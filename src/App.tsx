@@ -1,3 +1,5 @@
+import React from 'react';
+import AuthContainer from './components/AuthContainer';
 import './App.css'
 
 function App() {
@@ -5,9 +7,11 @@ function App() {
   return (
     <>
       <div>
-        <p>
-          Click on the Vite and React logos to learn more
-        </p>
+      {/* Use AuthContainer with any children */}
+      <AuthContainer>
+        {/* Your authentication form components go here */}
+        <input />
+      </AuthContainer>
       </div>
     </>
   )
