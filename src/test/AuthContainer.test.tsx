@@ -23,7 +23,7 @@ describe('AuthContainer', () => {
     const customText = 'Custom Text';
     render(<AuthContainer>{customText}</AuthContainer>);
 
-    
+    // Act
     const authContainer = screen.getByTestId('auth-container');
     const children = screen.getByText(customText);
 

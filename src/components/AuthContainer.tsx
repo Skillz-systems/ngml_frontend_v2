@@ -62,7 +62,7 @@ const LogoImage = styled.img`
  */
 
 interface AuthContainerProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const AuthContainer: React.FC<AuthContainerProps> = ({ children }) => {
