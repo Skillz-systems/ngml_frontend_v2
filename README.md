@@ -29,21 +29,21 @@ Ensure you have [Node.js](https://nodejs.org/) installed before proceeding.
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/Skillz-systems/ngml_frontend_v2.git
-    ```
+   ```bash
+   git clone https://github.com/Skillz-systems/ngml_frontend_v2.git
+   ```
 
 2. Navigate to the project directory:
 
-    ```bash
-    cd ngml_frontend_v2
-    ```
+   ```bash
+   cd ngml_frontend_v2
+   ```
 
 3. Install dependencies:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 ## Usage
 
@@ -57,65 +57,67 @@ Describe how to use your project. Include any important steps or configurations.
 
 2. Run the following command to build and start the services defined in the `docker-compose.yml` file:
 
-    ```bash
-    docker-compose up
-    ```
+   ```bash
+   docker-compose up
+   ```
 
-    If you want to run it in detached mode (in the background), you can use the `-d` flag:
+   If you want to run it in detached mode (in the background), you can use the `-d` flag:
 
-    ```bash
-    docker-compose up -d
-    ```
+   ```bash
+   docker-compose up -d
+   ```
 
 3. To stop and remove the containers created by your services, run:
 
-    ```bash
-    docker-compose down
-    ```
+   ```bash
+   docker-compose down
+   ```
 
 ## Scripts
 
 - **dev:** Start the development server.
 
-    ```bash
-    npm run dev
-    ```
+  ```bash
+  npm run dev
+  ```
 
 - **build:** Build the project.
 
-    ```bash
-    npm run build
-    ```
+  ```bash
+  npm run build
+  ```
 
 - **lint:** Run ESLint for linting.
 
-    ```bash
-    npm run lint
-    ```
+  ```bash
+  npm run lint
+  ```
 
 - **preview:** Preview the project.
 
-    ```bash
-    npm run preview
-    ```
+  ```bash
+  npm run preview
+  ```
 
 - **test:** Run tests using Vitest.
 
-    ```bash
-    npm test
-    ```
+  ```bash
+  npm test
+  ```
 
-- **styleguide:** Start the Styleguidist server.
+- **storybook:** Start the Storybook server.
 
-    ```bash
-    npm run styleguide
-    ```
+  ```bash
+  npm run storybook
 
-- **styleguide:build:** Build the Styleguidist documentation.
+  ```
 
-    ```bash
-    npm run styleguide:build
-    ```
+- **storybook:build:** Build the Storybook documentation.
+
+  ```bash
+  npm run build-storybook
+
+  ```
 
 ## Dependencies
 
@@ -142,12 +144,11 @@ Describe how to use your project. Include any important steps or configurations.
 - **eslint-plugin-react-refresh:** ^0.4.5
 - **jsdom:** ^23.2.0
 - **postcss:** ^8.4.33
-- **react-styleguidist:** ^13.1.1
+- **storybook:** ^7.6.8
 - **tailwindcss:** ^3.4.1
 - **typescript:** ^5.2.2
 - **vite:** ^5.0.8
 - **vitest:** ^1.1.3
-- **webpack:** ^5.89.0
 
 ## Contributing
 

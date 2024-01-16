@@ -1,6 +1,6 @@
+import { storiesOf } from '@storybook/react';
 import React from 'react';
 import styled from 'styled-components';
-import { storiesOf } from '@storybook/react';
 
 storiesOf('AuthContainer', module)
   .add('Basic Usage', () => <AuthContainer><p>Content goes here</p></AuthContainer>)

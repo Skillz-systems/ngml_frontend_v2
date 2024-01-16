@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import AuthContainer from '../Components/AuthContainer';
 
 describe('AuthContainer', () => {
