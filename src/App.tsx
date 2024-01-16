@@ -1,4 +1,4 @@
-import AuthContainer from './components/AuthContainer';
+import AuthContainer from './Components/AuthContainer';
 import './App.css'
 
 function App() {
