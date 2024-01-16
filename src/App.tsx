@@ -1,5 +1,5 @@
 import './App.css'
-import AuthContainer from './Components/AuthContainer'
+import AuthContainer from './Components/authContainer/AuthContainer'
 
 function App() {
 

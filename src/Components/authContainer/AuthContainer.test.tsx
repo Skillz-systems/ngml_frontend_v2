@@ -1,5 +1,5 @@
 import { act, render, screen } from '@testing-library/react';
-import AuthContainer from '../Components/AuthContainer';
+import AuthContainer from './AuthContainer';
 
 describe('AuthContainer', () => {
   test('renders AuthContainer with logo, logo container, and round logo image', () => {

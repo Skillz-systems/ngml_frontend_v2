@@ -1,10 +1,5 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import styled from 'styled-components';
-
-storiesOf('AuthContainer', module)
-  .add('Basic Usage', () => <AuthContainer><p>Content goes here</p></AuthContainer>)
-  .add('Responsive Design', () => <AuthContainer><p>Responsive Content</p></AuthContainer>)
 
 /**
  * Styled container for responsive design.
