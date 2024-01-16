@@ -3,7 +3,7 @@ import { render, screen, act } from '@testing-library/react';
 import AuthContainer from '../components/AuthContainer';
 
 describe('AuthContainer', () => {
-  test('renders AuthContainer with logo', () => {
+  test('renders AuthContainer with logo, logo container, and round logo image', () => {
     // Arrange
     render(<AuthContainer />);
 
@@ -16,6 +16,7 @@ describe('AuthContainer', () => {
     expect(authContainer).toBeInTheDocument();
     expect(logoContainer).toBeInTheDocument();
     expect(logoImage).toBeInTheDocument();
+    expect(logoImage).toHaveStyle('border-radius: 50%');
   });
 
   test('renders AuthContainer with provided children', () => {

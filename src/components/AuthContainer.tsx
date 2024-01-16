@@ -1,23 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+import { storiesOf } from '@storybook/react';
+
+storiesOf('AuthContainer', module)
+  .add('Basic Usage', () => <AuthContainer><p>Content goes here</p></AuthContainer>)
+  .add('Responsive Design', () => <AuthContainer><p>Responsive Content</p></AuthContainer>)
 
 /**
  * Styled container for responsive design.
+ * This container sets the maximum width, margin, padding, and background styles.
+ * The logo is positioned at the center-top of the container, wrapped by the top border line.
  * 
- * @styled
+ * @styledq
  */
 
 const Container = styled.div`
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically */
+max-width: 400px;
+margin: 10% auto;
+padding: 20px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+background-color: rgba(255, 255, 0, 0.2);
+border-radius: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+position: relative;
 `;
 
 /**
@@ -27,8 +34,9 @@ const Container = styled.div`
  */
 
 const LogoContainer = styled.div`
-  text-align: center;
-  margin-bottom: 20px; /* Add margin to separate the logo from the children */
+width: 100%;
+text-align: center;
+margin-bottom: 30px;
 `;
 
 /**
@@ -38,9 +46,13 @@ const LogoContainer = styled.div`
  */
 
 const LogoImage = styled.img`
-  width: 60px; /* Adjust the size according to your needs */
-  height: 60px; /* Ensure a square aspect ratio for a round image */
-  border-radius: 50%; /* Make the image round */
+position: absolute;
+top: -30px;
+left: 50%;
+transform: translateX(-50%);
+width: 60px;
+height: 60px;
+border-radius: 50%;
 `;
 
 /**
