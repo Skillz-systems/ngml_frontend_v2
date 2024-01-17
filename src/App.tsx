@@ -1,13 +1,15 @@
 import './App.css'
+import AuthContainer from './Components/authContainer/AuthContainer'
 
 function App() {
 
   return (
     <>
       <div>
-        <p>
-          Click on the Vite and React logos to learn more
-        </p>
+<AuthContainer>
+  <div className="">
+    <p className="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum vitae assumenda, voluptas autem error obcaecati veritatis veniam quidem quisquam. Magnam animi nihil voluptatibus officiis obcaecati consequuntur nesciunt quasi autem veritatis!</p></div>
+</AuthContainer>
       </div>
     </>
   )
