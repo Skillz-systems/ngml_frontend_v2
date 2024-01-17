@@ -1,18 +1,29 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
+
+
+/**
+ * This is the configuration file for Vite.
+ * It exports a default configuration object using defineConfig().
+ * The configuration includes plugins for React, test settings, and resolve aliases.
+ */
+
 export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-    // you might want to disable it, if you don't have tests that rely on CSS
-    // since parsing CSS is slow
+    setupFiles: resolve(__dirname, './src/test/setup.ts'),
     css: true,
   },
-})
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
+  },
+});
