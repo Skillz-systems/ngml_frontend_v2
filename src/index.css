@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	.gradient {
+		background: linear-gradient(
+			107.65deg,
+			#aae4c5 -6.77%,
+			#efec80 45.65%,
+			#d2f69e 108.92%
+		);
+	}
+}

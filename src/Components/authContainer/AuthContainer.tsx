@@ -4,22 +4,25 @@ import styled from 'styled-components';
  * Styled container for responsive design.
  * This container sets the maximum width, margin, padding, and background styles.
  * The logo is positioned at the center-top of the container, wrapped by the top border line.
+ * background-color: rgba(255, 255, 0, 0.2);
  * 
  * @styledq
  */
 
 const Container = styled.div`
-max-width: 400px;
+max-width: 560px;
+width: 400px;
 margin: 10% auto;
 padding: 20px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-background-color: rgba(255, 255, 0, 0.2);
-border-radius: 20px;
+box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+background-color: rgba(255, 255, 255, 0.5);
+border-radius: 32px;
 display: flex;
 flex-direction: column;
 align-items: center;
 position: relative;
 `;
+
 
 /**
  * Styled container for the logo, with centered text and margin.
