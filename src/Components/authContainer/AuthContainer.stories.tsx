@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import { AuthContainer, AuthContainerProps } from './AuthContainer';
+import AuthContainer, { AuthContainerProps } from './AuthContainer';
 
 export default {
   title: 'Components/AuthContainer',

@@ -4,7 +4,7 @@ import AuthContainer from './AuthContainer';
 describe('AuthContainer', () => {
   test('renders AuthContainer with logo, logo container, and round logo image', () => {
     // Arrange
-    render(<AuthContainer />);
+    render(<AuthContainer children={undefined} />);
 
     // Act
     const authContainer = screen.getByTestId('auth-container');
@@ -34,7 +34,7 @@ describe('AuthContainer', () => {
 
   test('renders AuthContainer with a round logo image', () => {
     // Arrange
-    render(<AuthContainer />);
+    render(<AuthContainer children={undefined} />);
 
     // Act
     const logoImage = screen.getByTestId('logo-image');
@@ -46,8 +46,8 @@ describe('AuthContainer', () => {
   test('renders AuthContainer with the correct logo source and alt text', () => {
     // Arrange
     const logoSource = 'assets/nnpclogo.png';
-    render(<AuthContainer />);
-    
+    render(<AuthContainer children={undefined} />);
+
     // Act
     const logoImage = screen.getByTestId('logo-image');
 
@@ -58,8 +58,8 @@ describe('AuthContainer', () => {
 
   test('applies responsive design styles', async () => {
     // Arrange
-    render(<AuthContainer />);
-    
+    render(<AuthContainer children={undefined} />);
+
     // Act
     await act(async () => {
       // Resize window to a mobile viewport
@@ -67,9 +67,9 @@ describe('AuthContainer', () => {
       global.dispatchEvent(new Event('resize'));
       await new Promise(resolve => setTimeout(resolve, 500));
     });
-    
+
     const container = screen.getByTestId('auth-container');
-    
+
     // Assert
     expect(container).toHaveStyle('max-width: 400px');
   });
@@ -78,7 +78,7 @@ describe('AuthContainer', () => {
     // Arrange
     render(
       <div>
-        <AuthContainer />
+        <AuthContainer children={undefined} />
         <AuthContainer>
           <p>Custom Content</p>
         </AuthContainer>

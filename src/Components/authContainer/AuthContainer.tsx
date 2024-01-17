@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 /**
@@ -68,7 +67,7 @@ border-radius: 50%;
  * @returns {React.FC} Returns the AuthContainer component.
  */
 
-interface AuthContainerProps {
+export type AuthContainerProps = {
   children: React.ReactNode;
 }
 
