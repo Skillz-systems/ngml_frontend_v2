@@ -1,0 +1,88 @@
+import styled from 'styled-components';
+
+/**
+ * Styled container for responsive design.
+ * This container sets the maximum width, margin, padding, and background styles.
+ * The logo is positioned at the center-top of the container, wrapped by the top border line.
+ * background-color: rgba(255, 255, 0, 0.2);
+ * 
+ * @styledq
+ */
+
+const Container = styled.div`
+max-width: 560px;
+width: 400px;
+margin: 10% auto;
+padding: 20px;
+box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+background-color: rgba(255, 255, 255, 0.5);
+border-radius: 32px;
+display: flex;
+flex-direction: column;
+align-items: center;
+position: relative;
+`;
+
+
+/**
+ * Styled container for the logo, with centered text and margin.
+ * 
+ * @styled
+ */
+
+const LogoContainer = styled.div`
+width: 100%;
+text-align: center;
+margin-bottom: 30px;
+`;
+
+/**
+ * Styled image for the logo with rounded corners.
+ * 
+ * @styled
+ */
+
+const LogoImage = styled.img`
+position: absolute;
+top: -30px;
+left: 50%;
+transform: translateX(-50%);
+width: 60px;
+height: 60px;
+border-radius: 50%;
+`;
+
+/**
+ * `AuthContainer` is a styled container component designed for authentication-related content.
+ * It includes responsive design styles and a round logo image.
+ *
+ * @component
+ * @example
+ * // Example usage of AuthContainer
+ * const MyComponent = () => (
+ *   <AuthContainer>
+ *     <p>Content goes here</p>
+ *   </AuthContainer>
+ * );
+ *
+ * @param {object} props - React props for the AuthContainer component.
+ * @param {React.ReactNode} props.children - The content to be displayed inside the container.
+ * @returns {React.FC} Returns the AuthContainer component.
+ */
+
+export type AuthContainerProps = {
+  children: React.ReactNode;
+}
+
+const AuthContainer: React.FC<AuthContainerProps> = ({ children }) => {
+  return (
+    <Container>
+      <LogoContainer>
+        <LogoImage src="assets/nnpclogo.png" alt="NGML Logo" />
+      </LogoContainer>
+      {children}
+    </Container>
+  );
+};
+
+export default AuthContainer;
