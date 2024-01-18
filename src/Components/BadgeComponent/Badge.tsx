@@ -43,7 +43,7 @@ import React from 'react'
  */
 
 interface BadgeProps {
-    type?: "primary" | "secondary" | "transparent" | "outline" 
+    type?: 'primary' | 'secondary' | 'transparent' | 'outline' 
     label?: string
     width?: string
     height?: string
