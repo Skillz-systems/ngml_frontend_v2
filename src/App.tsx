@@ -1,5 +1,5 @@
 
-import AuthContainer from './Components/authContainer/AuthContainer';
+import AuthContainer from './Components/Authcontainer/AuthContainer';
 
 function App() {
 
