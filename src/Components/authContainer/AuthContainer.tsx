@@ -76,9 +76,9 @@ export type AuthContainerProps = {
 
 const AuthContainer: React.FC<AuthContainerProps> = ({ children }) => {
   return (
-    <Container data-testid="auth-container">
-      <LogoContainer data-testid="logo-container">
-        <LogoImage src="assets/nnpclogo.png" alt="NGML Logo" data-testid="logo-image" />
+    <Container>
+      <LogoContainer>
+        <LogoImage src="assets/nnpclogo.png" alt="NGML Logo" />
       </LogoContainer>
       {children}
     </Container>

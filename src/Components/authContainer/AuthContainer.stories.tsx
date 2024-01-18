@@ -1,70 +1,48 @@
-import { Meta, Story } from '@storybook/react';
-import AuthContainer, { AuthContainerProps } from './AuthContainer';
+import { Meta, Story } from '@storybook/react/types-6-0';
+import AuthContainer, { AuthContainerProps } from './AuthContainer'; // Adjust the path based on your project structure
 
 export default {
-  title: 'Components/AuthContainer',
+  title: 'AuthContainer',
   component: AuthContainer,
 } as Meta;
 
 const Template: Story<AuthContainerProps> = (args) => <AuthContainer {...args} />;
 
-export const BasicUsage = Template.bind({});
-BasicUsage.args = {
+// Default story
+export const Default = Template.bind({});
+Default.args = {
   children: <p>Content goes here</p>,
 };
 
+// Story with custom authentication content
 export const WithCustomContent = Template.bind({});
 WithCustomContent.args = {
   children: (
     <>
-      <h2>Welcome to the Authentication Page</h2>
-      <p>Please log in to access your account.</p>
+      <h2>Welcome back!</h2>
+      <p>Please enter your credentials.</p>
     </>
   ),
 };
 
+// Story with a different logo
 export const WithDifferentLogo = Template.bind({});
 WithDifferentLogo.args = {
-  children: <p>Content with a different logo</p>,
-  logoSrc: "assets/customLogo.png", // Add a new prop if needed or customize as per your component
+  children: <p>Content goes here</p>,
+  logoSrc: 'assets/differentlogo.png',
+  logoAlt: 'Different Logo',
 };
 
-export const WithEmptyContent = Template.bind({});
-WithEmptyContent.args = {
-  children: null,
+// Story with loading state
+export const LoadingState = Template.bind({});
+LoadingState.args = {
+  children: <p>for loading purpose</p>,
+  isLoading: true, 
 };
 
-export const ResponsiveDesign = Template.bind({});
-ResponsiveDesign.args = {
-  children: <p>Responsive Content</p>,
-};
-
-// Add responsive design stories for different viewports
-ResponsiveDesign.parameters = {
-  viewport: {
-    defaultViewport: 'mobile1',
-    viewports: {
-      mobile1: {
-        name: 'Mobile 1',
-        styles: {
-          width: '320px',
-          height: '568px',
-        },
-      },
-      tablet: {
-        name: 'Tablet',
-        styles: {
-          width: '768px',
-          height: '1024px',
-        },
-      },
-      desktop: {
-        name: 'Desktop',
-        styles: {
-          width: '1024px',
-          height: '768px',
-        },
-      },
-    },
-  },
+// Story with error state
+export const ErrorState = Template.bind({});
+ErrorState.args = {
+  children: <p>Just incase of errors</p>,
+  error: 'Authentication failed',
 };
