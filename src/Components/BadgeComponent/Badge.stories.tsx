@@ -1,8 +1,6 @@
-
-
 import type { Meta, StoryObj } from '@storybook/react';
+import Cancelicon from '../../../public/assets/Cancelicon.png';
 import Badge from './Badge';
-import Cancelicon from '../../../public/assets/Cancelicon.png'
 
 
 const meta = {
@@ -26,6 +24,7 @@ const meta = {
         iconWidth: { control: 'text' },
         iconColor: { control: 'color' },
         columnGap: { control: 'text' },
+        onIconClick: { action: 'onIconClick' },
     },
 } satisfies Meta<typeof Badge>;
 
@@ -54,9 +53,9 @@ export const Secondary: Story = {
         radius: '20px',
         fontWeight: 'bold',
     },
-  };
+};
 
-  export const Transparent: Story = {
+export const Transparent: Story = {
     args: {
         type: 'transparent',
         label: 'Dangote sugar',
@@ -72,9 +71,9 @@ export const Secondary: Story = {
         columnGap: '8px',
         onIconClick: () => console.log('Icon clicked'),
     },
-  };
+};
 
-  export const Outline: Story = {
+export const Outline: Story = {
     args: {
         type: 'outline',
         label: 'Dangote sugar',
@@ -88,7 +87,7 @@ export const Secondary: Story = {
         iconWidth: '20px',
         iconColor: '#333',
         columnGap: '8px',
-        onIconClick: () => console.log('Icon clicked'),        
+        onIconClick: () => console.log('Icon clicked'),
 
     },
-  };
+};

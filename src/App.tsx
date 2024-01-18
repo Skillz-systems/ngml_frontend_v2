@@ -1,6 +1,6 @@
 import Cancelicon from '../public/assets/Cancelicon.png';
+import AuthContainer from './Components/AuthContainer/AuthContainer';
 import Badge from './Components/BadgeComponent/Badge';
-import AuthContainer from './Components/authContainer/AuthContainer';
 
 function App() {
   return (

@@ -43,7 +43,7 @@ import React from 'react'
  */
 
 interface BadgeProps {
-    type?: 'primary' | 'secondary' | 'transparent' | 'outline' 
+    type?: 'primary' | 'secondary' | 'transparent' | 'outline'
     label?: string
     width?: string
     height?: string
@@ -75,13 +75,13 @@ const Badge: React.FC<BadgeProps> = ({
     onIconClick
 }: BadgeProps) => {
 
-     /**
-     * Get the inline styles based on the badge type.
-     * 
-     * @function
-     * @private
-     * @returns {React.CSSProperties} Returns the inline styles for the badge container.
-     */
+    /**
+    * Get the inline styles based on the badge type.
+    * 
+    * @function
+    * @private
+    * @returns {React.CSSProperties} Returns the inline styles for the badge container.
+    */
 
     const getBadgeStyles = (): React.CSSProperties => {
         switch (type) {
@@ -108,13 +108,13 @@ const Badge: React.FC<BadgeProps> = ({
                         height: iconHeight,
                         width: iconWidth,
                         color: iconColor,
-                        cursor: onIconClick ? 'pointer' : 'auto' 
+                        cursor: onIconClick ? 'pointer' : 'auto'
                     }}
-                    onClick={onIconClick} 
+                    onClick={onIconClick}
                 >
                     {icon}
                 </div>
-            )}     
+            )}
             {label}
         </div>
     )
