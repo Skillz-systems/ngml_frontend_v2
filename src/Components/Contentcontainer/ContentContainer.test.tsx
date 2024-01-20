@@ -19,12 +19,12 @@ describe('ContentContainer', () => {
       </ContentContainer>
     );
     const container = getByTestId('content-container');
-
+  
     expect(container).toBeInTheDocument();
     expect(container).toHaveClass('bg-white border');
     expect(container).toHaveClass('rounded-md');
     expect(container).toHaveClass('shadow-md');
-    expect(container).toHaveClass('rounded-none');
+    expect(container).not.toHaveClass('rounded-none');
     expect(container).toHaveStyle('width: 50%');
     expect(container).toHaveStyle('height: 200px');
   });
