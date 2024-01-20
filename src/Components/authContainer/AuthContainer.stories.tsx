@@ -37,7 +37,7 @@ WithDifferentLogo.args = {
 export const LoadingState = Template.bind({});
 LoadingState.args = {
   children: <p>for loading purpose</p>,
-  isLoading: true, 
+  isLoading: true,
 };
 
 // Story with error state
