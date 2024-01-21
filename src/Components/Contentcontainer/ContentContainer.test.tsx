@@ -1,61 +1,41 @@
+import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import ContentContainer from './ContentContainer';
+import ContentContainer, { CardProps } from './ContentContainer';
 
 describe('ContentContainer', () => {
+  const defaultProps: CardProps = {
+    children: <div>Test Content</div>,
+  };
+
   it('renders with default props', () => {
-    const { getByTestId } = render(<ContentContainer>Test Content</ContentContainer>);
-    const container = getByTestId('content-container');
-
-    expect(container).toBeInTheDocument();
-    expect(container).toHaveClass('bg-gray-300 border');
-    expect(container).toHaveStyle('width: 100%');
-    expect(container).toHaveStyle('height: 100%');
+    const { getByText } = render(<ContentContainer {...defaultProps} />);
+    expect(getByText('Test Content')).toBeInTheDocument();
   });
 
-  it('renders with custom props', () => {
-    const { getByTestId } = render(
-      <ContentContainer type="white" radius={5} width="50%" height="200px">
-        Custom Content
-      </ContentContainer>
-    );
-    const container = getByTestId('content-container');
-  
-    expect(container).toBeInTheDocument();
-    expect(container).toHaveClass('bg-white border');
-    expect(container).toHaveClass('rounded-md');
-    expect(container).toHaveClass('shadow-md');
-    expect(container).not.toHaveClass('rounded-none');
-    expect(container).toHaveStyle('width: 50%');
-    expect(container).toHaveStyle('height: 200px');
+  it('applies correct styles for translucent type', () => {
+    const { container } = render(<ContentContainer {...defaultProps} type="translucent" />);
+    expect(container.firstChild).toHaveClass('rounded-0 bg-opacity-50 bg-yellow-200 w-100% h-100% p-4');
   });
 
-  it('handles zero radius correctly', () => {
-    const { getByTestId } = render(
-      <ContentContainer type="dashes" radius={0} width="75%" height="150px">
-        Zero Radius Content
-      </ContentContainer>
-    );
-    const container = getByTestId('content-container');
-
-    expect(container).toBeInTheDocument();
-    expect(container).toHaveClass('border-dashed');
-    expect(container).toHaveClass('rounded-none');
-    expect(container).toHaveStyle('width: 75%');
-    expect(container).toHaveStyle('height: 150px');
+  it('applies correct styles for white type', () => {
+    const { container } = render(<ContentContainer {...defaultProps} type="white" />);
+    expect(container.firstChild).toHaveClass('rounded-0 bg-white w-100% h-100% p-4');
   });
 
-  it('handles different types correctly', () => {
-    const { getByTestId } = render(
-      <ContentContainer type="translucent" radius={8} width="60%" height="250px">
-        Translucent Content
-      </ContentContainer>
-    );
-    const container = getByTestId('content-container');
+  it('applies correct styles for dashes type', () => {
+    const { container } = render(<ContentContainer {...defaultProps} type="dashes" />);
+    expect(container.firstChild).toHaveClass('rounded-0 border-dashed border-4 w-100% h-100% p-4');
+  });
 
-    expect(container).toBeInTheDocument();
-    expect(container).toHaveClass('bg-yellow-100 border-yellow-500 border-dashed');
-    expect(container).toHaveClass('rounded-md');
-    expect(container).toHaveStyle('width: 60%');
-    expect(container).toHaveStyle('height: 250px');
+  it('applies correct styles for solid type', () => {
+    const { container } = render(<ContentContainer {...defaultProps} type="solid" />);
+    expect(container.firstChild).toHaveClass('rounded-0 bg-gray-200 w-100% h-100% p-4');
+  });
+
+  it('applies custom radius, width, and height', () => {
+    const { container } = render(
+      <ContentContainer {...defaultProps} radius={10} width="50%" height="200px" />
+    );
+    expect(container.firstChild).toHaveClass('rounded-10 bg-gray-200 w-50% h-200px p-4');
   });
 });
