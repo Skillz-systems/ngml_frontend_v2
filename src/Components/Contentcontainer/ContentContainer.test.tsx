@@ -14,7 +14,7 @@ describe('ContentContainer', () => {
 
   it('applies correct styles for translucent type', () => {
     const { container } = render(<ContentContainer {...defaultProps} type="translucent" />);
-    expect(container.firstChild).toHaveClass('rounded-0 bg-white bg-opacity-50 border w-100% h-100% p-4');
+    expect(container.firstChild).toHaveClass('rounded-0 bg-transparent bg-opacity-50 border w-100% h-100% p-4');
   });
 
   it('applies correct styles for white type', () => {
@@ -24,7 +24,7 @@ describe('ContentContainer', () => {
 
   it('applies correct styles for dashes type', () => {
     const { container } = render(<ContentContainer {...defaultProps} type="dashes" />);
-    expect(container.firstChild).toHaveClass('rounded-0 border-dashed border w-100% h-100% p-4');
+    expect(container.firstChild).toHaveClass('rounded-0 border-dashed border-2 w-100% h-100% p-4');
   });
 
   it('applies correct styles for solid type', () => {
