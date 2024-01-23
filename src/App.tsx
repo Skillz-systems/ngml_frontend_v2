@@ -1,11 +1,12 @@
 import Cancelicon from '../public/assets/Cancelicon.png';
 import Badge from './Components/BadgeComponent/Badge';
-import AuthContainer from './Components/authContainer/AuthContainer';
+// import NavigationBar from './Components/NavigationMenu/NavigationBar';
+// import AuthContainer from './Components/authContainer/AuthContainer';
 
 function App() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-screen h-screen gradient">
+      {/* <div className="flex flex-col items-center justify-center w-screen h-screen gradient">
         <AuthContainer>
           <div className="">
             <p className="">
@@ -16,7 +17,7 @@ function App() {
             </p>
           </div>
         </AuthContainer>
-      </div>
+      </div> */}
       <div>
         <Badge
           type="outline"
@@ -25,7 +26,6 @@ function App() {
           width="160px"
           fontSize="16px"
           fontWeight="500"
-          radius="20px"
           icon={<img src={Cancelicon} alt="Cancel Icon" />}
           iconHeight="20px"
           iconWidth="20px"
@@ -34,7 +34,7 @@ function App() {
           onIconClick={() => alert('Icon clicked!')}
         />
       </div>
-      <div className="">
+           <div className="">
         <p className="">Vite and React</p>
       </div>
     </>
