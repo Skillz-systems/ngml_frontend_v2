@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ContentContainer from './ContentContainer';
 
 const meta = {
-  title: 'ContentContainer', // Name of your component in Storybook
+  title: 'ContentContainer',
   component: ContentContainer,
   parameters: {
     layout: 'centered',
@@ -17,6 +17,12 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    children: <p>Default Content</p>,
+  },
+};
 
 export const Translucent: Story = {
   args: {

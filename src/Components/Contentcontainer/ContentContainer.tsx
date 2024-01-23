@@ -70,7 +70,7 @@ type CardProps = {
     const getCardStyle = () => {
       switch (type) {
         case 'translucent':
-          return 'bg-transparent bg-opacity-50 border';
+          return 'bg-white bg-opacity-50 border';
         case 'white':
           return 'bg-white border';
         case 'dashes':
