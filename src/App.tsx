@@ -1,12 +1,11 @@
 import Cancelicon from '../public/assets/Cancelicon.png';
 import Badge from './Components/BadgeComponent/Badge';
-// import NavigationBar from './Components/NavigationMenu/NavigationBar';
-// import AuthContainer from './Components/authContainer/AuthContainer';
+import AuthContainer from './Components/authContainer/AuthContainer';
 
 function App() {
   return (
     <>
-      {/* <div className="flex flex-col items-center justify-center w-screen h-screen gradient">
+      <div className="flex flex-col items-center justify-center w-screen h-screen gradient">
         <AuthContainer>
           <div className="">
             <p className="">
@@ -17,7 +16,7 @@ function App() {
             </p>
           </div>
         </AuthContainer>
-      </div> */}
+      </div>
       <div>
         <Badge
           type="outline"
