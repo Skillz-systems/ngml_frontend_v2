@@ -1,14 +1,13 @@
+import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import ContentContainer from './ContentContainer'; // Adjust the import path as needed
+import ContentContainer from './ContentContainer';
 
 describe('ContentContainer Component', () => {
   it('renders with default props', () => {
     render(<ContentContainer>Hello, World!</ContentContainer>);
 
-    // Assert that the component renders with default props
     expect(screen.getByText(/Hello, World!/i)).toBeInTheDocument();
 
-    // Assert default styles
     const container = screen.getByRole('div');
     expect(container).toHaveStyle({
       width: '100%',
@@ -33,10 +32,8 @@ describe('ContentContainer Component', () => {
       </ContentContainer>
     );
 
-    // Assert that the component renders with custom props
     expect(screen.getByText(/Custom Content/i)).toBeInTheDocument();
 
-    // Assert custom styles
     const container = screen.getByRole('div');
     expect(container).toHaveStyle({
       width: '50%',
