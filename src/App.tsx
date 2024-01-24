@@ -3,9 +3,13 @@
 import AuthContainer from './Components/Authcontainer/AuthContainer';
 =======
 import Cancelicon from '../public/assets/Cancelicon.png';
+import AuthContainer from './Components/AuthContainer/AuthContainer';
 import Badge from './Components/BadgeComponent/Badge';
+<<<<<<< HEAD
 import AuthContainer from './Components/authContainer/AuthContainer';
 >>>>>>> 66c9327bcfc316fd71c4f524917813ed47ae0937
+=======
+>>>>>>> 3dbcd9b53a079db98c4e77539256f3a880edb537
 
 function App() {
   return (

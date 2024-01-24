@@ -10,7 +10,7 @@ This project is a private web solution to automate the processes, workflow, cust
 
 ## Table of Contents
 
-- [ngml\_frontend\_v2](#ngml_frontend_v2)
+- [ngml_frontend_v2](#ngml_frontend_v2)
   - [Description](#description)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
@@ -154,10 +154,10 @@ Describe how to use your project. Include any important steps or configurations.
 
 If you want to contribute to this project, follow these steps:
 
-1. Fork the project.
-2. Create a new branch.
+1. Clone the project.
+2. Create a new branch for the task.
 3. Make your changes and commit them.
-4. Push to your fork and submit a pull request.
+4. Push to your task and submit a pull request.
 
 ## License
 
