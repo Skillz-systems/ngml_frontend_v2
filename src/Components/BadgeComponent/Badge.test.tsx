@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import Badge from './Badge';// Import your Badge component
+import Badge from './Badge'; // Import your Badge component
 
 describe('Badge Component', () => {
   test('renders with custom label', () => {
