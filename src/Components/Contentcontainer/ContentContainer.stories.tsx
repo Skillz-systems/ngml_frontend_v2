@@ -5,11 +5,10 @@ const meta: Meta = {
   title: 'Components/ContentContainer',
   component: ContentContainer,
   parameters: {
-    // Optional parameter to center the component in the Canvas.
     layout: 'centered',
   },
   argTypes: {
-    // Define argTypes here if needed.
+
   },
 }satisfies Meta<typeof ContentContainer>;
 
