@@ -1,7 +1,7 @@
-import { Meta, Story } from '@storybook/react';
-import AuthContainer, { AuthContainerProps } from './AuthContainer'; // Adjust the path based on your project structure
+import { Meta, StoryObj } from '@storybook/react';
+import AuthContainer from './AuthContainer';
 
-const meta: Meta<AuthContainerProps> = {
+const meta: Meta = {
   title: 'Components/AuthContainer',
   component: AuthContainer,
   parameters: {
@@ -13,21 +13,20 @@ const meta: Meta<AuthContainerProps> = {
 };
 
 export default meta;
-type Story = Story<AuthContainerProps>;
+type Story = StoryObj<typeof AuthContainer>;
 
-const Template: Story = (args) => <AuthContainer {...args} />;
-
-export const Default: Story = Template.bind({});
-Default.args = {
+export const Default: Story = {
+args: {
   children: 'Content goes here',
+},
 };
-
-export const WithCustomContent: Story = Template.bind({});
-WithCustomContent.args = {
+export const WithCustomContent: Story = {
+args: {
   children: (
     <>
       <h2>Welcome back!</h2>
       <p>Please enter your credentials.</p>
     </>
   ),
-};
+}
+}
