@@ -1,48 +1,54 @@
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import ContentContainer from './ContentContainer';
 
 describe('ContentContainer Component', () => {
-  it('renders with default props', () => {
-    render(<ContentContainer>Hello, World!</ContentContainer>);
-
-    expect(screen.getByText(/Hello, World!/i)).toBeInTheDocument();
-
-    const container = screen.getByRole('div');
-    expect(container).toHaveStyle({
-      width: '100%',
-      height: '100%',
-      borderRadius: '0px',
-      backgroundColor: 'solid',
-      border: '1px solid',
-      borderColor: 'transparent',
-      padding: '20px',
-    });
+  test('renders ContentContainer component with default values', () => {
+    const { getByText } = render(<ContentContainer>Test Content</ContentContainer>);
+    const contentElement = getByText(/Test Content/i);
+    expect(contentElement).toBeInTheDocument();
   });
 
-  it('renders with custom props', () => {
-    render(
-      <ContentContainer
-        type="translucent"
-        width="50%"
-        height="200px"
-        borderRadius={10}
-      >
-        Custom Content
+  test('renders ContentContainer component with translucent type', () => {
+    const { container } = render(<ContentContainer type="translucent">Test Content</ContentContainer>);
+    const cardElement = container.firstChild;
+    expect(cardElement).toHaveStyle('background-color: rgba(255, 255, 255, 0.5);');
+  });
+
+  test('renders ContentContainer component with white type', () => {
+    const { container } = render(<ContentContainer type="white">Test Content</ContentContainer>);
+    const cardElement = container.firstChild;
+    expect(cardElement).toHaveStyle('background-color: #ffffff;');
+  });
+
+  test('renders ContentContainer component with dashed type', () => {
+    const { container } = render(<ContentContainer type="dashes">Test Content</ContentContainer>);
+    const cardElement = container.firstChild;
+    expect(cardElement).toHaveStyle('border-style:.*dashed.*');
+  });
+
+  test('renders ContentContainer component with custom width and height', () => {
+    const { container } = render(<ContentContainer width="200px" height="300px">Test Content</ContentContainer>);
+    const cardElement = container.firstChild;
+    expect(cardElement).toHaveStyle('width: 200px;');
+    expect(cardElement).toHaveStyle('height: 300px;');
+  });
+
+  test('renders ContentContainer component with custom border-radius', () => {
+    const { container } = render(<ContentContainer borderRadius={10}>Test Content</ContentContainer>);
+    const cardElement = container.firstChild;
+    expect(cardElement).toHaveStyle('border-radius: 10px;');
+  });
+
+  test('renders ContentContainer component with different content types', () => {
+    const { getByText } = render(
+      <ContentContainer>
+        <div>Test Div</div>
+        <button>Test Button</button>
       </ContentContainer>
     );
-
-    expect(screen.getByText(/Custom Content/i)).toBeInTheDocument();
-
-    const container = screen.getByRole('div');
-    expect(container).toHaveStyle({
-      width: '50%',
-      height: '200px',
-      borderRadius: '10px',
-      backgroundColor: 'rgba(255, 255, 255, 0.7)',
-      border: '1px solid',
-      borderColor: 'transparent',
-      padding: '20px',
-    });
+    expect(getByText(/Test Div/i)).toBeInTheDocument();
+    expect(getByText(/Test Button/i)).toBeInTheDocument();
   });
+
+  // Add more tests for interactions if needed
 });

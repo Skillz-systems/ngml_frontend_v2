@@ -1,57 +1,55 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import ContentContainer from './ContentContainer';
 
-const meta = {
-  title: 'ContentContainer',
+const meta: Meta = {
+  title: 'Components/ContentContainer',
   component: ContentContainer,
-
-  argTypes: {
-    type: { control: 'select', options: ['translucent', 'white', 'dashes', 'solid'] },
-    borderRadius: { control: 'number' },
-    width: { control: 'text' },
-    height: { control: 'text' },
+  parameters: {
+    // Optional parameter to center the component in the Canvas.
+    layout: 'centered',
   },
-} as Meta<typeof ContentContainer>;
+  argTypes: {
+    // Define argTypes here if needed.
+  },
+}satisfies Meta<typeof ContentContainer>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof meta>;;
+
+export const Default: Story = {
+  args: {},
+};
 
 export const Translucent: Story = {
   args: {
     type: 'translucent',
-    borderRadius: 10,
-    width: '100%',
-    height: '100%',
-    children: <p>Content goes here</p>,
   },
 };
 
 export const White: Story = {
   args: {
     type: 'white',
-    borderRadius: 5,
-    width: '80%',
-    height: '150px',
-    children: <p>Content goes here</p>,
   },
 };
 
 export const Dashes: Story = {
   args: {
     type: 'dashes',
-    borderRadius: 8,
-    width: '200px',
-    height: '100%',
-    children: <p>Content goes here</p>,
   },
 };
 
 export const Solid: Story = {
   args: {
     type: 'solid',
-    borderRadius: 0,
-    width: '100%',
-    height: '100%',
-    children: <p>Content goes here</p>,
+  },
+};
+
+export const CustomStyles: Story = {
+  args: {
+    type: 'solid',
+    width: '200px',
+    height: '150px',
+    borderRadius: 10,
   },
 };

@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
+import styled from 'styled-components';
 
-interface ContentContainerProps {
+interface CardProps {
   type?: 'translucent' | 'white' | 'dashes' | 'solid';
   width?: string;
   height?: string;
@@ -8,49 +9,30 @@ interface ContentContainerProps {
   children: ReactNode;
 }
 
-/**
- * @component ContentContainer
- * @description
- * A dynamic container component that can be of type translucent, white, dashes, or solid.
- * It allows customization of width, height, and border-radius, providing different styles based on the specified type.
- *
- * @props
- * @property {string} [type='solid'] - Type of the container. Accepts 'translucent', 'white', 'dashes', or 'solid'.
- * @property {string} [width='100%'] - The width of the container.
- * @property {string} [height='100%'] - The height of the container.
- * @property {number} [borderRadius=0] - The border radius of the container, useful for nested cards.
- * @property {ReactNode} children - The content to be displayed inside the container.
- */
-const ContentContainer: React.FC<ContentContainerProps> = ({
-  type = 'solid',
-  width = '100%',
-  height = '100%',
-  borderRadius = 0,
-  children
-}) => {
-  // Define styles based on the type of container
-  const getContainerStyles = () =>{
-  return {
-    width,
-    height,
-    borderRadius,
-    backgroundColor: type === 'translucent' ? 'rgba(255, 255, 255, 0.7)' :
-                      type === 'white' ? 'white' :
-                      type === 'dashes' ? 'transparent' : 'solid',
-    border: type === 'dashes' ? '1px dashed' : '1px solid',
-    borderColor: type === 'dashes' ? 'rgba(0, 0, 0, 0.3)' : 'transparent',
-    padding: '20px',
-    // Add more styles based on your needs
-  };
+const StyledCard = styled.div<CardProps>`
+  width: ${(props) => props.width || '100%'};
+  height: ${(props) => props.height || '100%'};
+  border-radius: ${(props) => props.borderRadius}px;
+  background-color: ${(props) => getBackgroundColor(props.type)};
+  // Add other styling properties based on card type
+`;
+
+const getBackgroundColor = (type?: string): string => {
+  switch (type) {
+    case 'translucent':
+      return 'rgba(255, 255, 255, 0.5)';
+    case 'white':
+      return '#ffffff';
+    case 'dashes':
+      return 'dashed';
+    case 'solid':
+    default:
+      return '#f0f0f0';
+  }
 };
 
-const containerStyles = getContainerStyles()
-
-  return (
-    <div className="my-4 mx-auto" style={containerStyles}>
-      {children}
-    </div>
-  );
+const ContentContainer: React.FC<CardProps> = ({ type = 'solid', width = '100%', height = '100%', borderRadius = 0, children }) => {
+  return <StyledCard type={type} width={width} height={height} borderRadius={borderRadius}>{children}</StyledCard>;
 };
 
 export default ContentContainer;
