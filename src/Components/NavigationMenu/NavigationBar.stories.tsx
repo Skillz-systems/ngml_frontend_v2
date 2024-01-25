@@ -90,7 +90,11 @@ export const Tertiary: Story = {
         leftIcon: <img src={HomeIcons} alt="Cancel Icon" />,
         iconHeight: '20px', 
         iconWidth: '20px', 
-        subMenu: [],
+        subMenu: [
+            { label: 'Submenu Item 1', reference: '/Home' },
+            { label: 'Submenu Item 2', reference: '/about' },
+            { label: 'Submenu Item 3', reference: '/yoo' },
+        ],
         reference: '/tertiary',
         onClick: () => console.log('Home clicked'),
     },
