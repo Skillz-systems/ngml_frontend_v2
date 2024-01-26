@@ -71,7 +71,7 @@ border-radius: 50%;
  * @returns {React.FC} Returns the AuthContainer component.
  */
 
-export type AuthContainerProps = {
+interface AuthContainerProps {
   children: React.ReactNode;
 }
 
