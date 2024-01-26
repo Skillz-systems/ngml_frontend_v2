@@ -5,7 +5,7 @@ import Badge from './Badge';
 
 const meta = {
 
-    title: 'Badge Component',
+    title: 'Components/BadgeComponent',
     component: Badge,
     parameters: {
         layout: 'centered',

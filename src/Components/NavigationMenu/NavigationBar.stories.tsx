@@ -1,37 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import NavigationBar from './NavigationBar';
-import HomeIcons from '../../../public/assets/HomeIcons.png'
+
 
 
 
 const meta = {
 
-    title: 'NavigationBar Component',
+    title: 'Components/NavigationBar',
     component: NavigationBar,
     parameters: {
-        layout: 'centered',
+        layout: 'start',
     },
     tags: ['autodocs'],
-     argTypes: {
-        type: { control: 'select', options: ['primary', 'secondary', 'tertiary'] },
-        upLabel: { control: 'text' },
-        downLabel: { control: 'text' },
-        width: { control: 'text' },
-        height: { control: 'text' },
-        fontSize: { control: 'text' },
-        radius: { control: 'text' },
-        fontWeight: { control: 'text' },
-        rightIcon: { control: 'text' },
-        leftIcon: { control: 'text' },
-        iconHeight: { control: 'text' },
-        iconWidth: { control: 'text' },
-        iconColor: { control: 'color' },
-        padding: { control: 'text' },
-        marginBottom: { control: 'text' },
-        reference: { control: 'text' },
-        onClick: { control: 'action' }, 
-        iconBackgroundColor: { control: 'color' },
-        subMenu: { control: 'array' },
+
+    argTypes: {
+        Navigationlinks: { control: 'object' },
+        sliceLength: { control: { type: 'number', required: false } },
+
+
     },
 } satisfies Meta<typeof NavigationBar>;
 
@@ -40,62 +26,192 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
     args: {
-        type: 'primary',
-        upLabel: 'Fort Oil Ltd.',
-        downLabel: 'John',
-        width: '200px',
-        height: '40px',
-        fontSize: '12px',
-        radius: '20px',
-        fontWeight: 'bold',
-        padding: '8px',
-        leftIcon: <img src={HomeIcons} alt="Cancel Icon" />,
-        rightIcon: <img src={HomeIcons} alt="Cancel Icon" />,
-        iconHeight: '20px', 
-        iconWidth: '20px', 
-        reference: '/home',
-        onClick: () => console.log('Home clicked'),
+        Navigationlinks: [
+            {
+                id: 1,
+                name: 'Home',
+                to: '/',
+                icon: '../../../public/assets/png-icons/Home.png',
+                type: 'primary'
+            },
+            {
+                id: 2,
+                name: 'Manger',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Invoice.png',
+                type: 'primary'
+            },
+            {
+                id: 3,
+                name: 'Record',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Records.png',
+                type: 'primary'
+            },
+            {
+                id: 4,
+                name: 'Report',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Reports.png',
+                type: 'primary'
+            },
+            {
+                id: 5,
+                name: 'Communication',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Communication.png',
+                type: 'primary'
+            },
+        ],
+        // sliceLength: 7
     },
 };
 
-
 export const Secondary: Story = {
     args: {
-        type: 'secondary',
-        upLabel: 'Home',
-        width: '200px',
-        height: '40px',
-        fontSize: '12px',
-        radius: '12px',
-        fontWeight: 'bold',
-        padding: '8px',
-        leftIcon: <img src={HomeIcons} alt="Cancel Icon" />,
-        iconHeight: '20px', 
-        iconWidth: '20px', 
-        reference: '/secondary',
-        onClick: () => console.log('Home clicked'),
+        Navigationlinks: [
+            {
+                id: 1,
+                name: 'Home',
+                to: '/',
+                icon: '../../../public/assets/png-icons/Home.png',
+                type: 'secondary',
+                subMenu: [
+                    {
+                        id: 1, name: 'Forte oil',
+                        to: '/customer/customerbusinesspage',
+                        icon: '../../../public/assets/png-icons/Invoice.png',
+                        type: 'primary'
+                    },
+                    { 
+                        id: 2, 
+                        name: 'Dangote', 
+                        to: '/customer/customerbusinesspage', 
+                        icon: '../../../public/assets/png-icons/Home.png',
+                        type: 'primary' 
+                    },
+                    { 
+                        id: 3, name: 'Shaffa', 
+                        to: '/customer/customerbusinesspage', 
+                        icon: '../../../public/assets/png-icons/Home.png', 
+                        type: 'primary' }
+                ]
+            },
+            {
+                id: 2,
+                name: 'Manger',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Invoice.png',
+                type: 'primary'
+            },
+            {
+                id: 3,
+                name: 'Record',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Records.png',
+                type: 'secondary',
+                subMenu: [
+                    {
+                        id: 1, name: 'Forte oil',
+                        to: '/customer/customerbusinesspage',
+                        icon: '../../../public/assets/png-icons/Invoice.png',
+                        type: 'primary'
+                    },
+                    { 
+                        id: 2, 
+                        name: 'Dangote', 
+                        to: '/customer/customerbusinesspage', 
+                        icon: '../../../public/assets/png-icons/Home.png',
+                        type: 'primary' 
+                    },
+                    { 
+                        id: 3, name: 'Shaffa', 
+                        to: '/customer/customerbusinesspage', 
+                        icon: '../../../public/assets/png-icons/Home.png', 
+                        type: 'primary' }
+                ]
+            },
+            {
+                id: 4,
+                name: 'Communication',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Communication.png',
+                type: 'primary'
+            },
+            {
+                id: 5,
+                name: 'Report',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Records.png',
+                type: 'secondary',
+                subMenu: [
+                    {
+                        id: 1, name: 'Forte oil',
+                        to: '/customer/customerbusinesspage',
+                        icon: '../../../public/assets/png-icons/Invoice.png',
+                        type: 'primary'
+                    },
+                    { 
+                        id: 2, 
+                        name: 'Dangote', 
+                        to: '/customer/customerbusinesspage', 
+                        icon: '../../../public/assets/png-icons/Home.png',
+                        type: 'primary' 
+                    },
+                    { 
+                        id: 3, name: 'Shaffa', 
+                        to: '/customer/customerbusinesspage', 
+                        icon: '../../../public/assets/png-icons/Home.png', 
+                        type: 'primary' }
+                ]
+            },
+            {
+                id: 6,
+                name: 'Manger',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Invoice.png',
+                type: 'primary'
+            },
+        ],
+        sliceLength: 4
     },
 };
 
 export const Tertiary: Story = {
     args: {
-        type: 'tertiary',
-        upLabel: 'Report',
-        width: '200px',
-        height: '40px',
-        fontSize: '12px',
-        radius: '12px',
-        fontWeight: 'bold',
-        padding: '8px',
-        leftIcon: <img src={HomeIcons} alt="Cancel Icon" />,
-        iconHeight: '20px', 
-        iconWidth: '20px', 
-        subMenu: [
-            { label: 'Submenu Item 1', reference: '/Home' },
-            { label: 'Submenu Item 2', reference: '/about' },
-            { label: 'Submenu Item 3', reference: '/yoo' },
+        Navigationlinks: [
+            {
+                id: 1,
+                name: 'Home',
+                to: '/',
+                icon: '../../../public/assets/png-icons/Home.png',
+                type: 'primary'
+            },
+            {
+                id: 2,
+                name: 'Manger',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Invoice.png',
+                type: 'primary'
+            },
+            {
+                id: 3,
+                name: 'Record',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Records.png',
+                type: 'primary'
+            },
+            {
+                id: 4,
+                name: 'Report',
+                to: '/profile',
+                icon: '../../../public/assets/png-icons/Reports.png',
+                type: 'primary'
+            },
+           
         ],
-        reference: '/tertiary',
-        onClick: () => console.log('Home clicked'),
+        sliceLength: 2
     },
 };
+
+

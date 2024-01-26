@@ -18,7 +18,7 @@ describe('NavigationBar component', () => {
   ];
 
   test('renders NavigationBar component with provided navigation links', () => {
-    render(<NavigationBar Navigationlinks={mockNavigationLinks} />);
+    render(<NavigationBar Navigationlinks={mockNavigationLinks}  />);
     
     // Ensure UniqueUser component is rendered
     expect(screen.getByAltText('happyavatar')).toBeInTheDocument();

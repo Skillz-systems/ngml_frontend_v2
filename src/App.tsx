@@ -1,7 +1,7 @@
 import Cancelicon from '../public/assets/Cancelicon.png';
 import Badge from './Components/BadgeComponent/Badge';
-import NavigationBar from './Components/NavigationMenu/NavigationBar';
-import { Navigationlinks } from './Components/NavigationMenu/Navigationlinks';
+// import NavigationBar from './Components/NavigationMenu/NavigationBar';
+// import { Navigationlinks } from './Components/NavigationMenu/Navigationlinks';
 // import AuthContainer from './Components/authContainer/AuthContainer';
 // import HomeIcons from '../public/assets/HomeIcons.png'
 
@@ -42,10 +42,10 @@ function App() {
       </div>
 
       <div className=' w-screen h-screen bg-500-red'>
-        <NavigationBar
+        {/* <NavigationBar
           Navigationlinks={Navigationlinks}
 
-        />
+        /> */}
       </div>
       <div></div>
     </>

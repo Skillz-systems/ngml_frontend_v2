@@ -1,6 +1,9 @@
-import { DensityMedium, KeyboardArrowDown, KeyboardArrowLeft } from '@mui/icons-material';
+import {
+  DensityMedium,
+  KeyboardArrowDown,
+  KeyboardArrowLeft
+} from '@mui/icons-material';
 import React, { useState } from 'react';
-
 
 /**
  * Navigation bar item.
@@ -22,38 +25,37 @@ interface INavigationBar {
   subMenu?: INavigationBar[];
 }
 
-
-interface NavigationBarProps {
+export interface NavigationBarProps {
   Navigationlinks: INavigationBar[];
+  sliceLength?: number;
 }
 
 /**
  * User information.
  *
- * @typedef {Object} IUserInfo
+ * @typeof {Object} IUserInfo
  * @property {string} name - User's name.
  * @property {string} designation - User's designation.
  * @property {string} avatar - URL of the user's avatar.
  */
-interface IUserInfo {
+interface IUserType {
   name: string;
   designation: string;
   avatar: string;
 }
 
-
 /**
- * UniqueUser component.
+ * UserType component.
  *
  * @component
  * @param {Object} props - Component props.
  * @param {IUserInfo} props.userInfo - Information about the user.
  * @param {() => void} props.handleToggleNavigationBar - Function to handle toggling the navigation bar.
- * @returns {ReactElement} React component representing a unique user.
+ * @returns {ReactElement} React component representing a user type.
  */
 
-const UniqueUser: React.FC<{
-  userInfo: IUserInfo;
+const UserType: React.FC<{
+  userInfo: IUserType;
   handleToggleNavigationBar: () => void;
 }> = ({ userInfo, handleToggleNavigationBar }) => {
   return (
@@ -146,7 +148,9 @@ const UniqueUser: React.FC<{
               }}
               onClick={handleToggleNavigationBar}
             >
-              <KeyboardArrowLeft style={{ color: '#CCD0DC' }} />
+              <KeyboardArrowLeft
+                style={{ color: '#CCD0DC', cursor: 'pointer' }}
+              />
             </div>
           </div>
         </div>
@@ -185,8 +189,8 @@ const NavigationBarItem: React.FC<{
     ? item.type === 'primary'
       ? '#F6FDEC'
       : item.type === 'secondary'
-        ? '#F9FAFB'
-        : '#F9FAFB'
+      ? '#F9FAFB'
+      : '#F9FAFB'
     : 'white';
 
   return (
@@ -310,7 +314,6 @@ const NavigationBarItem: React.FC<{
   );
 };
 
-
 /**
  * NavigationBar component.
  *
@@ -319,7 +322,10 @@ const NavigationBarItem: React.FC<{
  * @param {INavigationBar[]} props.Navigationlinks - Array of navigation bar items.
  * @returns {ReactElement} React component representing a navigation bar.
  */
-const NavigationBar: React.FC<NavigationBarProps> = ({ Navigationlinks }) => {
+const NavigationBar: React.FC<NavigationBarProps> = ({
+  Navigationlinks,
+  sliceLength = 0
+}) => {
   const [activeItemId, setActiveItemId] = useState<number | null>(null);
   const [isNavigationBarVisible, setIsNavigationBarVisible] = useState(true);
 
@@ -338,6 +344,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ Navigationlinks }) => {
     avatar: '../../../public/assets/avatar.png'
   });
 
+  const effectiveSliceLength =
+    sliceLength > 0 ? sliceLength : Navigationlinks.length;
+
   return (
     <>
       {isNavigationBarVisible ? (
@@ -353,7 +362,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ Navigationlinks }) => {
           }}
         >
           <div>
-            <UniqueUser
+            <UserType
               userInfo={userInfo}
               handleToggleNavigationBar={handleToggleNavigationBar}
             />
@@ -369,7 +378,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ Navigationlinks }) => {
               padding: '8px'
             }}
           >
-            {Navigationlinks.map((item) => (
+            {Navigationlinks.slice(0, effectiveSliceLength).map((item) => (
               <NavigationBarItem
                 key={item.id}
                 item={item}
@@ -378,6 +387,32 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ Navigationlinks }) => {
               />
             ))}
           </div>
+
+          {sliceLength > 0 && sliceLength < Navigationlinks.length && (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderRadius: '14px',
+                background: 'white',
+                width: '216px',
+                marginTop: '16px',
+                padding: '8px'
+              }}
+            >
+              {Navigationlinks.slice(
+                effectiveSliceLength,
+                Navigationlinks.length
+              ).map((item) => (
+                <NavigationBarItem
+                  key={item.id}
+                  item={item}
+                  isActive={activeItemId === item.id}
+                  onClick={() => handleItemClick(item.id)}
+                />
+              ))}
+            </div>
+          )}
         </div>
       ) : (
         <div
@@ -393,7 +428,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ Navigationlinks }) => {
           }}
           onClick={handleToggleNavigationBar}
         >
-          <DensityMedium style={{ color: '#CCD0DC', height: '18px', width: '18px' }} />
+          <DensityMedium
+            style={{ color: '#CCD0DC', height: '18px', width: '18px' }}
+          />
         </div>
       )}
     </>
