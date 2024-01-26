@@ -11,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      borderColor: {
+        'NGML-SEC': 'var(--NGML-SEC, #005828)'
+      },
       colors: {
         primary: colors.blue
       }
