@@ -37,14 +37,14 @@ function App() {
           onIconClick={() => alert('Icon clicked!')}
         />
       </div>
-           <div className="">
+      <div className="">
         <p className="">Vite and React</p>
       </div>
 
       <div className=' w-screen h-screen bg-500-red'>
         <NavigationBar
-        Navigationlinks={Navigationlinks} 
-        
+          Navigationlinks={Navigationlinks}
+
         />
       </div>
       <div></div>
