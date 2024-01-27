@@ -223,7 +223,7 @@ const NavigationBarItem: React.FC<{
         >
           <span>
             <img
-              style={{ height: '16px', width: '16px', color: 'red' }}
+              style={{ height: '16px', width: '16px'}}
               src={item.icon}
               alt={item.name}
             />
