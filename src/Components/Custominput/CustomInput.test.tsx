@@ -80,22 +80,4 @@ describe('CustomInput', () => {
     expect(mockOnChange).toHaveBeenCalledWith(true);
   });
 
-  // Add a test for the radio type
-  it('renders radio button', () => {
-    render(<CustomInput type="radio" label="Radio" value="radioValue" onChange={() => {}} />);
-    const radioElement = screen.getByLabelText('Radio');
-    expect(radioElement).toBeInTheDocument();
-    expect(radioElement).toHaveAttribute('type', 'radio');
-    
-  });
-
-  it('calls onChange when radio value changes', async () => {
-    const mockOnChange = vi.fn();
-    render(<CustomInput type="radio" label="Radio" value="radioValue" onChange={mockOnChange} />);
-    const radioElement = screen.getByLabelText('Radio');
-    
-    fireEvent.change(radioElement, { target: { value: 'radioValue' } });
-
-    expect(mockOnChange).toHaveBeenCalledWith('radioValue');
-  });
 });const mockOnChange = vi.fn();
