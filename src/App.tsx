@@ -1,23 +1,12 @@
-<<<<<<< HEAD
-import { useState } from 'react';
-import CustomInput from './Components/Custominput/CustomInput';
-import Eyeopen from '/assets/png-icons/Eyeopen.png';
-=======
 import Cancelicon from '../public/assets/Cancelicon.png';
 import Badge from './Components/BadgeComponent/Badge';
 
 
->>>>>>> 3d19dadfbc5d0ebd359a00736e4bdc52e103543f
 
 function App() {
 
 
   return (
-<<<<<<< HEAD
-    <div className="App">
- 
-    </div>
-=======
     <>
 
       <div>
@@ -48,7 +37,6 @@ function App() {
       </div>
       <div></div>
     </>
->>>>>>> 3d19dadfbc5d0ebd359a00736e4bdc52e103543f
   );
 }
 export default App
