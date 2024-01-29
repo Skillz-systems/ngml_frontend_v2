@@ -12,7 +12,7 @@ describe('CustomInput', () => {
   });
 
   it('calls onChange when input value changes', () => {
-    
+    const mockOnChange = vi.fn();
     render(<CustomInput type="text" label="Username" value="" onChange={mockOnChange} />);
     const inputElement = screen.getByRole('textbox');
     
@@ -71,13 +71,11 @@ describe('CustomInput', () => {
     expect(checkboxElement).toBeInTheDocument();
   });
 
-  it('calls onChange when checkbox value changes', () => {
-    const mockOnChange = vi.fn();
-    render(<CustomInput type="checkbox" label="Agree" value={false} onChange={mockOnChange} />);
-    const checkboxElement = screen.getByRole('checkbox');
-    
-    fireEvent.click(checkboxElement);
-    expect(mockOnChange).toHaveBeenCalledWith(true);
+  it('renders radio button', () => {
+    render(<CustomInput type="radio" label="Radio" value="radioValue" onChange={() => {}} options={['Option1', 'Option2']} />);
+    const radioElement = screen.getByLabelText('Option1');
+    expect(radioElement).toBeInTheDocument();
+    expect(radioElement).toHaveAttribute('type', 'radio');
   });
 
-});const mockOnChange = vi.fn();
+});

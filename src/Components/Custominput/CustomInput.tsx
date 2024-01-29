@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import AltDownArrow from '/assets/png-icons/AltDownArrow.png';
 import Eyeclosed from '/assets/png-icons/Eyeclosed.png';
 import Eyeopen from '/assets/png-icons/Eyeopen.png';
+import Search from '/assets/png-icons/Search.png';
 
 /**
- * CustomInput component for various input types (text, password, date, number, select, textarea, checkbox).
+ * CustomInput Component - A customizable input component for various input types.
  *
  * @component
  * @example
@@ -12,163 +13,201 @@ import Eyeopen from '/assets/png-icons/Eyeopen.png';
  *   type="text"
  *   label="Username"
  *   value={username}
- *   onChange={(value) => setUsername(value)}
+ *   onChange={(newValue) => setUsername(newValue)}
  *   placeholder="Enter your username"
- *   error={usernameError}
- *   icon={<i className="fas fa-user" />}
- * />
- *
- * @example
- * <CustomInput
- *   type="select"
- *   label="Select Option"
- *   value={selectedOption}
- *   onChange={(value) => setSelectedOption(value)}
- *   options={['Option 1', 'Option 2', 'Option 3']}
- *   error={selectError}
- *   icon={<i className="fas fa-caret-down" />}
+ *   required
+ *   icon={<IconComponent />}
+ *   styleVariant="custom1"
  * />
  *
  * @param {Object} props - The properties of the CustomInput component.
- * @param {string} props.type - The type of the input ('text', 'password', 'date', 'number', 'select', 'textarea', 'checkbox').
+ * @param {'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'search'} props.type - The type of input to render.
  * @param {string} props.label - The label for the input.
- * @param {string | number} props.value - The current value of the input.
- * @param {(value: string | number) => void} props.onChange - The function called when the input value changes.
+ * @param {string | number | boolean} props.value - The current value of the input.
+ * @param {(value: string | number | boolean) => void} props.onChange - The function to be called when the input value changes.
  * @param {string} [props.placeholder] - The placeholder text for the input.
- * @param {string[]} [props.options] - The options for the select input (applicable only for type 'select').
- * @param {string} [props.error] - The error message to be displayed.
+ * @param {string[]} [props.options] - The options for select or radio input types.
+ * @param {string} [props.error] - The error message to display.
+ * @param {boolean} [props.required=false] - Whether the input is required.
  * @param {React.ReactNode} [props.icon] - The icon to be displayed with the input.
- *
- * @returns {JSX.Element} JSX.Element
+ * @param {'default' | 'custom1' | 'custom2' | 'custom3' | 'custom4' | 'custom5' | 'custom6'} [props.styleVariant='default'] - The style variant for the input.
+ * @returns {JSX.Element} The rendered CustomInput component.
  */
 
 interface CustomInputProps {
-  type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio';
-  label: string;
-  value: string | number | boolean;
-  onChange: (value: string | number | boolean) => void;
-  placeholder?: string;
-  options?: string[];
-  error?: string;
-  icon?: React.ReactNode;
+    type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'search';
+    label: string;
+    value: string | number | boolean;
+    onChange: (value: string | number | boolean) => void;
+    placeholder?: string;
+    options?: string[];
+    error?: string;
+    required?: boolean;
+    icon?: React.ReactNode;
+    styleVariant?: 'default' | 'custom1' | 'custom2' | 'custom3' | 'custom4' | 'custom5' | 'custom6'
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
-  type,
-  label,
-  value,
-  onChange,
-  placeholder,
-  options,
-  error,
-  icon,
+    type,
+    label,
+    value,
+    onChange,
+    placeholder,
+    options,
+    error,
+    required = false,
+    icon,
+    styleVariant = 'default', // Default to 'default' if styleVariant is not provided
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
-  const handleTogglePassword = () => {
-    setShowPassword((prev) => !prev);
-  };
+    const handleTogglePassword = () => {
+        setShowPassword((prev) => !prev);
+    };
 
-  const inputClasses = `appearance-none block w-full px-3 py-2 border ${
-    error ? 'border-red-500' : 'border-b border-solid border-2 border-NGML-SEC'
-  } rounded-md shadow-sm placeholder-gray-400 italic pl-10 focus:outline-none focus:ring-indigo-500 focus:border-indigo-400 sm:text-sm`;
+    const handleToggle = () => {
+        setIsChecked(!isChecked);
+      };
 
-  const containerClasses = 'mt-1 relative rounded-md shadow-sm';
+    const styleVariants = {
+        default: `appearance-none block w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
+            } rounded-md shadow-sm placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-green-100 sm:text-sm`, //default input
+        custom1: `border border-solid border-green-500 placeholder-gray-400 italic pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-green-500`, // inputs with well rounded border radius
+        custom2: `rounded-md placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
+        custom3: `rounded-full placeholder-gray-300 italic pl-12 focus:outline-none focus:border-green-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-4`, // for inputs with gray background focused
+         custom4: `placeholder-black pl-12 focus:outline-none focus:border-green-200 focus:bg-white-600 border-1 solid w-full py-2`, // no boder input
+    };
 
-  const renderInput = () => {
-    switch (type) {
-      case 'text':
-      case 'password':
-      case 'date':
-      case 'number':
-        return (
-          <input
-            type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            placeholder={placeholder}
-            className={inputClasses}
-          />
-        );
-      case 'select':
-        return (
-          <div className='relative'>
-            <select value={value} onChange={(e) => onChange(e.target.value)} className={inputClasses}>
-              {options?.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-              <img src={AltDownArrow} alt='Alt down arrow' className='cursor-pointer'/>
-            </div>
-          </div>
-        );
-      case 'textarea':
-        return (
-          <textarea
-            value={value as string}
-            onChange={(e) => onChange(e.target.value)}
-            placeholder={placeholder}
-            className={inputClasses}
-          />
-        );
-      case 'checkbox':
-        return (
-          <input
+    const inputClasses = styleVariants[styleVariant];
+
+
+    const containerClasses = 'mt-1 relative rounded-md shadow-sm';
+
+    const renderInput = () => {
+        switch (type) {
+            case 'text':
+            case 'password':
+            case 'date':
+            case 'number':
+            case 'search':
+                return (
+                    <input
+                        type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
+                        value={value}
+                        onChange={(e) => onChange(e.target.value)}
+                        placeholder={placeholder}
+                        className={inputClasses}
+                    />
+                );
+            case 'select':
+                return (
+                    <div className='relative'>
+                        <select value={value} onChange={(e) => onChange(e.target.value)} className={inputClasses}>
+                            {options?.map((option) => (
+                                <option key={option} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                );
+            case 'textarea':
+                return (
+                    <textarea
+                        value={value as string}
+                        onChange={(e) => onChange(e.target.value)}
+                        placeholder={placeholder}
+                        className={inputClasses}
+                    />
+                );
+            case 'checkbox':
+                return (
+        <div className="flex items-center space-x-2">
+            <input
             type="checkbox"
-            checked={value as boolean}
-            onChange={(e) => onChange(e.target.checked)}
-          />
-        );
-      case 'radio':
-        return (
-          <div>
-            {options?.map((option) => (
-              <div key={option} className="flex items-center">
-                <input
-                  type="radio"
-                  id={option}
-                  value={option}
-                  checked={value === option}
-                  onChange={() => onChange(option)}
-                />
-                <label htmlFor={option} className="ml-2">{option}</label>
-              </div>
-            ))}
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
-
-  return (
-    <div className={containerClasses}>
-      <label className="block text-[14px] font-normal text-gray-500" htmlFor={label}>
-        {label}
+            id="toggle"
+            checked={isChecked}
+            onChange={handleToggle}
+            className="hidden"
+      />
+      <label
+        htmlFor="toggle"
+        className={`cursor-pointer relative w-10 h-4 rounded-full ${
+          isChecked ? 'bg-green-500' : 'bg-gray-300'
+        }`}
+      >
+        <div
+          className={`toggle-dot absolute w-4 h-4 bg-white rounded-full transition-transform duration-300 ease-in-out ${
+            isChecked ? 'transform translate-x-full' : 'transform translate-x-0'
+          }`}
+        ></div>
       </label>
-      <div className={containerClasses}>
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          {icon && <span className="text-gray-500 sm:text-sm">{icon}</span>}
+</div>
+                );
+            case 'radio':
+                return (
+                    <div>
+                        {options?.map((option) => (
+                            <div key={option} className="flex items-center">
+                                <input
+                                    type="radio"
+                                    id={option}
+                                    value={option}
+                                    checked={value === option}
+                                    onChange={() => onChange(option)}
+                                />
+                                <label htmlFor={option} className="ml-2">{option}</label>
+                            </div>
+                        ))}
+                    </div>
+                );
+            default:
+                return null;
+        }
+    };
+
+    return (
+        <div className={containerClasses}>
+            <label className={`block ${required ? 'font-bold' : ''}`}>
+                {label}
+                {required && <span className="text-red-500">*</span>}
+            </label>
+            <div className={containerClasses}>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    {icon && <span className="text-gray-500 sm:text-sm bg-green-200 rounded-full p-1">{icon}</span>}
+                </div>
+                {renderInput()}
+                {type === 'password' && (
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <button
+                            type="button"
+                            className="text-gray-500 focus:outline-none focus:text-gray-600"
+                            onClick={handleTogglePassword}
+                        >
+                            {showPassword ? <img src={Eyeclosed} alt='eyeclosed' /> : <img src={Eyeopen} alt='eyeopen' />}
+                        </button>
+                    </div>
+                )}
+                 {type === 'search' && (
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <button
+                            type="button"
+                            className="text-gray-500 focus:outline-none focus:text-gray-600"
+                        >
+                            <img src={Search} alt='eyeclosed' />
+                        </button>
+                    </div>
+                )}
+            </div>
+            {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
         </div>
-        {renderInput()}
-        {type === 'password' && (
-          <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-            <button
-              type="button"
-              className="text-gray-500 focus:outline-none focus:text-gray-600"
-              onClick={handleTogglePassword}
-            >
-              {showPassword ? <img src={Eyeclosed} alt='eyeclosed' /> : <img src={Eyeopen} alt='eyeopen' />}
-            </button>
-          </div>
-        )}
-      </div>
-      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
-    </div>
-  );
+    );
 };
 
 export default CustomInput;
+
+
+
+
+
