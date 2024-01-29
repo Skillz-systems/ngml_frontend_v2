@@ -97,13 +97,13 @@ const Button: React.FC<ButtonProps> = ({
             case 'secondary':
                 return { backgroundColor: isHovered ? '#00903e' : '#00AF50', color: '#FFFFFF', width, height, fontSize, borderRadius: radius, fontWeight, lineHeight , columnGap};
             case 'tertiary':
-                return { border: '1px solid #DCDFE4', color: '#49526A', width, height, fontSize: isHovered ? '17px' : '15px', borderRadius: radius, fontWeight };
+                return { border: '1px solid #DCDFE4', color: '#49526A', width, height, fontSize: isHovered ? '15.5px' : '15px', borderRadius: radius, fontWeight };
             case 'icon':
                 return {  backgroundColor: isHovered ? '#00903e' : '#F9FAFB', color, width, height, borderRadius: radius,   };
             case 'outline':
-                return { border: '1px solid #DCDFE4', color: '#49526A', width, height, fontSize: isHovered ? '17px' : '15px', borderRadius: radius, fontWeight };
+                return { border: '1px solid #DCDFE4', color: '#49526A', width, height, fontSize: isHovered ? '15.5px' : '15px', borderRadius: radius, fontWeight };
             case 'transparent':
-                return { fontSize: isHovered ? '16px' : '12px', fontWeight, lineHeight};
+                return { fontSize: isHovered ? '12.5px' : '12px', fontWeight, lineHeight};
             default:
                 return {backgroundColor: isHovered ? 'darkgreen' : 'green', color: 'white' };
         }
@@ -126,6 +126,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <button
+            className={`button ${isHovered ? 'hovered' : ''}`}
             onClick={action}
             disabled={disabled}
             onMouseEnter={() => setIsHovered(true)}
