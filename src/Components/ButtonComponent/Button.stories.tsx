@@ -77,7 +77,6 @@ export const Transparent: Story = {
     args: {
         type: 'transparent',
         label: 'Forgot Password?',
-        fontSize: '12px',
         lineHeight: '12px',
         fontWeight: '400',
         color: '#49526A',
@@ -108,7 +107,6 @@ export const Tertiary: Story = {
         label: 'Upload Data Sheet',
         width: '193px',
         height: '32px',
-        fontSize: '15px',
         radius: '32px',
         color: '#49526A',
         fontWeight: '400',
@@ -127,8 +125,6 @@ export const Icon: Story = {
         height: '80px',
         width: '80px',
         radius: '100%',
-        iconHeight: '24px',
-        iconWidth: '24px',
         iconColor: '#E2E4EB'
 
     },
