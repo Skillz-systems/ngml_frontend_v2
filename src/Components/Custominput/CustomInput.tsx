@@ -44,7 +44,7 @@ interface CustomInputProps {
     error?: string;
     required?: boolean;
     icon?: React.ReactNode;
-    styleVariant?: 'default' | 'custom1' | 'custom2' | 'custom3' | 'custom4' | 'custom5' | 'custom6'
+    styleVariant?: 'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4'
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -78,10 +78,10 @@ const CustomInput: React.FC<CustomInputProps> = ({
     const styleVariants = {
         default: `appearance-none block w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
             } rounded-md shadow-sm placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-green-100 sm:text-sm`, //default input
-        custom1: `border border-solid border-green-500 placeholder-gray-400 italic pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-green-500`, // inputs with well rounded border radius
-        custom2: `rounded-md placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
-        custom3: `rounded-full placeholder-gray-300 italic pl-12 focus:outline-none focus:border-green-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-4`, // for inputs with gray background focused
-         custom4: `placeholder-black pl-12 focus:outline-none focus:border-green-200 focus:bg-white-600 border-1 solid w-full py-2`, // no boder input
+        customStyle1: `border border-solid border-green-500 placeholder-gray-400 italic pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-green-500`, // inputs with well rounded border radius
+        customStyle2: `rounded-md placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
+        customStyle3: `rounded-full placeholder-gray-300 italic pl-12 focus:outline-none focus:border-green-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-4`, // for inputs with gray background focused, rounded radius and wider input 
+         customStyle4: `placeholder-black pl-12 focus:outline-none focus:border-green-200 focus:bg-white-600 border-1 solid w-full py-2`, // no border input
     };
 
     const inputClasses = `${styleVariants[styleVariant]} ${touched && !value ? 'border-red-500' : ''}`;
@@ -155,13 +155,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 return (
                     <div>
                         {options?.map((option) => (
-                            <div key={option} className="flex items-center">
+                            <div key={option} className="flex items-center p-2">
                                 <input
                                     type="radio"
                                     id={option}
                                     value={option}
                                     checked={value === option}
                                     onChange={() => onChange(option)}
+                                    className= "w-5 h-5"
                                 />
                                 <label htmlFor={option} className="ml-2">{option}</label>
                             </div>

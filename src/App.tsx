@@ -1,11 +1,9 @@
 import Cancelicon from '../public/assets/Cancelicon.png';
 import Badge from './Components/BadgeComponent/Badge';
-import Button from './Components/ButtonComponent/Button';
 
 
 
 function App() {
-
 
   return (
     <>
@@ -30,26 +28,13 @@ function App() {
         <p className="">Vite and React</p>
       </div>
 
-      <div className=' bg-500-red'>
+      <div className=' w-screen h-screen bg-500-red'>
         {/* <NavigationBar
           Navigationlinks={Navigationlinks}
 
         /> */}
       </div>
-      <div>
-        <Button
-          type='secondary'
-          label='fffff'
-          action={() => alert('Button clicked')}
-          height='40px'
-          width='150px'
-          radius='10px'
-          icon={<img src={Cancelicon} alt="Cancel Icon" />}
-          iconHeight='20px'
-          iconWidth='20px'
-          iconPosition='right'
-        />
-      </div>
+      <div></div>
     </>
   );
 }
