@@ -61,6 +61,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+    const [touched, setTouched] = useState(false);
 
     const handleTogglePassword = () => {
         setShowPassword((prev) => !prev);
@@ -68,6 +69,10 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
     const handleToggle = () => {
         setIsChecked(!isChecked);
+      };
+
+      const handleBlur = () => {
+        setTouched(true);
       };
 
     const styleVariants = {
@@ -79,7 +84,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
          custom4: `placeholder-black pl-12 focus:outline-none focus:border-green-200 focus:bg-white-600 border-1 solid w-full py-2`, // no boder input
     };
 
-    const inputClasses = styleVariants[styleVariant];
+    const inputClasses = `${styleVariants[styleVariant]} ${touched && !value ? 'border-red-500' : ''}`;
 
 
     const containerClasses = 'mt-1 relative rounded-md shadow-sm';
@@ -96,6 +101,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                         type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
+                        onBlur={handleBlur}
                         placeholder={placeholder}
                         className={inputClasses}
                     />
