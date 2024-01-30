@@ -4,25 +4,7 @@ import React from 'react'
  * Badge Component
  * 
  * A custom dynamic badge component that supports various styles, icons, and customization options.
- * 
- * @component
- * @example
- * // Example of using the Badge component
- * <Badge 
- *   type="primary"
- *   label="Dangote sugar"
- *   width="100px"
- *   height="40px"
- *   fontSize="16px"
- *   radius="4px"
- *   fontWeight="bold"
- *   icon={<IconComponent />}
- *   iconHeight="20px"
- *   iconWidth="20px"
- *   iconColor="#333"
- *   columnGap="8px"
- *   onIconClick={() => console.log('Icon clicked')}
- * />
+ 
  *
  * @param {Object} props - The properties of the Badge component.
  * @param {string} props.type - The type of the badge. Possible values are "primary", "secondary", "transparent", "outline".
