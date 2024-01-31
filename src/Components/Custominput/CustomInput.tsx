@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import AltDownArrow from '/assets/png-icons/AltDownArrow.png';
 import Eyeclosed from '/assets/png-icons/Eyeclosed.png';
 import Eyeopen from '/assets/png-icons/Eyeopen.png';
-import Search from '/assets/png-icons/Search.png';
 
 /**
  * CustomInput Component - A customizable input component for various input types.
@@ -69,11 +67,11 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
     const handleToggle = () => {
         setIsChecked(!isChecked);
-      };
+    };
 
-      const handleBlur = () => {
+    const handleBlur = () => {
         setTouched(true);
-      };
+    };
 
     const styleVariants = {
         default: `appearance-none block w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
@@ -81,7 +79,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
         customStyle1: `border border-solid border-green-500 placeholder-gray-400 italic pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-green-500`, // inputs with well rounded border radius
         customStyle2: `rounded-md placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
         customStyle3: `rounded-full placeholder-gray-300 italic pl-12 focus:outline-none focus:border-green-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-4`, // for inputs with gray background focused, rounded radius and wider input 
-         customStyle4: `placeholder-black pl-12 focus:outline-none focus:border-green-200 focus:bg-white-600 border-1 solid w-full py-2`, // no border input
+        customStyle4: `placeholder-black pl-12 focus:outline-none focus:border-green-200 focus:bg-white-600 border-1 solid w-full py-2`, // no border input
     };
 
     const inputClasses = `${styleVariants[styleVariant]} ${touched && !value ? 'border-red-500' : ''}`;
@@ -95,7 +93,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
             case 'password':
             case 'date':
             case 'number':
-            case 'search':
                 return (
                     <input
                         type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
@@ -129,27 +126,25 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 );
             case 'checkbox':
                 return (
-        <div className="flex items-center space-x-2">
-            <input
-            type="checkbox"
-            id="toggle"
-            checked={isChecked}
-            onChange={handleToggle}
-            className="hidden"
-      />
-      <label
-        htmlFor="toggle"
-        className={`cursor-pointer relative w-10 h-4 rounded-full ${
-          isChecked ? 'bg-green-500' : 'bg-gray-300'
-        }`}
-      >
-        <div
-          className={`toggle-dot absolute w-4 h-4 bg-white rounded-full transition-transform duration-300 ease-in-out ${
-            isChecked ? 'transform translate-x-full' : 'transform translate-x-0'
-          }`}
-        ></div>
-      </label>
-</div>
+                    <div className="flex items-center space-x-2">
+                        <input
+                            type="checkbox"
+                            id="toggle"
+                            checked={isChecked}
+                            onChange={handleToggle}
+                            className="hidden"
+                        />
+                        <label
+                            htmlFor="toggle"
+                            className={`cursor-pointer relative w-10 h-4 rounded-full ${isChecked ? 'bg-green-500' : 'bg-gray-300'
+                                }`}
+                        >
+                            <div
+                                className={`toggle-dot absolute w-4 h-4 bg-white rounded-full transition-transform duration-300 ease-in-out ${isChecked ? 'transform translate-x-full' : 'transform translate-x-0'
+                                    }`}
+                            ></div>
+                        </label>
+                    </div>
                 );
             case 'radio':
                 return (
@@ -162,7 +157,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                                     value={option}
                                     checked={value === option}
                                     onChange={() => onChange(option)}
-                                    className= "w-5 h-5"
+                                    className="w-5 h-5"
                                 />
                                 <label htmlFor={option} className="ml-2">{option}</label>
                             </div>
@@ -196,22 +191,11 @@ const CustomInput: React.FC<CustomInputProps> = ({
                         </button>
                     </div>
                 )}
-                 {type === 'search' && (
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                        <button
-                            type="button"
-                            className="text-gray-500 focus:outline-none focus:text-gray-600"
-                        >
-                            <img src={Search} alt='eyeclosed' />
-                        </button>
-                    </div>
-                )}
             </div>
             {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
         </div>
     );
 };
-
 export default CustomInput;
 
 
