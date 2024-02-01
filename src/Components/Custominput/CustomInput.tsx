@@ -89,6 +89,12 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
 
     const containerClasses = 'mt-1 relative';
+    const renderError = () => {
+        if (touched && !value && required) {
+            return <p className="mt-2 text-sm text-red-600">This field is required</p>;
+        }
+        return null;
+    };
 
     const renderInput = () => {
         switch (type) {
@@ -201,6 +207,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     </div>
                 )}
             </div>
+            {renderError()}
             {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
         </div>
     );
