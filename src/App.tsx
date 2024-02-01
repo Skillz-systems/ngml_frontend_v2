@@ -20,20 +20,22 @@ function App() {
   const [selectedOption, setSelectedOption] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
+  const options = ['Option 1', 'Option 2', 'Option 3'];
+
   const handleToggle = () => {
     setIsChecked(!isChecked);
   };
 
-  const handleSelectChanges = (value) => {
-    setSelectedOption(value);
+  const handleSelectChanges = (value: string | number | boolean | readonly string[]) => {
+    setSelectedOption(value as string);
   };
 
-  const handleInputChange = (value: string) => {
-    setTextValue(value);
+  const handleInputChange = (value: string | number | boolean | readonly string[]) => {
+    setTextValue(value as string);
   };
 
-  const handlePasswordChange = (value: string) => {
-    setPasswordValue(value);
+  const handlePasswordChange = (value: string | number | boolean | readonly string[]) => {
+    setPasswordValue(value as string);
   };
 
   const handleEmailChange = (value: string) => {
@@ -45,8 +47,8 @@ function App() {
     setNumberValue(Number(value));
   };
 
-  const handleSelectChange = (value: string) => {
-    setSelectValue(value);
+  const handleSelectChange = (value: string | number | boolean | readonly string[]) => {
+    setSelectValue(value as string);
   };
 
   const handleTextareaChange = (value: string) => {
@@ -117,9 +119,9 @@ function App() {
         <CustomInput
           type='select'
           label='khjgsdjhs'
-          value={passwordValue}
-          onChange={handlePasswordChange}
-          styleVariant='customStyle3'
+          value={selectedOption}
+          onChange={handleSelectChange}
+          options={options}
           placeholder='hfkjflg;khlk'
         />
         <CustomInput

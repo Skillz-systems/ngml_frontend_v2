@@ -35,8 +35,8 @@ import Eyeopen from '/assets/png-icons/Eyeopen.png';
 interface CustomInputProps {
     type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'search';
     label: string;
-    value?: string | number | boolean;
-    onChange: (value: string | number | boolean) => void;
+    value?: string | number | boolean | readonly string[];
+    onChange: (value: string | number | boolean | readonly string[] | undefined) => void;
     placeholder?: string;
     options?: string[];
     error?: string;
@@ -96,7 +96,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 return (
                     <input
                         type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
-                        value={value}
+                        value={value as string | number | undefined}
                         onChange={(e) => onChange(e.target.value)}
                         onBlur={handleBlur}
                         placeholder={placeholder}
@@ -106,7 +106,10 @@ const CustomInput: React.FC<CustomInputProps> = ({
             case 'select':
                 return (
                     <div className=''>
-                        <select value={value} onChange={(e) => onChange(e.target.value)} className={inputClasses}>
+                        <select value={Array.isArray(value) ? value : undefined} 
+                        onChange={(e) => onChange(e.target.value)} 
+                        className={inputClasses}>
+                             multiple={Array.isArray(value)}
                             {options?.map((option) => (
                                 <option key={option} value={option}>
                                     {option}
