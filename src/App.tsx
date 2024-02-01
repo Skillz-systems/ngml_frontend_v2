@@ -101,7 +101,7 @@ function App() {
           onChange={handleInputChange}
           placeholder="Enter text"
           // icon={<img src={Eyeopen} alt='eyeopen' />}
-          styleVariant="customStyle3"
+          styleVariant="customStyle1"
         />
 
         <CustomInput
@@ -112,13 +112,14 @@ function App() {
           onChange={handlePasswordChange}
           placeholder="Enter password"
           icon={<img src={Eyeopen} alt='eyeopen' />}
+          styleVariant="customStyle2"
         />
         <CustomInput
           type='select'
           label='khjgsdjhs'
           value={passwordValue}
           onChange={handlePasswordChange}
-          styleVariant='customStyle4'
+          styleVariant='customStyle3'
           placeholder='hfkjflg;khlk'
         />
         <CustomInput

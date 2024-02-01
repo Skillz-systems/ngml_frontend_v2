@@ -85,7 +85,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
     const inputClasses = `${styleVariants[styleVariant]} ${touched && !value ? 'border-red-500' : ''}`;
 
 
-    const containerClasses = 'mt-1 relative rounded-md shadow-sm';
+    const containerClasses = 'mt-1 relative';
 
     const renderInput = () => {
         switch (type) {
@@ -105,7 +105,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 );
             case 'select':
                 return (
-                    <div className='relative'>
+                    <div className=''>
                         <select value={value} onChange={(e) => onChange(e.target.value)} className={inputClasses}>
                             {options?.map((option) => (
                                 <option key={option} value={option}>
@@ -126,7 +126,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 );
             case 'checkbox':
                 return (
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center">
                         <input
                             type="checkbox"
                             id="toggle"
@@ -136,7 +136,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                         />
                         <label
                             htmlFor="toggle"
-                            className={`cursor-pointer relative w-10 h-4 rounded-full ${isChecked ? 'bg-green-500' : 'bg-gray-300'
+                            className={`cursor-pointer relative w-8 h-4 rounded-full ${isChecked ? 'bg-green-500' : 'bg-gray-300'
                                 }`}
                         >
                             <div
