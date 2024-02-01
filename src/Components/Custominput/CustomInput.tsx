@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Eyeclosed from '/assets/png-icons/Eyeclosed.png';
 import Eyeopen from '/assets/png-icons/Eyeopen.png';
+import AltDownArrow from '/assets/png-icons/AltDownArrow.png'
 
 /**
  * CustomInput Component - A customizable input component for various input types.
@@ -82,7 +83,9 @@ const CustomInput: React.FC<CustomInputProps> = ({
         customStyle4: `placeholder-black pl-12 focus:outline-none focus:border-green-200 focus:bg-white-600 border-1 solid w-full py-2`, // no border input
     };
 
-    const inputClasses = `${styleVariants[styleVariant]} ${touched && !value ? 'border-red-500' : ''}`;
+    const inputClasses = `${styleVariants[styleVariant]} ${
+        !icon ? 'pl-3' : ''
+      } ${touched && !value ? 'border-red-500' : ''}`;
 
 
     const containerClasses = 'mt-1 relative';
@@ -105,10 +108,10 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 );
             case 'select':
                 return (
-                    <div className=''>
+                    <div className='relative'>
                         <select value={Array.isArray(value) ? value : undefined} 
                         onChange={(e) => onChange(e.target.value)} 
-                        className={inputClasses}>
+                        className={`${inputClasses} appearance-none select-none`}>
                              multiple={Array.isArray(value)}
                             {options?.map((option) => (
                                 <option key={option} value={option}>
@@ -116,6 +119,9 @@ const CustomInput: React.FC<CustomInputProps> = ({
                                 </option>
                             ))}
                         </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <img src={AltDownArrow} alt='Alt down Arrow' />
+                </div>
                     </div>
                 );
             case 'textarea':
@@ -174,7 +180,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
     return (
         <div className={containerClasses}>
-            <label className={`block ${required ? 'font-bold' : ''}`}>
+            <label className={`block ${required ? 'text-gray-700' : ''}`}>
                 {label}
                 {required && <span className="text-red-500">*</span>}
             </label>
