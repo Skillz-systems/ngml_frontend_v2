@@ -1,9 +1,9 @@
 // import Cancelicon from '../public/assets/Cancelicon.png';
 // import Badge from './Components/BadgeComponent/Badge';
-import React, { useState } from 'react'
-import CustomInput from "./Components/Custominput/CustomInput";
-import Eyeopen from '/assets/png-icons/Eyeopen.png'
+import { useState } from 'react';
 import AuthContainer from './Components/Authcontainer/AuthContainer';
+import CustomInput from "./Components/Custominput/CustomInput";
+import Eyeopen from '/assets/png-icons/Eyeopen.png';
 
 
 
@@ -92,51 +92,51 @@ function App() {
     //   </div>
     //   <div></div>
     // </>
-<AuthContainer>
-    <div className="container mx-auto mt-8">
-    <CustomInput
-      type="text"
-      label="Text Input"
-      value={textValue}
-      onChange={handleInputChange}
-      placeholder="Enter text"
-      // icon={<img src={Eyeopen} alt='eyeopen' />}
-      styleVariant="customStyle3"
-    />
+    <AuthContainer backgroundColor="rgba(255, 255, 0, 0.2)">
+      <div className="container mx-auto mt-8">
+        <CustomInput
+          type="text"
+          label="Text Input"
+          value={textValue}
+          onChange={handleInputChange}
+          placeholder="Enter text"
+          // icon={<img src={Eyeopen} alt='eyeopen' />}
+          styleVariant="customStyle3"
+        />
 
-    <CustomInput
-      required
-      type="password"
-      label="Password Input"
-      value={passwordValue}
-      onChange={handlePasswordChange}
-      placeholder="Enter password"
-      icon={<img src={Eyeopen} alt='eyeopen' />}
-    />
-    <CustomInput 
-    type='select'
-    label='khjgsdjhs'
-    value={passwordValue}
-    onChange={handlePasswordChange}
-    styleVariant='custom4'
-    placeholder='hfkjflg;khlk'
-    />
-      <CustomInput
-        type="radio"
-        label="Choose One"
-        value={selectedOption}
-        onChange={handleSelectChanges}
-        options={['Option A', 'Option B', 'Option C']}
-      />
-    <CustomInput
-      required
-      type="checkbox"
-      label="Password Input"
-      value={passwordValue}
-      onChange={handlePasswordChange}
-    />
-  </div>
-  </AuthContainer>
+        <CustomInput
+          required
+          type="password"
+          label="Password Input"
+          value={passwordValue}
+          onChange={handlePasswordChange}
+          placeholder="Enter password"
+          icon={<img src={Eyeopen} alt='eyeopen' />}
+        />
+        <CustomInput
+          type='select'
+          label='khjgsdjhs'
+          value={passwordValue}
+          onChange={handlePasswordChange}
+          styleVariant='customStyle4'
+          placeholder='hfkjflg;khlk'
+        />
+        <CustomInput
+          type="radio"
+          label="Choose One"
+          value={selectedOption}
+          onChange={handleSelectChanges}
+          options={['Option A', 'Option B', 'Option C']}
+        />
+        <CustomInput
+          required
+          type="checkbox"
+          label="Password Input"
+          value={passwordValue}
+          onChange={handlePasswordChange}
+        />
+      </div>
+    </AuthContainer>
   );
 }
 export default App

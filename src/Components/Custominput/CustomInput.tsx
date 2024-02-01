@@ -35,7 +35,7 @@ import Eyeopen from '/assets/png-icons/Eyeopen.png';
 interface CustomInputProps {
     type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'search';
     label: string;
-    value: string | number | boolean;
+    value?: string | number | boolean;
     onChange: (value: string | number | boolean) => void;
     placeholder?: string;
     options?: string[];
