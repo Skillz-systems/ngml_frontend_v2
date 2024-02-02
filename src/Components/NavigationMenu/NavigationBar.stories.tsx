@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import NavigationBar from './NavigationBar';
 
-
-
-
 const meta = {
 
     title: 'Components/NavigationBar',
