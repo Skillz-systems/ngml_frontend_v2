@@ -27,9 +27,9 @@ const Notification: React.FC<NotificationProps> = ({ count, onClick }) => {
         };
     }, []);
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
+    // const toggleDropdown = () => {
+    //     setIsOpen(!isOpen);
+    // };
 
     return (
         <div className="notification-container" ref={notificationRef}>
