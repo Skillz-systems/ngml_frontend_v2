@@ -1,5 +1,7 @@
-import Cancelicon from '../public/assets/Cancelicon.png';
-import Badge from './Components/BadgeComponent/Badge';
+// import DateCardList from './Components/DateCardComponent/DateCardList';
+
+import Notification from './Components/NotificationComponent/Notification';
+
 
 
 
@@ -7,34 +9,20 @@ function App() {
 
   return (
     <>
-
-      <div>
-        <Badge
-          type="outline"
-          label="Dangote sugar"
-          height="30px"
-          width="160px"
-          fontSize="16px"
-          fontWeight="500"
-          icon={<img src={Cancelicon} alt="Cancel Icon" />}
-          iconHeight="20px"
-          iconWidth="20px"
-          iconColor="blue"
-          columnGap="4px"
-          onIconClick={() => alert('Icon clicked!')}
-        />
-      </div>
       <div className="">
         <p className="">Vite and React</p>
       </div>
 
-      <div className=' w-screen h-screen bg-500-red'>
-        {/* <NavigationBar
-          Navigationlinks={Navigationlinks}
-
-        /> */}
+      {/* <div style={{ backgroundColor: '#F9FBFD', height: 'screen', width: 'screen', }}>
+        <DateCardList startDate={12} endDate={18} cardType="primary" />
+      </div> */}
+      <div>
+        <Notification 
+        count={6} 
+        onClick={() => alert ('clicked')}
+        
+        />
       </div>
-      <div></div>
     </>
   );
 }
