@@ -1,39 +1,68 @@
 import { render, fireEvent } from '@testing-library/react';
-import DateCard, { DateCardProps } from './DateCard';
+import DateCard from './DateCard';
 
-describe('DateCard component', () => {
-  const mockProps: DateCardProps = {
-    cardType: 'primary',
-    day: 1,
-    week: 'Week 1',
-    month: 'January',
-    isActive: false,
-    onToggleActive: vitest.fn(),
-    icon: <span>Icon</span>,
-  };
+describe('DateCard Component', () => {
+  it('renders primary date card correctly', () => {
+    const props = {
+      cardType: 'primary' as const,
+      day: 15,
+      weekDay: 'Thur',
+      month: 'January',
+      isActive: false,
+      onToggleActive: vitest.fn(),
+      label: 'Sample Label',
+    };
 
-  
+    const { getByText } = render(<DateCard {...props} />);
+
+    expect(getByText('Thur')).toBeInTheDocument();
+    expect(getByText('15')).toBeInTheDocument();
+    expect(getByText('January')).toBeInTheDocument();
+    expect(getByText('Sample Label')).toBeInTheDocument();
+  });
+
+  it('renders secondary date card correctly with different props', () => {
+    const secondaryProps = {
+      date: 25,
+      businessName: 'Sample Business',
+      month: 'February',
+      businessIcon: <span>Business Icon</span>,
+      locationIcon: <span>Location Icon</span>,
+      location: 'Sample Location',
+    };
+
+    const props = {
+      cardType: 'secondary' as const,
+      isActive: true,
+      onToggleActive: vitest.fn(),
+      secondaryProps,
+    };
+
+    const { getByText, getByTestId } = render(<DateCard {...props} />);
+
+    expect(getByText('25')).toBeInTheDocument();
+    expect(getByText('Sample Business')).toBeInTheDocument();
+    expect(getByText('February')).toBeInTheDocument();
+    expect(getByTestId('business-icon')).toContainHTML('<span>Business Icon</span>');
+    expect(getByTestId('location-icon')).toContainHTML('<span>Location Icon</span>');
+    expect(getByText('Sample Location')).toBeInTheDocument();
+  });
+
   it('calls onToggleActive when clicked', () => {
-    const { container } = render(<DateCard {...mockProps} />);
+    const onToggleActive = vitest.fn();
+    const props = {
+      cardType: 'primary' as const,
+      day: 15,
+      weekDay: 'thur',
+      month: 'January',
+      isActive: false,
+      onToggleActive,
+      label: 'Sample Label',
+    };
 
-    fireEvent.click(container.firstChild as Element);
+    const { getByTestId } = render(<DateCard {...props} />);
+    fireEvent.click(getByTestId('date-card'));
 
-    expect(mockProps.onToggleActive).toHaveBeenCalled();
-  });
-
-  it('applies active styles when isActive is true', () => {
-    const { container } = render(<DateCard {...mockProps} isActive={true} />);
-
-    expect(container.firstChild).toHaveClass('active');
-  });
-
-  it('applies correct styles based on cardType', () => {
-    const { container } = render(<DateCard {...mockProps} cardType="secondary" />);
-
-    expect(container.firstChild).toHaveStyle({
-      backgroundColor: '#F6F8FA',
-      width: '266px',
-      height: '290px',
-    });
+    expect(onToggleActive).toHaveBeenCalledTimes(1);
   });
 });

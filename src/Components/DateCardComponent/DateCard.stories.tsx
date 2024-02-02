@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import DateCard from './DateCard';
+// import uploadIcon from '../../../public/assets/png-icons/UploadIcon.png'
+import { LocationCity, ManageAccounts } from '@mui/icons-material';
+
+
 
 
 const meta = {
@@ -14,11 +18,11 @@ const meta = {
   argTypes: {
     cardType: { control: 'select', options: ['primary', 'secondary'] },
     day: { control: 'number' },
-    week: { control: 'text' },
+    weekDay: { control: 'text' },
     month: { control: 'text' },
     isActive: { control: 'boolean' },
     onToggleActive: { action: 'clicked' },
-    icon: { control: 'text' },
+    secondaryProps: { control: 'object' },
   },
 
 } satisfies Meta<typeof DateCard>;
@@ -28,10 +32,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-
     cardType: 'primary',
     day: 10,
-    week: 'Fri',
+    weekDay: 'Fri',
     month: 'June',
     isActive: false,
     onToggleActive: () => { },
@@ -40,12 +43,15 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
-
     cardType: 'secondary',
-    day: 10,
-    week: 'Fri',
-    month: 'June',
-    isActive: true,
-    onToggleActive: () => { },
+    secondaryProps: {
+      date: 18,
+      month: 'DEC 2023',
+      businessName: 'Dangote Cement LTD',
+      businessIcon: <div><ManageAccounts /></div>,
+      locationIcon: <div><LocationCity/></div>,
+      location: '1 Alfred Rewane Rd, Ikoyi 106104, Lagos'
+    },
+
   }
 };
