@@ -45,7 +45,7 @@ const DateCardList: FC<DateCardListProps> = ({ cardType, startDate, endDate }) =
 
             const cardProps: DateCardProps = {
                 day: currentDate.getDate(),
-                week: currentDate.toLocaleDateString(undefined, { weekday: 'short' }),
+                weekDay: currentDate.toLocaleDateString(undefined, { weekday: 'short' }),
                 month: currentDate.toLocaleDateString(undefined, { month: 'long' }),
                 cardType: cardType,
                 isActive: i === activeIndex,
