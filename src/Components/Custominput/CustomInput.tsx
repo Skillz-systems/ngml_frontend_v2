@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import AltDownArrow from '/assets/png-icons/AltDownArrow.png';
 import Eyeclosed from '/assets/png-icons/Eyeclosed.png';
 import Eyeopen from '/assets/png-icons/Eyeopen.png';
-import AltDownArrow from '/assets/png-icons/AltDownArrow.png'
 
 /**
  * CustomInput Component - A customizable input component for various input types.
@@ -16,25 +16,25 @@ import AltDownArrow from '/assets/png-icons/AltDownArrow.png'
  *   placeholder="Enter your username"
  *   required
  *   icon={<IconComponent />}
- *   styleVariant="custom1"
+ *   styleVariant="customStyle1"
  * />
  *
  * @param {Object} props - The properties of the CustomInput component.
- * @param {'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'search'} props.type - The type of input to render.
+ * @param {'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio'} props.type - The type of input to render.
  * @param {string} props.label - The label for the input.
- * @param {string | number | boolean} props.value - The current value of the input.
- * @param {(value: string | number | boolean) => void} props.onChange - The function to be called when the input value changes.
+ * @param {string | number | boolean | readonly string[]} props.value - The current value of the input.
+ * @param {(value: string | number | boolean | readonly string[] | undefined) => void} props.onChange - The function to be called when the input value changes.
  * @param {string} [props.placeholder] - The placeholder text for the input.
  * @param {string[]} [props.options] - The options for select or radio input types.
  * @param {string} [props.error] - The error message to display.
  * @param {boolean} [props.required=false] - Whether the input is required.
  * @param {React.ReactNode} [props.icon] - The icon to be displayed with the input.
- * @param {'default' | 'custom1' | 'custom2' | 'custom3' | 'custom4' | 'custom5' | 'custom6'} [props.styleVariant='default'] - The style variant for the input.
+ * @param {'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4'} [props.styleVariant='default'] - The style variant for the input.
  * @returns {JSX.Element} The rendered CustomInput component.
  */
 
 interface CustomInputProps {
-    type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'search';
+    type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio';
     label: string;
     value?: string | number | boolean | readonly string[];
     onChange: (value: string | number | boolean | readonly string[] | undefined) => void;
@@ -75,17 +75,16 @@ const CustomInput: React.FC<CustomInputProps> = ({
     };
 
     const styleVariants = {
-        default: `appearance-none block w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
-            } rounded-md shadow-sm placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-green-100 sm:text-sm`, //default input
+        default: `appearance-none block w-full px-3 py-3 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
+            } rounded-[13px] shadow-sm placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-green-100 sm:text-sm`, //default input
         customStyle1: `border border-solid border-green-500 placeholder-gray-400 italic pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-green-500`, // inputs with well rounded border radius
-        customStyle2: `rounded-md placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
+        customStyle2: `rounded-[13px] placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
         customStyle3: `rounded-full placeholder-gray-300 italic pl-12 focus:outline-none focus:border-green-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-4`, // for inputs with gray background focused, rounded radius and wider input 
         customStyle4: `placeholder-black pl-12 focus:outline-none focus:border-green-200 focus:bg-white-600 border-1 solid w-full py-2`, // no border input
     };
 
-    const inputClasses = `${styleVariants[styleVariant]} ${
-        !icon ? 'pl-3' : ''
-      } ${touched && !value ? 'border-red-500' : ''}`;
+    const inputClasses = `${styleVariants[styleVariant]} ${!icon ? 'pl-3' : ''
+        } ${touched && !value ? 'border-red-500' : ''}`;
 
 
     const containerClasses = 'mt-1 relative';
@@ -115,10 +114,10 @@ const CustomInput: React.FC<CustomInputProps> = ({
             case 'select':
                 return (
                     <div className='relative'>
-                        <select value={Array.isArray(value) ? value : undefined} 
-                        onChange={(e) => onChange(e.target.value)} 
-                        className={`${inputClasses} appearance-none select-none`}>
-                             multiple={Array.isArray(value)}
+                        <select value={Array.isArray(value) ? value : undefined}
+                            onChange={(e) => onChange(e.target.value)}
+                            className={`${inputClasses} appearance-none select-none`} onBlur={handleBlur} >
+                            multiple={Array.isArray(value)}
                             {options?.map((option) => (
                                 <option key={option} value={option}>
                                     {option}
@@ -127,7 +126,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <img src={AltDownArrow} alt='Alt down Arrow' />
-                </div>
+                        </div>
                     </div>
                 );
             case 'textarea':
@@ -137,6 +136,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                         onChange={(e) => onChange(e.target.value)}
                         placeholder={placeholder}
                         className={inputClasses}
+                        onBlur={handleBlur}
                     />
                 );
             case 'checkbox':

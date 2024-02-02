@@ -5,8 +5,6 @@ import Badge from './Components/BadgeComponent/Badge';
 
 function App() {
 
-  
-
   return (
     <>
 

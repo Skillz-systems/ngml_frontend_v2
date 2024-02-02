@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import CustomInput from './CustomInput';
-import Eyeopen from '/assets/png-icons/Eyeopen.png';
 
 const meta: Meta = {
     title: 'Components/CustomInput',
@@ -78,17 +77,5 @@ export const RadioInput: Story = {
         onChange: action('onChange'),
         options: ['Male', 'Female', 'Other'],
         required: true,
-    },
-};
-
-export const SearchInput: Story = {
-    args: {
-        type: 'search',
-        label: 'Search',
-        value: '',
-        onChange: action('onChange'),
-        placeholder: 'Search...',
-        required: true,
-        icon: <img src={Eyeopen} alt='eyeopen' />
     },
 };
