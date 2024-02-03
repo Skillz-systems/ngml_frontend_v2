@@ -6,7 +6,15 @@ const meta: Meta = {
     title: 'Components/CustomInput',
     component: CustomInput,
     argTypes: {
-
+        type: { control: 'select', options: ['text', 'password', 'date', 'number', 'select', 'textarea', 'checkbox', 'radio'] },
+        label: { control: 'text' },
+        value: { control: 'text' },
+        onChange: { action: 'onChange' },
+        placeholder: { control: 'text' },
+        options: { control: 'array' },
+        required: { control: 'boolean' },
+        icon: { control: 'text' },
+        styleVariant: { control: 'select', options: ['default', 'customStyle1', 'customStyle2', 'customStyle3', 'customStyle4'] },
     },
 } satisfies Meta<typeof CustomInput>;
 

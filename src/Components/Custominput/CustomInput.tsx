@@ -7,17 +7,6 @@ import Eyeopen from '/assets/png-icons/Eyeopen.png';
  * CustomInput Component - A customizable input component for various input types.
  *
  * @component
- * @example
- * <CustomInput
- *   type="text"
- *   label="Username"
- *   value={username}
- *   onChange={(newValue) => setUsername(newValue)}
- *   placeholder="Enter your username"
- *   required
- *   icon={<IconComponent />}
- *   styleVariant="customStyle1"
- * />
  *
  * @param {Object} props - The properties of the CustomInput component.
  * @param {'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio'} props.type - The type of input to render.
@@ -117,7 +106,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
                         <select value={Array.isArray(value) ? value : undefined}
                             onChange={(e) => onChange(e.target.value)}
                             className={`${inputClasses} appearance-none select-none`} onBlur={handleBlur} >
-                            multiple={Array.isArray(value)}
                             {options?.map((option) => (
                                 <option key={option} value={option}>
                                     {option}

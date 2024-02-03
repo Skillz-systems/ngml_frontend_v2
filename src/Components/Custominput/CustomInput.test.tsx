@@ -78,4 +78,89 @@ describe('CustomInput', () => {
         expect(radioElement).toHaveAttribute('type', 'radio');
     });
 
+    it('applies default styles to text input', () => {
+        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} />);
+        const inputElement = screen.getByRole('textbox');
+
+        expect(inputElement).toHaveClass('border-b', 'border-solid', 'border-2', 'border-gray-300');
+        expect(inputElement).toHaveClass('rounded-[13px]', 'shadow-sm', 'placeholder-gray-400', 'italic', 'pl-12');
+        expect(inputElement).toHaveClass('focus:outline-none', 'focus:ring-gray-700', 'focus:border-green-100', 'sm:text-sm');
+    });
+
+    it('applies customStyle1 to select input', () => {
+        render(
+            <CustomInput
+                type="select"
+                label="Select Option"
+                value=""
+                onChange={() => { }}
+                options={['Option 1', 'Option 2']}
+                styleVariant="customStyle1"
+            />
+        );
+        const selectElement = screen.getByRole('combobox');
+
+        expect(selectElement).toHaveClass('border border-solid border-green-500');
+    });
+
+    it('applies custom styles to textarea', () => {
+        render(<CustomInput type="textarea" label="Description" value="" onChange={() => { }} />);
+        const textareaElement = screen.getByRole('textbox');
+
+        expect(textareaElement).toHaveClass('border-b', 'border-solid', 'border-2', 'border-gray-300');
+        expect(textareaElement).toHaveClass('rounded-[13px]', 'shadow-sm', 'placeholder-gray-400', 'italic', 'pl-12');
+        expect(textareaElement).toHaveClass('focus:outline-none', 'focus:ring-gray-700', 'sm:text-sm');
+    });
+
+    it('applies custom styles to checkbox', () => {
+        render(<CustomInput type="checkbox" label="Agree" value={false} onChange={() => { }} />);
+        const checkboxElement = screen.getByRole('checkbox');
+
+        expect(checkboxElement).toHaveClass('hidden');
+    });
+
+    it('applies custom styles to radio button', () => {
+        render(<CustomInput type="radio" label="Radio" value="radioValue" onChange={() => { }} options={['Option1', 'Option2']} />);
+        const radioElement = screen.getByLabelText('Option1');
+
+        expect(radioElement).toHaveClass('w-5', 'h-5');
+    });
+
+    it('applies default style', () => {
+        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} />);
+        const inputElement = screen.getByRole('textbox');
+    
+        expect(inputElement).toHaveClass('border-b');
+      });
+    
+      it('applies customStyle1', () => {
+        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle1" />);
+        const inputElement = screen.getByRole('textbox');
+    
+        expect(inputElement).toHaveClass('rounded-full');
+      });
+    
+      it('applies customStyle2', () => {
+        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle2" />);
+        const inputElement = screen.getByRole('textbox');
+    
+        expect(inputElement).toHaveClass('focus:bg-gray-200');
+      });
+    
+      it('applies customStyle3', () => {
+        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle3" />);
+        const inputElement = screen.getByRole('textbox');
+    
+        expect(inputElement).toHaveClass('rounded-full');
+        expect(inputElement).toHaveClass('w-full');
+      });
+    
+      it('applies customStyle4', () => {
+        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle4" />);
+        const inputElement = screen.getByRole('textbox');
+    
+        expect(inputElement).not.toHaveClass('border');
+      });
+
+
 });
