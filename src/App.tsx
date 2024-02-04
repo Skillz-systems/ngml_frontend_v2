@@ -1,6 +1,6 @@
-// import DateCardList from './Components/DateCardComponent/DateCardList';
 
-import Notification from './Components/NotificationComponent/Notification';
+import { NotificationImportantOutlined } from '@mui/icons-material';
+import NotificationAction from './Components/NotificationComponent/NotificationAction';
 
 
 
@@ -12,14 +12,13 @@ function App() {
         <p className="">Vite and React</p>
       </div>
 
-      {/* <div style={{ backgroundColor: '#F9FBFD', height: 'screen', width: 'screen', }}>
-        <DateCardList startDate={12} endDate={18} cardType="primary" />
-      </div> */}
-      <div>
-        <Notification 
-        count={6} 
-        onClick={() => alert ('clicked')}
-        
+      <div style={{ padding: '40px', }}>
+        <NotificationAction
+          notificationIcon={<NotificationImportantOutlined
+            style={{
+              width: '20px',
+              height: '20px',
+            }} />}
         />
       </div>
     </>

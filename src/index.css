@@ -3,21 +3,40 @@
 @tailwind utilities;
 
 @layer base {
-	.gradient {
-		background: linear-gradient(
-			107.65deg,
-			#aae4c5 -6.77%,
-			#efec80 45.65%,
-			#d2f69e 108.92%
-		);
-	}
+  .gradient {
+    background: linear-gradient(
+      107.65deg,
+      #aae4c5 -6.77%,
+      #efec80 45.65%,
+      #d2f69e 108.92%
+    );
+  }
 }
 
 .button {
-  
-    transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .button.hovered {
-    opacity: 0.8;
+  opacity: 0.8;
+}
+
+.notification-icon {
+  position: relative;
+  display: inline-flex;
+}
+
+.notification-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 20px;
+  background-color:#00AF50;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 7px;
+  font-size: 10px;
+  margin-top: -8px;
+  height: 18px;
+  width: 21px;
 }
