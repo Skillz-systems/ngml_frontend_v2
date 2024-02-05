@@ -29,7 +29,7 @@ function App() {
           <div className="flex justify-around">
       <StatisticCard type="primary" label="Total Users" value={1000} />
       <StatisticCard type="secondary" label="Active Users" value={500} />
-      <StatisticCard type="tertiary" label="Revenue" value="$50K" />
+      <StatisticCard type="tertiary" label="Revenue" value="Customer care" icon={<img src={Eyeopen} alt='eyeopen' />} />
     </div>
 
     </>

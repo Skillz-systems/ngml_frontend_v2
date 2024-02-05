@@ -4,26 +4,47 @@ type StatCardProps = {
   type: 'primary' | 'secondary' | 'tertiary';
   label: string;
   value: string | number;
+  icon?: string;
 };
 
-const StatisticCard: React.FC<StatCardProps> = ({ type, label, value }) => {
-  const getCardClass = () => {
+const StatisticCard: React.FC<StatCardProps> = ({ type, label, value, icon }) => {
+  const getHeaderColor = () => {
     switch (type) {
       case 'primary':
-        return 'bg-blue-500';
+        return 'bg-green-700';
       case 'secondary':
-        return 'bg-green-500';
+        return 'bg-gray-200';
       case 'tertiary':
-        return 'bg-yellow-500';
+        return ''; // No header background for tertiary
+      default:
+        return '';
+    }
+  };
+
+  const getBodyColor = () => {
+    switch (type) {
+      case 'primary':
+        return 'bg-green-500';
+      case 'secondary':
+        return 'bg-white-200';
+      case 'tertiary':
+        return ''; // No body background for tertiary
       default:
         return '';
     }
   };
 
   return (
-    <div className={`p-4 rounded-md shadow-md ${getCardClass()}`}>
-      <p className="text-white text-lg font-semibold">{label}</p>
-      <p className="text-white text-3xl font-bold mt-2">{value}</p>
+    <div className="w-full">
+      {type !== 'tertiary' && (
+        <div className={type === 'primary' ? `text-white text-lg font-semibold p-4 rounded-t-md shadow-md text-center ${getHeaderColor()}` : `text-gray-600 text-lg font-semibold p-4 rounded-t-md shadow-md text-center ${getHeaderColor()}`}>
+          {label}
+        </div>
+      )}
+      <div className={type === 'primary' ? `text-white text-3xl font-bold p-8 rounded-b-md shadow-md text-center ${getBodyColor()}` : `text-white text-3xl font-bold p-8 rounded-b-md shadow-md text-center text-black ${getBodyColor()}`}>
+        {icon && <img src={icon} alt="Icon" className="mb-4" />}
+        {value}
+      </div>
     </div>
   );
 };
