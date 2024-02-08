@@ -32,8 +32,6 @@ function App() {
     setShowNotifications(!showNotifications);
   };
 
-function App() {
-
   return (
     <>
       <div className="">
