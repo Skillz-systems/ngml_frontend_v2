@@ -31,6 +31,7 @@ const Notification: React.FC<NotificationProps> = ({
     notifications = [],
     onClick,
     renderIcon,
+    
 }) => {
 
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);

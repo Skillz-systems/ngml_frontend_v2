@@ -42,7 +42,7 @@ function App() {
         <Notification
           count={notificationsInfo.length}
           headerTitle="Notifications"
-          notifications={showNotifications ? notificationsInfo : []}
+          notifications={notificationsInfo }
           onClick={handleNotificationClick}
           renderIcon={() => <NotificationImportantOutlined />}
         />

@@ -13,6 +13,7 @@ interface NotificationProps {
         content: string;
     }[];
     onClose: () => void;
+    
 }
 
 
@@ -22,6 +23,9 @@ interface NotificationProps {
  * @returns {JSX.Element} JSX representation of the NotificationContents component
  */
 const NotificationContents: React.FC<NotificationProps> = ({ notifications, headerTitle, onClose }) => {
+
+    console.log(notifications, 'hhhhhhhhhhh');
+    
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: 'screen' }}>
@@ -42,7 +46,7 @@ const NotificationContents: React.FC<NotificationProps> = ({ notifications, head
                 />
 
             </div>
-            <div style={{ height: 'screen', width: '100%', display: 'flex', flexDirection: 'column', padding: '10px' }}>
+            <div style={{ height: 'screen', width: '100%', display: 'flex', flexDirection: 'column', padding: '10px'}}>
                 {notifications.map((notification, index) => (
                     <div key={index} style={{ border: '1px solid #E2E4EB', width: '100%', height: '58px', marginBottom: '10px', rowGap: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8px', borderRadius: '8px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
