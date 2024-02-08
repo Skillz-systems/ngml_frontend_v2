@@ -10,13 +10,18 @@ import styled from 'styled-components';
  * @styledq
  */
 
-const Container = styled.div`
+const Container = styled.div<{ 
+  backgroundColor?: string
+  width?: string;
+  height?: string; 
+}>`
 max-width: 560px;
-width: 400px;
+width: ${(props) => props.width || '400px'};
+height: ${(props) => props.height || 'auto'};
 margin: 10% auto;
 padding: 20px;
 box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-background-color: rgba(255, 255, 255, 0.5);
+background-color: ${(props) => props.backgroundColor || 'rgba(255, 255, 255, 0.5)'};
 border-radius: 32px;
 display: flex;
 flex-direction: column;
@@ -73,11 +78,14 @@ border-radius: 50%;
 
 interface AuthContainerProps {
   children: React.ReactNode;
+  backgroundColor?: string;
+  width?: string;
+  height?: string;
 }
 
-const AuthContainer: React.FC<AuthContainerProps> = ({ children }) => {
+const AuthContainer: React.FC<AuthContainerProps> = ({ children, backgroundColor, width, height }) => {
   return (
-    <Container>
+    <Container backgroundColor={backgroundColor} width={width} height={height}>
       <LogoContainer>
         <LogoImage src="assets/nnpclogo.png" alt="NGML Logo" />
       </LogoContainer>
