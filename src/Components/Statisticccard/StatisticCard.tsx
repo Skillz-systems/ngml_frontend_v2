@@ -1,4 +1,5 @@
 import React from 'react';
+import DataBox from '/assets/png-icons/DataBox.png'
 
 /**
  * Represents a statistical card component.
@@ -63,6 +64,19 @@ const StatisticCard: React.FC<StatCardProps> = ({ type, label, value, icon, repo
     }
   };
 
+  const getBackgroundColor = () => {
+    switch (type) {
+      case 'primary':
+        return 'bg-yellow-300';
+      case 'secondary':
+        return 'bg-white';
+      case 'tertiary':
+        return '';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className="w-full p-6">
       {type !== 'tertiary' && (
@@ -74,10 +88,11 @@ const StatisticCard: React.FC<StatCardProps> = ({ type, label, value, icon, repo
         {icon && <div className='absolute top-10'>{icon}</div>}
         {type === 'tertiary' ? <h3 className='pt-[60px] relative top-[60px]'>{text}</h3> : <div>{value}</div>}
         <div className='flex items-center justify-between relative top-[60px]'>
+        <img src={DataBox} alt="Background" className="absolute inset-0 object-cover top-[-250px] w-[300px]" />
         {reportText && <div className='text-gray-300 text-[15px]'>{reportText}</div>}
         {reportIcon && <div className='text-gray-300 text-[15px]'>{reportIcon}</div>}
         </div>
-      </div>
+        </div>
     </div>
   );
 };
