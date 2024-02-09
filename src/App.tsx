@@ -1,60 +1,55 @@
-
-// import { NotificationImportantOutlined } from '@mui/icons-material';
-// import NotificationAction from './Components/NotificationComponent/NotificationAction';
-
-import StatisticCard from "./Components/Statisticccard/StatisticCard";
-
-
-
-
+import { NotificationImportantOutlined } from '@mui/icons-material';
+import { useState } from 'react';
+import Notification from './Components/NotificationComponent/Notification';
 
 function App() {
+  const [showNotifications, setShowNotifications] = useState(false); 
+
+  const notificationsInfo = [
+    {
+      title: 'EOI REQUEST',
+      date: '17 Nov; 12:03pm',
+      content: 'Alberta Coporation Limited just sent in an EOI Request',
+    },
+    {
+      title: 'EOI REQUEST',
+      date: '17 Nov; 12:03pm',
+      content: 'Alberta Coporation Limited just sent in an EOI Request',
+    },
+    {
+      title: 'EOI REQUEST',
+      date: '17 Nov; 12:03pm',
+      content: 'Alberta Coporation Limited just sent in an EOI Request',
+    },
+    {
+      title: 'EOI REQUEST',
+      date: '17 Nov; 12:03pm',
+      content: 'Alberta Coporation Limited just sent in an EOI Request',
+    },
+  ];
+
+  const handleNotificationClick = () => {
+    setShowNotifications(!showNotifications);
+  };
 
   return (
     <>
-      {/* <div className="">
+      <div className="">
         <p className="">Vite and React</p>
       </div>
 
-      <div style={{ padding: '40px', }}>
-        <NotificationAction
-          notificationIcon={<NotificationImportantOutlined
-            style={{
-              width: '20px',
-              height: '20px',
-            }} />}
+      <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
+        <Notification
+          count={notificationsInfo.length}
+          headerTitle="Notifications"
+          notifications={notificationsInfo }
+          onClick={handleNotificationClick}
+          renderIcon={() => <NotificationImportantOutlined />}
         />
-      </div> */}
-
-      <div className="flex justify-between">
-      <StatisticCard
-        type="primary"
-        label="Connect"
-        value={100}
-        text=""
-        reportText=''
-        reportIcon
-      />
-        <StatisticCard
-        type="secondary"
-        label="Connect"
-        value={100}
-        text=""
-        reportText=""
-        reportIcon
-      />
-        <StatisticCard
-        type="tertiary"
-        icon= 'icon'
-        label="Connect"
-        value={100}
-        text="Primary Text"
-        reportText="Report Text"
-        reportIcon={<div>Report Icon</div>}
-      />
       </div>
 
     </>
   );
 }
-export default App
+
+export default App;
