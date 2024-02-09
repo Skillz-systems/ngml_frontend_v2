@@ -5,48 +5,34 @@ const meta: Meta = {
     title: 'Components/StatisticCard',
     component: StatisticCard,
     argTypes: {
-    type: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary'] } },
-    label: { control: 'text' },
-    value: { control: 'text' },
-    icon: { control: 'text' },
-    text: { control: 'text' },
-    reportText: { control: 'text' },
-    reportIcon: { control: 'text' },
-    },
+      label: { control: 'text' },
+        value: { control: 'text' },
+        width: { control: 'text' },
+        height: { control: 'text' },
+        primary: { control: 'select', options: ['true', 'false'] },
+        labelSpan: { control: 'none' },
+},
+
 } satisfies Meta<typeof StatisticCard>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story ={
+export const Default: Story={
 args: {
-  type: 'primary',
-  label: 'Connect',
-  value: 100,
-  text: 'Primary Text',
-  reportText: 'Report Text',
-  reportIcon: <div>Report Icon</div>,
+  label: 'Label',
+  value: 'Value',
 },
 };
 
-export const Secondary: Story={
+export const Custom: Story={
 args: {
-  type: 'secondary',
-  label: 'Service',
-  value: 200,
-  text: 'Secondary Text',
-  reportText: 'Secondary Report Text',
-  reportIcon: <div>Secondary Report Icon</div>,
-},
-};
-
-export const Tertiary: Story={
-args: {
-  type: 'tertiary',
-  icon: <div>Icon</div>,
-  text: 'Tertiary Text',
-  reportText: 'Tertiary Report Text',
-  reportIcon: <div>Tertiary Report Icon</div>,
+  label: 'Custom Label',
+  value: 42,
+  width: 'w-64',
+  height: 'h-48',
+  primary: false,
+  labelSpan: <span>Custom Span</span>,
 },
 };

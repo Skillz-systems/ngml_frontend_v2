@@ -1,98 +1,61 @@
 import React from 'react';
-import DataBox from '/assets/png-icons/DataBox.png'
+import DataBox from '/assets/png-icons/DataBox.png';
 
 /**
- * Represents a statistical card component.
- * This component displays statistical information with various styles based on the provided type.
+ * A customizable statistic card component.
  * @component
- * @param {object} props - The props object.
- * @param {'primary' | 'secondary' | 'tertiary'} props.type - The type of the card. Determines the color scheme and layout.
- * @param {string} props.label - The label displayed on the card.
- * @param {string | number} props.value - The value displayed on the card.
- * @param {React.ReactNode} [props.icon] - The optional icon displayed on the card.
- * @param {string} props.text - The text content of the card, displayed in tertiary type cards.
- * @param {string} props.reportText - The report text displayed on the card.
- * @param {React.ReactNode} props.reportIcon - The report icon displayed on the card.
- * @returns {JSX.Element} - The rendered StatisticCard component.
+ * @param {Object} props - The component props.
+ * @param {string} props.label - The label for the statistic.
+ * @param {string|number} props.value - The value for the statistic.
+ * @param {string} [props.width='w-32'] - The width of the card. Accepts Tailwind CSS classes.
+ * @param {string} [props.height='h-32'] - The height of the card. Accepts Tailwind CSS classes.
+ * @param {boolean} [props.primary=true] - Determines whether the card is of primary type. Defaults to true.
+ * @param {React.ReactNode} [props.labelSpan] - Optional JSX element to be rendered directly under the label.
+ * @returns {JSX.Element} The rendered StatisticCard component.
  */
 
-type StatCardProps = {
-  type: 'primary' | 'secondary' | 'tertiary';
+interface StatisticCardProps {
   label: string;
   value: string | number;
-  icon?: React.ReactNode;
-  text: string;
-  reportText: string;
-  reportIcon: React.ReactNode;
-};
+  width?: string;
+  height?: string;
+  primary?: boolean;
+  labelSpan?: React.ReactNode; // New optional prop for the span tag
+}
 
-const StatisticCard: React.FC<StatCardProps> = ({ type, label, value, icon, reportText, reportIcon, text }) => {
-
-    /**
-   * Determines the background color for the card header based on its type.
-   * @returns {string} - The CSS class for the header background color.
-   */
-
-  const getHeaderColor = () => {
-    switch (type) {
-      case 'primary':
-        return 'bg-green-700';
-      case 'secondary':
-        return 'bg-gray-200';
-      case 'tertiary':
-        return '';
-      default:
-        return '';
-    }
-  };
-
-    /**
-   * Determines the background color for the card body based on its type.
-   * @returns {string} - The CSS class for the body background color.
-   */
-
-  const getBodyColor = () => {
-    switch (type) {
-      case 'primary':
-        return 'bg-green-500';
-      case 'secondary':
-        return 'bg-white-200 text-center';
-      case 'tertiary':
-        return 'py-[95px] rounded-[20px]';
-      default:
-        return '';
-    }
-  };
-
-  const getBackgroundColor = () => {
-    switch (type) {
-      case 'primary':
-        return 'bg-yellow-300';
-      case 'secondary':
-        return 'bg-white';
-      case 'tertiary':
-        return '';
-      default:
-        return '';
-    }
-  };
+const StatisticCard: React.FC<StatisticCardProps> = ({
+  label,
+  value,
+  width = 'w-32',
+  height = 'h-32',
+  primary = true,
+  labelSpan, // Destructure labelSpan from props
+}) => {
+  const labelBgColor = primary ? 'bg-green-700 text-white' : 'bg-gray-200 text-gray-500';
+  const valueBgColor = primary ? 'bg-green-500 text-white' : 'bg-white-500';
 
   return (
-    <div className="w-full p-6">
-      {type !== 'tertiary' && (
-        <div className={type === 'primary' ? `text-white text-lg font-semibold p-[50px] rounded-t-[20px] shadow-md text-center ${getHeaderColor()}` : `text-gray-600 text-lg font-semibold p-[50px] rounded-t-[20px] shadow-md text-center ${getHeaderColor()}`}>
-          {label}
+    <div className={`relative rounded-[20px] overflow-hidden ${width} ${height}`}>
+      <img
+        className="absolute inset-4 z-4 object-cover h-full"
+        src={DataBox}
+        alt="data box"
+      />
+      <div className="flex flex-col justify-center items-center h-full">
+        <div
+          className={`w-full ${labelBgColor} p-3 rounded-t-[20px] text-center h-full`}
+        >
+          <span className="text-lg font-bold">{label}</span>
+          <div className='mt-[-7px]'>
+          {labelSpan && <span>{labelSpan}</span>}
+          </div>
         </div>
-      )}
-      <div className={type === 'primary' ? `text-white text-3xl font-bold p-8 rounded-b-[20px] shadow-md text-center py-20 ${getBodyColor()}` : `text-3xl font-bold p-8 rounded-b-[20px] shadow-md text-black py-20 ${getBodyColor()}`}>
-        {icon && <div className='absolute top-10'>{icon}</div>}
-        {type === 'tertiary' ? <h3 className='pt-[60px] relative top-[60px]'>{text}</h3> : <div>{value}</div>}
-        <div className='flex items-center justify-between relative top-[60px]'>
-        <img src={DataBox} alt="Background" className="absolute inset-0 object-cover top-[-250px] w-[300px]" />
-        {reportText && <div className='text-gray-300 text-[15px]'>{reportText}</div>}
-        {reportIcon && <div className='text-gray-300 text-[15px]'>{reportIcon}</div>}
+        <div
+          className={`w-full ${valueBgColor} p-4 rounded-b-[20px] text-center h-full`}
+        >
+          <span className="text-2xl font-bold">{value}</span>
         </div>
-        </div>
+      </div>
     </div>
   );
 };
