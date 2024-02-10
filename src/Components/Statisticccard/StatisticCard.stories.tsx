@@ -5,12 +5,10 @@ const meta: Meta = {
     title: 'Components/StatisticCard',
     component: StatisticCard,
     argTypes: {
+      primary: { control: 'boolean' },
       label: { control: 'text' },
-        value: { control: 'text' },
-        width: { control: 'text' },
-        height: { control: 'text' },
-        primary: { control: 'select', options: ['true', 'false'] },
-        labelSpan: { control: 'none' },
+      value: { control: 'text' },
+      labelSpan: { control: 'text' },
 },
 
 } satisfies Meta<typeof StatisticCard>;
@@ -19,20 +17,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story={
+export const Primary: Story={
 args: {
-  label: 'Label',
-  value: 'Value',
+  label: 'Total Users',
+  value: 1000,
+},
+}
+
+export const Secondary: Story={
+args: {
+  label: 'Total Sales',
+  value: 5000,
+  primary: false,
 },
 };
 
-export const Custom: Story={
+export const WithCustomLabelSpan: Story={
 args: {
-  label: 'Custom Label',
-  value: 42,
-  width: 'w-64',
-  height: 'h-48',
-  primary: false,
-  labelSpan: <span>Custom Span</span>,
+  label: 'Total Sales',
+  value: 5000,
+  labelSpan: <span>Monthly</span>,
 },
 };

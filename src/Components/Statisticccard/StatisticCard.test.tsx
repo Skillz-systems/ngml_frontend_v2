@@ -1,28 +1,50 @@
 import { render } from '@testing-library/react';
 import StatisticCard from './StatisticCard';
 
-describe('StatisticCard', () => {
-  test('renders with default props', () => {
-    const { getByText } = render(<StatisticCard label="Label" value="Value" />);
-    
-    expect(getByText('Label')).toBeInTheDocument();
-    expect(getByText('Value')).toBeInTheDocument();
-  });
+describe('StatisticCard component', () => {
+    test('renders with label and value', () => {
+        const { getByText } = render(
+            <StatisticCard label="Total Users" value={1000} />
+        );
 
-  test('renders with custom props', () => {
-    const { getByText } = render(
-      <StatisticCard
-        label="Custom Label"
-        value={42}
-        width="w-64"
-        height="h-48"
-        primary={false}
-        labelSpan={<span>Custom Span</span>}
-      />
-    );
+        expect(getByText('Total Users')).toBeInTheDocument();
+        expect(getByText('1000')).toBeInTheDocument();
+    });
 
-    expect(getByText('Custom Label')).toBeInTheDocument();
-    expect(getByText('42')).toBeInTheDocument();
-    expect(getByText('Custom Span')).toBeInTheDocument();
-  });
+    test('renders with custom label span', () => {
+        const { getByText } = render(
+            <StatisticCard
+                label="Total Sales"
+                value={5000}
+                labelSpan={<span>Monthly</span>}
+            />
+        );
+
+        expect(getByText('Total Sales')).toBeInTheDocument();
+        expect(getByText('Monthly')).toBeInTheDocument();
+    });
+
+    test('renders primary card by default', () => {
+        const { getByText } = render(
+            <StatisticCard label="Total Sales" value={5000} />
+        );
+
+        const label = getByText('Total Sales');
+        const value = getByText('5000');
+
+        expect(label).toHaveClass('text-lg font-bold');
+        expect(value).toHaveClass('text-2xl font-bold');
+    });
+
+    test('renders secondary card when primary is false', () => {
+        const { getByText } = render(
+            <StatisticCard label="Total Sales" value={5000} primary={false} />
+        );
+
+        const label = getByText('Total Sales');
+        const value = getByText('5000');
+
+        expect(label).toHaveClass('text-lg font-bold');
+        expect(value).toHaveClass('text-2xl font-bold');
+    });
 });
