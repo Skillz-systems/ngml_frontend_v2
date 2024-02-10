@@ -1,37 +1,37 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import Notification from './Notification';
 import { NotificationImportantOutlined } from '@mui/icons-material';
 
-const meta = {
-
+const meta: Meta<typeof Notification> = {
     title: 'Components/Notification',
     component: Notification,
     parameters: {
         layout: 'centered',
     },
-    tags: ['autodocs'],
     argTypes: {
         count: { control: 'number' },
         onClick: { action: 'clicked' },
-        isOpen: { control: 'boolean' },
-        renderIcon: { control: null },
-      },
-} satisfies Meta<typeof Notification>;
+        renderIcon: { control: null }, 
+    },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>; 
 
+// Define the type for the story using StoryObj
+type Story = StoryObj<typeof meta>;
 
+// Sample story with basic props
 export const Sample: Story = {
     args: {
-        count: 3,
-        isOpen: false,
-        renderIcon: () => <div><NotificationImportantOutlined /></div>,
-
+        count: 5,
+        headerTitle: 'Notifications',
+        notifications: [
+            { title: 'New Message', date: '2023-01-01', content: 'You have a new message from John.' },
+            { title: 'System Update', date: '2023-01-02', content: 'System update is scheduled for 2 AM.' },
+            { title: 'Meeting Reminder', date: '2023-01-03', content: 'Reminder: Meeting with the team at 10 AM.' },
+        ],
+        onClick: () => console.log('Notification icon clicked'),
+        renderIcon: () => <NotificationImportantOutlined />,
     },
-}
-
-
-
-
-
+};

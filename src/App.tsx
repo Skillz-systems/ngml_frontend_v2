@@ -1,9 +1,10 @@
-import { NotificationImportantOutlined } from '@mui/icons-material';
+import { House, NotificationImportantOutlined } from '@mui/icons-material';
 import { useState } from 'react';
 import Notification from './Components/NotificationComponent/Notification';
+import StatisticCard from './Components/StatisticCardComponent/StatisticCard';
 
 function App() {
-  const [showNotifications, setShowNotifications] = useState(false); 
+  const [showNotifications, setShowNotifications] = useState(false);
 
   const notificationsInfo = [
     {
@@ -42,11 +43,20 @@ function App() {
         <Notification
           count={notificationsInfo.length}
           headerTitle="Notifications"
-          notifications={notificationsInfo }
+          notifications={notificationsInfo}
           onClick={handleNotificationClick}
           renderIcon={() => <NotificationImportantOutlined />}
         />
       </div>
+      <StatisticCard
+        type="primary"
+        title="Total Supplied Volume "
+        content={<p>12,129,243,990.00</p>}
+        icon={<House/>} 
+        onSortChange={(sortType, value) => console.log(`Sort by ${sortType}: ${value}`)}
+        yearOptions={[2020, 2021, 2022, 2023]}
+        valueOptions={[{ label: 'All Suppliers', value: 'high' }, { label: 'Total Suppliers', value: 'low' }]}
+      />
     </>
   );
 }
