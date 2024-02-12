@@ -1,8 +1,8 @@
-import { render, fireEvent, screen } from '@testing-library/react';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import StatisticCard from './StatisticCard';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import StatisticCard from './StatisticDynamicCard';
 
-describe('StatisticCard', () => {
+describe('StatisticDynamicCard', () => {
   const mockOnSortChange = vi.fn();
   const yearOptions = [2020, 2021];
   const valueOptions = [

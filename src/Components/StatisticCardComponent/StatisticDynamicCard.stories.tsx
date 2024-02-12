@@ -1,22 +1,22 @@
-import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import StatisticCard from './StatisticCard'; 
 import { BuildOutlined } from '@mui/icons-material';
+import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import StatisticDynamicCard from './StatisticDynamicCard';
 
-const YourIconComponent: React.FC = () => <span><BuildOutlined/></span>;
+const YourIconComponent: React.FC = () => <span><BuildOutlined /></span>;
 
-const statisticCardMeta: Meta<typeof StatisticCard> = {
+const statisticCardMeta: Meta<typeof StatisticDynamicCard> = {
     title: 'Components/StatisticCard',
-    component: StatisticCard,
+    component: StatisticDynamicCard,
 };
 
 export default statisticCardMeta;
 
-const Template: StoryObj<typeof StatisticCard> = {
-    render: (args) => <StatisticCard {...args} />,
+const Template: StoryObj<typeof StatisticDynamicCard> = {
+    render: (args) => <StatisticDynamicCard {...args} />,
 };
 
-export const Primary: StoryObj<typeof StatisticCard> = {
+export const Primary: StoryObj<typeof StatisticDynamicCard> = {
     ...Template,
     args: {
         type: 'primary',
@@ -32,7 +32,7 @@ export const Primary: StoryObj<typeof StatisticCard> = {
     },
 };
 
-export const Secondary: StoryObj<typeof StatisticCard> = {
+export const Secondary: StoryObj<typeof StatisticDynamicCard> = {
     ...Template,
     args: {
         ...Primary.args,
