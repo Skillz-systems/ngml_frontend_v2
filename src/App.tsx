@@ -49,7 +49,7 @@ function App() {
         />
       </div>
       <StatisticDynamicCard
-        type="secondary"
+        type="primary"
         title="Total Supplied Volume "
         content={<p>12,129,243,990.00</p>}
         icon={<House />}

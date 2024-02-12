@@ -41,32 +41,35 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
         }
     };
 
-    const getSelectBorderStyle = (type: 'primary' | 'secondary') => {
-        switch (type) {
-            case 'primary':
-                return '1px solid #ffffff';
-            case 'secondary':
-                return '1px solid #005828';
-            default:
-                return '1px solid green';
-        }
-    };
 
-    const getTextStyle = (type: 'primary' | 'secondary') => {
+    const getSelectStyle = (type: 'primary' | 'secondary') => {
         switch (type) {
             case 'primary':
-                return { color: '#D2F69E' };
+                return {
+                    backgroundColor: '#005828', 
+                    color: '#ffffff', 
+                    border: '1px solid #ffffff' 
+                };
             case 'secondary':
-                return { color: '#005828' };
+                return {
+                    backgroundColor: '#F6FDEC', 
+                    color: '#005828', 
+                    border: '1px solid #005828' 
+                };
             default:
-                return { color: 'black' };
+                return {
+                    backgroundColor: 'blue', 
+                    color: 'black',
+                    border: '1px solid green' 
+                };
         }
     };
 
     const cardStyle = getCardStyle(type);
-    const selectBorderStyle = getSelectBorderStyle(type);
-    const titleStyle = getTextStyle(type);
-    const scfStyle = getTextStyle(type);
+    const selectStyle = getSelectStyle(type); 
+    const titleStyle = { color: type === 'primary' ? '#D2F69E' : '#005828' }
+    const scfStyle = { color: type === 'primary' ? '#D2F69E' : '#005828' }
+
 
     return (
         <div className="card" style={cardStyle}>
@@ -85,6 +88,7 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                         aria-label="Sort by year"
                         onChange={(e) => handleSortChange(e, 'year')}
                         style={{
+                            
                             display: 'block',
                             width: '100%',
                             backgroundColor: 'inherit',
@@ -92,14 +96,13 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                             borderRadius: '40px',
                             fontSize: '12px',
                             lineHeight: '15.06px',
-                            border: selectBorderStyle,
                             textAlignLast: 'start',
                             appearance: 'none',
                             padding: '10px'
 
                         }}
                     >
-                        {yearOptions.map(year => <option  key={year} value={year}>{year}</option>)}
+                        {yearOptions.map(year => <option style={{...selectStyle}}  key={year} value={year}>{year}</option>)}
                     </select>
                    </div>
                     <div style={{
@@ -128,6 +131,7 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                         aria-label="Sort by value"
                         onChange={(e) => handleSortChange(e, 'value')}
                         style={{
+                            ...selectStyle,
                             display: 'block',
                             width: '100%',
                             backgroundColor: 'inherit',
@@ -135,13 +139,12 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                             borderRadius: '30px',
                             fontSize: '12px',
                             lineHeight: '15.06px',
-                            border: selectBorderStyle,
                             padding: '10px 20px',
                             textAlignLast: 'start',
                             appearance: 'none',
                         }}
                     >
-                        {valueOptions.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
+                        {valueOptions.map(option => <option style={{...selectStyle}} key={option.value} value={option.value}>{option.label}</option>)}
                     </select>
                     <div style={{
                         position: 'absolute',
