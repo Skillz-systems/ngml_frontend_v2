@@ -88,7 +88,7 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                         aria-label="Sort by year"
                         onChange={(e) => handleSortChange(e, 'year')}
                         style={{
-                            
+                            ...selectStyle,
                             display: 'block',
                             width: '100%',
                             backgroundColor: 'inherit',
@@ -110,7 +110,6 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                         right: '10px',
                         top: '50%',
                         transform: 'translateY(-50%)',
-                        pointerEvents: 'none',
                     }}>
                         {dropdownIcon}
                     </div>
@@ -144,14 +143,13 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                             appearance: 'none',
                         }}
                     >
-                        {valueOptions.map(option => <option style={{...selectStyle}} key={option.value} value={option.value}>{option.label}</option>)}
+                        {valueOptions.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
                     </select>
                     <div style={{
                         position: 'absolute',
                         right: '10px',
                         top: '50%',
                         transform: 'translateY(-50%)',
-                        pointerEvents: 'none',
                     }}>
                         {dropdownIcon}
                     </div>
