@@ -1,22 +1,55 @@
 import React from 'react';
 
+
+/**
+ * Props for the StatisticDynamicCard component.
+ * @typeof CardProps
+ * @type {object}
+ * @property {'primary' | 'secondary'} type - The type of the card, affecting its styling.
+ * @property {string} [title] - The title of the card.
+ * @property {React.ReactNode} [content] - The main content of the card.
+ * @property {React.ReactNode} [icon] - An optional icon to display on the card.
+ * @property {React.ReactNode} [dropdownIcon] - An icon to display in dropdown selectors.
+ * @property {Function} onSortChange - Callback function to handle sort changes.
+ * @property {Array<number>} yearOptions - Array of available years for sorting.
+ * @property {Array<SelectOption>} valueOptions - Array of options for value-based sorting.
+ */
 interface CardProps {
     type: 'primary' | 'secondary';
     title?: string;
     content?: React.ReactNode;
-    icon?: React.ReactNode; // Card's main icon
-    dropdownIcon?: React.ReactNode; // Custom dropdown icon
+    icon?: React.ReactNode;
+    dropdownIcon?: React.ReactNode;
     onSortChange: (sortType: 'year' | 'value', value: string) => void;
     yearOptions: Array<number>;
     valueOptions: Array<SelectOption>;
 }
 
+/**
+ * Defines the shape of the selection option for dropdowns.
+ * @typeof SelectOption
+ * @type {object}
+ * @property {string} label - The display text of the option.
+ * @property {string} value - The value of the option.
+ */
 interface SelectOption {
     label: string;
     value: string;
 }
 
+
+/**
+ * A dynamic card component for displaying statistical information with customizable sorting options.
+ * @param {CardProps} props - The properties passed to the component.
+ * @returns {React.FC} A functional React component.
+ */
 const StatisticDynamicCard: React.FC<CardProps> = ({
+    /**
+    * Handles changes in sort selection.
+    * @param {React.ChangeEvent<HTMLSelectElement>} e - The change event from the select input.
+    * @param {'year' | 'value'} sortType - The type of sorting (by year or value).
+    */
+
     type,
     title,
     content,
@@ -29,6 +62,13 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
     const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>, sortType: 'year' | 'value') => {
         onSortChange(sortType, e.target.value);
     };
+
+
+    /**
+     * Determines the card's style based on its type.
+     * @param {'primary' | 'secondary'} type - The card's type.
+     * @returns {object} The style object for the card.
+     */
 
     const getCardStyle = (type: 'primary' | 'secondary') => {
         switch (type) {
@@ -46,27 +86,27 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
         switch (type) {
             case 'primary':
                 return {
-                    backgroundColor: '#005828', 
-                    color: '#ffffff', 
-                    border: '1px solid #ffffff' 
+                    backgroundColor: '#005828',
+                    color: '#ffffff',
+                    border: '1px solid #ffffff'
                 };
             case 'secondary':
                 return {
-                    backgroundColor: '#F6FDEC', 
-                    color: '#005828', 
-                    border: '1px solid #005828' 
+                    backgroundColor: '#F6FDEC',
+                    color: '#005828',
+                    border: '1px solid #005828'
                 };
             default:
                 return {
-                    backgroundColor: 'blue', 
+                    backgroundColor: 'blue',
                     color: 'black',
-                    border: '1px solid green' 
+                    border: '1px solid green'
                 };
         }
     };
 
     const cardStyle = getCardStyle(type);
-    const selectStyle = getSelectStyle(type); 
+    const selectStyle = getSelectStyle(type);
     const titleStyle = { color: type === 'primary' ? '#D2F69E' : '#005828' }
     const scfStyle = { color: type === 'primary' ? '#D2F69E' : '#005828' }
 
@@ -83,28 +123,28 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                     width: '83px',
                     justifyContent: 'space-between',
                 }}>
-                   <div style={{}}>
-                   <select
-                        aria-label="Sort by year"
-                        onChange={(e) => handleSortChange(e, 'year')}
-                        style={{
-                            ...selectStyle,
-                            display: 'block',
-                            width: '100%',
-                            backgroundColor: 'inherit',
-                            height: '35px',
-                            borderRadius: '40px',
-                            fontSize: '12px',
-                            lineHeight: '15.06px',
-                            textAlignLast: 'start',
-                            appearance: 'none',
-                            padding: '10px'
+                    <div style={{}}>
+                        <select
+                            aria-label="Sort by year"
+                            onChange={(e) => handleSortChange(e, 'year')}
+                            style={{
+                                ...selectStyle,
+                                display: 'block',
+                                width: '100%',
+                                backgroundColor: 'inherit',
+                                height: '35px',
+                                borderRadius: '40px',
+                                fontSize: '12px',
+                                lineHeight: '15.06px',
+                                textAlignLast: 'start',
+                                appearance: 'none',
+                                padding: '10px'
 
-                        }}
-                    >
-                        {yearOptions.map(year => <option style={{...selectStyle}}  key={year} value={year}>{year}</option>)}
-                    </select>
-                   </div>
+                            }}
+                        >
+                            {yearOptions.map(year => <option style={{ ...selectStyle }} key={year} value={year}>{year}</option>)}
+                        </select>
+                    </div>
                     <div style={{
                         position: 'absolute',
                         right: '10px',
