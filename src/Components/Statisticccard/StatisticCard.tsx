@@ -53,7 +53,7 @@ const StatisticCard: React.FC<StatisticCardProps> = ({
   value,
   primary = true,
   labelSpan,
-  size = '',
+  size = 'md',
 }) => {
   const labelBgColor = primary ? 'bg-green-700 text-white' : 'bg-gray-200 text-gray-500';
   const valueBgColor = primary ? 'bg-green-500 text-white' : 'bg-white-500';
