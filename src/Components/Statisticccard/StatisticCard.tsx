@@ -1,6 +1,6 @@
+import { cva } from 'class-variance-authority';
 import React from 'react';
 import DataBox from '/assets/png-icons/DataBox.png';
-import { cva } from 'class-variance-authority';
 
 
 /**
@@ -53,24 +53,24 @@ const StatisticCard: React.FC<StatisticCardProps> = ({
   value,
   primary = true,
   labelSpan,
-  size = 'md',
+  size = '',
 }) => {
   const labelBgColor = primary ? 'bg-green-700 text-white' : 'bg-gray-200 text-gray-500';
   const valueBgColor = primary ? 'bg-green-500 text-white' : 'bg-white-500';
 
   return (
     <div className={cardStyles({ size })}>
-      <img className="absolute w-full inset-0 z-0 object-cover h-full" src={DataBox} alt="data box" />
       <div className={`p-3 w-full rounded-t-[20px] ${labelBgColor}`}>
-        {primary ? 
-        <span className="text-lg font-normal">{label}</span> :
-        <span className="text-lg font-normal" style={{ fontWeight: 500 }}>{label}</span>}
+        <img className="absolute w-full inset-0 z-0 object-cover h-full" src={DataBox} alt="data box" />
+        {primary ?
+          <span className="text-lg font-normal">{label}</span> :
+          <span className="text-lg font-normal" style={{ fontWeight: 500 }}>{label}</span>}
         {labelSpan && <div className="mt-[-7px]">{labelSpan}</div>}
       </div>
       <div className={`p-4 rounded-b-[20px] w-full ${valueBgColor}`}>
-        {primary ? 
-        <span className="text-2xl font-semibold" style={{ fontWeight: 600 }}>{value}</span> :
-        <span className="text-2xl font-semibold" style={{ fontWeight: 700 }}>{value}</span>}
+        {primary ?
+          <span className="text-2xl font-semibold" style={{ fontWeight: 600 }}>{value}</span> :
+          <span className="text-2xl font-semibold" style={{ fontWeight: 700 }}>{value}</span>}
       </div>
     </div>
   );
