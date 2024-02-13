@@ -9,7 +9,6 @@ import DataBox from '/assets/png-icons/DataBox.png';
  * @param {string|number} props.value - The value for the statistic.
  * @param {boolean} [props.primary=true] - Determines whether the card is of primary type. Defaults to true.
  * @param {React.ReactNode} [props.labelSpan] - Optional JSX element to be rendered directly under the label.
- * @param {('sm' | 'md' | 'lg')} [props.size='md'] - Size variant for the statistic card.
  * @returns {JSX.Element} The rendered StatisticCard component.
  */
 
