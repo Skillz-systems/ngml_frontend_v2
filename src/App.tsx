@@ -35,11 +35,11 @@ function App() {
 
   return (
     <>
-      {/* <div className="">
+      <div className="">
         <p className="">Vite and React</p>
       </div>
 
-      <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
+      {/* <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
         <Notification
           count={notificationsInfo.length}
           headerTitle="Notifications"
