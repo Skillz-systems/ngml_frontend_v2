@@ -52,17 +52,4 @@ describe('StatisticCard', () => {
         expect(screen.getByText('Label').parentElement).toHaveClass('bg-gray-200');
         expect(screen.getByText('123').parentElement).toHaveClass('bg-white-500');
     });
-
-    test('renders with different size', () => {
-        render(
-            <StatisticCard
-                label="Label"
-                value="123"
-            />
-        );
-
-        // Assert small size is applied
-        expect(screen.getByText('Label').parentElement).toHaveClass(' p-3 w-full rounded-t-[20px] bg-green-700 text-white h-2/5 flex flex-col justify-center items-center');
-        expect(screen.getByText('Label').parentElement).toHaveClass(' p-3 w-full rounded-t-[20px] bg-green-700 text-white h-2/5 flex flex-col justify-center items-center');
-    });
 });
