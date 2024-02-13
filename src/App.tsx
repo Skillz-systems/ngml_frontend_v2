@@ -12,7 +12,6 @@ function App() {
 
       <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
         <SearchComponent />
-
       </div>
 
     </>
