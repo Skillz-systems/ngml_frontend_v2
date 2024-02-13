@@ -1,7 +1,5 @@
-import { cva } from 'class-variance-authority';
 import React from 'react';
 import DataBox from '/assets/png-icons/DataBox.png';
-
 
 /**
  * A customizable statistic card component.
@@ -11,6 +9,7 @@ import DataBox from '/assets/png-icons/DataBox.png';
  * @param {string|number} props.value - The value for the statistic.
  * @param {boolean} [props.primary=true] - Determines whether the card is of primary type. Defaults to true.
  * @param {React.ReactNode} [props.labelSpan] - Optional JSX element to be rendered directly under the label.
+ * @param {('sm' | 'md' | 'lg')} [props.size='md'] - Size variant for the statistic card.
  * @returns {JSX.Element} The rendered StatisticCard component.
  */
 
@@ -22,32 +21,6 @@ interface StatisticCardProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const cardStyles = cva(
-  [
-    'rounded-[20px]',
-    'overflow-hidden',
-    'h-full',
-    'flex',
-    'flex-col',
-    'justify-center',
-    'items-center',
-    'text-center',
-    'relative',
-  ],
-  {
-    variants: {
-      size: {
-        sm: 'w-32 h-32',
-        md: 'w-48 h-48',
-        lg: 'w-64 h-64',
-      },
-    },
-    defaultVariants: {
-      size: 'md',
-    },
-  }
-);
-
 const StatisticCard: React.FC<StatisticCardProps> = ({
   label,
   value,
@@ -56,21 +29,17 @@ const StatisticCard: React.FC<StatisticCardProps> = ({
   size = 'md',
 }) => {
   const labelBgColor = primary ? 'bg-green-700 text-white' : 'bg-gray-200 text-gray-500';
-  const valueBgColor = primary ? 'bg-green-500 text-white' : 'bg-white-500';
+  const valueBgColor = primary ? 'bg-green-500 text-white' : 'bg-white-500 text-black-700';
 
   return (
-    <div className={cardStyles({ size })}>
-      <div className={`p-3 w-full rounded-t-[20px] ${labelBgColor}`}>
-        <img className="absolute w-full inset-0 z-0 object-cover h-full" src={DataBox} alt="data box" />
-        {primary ?
-          <span className="text-lg font-normal">{label}</span> :
-          <span className="text-lg font-normal" style={{ fontWeight: 500 }}>{label}</span>}
+    <div className={`w-56 h-44 relative rounded-[20px] ${!primary ? 'border-2' : '' } ${size === 'sm' ? 'md:w-32 md:h-32' : size === 'lg' ? 'md:w-64 md:h-64' : ''}`}>
+      <img className="absolute w-full inset-0 z-0 object-cover h-fit" src={DataBox} alt="data box" />
+      <div className={`p-3 w-full rounded-t-[20px] ${labelBgColor} h-2/5 flex flex-col justify-center items-center`}>
+        <span className='text-xl'>{label}</span>
         {labelSpan && <div className="mt-[-7px]">{labelSpan}</div>}
       </div>
-      <div className={`p-4 rounded-b-[20px] w-full ${valueBgColor}`}>
-        {primary ?
-          <span className="text-2xl font-semibold" style={{ fontWeight: 600 }}>{value}</span> :
-          <span className="text-2xl font-semibold" style={{ fontWeight: 700 }}>{value}</span>}
+      <div className={`w-full h-3/5 ${valueBgColor} rounded-b-[20px] flex justify-center items-center`}>
+        <h4 className={`text-3xl ${!primary ? 'font-bold' : 'font-semi-bold'}`}>{value}</h4>
       </div>
     </div>
   );
