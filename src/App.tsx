@@ -1,17 +1,10 @@
-import { House, KeyboardArrowDown, NotificationImportantOutlined } from '@mui/icons-material';
+import { NotificationImportantOutlined } from '@mui/icons-material';
 import { useState } from 'react';
 import Notification from './Components/NotificationComponent/Notification';
-<<<<<<< HEAD
 import StatisticCard from './Components/Statisticccard/StatisticCard';
 
 function App() {
   // const [showNotifications, setShowNotifications] = useState(false); 
-=======
-import StatisticDynamicCard from './Components/StatisticCardComponent/StatisticDynamicCard';
-
-function App() {
-  const [showNotifications, setShowNotifications] = useState(false);
->>>>>>> 2a98735b29a2c5ad116ae3bcd4f85447f114f563
 
   // const notificationsInfo = [
   //   {
@@ -50,11 +43,10 @@ function App() {
         <Notification
           count={notificationsInfo.length}
           headerTitle="Notifications"
-          notifications={notificationsInfo}
+          notifications={notificationsInfo }
           onClick={handleNotificationClick}
           renderIcon={() => <NotificationImportantOutlined />}
         />
-<<<<<<< HEAD
       </div> */}
       
       <div className="flex justify-center gap-[20px] items-center">
@@ -74,19 +66,6 @@ function App() {
       />
     </div>
 
-=======
-      </div>
-      <StatisticDynamicCard
-        type="primary"
-        title="Total Supplied Volume "
-        content={<p>12,129,243,990.00</p>}
-        icon={<House />}
-        dropdownIcon={<KeyboardArrowDown />}
-        onSortChange={(sortType, value) => console.log(`Sort by ${sortType}: ${value}`)}
-        yearOptions={[2020, 2021, 2022, 2023]}
-        valueOptions={[{ label: 'All Suppliers', value: 'high' }, { label: 'Total Suppliers', value: 'low' }]}
-      />
->>>>>>> 2a98735b29a2c5ad116ae3bcd4f85447f114f563
     </>
   );
 }
