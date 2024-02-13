@@ -58,7 +58,6 @@ describe('StatisticCard', () => {
             <StatisticCard
                 label="Label"
                 value="123"
-                size="sm"
             />
         );
 

@@ -55,14 +55,12 @@ function App() {
         value="554"
         primary={true}
         labelSpan={<span>Monthly</span>}
-        size="md"
       />
       <StatisticCard
         label="Total Sales"
         value="9"
         primary={false}
         labelSpan={<span>Monthly</span>}
-        size="md"
       />
     </div>
 

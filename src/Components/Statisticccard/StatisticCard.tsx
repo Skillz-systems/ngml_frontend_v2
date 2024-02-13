@@ -18,7 +18,6 @@ interface StatisticCardProps {
   value: string | number;
   primary?: boolean;
   labelSpan?: React.ReactNode;
-  size?: 'sm' | 'md' | 'lg';
 }
 
 const StatisticCard: React.FC<StatisticCardProps> = ({
@@ -26,20 +25,19 @@ const StatisticCard: React.FC<StatisticCardProps> = ({
   value,
   primary = true,
   labelSpan,
-  size = 'md',
 }) => {
   const labelBgColor = primary ? 'bg-green-700 text-white' : 'bg-gray-200 text-gray-500';
   const valueBgColor = primary ? 'bg-green-500 text-white' : 'bg-white-500 text-black-700';
 
   return (
-    <div className={`w-56 h-44 relative rounded-[20px] ${!primary ? 'border-2' : '' } ${size === 'sm' ? 'md:w-32 md:h-32' : size === 'lg' ? 'md:w-64 md:h-64' : ''}`}>
+    <div className={`w-56 h-44 relative rounded-[20px] ${!primary ? 'border-2' : '' }`}>
       <img className="absolute w-full inset-0 z-0 object-cover h-fit" src={DataBox} alt="data box" />
       <div className={`p-3 w-full rounded-t-[20px] ${labelBgColor} h-2/5 flex flex-col justify-center items-center`}>
         <span className='text-xl'>{label}</span>
         {labelSpan && <div className="mt-[-7px]">{labelSpan}</div>}
       </div>
       <div className={`w-full h-3/5 ${valueBgColor} rounded-b-[20px] flex justify-center items-center`}>
-        <h4 className={`text-3xl ${!primary ? 'font-bold' : 'font-semi-bold'}`}>{value}</h4>
+        <h4 className='text-3xl font-medium'>{value}</h4>
       </div>
     </div>
   );
