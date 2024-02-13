@@ -5,8 +5,8 @@ const meta: Meta = {
     title: 'Components/StatisticCard',
     component: StatisticCard,
     parameters: {
-      layout: 'centered'
-  }, tags: ['autodocs'],
+        layout: 'centered'
+    }, tags: ['autodocs'],
     argTypes: {
       primary: { control: 'boolean' },
       label: { control: 'text' },
