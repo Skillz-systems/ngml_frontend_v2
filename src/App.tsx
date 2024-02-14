@@ -2,7 +2,8 @@
 // import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
 
 import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
-import Calendar from '/assets/png-icons/Calendar.png'
+import Records from '/assets/png-icons/Records.png'
+import Warning from '/assets/png-icons/Warning.png'
 
 function App() {
 
@@ -18,24 +19,26 @@ function App() {
       </div> */}
     <div className="flex gap-8 items-center justify-center">
       <StatisticRectangleCard
-        icon={<img src={Calendar} alt='eyeopen'/>}
-        title="Users"
-        backgroundColor="bg-blue-200"
-        valueColor="text-red-400"
-        color="text-blue-800"
-        size="w-64"
-        iconBgColor="bg-red-400 rounded-full"
-        iconSize="w-[10px]"
+        icon={<img src={Records} alt='Records' />}
+        title="Contracts Created"
+        backgroundColor="bg-white"
+        valueColor="text-green-500"
+        color="text-gray-500"
+        size="w-96"
+        iconBgColor="bg-green-600 rounded-[7px]"
+        iconSize="w-5"
+        value="227"
       />
       <StatisticRectangleCard
-        icon={<img src={Calendar} alt='eyeopen'/>}
-        title="Users"
-        backgroundColor=""
+        icon={<img src={Warning} alt='Warning'/>}
+        title="Processing Contracts"
+        backgroundColor="bg-customYellow"
         color="text-gray-400"
         size="w-96"
+        iconBgColor="bg-red-300 rounded-full"
       />
       <StatisticRectangleCard
-        icon={<img src={Calendar} alt='eyeopen'/>}
+        icon={<img src={Records} alt='eyeopen'/>}
         title="Users"
         backgroundColor="bg-blue-200"
         color="text-blue-800"
