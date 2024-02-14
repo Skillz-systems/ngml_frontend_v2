@@ -2,7 +2,7 @@
 // import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
 
 import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
-import Eyeopen from '/assets/png-icons/Eyeopen.png'
+import Calendar from '/assets/png-icons/Calendar.png'
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
       </div> */}
     <div className="flex gap-8 items-center justify-center">
       <StatisticRectangleCard
-        icon={<img src={Eyeopen} alt='eyeopen'/>}
+        icon={<img src={Calendar} alt='eyeopen'/>}
         title="Users"
         backgroundColor="bg-blue-200"
         valueColor="text-red-400"
@@ -28,14 +28,14 @@ function App() {
         iconSize="w-[10px]"
       />
       <StatisticRectangleCard
-        icon={<img src={Eyeopen} alt='eyeopen'/>}
+        icon={<img src={Calendar} alt='eyeopen'/>}
         title="Users"
         backgroundColor=""
         color="text-gray-400"
         size="w-96"
       />
       <StatisticRectangleCard
-        icon={<img src={Eyeopen} alt='eyeopen'/>}
+        icon={<img src={Calendar} alt='eyeopen'/>}
         title="Users"
         backgroundColor="bg-blue-200"
         color="text-blue-800"
