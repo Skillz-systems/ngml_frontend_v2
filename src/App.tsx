@@ -16,7 +16,7 @@ function App() {
       {/* <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
         <SearchComponent />
       </div> */}
-    <div className="flex gap-8 items-center">
+    <div className="flex gap-8 items-center justify-center">
       <StatisticRectangleCard
         icon={<img src={Eyeopen} alt='eyeopen'/>}
         title="Users"
@@ -27,19 +27,19 @@ function App() {
         iconBgColor="bg-red-400 rounded-full"
         iconSize="w-[10px]"
       />
-            <StatisticRectangleCard
+      <StatisticRectangleCard
         icon={<img src={Eyeopen} alt='eyeopen'/>}
         title="Users"
         backgroundColor=""
         color="text-gray-400"
         size="w-96"
       />
-            <StatisticRectangleCard
+      <StatisticRectangleCard
         icon={<img src={Eyeopen} alt='eyeopen'/>}
         title="Users"
         backgroundColor="bg-blue-200"
         color="text-blue-800"
-        size="w-64"
+        size="w-[500px]"
       />
     </div>
 
