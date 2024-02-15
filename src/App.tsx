@@ -1,5 +1,5 @@
 
-import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
+import ChartComponent from './Components/ChartComponent/ChartComponent';
 
 function App() {
 
@@ -11,7 +11,10 @@ function App() {
       </div>
 
       <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
-        <SearchComponent />
+        <ChartComponent
+        dataType={'ordinal'}
+        series={1}
+        />
       </div>
 
     </>
