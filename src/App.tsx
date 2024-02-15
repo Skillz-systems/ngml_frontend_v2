@@ -1,10 +1,12 @@
 
 // import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
 
-import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
-import Records from '/assets/png-icons/Records.png'
-import Warning from '/assets/png-icons/Warning.png'
-import Staff from '/assets/png-icons/Staff.png'
+import ActivityLogCard from "./Components/Activitylogcard/ActivityLogCard";
+
+// import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
+// import Records from '/assets/png-icons/Records.png'
+// import Warning from '/assets/png-icons/Warning.png'
+// import Staff from '/assets/png-icons/Staff.png'
 
 function App() {
 
@@ -18,7 +20,7 @@ function App() {
       {/* <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
         <SearchComponent />
       </div> */}
-      <div className="flex gap-8 items-center justify-center">
+      {/* <div className="flex gap-8 items-center justify-center">
         <StatisticRectangleCard
           icon={<img src={Records} alt='Records' />}
           title="Contracts Created"
@@ -49,7 +51,19 @@ function App() {
           iconSize="w-5"
           value="2,305"
         />
-      </div>
+      </div> */}
+       <div className="App">
+      <ActivityLogCard 
+        title="Meeting"
+        text="Scheduled a team meeting for next Monday."
+        dateTime="2024-02-09 10:00 AM"
+      />
+      <ActivityLogCard 
+        title="Task Completed"
+        text="Completed the UI design task."
+        dateTime="2024-02-08 03:30 PM"
+      />
+    </div>
 
     </>
   );
