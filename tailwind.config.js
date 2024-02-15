@@ -15,7 +15,10 @@ export default {
         'NGML-SEC': 'var(--NGML-SEC, #005828)'
       },
       colors: {
-        primary: colors.blue
+        primary: colors.blue,
+      },
+      backgroundColor: {
+        customYellow: '#FDF6E4',
       }
     },
   },
