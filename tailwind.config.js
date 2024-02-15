@@ -19,6 +19,7 @@ export default {
       },
       backgroundColor: {
         customYellow: '#FDF6E4',
+        customGreen: '#AEF359'
       }
     },
   },

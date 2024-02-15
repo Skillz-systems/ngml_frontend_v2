@@ -52,17 +52,35 @@ function App() {
           value="2,305"
         />
       </div> */}
-       <div className="App">
+      <div className="flex justify-center">
+       <div className="w-[500px]">
       <ActivityLogCard 
-        title="Meeting"
-        text="Scheduled a team meeting for next Monday."
-        dateTime="2024-02-09 10:00 AM"
+        title="EOI REQUEST"
+        text="Alberta Corporation Limited just sent in an EOI Request."
+        dateTime={new Date()}
+        button={<button className="bg-green-600 hover:bg-gray-100 text-white font-bold py-1 px-8 rounded-[30px]">View Request</button>}
       />
       <ActivityLogCard 
-        title="Task Completed"
-        text="Completed the UI design task."
-        dateTime="2024-02-08 03:30 PM"
+        title="EOI REQUEST"
+        text="Ayolla Obasanjo just approved the Aberta Corporation EOI Request."
+        dateTime={new Date()}
       />
+      <ActivityLogCard 
+        title="SITE VISIT"
+        text="Johnson Alaba has updated the site survey findings for GET Technologies Limited."
+        dateTime={new Date()}
+      />
+      <ActivityLogCard 
+        title="SITE VISIT"
+        text="GET Technologies has picked a survey date."
+        dateTime={new Date()}
+      />
+      <ActivityLogCard 
+        title="DCQ"
+        text="Benjamin Ayodele just updated the DCQ for Dangote Cement."
+        dateTime={new Date()}
+      />
+    </div>
     </div>
 
     </>
