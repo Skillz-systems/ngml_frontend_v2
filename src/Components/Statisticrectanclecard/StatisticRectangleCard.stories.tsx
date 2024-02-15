@@ -1,5 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import StatisticRectangleCard from './StatisticRectangleCard';
+import Records from '/assets/png-icons/Records.png';
+import Warning from '/assets/png-icons/Warning.png'
 
 const meta: Meta = {
   title: 'Components/StatisticRectangleCard',
@@ -27,7 +29,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story={
 args: {
-    
+    title: 'Custom Title',
+    value: '50',
+    backgroundColor: 'bg-white-500',
+    valueColor: 'text-gray-800',
+    icon: <div><img src={Records} alt="record icon" /></div>
 },
 };
 
@@ -38,12 +44,13 @@ args: {
     value: '50',
     backgroundColor: 'bg-blue-500',
     valueColor: 'text-white',
+    icon: <div><img src={Records} alt="record icon" /></div>
 },
 };
 
 export const WithIcon: Story ={
 args: {
-  icon: <div>Icon</div>,
-  iconBgColor: 'bg-red-500',
+  icon: <div><img src={Warning} alt="Warning" /></div>,
+  iconBgColor: 'bg-red-500 rounded-full',
 },
 };
