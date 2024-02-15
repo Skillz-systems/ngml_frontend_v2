@@ -8,7 +8,7 @@ const meta: Meta = {
     layout: 'centered'
   }, tags: ['autodocs'],
   argTypes: {
-    icon: { control: 'object' },
+    icon: { control: 'text' },
     title: { control: 'text' },
     value: { control: 'text' },
     valueColor: { control: 'color' },
@@ -34,12 +34,16 @@ args: {
 export const Custom: Story={
 args: {
     
-  title: 'Custom Title',
-  value: '42',
-  backgroundColor: 'bg-gray-300',
-  valueColor: 'text-white',
-  color: 'text-blue-600',
-  size: 'w-96',
-  iconSize: '10px'
+    title: 'Custom Title',
+    value: '50',
+    backgroundColor: 'bg-blue-500',
+    valueColor: 'text-white',
+},
+};
+
+export const WithIcon: Story ={
+args: {
+  icon: <div>Icon</div>,
+  iconBgColor: 'bg-red-500',
 },
 };

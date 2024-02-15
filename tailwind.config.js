@@ -18,7 +18,7 @@ export default {
         primary: colors.blue,
       },
       backgroundColor: {
-        customYellow: '#FCBACB',
+        customYellow: '#FDF6E4',
       }
     },
   },

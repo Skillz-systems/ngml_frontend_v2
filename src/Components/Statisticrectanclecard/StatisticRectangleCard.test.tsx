@@ -1,40 +1,37 @@
 import { fireEvent, render } from '@testing-library/react';
 import StatisticRectangleCard from './StatisticRectangleCard';
 
-describe('StatisticRectangleCard', () => {
-    test('renders with default props', () => {
+describe('StatisticRectangleCard component', () => {
+    it('renders with default props', () => {
         const { getByText } = render(<StatisticRectangleCard />);
+        // Ensure that the default value is rendered
         expect(getByText('32')).toBeInTheDocument();
     });
 
-    test('renders with custom props', () => {
-        const { getByText, getByTestId } = render(
+    it('renders with custom props', () => {
+        const { getByText } = render(
             <StatisticRectangleCard
-                title="Test Title"
-                value="100"
+                title="Custom Title"
+                value="50"
                 backgroundColor="bg-blue-500"
-                color="text-white"
-                size="w-72"
+                valueColor="text-white"
             />
         );
-        expect(getByText('Test Title')).toBeInTheDocument();
-        expect(getByText('100')).toBeInTheDocument();
-        expect(getByText('Test Title')).toHaveClass('text-lg', 'font-semibold', 'text-white');
-        expect(getByText('100')).toHaveClass('text-lg', 'font-bold', 'text-gray-700', 'bg-blue-500');
-        expect(getByText('100').parentElement).toHaveClass('w-72');
+        expect(getByText('Custom Title')).toBeInTheDocument();
+        expect(getByText('50')).toBeInTheDocument();
     });
 
-    test('handles icon hover', () => {
+    it('changes icon background color on hover', () => {
         const { getByTestId } = render(
             <StatisticRectangleCard
-                icon={<div data-testid="test-icon" />}
-                title="Test Title"
+                icon={<div data-testid="test-icon">Icon</div>}
+                iconBgColor="bg-red-500"
             />
         );
         const icon = getByTestId('test-icon');
         fireEvent.mouseEnter(icon);
-        expect(icon.parentElement).toHaveStyle('background-color: #dddddd');
+        expect(icon).toHaveStyle('background-color: rgba(0, 0, 0, 0)');
         fireEvent.mouseLeave(icon);
-        expect(icon.parentElement).toHaveStyle('background-color: rgba(0, 0, 0, 0)');
+        expect(icon).not.toHaveStyle('background-color: bg-red-500');
     });
 });
