@@ -24,7 +24,7 @@ function App() {
           title="Contracts Created"
           backgroundColor="bg-white"
           valueColor="text-green-700"
-          color="text-gray-700"
+          color="text-gray-900"
           size="w-96"
           iconBgColor="bg-green-600 rounded-[7px]"
           iconSize="w-5"
@@ -34,7 +34,7 @@ function App() {
           icon={<img src={Warning} alt='Warning' />}
           title="Processing Contracts"
           backgroundColor="bg-customYellow"
-          color="text-gray-700"
+          color="text-gray-900"
           size="w-96"
           iconBgColor="bg-red-200 rounded-full"
         />
