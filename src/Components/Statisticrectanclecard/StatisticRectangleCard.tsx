@@ -44,7 +44,7 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
         >
           {icon &&  <div className={`${iconSize}`}>{icon}</div>}
         </div>
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <h3 className="text-lg font-[400]">{title}</h3>
       </div>
       <div>
         <h3 className={`text-lg font-bold ${valueColor}`}>{value}</h3>
