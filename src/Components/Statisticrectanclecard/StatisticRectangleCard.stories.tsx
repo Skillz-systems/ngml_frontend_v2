@@ -44,7 +44,8 @@ args: {
     value: '50',
     backgroundColor: 'bg-blue-500',
     valueColor: 'text-white',
-    icon: <div><img src={Records} alt="record icon" /></div>
+    icon: <div><img src={Records} alt="record icon" /></div>,
+    size: 'w-96'
 },
 };
 
