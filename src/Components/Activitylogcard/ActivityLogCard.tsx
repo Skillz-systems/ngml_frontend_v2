@@ -1,11 +1,21 @@
 import { format } from 'date-fns';
 import React from 'react';
 
+/**
+ * Renders a card for displaying activity log information.
+ * @param {object} props - The props for the ActivityLogCard component.
+ * @param {string} props.title - The title of the activity log.
+ * @param {string} props.text - The text content of the activity log.
+ * @param {Date} props.dateTime - The date and time of the activity log.
+ * @param {React.ReactNode} [props.button] - JSX element for an optional button (optional).
+ * @returns {JSX.Element} - The JSX element representing the ActivityLogCard component.
+ */
+
 interface ActivityLogCardProps {
   title: string;
   text: string;
   dateTime: Date;
-  button?: React.ReactNode; // Accepts any valid JSX element as a prop
+  button?: React.ReactNode;
 }
 
 const ActivityLogCard: React.FC<ActivityLogCardProps> = ({ title, text, dateTime, button }) => {

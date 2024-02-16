@@ -1,8 +1,8 @@
 
 // import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
 
-import ActivityLogCard from "./Components/Activitylogcard/ActivityLogCard";
 import ActivityLogCardContainer from "./Components/Activitylogcard/ActivityLogCardContainer";
+import Rightarrow from '/assets/png-icons/Rightarrow.png';
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
 // import Records from '/assets/png-icons/Records.png'
@@ -83,7 +83,12 @@ function App() {
       />
     </div>
     </div> */}
-    <ActivityLogCardContainer />
+      <ActivityLogCardContainer
+        size="550px"
+        heading="Recent Activity"
+        icon={Rightarrow} // Import Warning from assets and pass it here
+        headingBgColor="bg-gray-100"
+      />
 
     </>
   );
