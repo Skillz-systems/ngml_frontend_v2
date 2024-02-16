@@ -2,6 +2,7 @@
 // import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
 
 import ActivityLogCard from "./Components/Activitylogcard/ActivityLogCard";
+import ActivityLogCardContainer from "./Components/Activitylogcard/ActivityLogCardContainer";
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
 // import Records from '/assets/png-icons/Records.png'
@@ -52,7 +53,7 @@ function App() {
           value="2,305"
         />
       </div> */}
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
        <div className="w-[500px]">
       <ActivityLogCard 
         title="EOI REQUEST"
@@ -81,7 +82,8 @@ function App() {
         button={<button className="bg-green-600 hover:bg-gray-100 text-white font-bold py-1 px-8 rounded-[30px]">View Request</button>}
       />
     </div>
-    </div>
+    </div> */}
+    <ActivityLogCardContainer />
 
     </>
   );
