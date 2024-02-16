@@ -58,7 +58,6 @@ function App() {
         title="EOI REQUEST"
         text="Alberta Corporation Limited just sent in an EOI Request."
         dateTime={new Date()}
-        button={<button className="bg-green-600 hover:bg-gray-100 text-white font-bold py-1 px-8 rounded-[30px]">View Request</button>}
       />
       <ActivityLogCard 
         title="EOI REQUEST"
@@ -67,7 +66,7 @@ function App() {
       />
       <ActivityLogCard 
         title="SITE VISIT"
-        text="Johnson Alaba has updated the site survey findings for GET Technologies Limited."
+        text="Johnson Alaba has updated the site survey findings."
         dateTime={new Date()}
       />
       <ActivityLogCard 
@@ -77,8 +76,9 @@ function App() {
       />
       <ActivityLogCard 
         title="DCQ"
-        text="Benjamin Ayodele just updated the DCQ for Dangote Cement."
+        text="Benjamin Ayodele just updated the DCQ."
         dateTime={new Date()}
+        button={<button className="bg-green-600 hover:bg-gray-100 text-white font-bold py-1 px-8 rounded-[30px]">View Request</button>}
       />
     </div>
     </div>
