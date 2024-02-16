@@ -86,7 +86,7 @@ function App() {
       <ActivityLogCardContainer
         size="550px"
         heading="Recent Activity"
-        icon={Rightarrow} // Import Warning from assets and pass it here
+        icon={Rightarrow}
         headingBgColor="bg-gray-100"
       />
 
