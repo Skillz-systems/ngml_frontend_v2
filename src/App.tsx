@@ -2,6 +2,7 @@
 // import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
 
 import ActivityLogCardContainer from "./Components/Activitylogcard/ActivityLogCardContainer";
+import ActivityLogCardContainerWithButton from "./Components/Activitylogcard/ActivityLogCardContainerWithButtons";
 import Rightarrow from '/assets/png-icons/Rightarrow.png';
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
@@ -88,6 +89,12 @@ function App() {
         heading="Recent Activity"
         icon={Rightarrow}
         headingBgColor="bg-gray-100"
+      />
+      <ActivityLogCardContainerWithButton
+              size="550px"
+              heading="Recent Activity"
+              icon={Rightarrow}
+              headingBgColor="bg-gray-100"
       />
 
     </>
