@@ -90,12 +90,14 @@ function App() {
         icon={Rightarrow}
         headingBgColor="bg-gray-100"
       />
-      <ActivityLogCardContainerWithButton
-              size="550px"
-              heading="Recent Activity"
-              icon={Rightarrow}
-              headingBgColor="bg-gray-100"
-      />
+      <div className="mt-[40px]">
+        <ActivityLogCardContainerWithButton
+          size="550px"
+          heading="Recent Activity"
+          icon={Rightarrow}
+          headingBgColor="bg-customWhite"
+        />
+      </div>
 
     </>
   );
