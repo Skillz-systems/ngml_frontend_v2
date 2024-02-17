@@ -47,7 +47,7 @@ const ActivityLogCardContainerWithButton: React.FC<ActivityLogCardContainerProps
     ];
 
     return (
-        <div style={{ width: size }}  className="flex flex-col border-2 rounded-[10px] overflow-hidden">
+        <div style={{ width: size }}  className="flex flex-col border-1 rounded-[10px] overflow-hidden">
             <div className={`flex items-center justify-between mb-4 ${headingBgColor} p-2`}>
                 <h2 className="text-xl font-[400] text-gray-400">{heading}</h2>
                 {icon && <img src={icon} alt="icon" className="w-6 h-6 text-gray-600" />}
