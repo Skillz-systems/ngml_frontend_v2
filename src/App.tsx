@@ -92,7 +92,7 @@ function App() {
       />
       <div className="mt-[40px]">
         <ActivityLogCardContainerWithButton
-          size="550px"
+          size="full"
           heading="Recent Activity"
           icon={Rightarrow}
           headingBgColor="bg-customWhite"
