@@ -4,7 +4,7 @@
 import ActivityLogCardContainer from "./Components/Activitylogcard/ActivityLogCardContainer";
 import ActivityLogCardContainerWithButton from "./Components/Activitylogcard/ActivityLogCardContainerWithButtons";
 import DocumentCard from "./Components/Documentcard/DocumentCard";
-import Rightarrow from '/assets/png-icons/Rightarrow.png';
+import Records from '/assets/png-icons/Records.png';
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
 // import Records from '/assets/png-icons/Records.png'
@@ -105,14 +105,15 @@ function App() {
       <div className="flex flex-wrap justify-center">
         <DocumentCard
           type="withLink"
-          icon="/path/to/icon1.png"
+          icon="/assets/png-icons/Records.png"
           title="Document 1"
           subtitle="Subtitle for Document 1"
-          linkText="View Document"
+          linkText="Invoice"
+          linkText2="LINKED"
         />
         <DocumentCard
           type="withoutLink"
-          icon="/path/to/icon2.png"
+          icon={Records}
           title="Document 2"
           subtitle="Subtitle for Document 2"
         />
@@ -120,7 +121,6 @@ function App() {
           type="withReport"
           icon="/path/to/icon3.png"
           title="Document 3"
-          subtitle="Subtitle for Document 3"
         />
       </div>
     </div>
