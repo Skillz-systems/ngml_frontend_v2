@@ -1,8 +1,6 @@
 
 // import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
 
-import ActivityLogCardContainer from "./Components/Activitylogcard/ActivityLogCardContainer";
-import ActivityLogCardContainerWithButton from "./Components/Activitylogcard/ActivityLogCardContainerWithButtons";
 import DocumentCard from "./Components/Documentcard/DocumentCard";
 import Records from '/assets/png-icons/Records.png';
 
@@ -100,29 +98,29 @@ function App() {
         />
       </div> */}
 
-<div className="">
-      <div className="flex justify-center gap-[20px] w-[700px]">
-        <DocumentCard
-          type="withLink"
-          icon="/assets/png-icons/Records.png"
-          title="Dangote Cement"
-          subtitle="October Invoice Advice"
-          linkText="Invoice"
-          linkText2="LINKED"
-        />
-        <DocumentCard
-          type="withoutLink"
-          icon={Records}
-          title="Chicken Republic Ltd"
-          subtitle="October Invoice Advice"
-        />
-        <DocumentCard
-          type="withReport"
-          icon="/assets/png-icons/Customers.png"
-          title="Customers"
-        />
+      <div className="">
+        <div className="flex justify-center gap-[20px] w-[700px]">
+          <DocumentCard
+            type="withLink"
+            icon="/assets/png-icons/Records.png"
+            title="Dangote Cement"
+            subtitle="October Invoice Advice"
+            linkText="Invoice"
+            linkText2="LINKED"
+          />
+          <DocumentCard
+            type="withoutLink"
+            icon={Records}
+            title="Chicken Republic Ltd"
+            subtitle="October Invoice Advice"
+          />
+          <DocumentCard
+            type="withReport"
+            icon="/assets/png-icons/Customers.png"
+            title="Customers"
+          />
+        </div>
       </div>
-    </div>
     </>
   );
 }
