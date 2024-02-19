@@ -81,7 +81,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
             Reports
           </a>
           <div>
-            <div className='border-2 rounded-full p-2 bg-gray-100 hover:bg-gray-200'>
+            <div className='border-2 rounded-full p-2 bg-gray-100 hover:bg-gray-200 cursor-pointer'>
               <img src={callmade} alt="callmade Icon" className= 'w-4 h-4'  />
             </div>
           </div>
