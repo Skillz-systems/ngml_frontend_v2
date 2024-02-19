@@ -1,4 +1,6 @@
-import LinechartContent from './Components/ChartComponent/LinechartContent.jsx'
+// import LinechartContent from './Components/ChartComponent/LinechartContent.jsx'
+
+import InfoCard from './Components/InfoCardComponent/InfoCardComponent';
 
 
 
@@ -12,7 +14,9 @@ function App() {
       </div>
 
       <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
-        <LinechartContent/>
+        {/* <LinechartContent/> */}
+
+        <InfoCard title="Total Views" number={1500} />
       </div>
 
     </>
