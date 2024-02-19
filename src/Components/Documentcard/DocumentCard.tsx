@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Rightarrow from '/assets/png-icons/Rightarrow.png';
-import DataBox from '/assets/png-icons/DataBox.png';
+import icons from '/assets/png-icons/icons.png';
 
 /**
  * DocumentCard component displays a card with various types based on props.
@@ -32,25 +32,26 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
 
   return (
     <div
-      className={`bg-gray-100 shadow-md rounded-[20px] p-4 mb-4 md:w-80 ${hovered ? 'bg-gray-100' : ''}`}
-      style={{ backgroundImage: type === 'withReport' ? `url(${DataBox})` : 'none' }}
+      className={(type === 'withLink' || type === 'withReport') ? `bg-gray-100 shadow-md rounded-[20px] p-4 mb-4 md:w-80 ${hovered ? 'bg-gray-100' : ''}` : `bg-gray-100 shadow-md mb-1 rounded-[20px] p-4 md:w-80 ${hovered ? 'bg-gray-100' : ''}`}
+      style={{
+        backgroundImage: type === 'withReport' ? `url(${icons})` : 'none',
+        backgroundSize: type === 'withReport' ? 'cover' : 'auto'
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <img
         src={icon}
         alt="Icon"
-        className={`w-8 h-8 mr-2 ${
-          (type === 'withLink' && hovered) || (type !== 'withReport' && hovered) ? 'bg-gray-100 p-2 border-2' : type === 'withLink' || type !== 'withReport' ? 'bg-green-500 p-2' : ''
-        } rounded-full`}
+        className={`w-8 h-8 mr-2 ${(type === 'withLink' && hovered) || (type === 'withoutLink' && hovered) ? 'bg-gray-100 p-2 border-2 rounded-full' : type === 'withLink' || type === 'withoutLink' ? 'bg-green-500 p-2 rounded-full' : ''
+          }`}
       />
       {type === 'withoutLink' && hovered ? <div className="">
         <h2 className={`text-lg font-bold ${type === 'withoutLink' || type === 'withReport' ? 'mt-[90px]' : ''}`}>{title}</h2>
         {subtitle && (
           <p
-            className={`text-sm mb-2 text-gray-400 italic ${
-              hovered ? 'text-xs' : ''
-            }`}
+            className={`text-sm mb-2 text-gray-400 italic ${hovered ? 'text-xs' : ''
+              }`}
           >
             {subtitle}
           </p>
@@ -59,9 +60,8 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
         <h2 className={`text-lg font-bold ${type === 'withoutLink' || type === 'withReport' ? 'mt-[120px]' : ''}`}>{title}</h2>
         {subtitle && (
           <p
-            className={`text-sm mb-2 text-gray-400 italic ${
-              hovered ? 'text-xs' : ''
-            }`}
+            className={`text-sm mb-2 text-gray-400 italic ${hovered ? 'text-xs' : ''
+              }`}
           >
             {subtitle}
           </p>
@@ -76,20 +76,20 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
         </div>
       )}
       {type === 'withReport' && (
-        <div className="flex items-center justify-between mt-2">
+        <div className="flex items-center justify-between">
           <a href="#" className="text-gray-500">
             Reports
           </a>
-          <img src={Rightarrow} alt="Report Icon" className={`w-6 h-6 ${hovered ? 'bg-gray-100 rounded-full p-2 border-2' : ''}`} />
+          <img src={Rightarrow} alt="Report Icon" className={`w-6 h-6 ${hovered ? 'bg-gray-100 rounded-full p-2 border-2 cursor-pointer' : ''}`} />
         </div>
       )}
-      {(type !== 'withReport' && type !== 'withLink')  &&(
-         <div className={`flex items-center justify-between ${hovered ? 'border-2' : ''} p-1 rounded-[10px]`}>
-         <a className="block text-sm text-gray-400">{hovered ? 'Last edited' : ''}</a>
-         <a href="#" className="block border-gray-400 text-gray-700 font-[600]">
-           {hovered ? formattedDate : ''}
-         </a>
-       </div>
+      {(type !== 'withReport' && type !== 'withLink') && (
+        <div className={`flex items-center justify-between ${hovered ? 'border-2' : ''} p-1 rounded-[10px]`}>
+          <a className="block text-sm text-gray-400">{hovered ? 'Last edited' : ''}</a>
+          <a href="#" className="block border-gray-400 text-gray-700 font-[600]">
+            {hovered ? formattedDate : ''}
+          </a>
+        </div>
       )}
     </div>
   );
