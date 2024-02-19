@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 
 /**
- * @typedef {'primary' | 'secondary' | 'tertiary' | 'icon' | 'outline' | 'transparent'} ButtonType
+ * @typeof {'primary' | 'secondary' | 'tertiary' | 'icon' | 'outline' | 'transparent'} ButtonType
  *
- * @typedef {Object} ButtonProps
+ * @typeof {Object} ButtonProps
  * @property {ButtonType} type - The type of the button.
  * @property {string} [label] - The label text for the button.
  * @property {string} [color] - The color of the button.

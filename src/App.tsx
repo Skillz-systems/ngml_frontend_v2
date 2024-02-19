@@ -1,5 +1,6 @@
+import LinechartContent from './Components/ChartComponent/LinechartContent.jsx'
 
-import ChartComponent from './Components/ChartComponent/ChartComponent';
+
 
 function App() {
 
@@ -11,10 +12,7 @@ function App() {
       </div>
 
       <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
-        <ChartComponent
-        dataType={'ordinal'}
-        series={1}
-        />
+        <LinechartContent/>
       </div>
 
     </>
