@@ -1,9 +1,15 @@
-import LinechartContent from './Components/ChartComponent/LinechartContent.jsx'
+
+// import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
 
 import ActivityLogCardContainer from "./Components/Activitylogcard/ActivityLogCardContainer";
 import ActivityLogCardContainerWithButton from "./Components/Activitylogcard/ActivityLogCardContainerWithButtons";
-import Rightarrow from '/assets/png-icons/Rightarrow.png';
+import DocumentCard from "./Components/Documentcard/DocumentCard";
+import Records from '/assets/png-icons/Records.png';
 
+// import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
+// import Records from '/assets/png-icons/Records.png'
+// import Warning from '/assets/png-icons/Warning.png'
+// import Staff from '/assets/png-icons/Staff.png'
 
 function App() {
 
@@ -79,7 +85,7 @@ function App() {
       />
     </div>
     </div> */}
-      <ActivityLogCardContainer
+      {/* <ActivityLogCardContainer
         size="550px"
         heading="Recent Activity"
         icon={Rightarrow}
@@ -91,6 +97,29 @@ function App() {
           heading="Recent Activity"
           icon={Rightarrow}
           headingBgColor="bg-customWhite"
+        />
+      </div> */}
+
+<div className="">
+      <div className="flex justify-center gap-[20px] w-[700px]">
+        <DocumentCard
+          type="withLink"
+          icon="/assets/png-icons/Records.png"
+          title="Dangote Cement"
+          subtitle="October Invoice Advice"
+          linkText="Invoice"
+          linkText2="LINKED"
+        />
+        <DocumentCard
+          type="withoutLink"
+          icon={Records}
+          title="Chicken Republic Ltd"
+          subtitle="October Invoice Advice"
+        />
+        <DocumentCard
+          type="withReport"
+          icon="/assets/png-icons/Customers.png"
+          title="Customers"
         />
       </div>
     </div>
