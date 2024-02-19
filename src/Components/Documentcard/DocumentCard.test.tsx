@@ -38,6 +38,6 @@ describe('DocumentCard component', () => {
     expect(getByText('Test Title')).toBeInTheDocument();
     expect(getByText('Test Subtitle')).toBeInTheDocument();
     expect(getByText('Reports')).toBeInTheDocument();
-    expect(getByAltText('Report Icon')).toBeInTheDocument();
+    expect(getByAltText('callmade Icon')).toBeInTheDocument();
   });
 });
