@@ -100,27 +100,26 @@ function App() {
         />
       </div> */}
 
-<div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Document Cards</h1>
-      <div className="flex flex-wrap justify-center">
+<div className="">
+      <div className="flex justify-center gap-[20px] w-[700px]">
         <DocumentCard
           type="withLink"
           icon="/assets/png-icons/Records.png"
-          title="Document 1"
-          subtitle="Subtitle for Document 1"
+          title="Dangote Cement"
+          subtitle="October Invoice Advice"
           linkText="Invoice"
           linkText2="LINKED"
         />
         <DocumentCard
           type="withoutLink"
           icon={Records}
-          title="Document 2"
-          subtitle="Subtitle for Document 2"
+          title="Chicken Republic Ltd"
+          subtitle="October Invoice Advice"
         />
         <DocumentCard
           type="withReport"
-          icon="/path/to/icon3.png"
-          title="Document 3"
+          icon="/assets/png-icons/Customers.png"
+          title="Customers"
         />
       </div>
     </div>
