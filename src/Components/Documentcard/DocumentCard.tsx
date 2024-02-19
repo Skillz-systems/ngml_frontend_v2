@@ -26,19 +26,6 @@ interface DocumentCardProps {
 const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle, linkText, linkText2 }) => {
   const [hovered, setHovered] = useState(false);
 
-  let hoverTimeout: NodeJS.Timeout;
-
-  const handleMouseEnter = () => {
-    hoverTimeout = setTimeout(() => {
-      setHovered(true);
-    }, 1000); // 1000 milliseconds delay (1 second)
-  };
-
-  const handleMouseLeave = () => {
-    clearTimeout(hoverTimeout);
-    setHovered(false);
-  };
-
   const currentDate = new Date();
   const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
@@ -50,8 +37,8 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
         backgroundImage: type === 'withReport' ? `url(${icons})` : 'none',
         backgroundSize: type === 'withReport' ? 'cover' : 'auto'
       }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <img
         src={icon}
@@ -94,8 +81,8 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
             Reports
           </a>
           <div>
-            <div className='border-2 rounded-full p-2 bg-gray-100 hover:bg-gray-200 cursor-pointer'>
-              <img src={callmade} alt="callmade Icon" className='w-4 h-4' />
+            <div className='border-2 rounded-full p-2 bg-gray-100 hover:bg-gray-200'>
+              <img src={callmade} alt="callmade Icon" className= 'w-4 h-4'  />
             </div>
           </div>
         </div>
