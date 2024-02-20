@@ -3,6 +3,7 @@ import AgreementTemplate from './Components/AgreementTemplateComponent/Agreement
 import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 
 import FileUploadInput from "./Components/Fileuploadinput/FileUploadInput";
+import { FileType } from './Components/Fileuploadinput/FileTypes';
 
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
@@ -123,10 +124,10 @@ function App() {
         </div>
       </div> */}
       <div className="mb-8">
-        <FileUploadInput maxSizeMB={5} required title="Passport Photograph" fileType={['image/jpeg', 'image/png', 'application/pdf']} />
+        <FileUploadInput maxSizeMB={5} required title="Passport Photograph" fileType={[FileType.JPEG, FileType.PNG]} />
       </div>
       <div className="mb-8">
-        <FileUploadInput maxSizeMB={5} required title="NYSC Certificate" fileType={['image/jpeg', 'image/png', 'application/pdf, word']}/>
+        <FileUploadInput maxSizeMB={5} required title="NYSC Certificate" fileType={[FileType.PDF, FileType.WORD]}/>
       </div>
     </>
   );

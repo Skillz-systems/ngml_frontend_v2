@@ -4,6 +4,7 @@ import Picture from '/assets/png-icons/Picture.png';
 import Upload from '/assets/png-icons/Upload.png';
 import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
+import { FileType } from './FileTypes';
 
 /**
  * FileUploadInput component for uploading files.
@@ -19,7 +20,7 @@ interface FileUploadInputProps {
     maxSizeMB: number;
     required?: boolean;
     title?: string;
-    fileType?: string[];
+    fileType?: FileType[]
 }
 
 const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, required = false, fileType = [] }) => {
@@ -39,7 +40,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, req
             setFile(null);
             return;
         }
-        if (fileType.length && !fileType.includes(selectedFile.type)) {
+        if (fileType.length && !fileType.includes(selectedFile.type as FileType)) {
             setError(`File type not allowed: ${selectedFile.type}`);
             setFile(null);
             return;

@@ -1,13 +1,15 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import FileUploadInput from './FileUploadInput';
+import { FileType } from './FileTypes';
 
 describe('FileUploadInput component', () => {
     const mockProps = {
         maxSizeMB: 5,
         required: false,
         title: 'Upload File',
-        fileType: ['image/jpeg', 'image/png'],
+        fileType: [FileType.JPEG, FileType.PNG], // Use enum values here
     };
+
 
     test('renders with correct props', () => {
         const { getByText, getByLabelText } = render(<FileUploadInput {...mockProps} />);
@@ -26,7 +28,7 @@ describe('FileUploadInput component', () => {
         Object.defineProperty(inputElement, 'files', { value: [file] });
         fireEvent.change(inputElement);
 
-        const errorMessage = getByText(/File type not allowed:/); // Using a regex for flexible matching
+        const errorMessage = getByText(/File type not allowed:/);
         expect(errorMessage).toBeInTheDocument();
     });
 
