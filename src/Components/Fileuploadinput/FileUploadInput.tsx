@@ -120,7 +120,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, req
                         </div>
                     </label>
                     {file && (
-                        <button type="button" onClick={handleCancel} className="absolute right-[-1px] mr-10">
+                        <button type="button" onClick={handleCancel} className="absolute right-[-1px] mr-12">
                             <img src={Cancelicon} alt='cancel icon' />
                         </button>
                     )}
