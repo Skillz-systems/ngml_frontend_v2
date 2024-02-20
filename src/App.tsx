@@ -1,8 +1,8 @@
 
 // import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
 
-import DocumentCard from "./Components/Documentcard/DocumentCard";
-import Records from '/assets/png-icons/Records.png';
+import FileUploadInput from "./Components/Fileuploadinput/FileUploadInput";
+import FileUploadInputNysc from "./Components/Fileuploadinput/FileUploadInputNysc";
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
 // import Records from '/assets/png-icons/Records.png'
@@ -98,7 +98,7 @@ function App() {
         />
       </div> */}
 
-      <div className="">
+      {/* <div className="">
         <div className="flex justify-center gap-[20px] w-[700px]">
           <DocumentCard
             type="withLink"
@@ -120,6 +120,12 @@ function App() {
             title="Customers"
           />
         </div>
+      </div> */}
+      <div className="mb-8">
+        <FileUploadInput maxSizeMB={5} required title="Passport Photograph" />
+      </div>
+      <div className="mb-8">
+        <FileUploadInput maxSizeMB={5} required title="NYSC Certificate" />
       </div>
     </>
   );
