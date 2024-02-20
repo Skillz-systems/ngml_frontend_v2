@@ -123,10 +123,10 @@ function App() {
         </div>
       </div> */}
       <div className="mb-8">
-        <FileUploadInput maxSizeMB={5} required title="Passport Photograph" />
+        <FileUploadInput maxSizeMB={5} required title="Passport Photograph" fileType={['image/jpeg', 'image/png', 'application/pdf']} />
       </div>
       <div className="mb-8">
-        <FileUploadInput maxSizeMB={5} required title="NYSC Certificate" />
+        <FileUploadInput maxSizeMB={5} required title="NYSC Certificate" fileType={['image/jpeg', 'image/png', 'application/pdf, word']}/>
       </div>
     </>
   );

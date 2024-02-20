@@ -2,44 +2,102 @@ import React, { useState } from 'react';
 import Cancelicon from '/assets/png-icons/Cancellation.png';
 import Picture from '/assets/png-icons/Picture.png';
 import Upload from '/assets/png-icons/Upload.png';
+import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
+
+/**
+ * FileUploadInput component for uploading files.
+ * @param {Object} props - Component props.
+ * @param {number} props.maxSizeMB - Maximum allowed file size in megabytes.
+ * @param {boolean} [props.required=false] - Whether the file upload is required.
+ * @param {string} [props.title] - Title for the file upload component.
+ * @param {string[]} [props.fileType] - Allowed file types.
+ * @returns {JSX.Element} FileUploadInput component.
+ */
 
 interface FileUploadInputProps {
     maxSizeMB: number;
     required?: boolean;
     title?: string;
+    fileType?: string[];
 }
 
-const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, required = false }) => {
+const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, required = false, fileType = [] }) => {
+    
     const [file, setFile] = useState<File | null>(null);
     const [error, setError] = useState<string>('');
+    const [dragging, setDragging] = useState<boolean>(false);
+    const [uploaded, setUploaded] = useState<boolean>(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = event.target.files && event.target.files[0];
-        if (selectedFile) {
-            if (selectedFile.size > maxSizeMB * 1024 * 1024) {
-                setError(`File size exceeds ${maxSizeMB}MB.`);
-                setFile(null);
-            } else {
-                setError('');
-                setFile(selectedFile);
-            }
+        const selectedFile = event.target.files?.[0];
+        if (!selectedFile) {
+            return;
         }
+        if (selectedFile.size > maxSizeMB * 1024 * 1024) {
+            setError(`File size exceeds ${maxSizeMB}MB.`);
+            setFile(null);
+            return;
+        }
+        if (fileType.length && !fileType.includes(selectedFile.type)) {
+            setError(`File type not allowed: ${selectedFile.type}`);
+            setFile(null);
+            return;
+        }
+        setError('');
+        setFile(selectedFile);
+        setUploaded(true);
     };
 
     const handleCancel = () => {
         setFile(null);
         setError('');
+        setUploaded(false);
     };
 
-    // Generate a unique ID for the input element
-    const inputId = `file-upload-${Math.random().toString(36).substr(2, 9)}`;
+    const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        setDragging(true);
+    };
+
+    const handleDragLeave = () => {
+        setDragging(false);
+    };
+
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        setDragging(false);
+        const selectedFile = event.dataTransfer.files?.[0];
+        if (selectedFile) {
+            handleChange({
+                target: {
+                    files: [selectedFile],
+                },
+            } as unknown as React.ChangeEvent<HTMLInputElement>);
+        }
+    };
+
+    const inputId = `file-upload-${uuidv4()}`;
 
     return (
-        <div className='border-4 border-dotted border-gray-200 rounded-xl p-4'>
+        <div
+            className={classNames('border-[3px] border-slate-400 border-dashed rounded-xl p-4', {
+                'dragging-over': dragging,
+                'border-green-800': uploaded
+            })}
+            onDragOver={handleDragEnter}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+        >
             <h3>{title}</h3>
-            <div className={file ? 'self-stretch p-4 bg-lime-50 rounded-xl border-4 border-dotted border-gray-200 justify-start items-center gap-4' : 'self-stretch p-4 bg-gray-100 rounded-xl border-4 border-dotted border-gray-200 justify-start items-center gap-4'}>
-                <div className={file ? 'items-center gap-2 flex' : 'justify-center items-center gap-2 flex'}>
-                    <div className={file ? `w-8 h-8 bg-lime-200 rounded-lg justify-center items-center gap-2.5 flex` : ''}>
+            <div className={classNames('self-stretch p-4 rounded-xl border-2 border-slate-400 border-dashed justify-start items-center gap-4', {
+                'bg-lime-50': file,
+                'bg-gray-100': !file,
+                'border-gray-500 border-[5px]': dragging,
+            })}>
+                <div className={classNames('items-center gap-2 flex', { 'justify-center': !file })}>
+                    <div className={classNames('w-8 h-8 rounded-lg justify-center items-center gap-2.5 flex', { 'bg-lime-200': file })}>
                         <div className="w-6 h-6 justify-center items-center flex">
                             <div className="w-6 h-6 relative flex-col justify-start items-start flex">
                                 {file && (
@@ -62,7 +120,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, req
                         </div>
                     </label>
                     {file && (
-                        <button onClick={handleCancel} className="absolute right-[-1px] mr-10">
+                        <button type="button" onClick={handleCancel} className="absolute right-[-1px] mr-10">
                             <img src={Cancelicon} alt='cancel icon' />
                         </button>
                     )}
@@ -72,6 +130,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, req
                         className="hidden"
                         onChange={handleChange}
                         required={required}
+                        accept={fileType.length ? fileType.join(',') : undefined}
                     />
                 </div>
                 {error && <span className="text-red-500 text-xs">{error}</span>}
