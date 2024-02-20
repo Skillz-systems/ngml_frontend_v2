@@ -1,6 +1,7 @@
 // import LinechartContent from './Components/ChartComponent/LinechartContent.jsx'
 
-import InfoCard from './Components/InfoCardComponent/InfoCardComponent';
+import AgreementTemplate from './Components/AgreementTemplateComponent/AgreementTemplate';
+import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 
 
 
@@ -16,7 +17,27 @@ function App() {
       <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
         {/* <LinechartContent/> */}
 
-        <InfoCard title="Total Views" number={1500} />
+        <AgreementTemplate
+          icon={<StickyNote2OutlinedIcon />}
+          heading="GSPA"
+          title="Agreement"
+          modalTitle="Agreement Template"
+          modalContent={<p>
+            This is a dynamic content for the modal. 
+            This is a dynamic content for the modal. 
+            This is a dynamic content for the modal. 
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+            </p>}
+        />
+
       </div>
 
     </>
