@@ -19,7 +19,7 @@ interface ActivityLogCardProps {
 }
 
 const ActivityLogCard: React.FC<ActivityLogCardProps> = ({ title, text, dateTime, button }) => {
-  const formattedDateTime = format(dateTime, "dd MMM; hh:mma").toLowerCase();
+  const formattedDateTime = format(dateTime, 'dd MMM; hh:mma').toLowerCase();
 
   return (
     <div className={`bg-white shadow-sm border-1 rounded-[20px] ${button ? 'p-12 mb-4 relative' : 'p-2 mb-4 relative'} `}>
