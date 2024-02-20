@@ -1,8 +1,9 @@
 
-// import SearchComponent from './Components/SearchBarModalComponent/SearchResultComponent';
+import AgreementTemplate from './Components/AgreementTemplateComponent/AgreementTemplate';
+import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 
 import FileUploadInput from "./Components/Fileuploadinput/FileUploadInput";
-import FileUploadInputNysc from "./Components/Fileuploadinput/FileUploadInputNysc";
+
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
 // import Records from '/assets/png-icons/Records.png'
