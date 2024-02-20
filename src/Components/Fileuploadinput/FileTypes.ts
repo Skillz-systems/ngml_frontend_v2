@@ -4,6 +4,7 @@ export enum FileType {
     PDF = 'application/pdf',
     EXCEL = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     WEBP = 'image/webp',
+    WORD = 'application/msword',
     TXT = 'text/plain',
     DOC = 'application/msword',
     DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
