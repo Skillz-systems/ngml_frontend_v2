@@ -1,8 +1,6 @@
-// import LinechartContent from './Components/ChartComponent/LinechartContent.jsx'
 
 import AgreementTemplate from './Components/AgreementTemplateComponent/AgreementTemplate';
 import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
-
 
 
 function App() {
@@ -14,8 +12,7 @@ function App() {
         <p className="">Vite and React</p>
       </div>
 
-      <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
-        {/* <LinechartContent/> */}
+      <div className="">
 
         <AgreementTemplate
           icon={<StickyNote2OutlinedIcon />}
@@ -23,9 +20,6 @@ function App() {
           title="Agreement"
           modalTitle="Agreement Template"
           modalContent={<p>
-            This is a dynamic content for the modal. 
-            This is a dynamic content for the modal. 
-            This is a dynamic content for the modal. 
             This is a dynamic content for the modal.
             This is a dynamic content for the modal.
             This is a dynamic content for the modal.
@@ -35,11 +29,13 @@ function App() {
             This is a dynamic content for the modal.
             This is a dynamic content for the modal.
             This is a dynamic content for the modal.
-            </p>}
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+            This is a dynamic content for the modal.
+          </p>}
         />
 
       </div>
-
     </>
   );
 }
