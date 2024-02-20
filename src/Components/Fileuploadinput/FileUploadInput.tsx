@@ -81,7 +81,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, req
 
     return (
         <div
-            className={classNames('border-[3px] border-slate-400 border-dashed rounded-xl p-4', {
+            className={classNames('border-[2px] border-slate-400 border-dashed rounded-2xl p-4 px-8', {
                 'dragging-over': dragging,
                 'border-green-800': uploaded
             })}
@@ -91,7 +91,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, req
             onDrop={handleDrop}
         >
             <h3>{title}</h3>
-            <div className={classNames('self-stretch p-4 rounded-xl border-2 border-slate-400 border-dashed justify-start items-center gap-4', {
+            <div className={classNames('self-stretch p-4 px-8 rounded-xl border-2 border-slate-400 border-dashed justify-start items-center gap-4', {
                 'bg-lime-50': file,
                 'bg-gray-100': !file,
                 'border-gray-500 border-[5px]': dragging,
