@@ -1,10 +1,10 @@
+import classNames from 'classnames';
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { FileType } from './FileTypes';
 import Cancelicon from '/assets/png-icons/Cancellation.png';
 import Picture from '/assets/png-icons/Picture.png';
 import Upload from '/assets/png-icons/Upload.png';
-import { v4 as uuidv4 } from 'uuid';
-import classNames from 'classnames';
-import { FileType } from './FileTypes';
 
 /**
  * FileUploadInput component for uploading files.
@@ -24,7 +24,7 @@ interface FileUploadInputProps {
 }
 
 const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, required = false, fileType = [] }) => {
-    
+
     const [file, setFile] = useState<File | null>(null);
     const [error, setError] = useState<string>('');
     const [dragging, setDragging] = useState<boolean>(false);

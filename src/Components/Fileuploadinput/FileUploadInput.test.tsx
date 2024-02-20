@@ -1,13 +1,13 @@
 import { fireEvent, render } from '@testing-library/react';
-import FileUploadInput from './FileUploadInput';
 import { FileType } from './FileTypes';
+import FileUploadInput from './FileUploadInput';
 
 describe('FileUploadInput component', () => {
     const mockProps = {
         maxSizeMB: 5,
         required: false,
         title: 'Upload File',
-        fileType: [FileType.JPEG, FileType.PNG], // Use enum values here
+        fileType: [FileType.JPEG, FileType.PNG],
     };
 
 
