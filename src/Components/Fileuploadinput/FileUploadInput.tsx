@@ -111,7 +111,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, req
                     {!file && <img src={Upload} className="w-6 h-6" alt="Upload Icon" />}
                     <label htmlFor={inputId} className="cursor-pointer">
                         <div className="flex-col justify-center items-start gap-1 inline-flex">
-                            <div className="text-zinc-950 text-md font-bold font-['Mulish'] leading-[14px]">
+                            <div className="text-zinc-950 text-md font-bold leading-[14px]">
                                 {file ? file.name : <h3 className='text-gray-400 font-semi-bold'>Drag and drop or <span className='text-green-500'>browse</span></h3>}
                             </div>
                             <div className="text-slate-400 text-xs font-normal font-['Mulish'] leading-3">
