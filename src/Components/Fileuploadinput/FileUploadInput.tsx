@@ -20,10 +20,11 @@ interface FileUploadInputProps {
     maxSizeMB: number;
     required?: boolean;
     title?: string;
+    fileDescription?: string
     fileType?: FileType[]
 }
 
-const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, required = false, fileType = [] }) => {
+const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, fileDescription, required = false, fileType = [] }) => {
 
     const [file, setFile] = useState<File | null>(null);
     const [error, setError] = useState<string>('');
@@ -115,13 +116,13 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, req
                             <div className="text-zinc-950 text-md font-bold leading-[14px]">
                                 {file ? file.name : <h3 className='text-gray-400 font-semi-bold'>Drag and drop or <span className='text-green-500'>browse</span></h3>}
                             </div>
-                            <div className="text-slate-400 text-xs font-normal font-['Mulish'] leading-3">
+                            <div className="text-slate-400 text-xs font-normal leading-3">
                                 {file ? `${(file.size / 1024).toFixed(2)} KB` : ''}
                             </div>
                         </div>
                     </label>
                     {file && (
-                        <button type="button" onClick={handleCancel} className="absolute right-[-1px] mr-12">
+                        <button type="button" onClick={handleCancel} className="absolute right-[-1px] mr-14">
                             <img src={Cancelicon} alt='cancel icon' />
                         </button>
                     )}
@@ -134,9 +135,9 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, req
                         accept={fileType.length ? fileType.join(',') : undefined}
                     />
                 </div>
-                {error && <span className="text-red-500 text-xs">{error}</span>}
             </div>
-            <p className='text-sm text-gray-400'>Scan the copy of your original document (pdf, png, jpg)</p>
+            {error && <span className="text-red-500 text-sm">{error}</span>}
+            <p className='text-sm text-gray-400'>{fileDescription}</p>
             <div className='text-sm text-gray-400'>{`Maximum file size: ${maxSizeMB}MB`}</div>
         </div>
     );
