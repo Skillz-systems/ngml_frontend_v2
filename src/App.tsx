@@ -1,9 +1,6 @@
+import React, { useState } from 'react'
 
-import AgreementTemplate from './Components/AgreementTemplateComponent/AgreementTemplate';
-import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
-
-import FileUploadInput from "./Components/Fileuploadinput/FileUploadInput";
-import { FileType } from './Components/Fileuploadinput/FileTypes';
+import SearchInput from './Components/Searchinput/SearchInput';
 
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
@@ -13,6 +10,12 @@ import { FileType } from './Components/Fileuploadinput/FileTypes';
 
 function App() {
 
+  const [searchResults, setSearchResults] = useState<string[]>([]);
+
+  const handleSearch = (query: string) => {
+      // Perform search operation here, for example, update searchResults state
+      console.log("Performing search for:", query);
+  };
 
   return (
     <>
@@ -123,7 +126,7 @@ function App() {
           />
         </div>
       </div> */}
-      <div className="mb-8">
+      {/* <div className="mb-8">
         <FileUploadInput 
         maxSizeMB={1} 
         required title="Passport Photograph" 
@@ -138,7 +141,18 @@ function App() {
         fileType={[FileType.PDF, FileType.DOCX]}
         fileDescription='Scan the copy of your original document (pdf, png, jpg, jpeng, word)'
         />
-      </div>
+      </div> */}
+       <SearchInput
+                onSearch={handleSearch}
+                placeholder="Search here"
+                className="mt-4"
+            />
+            {/* Display search results */}
+            <ul>
+                {searchResults.map((result, index) => (
+                    <li key={index}>{result}</li>
+                ))}
+            </ul>
     </>
   );
 }
