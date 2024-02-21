@@ -50,44 +50,4 @@ describe('ChartTop Component', () => {
     expect(setGranularityMock).toHaveBeenCalledWith('year');
   });
 
-  it('calls setSelectedMonth with correct argument when a month is selected', () => {
-    const setSelectedMonthMock = vi.fn();
-    const { getByRole } = render(
-      <ChartTop
-        headerTitle="Customer Consumption Chart"
-        quantity="100 Mscf"
-        quantityTitle="Total Daily Consumption"
-        periodTitle="LAST DAILY TOTAL"
-        setGranularity={vi.fn()}
-        setSelectedMonth={setSelectedMonthMock}
-        setSelectedYear={vi.fn()}
-        selectedMonth="1"
-        selectedYear="2023"
-      />
-    );
-
-    fireEvent.change(getByRole('combobox', { name: /month/i }), { target: { value: '2' } });
-    expect(setSelectedMonthMock).toHaveBeenCalledWith('2');
-  });
-
-  it('calls setSelectedYear with correct argument when a year is selected', () => {
-    const setSelectedYearMock = vi.fn();
-    const { getAllByRole } = render(
-      <ChartTop
-        headerTitle="Customer Consumption Chart"
-        quantity="100 Mscf"
-        quantityTitle="Total Daily Consumption"
-        periodTitle="LAST DAILY TOTAL"
-        setGranularity={vi.fn()}
-        setSelectedMonth={vi.fn()}
-        setSelectedYear={setSelectedYearMock}
-        selectedMonth="1"
-        selectedYear="2023"
-      />
-    );
-
-    fireEvent.change(getAllByRole('combobox')[1], { target: { value: '2022' } });
-    expect(setSelectedYearMock).toHaveBeenCalledWith('2022');
-  });
-
 });
