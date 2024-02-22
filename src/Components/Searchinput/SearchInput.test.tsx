@@ -1,44 +1,53 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import SearchInput from './SearchInput';
 
-describe('SearchInput', () => {
-    const mockOnSearch = vi.fn();
-
-    afterEach(() => {
-        vi.clearAllMocks();
-    });
-
+describe('SearchInput Component', () => {
     it('renders without crashing', () => {
-        render(<SearchInput onSearch={mockOnSearch} />);
+        render(<SearchInput onSearch={() => { }} />);
     });
 
-    it('calls onSearch prop when search button is clicked', () => {
-        const { getByAltText } = render(<SearchInput onSearch={mockOnSearch} />);
-        fireEvent.click(getByAltText('Search Logo'));
-        expect(mockOnSearch).toHaveBeenCalledTimes(1);
+    it('starts with empty input and unfocused state', () => {
+        render(<SearchInput onSearch={() => { }} />);
+        const inputElement = screen.getByPlaceholderText('Search here') as HTMLInputElement;
+        expect(inputElement.value).toBe('');
+        expect(inputElement).not.toHaveFocus();
     });
 
-    it('calls onSearch prop when enter key is pressed', () => {
-        const { getByRole } = render(<SearchInput onSearch={mockOnSearch} />);
-        const input = getByRole('textbox');
-        fireEvent.change(input, { target: { value: 'test' } });
-        fireEvent.keyPress(input, { key: 'Enter', code: 13, charCode: 13 });
-        expect(mockOnSearch).toHaveBeenCalledTimes(1);
+    it('displays placeholder text correctly', () => {
+        render(<SearchInput onSearch={() => { }} />);
+        const inputElement = screen.getByPlaceholderText('Search here');
+        expect(inputElement).toBeInTheDocument();
     });
 
-    it('displays placeholder text when query is empty', () => {
-        const placeholderText = 'Search something...';
-        const { getByText } = render(<SearchInput onSearch={mockOnSearch} placeholder={placeholderText} />);
-        expect(getByText(placeholderText)).toBeInTheDocument();
+    it('updates query state when typing', () => {
+        render(<SearchInput onSearch={() => { }} />);
+        const inputElement = screen.getByPlaceholderText('Search here');
+        fireEvent.change(inputElement, { target: { value: 'test' } });
+        expect((inputElement as HTMLInputElement).value).toBe('test');
     });
 
-    it('displays no search results when no results match the query', () => {
-        const { getByRole, queryByText } = render(<SearchInput onSearch={mockOnSearch} />);
-        const input = getByRole('textbox');
-        fireEvent.change(input, { target: { value: 'Nonexistent' } });
-        fireEvent.keyPress(input, { key: 'Enter', code: 13, charCode: 13 });
-        expect(queryByText('Test Result 1')).toBeNull();
-        expect(queryByText('Test Result 2')).toBeNull();
+    it('displays search icon when input is not focused', () => {
+        render(<SearchInput onSearch={() => { }} />);
+        const searchIcon = screen.getByAltText('Search Logo');
+        expect(searchIcon).toBeInTheDocument();
     });
 
+    it('calls onSearch function when search icon is clicked', () => {
+        const onSearchMock = vi.fn();
+        render(<SearchInput onSearch={onSearchMock} />);
+        const inputElement = screen.getByPlaceholderText('Search here');
+        const searchIcon = screen.getByAltText('Search Logo');
+        fireEvent.change(inputElement, { target: { value: 'test' } });
+        fireEvent.click(searchIcon);
+        expect(onSearchMock).toHaveBeenCalledWith('test');
+    });
+
+    it('calls onSearch function when Enter key is pressed', () => {
+        const onSearchMock = vi.fn();
+        render(<SearchInput onSearch={onSearchMock} />);
+        const inputElement = screen.getByPlaceholderText('Search here');
+        fireEvent.change(inputElement, { target: { value: 'test' } });
+        fireEvent.keyPress(inputElement, { key: 'Enter', code: 13, charCode: 13 });
+        expect(onSearchMock).toHaveBeenCalledWith('test');
+    });
 });

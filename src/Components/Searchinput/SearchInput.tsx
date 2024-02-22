@@ -50,17 +50,19 @@ const SearchInput: React.FC<SearchInputProps> = ({ className, onSearch, placehol
     return (
         <div className={`relative flex items-center ${className}`}>
             <input
-                type="text"
+                type="search"
                 value={query}
+                placeholder='Search here'
                 onChange={handleChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onKeyPress={handleKeyPress}
-                className="h-8 w-full pl-6 pr-10 rounded-full border border-[2px] border-gray-300 focus:outline-none focus:border-blue-500 relative"
+                className={isFocused ? "h-8 w-full pl-6 pr-10 rounded-full placeholder:absolute placeholder:right-4 placeholder:text-xs border-[2px] border-gray-300 focus:outline-none focus:border-lime-300 relative" :
+                 "h-8 w-full pl-6 pr-10 rounded-full placeholder:absolute placeholder:right-10 placeholder:text-xs border-[2px] border-gray-300 focus:outline-none focus:border-lime-300 relative"}
             />
-            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={handleSearch}>
+            {isFocused ? '' :<div className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={handleSearch}>
                 <img src={SearchIcon} alt="Search Logo" className='w-4' />
-            </div>
+            </div>}
             {isFocused && query && (
                 <div className="absolute top-full left-0 w-full bg-white shadow p-2 rounded-b-[20px]">
                     {filteredResults.length > 0 ? (
@@ -70,11 +72,6 @@ const SearchInput: React.FC<SearchInputProps> = ({ className, onSearch, placehol
                     ) : (
                         <p>No results found</p>
                     )}
-                </div>
-            )}
-            {query === '' && (
-                <div className="absolute right-0 top-0 h-full flex items-center pr-10 text-gray-500 italic text-xs">
-                    {placeholder}
                 </div>
             )}
         </div>
