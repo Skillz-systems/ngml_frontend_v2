@@ -10,7 +10,6 @@ const meta: Meta = {
     argTypes: {
         className: { control: 'text' },
         onSearch: { action: 'searched' },
-        placeholder: { control: 'text' },
     },
 
 } satisfies Meta<typeof SearchInput>;

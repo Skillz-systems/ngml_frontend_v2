@@ -14,10 +14,9 @@ import SearchIcon from '/assets/png-icons/Search.png';
 interface SearchInputProps {
     className?: string;
     onSearch: (query: string) => void;
-    placeholder?: string;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ className, onSearch, placeholder }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ className, onSearch }) => {
     const [query, setQuery] = useState<string>('');
     const [isFocused, setIsFocused] = useState<boolean>(false);
 

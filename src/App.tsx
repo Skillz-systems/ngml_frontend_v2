@@ -144,7 +144,6 @@ function App() {
       </div> */}
        <SearchInput
                 onSearch={handleSearch}
-                placeholder="Search here"
                 className="mt-4"
             />
             {/* Display search results */}
