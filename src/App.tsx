@@ -146,7 +146,6 @@ function App() {
                 onSearch={handleSearch}
                 className="mt-4"
             />
-            {/* Display search results */}
             <ul>
                 {searchResults.map((result, index) => (
                     <li key={index}>{result}</li>
