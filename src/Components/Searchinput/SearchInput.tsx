@@ -48,7 +48,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ className, onSearch }) => {
 
     return (
         <div className={`relative flex items-center ${className}`}>
-            <input
+          <input
                 type="search"
                 value={query}
                 placeholder='Search here'
@@ -56,8 +56,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ className, onSearch }) => {
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onKeyPress={handleKeyPress}
-                className={isFocused ? "h-8 w-full pl-6 pr-10 rounded-full placeholder:absolute placeholder:right-4 placeholder:text-xs border-[2px] border-gray-300 focus:outline-none focus:border-lime-300 relative" :
-                 "h-8 w-full pl-6 pr-10 rounded-full placeholder:absolute placeholder:right-10 placeholder:text-xs border-[2px] border-gray-300 focus:outline-none focus:border-lime-300 relative"}
+                className='h-8 w-full pl-6 pr-10 rounded-full placeholder:absolute placeholder:right-8 placeholder:text-xs border-[2px] border-gray-300 focus:outline-none focus:border-lime-300 relative active:border-green-500 focus-within:border-green-500 transition-all duration-300 ease-in outline-none'
             />
             {isFocused ? '' :<div className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={handleSearch}>
                 <img src={SearchIcon} alt="Search Logo" className='w-4' />
