@@ -12,6 +12,7 @@ interface SelectedDateModalprops {
   companyAddress: string;
   statusHeading: string;
   handleClose: () => void;
+  statusStyle: React.CSSProperties;
 }
 
 const SelectedDateModal: React.FC<SelectedDateModalprops> = ({
@@ -24,9 +25,10 @@ const SelectedDateModal: React.FC<SelectedDateModalprops> = ({
   companyAddress,
   statusHeading,
   handleClose,
+  statusStyle,
 }) => {
 
-  
+
 
 
   return (
@@ -58,26 +60,27 @@ const SelectedDateModal: React.FC<SelectedDateModalprops> = ({
             <div className='text-[#828DA9] text-[12px] font-[700]'>Dates Picked On</div>
             <div className='text-[#828DA9] text-[12px] font-[400]'>{dateTime}</div>
           </div>
-          <div className='border border-[#E2E4EB] w-[101px] h-[24px] bg-[#EAEEF2] rounded-[24px] flex items-center justify-center text-[#050505] text-[12px]'>
+          <div style={statusStyle}
+          className='border border-[#E2E4EB] w-[115px] h-[24px] bg-[#EAEEF2] rounded-[24px] flex items-center justify-center text-[#050505] text-[12px]'>
             {statusHeading}
           </div>
         </div>
       </div>
       <div className='h-[94px] bg-[#F6F8FA] p-[10px]'>
         <div className='flex justify-between w-[100%]'>
-          <div className='text-[#828DA9] text-[14px] font-[500] w-[50%]'>
-            <div className='flex justify-between'>
+          <div className='text-[#828DA9] text-[14px] font-[500] w-[50%] flex justify-between'>
+            <div>
               <div>Company Name</div>
-              <div>{companyName}</div>
-            </div>
-            <div className='flex justify-between'>
               <div>Company Email</div>
-              <div>{companyEmail}</div>
-            </div>
-            <div className='flex justify-between'>
               <div>Company Number</div>
+
+            </div>
+            <div>
+              <div>{companyName}</div>
+              <div>{companyEmail}</div>
               <div>{companyNumber}</div>
             </div>
+
           </div>
           <div className='border border-[#CCD0DC] cursor-pointer h-[32px] w-[32px] rounded-[100%] flex items-center justify-center'>
             <ContentPasteOutlined style={{ height: '14px', width: '14px', color: '#828DA9' }} />

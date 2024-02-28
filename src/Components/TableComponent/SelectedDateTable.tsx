@@ -3,7 +3,7 @@ import { IconButton, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { fundersData } from './Data';
-import DateRequestModalal from './SelectedDateModal';
+import SelectedDateModal from './SelectedDateModal';
 
 
 interface SelectedDateTableProps {
@@ -14,6 +14,10 @@ interface SelectedDateTableProps {
     status: string;
     action: string;
     deadline?: string;
+    companyEmail?: string;
+    companyNumber?: string;
+    companyAddress?: string;
+
 }
 
 const rows = fundersData
@@ -25,7 +29,7 @@ const SelectedDateTable = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [filteredRows, setFilteredRows] = useState<SelectedDateTableProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [, setSelectedRow] = useState<SelectedDateTableProps | null>(null);
+    const [selectedRow, setSelectedRow] = useState<SelectedDateTableProps | null>(null);
 
     const handleOpen = (row: SelectedDateTableProps) => {
         setSelectedRow(row);
@@ -53,6 +57,18 @@ const SelectedDateTable = () => {
     const handleFilterClick = () => {
         console.log('Filter icon clicked');
     };
+
+    const getStatusStyle = (status: string) => {
+        switch (status) {
+            case 'Date Approved':
+                return { backgroundColor: '#D2F69E', color: '#005828' };
+            case 'Request Approval':
+                return { backgroundColor: '#FFF3D5', color: '#475467' }; // For inline styles
+            default:
+                return {};
+        }
+    };
+
 
 
     const columns: GridColDef[] = [
@@ -158,18 +174,21 @@ const SelectedDateTable = () => {
                 aria-describedby="modal-description"
             >
                 <div >
-                    <DateRequestModalal
-                        handleClose={handleClose}
-                        dateTime={'09th, Nov, 2023; 09:23:44Am'}
-                        status={'Awaiting Customers Choice'}
-                        companyName={'Dangote Cement LTD.'}
-                        companyEmail={'info@dangotecement.org'}
-                        companyNumber={'0901 000 0001'}
-                        availableDates={['2024-03-01', '2024-03-02', '2024-03-03']}
-                        companyAddress={'1 Alfred Rewane Rd, Ikoyi 106104, Lagos'}
-                        statusHeading={'Dates Selected'}
-                    />
+                    {selectedRow && (
+                        <SelectedDateModal
+                            handleClose={handleClose}
+                            dateTime={'09th, Nov, 2023; 09:23:44Am'}
+                            status={selectedRow.status || 'Default Status'}
+                            companyName={selectedRow.companyname || 'Provide Company Name'}
+                            companyEmail={selectedRow.companyEmail || 'Provide an email address'}
+                            companyNumber={selectedRow.companyNumber || 'Provide a number'}
+                            availableDates={selectedRow.selectedDates || ['No Dates Available']}
+                            companyAddress={selectedRow.companyAddress || 'Provide an Address'}
+                            statusHeading={selectedRow.status}
+                            statusStyle={getStatusStyle(selectedRow.status)}
 
+                        />
+                    )}
                 </div>
             </Modal>
             <div className='flex items-center justify-between border border-[#CCD0DC] h-[60px] p-[20px] '>
@@ -188,13 +207,34 @@ const SelectedDateTable = () => {
                             style: {
                                 borderRadius: '32px',
                                 width: '200px',
-                                height: '35px'
+                                height: '35px',
 
                             }
                         }}
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                '& fieldset': {
+                                    borderColor: '#CCD0DC',
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: '#00AF50',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#00AF50',
+                                },
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: 'gray',
+                                fontSize: '10px',
+                                fontStyle: 'italic',
+                                '&.Mui-focused': {
+                                    color: 'green',
+                                },
+                            },
+                        }}
                     />
-                    <div className='flex items-center rounded-[32px]  h-[32px] w-[98px] justify-center border border-[#828DA9] flex-row'>
-                        <div className='font-[12px] font-[400] text-[#828DA9]'>Filter</div>
+                    <div className='flex items-center rounded-[32px]  h-[32px] w-[98px] justify-center border border-[#CCD0DC] flex-row'>
+                        <div className='text-[10px] font-[400] text-[#828DA9] italic'>Filter</div>
                         <IconButton onClick={handleFilterClick}  >
                             <FilterList />
                         </IconButton>
@@ -216,6 +256,9 @@ const SelectedDateTable = () => {
                     }}
                     pageSizeOptions={[5, 10]}
                     sx={{
+                        '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
+                            outline: 'solid #00AF50 1px',
+                        },
                         '& .MuiDataGrid-columnHeaders': {
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
@@ -223,6 +266,7 @@ const SelectedDateTable = () => {
                                 fontSize: '12px'
                             },
                         },
+
                     }}
                 />
             </div>

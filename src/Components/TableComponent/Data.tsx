@@ -3,7 +3,10 @@ export const fundersData = [
         id: 1,
         sn: '01',
         companyname: 'Dangote Cement LTD',
+        companyEmail: 'default@email.com',
         companyType: 'Direct Customer',
+        companyNumber: '000-000-0000',
+        companyAddress: 'Default Address',
         selectedDates: [
             '18/June/2023',
             '19/June/2023', 
@@ -15,12 +18,12 @@ export const fundersData = [
     {
         sn: '02',
         id: 2,
-        companyname: 'Dangote Cement LTD',
+        companyname: 'BUA Cement',
         companyType: 'Direct Customer',
         selectedDates: [
-            '18/June/2023',
-            '19/June/2023', 
-            '20/June/2023',
+            '10/July/2023',
+            '14/Nov/2023', 
+            '23/June/2023',
         ],
         status: 'Request Approval',
         action: '',
@@ -28,12 +31,12 @@ export const fundersData = [
     {
         sn: '03',
         id: 3,
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Fidelity Bank Nigeria',
         companyType: 'Direct Customer',
         selectedDates: [
-            '18/June/2023',
-            '19/June/2023', 
-            '20/June/2023',
+            '18/May/2023',
+            '23/June/2023', 
+            '25/Aug/2023',
         ],
         status: 'Date Approved',
         action: '',
@@ -41,12 +44,12 @@ export const fundersData = [
     {
         sn: '04',
         id: 4,
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Julius Berger',
         companyType: 'Direct Customer',
         selectedDates: [
-            '18/June/2023',
-            '19/June/2023', 
-            '20/June/2023',
+            '8/Jan/2023',
+            '17/Mar/2023', 
+            '29/Sept/2023',
         ],
         status: 'Dates Selected',
         action: '',
@@ -54,7 +57,7 @@ export const fundersData = [
     {
         sn: '05',
         id: 5,
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Mikano International Limited',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -67,7 +70,7 @@ export const fundersData = [
     {
         id: 6,
         sn: '06',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Nigerian Railway Corporation',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -80,7 +83,7 @@ export const fundersData = [
     {
         id: 7,
         sn: '07',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Oando',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -93,7 +96,7 @@ export const fundersData = [
     {
         id: 8,
         sn: '08',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Shell Nigeria',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -106,12 +109,12 @@ export const fundersData = [
     {
         id: 9,
         sn: '09',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Dotts Media House',
         companyType: 'Direct Customer',
         selectedDates: [
-            '18/June/2023',
-            '19/June/2023', 
-            '20/June/2023',
+            '18/May/2023',
+            '23/June/2023', 
+            '25/Aug/2023',
         ],
         status: 'Date Approved',
         action: '',
@@ -119,7 +122,7 @@ export const fundersData = [
     {
         id: 10,
         sn: '10',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'United Bank for Africa',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -132,7 +135,7 @@ export const fundersData = [
     {
         id: 11,
         sn: '11',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Leadway Company',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -145,7 +148,7 @@ export const fundersData = [
     {
         id: 12,
         sn: '12',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Kabo Air',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -158,7 +161,7 @@ export const fundersData = [
     {
         id: 13,
         sn: '13',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'John Holt plc',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -171,12 +174,12 @@ export const fundersData = [
     {
         id: 14,
         sn: '14',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Guaranty Trust Bank',
         companyType: 'Direct Customer',
         selectedDates: [
-            '18/June/2023',
-            '19/June/2023', 
-            '20/June/2023',
+            '8/Jan/2023',
+            '17/Mar/2023', 
+            '29/Sept/2023',
         ],
         status: 'Dates Selected',
         action: '',
@@ -184,7 +187,7 @@ export const fundersData = [
     {
         id: 15,
         sn: '15',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Chocolate City Records',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -197,7 +200,7 @@ export const fundersData = [
     {
         id: 16,
         sn: '16',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Chanchangi Airlines',
         companyType: 'Direct Customer',
         selectedDates: [
             '18/June/2023',
@@ -210,12 +213,12 @@ export const fundersData = [
     {
         id: 17,
         sn: '17',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Cassava Republic Press',
         companyType: 'Direct Customer',
         selectedDates: [
-            '18/June/2023',
-            '19/June/2023', 
-            '20/June/2023',
+            '10/July/2023',
+            '14/Nov/2023', 
+            '23/June/2023',
         ],
         status: 'Request Approval',
         action: '',
@@ -223,12 +226,12 @@ export const fundersData = [
     {
         id: 18,
         sn: '18',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Nigerian Railway Corporation',
         companyType: 'Direct Customer',
         selectedDates: [
-            '18/June/2023',
-            '19/June/2023', 
-            '20/June/2023',
+            '8/Jan/2023',
+            '17/Mar/2023', 
+            '29/Sept/2023',
         ],
         status: 'Request Approval',
         action: '',
@@ -236,11 +239,11 @@ export const fundersData = [
     {
         id: 19,
         sn: '19',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'ROCAD Construction Limited',
         companyType: 'Direct Customer',
         selectedDates: [
-            '18/June/2023',
-            '19/June/2023', 
+            '11/Feb/2023',
+            '19/April/2023', 
             '20/June/2023',
         ],
         status: 'Date Approved',
@@ -249,12 +252,12 @@ export const fundersData = [
     {
         id: 20,
         sn: '20',
-        companyname: 'Dangote Cement LTD',
+        companyname: 'Wema Bank',
         companyType: 'Direct Customer',
         selectedDates: [
-            '18/June/2023',
-            '19/June/2023', 
-            '20/June/2023',
+            '18/May/2023',
+            '23/June/2023', 
+            '25/Aug/2023',
         ],
         status: 'Date Approved',
         action: '',
