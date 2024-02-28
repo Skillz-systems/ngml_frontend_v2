@@ -1,6 +1,6 @@
-import { Box } from '@mui/material';
-import Button from '../ButtonComponent/Button';
 import { ContentPasteOutlined, HighlightOff } from '@mui/icons-material';
+import { Box } from '@mui/material';
+import Button from '../../ButtonComponent/Button';
 
 interface SelectedDateModalprops {
   dateTime: string;
@@ -61,7 +61,7 @@ const SelectedDateModal: React.FC<SelectedDateModalprops> = ({
             <div className='text-[#828DA9] text-[12px] font-[400]'>{dateTime}</div>
           </div>
           <div style={statusStyle}
-          className='border border-[#E2E4EB] w-[115px] h-[24px] bg-[#EAEEF2] rounded-[24px] flex items-center justify-center text-[#050505] text-[12px]'>
+            className='border border-[#E2E4EB] w-[115px] h-[24px] bg-[#EAEEF2] rounded-[24px] flex items-center justify-center text-[#050505] text-[12px]'>
             {statusHeading}
           </div>
         </div>

@@ -1,6 +1,6 @@
 // import React, { useState } from 'react'
 
-import TableOne from './Components/TableComponent/SelectedDateTable';
+import TableOne from './Components/TableComponent/SelectedDate/SelectedDateTable';
 
 
 function App() {
@@ -11,12 +11,12 @@ function App() {
     <>
       <div className="">
         <p className="">Vite and React</p>
-      </div>   
+      </div>
       <div>
-      <TableOne/>
-    </div>
+        <TableOne />
+      </div>
     </>
-   
+
   );
 }
 

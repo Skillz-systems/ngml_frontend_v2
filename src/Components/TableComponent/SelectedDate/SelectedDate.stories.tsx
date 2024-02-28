@@ -1,6 +1,6 @@
 // SelectedDateTable.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
-import SelectedDateTable from './SelectedDateTable'; 
+import SelectedDateTable from './SelectedDateTable';
 
 const meta: Meta<typeof SelectedDateTable> = {
     title: 'Components/SelectedDateTable',
