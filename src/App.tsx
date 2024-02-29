@@ -12,15 +12,7 @@ import Button from './Components/ButtonComponent/Button';
 // import Staff from '/assets/png-icons/Staff.png'
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
 
   // const [searchResults, setSearchResults] = useState<string[]>([]);
 
@@ -184,16 +176,17 @@ function App() {
               key="cancelButton"
               type="secondary"
               label="Cancel"
-              action={handleModalClose}
+              action={toggleModal}
               width="7rem"
               radius='20px'
               height='40px'
+
             />,
             <Button
               key="submitButton"
               type="primary"
               label="Create Customer"
-              action={handleModalOpen}
+              action={toggleModal}
               width="16rem"
               radius='20px'
               height='40px'
