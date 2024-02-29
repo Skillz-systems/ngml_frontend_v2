@@ -46,7 +46,7 @@ const Modal: FC<ModalProps> = ({
                   <h2 id="modal-headline" className="text-lg font-semibold text-center">
                     {title}
                   </h2>
-                  <h3 id="modal-headline" className="text-sm text-gray-300 text-center">
+                  <h3 className="text-sm text-gray-300 text-center">
                     {subTitle}
                   </h3>
                 </div>
