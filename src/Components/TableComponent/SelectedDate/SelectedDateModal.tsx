@@ -92,7 +92,7 @@ const SelectedDateModal: React.FC<SelectedDateModalprops> = ({
           <div className='text-[#828DA9] text-[16px] font-[700]'>Available Dates</div>
           <ul className='flex gap-[10px]  '>
             {availableDates.map((date, index) => (
-              <li key={index} className='bg-[#EAEEF2] h-[24px] w-[92px] text-[12px] flex items-center justify-center rounded-[24px] text-[#49526A]'>{date}</li>
+              <li key={index} className='bg-[#EAEEF2] h-[24px] p-[8px] text-[12px] flex items-center justify-center rounded-[24px] text-[#49526A]'>{date}</li>
             ))}
           </ul>
         </div>

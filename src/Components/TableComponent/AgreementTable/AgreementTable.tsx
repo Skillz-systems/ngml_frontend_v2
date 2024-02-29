@@ -34,6 +34,11 @@ const AgreementTable = () => {
     const [selectedAgreement, setSelectedAgreement] = useState<string>('All Contracts');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
+    useEffect(() => {
+        filterData(searchText);
+    }, [searchText, selectedAgreement]);
+
+
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedAgreement('All Contracts');
@@ -65,9 +70,6 @@ const AgreementTable = () => {
         setFilteredRows(filtered);
     };
 
-    useEffect(() => {
-        filterData(searchText);
-    }, [searchText, selectedAgreement]);
 
 
     const getStatusStyle = (status: string) => {
@@ -206,7 +208,7 @@ const AgreementTable = () => {
                 <div className='italic text-[12px] text-[#828DA9]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex justify-end  items-center gap-[8px] relative	'>
+                <div className='flex justify-end  items-center gap-[8px] relative'>
                     <TextField
                         id="search-input"
                         label="Search this list"
@@ -250,7 +252,7 @@ const AgreementTable = () => {
                             <FilterList />
                         </IconButton>
                         {dropdownOpen && (
-                            <div className='absolute -right-56 -top-3.5 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
+                            <div className='absolute z-10 top-full left-0 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
                                 {agreementNames.map(name => (
                                     <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedAgreement(name)}>
                                         {name}
@@ -276,7 +278,6 @@ const AgreementTable = () => {
                     }}
                     pageSizeOptions={[5, 10]}
                     sx={{
-                        position: 'relative',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },
