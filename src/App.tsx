@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
+import { FileType } from './Components/Fileuploadinput/FileTypes';
 
-import SearchInput from './Components/Searchinput/SearchInput';
+import FileUploadInput from './Components/Fileuploadinput/FileUploadInput';
 import Modal from './Components/Modal/Modal';
+import Button from './Components/ButtonComponent/Button';
 
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
@@ -10,6 +12,15 @@ import Modal from './Components/Modal/Modal';
 // import Staff from '/assets/png-icons/Staff.png'
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   // const [searchResults, setSearchResults] = useState<string[]>([]);
 
@@ -148,7 +159,7 @@ function App() {
         fileDescription='Scan the copy of your original document (pdf, png, jpg, jpeng, word)'
         />
       </div> */}
-       {/* <SearchInput
+      {/* <SearchInput
                 onSearch={handleSearch}
                 className="mt-4"
             />
@@ -157,18 +168,48 @@ function App() {
                     <li key={index}>{result}</li>
                 ))}
             </ul> */}
-            <div className="flex justify-center items-center h-screen">
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
-        onClick={toggleModal}
-      >
-        Open Modal
-      </button>
-      <Modal isOpen={isOpen} onClose={toggleModal} title="Sample Modal" size="small">
-        {/* Your content goes here */}
-        <p>This is the content of the modal.</p>
-      </Modal>
-    </div>
+      <div className="flex justify-center items-center h-screen">
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+          onClick={toggleModal}
+        >
+          Open Modal
+        </button>
+        <Modal isOpen={isOpen} onClose={toggleModal}
+          title="Create New Customer"
+          subTitle='Only use this method if the customer is already an existing customer of NGML'
+          size="medium"
+          buttons={[
+            <Button
+              key="cancelButton"
+              type="secondary"
+              label="Cancel"
+              action={handleModalClose}
+              width="7rem"
+              radius='20px'
+              height='40px'
+            />,
+            <Button
+              key="submitButton"
+              type="primary"
+              label="Create Customer"
+              action={handleModalOpen}
+              width="16rem"
+              radius='20px'
+              height='40px'
+            />,
+          ]}
+          >
+          {/* Your content goes here */}
+          <FileUploadInput
+            maxSizeMB={1}
+            required title="Passport Photograph"
+            fileType={[FileType.JPEG, FileType.PNG]}
+            fileDescription='Scan the copy of your original document (pdf, png, jpg)'
+          />
+          <p>This is the content of the modal.</p>
+        </Modal>
+      </div>
     </>
   );
 }

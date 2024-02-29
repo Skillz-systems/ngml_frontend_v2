@@ -3,12 +3,22 @@ import React, { FC, ReactNode } from 'react';
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large'; // optional size prop
   title: string;
+  subTitle?: string;
+  buttons?: ReactNode[]; // Custom buttons array
   children: ReactNode;
 }
 
-const Modal: FC<ModalProps> = ({ isOpen, onClose, size = 'medium', title, children }) => {
+const Modal: FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  size = 'medium',
+  title,
+  subTitle,
+  buttons = [],
+  children,
+}) => {
   const getSizeClass = () => {
     switch (size) {
       case 'small':
@@ -24,49 +34,35 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, size = 'medium', title, childr
     <>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none">
-          <div className="relative z-50 w-full max-h-screen overflow-auto bg-gray-900 bg-opacity-50">
+          <div className="relative z-50 w-full max-h-screen overflow-auto bg-opacity-50">
             <div
-              className={`relative z-50 p-6 mx-auto my-8 bg-white shadow-lg rounded-lg ${getSizeClass()}`}
+              className={`relative z-50 mx-auto bg-white shadow-lg rounded-[20px] ${getSizeClass()}`}
               role="dialog"
               aria-modal="true"
               aria-labelledby="modal-headline"
             >
-              <div className="flex justify-between items-center mb-4">
-                <h2 id="modal-headline" className="text-lg font-semibold">{title}</h2>
-                <button
-                  className="text-gray-500 hover:text-gray-700 focus:outline-none"
-                  onClick={onClose}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
+              <div className="p-6">
+                <div className="mb-4">
+                  <h2 id="modal-headline" className="text-lg font-semibold text-center">
+                    {title}
+                  </h2>
+                  <h3 id="modal-headline" className="text-sm text-gray-300 text-center">
+                    {subTitle}
+                  </h3>
+                </div>
+                <div className="">{children}</div>
               </div>
-              <div className="mb-4">{children}</div>
-              <div className="flex justify-end">
-                <button
-                  className="px-4 py-2 mr-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none"
-                  onClick={onClose}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none"
-                  onClick={onClose}
-                >
-                  Confirm
-                </button>
+              <div className="relative">
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white w-10 h-4 -rotate-45"></div>
+              </div>
+              <div className="bg-green-500 p-6 rounded-b-[20px]">
+                <div className="flex justify-end">
+                  {buttons.map((button, index) => (
+                    <div key={index} className="mr-2">
+                      {button}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
