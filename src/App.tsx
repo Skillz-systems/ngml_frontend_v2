@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import SearchInput from './Components/Searchinput/SearchInput';
+import Modal from './Components/Modal/Modal';
 
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
@@ -10,11 +11,16 @@ import SearchInput from './Components/Searchinput/SearchInput';
 
 function App() {
 
-  const [searchResults, setSearchResults] = useState<string[]>([]);
+  // const [searchResults, setSearchResults] = useState<string[]>([]);
 
-  const handleSearch = (query: string) => {
-      // Perform search operation here, for example, update searchResults state
-      console.log("Performing search for:", query);
+  // const handleSearch = (query: string) => {
+  //     // Perform search operation here, for example, update searchResults state
+  //     console.log("Performing search for:", query);
+  // };
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -142,7 +148,7 @@ function App() {
         fileDescription='Scan the copy of your original document (pdf, png, jpg, jpeng, word)'
         />
       </div> */}
-       <SearchInput
+       {/* <SearchInput
                 onSearch={handleSearch}
                 className="mt-4"
             />
@@ -150,7 +156,19 @@ function App() {
                 {searchResults.map((result, index) => (
                     <li key={index}>{result}</li>
                 ))}
-            </ul>
+            </ul> */}
+            <div className="flex justify-center items-center h-screen">
+      <button
+        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+        onClick={toggleModal}
+      >
+        Open Modal
+      </button>
+      <Modal isOpen={isOpen} onClose={toggleModal} title="Sample Modal" size="small">
+        {/* Your content goes here */}
+        <p>This is the content of the modal.</p>
+      </Modal>
+    </div>
     </>
   );
 }
