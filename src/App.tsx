@@ -1,6 +1,6 @@
 // import React, { useState } from 'react'
 
-import TableOne from './Components/TableComponent/SelectedDate/SelectedDateTable';
+import AgreementTable from './Components/TableComponent/AgreementTable/AgreementTable';
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <p className="">Vite and React</p>
       </div>
       <div>
-        <TableOne />
+        < AgreementTable />
       </div>
     </>
 
