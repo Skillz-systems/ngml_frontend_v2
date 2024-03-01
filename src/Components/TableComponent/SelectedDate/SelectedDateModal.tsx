@@ -12,7 +12,7 @@ interface SelectedDateModalprops {
   companyAddress: string;
   statusHeading: string;
   handleClose: () => void;
-  statusStyle: React.CSSProperties;
+  statusStyle?: React.CSSProperties;
 }
 
 const SelectedDateModal: React.FC<SelectedDateModalprops> = ({
