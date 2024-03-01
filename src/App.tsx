@@ -174,12 +174,13 @@ function App() {
           buttons={[
             <Button
               key="cancelButton"
-              type="secondary"
+              type="outline"
               label="Cancel"
               action={toggleModal}
               width="7rem"
               radius='20px'
               height='40px'
+              color='white'
 
             />,
             <Button
