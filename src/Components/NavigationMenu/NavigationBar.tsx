@@ -189,8 +189,8 @@ const NavigationBarItem: React.FC<{
     ? item.type === 'primary'
       ? '#F6FDEC'
       : item.type === 'secondary'
-      ? '#F9FAFB'
-      : '#F9FAFB'
+        ? '#F9FAFB'
+        : '#F9FAFB'
     : 'white';
 
   return (
@@ -223,7 +223,7 @@ const NavigationBarItem: React.FC<{
         >
           <span>
             <img
-              style={{ height: '16px', width: '16px'}}
+              style={{ height: '16px', width: '16px' }}
               src={item.icon}
               alt={item.name}
             />

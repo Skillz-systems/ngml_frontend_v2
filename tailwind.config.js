@@ -11,8 +11,16 @@ export default {
   ],
   theme: {
     extend: {
+      borderColor: {
+        'NGML-SEC': 'var(--NGML-SEC, #005828)'
+      },
       colors: {
-        primary: colors.blue
+        primary: colors.blue,
+      },
+      backgroundColor: {
+        customYellow: '#FDF6E4',
+        customGreen: '#AEF359',
+        customWhite: '#FDFFF5'
       }
     },
   },
