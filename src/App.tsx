@@ -1,11 +1,9 @@
 // import React, { useState } from 'react'
 
-import TenderTypeTable from './Components/TableComponent/TenderTypeTable/TenderTypeTable';
+import ComplaintTable from './Components/TableComponent/ComplaintTable/ComplaintTable';
 
 
 function App() {
-
-
 
   return (
     <>
@@ -13,7 +11,7 @@ function App() {
         <p className="">Vite and React</p>
       </div>
       <div>
-        < TenderTypeTable/>
+        < ComplaintTable/>
       </div>
     </>
 

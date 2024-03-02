@@ -1,0 +1,246 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { FilterList } from '@mui/icons-material';
+import { IconButton, TextField } from '@mui/material';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { useEffect, useState } from 'react';
+import { ComplaintData } from '../../../Data';
+
+
+interface ComplaintTableProps {
+    id: number;
+    companyname?: string;
+    companyType?: string;
+    selectedDates?: string[];
+    status?: string;
+    action?: string;
+    deadline?: string;
+    companyEmail?: string;
+    companyNumber?: string;
+    companyAddress?: string;
+
+}
+
+const rows = ComplaintData
+
+
+
+
+const ComplaintTable = () => {
+    const [searchText, setSearchText] = useState<string>('');
+    const [filteredRows, setFilteredRows] = useState<ComplaintTableProps[]>(rows);
+    const [selectedStatus, setSelectedStatus] = useState<string>('All Status');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    useEffect(() => {
+        filterData(searchText);
+    }, [searchText, selectedStatus]);
+
+
+    const handleFilterClick = () => {
+        setDropdownOpen(!dropdownOpen);
+        setSelectedStatus('All Status');
+    };
+
+
+    const status = [...new Set(rows.map(row => row.status))];
+
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSearchText(value);
+    };
+
+    const filterData = (search: string) => {
+        const lowercasedSearch = search.toLowerCase();
+        let filtered = rows.filter((row) =>
+            row.companyname.toLowerCase().includes(lowercasedSearch) ||
+            row.companyType.toLowerCase().includes(lowercasedSearch)
+        );
+        if (selectedStatus !== 'All Status') {
+            filtered = filtered.filter(row => row.status === selectedStatus);
+        }
+        setFilteredRows(filtered);
+    };
+
+
+
+    const columns: GridColDef[] = [
+        {
+            field: 'sn',
+            headerName: 'SN',
+            width: 60,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className='text-xs font-[600] text-[#49526A] leading-3'>
+                    {params.row.sn}
+                </div>
+            ),
+
+        },
+        {
+            field: 'datereceived',
+            headerName: 'DATE REEIVED',
+            width: 127,
+            renderCell: (params) => (
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.datereceived}
+                </div>
+            )
+        },
+        {
+            field: 'name',
+            headerName: 'RECEIVED FROM',
+            width: 200,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className='text-[12px] font-[600] text-[#49526A] leading-3'>
+                    {params.row.companyname}
+                </div>
+
+            ),
+        },
+        {
+            field: 'agreementType',
+            headerName: 'ISSUE',
+            width: 395,
+            renderCell: (params: GridRenderCellParams) => (
+                <div
+                    className='text-[12px] font-[400] text-[#49526A] leading-3 text-wrap '>
+                    {params.row.issue}
+                </div>
+            ),
+        },
+
+        {
+            field: 'status',
+            headerName: 'STATUS',
+            width: 110,
+            renderCell: (params: GridRenderCellParams) => {
+                let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
+
+                switch (params.row.status) {
+                    case 'Resolving':
+                        classNames += 'bg-[#FFD181] text-[#050505] ';
+                        break;
+                    case 'Resolved':
+                        classNames += 'bg-[#D2F69E] text-[#005828] ';
+                        break;
+                    case 'New':
+                        classNames += 'bg-[#EAEEF2] text-[#050505] ';
+                        break;
+                    default:
+                        classNames += 'text-[E2E4EB] ';
+                }
+
+                return (
+                    <div className={classNames}>
+                        {params.row.status}
+                    </div>
+                );
+            }
+        },
+
+    ]
+
+
+
+
+    return (
+        <div className='ml-[70px] mt-[20px] w-[892px] '>
+
+            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
+                <div className='italic text-[12px] text-[#828DA9]'>
+                    Showing {filteredRows.length} of {rows.length} site visits
+                </div>
+                <div className='flex justify-end  items-center gap-[8px] relative'>
+                    <TextField
+                        id="search-input"
+                        label="Search this list"
+                        variant="outlined"
+                        size="small"
+                        value={searchText}
+                        onChange={handleSearchChange}
+                        InputProps={{
+                            style: {
+                                borderRadius: '32px',
+                                width: '200px',
+                                height: '35px',
+
+                            }
+                        }}
+
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                '& fieldset': {
+                                    borderColor: '#CCD0DC',
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: '#00AF50',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#00AF50',
+                                },
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: 'gray',
+                                fontSize: '10px',
+                                fontStyle: 'italic',
+                                '&.Mui-focused': {
+                                    color: 'green',
+                                },
+                            },
+                        }}
+                    />
+                    <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
+                        <div className='text-[12px] font-[400] text-[#828DA9] '>Filter</div>
+                        <IconButton onClick={handleFilterClick}>
+                            <FilterList />
+                        </IconButton>
+                        {dropdownOpen && (
+                            <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
+                                {status.map(name => (
+                                    <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedStatus(name)}>
+                                        {name}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <DataGrid
+                    className="pointer-cursor-datagrid"
+                    rows={filteredRows}
+                    columns={columns}
+                    rowHeight={64}
+                    autoHeight
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 13 },
+                        },
+                    }}
+
+                    pageSizeOptions={[5, 10]}
+                    sx={{
+
+                        '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
+                            outline: 'solid #00AF50 1px',
+                        },
+                        '& .MuiDataGrid-columnHeaders': {
+                            '& .MuiDataGrid-columnHeaderTitle': {
+                                color: '#050505',
+                                fontWeight: '700',
+                                fontSize: '12px',
+
+                            },
+                        },
+                    }}
+                />
+            </div>
+        </div>
+    );
+}
+
+export default ComplaintTable
+
+
