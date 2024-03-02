@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 
 /**
- * @typedef {'primary' | 'secondary' | 'tertiary' | 'icon' | 'outline' | 'transparent'} ButtonType
+ * @typeof {'primary' | 'secondary' | 'tertiary' | 'icon' | 'outline' | 'transparent'} ButtonType
  *
- * @typedef {Object} ButtonProps
+ * @typeof {Object} ButtonProps
  * @property {ButtonType} type - The type of the button.
  * @property {string} [label] - The label text for the button.
  * @property {string} [color] - The color of the button.
@@ -49,7 +49,8 @@ interface ButtonProps {
     columnGap?: string;
     lineHeight?: string;
     textDecoration?: string;
-    
+    backgroundColor?: string
+    borderColor?: string
 }
 
 
@@ -81,6 +82,8 @@ const Button: React.FC<ButtonProps> = ({
     columnGap,
     lineHeight,
     textDecoration,
+    backgroundColor,
+    borderColor,
 }: ButtonProps): React.ReactElement => {
 
     const [isHovered, setIsHovered] = useState(false);
@@ -137,10 +140,11 @@ const Button: React.FC<ButtonProps> = ({
                 justifyContent: 'center',
                 cursor: disabled ? 'not-allowed' : 'pointer',
                 outline: 'none',
-                border: 'none',
                 textDecoration: underline ? 'underline' : 'none',
                 columnGap,
-                color,               
+                backgroundColor,
+                color,       
+                border: borderColor,       
                 ...getButtonStyles(),
             }}
         >
