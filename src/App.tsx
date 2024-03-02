@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { FileType } from './Components/Fileuploadinput/FileTypes';
 
+import Button from './Components/ButtonComponent/Button';
 import FileUploadInput from './Components/Fileuploadinput/FileUploadInput';
 import Modal from './Components/Modal/Modal';
-import Button from './Components/ButtonComponent/Button';
 
 
 // import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
@@ -181,19 +181,21 @@ function App() {
               radius='20px'
               height='40px'
               color='white'
+              backgroundColor='rgb(139, 0, 0)'
 
             />,
             <Button
               key="submitButton"
-              type="primary"
+              type="outline"
               label="Create Customer"
               action={toggleModal}
               width="16rem"
               radius='20px'
               height='40px'
+              backgroundColor='white'
             />,
           ]}
-          >
+        >
           {/* Your content goes here */}
           <FileUploadInput
             maxSizeMB={1}
