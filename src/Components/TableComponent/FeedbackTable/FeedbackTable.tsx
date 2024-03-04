@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FilterList } from '@mui/icons-material';
-import { IconButton, TextField } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import { ComplaintData } from '../../../Data';
+import { FeedbackData } from '../../../Data';
 
 
-interface ComplaintTableProps {
+interface FeedbackTableProps {
     id: number;
     companyname?: string;
     companyType?: string;
@@ -20,21 +20,19 @@ interface ComplaintTableProps {
 
 }
 
-const rows = ComplaintData
+const rows = FeedbackData
 
 
 
 
-const ComplaintTable = () => {
-    const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<ComplaintTableProps[]>(rows);
+const FeedbackTable = () => {
+    const [filteredRows, setFilteredRows] = useState<FeedbackTableProps[]>(rows);
     const [selectedStatus, setSelectedStatus] = useState<string>('All Status');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     useEffect(() => {
-        filterData(searchText);
-    }, [searchText, selectedStatus]);
-
+        filterData();
+    }, [selectedStatus]);
 
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
@@ -44,18 +42,8 @@ const ComplaintTable = () => {
 
     const status = [...new Set(rows.map(row => row.status))];
 
-
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
-        setSearchText(value);
-    };
-
-    const filterData = (search: string) => {
-        const lowercasedSearch = search.toLowerCase();
-        let filtered = rows.filter((row) =>
-            row.companyname.toLowerCase().includes(lowercasedSearch) ||
-            row.companyType.toLowerCase().includes(lowercasedSearch)
-        );
+    const filterData = () => {
+        let filtered = rows;
         if (selectedStatus !== 'All Status') {
             filtered = filtered.filter(row => row.status === selectedStatus);
         }
@@ -78,7 +66,7 @@ const ComplaintTable = () => {
         },
         {
             field: 'datereceived',
-            headerName: 'DATE RECEIVED',
+            headerName: 'DATE SENT',
             width: 127,
             renderCell: (params) => (
                 <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
@@ -88,7 +76,7 @@ const ComplaintTable = () => {
         },
         {
             field: 'name',
-            headerName: 'RECEIVED FROM',
+            headerName: 'RECEIVER',
             width: 200,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-[12px] font-[600] text-[#49526A] leading-3'>
@@ -98,13 +86,13 @@ const ComplaintTable = () => {
             ),
         },
         {
-            field: 'agreementType',
-            headerName: 'ISSUE',
-            width: 395,
+            field: 'subject',
+            headerName: 'SUBJECT',
+            width: 350,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[400] text-[#49526A] leading-3 text-wrap '>
-                    {params.row.issue}
+                    {params.row.subject}
                 </div>
             ),
         },
@@ -112,19 +100,16 @@ const ComplaintTable = () => {
         {
             field: 'status',
             headerName: 'STATUS',
-            width: 110,
+            width: 149,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
                 switch (params.row.status) {
-                    case 'Resolving':
+                    case 'Feedback Pending':
                         classNames += 'bg-[#FFD181] text-[#050505] ';
                         break;
-                    case 'Resolved':
+                    case 'Sent':
                         classNames += 'bg-[#D2F69E] text-[#005828] ';
-                        break;
-                    case 'New':
-                        classNames += 'bg-[#EAEEF2] text-[#050505] ';
                         break;
                     default:
                         classNames += 'text-[E2E4EB] ';
@@ -151,46 +136,8 @@ const ComplaintTable = () => {
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
                 <div className='flex justify-end  items-center gap-[8px] relative'>
-                    <TextField
-                        id="search-input"
-                        label="Search this list"
-                        variant="outlined"
-                        size="small"
-                        value={searchText}
-                        onChange={handleSearchChange}
-                        InputProps={{
-                            style: {
-                                borderRadius: '32px',
-                                width: '200px',
-                                height: '35px',
-
-                            }
-                        }}
-
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: '#CCD0DC',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: '#00AF50',
-                                },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: '#00AF50',
-                                },
-                            },
-                            '& .MuiInputLabel-root': {
-                                color: 'gray',
-                                fontSize: '10px',
-                                fontStyle: 'italic',
-                                '&.Mui-focused': {
-                                    color: 'green',
-                                },
-                            },
-                        }}
-                    />
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
-                        <div className='text-[12px] font-[400] text-[#828DA9] '>Filter</div>
+                        <div className='text-[12px] font-[400] text-[#828DA9] '>All Forms</div>
                         <IconButton onClick={handleFilterClick}>
                             <FilterList />
                         </IconButton>
@@ -241,6 +188,6 @@ const ComplaintTable = () => {
     );
 }
 
-export default ComplaintTable
+export default FeedbackTable
 
 
