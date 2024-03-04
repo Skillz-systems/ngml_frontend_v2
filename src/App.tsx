@@ -14,7 +14,7 @@ function App() {
 
   const handleSearch = (query: string) => {
       // Perform search operation here, for example, update searchResults state
-      console.log("Performing search for:", query);
+      console.log('Performing search for:', query);
   };
 
   return (
