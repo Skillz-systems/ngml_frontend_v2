@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { Modal } from '@mui/material';
 import SelectedDateModal from '../SelectedDate/SelectedDateModal';
@@ -16,7 +16,7 @@ interface DailyFrequencyProps {
     companyEmail?: string;
     companyNumber?: string;
     companyAddress?: string;
-    datesent?: string; 
+    datesent?: string;
 }
 
 const rows = DailyFrequencyData
@@ -176,7 +176,7 @@ const DailyFrequencyTable = () => {
                             companyEmail={selectedRow.companyEmail || 'Provide an email address'}
                             companyNumber={selectedRow.companyNumber || 'Provide a number'}
                             availableDates={selectedRow.selectedDates || ['No Dates Available']}
-                            companyAddress={selectedRow.companyAddress || 'Provide an Address'} 
+                            companyAddress={selectedRow.companyAddress || 'Provide an Address'}
                             statusHeading={''}
                         />
                     )}
