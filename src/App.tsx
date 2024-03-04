@@ -1,6 +1,6 @@
 // import React, { useState } from 'react'
 
-import FeedbackTable from './Components/TableComponent/FeedbackTable/FeedbackTable';
+import DailyFrequencyTable from './Components/TableComponent/DailyFrequencyTable/DailyFrequencyTable';
 
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
         <p className="">Vite and React</p>
       </div>
       <div>
-        < FeedbackTable/>
+        < DailyFrequencyTable />
       </div>
     </>
 
