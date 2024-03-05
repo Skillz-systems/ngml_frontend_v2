@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { Modal } from '@mui/material';
 import SelectedDateModal from '../SelectedDate/SelectedDateModal';
-import { DailyFrequencyData } from '../../../Data';
+import { DailyFrequencyData } from '@/Data';
 
 interface DailyFrequencyProps {
     id: number;

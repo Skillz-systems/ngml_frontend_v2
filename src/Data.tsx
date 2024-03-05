@@ -1388,3 +1388,349 @@ export const DailyFrequencyData = [
     },
 
 ]
+
+
+export const TenderTitleData = [
+    {
+        id: 1,
+        sn: '01',
+        companyname: 'Dangote Cement ',
+        companyEmail: 'default@email.com',
+        companyType: 'Direct Customer',
+        companyNumber: '000-000-0000',
+        companyAddress: 'Default Address',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '25/Feb/2022',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'COBD',  
+            }
+        ],
+        action: '',
+    },
+    {
+        sn: '02',
+        id: 2,
+        companyname: 'BUA Cement',
+        companyType: 'Strategic partner',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '19/Oct/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'COBD',  
+            }
+        ],
+        action: '',
+    },
+    {
+        sn: '03',
+        id: 3,
+        companyname: 'Fidelity Bank ',
+        companyType: 'Direct Customer',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '05/Jun/2022',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],      
+        action: '',
+    },
+    {
+        sn: '04',
+        id: 4,
+        companyname: 'Julius Berger',
+        companyType: 'Direct Customer',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '11/May/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'HR',  
+            }
+        ],
+        action: '',
+    },
+    {
+        sn: '05',
+        id: 5,
+        companyname: 'Mikano  Corporation',
+        companyType: 'Strategic partner',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '08/Dec/2024',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'HR',  
+            }
+        ],
+        action: '',
+    },
+    {
+        id: 6,
+        sn: '06',
+        companyname: 'Nigerian Railway ',
+        companyType: 'Direct Customer',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '14/Sept/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],
+        action: '',
+    },
+    {
+        id: 7,
+        sn: '07',
+        companyname: 'Oando',
+        companyType: 'Strategic partner',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '18/May/2025',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],  
+        action: '',
+    },
+    {
+        id: 8,
+        sn: '08',
+        companyname: 'Shell Nigeria',
+        companyType: 'Direct Customer',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '04/April/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],  
+        action: '',
+    },
+    {
+        id: 9,
+        sn: '09',
+        companyname: 'Dotts Media House',
+        companyType: 'Strategic partner',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '17/Oct/2024',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],  
+        action: '',
+    },
+    {
+        id: 10,
+        sn: '10',
+        companyname: 'United Bank ',
+        companyType: 'Strategic partner',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '11/Nov/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],
+        action: '',
+    },
+    {
+        id: 11,
+        sn: '11',
+        companyname: 'Leadway Company',
+        companyType: 'Direct Customer',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '07/Mar/2025',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],
+        action: '',
+    },
+    {
+        id: 12,
+        sn: '12',
+        companyname: 'Kabo Air',
+        companyType: 'Strategic partner',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '20/May/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],
+        action: '',
+    },
+    {
+        id: 13,
+        sn: '13',
+        companyname: 'John Holt plc',
+        companyType: 'Direct Customer',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '15/Sept/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],
+        action: '',
+    },
+    {
+        id: 14,
+        sn: '14',
+        companyname: 'Guaranty Trust ',
+        companyType: 'Direct Customer',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '14/Feb/2022',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ], 
+        action: '',
+    },
+    {
+        id: 15,
+        sn: '15',
+        companyname: 'Chocolate City ',
+        companyType: 'Strategic partner',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '19/July/2024',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],
+        action: '',
+    },
+    {
+        id: 16,
+        sn: '16',
+        companyname: 'Chanchangi Airlines',
+        companyType: 'Direct Customer',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '01/Dec/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ], 
+        action: '',
+    },
+    {
+        id: 17,
+        sn: '17',
+        companyname: 'Cassava Republic ',
+        companyType: 'Strategic partner',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '24/May/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],
+        action: '',
+    },
+    {
+        id: 18,
+        sn: '18',
+        companyname: 'Nigerian  Corporation',
+        companyType: 'Strategic partner',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '10/Jan/2022',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ], 
+        action: '',
+    },
+    {
+        id: 19,
+        sn: '19',
+        companyname: 'ROCAD Construction ',
+        companyType: 'Direct Customer',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '11/Feb/2023',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ], 
+        action: '',
+    },
+    {
+        id: 20,
+        sn: '20',
+        companyname: 'Wema Bank',
+        companyType: 'Strategic partner',
+        frequency: 'Daily',
+        tenderTitle: 'Gas Supply to Metal Manufacturing Nigeria Limited.',
+        datesubmitted: '18/May/2024',
+        details: [
+            {
+                type: 'Open Tender',
+                type2: 'Procurement Tender',
+                dept: 'ADMIN',  
+            }
+        ],      
+        action: '',
+    },
+
+]

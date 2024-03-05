@@ -2,12 +2,12 @@
 import { FilterList } from '@mui/icons-material';
 import { IconButton, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SelectedDateModal from '../SelectedDate/SelectedDateModal';
-import { AgreementData } from '@/Data';
+import { TenderTitleData } from '@/Data';
 
 
-interface AgreementTableProps {
+interface TenderTitleTableProps {
     id: number;
     companyname: string;
     companyType: string;
@@ -21,22 +21,28 @@ interface AgreementTableProps {
 
 }
 
-const rows = AgreementData
+interface Detail {
+    type: string;
+    type2: string;
+    dept: string;
+}
+
+const rows = TenderTitleData as unknown as TenderTitleTableProps[];
 
 
 
 
-const AgreementTable = () => {
+const TenderTitleTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<AgreementTableProps[]>(rows);
+    const [filteredRows] = useState<TenderTitleTableProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<AgreementTableProps | null>(null);
-    const [selectedAgreement, setSelectedAgreement] = useState<string>('All Contracts');
+    const [selectedRow, setSelectedRow] = useState<TenderTitleTableProps | null>(null);
+    const [, setSelectedAgreement] = useState<string>('All Contracts');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    useEffect(() => {
-        filterData(searchText);
-    }, [searchText, selectedAgreement]);
+    // useEffect(() => {
+    //     filterData(searchText);
+    // }, [searchText, selectedAgreement]);
 
 
     const handleFilterClick = () => {
@@ -44,9 +50,9 @@ const AgreementTable = () => {
         setSelectedAgreement('All Contracts');
     };
 
-    const agreementNames = [...new Set(rows.map(row => row.agreementType))];
+    // const agreementNames = [...new Set(rows.map(row => row.details))];
 
-    const handleOpen = (row: AgreementTableProps) => {
+    const handleOpen = (row: TenderTitleTableProps) => {
         setSelectedRow(row);
         setOpen(true);
     };
@@ -58,30 +64,35 @@ const AgreementTable = () => {
         setSearchText(value);
     };
 
-    const filterData = (search: string) => {
-        const lowercasedSearch = search.toLowerCase();
-        let filtered = rows.filter((row) =>
-            row.companyname.toLowerCase().includes(lowercasedSearch) ||
-            row.companyType.toLowerCase().includes(lowercasedSearch)
-        );
-        if (selectedAgreement !== 'All Contracts') {
-            filtered = filtered.filter(row => row.agreementType === selectedAgreement);
-        }
-        setFilteredRows(filtered);
-    };
+    // const filterData = (search: string) => {
+    //     const lowercasedSearch = search.toLowerCase();
+    //     let filtered = rows.filter(row =>
+    //         row.companyname.toLowerCase().includes(lowercasedSearch) ||
+    //         row.companyType.toLowerCase().includes(lowercasedSearch)
+    //     );
+    
+    //     if (selectedAgreement !== 'All Contracts') {
+    //         filtered = filtered.filter(row =>
+    //             row.details.some(detail =>
+    //                 detail.type === selectedAgreement || detail.type2 === selectedAgreement
+    //             )
+    //         );
+    //     }
+    
+    //     setFilteredRows(filtered);
+    // };
 
 
-
-    const getStatusStyle = (status: string) => {
-        switch (status) {
-            case 'Signed':
-                return { backgroundColor: '#D2F69E', color: '#005828' };
-            case 'Unsigned':
-                return { backgroundColor: '#FFD181', color: '#475467' };
-            default:
-                return {};
-        }
-    };
+    // const getStatusStyle = (status: string) => {
+    //     switch (status) {
+    //         case 'Signed':
+    //             return { backgroundColor: '#D2F69E', color: '#005828' };
+    //         case 'Unsigned':
+    //             return { backgroundColor: '#FFD181', color: '#475467' };
+    //         default:
+    //             return {};
+    //     }
+    // };
 
 
 
@@ -100,7 +111,7 @@ const AgreementTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            width: 228,
+            width: 180,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='flex flex-col gap-[4px]'>
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
@@ -114,50 +125,50 @@ const AgreementTable = () => {
             ),
         },
         {
-            field: 'agreementType',
-            headerName: 'AGREEMENT NAME',
-            width: 444,
+            field: 'tenderTitle',
+            headerName: 'TITLE OF TENDER',
+            width: 433,
             renderCell: (params: GridRenderCellParams) => (
                 <div
-                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
-                    {params.row.agreementType}
+                    className='text-[14px] font-[700] text-[#49526A] leading-3'>
+                    {params.row.tenderTitle}
                 </div>
             ),
         },
         {
-            field: 'datesent',
-            headerName: 'DATE SENT',
-            width: 180,
+            field: 'datesubmitted',
+            headerName: 'DATE SUBMITTED',
+            width: 124,
             renderCell: (params) => (
                 <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
-                    {params.row.datesent}
+                    {params.row.datesubmitted}
                 </div>
             )
         },
         {
-            field: 'status',
-            headerName: 'STATUS',
-            width: 100,
-            renderCell: (params: GridRenderCellParams) => {
-                let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
-
-                switch (params.row.status) {
-                    case 'Unsigned':
-                        classNames += 'bg-[#FFD181] text-[#050505] ';
-                        break;
-                    case 'Signed':
-                        classNames += 'bg-[#D2F69E] text-[#005828] ';
-                        break;
-                    default:
-                        classNames += 'text-[E2E4EB] ';
-                }
-
-                return (
-                    <div className={classNames}>
-                        {params.row.status}
-                    </div>
-                );
-            }
+            field: 'details',
+            headerName: 'DETAILS',
+            width: 215,
+            renderCell: (params) => (
+                <ul className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.details.map((detail: Detail, index: number) => (
+                        <div key={index} className='text-[12px] font-[600] text-[#828DA9] flex flex-col gap-[10px] '>
+                            <div className='flex gap-[14px] flex items-center'>
+                                <div>TYPE</div>
+                                <div className='bg-[#D2F69E] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.type}</div>
+                            </div>
+                            <div className='flex gap-[10px] flex items-center'>
+                                <div>TYPE2</div>
+                                <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.type2}</div>
+                            </div>
+                            <div className='flex gap-[14px] flex items-center'>
+                                <div>DEPT</div>
+                                <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.dept}</div>
+                            </div>
+                        </div>
+                    ))}
+                </ul>
+            )
         },
 
 
@@ -198,7 +209,7 @@ const AgreementTable = () => {
                             availableDates={selectedRow.selectedDates || ['No Dates Available']}
                             companyAddress={selectedRow.companyAddress || 'Provide an Address'}
                             statusHeading={selectedRow.status}
-                            statusStyle={getStatusStyle(selectedRow.status)}
+                            // statusStyle={getStatusStyle(selectedRow.status)}
 
                         />
                     )}
@@ -252,15 +263,15 @@ const AgreementTable = () => {
                         <IconButton onClick={handleFilterClick}>
                             <FilterList />
                         </IconButton>
-                        {dropdownOpen && (
+                        {/* {dropdownOpen && (
                             <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
-                                {agreementNames.map(name => (
+                                {details.map(name => (
                                     <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedAgreement(name)}>
                                         {name}
                                     </div>
                                 ))}
                             </div>
-                        )}
+                        )} */}
                     </div>
                 </div>
             </div>
@@ -270,7 +281,7 @@ const AgreementTable = () => {
                     className="pointer-cursor-datagrid"
                     rows={filteredRows}
                     columns={columns}
-                    rowHeight={48}
+                    rowHeight={104}
                     autoHeight
                     initialState={{
                         pagination: {
@@ -299,6 +310,6 @@ const AgreementTable = () => {
     );
 }
 
-export default AgreementTable
+export default TenderTitleTable
 
 
