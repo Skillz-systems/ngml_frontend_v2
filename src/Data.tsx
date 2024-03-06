@@ -1405,7 +1405,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'COBD',  
+                dept: 'COBD',
             }
         ],
         action: '',
@@ -1421,7 +1421,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'COBD',  
+                dept: 'COBD',
             }
         ],
         action: '',
@@ -1438,9 +1438,9 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
-        ],      
+        ],
         action: '',
     },
     {
@@ -1455,7 +1455,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'HR',  
+                dept: 'HR',
             }
         ],
         action: '',
@@ -1472,7 +1472,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'HR',  
+                dept: 'HR',
             }
         ],
         action: '',
@@ -1489,7 +1489,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
         ],
         action: '',
@@ -1506,9 +1506,9 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
-        ],  
+        ],
         action: '',
     },
     {
@@ -1523,9 +1523,9 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
-        ],  
+        ],
         action: '',
     },
     {
@@ -1540,9 +1540,9 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
-        ],  
+        ],
         action: '',
     },
     {
@@ -1557,7 +1557,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
         ],
         action: '',
@@ -1574,7 +1574,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
         ],
         action: '',
@@ -1591,7 +1591,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
         ],
         action: '',
@@ -1608,7 +1608,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
         ],
         action: '',
@@ -1625,9 +1625,9 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
-        ], 
+        ],
         action: '',
     },
     {
@@ -1642,7 +1642,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
         ],
         action: '',
@@ -1659,9 +1659,9 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
-        ], 
+        ],
         action: '',
     },
     {
@@ -1676,7 +1676,7 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
         ],
         action: '',
@@ -1693,9 +1693,9 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
-        ], 
+        ],
         action: '',
     },
     {
@@ -1710,9 +1710,9 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
-        ], 
+        ],
         action: '',
     },
     {
@@ -1727,9 +1727,235 @@ export const TenderTitleData = [
             {
                 type: 'Open Tender',
                 type2: 'Procurement Tender',
-                dept: 'ADMIN',  
+                dept: 'ADMIN',
             }
-        ],      
+        ],
+        action: '',
+    },
+
+]
+
+
+export const EoiRequestData = [
+    {
+        id: 1,
+        sn: '01',
+        companyname: 'Dangote Cement ',
+        companyEmail: 'company@email.com',
+        companyType: 'Direct Customer',
+        companyNumber: '000-000-0000',
+        companyAddress: 'Default Address',
+        customerID: '542023',
+        status: 'New',
+        action: '',
+    },
+    {
+        sn: '02',
+        id: 2,
+        companyname: 'BUA Cement',
+        companyEmail: 'company@email.com',
+        companyType: 'Strategic partner',
+        agreementType: 'Supplement Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        sn: '03',
+        id: 3,
+        companyname: 'Fidelity Bank ',
+        companyEmail: 'company@email.com',
+        companyType: 'Direct Customer',
+        agreementType: 'Addendum Agreement',
+        customerID: '542023',
+        status: 'New',
+        action: '',
+    },
+    {
+        sn: '04',
+        id: 4,
+        companyname: 'Julius Berger',
+        companyType: 'Direct Customer',
+        companyEmail: 'company@email.com',
+        agreementType: 'GSPA Agreement',
+        customerID: '542023',
+        status: 'New',
+        action: '',
+    },
+    {
+        sn: '05',
+        id: 5,
+        companyname: 'Mikano  Corporation',
+        companyEmail: 'company@email.com',
+        companyType: 'Strategic partner',
+        agreementType: 'Addendum Agreement',
+        customerID: '542023',
+        status: 'New',
+        action: '',
+    },
+    {
+        id: 6,
+        sn: '06',
+        companyname: 'Nigerian Railway ',
+        companyEmail: 'company@email.com',
+        companyType: 'Direct Customer',
+        agreementType: 'GSPA Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        id: 7,
+        sn: '07',
+        companyname: 'Oando',
+        companyType: 'Strategic partner',
+        companyEmail: 'company@email.com',
+        agreementType: 'Supplement Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        id: 8,
+        sn: '08',
+        companyname: 'Shell Nigeria',
+        companyEmail: 'company@email.com',
+        companyType: 'Direct Customer',
+        agreementType: 'Supplement Agreement',
+        customerID: '542023',
+        status: 'Disapproved',
+        action: '',
+    },
+    {
+        id: 9,
+        sn: '09',
+        companyname: 'Dotts Media House',
+        companyEmail: 'company@email.com',
+        companyType: 'Strategic partner',
+        agreementType: 'Supplement Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        id: 10,
+        sn: '10',
+        companyname: 'United Bank ',
+        companyEmail: 'company@email.com',
+        companyType: 'Strategic partner',
+        agreementType: 'Supplement Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        id: 11,
+        sn: '11',
+        companyname: 'Leadway Company',
+        companyEmail: 'company@email.com',
+        companyType: 'Direct Customer',
+        agreementType: 'GSPA Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        id: 12,
+        sn: '12',
+        companyname: 'Kabo Air',
+        companyType: 'Strategic partner',
+        companyEmail: 'company@email.com',
+        agreementType: 'GSPA Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        id: 13,
+        sn: '13',
+        companyname: 'John Holt plc',
+        companyType: 'Direct Customer',
+        companyEmail: 'company@email.com',
+        agreementType: 'GSPA Agreement',
+        customerID: '542023',
+        status: 'Disapproved',
+        action: '',
+    },
+    {
+        id: 14,
+        sn: '14',
+        companyname: 'Guaranty Trust ',
+        companyType: 'Direct Customer',
+        companyEmail: 'company@email.com',
+        agreementType: 'Addendum Agreement',
+        customerID: '542023',
+        status: 'New',
+        action: '',
+    },
+    {
+        id: 15,
+        sn: '15',
+        companyname: 'Chocolate City ',
+        companyType: 'Strategic partner',
+        companyEmail: 'company@email.com',
+        agreementType: 'GSPA Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        id: 16,
+        sn: '16',
+        companyname: 'Chanchangi Airlines',
+        companyEmail: 'company@email.com',
+        companyType: 'Direct Customer',
+        agreementType: 'GSPA Agreement',
+        customerID: '542023',
+        status: 'New',
+        action: '',
+    },
+    {
+        id: 17,
+        sn: '17',
+        companyname: 'Cassava Republic ',
+        companyType: 'Strategic partner',
+        companyEmail: 'company@email.com',
+        agreementType: 'Addendum Agreement',
+        customerID: '542023',
+        status: 'New',
+        action: '',
+    },
+    {
+        id: 18,
+        sn: '18',
+        companyname: 'Nigerian  Corporation',
+        companyEmail: 'company@email.com',
+        companyType: 'Strategic partner',
+        agreementType: 'Supplement Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        id: 19,
+        sn: '19',
+        companyname: 'ROCAD Construction ',
+        companyEmail: 'company@email.com',
+        companyType: 'Direct Customer',
+        agreementType: 'Supplement Agreement',
+        customerID: '542023',
+        status: 'Approved',
+        action: '',
+    },
+    {
+        id: 20,
+        sn: '20',
+        companyname: 'Wema Bank',
+        companyType: 'Strategic partner',
+        companyEmail: 'company@email.com',
+        agreementType: 'Addendum Agreement',
+        customerID: '542023',
+        status: 'Approved',
         action: '',
     },
 

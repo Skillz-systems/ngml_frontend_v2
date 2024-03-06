@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { TenderTitleData } from '@/Data';
 import { FilterList } from '@mui/icons-material';
 import { IconButton, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useState } from 'react';
-import SelectedDateModal from '../SelectedDate/SelectedDateModal';
-import { TenderTitleData } from '@/Data';
+import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
 
 interface TenderTitleTableProps {
@@ -70,7 +70,7 @@ const TenderTitleTable = () => {
     //         row.companyname.toLowerCase().includes(lowercasedSearch) ||
     //         row.companyType.toLowerCase().includes(lowercasedSearch)
     //     );
-    
+
     //     if (selectedAgreement !== 'All Contracts') {
     //         filtered = filtered.filter(row =>
     //             row.details.some(detail =>
@@ -78,7 +78,7 @@ const TenderTitleTable = () => {
     //             )
     //         );
     //     }
-    
+
     //     setFilteredRows(filtered);
     // };
 
@@ -209,7 +209,7 @@ const TenderTitleTable = () => {
                             availableDates={selectedRow.selectedDates || ['No Dates Available']}
                             companyAddress={selectedRow.companyAddress || 'Provide an Address'}
                             statusHeading={selectedRow.status}
-                            // statusStyle={getStatusStyle(selectedRow.status)}
+                        // statusStyle={getStatusStyle(selectedRow.status)}
 
                         />
                     )}

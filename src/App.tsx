@@ -1,6 +1,7 @@
 // import React, { useState } from 'react'
 
-import TenderTitleTable from './Components/TableComponent/TenderTitleTable/TenderTitleTable';
+import EoiRequestTable from './Components/TableComponent/EoiRequestTable/EoiRequestTable';
+
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
         <p className="">Vite and React</p>
       </div>
       <div>
-        < TenderTitleTable />
+        < EoiRequestTable/>
       </div>
     </>
 

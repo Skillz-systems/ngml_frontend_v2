@@ -1,12 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { EoiRequestData } from '@/Data';
 import { FilterList } from '@mui/icons-material';
 import { IconButton, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useState } from 'react';
-import { fundersData } from '../../../Data';
-import SelectedDateModal from './SelectedDateModal';
+import { useEffect, useState } from 'react';
+import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
 
-interface SelectedDateTableProps {
+interface EoiRequestTableProps {
     id: number;
     companyname: string;
     companyType: string;
@@ -17,57 +18,65 @@ interface SelectedDateTableProps {
     companyEmail?: string;
     companyNumber?: string;
     companyAddress?: string;
+    companyStatus?: string;
+
 
 }
 
-const rows = fundersData
+const rows = EoiRequestData
 
 
 
 
-const SelectedDateTable = () => {
+const EoiRequestTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<SelectedDateTableProps[]>(rows);
+    const [filteredRows, setFilteredRows] = useState<EoiRequestTableProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<SelectedDateTableProps | null>(null);
+    const [selectedRow, setSelectedRow] = useState<EoiRequestTableProps | null>(null);
+    const [selectedStatus, setSelectedStatus] = useState<string>('All Contracts');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const handleOpen = (row: SelectedDateTableProps) => {
+    useEffect(() => {
+        filterData();
+    }, [searchText, selectedStatus]);
+
+
+    const companyStatus = [...new Set(rows.map(row => row.status))];
+
+    const handleOpen = (row: EoiRequestTableProps) => {
         setSelectedRow(row);
         setOpen(true);
     };
 
     const handleClose = () => setOpen(false);
 
-
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
-        filterData(value);
     };
 
-    const filterData = (search: string) => {
-        const lowercasedSearch = search.toLowerCase();
-        const filtered = rows.filter((row) =>
-            row.companyname.toLowerCase().includes(lowercasedSearch) ||
-            row.companyType.toLowerCase().includes(lowercasedSearch)
-        );
+    const filterData = () => {
+        let filtered = rows;
+        if (selectedStatus !== 'All Contracts') {
+            filtered = filtered.filter(row => row.status === selectedStatus);
+        }
+        if (searchText) {
+            const lowercasedSearch = searchText.toLowerCase();
+            filtered = filtered.filter(row =>
+                row.companyname.toLowerCase().includes(lowercasedSearch) ||
+                row.companyType.toLowerCase().includes(lowercasedSearch)
+            );
+        }
         setFilteredRows(filtered);
     };
 
     const handleFilterClick = () => {
-        console.log('Filter icon clicked');
+        setDropdownOpen(!dropdownOpen);
+        setSelectedStatus('All Contracts');
     };
 
-    const getStatusStyle = (status: string) => {
-        switch (status) {
-            case 'Date Approved':
-                return { backgroundColor: '#D2F69E', color: '#005828' };
-            case 'Request Approval':
-                return { backgroundColor: '#FFF3D5', color: '#475467' }; // For inline styles
-            default:
-                return {};
-        }
-    };
+
+
 
 
 
@@ -88,7 +97,7 @@ const SelectedDateTable = () => {
             headerName: 'COMPANY NAME',
             width: 304,
             renderCell: (params: GridRenderCellParams) => (
-                <div className='text-xs font-[600] text-[#49526A] leading-3'>
+                <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
                     {params.row.companyname}
                 </div>
             ),
@@ -99,41 +108,47 @@ const SelectedDateTable = () => {
             width: 151,
             renderCell: (params: GridRenderCellParams) => (
                 <div
-                    className='text-[12px] font-[400] text-[#49526A] leading-3'>
+                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
                     {params.row.companyType}
                 </div>
             ),
         },
         {
-            field: 'selectedDates',
-            headerName: 'SELECTED DATES',
-            width: 351,
+            field: 'customerID',
+            headerName: 'CUSTOMER ID',
+            width: 151,
             renderCell: (params) => (
-                <div className='text-[12px] font-[500] text-[#49526A] leading-3 flex gap-[10px]'>
-                    {params.row.selectedDates ? params.row.selectedDates.map((date: string, index: number) => (
-                        <div key={index} className='bg-[#EAEEF2] h-[24px] w-[92px] flex items-center justify-center rounded-[24px] '>
-                            {date}
-                        </div>
-                    )) : 'No Dates Selected'}
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.customerID}
                 </div>
             )
         },
         {
-            field: 'status',
+            field: 'companyEmail',
+            headerName: 'EMAIL',
+            width: 200,
+            renderCell: (params) => (
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.companyEmail}
+                </div>
+            )
+        },
+        {
+            field: 'companyStatus',
             headerName: 'STATUS',
             width: 146,
             renderCell: (params: GridRenderCellParams) => {
-                let classNames = 'text-xs h-6 rounded-full flex justify-center items-center px-2.5 ';
+                let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
                 switch (params.row.status) {
-                    case 'Date Approved':
+                    case 'New':
+                        classNames += 'bg-[#EAEEF2] text-[#050505] ';
+                        break;
+                    case 'Approved':
                         classNames += 'bg-[#D2F69E] text-[#005828] ';
                         break;
-                    case 'Request Approval':
-                        classNames += 'bg-[#FFF3D5] text-[#475467] border border-[ #E2E4EB] ';
-                        break;
-                    case 'Dates Selected':
-                        classNames += 'border border-[E2E4EB] ';
+                    case 'Disapproved':
+                        classNames += 'bg-[#FD838F] text-[#FFFFFF] ';
                         break;
                     default:
                         classNames += 'text-[E2E4EB] ';
@@ -185,17 +200,16 @@ const SelectedDateTable = () => {
                             availableDates={selectedRow.selectedDates || ['No Dates Available']}
                             companyAddress={selectedRow.companyAddress || 'Provide an Address'}
                             statusHeading={selectedRow.status}
-                            statusStyle={getStatusStyle(selectedRow.status)}
 
                         />
                     )}
                 </div>
             </Modal>
-            <div className='flex items-center justify-between border border-[#CCD0DC] h-[60px] p-[20px] '>
+            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
                 <div className='italic text-[12px] text-[#828DA9]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex justify-end  items-center gap-[8px]	'>
+                <div className='flex justify-end  items-center gap-[8px] relative'>
                     <TextField
                         id="search-input"
                         label="Search this list"
@@ -211,6 +225,7 @@ const SelectedDateTable = () => {
 
                             }
                         }}
+
                         sx={{
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': {
@@ -233,16 +248,25 @@ const SelectedDateTable = () => {
                             },
                         }}
                     />
-                    <div className='flex items-center rounded-[32px]  h-[32px] w-[98px] justify-center border border-[#CCD0DC] flex-row'>
-                        <div className='text-[10px] font-[400] text-[#828DA9] italic'>Filter</div>
-                        <IconButton onClick={handleFilterClick}  >
+                    <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
+                        <div className='text-[12px] font-[400] text-[#828DA9] '>Filter</div>
+                        <IconButton onClick={handleFilterClick}>
                             <FilterList />
                         </IconButton>
+                        {dropdownOpen && (
+                            <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
+                                {companyStatus.map((status, index) => (
+                                    <div key={index} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedStatus(status)}>
+                                        {status}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
 
-            <div style={{ width: '100%' }}>
+            <div>
                 <DataGrid
                     className="pointer-cursor-datagrid"
                     rows={filteredRows}
@@ -254,8 +278,10 @@ const SelectedDateTable = () => {
                             paginationModel: { page: 0, pageSize: 13 },
                         },
                     }}
+
                     pageSizeOptions={[5, 10]}
                     sx={{
+
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },
@@ -263,10 +289,10 @@ const SelectedDateTable = () => {
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
                                 fontWeight: '700',
-                                fontSize: '12px'
+                                fontSize: '12px',
+
                             },
                         },
-
                     }}
                 />
             </div>
@@ -274,6 +300,6 @@ const SelectedDateTable = () => {
     );
 }
 
-export default SelectedDateTable
+export default EoiRequestTable
 
 

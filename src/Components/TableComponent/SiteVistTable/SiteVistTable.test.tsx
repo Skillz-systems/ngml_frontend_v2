@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import SelectedDateTable from './SelectedDateTable';
+import SelectedDateTable from './SiteVistTable';
 
 vi.mock('@mui/material/Modal', () => {
   const MockModal = ({ children }: { children: React.ReactNode }) => <div>{children}</div>;
