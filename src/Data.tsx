@@ -1758,6 +1758,7 @@ export const EoiRequestData = [
         agreementType: 'Supplement Agreement',
         customerID: '542023',
         status: 'Approved',
+        approverName: 'Osoigwe Wilfred',
         action: '',
     },
     {
@@ -1801,6 +1802,7 @@ export const EoiRequestData = [
         companyType: 'Direct Customer',
         agreementType: 'GSPA Agreement',
         customerID: '542023',
+        approverName: 'Osoigwe Wilfred',
         status: 'Approved',
         action: '',
     },
@@ -1813,6 +1815,7 @@ export const EoiRequestData = [
         agreementType: 'Supplement Agreement',
         customerID: '542023',
         status: 'Approved',
+        approverName: 'Osoigwe Wilfred',
         action: '',
     },
     {
@@ -1834,7 +1837,8 @@ export const EoiRequestData = [
         companyType: 'Strategic partner',
         agreementType: 'Supplement Agreement',
         customerID: '542023',
-        status: 'Approved',
+        status: 'Pending',
+        approverName: 'Osoigwe Wilfred',
         action: '',
     },
     {
@@ -1846,6 +1850,7 @@ export const EoiRequestData = [
         agreementType: 'Supplement Agreement',
         customerID: '542023',
         status: 'Approved',
+        approverName: 'Osoigwe Wilfred',
         action: '',
     },
     {
@@ -1857,6 +1862,7 @@ export const EoiRequestData = [
         agreementType: 'GSPA Agreement',
         customerID: '542023',
         status: 'Approved',
+        approverName: 'Osoigwe Wilfred',
         action: '',
     },
     {
@@ -1868,6 +1874,7 @@ export const EoiRequestData = [
         agreementType: 'GSPA Agreement',
         customerID: '542023',
         status: 'Approved',
+        approverName: 'Osoigwe Wilfred',
         action: '',
     },
     {
@@ -1900,7 +1907,8 @@ export const EoiRequestData = [
         companyEmail: 'company@email.com',
         agreementType: 'GSPA Agreement',
         customerID: '542023',
-        status: 'Approved',
+        status: 'Pending',
+        approverName: 'Osoigwe Wilfred',
         action: '',
     },
     {
@@ -1933,6 +1941,7 @@ export const EoiRequestData = [
         companyType: 'Strategic partner',
         agreementType: 'Supplement Agreement',
         customerID: '542023',
+        approverName: 'Osoigwe Wilfred',
         status: 'Approved',
         action: '',
     },
@@ -1945,6 +1954,7 @@ export const EoiRequestData = [
         agreementType: 'Supplement Agreement',
         customerID: '542023',
         status: 'Approved',
+        approverName: 'Osoigwe Wilfred',
         action: '',
     },
     {
@@ -1956,6 +1966,7 @@ export const EoiRequestData = [
         agreementType: 'Addendum Agreement',
         customerID: '542023',
         status: 'Approved',
+        approverName: 'Osoigwe Wilfred',
         action: '',
     },
 

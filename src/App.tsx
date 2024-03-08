@@ -12,7 +12,9 @@ function App() {
         <p className="">Vite and React</p>
       </div>
       <div>
-        < EoiRequestTable/>
+        < EoiRequestTable
+
+        />
       </div>
     </>
 

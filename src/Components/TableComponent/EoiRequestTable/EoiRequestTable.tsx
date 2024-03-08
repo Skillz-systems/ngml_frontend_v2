@@ -4,7 +4,7 @@ import { FilterList } from '@mui/icons-material';
 import { IconButton, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
+import EoiModal from './EoiModal';
 
 
 interface EoiRequestTableProps {
@@ -19,8 +19,7 @@ interface EoiRequestTableProps {
     companyNumber?: string;
     companyAddress?: string;
     companyStatus?: string;
-
-
+    approverName?: string;
 }
 
 const rows = EoiRequestData
@@ -97,7 +96,7 @@ const EoiRequestTable = () => {
             headerName: 'COMPANY NAME',
             width: 304,
             renderCell: (params: GridRenderCellParams) => (
-                <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
+                <div className='text-[12px] font-[600] text-[#49526A] leading-3'>
                     {params.row.companyname}
                 </div>
             ),
@@ -108,7 +107,7 @@ const EoiRequestTable = () => {
             width: 151,
             renderCell: (params: GridRenderCellParams) => (
                 <div
-                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
+                    className='text-[12px] font-[400] text-[#49526A] leading-3'>
                     {params.row.companyType}
                 </div>
             ),
@@ -118,7 +117,7 @@ const EoiRequestTable = () => {
             headerName: 'CUSTOMER ID',
             width: 151,
             renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.customerID}
                 </div>
             )
@@ -128,7 +127,7 @@ const EoiRequestTable = () => {
             headerName: 'EMAIL',
             width: 200,
             renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.companyEmail}
                 </div>
             )
@@ -149,6 +148,9 @@ const EoiRequestTable = () => {
                         break;
                     case 'Disapproved':
                         classNames += 'bg-[#FD838F] text-[#FFFFFF] ';
+                        break;
+                    case 'Pending':
+                        classNames += 'bg-[#FFD181] text-[#050505] ';
                         break;
                     default:
                         classNames += 'text-[E2E4EB] ';
@@ -190,16 +192,15 @@ const EoiRequestTable = () => {
             >
                 <div >
                     {selectedRow && (
-                        <SelectedDateModal
+                        <EoiModal
                             handleClose={handleClose}
                             dateTime={'09th, Nov, 2023; 09:23:44Am'}
                             status={selectedRow.status || 'Default Status'}
                             companyName={selectedRow.companyname || 'Provide Company Name'}
                             companyEmail={selectedRow.companyEmail || 'Provide an email address'}
                             companyNumber={selectedRow.companyNumber || 'Provide a number'}
-                            availableDates={selectedRow.selectedDates || ['No Dates Available']}
-                            companyAddress={selectedRow.companyAddress || 'Provide an Address'}
                             statusHeading={selectedRow.status}
+                            approverName={selectedRow.approverName || 'Okoro Florish'}
 
                         />
                     )}
