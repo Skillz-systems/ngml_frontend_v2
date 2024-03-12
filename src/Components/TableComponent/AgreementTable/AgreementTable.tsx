@@ -7,6 +7,22 @@ import { useEffect, useState } from 'react';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
 
+/**
+ * Defines the structure for Agreement properties used in the AgreementTable.
+ * 
+ * @interface
+ * @property {number} id - Unique identifier for the agreement.
+ * @property {string} companyname - Name of the company associated with the agreement.
+ * @property {string} companyType - Type of the company (e.g., LLC, Inc., etc.).
+ * @property {string[]} selectedDates - Optional. Dates selected for the agreement.
+ * @property {string} status - Current status of the agreement (e.g., Signed, Unsigned).
+ * @property {string} action - Action available for the agreement (e.g., View, Edit).
+ * @property {string} deadline - Optional. Deadline for the agreement.
+ * @property {string} companyEmail - Optional. Email address of the company.
+ * @property {string} companyNumber - Optional. Contact number of the company.
+ * @property {string} companyAddress - Optional. Physical address of the company.
+ */
+
 interface AgreementTableProps {
     id: number;
     companyname: string;
@@ -34,11 +50,16 @@ const AgreementTable = () => {
     const [selectedAgreement, setSelectedAgreement] = useState<string>('All Contracts');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
+    /**
+     * useEffect hook to filter data whenever searchText or selectedAgreement changes.
+     */
     useEffect(() => {
         filterData(searchText);
     }, [searchText, selectedAgreement]);
 
-
+    /**
+     * Toggles the dropdown menu for the agreement filter.
+     */
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedAgreement('All Contracts');
@@ -46,6 +67,10 @@ const AgreementTable = () => {
 
     const agreementNames = [...new Set(rows.map(row => row.agreementType))];
 
+    /**
+     * Opens a modal to show detailed information for the selected row.
+     * @param {AgreementTableProps} row - The selected row's data.
+     */
     const handleOpen = (row: AgreementTableProps) => {
         setSelectedRow(row);
         setOpen(true);
@@ -53,11 +78,20 @@ const AgreementTable = () => {
 
     const handleClose = () => setOpen(false);
 
+    /**
+     * Handles changes to the search input field and updates the searchText state.
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
+     */
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
     };
 
+
+    /**
+    * Filters the rows based on the search text and selected agreement type.
+    * @param {string} search - The current text in the search input field.
+    */
     const filterData = (search: string) => {
         const lowercasedSearch = search.toLowerCase();
         let filtered = rows.filter((row) =>
@@ -72,6 +106,11 @@ const AgreementTable = () => {
 
 
 
+    /**
+    * Returns a style object based on the agreement's status.
+    * @param {string} status - The status of the agreement.
+    * @returns {React.CSSProperties} The style object for the status.
+    */
     const getStatusStyle = (status: string) => {
         switch (status) {
             case 'Signed':
@@ -294,7 +333,7 @@ const AgreementTable = () => {
                         },
                     }}
                 />
-            </div>
+            </div>            
         </div>
     );
 }
