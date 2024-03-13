@@ -1,10 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FilterList } from '@mui/icons-material';
-import { IconButton, TextField } from '@mui/material';
+import { FilterList, SearchOutlined } from '@mui/icons-material';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import { ComplaintData } from '../../../Data';
 
+/**
+ * Interface for the props of the ComplaintTable component.
+ * @interface ComplaintTableProps
+ * @property {number} id - Unique identifier for a complaint.
+ * @property {string} [companyname] - Name of the company associated with the complaint.
+ * @property {string} [companyType] - Type of the company associated with the complaint.
+ * @property {string[]} [selectedDates] - Array of dates relevant to the complaint.
+ * @property {string} [status] - Current status of the complaint.
+ * @property {string} [action] - Action taken or required for the complaint.
+ * @property {string} [deadline] - Deadline for the complaint resolution.
+ * @property {string} [companyEmail] - Email address of the company.
+ * @property {string} [companyNumber] - Contact number of the company.
+ * @property {string} [companyAddress] - Physical address of the company.
+ */
 
 interface ComplaintTableProps {
     id: number;
@@ -50,6 +64,11 @@ const ComplaintTable = () => {
         setSearchText(value);
     };
 
+
+    /**
+    * Filters the complaint data based on the search text and selected status.
+    * @param {string} search - The search text used to filter complaints by company name or company type.
+    */
     const filterData = (search: string) => {
         const lowercasedSearch = search.toLowerCase();
         let filtered = rows.filter((row) =>
@@ -159,12 +178,16 @@ const ComplaintTable = () => {
                         value={searchText}
                         onChange={handleSearchChange}
                         InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchOutlined />
+                                </InputAdornment>
+                            ),
                             style: {
                                 borderRadius: '32px',
                                 width: '200px',
                                 height: '35px',
-
-                            }
+                            },
                         }}
 
                         sx={{

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AgreementData } from '@/Data';
-import { FilterList } from '@mui/icons-material';
-import { IconButton, Modal, TextField } from '@mui/material';
+import { FilterList, SearchOutlined } from '@mui/icons-material';
+import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
@@ -256,14 +256,17 @@ const AgreementTable = () => {
                         value={searchText}
                         onChange={handleSearchChange}
                         InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <SearchOutlined className='h-[16px] w-[16px]'/> 
+                              </InputAdornment>
+                            ),
                             style: {
-                                borderRadius: '32px',
-                                width: '200px',
-                                height: '35px',
-
-                            }
-                        }}
-
+                              borderRadius: '32px',
+                              width: '200px',
+                              height: '35px',
+                            },
+                          }}
                         sx={{
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': {
@@ -285,6 +288,7 @@ const AgreementTable = () => {
                                 },
                             },
                         }}
+                       
                     />
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
                         <div className='text-[12px] font-[400] text-[#828DA9] '>Filter</div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import ComplaintTable from './Components/TableComponent/ComplaintTable/ComplaintTable';
 
 
 
@@ -10,7 +10,7 @@ function App() {
           <p className="">Vite and React</p>
         </div>
         <div>
-         
+         <ComplaintTable />
         </div>
       </>
     );
