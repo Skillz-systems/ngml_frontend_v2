@@ -5,7 +5,7 @@ import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
-interface DailyFrequencyProps {
+interface DailyVolumnProps {
     id: number;
     companyname: string;
     companyType: string;
@@ -22,11 +22,11 @@ interface DailyFrequencyProps {
 const rows = DailyFrequencyData
 
 
-const DailyFrequencyTable = () => {
+const DailyVolumnTable = () => {
     const [searchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<DailyFrequencyProps[]>(rows);
+    const [filteredRows, setFilteredRows] = useState<DailyVolumnProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<DailyFrequencyProps | null>(null);
+    const [selectedRow, setSelectedRow] = useState<DailyVolumnProps | null>(null);
     const [selectedMonth, setSelectedMonth] = useState<string>('');
     const [selectedYear, setSelectedYear] = useState<string>('');
 
@@ -34,7 +34,7 @@ const DailyFrequencyTable = () => {
         filterData();
     }, [searchText, selectedMonth, selectedYear]);
 
-    const handleOpen = (row: DailyFrequencyProps) => {
+    const handleOpen = (row: DailyVolumnProps) => {
         setSelectedRow(row);
         setOpen(true);
     };
@@ -257,6 +257,6 @@ const DailyFrequencyTable = () => {
     );
 }
 
-export default DailyFrequencyTable
+export default DailyVolumnTable
 
 
