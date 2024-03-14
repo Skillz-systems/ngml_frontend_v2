@@ -1,4 +1,4 @@
-import FeedbackTable from './Components/TableComponent/FeedbackTable/FeedbackTable';
+import ProcessingCustomerTable from './Components/TableComponent/ProcessingCustomerTable/ProcessingCustomerTable';
 
 
 
@@ -10,7 +10,7 @@ function App() {
           <p className="">Vite and React</p>
         </div>
         <div>
-         <FeedbackTable />
+         <ProcessingCustomerTable />
         </div>
       </>
     );

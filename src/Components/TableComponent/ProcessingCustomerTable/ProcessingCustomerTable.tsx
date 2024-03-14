@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // import Pagination from '@/Components/Pagination/Pagination';
 import { ProcessingCustomerData } from '@/Data';
-import { FilterList } from '@mui/icons-material';
-import { IconButton, TextField } from '@mui/material';
+import { FilterList, SearchOutlined } from '@mui/icons-material';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 
@@ -269,12 +269,16 @@ const ProcessingCustomerTable = () => {
                         value={searchText}
                         onChange={handleSearchChange}
                         InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <SearchOutlined />
+                                </InputAdornment>
+                            ),
                             style: {
                                 borderRadius: '32px',
                                 width: '200px',
                                 height: '35px',
-
-                            }
+                            },
                         }}
 
                         sx={{
