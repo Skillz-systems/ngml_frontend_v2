@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { EoiRequestData } from '@/Data';
-import { FilterList } from '@mui/icons-material';
-import { IconButton, Modal, TextField } from '@mui/material';
+import { FilterList, SearchOutlined } from '@mui/icons-material';
+import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import EoiModal from './EoiModal';
@@ -219,12 +219,16 @@ const EoiRequestTable = () => {
                         value={searchText}
                         onChange={handleSearchChange}
                         InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <SearchOutlined />
+                                </InputAdornment>
+                            ),
                             style: {
                                 borderRadius: '32px',
                                 width: '200px',
                                 height: '35px',
-
-                            }
+                            },
                         }}
 
                         sx={{

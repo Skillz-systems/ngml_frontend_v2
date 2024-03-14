@@ -258,7 +258,7 @@ const AgreementTable = () => {
                         InputProps={{
                             endAdornment: (
                               <InputAdornment position="end">
-                                <SearchOutlined className='h-[16px] w-[16px]'/> 
+                                <SearchOutlined/> 
                               </InputAdornment>
                             ),
                             style: {

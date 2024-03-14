@@ -178,8 +178,8 @@ const ComplaintTable = () => {
                         value={searchText}
                         onChange={handleSearchChange}
                         InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
+                            endAdornment: (
+                                <InputAdornment position="end">
                                     <SearchOutlined />
                                 </InputAdornment>
                             ),

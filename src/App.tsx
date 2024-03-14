@@ -1,4 +1,4 @@
-import DailyVolumnTable from './Components/TableComponent/DailyVolumnTable/DailyVolumnTable';
+import FeedbackTable from './Components/TableComponent/FeedbackTable/FeedbackTable';
 
 
 
@@ -10,7 +10,7 @@ function App() {
           <p className="">Vite and React</p>
         </div>
         <div>
-         <DailyVolumnTable />
+         <FeedbackTable />
         </div>
       </>
     );
