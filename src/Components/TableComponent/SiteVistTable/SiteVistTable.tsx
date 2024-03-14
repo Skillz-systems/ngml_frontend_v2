@@ -1,5 +1,5 @@
-import { FilterList } from '@mui/icons-material';
-import { IconButton, Modal, TextField } from '@mui/material';
+import { FilterList, SearchOutlined } from '@mui/icons-material';
+import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { fundersData } from '../../../Data';
@@ -204,12 +204,16 @@ const SelectedDateTable = () => {
                         value={searchText}
                         onChange={handleSearchChange}
                         InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <SearchOutlined />
+                                </InputAdornment>
+                            ),
                             style: {
                                 borderRadius: '32px',
                                 width: '200px',
                                 height: '35px',
-
-                            }
+                            },
                         }}
                         sx={{
                             '& .MuiOutlinedInput-root': {
