@@ -12,16 +12,17 @@ const PasswordResetPage: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleEmailChange = (value: string) => {
-        setEmail(value);
+    const handleEmailChange = (value: string | number | boolean | readonly string[] | undefined) => {
+        console.log(value)
+        setEmail(value as string);
     };
 
-    const handlePasswordChange = (value: string) => {
-        setPassword(value);
+    const handlePasswordChange = (value: string | number | boolean | readonly string[] | undefined) => {
+        setPassword(value as string);
     };
 
-    const handleConfirmPasswordChange = (value: string) => {
-        setConfirmPassword(value);
+    const handleConfirmPasswordChange = (value: string | number | boolean | readonly string[] | undefined) => {
+        setConfirmPassword(value as string);
     };
 
     const handleResetPassword = () => {
@@ -84,8 +85,8 @@ const PasswordResetPage: React.FC = () => {
                 </AuthContainer>
             </div>
             <div className='mb-10 mr-6 ml-6' style={{ position: 'relative' }}>
-                <ContentContainer type="white" width="100%" height="30px" borderRadius="20px">
-                    <div style={{ width: '100%' }}>
+                <ContentContainer type="white" width="100%" height="30px" borderRadius={20}>
+                    <div style={{ width: '100%', overflow: 'hidden', wordWrap: 'break-word' }}>
                         <p className='text-center text-sm md:text-sm' style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>This Portal is a Property of NNPC Gas Marketing Limited</p>
                     </div>
                 </ContentContainer>
