@@ -7,6 +7,23 @@ import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 
 
+
+/**
+ * Interface representing the properties of a processing customer entry.
+ * @typeof {Object} ProcessingCustomerTableProps
+ * @property {number} id - Unique identifier for the processing customer entry.
+ * @property {string} sn - Serial number of the processing customer entry.
+ * @property {string} companyname - Name of the company.
+ * @property {string} companyType - Type of the company (e.g., LLC, Corporation).
+ * @property {string} request - Current status of the request (e.g., In Progress, Approved).
+ * @property {string} ddqform - Status of the Due Diligence Questionnaire form (e.g., In Progress, Completed).
+ * @property {string} sitevisits - Status of site visits (e.g., In Progress, Completed).
+ * @property {string} analysis - Status of the analysis phase (e.g., In Progress, Completed).
+ * @property {string} agreement - Status of the agreement phase (e.g., In Progress, Completed).
+ * @property {string} connectProject - Indicates if the project is connected.
+ * @property {string} statusUpdate - Latest status update on the processing customer entry.
+ * @property {string} action - Actions that can be taken on the entry.
+ */
 interface ProcessingCustomerTableProps {
     id: number;
     sn: string;
@@ -32,31 +49,27 @@ const ProcessingCustomerTable = () => {
     const [selectedProcessingCustomer, setSelectedProcessingCustomer] = useState<string>('Processing Customer');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    // const itemsPerPage = 5;
-    // const [currentPage, setCurrentPage] = useState(1);
-
-
-    // useEffect(() => {
-    //     // Filter data based on currentPage and itemsPerPage
-    //     const startIndex = (currentPage - 1) * itemsPerPage;
-    //     const endIndex = startIndex + itemsPerPage;
-    //     const currentItems = filteredRows.slice(startIndex, endIndex);
-    // }, [currentPage, filteredRows]);
 
     useEffect(() => {
         filterData(searchText);
     }, [searchText, selectedProcessingCustomer]);
 
-
+    /**
+     * Toggles the visibility of the request filter dropdown.
+     */
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedProcessingCustomer('Processing Customer');
     };
 
 
-
     const agreementNames = [...new Set(rows.map(row => row.request))];
 
+
+    /**
+     * Handles changes in the search input field, updating the search text state.
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The change event from the search input field.
+     */
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);

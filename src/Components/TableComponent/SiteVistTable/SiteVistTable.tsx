@@ -6,6 +6,22 @@ import { fundersData } from '../../../Data';
 import SelectedDateModal from './SiteVistTableModal';
 
 
+
+/**
+ * Interface representing the properties of a selected date entry for a company.
+ * @typeof {Object} SelectedDateTableProps
+ * @property {number} id - Unique identifier for the entry.
+ * @property {string} companyname - Name of the company.
+ * @property {string} companyType - Type of the company (e.g., LLC, Corporation).
+ * @property {string[]} [selectedDates] - Dates selected by the company.
+ * @property {string} status - Current status of the date selection (e.g., Date Approved, Request Approval).
+ * @property {string} action - Action to be taken on the entry.
+ * @property {string} [deadline] - Optional deadline associated with the date selection.
+ * @property {string} [companyEmail] - Optional email address of the company.
+ * @property {string} [companyNumber] - Optional contact number of the company.
+ * @property {string} [companyAddress] - Optional physical address of the company.
+ */
+
 interface SelectedDateTableProps {
     id: number;
     companyname: string;

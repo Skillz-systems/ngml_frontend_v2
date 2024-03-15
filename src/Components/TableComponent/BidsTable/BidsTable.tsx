@@ -6,7 +6,20 @@ import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useState } from 'react';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
-
+/**
+ * Represents the properties of a single bid in the bids table.
+ * @typeof {Object} BidsTableProps
+ * @property {number} id - The unique identifier for the bid.
+ * @property {string} companyname - The name of the company that submitted the bid.
+ * @property {string} companyType - The type of the company (e.g., LLC, Corporation).
+ * @property {string[]} [selectedDates] - Optional array of dates selected for the bid.
+ * @property {string} status - The current status of the bid (e.g., Pending, Approved).
+ * @property {string} action - The action to be taken on the bid (e.g., View, Edit).
+ * @property {string} [deadline] - Optional deadline for the bid submission.
+ * @property {string} [companyEmail] - Optional email address of the company.
+ * @property {string} [companyNumber] - Optional contact number of the company.
+ * @property {string} [companyAddress] - Optional physical address of the company.
+ */
 interface BidsTableProps {
     id: number;
     companyname: string;
@@ -20,6 +33,14 @@ interface BidsTableProps {
     companyAddress?: string;
 
 }
+
+/**
+ * Represents additional details for a bid.
+ * @typedef {Object} Detail
+ * @property {string} type - The type of detail.
+ * @property {string} type2 - An additional type of detail.
+ * @property {string} dept - The department associated with the detail.
+ */
 
 interface Detail {
     type: string;
@@ -40,7 +61,9 @@ const BidsTable = () => {
     const [, setSelectedAgreement] = useState<string>('All Contracts');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-
+    /**
+     * Handles the action of clicking the filter button. Toggles the visibility of the dropdown and resets the selected agreement filter.
+     */
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedAgreement('All Contracts');
@@ -231,7 +254,7 @@ const BidsTable = () => {
                         <IconButton onClick={handleFilterClick}>
                             <FilterList />
                         </IconButton>
-                        
+
                     </div>
                 </div>
             </div>

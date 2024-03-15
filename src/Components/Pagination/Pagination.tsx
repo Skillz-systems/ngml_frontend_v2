@@ -1,3 +1,4 @@
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import React, { useState } from 'react';
 
 interface PaginationProps {
@@ -18,17 +19,16 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange }) => 
             <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-[40px]"
+                className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 rounded-[40px]"
             >
-                Prev
+                <KeyboardArrowLeft/>
             </button>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button
                     key={page}
                     onClick={() => handlePageChange(page)}
-                    className={`${
-                        currentPage === page ? 'bg-blue-500' : 'bg-gray-300'
-                    } hover:bg-gray-400 text-white font-bold py-2 px-4 rounded`}
+                    className={`${currentPage === page ? 'bg-green-500' : 'bg-green-300'
+                        } hover:bg-green-400 text-white font-bold py-2 px-4 rounded`}
                 >
                     {page}
                 </button>
@@ -36,9 +36,9 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange }) => 
             <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 rounded"
             >
-                Next
+                <KeyboardArrowRight/>
             </button>
         </div>
     );

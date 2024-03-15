@@ -7,6 +7,22 @@ import { useEffect, useState } from 'react';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
 
+
+/**
+ * Properties for an individual tender entry in the tender table.
+ * @typeof {Object} TenderTypeProps
+ * @property {number} id - Unique identifier for the tender entry.
+ * @property {string} companyname - Name of the company associated with the tender.
+ * @property {string} companyType - Type of company (e.g., LLC, Corporation).
+ * @property {string[]} [selectedDates] - Dates selected for the tender process, if any.
+ * @property {string} [status] - Current status of the tender (e.g., Open, Closed).
+ * @property {string} action - Action to be taken on the tender entry (e.g., View, Edit).
+ * @property {string} [deadline] - Deadline for the tender submission, if applicable.
+ * @property {string} [companyEmail] - Email address of the company.
+ * @property {string} [companyNumber] - Contact number of the company.
+ * @property {string} [companyAddress] - Physical address of the company.
+ */
+
 interface TenderTypeProps {
     id: number;
     companyname: string;
@@ -58,6 +74,10 @@ const TenderTable = () => {
     const category = [...new Set(rows.map(row => row.category))];
 
 
+    /**
+     * Opens a modal to display detailed information for a selected tender entry.
+     * @param {TenderTypeProps} row - The tender entry to display in the modal.
+     */
     const handleOpen = (row: TenderTypeProps) => {
         setSelectedRow(row);
         setOpen(true);
@@ -66,11 +86,22 @@ const TenderTable = () => {
 
     const handleClose = () => setOpen(false);
 
+
+     /**
+     * Updates the search text state based on user input in the search field.
+     * Filters the tender rows based on the updated search text.
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The change event from the search input field.
+     */
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
     };
 
+
+     /**
+     * Filters the tender rows based on search text, selected tender type, and category.
+     * @param {string} search - The current search text.
+     */
     const filterData = (search: string) => {
         const lowercasedSearch = search.toLowerCase();
         let filtered = rows.filter((row) =>

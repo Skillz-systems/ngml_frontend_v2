@@ -7,6 +7,25 @@ import { useEffect, useState } from 'react';
 import EoiModal from './EoiModal';
 
 
+
+/**
+ * Interface representing the properties of an Expression of Interest (EOI) request.
+ * @typeof {Object} EoiRequestTableProps
+ * @property {number} id - Unique identifier for the EOI request.
+ * @property {string} companyname - Name of the company associated with the EOI request.
+ * @property {string} companyType - Type of the company (e.g., LLC, Corporation).
+ * @property {string[]} [selectedDates] - Optional dates selected for the EOI request.
+ * @property {string} status - Current status of the EOI request (e.g., New, Approved).
+ * @property {string} action - Action associated with the EOI request (e.g., Review).
+ * @property {string} [deadline] - Optional deadline for the EOI request submission.
+ * @property {string} [companyEmail] - Optional email address of the company.
+ * @property {string} [companyNumber] - Optional contact number of the company.
+ * @property {string} [companyAddress] - Optional physical address of the company.
+ * @property {string} [companyStatus] - Optional status of the company (e.g., Active, Inactive).
+ * @property {string} [approverName] - Optional name of the person who approved the request.
+ */
+
+
 interface EoiRequestTableProps {
     id: number;
     companyname: string;
@@ -42,6 +61,11 @@ const EoiRequestTable = () => {
 
     const companyStatus = [...new Set(rows.map(row => row.status))];
 
+
+    /**
+    * Handles opening a modal to display detailed information for the selected EOI request.
+    * @param {EoiRequestTableProps} row - The EOI request data to be displayed in the modal.
+    */
     const handleOpen = (row: EoiRequestTableProps) => {
         setSelectedRow(row);
         setOpen(true);
@@ -69,6 +93,10 @@ const EoiRequestTable = () => {
         setFilteredRows(filtered);
     };
 
+
+     /**
+     * Toggles the visibility of the status filter dropdown.
+     */
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedStatus('All Contracts');

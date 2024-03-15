@@ -5,6 +5,22 @@ import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
+
+/**
+ * Interface representing the properties of a daily volume entry.
+ * @typeof {Object} DailyVolumnProps
+ * @property {number} id - Unique identifier for the daily volume entry.
+ * @property {string} companyname - Name of the company associated with the entry.
+ * @property {string} companyType - Type of the company (e.g., LLC, Corporation).
+ * @property {string[]} [selectedDates] - Optional. Dates selected for the entry.
+ * @property {string} [status] - Optional. Current status of the entry.
+ * @property {string} action - Action to be taken on the entry (e.g., View, Edit).
+ * @property {string} [deadline] - Optional. Deadline for the entry submission.
+ * @property {string} [companyEmail] - Optional. Email address of the company.
+ * @property {string} [companyNumber] - Optional. Contact number of the company.
+ * @property {string} [companyAddress] - Optional. Physical address of the company.
+ * @property {string} [datesent] - Optional. Date when the entry was sent.
+ */
 interface DailyVolumnProps {
     id: number;
     companyname: string;
@@ -34,6 +50,11 @@ const DailyVolumnTable = () => {
         filterData();
     }, [searchText, selectedMonth, selectedYear]);
 
+
+    /**
+     * Opens a modal to display detailed information for the selected row.
+     * @param {DailyVolumnProps} row - The row data to be displayed in the modal.
+     */
     const handleOpen = (row: DailyVolumnProps) => {
         setSelectedRow(row);
         setOpen(true);

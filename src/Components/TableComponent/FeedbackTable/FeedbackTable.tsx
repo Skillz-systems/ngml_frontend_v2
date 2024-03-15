@@ -6,6 +6,21 @@ import { useEffect, useState } from 'react';
 import { FeedbackData } from '../../../Data';
 
 
+
+  /**
+ * Interface representing the properties of a feedback entry.
+ * @typeof {Object} FeedbackTableProps
+ * @property {number} id - The unique identifier for the feedback entry.
+ * @property {string} [companyname] - The name of the company providing feedback.
+ * @property {string} [companyType] - The type of the company providing feedback.
+ * @property {string[]} [selectedDates] - Optional. Dates selected related to the feedback.
+ * @property {string} [status] - Optional. The current status of the feedback (e.g., Pending, Sent).
+ * @property {string} [action] - Optional. Actions that can be taken on the feedback.
+ * @property {string} [deadline] - Optional. Deadline associated with the feedback.
+ * @property {string} [companyEmail] - Optional. Email address of the company providing feedback.
+ * @property {string} [companyNumber] - Optional. Contact number of the company providing feedback.
+ * @property {string} [companyAddress] - Optional. Physical address of the company providing feedback.
+ */
 interface FeedbackTableProps {
     id: number;
     companyname?: string;
@@ -34,6 +49,10 @@ const FeedbackTable = () => {
         filterData();
     }, [selectedStatus]);
 
+
+    /**
+     * Toggles the visibility of the status filter dropdown.
+     */
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedStatus('All Status');
@@ -42,6 +61,10 @@ const FeedbackTable = () => {
 
     const status = [...new Set(rows.map(row => row.status))];
 
+
+     /**
+     * Filters the feedback entries based on the selected status.
+     */
     const filterData = () => {
         let filtered = rows;
         if (selectedStatus !== 'All Status') {
