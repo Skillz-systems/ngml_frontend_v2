@@ -268,7 +268,7 @@ const TenderTable = () => {
                             <FilterList />
                         </IconButton>
                         {tenderTypeDropdownOpen && (
-                            <div className='absolute z-10 top-full right-30 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
+                            <div className='absolute z-10 top-full right-30 mt-2 h-[100px] w-[155px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
                                 {tenderType.map(name => (
                                     <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedAgreement(name)}>
                                         {name}
@@ -283,7 +283,7 @@ const TenderTable = () => {
                             <FilterList />
                         </IconButton>
                         {categoryDropdownOpen && (
-                            <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
+                            <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[155px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
                                 {category.map(name => (
                                     <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedCategory(name)}>
                                         {name}

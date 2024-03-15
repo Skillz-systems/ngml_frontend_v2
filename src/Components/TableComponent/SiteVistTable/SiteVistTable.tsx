@@ -79,7 +79,7 @@ const SelectedDateTable = () => {
             case 'Date Approved':
                 return { backgroundColor: '#D2F69E', color: '#005828' };
             case 'Request Approval':
-                return { backgroundColor: '#FFF3D5', color: '#475467' }; // For inline styles
+                return { backgroundColor: '#FFF3D5', color: '#475467' }; 
             default:
                 return {};
         }
