@@ -1,4 +1,4 @@
-import ProcessingCustomerTable from './Components/TableComponent/ProcessingCustomerTable/ProcessingCustomerTable';
+import TenderTable from './Components/TableComponent/TenderTable/TenderTable';
 
 
 
@@ -10,7 +10,7 @@ function App() {
           <p className="">Vite and React</p>
         </div>
         <div>
-         <ProcessingCustomerTable />
+         <TenderTable />
         </div>
       </>
     );

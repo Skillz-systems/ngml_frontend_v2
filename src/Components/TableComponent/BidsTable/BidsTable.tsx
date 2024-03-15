@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { TenderTypeData } from '@/Data';
-import { FilterList } from '@mui/icons-material';
-import { IconButton, Modal, TextField } from '@mui/material';
+import { TenderTitleData } from '@/Data';
+import { FilterList, SearchOutlined } from '@mui/icons-material';
+import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
 
-interface TenderTypeProps {
+interface BidsTableProps {
     id: number;
     companyname: string;
     companyType: string;
     selectedDates?: string[];
-    status?: string;
+    status: string;
     action: string;
     deadline?: string;
     companyEmail?: string;
@@ -21,48 +21,36 @@ interface TenderTypeProps {
 
 }
 
-const rows = TenderTypeData
+interface Detail {
+    type: string;
+    type2: string;
+    dept: string;
+}
+
+const rows = TenderTitleData as unknown as BidsTableProps[];
 
 
 
 
-const TenderTypeTable = () => {
+const BidsTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<TenderTypeProps[]>([]);
+    const [filteredRows] = useState<BidsTableProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<TenderTypeProps | null>(null);
-    const [selectedAgreement, setSelectedAgreement] = useState<string>('All Tender Types');
-    const [selectedCategory, setSelectedCategory] = useState<string>('All Categories');
-    const [tenderTypeDropdownOpen, setTenderTypeDropdownOpen] = useState(false);
-    const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
+    const [selectedRow, setSelectedRow] = useState<BidsTableProps | null>(null);
+    const [, setSelectedAgreement] = useState<string>('All Contracts');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    useEffect(() => {
-        filterData(searchText);
-    }, [searchText, selectedAgreement, selectedCategory]);
 
-    useEffect(() => {
-        filterData(searchText);
-    }, []);
-
-    const handleTenderTypeFilterClick = () => {
-        setTenderTypeDropdownOpen(!tenderTypeDropdownOpen);
-        setSelectedAgreement('All Tender Types');
+    const handleFilterClick = () => {
+        setDropdownOpen(!dropdownOpen);
+        setSelectedAgreement('All Contracts');
     };
 
-    const handleCategoryFilterClick = () => {
-        setCategoryDropdownOpen(!categoryDropdownOpen);
-        setSelectedCategory('All Categories');
-    };
 
-    const tenderType = [...new Set(rows.map(row => row.tenderType))];
-    const category = [...new Set(rows.map(row => row.category))];
-
-
-    const handleOpen = (row: TenderTypeProps) => {
+    const handleOpen = (row: BidsTableProps) => {
         setSelectedRow(row);
         setOpen(true);
     };
-
 
     const handleClose = () => setOpen(false);
 
@@ -71,78 +59,80 @@ const TenderTypeTable = () => {
         setSearchText(value);
     };
 
-    const filterData = (search: string) => {
-        const lowercasedSearch = search.toLowerCase();
-        let filtered = rows.filter((row) =>
-            row.companyname.toLowerCase().includes(lowercasedSearch) ||
-            row.companyType.toLowerCase().includes(lowercasedSearch)
-        );
-        if (selectedAgreement !== 'All Tender Types') {
-            filtered = filtered.filter(row => row.tenderType === selectedAgreement);
-        }
-        if (selectedCategory !== 'All Categories') {
-            filtered = filtered.filter(row => row.category === selectedCategory);
-        }
-        setFilteredRows(filtered);
-    };
 
 
     const columns: GridColDef[] = [
         {
             field: 'sn',
-            headerName: '',
-            width: 80,
+            headerName: 'SN',
+            width: 60,
             renderCell: (params: GridRenderCellParams) => (
-                <div className='bg-[#D2F69E] rounded-[10px] w-[68px] h-[48px] items-center flex justify-center'>
-                    <img src={params.row.sn} alt='jjjj' />
+                <div className='text-xs font-[600] text-[#49526A] leading-3'>
+                    {params.row.sn}
                 </div>
             ),
 
         },
         {
-            field: 'dateopened',
-            headerName: 'DATE OPENED',
-            width: 124,
+            field: 'name',
+            headerName: 'COMPANY NAME',
+            width: 180,
             renderCell: (params: GridRenderCellParams) => (
-                <div
-                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
-                    {params.row.dateopened}
-                </div>
-            ),
-        },
-        {
-            field: 'tenderType',
-            headerName: 'TENDER TYPE',
-            width: 151,
-            renderCell: (params: GridRenderCellParams) => (
-                <div
-                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
-                    {params.row.tenderType}
-                </div>
-            ),
-        },
-        {
-            field: 'titleDescription',
-            headerName: 'TITLE AND DESCRIPTION',
-            width: 499,
-            renderCell: (params) => (
-                <div className='flex flex-col gap-[16px]'>
-                    <div className='text-[14px] font-[700] text-[#49526A] leading-3 '>
-                        {params.row.titleDescription}
+                <div className='flex flex-col gap-[4px]'>
+                    <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
+                        {params.row.companyname}
                     </div>
-                    <div className='text-[12px] font-[400] text-[#49526A] leading-4 text-wrap '>{params.row.description}</div>
-
+                    <div
+                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
+                        {params.row.companyType}
+                    </div>
+                </div>
+            ),
+        },
+        {
+            field: 'tenderTitle',
+            headerName: 'TITLE OF TENDER',
+            width: 433,
+            renderCell: (params: GridRenderCellParams) => (
+                <div
+                    className='text-[14px] font-[700] text-[#49526A] leading-3'>
+                    {params.row.tenderTitle}
+                </div>
+            ),
+        },
+        {
+            field: 'datesubmitted',
+            headerName: 'DATE SUBMITTED',
+            width: 124,
+            renderCell: (params) => (
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.datesubmitted}
                 </div>
             )
         },
         {
-            field: 'category',
-            headerName: 'CATEGORY',
-            width: 160,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className=' bg-[#EAEEF2] h-[24px] p-[8px] rounded-[24px] flex items-center justify-center'>
-                    <div className='text-[#050505] font-[700] text-[12px]'>{params.row.category}</div>
-                </div>
+            field: 'details',
+            headerName: 'DETAILS',
+            width: 215,
+            renderCell: (params) => (
+                <ul className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.details.map((detail: Detail, index: number) => (
+                        <div key={index} className='text-[12px] font-[600] text-[#828DA9] flex flex-col gap-[10px] '>
+                            <div className='flex gap-[14px] flex items-center'>
+                                <div>TYPE</div>
+                                <div className='bg-[#D2F69E] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.type}</div>
+                            </div>
+                            <div className='flex gap-[10px] flex items-center'>
+                                <div>TYPE2</div>
+                                <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.type2}</div>
+                            </div>
+                            <div className='flex gap-[14px] flex items-center'>
+                                <div>DEPT</div>
+                                <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.dept}</div>
+                            </div>
+                        </div>
+                    ))}
+                </ul>
             )
         },
 
@@ -154,7 +144,7 @@ const TenderTypeTable = () => {
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
-                    className='text-[12px] text-[#FFFFFF] rounded-[8px] bg-[#00AF50] h-[62px] w-[84px] flex items-center justify-center cursor-pointer'>
+                    className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
                     View
                 </div>
             ),
@@ -183,7 +173,9 @@ const TenderTypeTable = () => {
                             companyNumber={selectedRow.companyNumber || 'Provide a number'}
                             availableDates={selectedRow.selectedDates || ['No Dates Available']}
                             companyAddress={selectedRow.companyAddress || 'Provide an Address'}
-                            statusHeading={selectedRow.status || 'Provide a status'}
+                            statusHeading={selectedRow.status}
+                        // statusStyle={getStatusStyle(selectedRow.status)}
+
                         />
                     )}
                 </div>
@@ -201,14 +193,17 @@ const TenderTypeTable = () => {
                         value={searchText}
                         onChange={handleSearchChange}
                         InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <SearchOutlined />
+                                </InputAdornment>
+                            ),
                             style: {
                                 borderRadius: '32px',
                                 width: '200px',
                                 height: '35px',
-
-                            }
+                            },
                         }}
-
                         sx={{
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': {
@@ -231,35 +226,12 @@ const TenderTypeTable = () => {
                             },
                         }}
                     />
-                    <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[168px] justify-center border border-[#CCD0DC] flex-row'>
-                        <div className='text-[12px] font-[400] text-[#828DA9] '>All Tender Types</div>
-                        <IconButton onClick={handleTenderTypeFilterClick}>
+                    <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
+                        <div className='text-[12px] font-[400] text-[#828DA9] '>All Bids</div>
+                        <IconButton onClick={handleFilterClick}>
                             <FilterList />
                         </IconButton>
-                        {tenderTypeDropdownOpen && (
-                            <div className='absolute z-10 top-full right-30 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
-                                {tenderType.map(name => (
-                                    <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedAgreement(name)}>
-                                        {name}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                    <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[139px] justify-center border border-[#CCD0DC] flex-row'>
-                        <div className='text-[12px] font-[400] text-[#828DA9] '>All Categories</div>
-                        <IconButton onClick={handleCategoryFilterClick}>
-                            <FilterList />
-                        </IconButton>
-                        {categoryDropdownOpen && (
-                            <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
-                                {category.map(name => (
-                                    <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedCategory(name)}>
-                                        {name}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                        
                     </div>
                 </div>
             </div>
@@ -269,7 +241,7 @@ const TenderTypeTable = () => {
                     className="pointer-cursor-datagrid"
                     rows={filteredRows}
                     columns={columns}
-                    rowHeight={96}
+                    rowHeight={104}
                     autoHeight
                     initialState={{
                         pagination: {
@@ -298,6 +270,6 @@ const TenderTypeTable = () => {
     );
 }
 
-export default TenderTypeTable
+export default BidsTable
 
 

@@ -1419,7 +1419,7 @@ export const TenderTitleData = [
         datesubmitted: '19/Oct/2023',
         details: [
             {
-                type: 'Open Tender',
+                type: 'Closed Tender',
                 type2: 'Procurement Tender',
                 dept: 'COBD',
             }
@@ -1453,7 +1453,7 @@ export const TenderTitleData = [
         datesubmitted: '11/May/2023',
         details: [
             {
-                type: 'Open Tender',
+                type: 'Closed Tender',
                 type2: 'Procurement Tender',
                 dept: 'HR',
             }
@@ -1589,7 +1589,7 @@ export const TenderTitleData = [
         datesubmitted: '20/May/2023',
         details: [
             {
-                type: 'Open Tender',
+                type: 'Closed Tender',
                 type2: 'Procurement Tender',
                 dept: 'ADMIN',
             }
@@ -1691,7 +1691,7 @@ export const TenderTitleData = [
         datesubmitted: '10/Jan/2022',
         details: [
             {
-                type: 'Open Tender',
+                type: 'Closed Tender',
                 type2: 'Procurement Tender',
                 dept: 'ADMIN',
             }
