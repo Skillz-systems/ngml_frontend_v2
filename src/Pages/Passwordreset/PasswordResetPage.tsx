@@ -35,8 +35,8 @@ const PasswordResetPage: React.FC = () => {
     };
 
     return (
-        <div style={{ minHeight: '100vh', background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="min-h-screen bg-gradient-to-b from-green-400 via-yellow-300 to-green-100 flex flex-col" style={{ background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)' }}>
+            <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
                     <h1 className='text-[25px] text-gray-500 font-semibold'>Reset Password</h1>
                     <div className='w-[100%] md:w-[350px] mx-auto space-y-4'>
@@ -84,10 +84,10 @@ const PasswordResetPage: React.FC = () => {
                     </div>
                 </AuthContainer>
             </div>
-            <div className='mb-10 mr-6 ml-6' style={{ position: 'relative' }}>
+            <div className='mb-10 mr-6 ml-6'>
                 <ContentContainer type="white" width="100%" height="30px" borderRadius={20}>
-                    <div style={{ width: '100%', overflow: 'hidden', wordWrap: 'break-word' }}>
-                        <p className='text-center text-sm md:text-sm' style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>This Portal is a Property of NNPC Gas Marketing Limited</p>
+                    <div className="w-full h-full flex justify-center items-center">
+                        <p className='text-center text-sm md:text-sm'>This Portal is a Property of NNPC Gas Marketing Limited</p>
                     </div>
                 </ContentContainer>
             </div>
