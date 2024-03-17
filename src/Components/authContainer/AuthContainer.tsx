@@ -1,5 +1,17 @@
 import React from 'react';
 
+/**
+ * AuthContainer is a styled container component designed for authentication-related content.
+ * It includes responsive design styles and a round logo image.
+ *
+ * @param {object} props - React props for the AuthContainer component.
+ * @param {React.ReactNode} props.children - The content to be displayed inside the container.
+ * @param {string} [props.backgroundColor] - Background color of the container. Default is 'rgba(255, 255, 255, 0.5)'.
+ * @param {string} [props.width] - Width of the container. Default is '400px'.
+ * @param {string} [props.height] - Height of the container. Default is 'auto'.
+ * @returns {React.FC} Returns the AuthContainer component.
+ */
+
 interface AuthContainerProps {
   children: React.ReactNode;
   backgroundColor?: string;
