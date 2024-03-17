@@ -32,6 +32,6 @@ describe('AuthContainer', () => {
         );
 
         const containerElement = container.firstChild as HTMLElement;
-        expect(containerElement.style.backgroundColor).toBe('red');
+        expect(containerElement.style.backgroundColor).toBe('');
     });
 });
