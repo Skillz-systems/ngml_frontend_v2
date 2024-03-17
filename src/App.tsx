@@ -1,9 +1,5 @@
 import { useState } from 'react';
-import { FileType } from './Components/Fileuploadinput/FileTypes';
 
-import Button from './Components/ButtonComponent/Button';
-import FileUploadInput from './Components/Fileuploadinput/FileUploadInput';
-import Modal from './Components/Modal/Modal';
 import PasswordResetPage from './Pages/Passwordreset/PasswordResetPage';
 
 
@@ -157,7 +153,7 @@ function App() {
                     <li key={index}>{result}</li>
                 ))}
             </ul> */}
-     <PasswordResetPage />
+      <PasswordResetPage />
     </>
   );
 }
