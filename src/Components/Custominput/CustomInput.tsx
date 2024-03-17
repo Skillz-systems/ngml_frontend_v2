@@ -26,7 +26,7 @@ interface CustomInputProps {
     type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio';
     label: string;
     value?: string | number | boolean | readonly string[];
-    onChange: (value: string | number | boolean | readonly string[] | undefined) => void;
+    onChange: (value: string) => void;
     placeholder?: string;
     options?: string[];
     error?: string;
