@@ -161,8 +161,52 @@ function App() {
                     <li key={index}>{result}</li>
                 ))}
             </ul> */}
-      
-      <PasswordResetPage />
+      <div className="flex justify-center items-center h-screen">
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+          onClick={toggleModal}
+        >
+          Open Modal
+        </button>
+        <Modal isOpen={isOpen} onClose={toggleModal}
+          title="Create New Customer"
+          subTitle='Only use this method if the customer is already an existing customer of NGML'
+          size="medium"
+          buttons={[
+            <Button
+              key="cancelButton"
+              type="outline"
+              label="Cancel"
+              action={toggleModal}
+              width="7rem"
+              radius='20px'
+              height='40px'
+              color='white'
+              backgroundColor='#ff0800'
+
+            />,
+            <Button
+              key="submitButton"
+              type="outline"
+              label="Create Customer"
+              action={toggleModal}
+              width="16rem"
+              radius='20px'
+              height='40px'
+              backgroundColor='white'
+            />,
+          ]}
+        >
+          {/* Your content goes here */}
+          <FileUploadInput
+            maxSizeMB={1}
+            required title="Passport Photograph"
+            fileType={[FileType.JPEG, FileType.PNG]}
+            fileDescription='Scan the copy of your original document (pdf, png, jpg)'
+          />
+          <p>This is the content of the modal.</p>
+        </Modal>
+      </div>
     </>
   );
 }
