@@ -274,7 +274,6 @@ const SelectedDateTable = () => {
                             paginationModel: { page: 0, pageSize: 13 },
                         },
                     }}
-                    pageSizeOptions={[5, 10]}
                     sx={{
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',

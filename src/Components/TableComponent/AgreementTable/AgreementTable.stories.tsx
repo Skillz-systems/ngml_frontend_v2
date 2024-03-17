@@ -4,7 +4,7 @@ import AgreementTable from './AgreementTable';
 
 
 const meta: Meta<typeof AgreementTable> = {
-    title: 'Components/AgreementTable',
+    title: 'Tables/AgreementTable',
     component: AgreementTable,
     parameters: {
         layout: 'fullscreen',

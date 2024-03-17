@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ProcessingCustomerTable from './ProcessingCustomerTable';
 
 const meta: Meta<typeof ProcessingCustomerTable> = {
-    title: 'Components/ProcessingCustomerTable',
+    title: 'Tables/ProcessingCustomerTable',
     component: ProcessingCustomerTable,
     parameters: {
         layout: 'fullscreen',

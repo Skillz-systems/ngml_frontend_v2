@@ -190,7 +190,6 @@ const FeedbackTable = () => {
                         },
                     }}
 
-                    pageSizeOptions={[5, 10]}
                     sx={{
 
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {

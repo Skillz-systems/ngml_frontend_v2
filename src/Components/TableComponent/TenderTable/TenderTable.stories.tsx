@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import TenderTable from './TenderTable';
 
 const meta: Meta<typeof TenderTable> = {
-    title: 'Components/TenderTable',
+    title: 'Tables/TenderTable',
     component: TenderTable,
     parameters: {
         layout: 'fullscreen',

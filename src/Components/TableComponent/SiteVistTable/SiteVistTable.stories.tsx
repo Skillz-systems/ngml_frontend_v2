@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import SelectedDateTable from './SiteVistTable';
 
 const meta: Meta<typeof SelectedDateTable> = {
-    title: 'Components/SelectedDateTable',
+    title: 'Tables/SelectedDateTable',
     component: SelectedDateTable,
     parameters: {
         layout: 'fullscreen',

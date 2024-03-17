@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import FeedbackTable from './FeedbackTable';
 
 const meta: Meta<typeof FeedbackTable> = {
-    title: 'Components/FeedbackTable',
+    title: 'Tables/FeedbackTable',
     component: FeedbackTable,
     parameters: {
         layout: 'fullscreen',

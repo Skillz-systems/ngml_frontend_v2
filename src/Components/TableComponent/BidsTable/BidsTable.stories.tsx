@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import BidsTable from './BidsTable';
 
 const meta: Meta<typeof BidsTable> = {
-    title: 'Components/BidsTable',
+    title: 'Tables/BidsTable',
     component: BidsTable,
     parameters: {
         layout: 'fullscreen',
