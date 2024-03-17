@@ -50,11 +50,11 @@ margin-bottom: 30px;
 
 const LogoImage = styled.img`
 position: absolute;
-top: -40px;
+top: -35px;
 left: 50%;
 transform: translateX(-50%);
-width: 80px;
-height: 80px;
+width: 70px;
+height: 70px;
 border-radius: 50%;
 `;
 
