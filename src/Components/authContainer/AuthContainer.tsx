@@ -10,10 +10,10 @@ import styled from 'styled-components';
  * @styledq
  */
 
-const Container = styled.div<{ 
-  backgroundColor?: string
-  width?: string;
-  height?: string; 
+const Container = styled.div<{
+    backgroundColor?: string
+    width?: string;
+    height?: string;
 }>`
 max-width: 560px;
 width: ${(props) => props.width || '400px'};
@@ -50,11 +50,11 @@ margin-bottom: 30px;
 
 const LogoImage = styled.img`
 position: absolute;
-top: -35px;
+top: -40px;
 left: 50%;
 transform: translateX(-50%);
-width: 70px;
-height: 70px;
+width: 80px;
+height: 80px;
 border-radius: 50%;
 `;
 
@@ -77,21 +77,21 @@ border-radius: 50%;
  */
 
 interface AuthContainerProps {
-  children: React.ReactNode;
-  backgroundColor?: string;
-  width?: string;
-  height?: string;
+    children: React.ReactNode;
+    backgroundColor?: string;
+    width?: string;
+    height?: string;
 }
 
 const AuthContainer: React.FC<AuthContainerProps> = ({ children, backgroundColor, width, height }) => {
-  return (
-    <Container backgroundColor={backgroundColor} width={width} height={height}>
-      <LogoContainer>
-        <LogoImage src="assets/nnpclogo.png" alt="NGML Logo" />
-      </LogoContainer>
-      {children}
-    </Container>
-  );
+    return (
+        <Container backgroundColor={backgroundColor} width={width} height={height}>
+            <LogoContainer>
+                <LogoImage src="assets/nnpclogo.png" alt="NGML Logo" />
+            </LogoContainer>
+            {children}
+        </Container>
+    );
 };
 
 export default AuthContainer;
