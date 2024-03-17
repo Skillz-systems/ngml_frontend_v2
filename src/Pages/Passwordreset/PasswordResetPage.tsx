@@ -12,17 +12,17 @@ const PasswordResetPage: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleEmailChange = (value: string | number | boolean | readonly string[] | undefined) => {
+    const handleEmailChange = (value: string) => {
         console.log(value)
-        setEmail(value as string);
+        setEmail(value);
     };
 
-    const handlePasswordChange = (value: string | number | boolean | readonly string[] | undefined) => {
-        setPassword(value as string);
+    const handlePasswordChange = (value: string) => {
+        setPassword(value);
     };
 
-    const handleConfirmPasswordChange = (value: string | number | boolean | readonly string[] | undefined) => {
-        setConfirmPassword(value as string);
+    const handleConfirmPasswordChange = (value: string) => {
+        setConfirmPassword(value);
     };
 
     const handleResetPassword = () => {
