@@ -7,10 +7,6 @@ import Modal from './Components/Modal/Modal';
 import PasswordResetPage from './Pages/Passwordreset/PasswordResetPage';
 
 
-// import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
-// import Records from '/assets/png-icons/Records.png'
-// import Warning from '/assets/png-icons/Warning.png'
-// import Staff from '/assets/png-icons/Staff.png'
 
 function App() {
 
