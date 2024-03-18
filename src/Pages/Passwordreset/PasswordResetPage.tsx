@@ -7,62 +7,57 @@ import ContentContainer from '../../Components/Contentcontainer/ContentContainer
 import CustomInput from '../../Components/Custominput/CustomInput';
 
 const PasswordResetPage: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        confirmPassword: '',
+    });
+    const [errors, setErrors] = useState({
+        emailError: '',
+        passwordError: '',
+        confirmPasswordError: '',
+        commonError: '',
+    });
 
-    const handleEmailChange = (value: any) => {
-        setEmail(value);
-        setEmailError('');
-    };
-
-    const handlePasswordChange = (value: any) => {
-        setPassword(value);
-        setPasswordError('');
-    };
-
-    const handleConfirmPasswordChange = (value: any) => {
-        setConfirmPassword(value);
-        setConfirmPasswordError('');
+    const handleChange = (key: string) => (value: any) => {
+        setFormData({ ...formData, [key]: value });
+        setErrors({ ...errors, [`${key}Error`]: '' });
     };
 
     const handleResetPassword = () => {
         let valid = true;
+        const newErrors = { ...errors };
 
         // Email validation
-        if (!email) {
-            setEmailError('Email is required');
+        if (!formData.email) {
+            newErrors.emailError = 'Email is required';
             valid = false;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            setEmailError('Invalid email address');
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.emailError = 'Invalid email address';
             valid = false;
         }
 
         // Password validation
-        if (!password) {
-            setPasswordError('Password is required');
+        if (!formData.password) {
+            newErrors.passwordError = 'Password is required';
             valid = false;
         }
 
         // Confirm password validation
-        if (!confirmPassword) {
-            setConfirmPasswordError('Confirm password is required');
+        if (!formData.confirmPassword) {
+            newErrors.confirmPasswordError = 'Confirm password is required';
             valid = false;
-        } else if (password !== confirmPassword) {
-            setConfirmPasswordError('Passwords do not match');
+        } else if (formData.password !== formData.confirmPassword) {
+            newErrors.confirmPasswordError = 'Passwords do not match';
             valid = false;
         }
 
         if (valid) {
             // Call your password reset API or logic here
             console.log('Resetting password...');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
+            setFormData({ email: '', password: '', confirmPassword: '' });
+        } else {
+            setErrors(newErrors);
         }
     };
 
@@ -74,32 +69,32 @@ const PasswordResetPage: React.FC = () => {
                     <div className='w-[100%] md:w-[350px] mx-auto space-y-4'>
                         <CustomInput
                             type="text"
-                            value={email}
-                            onChange={handleEmailChange}
+                            value={formData.email}
+                            onChange={handleChange('email')}
                             placeholder="Enter your email"
                             styleVariant='customStyle1'
                             icon={<img src={Email} alt='Email Icon' />}
-                            error={emailError}
+                            error={errors.emailError}
                         />
                         <CustomInput
                             type="password"
-                            value={password}
-                            onChange={handlePasswordChange}
+                            value={formData.password}
+                            onChange={handleChange('password')}
                             placeholder="Enter a password"
                             styleVariant='customStyle1'
                             icon={<img src={Password} alt='Password Icon' />}
-                            error={passwordError}
+                            error={errors.passwordError}
                         />
                         <CustomInput
                             type="password"
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
+                            value={formData.confirmPassword}
+                            onChange={handleChange('confirmPassword')}
                             placeholder="Re-Enter the password"
                             styleVariant='customStyle1'
                             icon={<img src={Password} alt='Password Icon' />}
-                            error={confirmPasswordError}
+                            error={errors.confirmPasswordError}
                         />
-                        {error && <p className="text-red-500">{error}</p>}
+                        {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
                     </div>
                     <div className='mt-3 w-[98%] flex items-center justify-center'>
                         <Button
