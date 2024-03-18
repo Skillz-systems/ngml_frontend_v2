@@ -180,7 +180,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
             </label>
             <div className={containerClasses}>
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    {icon && <span className="text-gray-500 sm:text-sm bg-green-200 rounded-full p-1">{icon}</span>}
+                    {icon && <span className="text-gray-500 sm:text-sm bg-lime-200 rounded-full p-1">{icon}</span>}
                 </div>
                 {renderInput()}
                 {type === 'password' && (
