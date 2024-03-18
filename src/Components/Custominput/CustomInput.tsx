@@ -26,7 +26,7 @@ interface CustomInputProps {
     type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio';
     label: string;
     value?: string | number | boolean | readonly string[];
-    onChange: (value: string | number | boolean | readonly string[] | undefined) => void;
+    onChange: (value: string) => void;
     placeholder?: string;
     options?: string[];
     error?: string;
@@ -66,7 +66,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
     const styleVariants = {
         default: `appearance-none block w-full px-3 py-3 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
             } rounded-[13px] shadow-sm placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-green-100 sm:text-sm`, //default input
-        customStyle1: `border border-solid border-green-500 placeholder-gray-400 italic pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-green-500`, // inputs with well rounded border radius
+        customStyle1: `border border-solid border-lime-200 placeholder-gray-400 italic pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-green-500`, // inputs with well rounded border radius
         customStyle2: `rounded-[13px] placeholder-gray-400 italic pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
         customStyle3: `rounded-full placeholder-gray-300 italic pl-12 focus:outline-none focus:border-green-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-4`, // for inputs with gray background focused, rounded radius and wider input 
         customStyle4: `placeholder-black pl-12 focus:outline-none focus:border-green-200 focus:bg-white-600 border-1 solid w-full py-2`, // no border input
@@ -180,7 +180,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
             </label>
             <div className={containerClasses}>
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    {icon && <span className="text-gray-500 sm:text-sm bg-green-200 rounded-full p-1">{icon}</span>}
+                    {icon && <span className="text-gray-500 sm:text-sm bg-lime-200 rounded-full p-1">{icon}</span>}
                 </div>
                 {renderInput()}
                 {type === 'password' && (

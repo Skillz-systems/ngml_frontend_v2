@@ -1,27 +1,21 @@
-import React, { useState } from 'react'
 
-import SearchInput from './Components/Searchinput/SearchInput';
+import PasswordResetPage from './Pages/Passwordreset/PasswordResetPage';
 
 
-// import StatisticRectangleCard from "./Components/Statisticrectanclecard/StatisticRectangleCard";
-// import Records from '/assets/png-icons/Records.png'
-// import Warning from '/assets/png-icons/Warning.png'
-// import Staff from '/assets/png-icons/Staff.png'
 
 function App() {
 
-  const [searchResults, setSearchResults] = useState<string[]>([]);
 
-  const handleSearch = (query: string) => {
-      // Perform search operation here, for example, update searchResults state
-      console.log('Performing search for:', query);
-  };
+  // const handleSearch = (query: string) => {
+  //     // Perform search operation here, for example, update searchResults state
+  //     console.log('Performing search for:', query);
+  // };
 
   return (
     <>
-      <div className="">
+      {/* <div className="">
         <p className="">Vite and React</p>
-      </div>
+      </div> */}
 
       {/* <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
         <SearchComponent />
@@ -142,7 +136,7 @@ function App() {
         fileDescription='Scan the copy of your original document (pdf, png, jpg, jpeng, word)'
         />
       </div> */}
-       <SearchInput
+      {/* <SearchInput
                 onSearch={handleSearch}
                 className="mt-4"
             />
@@ -150,7 +144,8 @@ function App() {
                 {searchResults.map((result, index) => (
                     <li key={index}>{result}</li>
                 ))}
-            </ul>
+            </ul> */}
+      <PasswordResetPage />
     </>
   );
 }

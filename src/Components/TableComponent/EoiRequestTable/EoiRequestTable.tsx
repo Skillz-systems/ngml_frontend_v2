@@ -1,39 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-<<<<<<< HEAD
-import { FilterList } from '@mui/icons-material';
-import { IconButton, Modal, TextField } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
-import { AgreementData } from '../../../Data';
-import SelectedDateModal from '../SelectedDate/SelectedDateModal';
-
-=======
-import { AgreementData } from '@/Data';
+import { EoiRequestData } from '@/Data';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
 import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
+import EoiModal from './EoiModal';
+
 
 
 /**
- * Defines the structure for Agreement properties used in the AgreementTable.
- * 
- * @interface
- * @property {number} id - Unique identifier for the agreement.
- * @property {string} companyname - Name of the company associated with the agreement.
- * @property {string} companyType - Type of the company (e.g., LLC, Inc., etc.).
- * @property {string[]} selectedDates - Optional. Dates selected for the agreement.
- * @property {string} status - Current status of the agreement (e.g., Signed, Unsigned).
- * @property {string} action - Action available for the agreement (e.g., View, Edit).
- * @property {string} deadline - Optional. Deadline for the agreement.
- * @property {string} companyEmail - Optional. Email address of the company.
- * @property {string} companyNumber - Optional. Contact number of the company.
- * @property {string} companyAddress - Optional. Physical address of the company.
+ * Interface representing the properties of an Expression of Interest (EOI) request.
+ * @typeof {Object} EoiRequestTableProps
+ * @property {number} id - Unique identifier for the EOI request.
+ * @property {string} companyname - Name of the company associated with the EOI request.
+ * @property {string} companyType - Type of the company (e.g., LLC, Corporation).
+ * @property {string[]} [selectedDates] - Optional dates selected for the EOI request.
+ * @property {string} status - Current status of the EOI request (e.g., New, Approved).
+ * @property {string} action - Action associated with the EOI request (e.g., Review).
+ * @property {string} [deadline] - Optional deadline for the EOI request submission.
+ * @property {string} [companyEmail] - Optional email address of the company.
+ * @property {string} [companyNumber] - Optional contact number of the company.
+ * @property {string} [companyAddress] - Optional physical address of the company.
+ * @property {string} [companyStatus] - Optional status of the company (e.g., Active, Inactive).
+ * @property {string} [approverName] - Optional name of the person who approved the request.
  */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
 
-interface AgreementTableProps {
+
+interface EoiRequestTableProps {
     id: number;
     companyname: string;
     companyType: string;
@@ -44,112 +37,73 @@ interface AgreementTableProps {
     companyEmail?: string;
     companyNumber?: string;
     companyAddress?: string;
-
+    companyStatus?: string;
+    approverName?: string;
 }
 
-const rows = AgreementData
+const rows = EoiRequestData
 
 
 
 
-const AgreementTable = () => {
+const EoiRequestTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<AgreementTableProps[]>(rows);
+    const [filteredRows, setFilteredRows] = useState<EoiRequestTableProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<AgreementTableProps | null>(null);
-    const [selectedAgreement, setSelectedAgreement] = useState<string>('All Contracts');
+    const [selectedRow, setSelectedRow] = useState<EoiRequestTableProps | null>(null);
+    const [selectedStatus, setSelectedStatus] = useState<string>('All Contracts');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-<<<<<<< HEAD
-=======
-    /**
-     * useEffect hook to filter data whenever searchText or selectedAgreement changes.
-     */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
     useEffect(() => {
-        filterData(searchText);
-    }, [searchText, selectedAgreement]);
+        filterData();
+    }, [searchText, selectedStatus]);
 
-<<<<<<< HEAD
 
-=======
+    const companyStatus = [...new Set(rows.map(row => row.status))];
+
+
     /**
-     * Toggles the dropdown menu for the agreement filter.
-     */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
-    const handleFilterClick = () => {
-        setDropdownOpen(!dropdownOpen);
-        setSelectedAgreement('All Contracts');
-    };
-
-    const agreementNames = [...new Set(rows.map(row => row.agreementType))];
-
-<<<<<<< HEAD
-=======
-    /**
-     * Opens a modal to show detailed information for the selected row.
-     * @param {AgreementTableProps} row - The selected row's data.
-     */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
-    const handleOpen = (row: AgreementTableProps) => {
+    * Handles opening a modal to display detailed information for the selected EOI request.
+    * @param {EoiRequestTableProps} row - The EOI request data to be displayed in the modal.
+    */
+    const handleOpen = (row: EoiRequestTableProps) => {
         setSelectedRow(row);
         setOpen(true);
     };
 
     const handleClose = () => setOpen(false);
 
-<<<<<<< HEAD
-=======
-    /**
-     * Handles changes to the search input field and updates the searchText state.
-     * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
-     */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
     };
 
-<<<<<<< HEAD
-=======
-
-    /**
-    * Filters the rows based on the search text and selected agreement type.
-    * @param {string} search - The current text in the search input field.
-    */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
-    const filterData = (search: string) => {
-        const lowercasedSearch = search.toLowerCase();
-        let filtered = rows.filter((row) =>
-            row.companyname.toLowerCase().includes(lowercasedSearch) ||
-            row.companyType.toLowerCase().includes(lowercasedSearch)
-        );
-        if (selectedAgreement !== 'All Contracts') {
-            filtered = filtered.filter(row => row.agreementType === selectedAgreement);
+    const filterData = () => {
+        let filtered = rows;
+        if (selectedStatus !== 'All Contracts') {
+            filtered = filtered.filter(row => row.status === selectedStatus);
+        }
+        if (searchText) {
+            const lowercasedSearch = searchText.toLowerCase();
+            filtered = filtered.filter(row =>
+                row.companyname.toLowerCase().includes(lowercasedSearch) ||
+                row.companyType.toLowerCase().includes(lowercasedSearch)
+            );
         }
         setFilteredRows(filtered);
     };
 
 
-
-<<<<<<< HEAD
-=======
-    /**
-    * Returns a style object based on the agreement's status.
-    * @param {string} status - The status of the agreement.
-    * @returns {React.CSSProperties} The style object for the status.
-    */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
-    const getStatusStyle = (status: string) => {
-        switch (status) {
-            case 'Signed':
-                return { backgroundColor: '#D2F69E', color: '#005828' };
-            case 'Unsigned':
-                return { backgroundColor: '#FFD181', color: '#475467' };
-            default:
-                return {};
-        }
+     /**
+     * Toggles the visibility of the status filter dropdown.
+     */
+    const handleFilterClick = () => {
+        setDropdownOpen(!dropdownOpen);
+        setSelectedStatus('All Contracts');
     };
+
+
+
 
 
 
@@ -168,53 +122,63 @@ const AgreementTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            width: 228,
+            width: 304,
             renderCell: (params: GridRenderCellParams) => (
-                <div className='flex flex-col gap-[4px]'>
-                    <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
-                        {params.row.companyname}
-                    </div>
-                    <div
-                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
-                        {params.row.companyType}
-                    </div>
+                <div className='text-[12px] font-[600] text-[#49526A] leading-3'>
+                    {params.row.companyname}
                 </div>
             ),
         },
         {
-            field: 'agreementType',
-            headerName: 'AGREEMENT NAME',
-            width: 444,
+            field: 'companyType',
+            headerName: 'COMPANY TYPE',
+            width: 151,
             renderCell: (params: GridRenderCellParams) => (
                 <div
-                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
-                    {params.row.agreementType}
+                    className='text-[12px] font-[400] text-[#49526A] leading-3'>
+                    {params.row.companyType}
                 </div>
             ),
         },
         {
-            field: 'datesent',
-            headerName: 'DATE SENT',
-            width: 180,
+            field: 'customerID',
+            headerName: 'CUSTOMER ID',
+            width: 151,
             renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
-                    {params.row.datesent}
+                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
+                    {params.row.customerID}
                 </div>
             )
         },
         {
-            field: 'status',
+            field: 'companyEmail',
+            headerName: 'EMAIL',
+            width: 200,
+            renderCell: (params) => (
+                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
+                    {params.row.companyEmail}
+                </div>
+            )
+        },
+        {
+            field: 'companyStatus',
             headerName: 'STATUS',
-            width: 100,
+            width: 146,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
                 switch (params.row.status) {
-                    case 'Unsigned':
-                        classNames += 'bg-[#FFD181] text-[#050505] ';
+                    case 'New':
+                        classNames += 'bg-[#EAEEF2] text-[#050505] ';
                         break;
-                    case 'Signed':
+                    case 'Approved':
                         classNames += 'bg-[#D2F69E] text-[#005828] ';
+                        break;
+                    case 'Disapproved':
+                        classNames += 'bg-[#FD838F] text-[#FFFFFF] ';
+                        break;
+                    case 'Pending':
+                        classNames += 'bg-[#FFD181] text-[#050505] ';
                         break;
                     default:
                         classNames += 'text-[E2E4EB] ';
@@ -256,17 +220,15 @@ const AgreementTable = () => {
             >
                 <div >
                     {selectedRow && (
-                        <SelectedDateModal
+                        <EoiModal
                             handleClose={handleClose}
                             dateTime={'09th, Nov, 2023; 09:23:44Am'}
                             status={selectedRow.status || 'Default Status'}
                             companyName={selectedRow.companyname || 'Provide Company Name'}
                             companyEmail={selectedRow.companyEmail || 'Provide an email address'}
                             companyNumber={selectedRow.companyNumber || 'Provide a number'}
-                            availableDates={selectedRow.selectedDates || ['No Dates Available']}
-                            companyAddress={selectedRow.companyAddress || 'Provide an Address'}
                             statusHeading={selectedRow.status}
-                            statusStyle={getStatusStyle(selectedRow.status)}
+                            approverName={selectedRow.approverName || 'Okoro Florish'}
 
                         />
                     )}
@@ -285,28 +247,18 @@ const AgreementTable = () => {
                         value={searchText}
                         onChange={handleSearchChange}
                         InputProps={{
-<<<<<<< HEAD
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <SearchOutlined />
+                                </InputAdornment>
+                            ),
                             style: {
                                 borderRadius: '32px',
                                 width: '200px',
                                 height: '35px',
-
-                            }
+                            },
                         }}
 
-=======
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <SearchOutlined/> 
-                              </InputAdornment>
-                            ),
-                            style: {
-                              borderRadius: '32px',
-                              width: '200px',
-                              height: '35px',
-                            },
-                          }}
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
                         sx={{
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': {
@@ -328,10 +280,6 @@ const AgreementTable = () => {
                                 },
                             },
                         }}
-<<<<<<< HEAD
-=======
-                       
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
                     />
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
                         <div className='text-[12px] font-[400] text-[#828DA9] '>Filter</div>
@@ -339,14 +287,10 @@ const AgreementTable = () => {
                             <FilterList />
                         </IconButton>
                         {dropdownOpen && (
-<<<<<<< HEAD
-                            <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
-=======
                             <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[155px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
-                                {agreementNames.map(name => (
-                                    <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedAgreement(name)}>
-                                        {name}
+                                {companyStatus.map((status, index) => (
+                                    <div key={index} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedStatus(status)}>
+                                        {status}
                                     </div>
                                 ))}
                             </div>
@@ -368,10 +312,6 @@ const AgreementTable = () => {
                         },
                     }}
 
-<<<<<<< HEAD
-                    pageSizeOptions={[5, 10]}
-=======
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
                     sx={{
 
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
@@ -387,15 +327,11 @@ const AgreementTable = () => {
                         },
                     }}
                 />
-<<<<<<< HEAD
             </div>
-=======
-            </div>            
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
         </div>
     );
 }
 
-export default AgreementTable
+export default EoiRequestTable
 
 
