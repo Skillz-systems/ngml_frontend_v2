@@ -11,26 +11,58 @@ const PasswordResetPage: React.FC = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
     const handleEmailChange = (value: string) => {
-        console.log(value)
         setEmail(value);
+        setEmailError('');
     };
 
     const handlePasswordChange = (value: string) => {
         setPassword(value);
+        setPasswordError('');
     };
 
     const handleConfirmPasswordChange = (value: string) => {
         setConfirmPassword(value);
+        setConfirmPasswordError('');
     };
 
     const handleResetPassword = () => {
-        if (password !== confirmPassword) {
-            setError('Passwords do not match');
-        } else {
+        let valid = true;
+
+        // Email validation
+        if (!email) {
+            setEmailError('Email is required');
+            valid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            setEmailError('Invalid email address');
+            valid = false;
+        }
+
+        // Password validation
+        if (!password) {
+            setPasswordError('Password is required');
+            valid = false;
+        }
+
+        // Confirm password validation
+        if (!confirmPassword) {
+            setConfirmPasswordError('Confirm password is required');
+            valid = false;
+        } else if (password !== confirmPassword) {
+            setConfirmPasswordError('Passwords do not match');
+            valid = false;
+        }
+
+        if (valid) {
             // Call your password reset API or logic here
             console.log('Resetting password...');
+            setEmail('')
+            setPassword('')
+            setConfirmPassword('')
         }
     };
 
@@ -48,6 +80,7 @@ const PasswordResetPage: React.FC = () => {
                             placeholder="Enter your email"
                             styleVariant='customStyle1'
                             icon={<img src={Email} alt='Email Icon' />}
+                            error={emailError}
                         />
                         <CustomInput
                             type="password"
@@ -57,6 +90,7 @@ const PasswordResetPage: React.FC = () => {
                             placeholder="Enter a password"
                             styleVariant='customStyle1'
                             icon={<img src={Password} alt='Password Icon' />}
+                            error={passwordError}
                         />
                         <CustomInput
                             type="password"
@@ -66,6 +100,7 @@ const PasswordResetPage: React.FC = () => {
                             placeholder="Re-Enter the password"
                             styleVariant='customStyle1'
                             icon={<img src={Password} alt='Password Icon' />}
+                            error={confirmPasswordError}
                         />
                         {error && <p className="text-red-500">{error}</p>}
                     </div>
@@ -85,9 +120,9 @@ const PasswordResetPage: React.FC = () => {
                 </AuthContainer>
             </div>
             <div className='mb-10 mr-6 ml-6'>
-                <ContentContainer type="white" width="100%" height="30px" borderRadius={20}>
+                <ContentContainer type="translucent" width="100%" height="30px" borderRadius={20}>
                     <div className="w-full h-full flex justify-center items-center">
-                        <p className='text-center text-sm md:text-sm'>This Portal is a Property of NNPC Gas Marketing Limited</p>
+                        <p className='text-center text-[10px] md:text-sm'>This Portal is a Property of NNPC Gas Marketing Limited</p>
                     </div>
                 </ContentContainer>
             </div>
