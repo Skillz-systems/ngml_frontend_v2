@@ -15,17 +15,17 @@ const PasswordResetPage: React.FC = () => {
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
-    const handleEmailChange = (value: string) => {
+    const handleEmailChange = (value: any) => {
         setEmail(value);
         setEmailError('');
     };
 
-    const handlePasswordChange = (value: string) => {
+    const handlePasswordChange = (value: any) => {
         setPassword(value);
         setPasswordError('');
     };
 
-    const handleConfirmPasswordChange = (value: string) => {
+    const handleConfirmPasswordChange = (value: any) => {
         setConfirmPassword(value);
         setConfirmPasswordError('');
     };
@@ -60,9 +60,9 @@ const PasswordResetPage: React.FC = () => {
         if (valid) {
             // Call your password reset API or logic here
             console.log('Resetting password...');
-            setEmail('')
-            setPassword('')
-            setConfirmPassword('')
+            setEmail('');
+            setPassword('');
+            setConfirmPassword('');
         }
     };
 
@@ -74,7 +74,6 @@ const PasswordResetPage: React.FC = () => {
                     <div className='w-[100%] md:w-[350px] mx-auto space-y-4'>
                         <CustomInput
                             type="text"
-                            label=""
                             value={email}
                             onChange={handleEmailChange}
                             placeholder="Enter your email"
@@ -84,7 +83,6 @@ const PasswordResetPage: React.FC = () => {
                         />
                         <CustomInput
                             type="password"
-                            label=""
                             value={password}
                             onChange={handlePasswordChange}
                             placeholder="Enter a password"
@@ -94,7 +92,6 @@ const PasswordResetPage: React.FC = () => {
                         />
                         <CustomInput
                             type="password"
-                            label=""
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
                             placeholder="Re-Enter the password"
