@@ -67,7 +67,7 @@ const PasswordResetPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-400 via-yellow-300 to-green-100 flex flex-col" style={{ background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)' }}>
+        <div className="min-h-screen flex flex-col" style={{ background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)' }}>
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
                     <h1 className='text-[25px] text-gray-500 font-semibold'>Set New Password</h1>
