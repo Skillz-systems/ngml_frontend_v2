@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Email from '../../../public/assets/png-icons/Email.png';
 import Password from '../../../public/assets/png-icons/Password.png';
-import AuthContainer from '../../Components/Authcontainer/AuthContainer';
 import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
+import AuthContainer from '@/Components/authContainer/AuthContainer';
 
 const PasswordResetPage: React.FC = () => {
     const [email, setEmail] = useState('');

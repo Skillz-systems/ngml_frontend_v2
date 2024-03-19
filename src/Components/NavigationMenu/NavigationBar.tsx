@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   DensityMedium,
   KeyboardArrowDown,
@@ -23,10 +24,11 @@ interface INavigationBar {
   to?: string;
   icon?: string;
   subMenu?: INavigationBar[];
+
 }
 
 export interface NavigationBarProps {
-  Navigationlinks: INavigationBar[];
+  Navigationlinks: any;
   sliceLength?: number;
 }
 
@@ -174,6 +176,7 @@ const NavigationBarItem: React.FC<{
   item: INavigationBar;
   isActive: boolean;
   onClick: () => void;
+
 }> = ({ item, isActive, onClick }) => {
   const [isSubMenuVisible, setSubMenuVisible] = useState(false);
 
@@ -326,6 +329,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   Navigationlinks,
   sliceLength = 0
 }) => {
+  console.log(Navigationlinks, 'kkkkkkkk');
+
   const [activeItemId, setActiveItemId] = useState<number | null>(null);
   const [isNavigationBarVisible, setIsNavigationBarVisible] = useState(true);
 
@@ -338,7 +343,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo] = useState({
     name: 'John Okor',
     designation: 'D. Manager',
     avatar: '../../../public/assets/avatar.png'
@@ -351,14 +356,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
     <>
       {isNavigationBarVisible ? (
         <div
-          className="fixed top-10 h-screen"
+          className="fixed "
           style={{
-            width: '100%',
+            width: '20%',
             padding: '18px',
             overflowY: 'auto',
-            marginTop: '32px',
-            marginLeft: '16px',
-            backgroundColor: '#F9FAFB'
+
           }}
         >
           <div>
@@ -378,7 +381,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               padding: '8px'
             }}
           >
-            {Navigationlinks.slice(0, effectiveSliceLength).map((item) => (
+            {Navigationlinks.slice(0, effectiveSliceLength).map((item: INavigationBar) => (
               <NavigationBarItem
                 key={item.id}
                 item={item}
@@ -403,7 +406,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               {Navigationlinks.slice(
                 effectiveSliceLength,
                 Navigationlinks.length
-              ).map((item) => (
+              ).map((item: INavigationBar) => (
                 <NavigationBarItem
                   key={item.id}
                   item={item}
