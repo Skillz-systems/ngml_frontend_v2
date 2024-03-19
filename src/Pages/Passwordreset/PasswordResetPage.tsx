@@ -6,6 +6,10 @@ import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
 
+const backgroundStyle = {
+    background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)'
+  };
+
 const PasswordResetPage: React.FC = () => {
     const [formData, setFormData] = useState({
         email: '',
@@ -63,7 +67,7 @@ const PasswordResetPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col" style={{ background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)' }}>
+        <div className="h-screen flex flex-col" style={backgroundStyle}>
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
                     <h1 className='text-[25px] text-gray-500 font-semibold'>Set New Password</h1>
