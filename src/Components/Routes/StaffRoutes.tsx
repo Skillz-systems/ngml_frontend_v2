@@ -1,15 +1,15 @@
 import SamplePage from '@/Pages/SamplePage/SamplePage';
-import CustomerInternalLayout from '../Hoc/CustomerInternalLayout';
+import StaffInternalLayout from '../Hoc/StaffInternalLayout';
 
 
 
 export const StaffRoutes = [
-    {
-        title: 'Customer Home page',
-        path: '/staff/customerhomepage',
-        component: CustomerInternalLayout(SamplePage),
-        exact: true
-      },
+  {
+    title: 'Customer Home page',
+    path: '/staff/customerhomepage',
+    component: StaffInternalLayout(SamplePage),
+    exact: true
+  },
 ]
 
 

@@ -1,12 +1,12 @@
 import SamplePage from '@/Pages/SamplePage/SamplePage';
-import CustomerInternalLayout from '../Hoc/CustomerInternalLayout';
+import SupplierInternalLayout from '../Hoc/SupplierInternalLayout';
 
 
 export const SupplierRoutes = [
-    {
-        title: 'Customer Home page',
-        path: '/supplier/customerhomepage',
-        component: CustomerInternalLayout(SamplePage),
-        exact: true
-      },
+  {
+    title: 'Customer Home page',
+    path: '/supplier/customerhomepage',
+    component: SupplierInternalLayout(SamplePage),
+    exact: true
+  },
 ]

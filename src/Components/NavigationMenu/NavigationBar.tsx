@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  DensityMedium,
   KeyboardArrowDown,
   KeyboardArrowLeft
 } from '@mui/icons-material';
@@ -30,7 +29,10 @@ interface INavigationBar {
 export interface NavigationBarProps {
   Navigationlinks: any;
   sliceLength?: number;
+  isNavigationBarVisible: boolean;
+  toggleNavigationBar: () => void;
 }
+
 
 /**
  * User information.
@@ -327,16 +329,12 @@ const NavigationBarItem: React.FC<{
  */
 const NavigationBar: React.FC<NavigationBarProps> = ({
   Navigationlinks,
-  sliceLength = 0
+  sliceLength = 0,
+  toggleNavigationBar,
 }) => {
-  console.log(Navigationlinks, 'kkkkkkkk');
 
   const [activeItemId, setActiveItemId] = useState<number | null>(null);
-  const [isNavigationBarVisible, setIsNavigationBarVisible] = useState(true);
 
-  const handleToggleNavigationBar = () => {
-    setIsNavigationBarVisible(!isNavigationBarVisible);
-  };
 
   const handleItemClick = (id: number) => {
     setActiveItemId(id);
@@ -354,22 +352,44 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
   return (
     <>
-      {isNavigationBarVisible ? (
-        <div
-          className="fixed "
-          style={{
-            width: '20%',
-            padding: '18px',
-            overflowY: 'auto',
 
+      <div
+        className="fixed "
+        style={{
+          width: '20%',
+          padding: '18px',
+          overflowY: 'auto',
+
+        }}
+      >
+        <div>
+          <UserType
+            userInfo={userInfo}
+            handleToggleNavigationBar={toggleNavigationBar}
+          />
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            borderRadius: '14px',
+            background: 'white',
+            width: '216px',
+            marginTop: '16px',
+            padding: '8px'
           }}
         >
-          <div>
-            <UserType
-              userInfo={userInfo}
-              handleToggleNavigationBar={handleToggleNavigationBar}
+          {Navigationlinks.slice(0, effectiveSliceLength).map((item: INavigationBar) => (
+            <NavigationBarItem
+              key={item.id}
+              item={item}
+              isActive={activeItemId === item.id}
+              onClick={() => handleItemClick(item.id)}
             />
-          </div>
+          ))}
+        </div>
+
+        {sliceLength > 0 && sliceLength < Navigationlinks.length && (
           <div
             style={{
               display: 'flex',
@@ -381,7 +401,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               padding: '8px'
             }}
           >
-            {Navigationlinks.slice(0, effectiveSliceLength).map((item: INavigationBar) => (
+            {Navigationlinks.slice(
+              effectiveSliceLength,
+              Navigationlinks.length
+            ).map((item: INavigationBar) => (
               <NavigationBarItem
                 key={item.id}
                 item={item}
@@ -390,52 +413,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               />
             ))}
           </div>
+        )}
+      </div>
 
-          {sliceLength > 0 && sliceLength < Navigationlinks.length && (
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: '14px',
-                background: 'white',
-                width: '216px',
-                marginTop: '16px',
-                padding: '8px'
-              }}
-            >
-              {Navigationlinks.slice(
-                effectiveSliceLength,
-                Navigationlinks.length
-              ).map((item: INavigationBar) => (
-                <NavigationBarItem
-                  key={item.id}
-                  item={item}
-                  isActive={activeItemId === item.id}
-                  onClick={() => handleItemClick(item.id)}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      ) : (
-        <div
-          style={{
-            border: '2px solid #e8eaed',
-            height: '24px',
-            width: '24px',
-            borderRadius: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '20px'
-          }}
-          onClick={handleToggleNavigationBar}
-        >
-          <DensityMedium
-            style={{ color: '#CCD0DC', height: '18px', width: '18px' }}
-          />
-        </div>
-      )}
     </>
   );
 };

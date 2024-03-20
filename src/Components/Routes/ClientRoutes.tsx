@@ -1,11 +1,11 @@
 import SamplePage from '@/Pages/SamplePage/SamplePage';
-import CustomerInternalLayout from '../Hoc/CustomerInternalLayout';
+import ClientInternalLayout from '../Hoc/ClientInternalLayout';
 
 export const ClientRoutes = [
-    {
-        title: 'Customer Home page',
-        path: '/client/customerhomepage',
-        component: CustomerInternalLayout(SamplePage),
-        exact: true
-      },
+  {
+    title: 'Customer Home page',
+    path: '/client/customerhomepage',
+    component: ClientInternalLayout(SamplePage),
+    exact: true
+  },
 ]
