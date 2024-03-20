@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import PasswordResetPage from './Pages/Passwordreset/PasswordResetPage';
+import StaffLoginPage from './Pages/Stafflogin/StaffLoginPage';
 
 
 
@@ -153,7 +153,7 @@ function App() {
                     <li key={index}>{result}</li>
                 ))}
             </ul> */}
-      <PasswordResetPage />
+      <StaffLoginPage />
     </>
   );
 }
