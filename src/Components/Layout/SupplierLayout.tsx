@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React, { useState, type ComponentType } from 'react';
@@ -11,7 +10,17 @@ interface SupplierLayoutProps {
   title: string;
 }
 
-const SupplierLayout: React.FC<SupplierLayoutProps> = ({ Component, title, ...otherProps }) => {
+/**
+ * Renders a layout specific for supplier-related interfaces within the application. This layout includes
+ * a navigation bar that can be toggled on or off, providing flexibility in how the interface is presented.
+ * The main content area is reserved for rendering any passed React component, making this layout versatile
+ * for various supplier-related pages or components.
+ *
+ * @param {Object} props - The props for `SupplierLayout`.
+ * @param {ComponentType<any>} props.Component - The component to be displayed in the main content area.
+ * @param {string} props.title - The title of the page, intended for use in SEO or accessibility, not displayed in the UI.
+ */
+const SupplierLayout: React.FC<SupplierLayoutProps> = ({ Component, ...otherProps }) => {
   const [isNavigationBarVisible, setIsNavigationBarVisible] = useState(true);
 
   const toggleNavigationBar = () => {
@@ -21,7 +30,7 @@ const SupplierLayout: React.FC<SupplierLayoutProps> = ({ Component, title, ...ot
   return (
     <>
       <div>
-        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100vh', background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)' }}>
+        <div className='gradient flex w-[100%] h-[100vh] flex-row'>
           {isNavigationBarVisible ? (
             <>
               <NavigationBar
@@ -29,39 +38,16 @@ const SupplierLayout: React.FC<SupplierLayoutProps> = ({ Component, title, ...ot
                 isNavigationBarVisible={isNavigationBarVisible}
                 toggleNavigationBar={toggleNavigationBar}
               />
-              <main
-                style={{
-                  width: '100%',
-                  overflowY: 'auto',
-                  marginLeft: '260px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                  padding: '32px',
-                  marginTop: '20px',
-                  borderRadius: '8px',
-                  border: '2px solid black',
-                }}
-              >
+              <main className='w-[100%] ml-[260px] bg-[#EAF4CD] p-[32px] mt-[20px] rounded-[8px] overflow-y-auto ' >
                 <Component {...otherProps} style={{ overflowY: 'auto' }} />
               </main>
             </>
           ) : (
             <div
-              style={{
-                border: '2px solid #e8eaed',
-                height: '24px',
-                width: '24px',
-                borderRadius: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '20px',
-                cursor: 'pointer',
-              }}
+              className='layout-icon-body'
               onClick={toggleNavigationBar}
             >
-              <DensityMedium
-                style={{ color: '#CCD0DC', height: '18px', width: '18px' }}
-              />
+              <DensityMedium className='text-[#CCD0DC] h-[18px] w-[18px]' />
             </div>
           )}
         </div>

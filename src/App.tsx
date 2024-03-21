@@ -81,7 +81,6 @@ function App(): JSX.Element {
       <ToastContainer />
       <BrowserRouter>
         <Routes>
-          
           {authRoutes}
           {AdminRoutes}
           {ClientRoutes}

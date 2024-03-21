@@ -18,7 +18,11 @@ describe('NavigationBar component', () => {
   ];
 
   test('renders NavigationBar component with provided navigation links', () => {
-    render(<NavigationBar Navigationlinks={mockNavigationLinks}  />);
+    render(<NavigationBar Navigationlinks={mockNavigationLinks} 
+           isNavigationBarVisible={false} 
+           toggleNavigationBar={function (): void {
+      throw new Error('Function not implemented.');
+    } }  />);
     
     // Ensure UniqueUser component is rendered
     expect(screen.getByAltText('happyavatar')).toBeInTheDocument();
@@ -30,7 +34,9 @@ describe('NavigationBar component', () => {
   });
 
   test('handles item click correctly', () => {
-    render(<NavigationBar Navigationlinks={mockNavigationLinks} />);
+    render(<NavigationBar Navigationlinks={mockNavigationLinks} isNavigationBarVisible={false} toggleNavigationBar={function (): void {
+      throw new Error('Function not implemented.');
+    } } />);
 
     // Click on the first navigation item
     fireEvent.click(screen.getByText('Home'));

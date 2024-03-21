@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 /**
  * Navigation bar item.
  *
- * @typedef {Object} INavigationBar
+ * @typeof {Object} INavigationBar
  * @property {'primary' | 'secondary'} [type] - Type of navigation bar.
  * @property {number} id - Unique identifier for the navigation bar item.
  * @property {string} [name] - Name of the navigation bar item.

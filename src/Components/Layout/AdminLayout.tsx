@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React, { useState, type ComponentType } from 'react';
@@ -11,9 +10,29 @@ interface InternalLayoutProps {
   title: string;
 }
 
-const AdminLayout: React.FC<InternalLayoutProps> = ({ Component, title, ...otherProps }) => {
+/**
+ * AdminLayout is a React Functional Component that renders the main layout for administrative interfaces.
+ * It includes a navigation bar on the left side, which can be toggled on or off, and a main content area
+ * where the passed Component is rendered. The layout is designed to be flexible and reusable across different
+ * parts of the admin interface.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {ComponentType<any>} props.Component - The React component to be rendered in the main content area.
+ * This component will receive all `otherProps` as its props.
+ * @param {string} props.title - The title of the page, used for accessibility or SEO purposes, not currently displayed.
+ * @returns {React.ReactElement} - A React element representing the admin layout.
+ *
+ */
+
+const AdminLayout: React.FC<InternalLayoutProps> = ({ Component, ...otherProps }) => {
+  
+    // State to manage the visibility of the navigation bar
   const [isNavigationBarVisible, setIsNavigationBarVisible] = useState(true);
 
+  /**
+   * Toggles the visibility of the navigation bar.
+   */
   const toggleNavigationBar = () => {
     setIsNavigationBarVisible(!isNavigationBarVisible);
   };
@@ -21,7 +40,7 @@ const AdminLayout: React.FC<InternalLayoutProps> = ({ Component, title, ...other
   return (
     <>
       <div>
-        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100vh', background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)' }}>
+        <div className='gradient flex w-[100%] h-[100vh] flex-row'>
           {isNavigationBarVisible ? (
             <>
               <NavigationBar
@@ -29,39 +48,16 @@ const AdminLayout: React.FC<InternalLayoutProps> = ({ Component, title, ...other
                 isNavigationBarVisible={isNavigationBarVisible}
                 toggleNavigationBar={toggleNavigationBar}
               />
-              <main
-                style={{
-                  width: '100%',
-                  overflowY: 'auto',
-                  marginLeft: '260px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                  padding: '32px',
-                  marginTop: '20px',
-                  borderRadius: '8px',
-                  border: '2px solid red',
-                }}
-              >
+              <main className='w-[100%] ml-[260px] bg-[#EAF4CD] p-[32px] mt-[20px] rounded-[8px] overflow-y-auto ' >
                 <Component {...otherProps} style={{ overflowY: 'auto' }} />
               </main>
             </>
           ) : (
             <div
-              style={{
-                border: '2px solid #e8eaed',
-                height: '24px',
-                width: '24px',
-                borderRadius: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '20px',
-                cursor: 'pointer',
-              }}
+              className='layout-icon-body'
               onClick={toggleNavigationBar}
             >
-              <DensityMedium
-                style={{ color: '#CCD0DC', height: '18px', width: '18px' }}
-              />
+              <DensityMedium className='text-[#CCD0DC] h-[18px] w-[18px]' />
             </div>
           )}
         </div>

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React, { useState, type ComponentType } from 'react';
@@ -11,7 +10,17 @@ interface StaffLayoutProps {
   title: string;
 }
 
-const StaffLayout: React.FC<StaffLayoutProps> = ({ Component, title, ...otherProps }) => {
+
+/**
+ * `StaffLayout` is a component that renders a layout for staff-related sections of the application. 
+ * It includes a toggleable navigation bar and a main content area. The navigation bar can be shown or 
+ * hidden, and the main content area is designed to render any passed React component.
+ *
+ * @param {Object} props - Props for `StaffLayout`.
+ * @param {ComponentType<any>} props.Component - The component to be rendered in the main content area.
+ * @param {string} props.title - The title for the page. Note: Not currently displayed.
+ */
+const StaffLayout: React.FC<StaffLayoutProps> = ({ Component, ...otherProps }) => {
   const [isNavigationBarVisible, setIsNavigationBarVisible] = useState(true);
 
   const toggleNavigationBar = () => {
@@ -21,7 +30,7 @@ const StaffLayout: React.FC<StaffLayoutProps> = ({ Component, title, ...otherPro
   return (
     <>
       <div>
-        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100vh', background: '#EAEEF2' }}>
+        <div className='gradient flex w-[100%] h-[100vh] flex-row'>
           {isNavigationBarVisible ? (
             <>
               <NavigationBar
@@ -29,38 +38,16 @@ const StaffLayout: React.FC<StaffLayoutProps> = ({ Component, title, ...otherPro
                 isNavigationBarVisible={isNavigationBarVisible}
                 toggleNavigationBar={toggleNavigationBar}
               />
-              <main
-                style={{
-                  width: '100%',
-                  overflowY: 'auto',
-                  marginLeft: '260px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                  padding: '32px',
-                  marginTop: '20px',
-                  borderRadius: '8px',
-                }}
-              >
+              <main className='w-[100%] ml-[260px] bg-[#EAF4CD] p-[32px] mt-[20px] rounded-[8px] overflow-y-auto ' >
                 <Component {...otherProps} style={{ overflowY: 'auto' }} />
               </main>
             </>
           ) : (
             <div
-              style={{
-                border: '2px solid #e8eaed',
-                height: '24px',
-                width: '24px',
-                borderRadius: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '20px',
-                cursor: 'pointer',
-              }}
+              className='layout-icon-body'
               onClick={toggleNavigationBar}
             >
-              <DensityMedium
-                style={{ color: '#CCD0DC', height: '18px', width: '18px' }}
-              />
+              <DensityMedium className='text-[#CCD0DC] h-[18px] w-[18px]' />
             </div>
           )}
         </div>
