@@ -1,3 +1,8 @@
+/**
+ * React functional component for staff login page.
+ * @module StaffLoginPage
+ */
+
 import React, { useState } from 'react';
 import Email from '../../../public/assets/png-icons/Email.png';
 import Password from '../../../public/assets/png-icons/Password.png';
@@ -6,26 +11,45 @@ import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
 
-
-
-const PasswordResetPage: React.FC = () => {
+/**
+ * Functional component representing the staff login page.
+ * @returns {JSX.Element} StaffLoginPage component
+ */
+const StaffLoginPage: React.FC = () => {
+    /**
+     * State hook to manage form data.
+     * @type {Object}
+     */
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
+
+    /**
+     * State hook to manage form errors.
+     * @type {Object}
+     */
     const [errors, setErrors] = useState({
         emailError: '',
         passwordError: '',
         commonError: '',
     });
 
-    const handleChange = (key: any) => (value: any) => {
-        console.log(value)
+    /**
+     * Function to handle input change.
+     * @param {string} key - The key of the input field.
+     * @returns {Function} Function to handle input change.
+     */
+    const handleChange = (key: string) => (value: string) => {
+        console.log(value);
         setFormData({ ...formData, [key]: value });
         setErrors({ ...errors, [`${key}Error`]: '' });
     };
 
-    const handleResetPassword = () => {
+    /**
+     * Function to handle login action.
+     */
+    const handleLogin = () => {
         let valid = true;
         const newErrors = { ...errors };
 
@@ -45,7 +69,7 @@ const PasswordResetPage: React.FC = () => {
         }
 
         if (valid) {
-            // Call your password reset API or logic here
+            // Call your Login API or logic here
             console.log('Resetting password...');
             setFormData({ email: '', password: '' });
         } else {
@@ -53,14 +77,18 @@ const PasswordResetPage: React.FC = () => {
         }
     };
 
+    /**
+     * Function to handle forgot password action.
+     */
     const handleForgotPassword = () => {
         // Logic to handle forgot password action
         console.log('Forgot Password clicked');
-        // You can open a modal or navigate to a forgot password page
     };
 
+    /**
+     * Function to handle new sign-in action.
+     */
     const handleNewSignIn = () => {
-        // Logic to handle new sign in action
         console.log('New Sign In clicked');
         // You can navigate to a new sign-in page
     };
@@ -95,7 +123,7 @@ const PasswordResetPage: React.FC = () => {
                         <Button
                             type="primary"
                             label="Login"
-                            action={handleResetPassword}
+                            action={handleLogin}
                             color="#FFFFFF"
                             fontStyle="italic"
                             width="100%"
@@ -116,9 +144,10 @@ const PasswordResetPage: React.FC = () => {
                         />
                     </div>
                 </AuthContainer>
-                <div className='absolute top-[67%] sm:w-[400px] md:w-[400px]'>
+            </div>
+            <div className='absolute top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:w-[400px]'>
                     <ContentContainer type="translucent" width="100%" height="40px" borderRadius={20}>
-                        <div className="w-full h-full flex justify-center items-center justify-between">
+                        <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
                             <p className='text-center text-[10px] md:text-sm text-white'>New to the Portal, Sign in Here</p>
                             <Button
                                 type="outline"
@@ -134,7 +163,6 @@ const PasswordResetPage: React.FC = () => {
                         </div>
                     </ContentContainer>
                 </div>
-            </div>
             <div className='mb-10 mr-6 ml-6'>
                 <ContentContainer type="translucent" width="100%" height="30px" borderRadius={20}>
                     <div className="w-full h-full flex justify-center items-center">
@@ -146,4 +174,4 @@ const PasswordResetPage: React.FC = () => {
     );
 };
 
-export default PasswordResetPage;
+export default StaffLoginPage;
