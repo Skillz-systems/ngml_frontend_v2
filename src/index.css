@@ -1,3 +1,17 @@
+:root {
+  --nnpc-50: 242 251 246;
+  --nnpc-100: 225 247 234;
+  --nnpc-200: 196 238 216;
+  --nnpc-300: 149 224 184;
+  --nnpc-400: 96 200 146;
+  --nnpc-500: 58 173 113;
+  --nnpc-600: 43 142 90;
+  --nnpc-700: 34 104 68;
+  --nnpc-800: 34 89 61;
+  --nnpc-900: 29 74 52;
+  --nnpc-950: 11 40 26;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
