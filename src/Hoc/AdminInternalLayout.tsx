@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import AdminLayout from '@/Components/Layout/AdminLayout'
+import AdminLayout from '@/Layout/AdminLayout'
 
 /**
  * this is an HOC that renders the Admin Layout components of the application

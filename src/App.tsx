@@ -1,9 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { PrivateAdminRoute, routes } from './Components/Routes/Index'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { PrivateAdminRoute, routes } from './Routes/Index'
 
-// eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
 
   const authRoutes = routes.AuthRoutes.map(({ path, component: Component }) => (
