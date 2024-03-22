@@ -98,7 +98,7 @@ const StaffLoginPage: React.FC = () => {
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
                     <h1 className='text-[20px] text-gray-500 font-semibold text-white'>NGML STAFF LOGIN</h1>
-                    <div className='w-[100%] md:w-[350px] mx-auto space-y-4'>
+                    <div className='w-[100%] md:w-[350px] mx-auto space-y-6'>
                         <CustomInput
                             type="text"
                             value={formData.email}
@@ -107,7 +107,7 @@ const StaffLoginPage: React.FC = () => {
                             styleVariant='customStyle1'
                             icon={<img src={Email} alt='Email Icon' />}
                         />
-                        {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[106px] text-[14px]">{errors.emailError}</p>}
+                        {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[102px] text-[14px]">{errors.emailError}</p>}
                         <CustomInput
                             type="password"
                             value={formData.password}
@@ -116,10 +116,10 @@ const StaffLoginPage: React.FC = () => {
                             styleVariant='customStyle1'
                             icon={<img src={Password} alt='Password Icon' />}
                         />
-                        {errors.passwordError && <p className="text-red-500 h-[1px] absolute top-[163px] text-[14px]">{errors.passwordError}</p>}
+                        {errors.passwordError && <p className="text-red-500 h-[1px] absolute top-[167px] text-[14px]">{errors.passwordError}</p>}
                         {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
                     </div>
-                    <div className='mt-4 w-[98%] flex items-center justify-center'>
+                    <div className='mt-6 w-[98%] flex items-center justify-center'>
                         <Button
                             type="primary"
                             label="Login"
@@ -145,7 +145,7 @@ const StaffLoginPage: React.FC = () => {
                     </div>
                 </AuthContainer>
             </div>
-            <div className='absolute top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:w-[400px]'>
+            <div className='absolute top-[70%] left-1/2 transform -translate-x-1/2 w-full md:w-[400px]'>
                     <ContentContainer type="translucent" width="100%" height="40px" borderRadius={20}>
                         <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
                             <p className='text-center text-[10px] md:text-sm text-white'>New to the Portal, Sign in Here</p>
