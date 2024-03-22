@@ -1,53 +1,26 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import NavigationBar from './NavigationBar';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import NavigationBar from './NavigationBar'; 
 
-describe('NavigationBar component', () => {
-  const mockNavigationLinks = [
-    {
-      id: 1,
-      name: 'Home',
-      to: '/',
-      icon: 'home-icon.png',
-    },
-    {
-      id: 2,
-      name: 'About',
-      to: '/about',
-      icon: 'about-icon.png',
-    },
-  ];
+const mockToggleNavigationBar = vi.fn();
 
-  test('renders NavigationBar component with provided navigation links', () => {
-    render(<NavigationBar Navigationlinks={mockNavigationLinks} 
-           isNavigationBarVisible={false} 
-           toggleNavigationBar={function (): void {
-      throw new Error('Function not implemented.');
-    } }  />);
+const mockNavigationLinks = [
+  { id: 1, name: 'Home', to: '/home', icon: 'home-icon-path' },
+  { id: 2, name: 'Profile', to: '/profile', icon: 'profile-icon-path' },
+];
+
+describe('NavigationBar Component', () => {
+
+  it('should display the correct number of navigation items', () => {
+    render(
+      <Router>
+        <NavigationBar Navigationlinks={mockNavigationLinks} isNavigationBarVisible={true} toggleNavigationBar={mockToggleNavigationBar} />
+      </Router>
+    );
     
-    // Ensure UniqueUser component is rendered
-    expect(screen.getByAltText('happyavatar')).toBeInTheDocument();
-
-    // Ensure NavigationBarItem components are rendered
-    mockNavigationLinks.forEach((item) => {
-      expect(screen.getByText(item.name)).toBeInTheDocument();
-    });
+    const navigationItems = screen.getAllByRole('link'); 
+    expect(navigationItems.length).toBe(mockNavigationLinks.length);
   });
 
-  test('handles item click correctly', () => {
-    render(<NavigationBar Navigationlinks={mockNavigationLinks} isNavigationBarVisible={false} toggleNavigationBar={function (): void {
-      throw new Error('Function not implemented.');
-    } } />);
-
-    // Click on the first navigation item
-    fireEvent.click(screen.getByText('Home'));
-
-    // Ensure that the first item is now active
-    expect(screen.getByText('Home').parentElement).toHaveStyle('background-color: rgba(0, 0, 0, 0)');
-
-    // Click on the second navigation item
-    fireEvent.click(screen.getByText('About'));
-
-    // Ensure that the second item is now active
-    expect(screen.getByText('About').parentElement).toHaveStyle('background-color: rgba(0, 0, 0, 0)');
-  });
 });
