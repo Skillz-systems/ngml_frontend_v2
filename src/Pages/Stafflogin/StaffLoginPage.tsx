@@ -147,26 +147,26 @@ const StaffLoginPage: React.FC = () => {
                     </div>
                 </AuthContainer>
             </div>
-            <div className='relative'>
-            <div className='absolute top-[-150px] left-1/2 transform -translate-x-1/2 w-full md:w-[400px]'>
-                    <ContentContainer type="translucent" width="100%" height="40px" borderRadius={20}>
-                        <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
-                            <p className='text-center text-[10px] md:text-sm text-white'>New to the Portal, Sign in Here</p>
-                            <Button
-                                type="outline"
-                                label="New Sign In"
-                                width='120px'
-                                height='32px'
-                                radius='32px'
-                                color='#FFFFFF'
-                                fontWeight='500'
-                                lineHeight='24px'
-                                action={handleNewSignIn}
-                            />
-                        </div>
-                    </ContentContainer>
-                </div>
-                </div>
+            <div className='flex justify-center relative'>
+    <div className='w-full md:w-[400px] absolute bottom-[7rem]'>
+        <ContentContainer type="translucent" height="40px" borderRadius={20}>
+            <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
+                <p className='text-center text-[10px] md:text-sm text-white'>New to the Portal, Sign in Here</p>
+                <Button
+                    type="outline"
+                    label="New Sign In"
+                    width='120px'
+                    height='32px'
+                    radius='32px'
+                    color='#FFFFFF'
+                    fontWeight='500'
+                    lineHeight='24px'
+                    action={handleNewSignIn}
+                />
+            </div>
+        </ContentContainer>
+    </div>
+</div>
             <div className='mb-10 mr-6 ml-6'>
                 <ContentContainer type="translucent" width="100%" height="30px" borderRadius={20}>
                     <div className="w-full h-full flex justify-center items-center">
