@@ -31,5 +31,6 @@
   "peacock.color": "#42b883",
   "[typescriptreact]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  },
+  "cSpell.words": ["nnpc"]
 }
