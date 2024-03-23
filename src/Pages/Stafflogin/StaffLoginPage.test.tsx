@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import StaffLoginPage from './StaffLoginPage';
 
 test('renders password reset page with form elements', () => {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import StaffLoginPage from './Pages/Stafflogin/StaffLoginPage';
+import PortalEnrollment from './Pages/Portalenrollment/PortalEnrollment';
 
 
 
@@ -153,7 +153,7 @@ function App() {
                     <li key={index}>{result}</li>
                 ))}
             </ul> */}
-      <StaffLoginPage />
+      <PortalEnrollment />
     </>
   );
 }

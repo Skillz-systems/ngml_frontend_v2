@@ -59,7 +59,6 @@ const PortalEnrollment: React.FC = () => {
                     radius="100%"
                     width="40px"
                     height="40px"
-                    radius="20px"
                 />
             </div>
             <div className="flex-1 flex items-center justify-center">
@@ -75,9 +74,8 @@ const PortalEnrollment: React.FC = () => {
                             icon={<img src={Profile} alt='Profile Icon' />}
                         />
                         {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[106px] text-[14px]">{errors.emailError}</p>}
-                        {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
                     </div>
-                    <div className='mt-4 w-[98%] flex items-center justify-center'>
+                    <div className='mt-10 w-[98%] flex items-center justify-center'>
                         <Button
                             type="primary"
                             label="Login"
