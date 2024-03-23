@@ -6,9 +6,6 @@ import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
 
-const backgroundStyle = {
-    background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)'
-  };
 
 const PasswordResetPage: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -67,10 +64,10 @@ const PasswordResetPage: React.FC = () => {
     };
 
     return (
-        <div className="h-screen flex flex-col" style={backgroundStyle}>
+        <div className="h-screen flex flex-col bg-nnpc-700">
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
-                    <h1 className='text-[25px] text-gray-500 font-semibold'>Set New Password</h1>
+                    <h1 className='text-[25px] text-white font-semibold'>Set New Password</h1>
                     <div className='w-[100%] md:w-[350px] mx-auto space-y-4'>
                         <CustomInput
                             type="text"
@@ -119,7 +116,7 @@ const PasswordResetPage: React.FC = () => {
             <div className='mb-10 mr-6 ml-6'>
                 <ContentContainer type="translucent" width="100%" height="30px" borderRadius={20}>
                     <div className="w-full h-full flex justify-center items-center">
-                        <p className='text-center text-[10px] md:text-sm'>This Portal is a Property of NNPC Gas Marketing Limited</p>
+                        <p className='text-center text-[10px] text-white md:text-sm'>This Portal is a Property of NNPC Gas Marketing Limited</p>
                     </div>
                 </ContentContainer>
             </div>
