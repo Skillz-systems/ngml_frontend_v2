@@ -5,7 +5,6 @@ const meta: Meta = {
     title: 'Pages/PasswordResetPage',
     component: PasswordResetPage,
     parameters: {
-        layout: 'centered'
     }, tags: ['autodocs'],
     argTypes: {},
 
