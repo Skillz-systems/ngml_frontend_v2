@@ -36,17 +36,19 @@ const StaffLayout: React.FC<StaffLayoutProps> = ({ Component, ...otherProps }) =
         />
       </div>
 
-      <div className='flex-1 flex'>
+      <div className='flex-1 flex '>
         <div
-          className='p-2 cursor-pointer h-[50px] rounded-[50%] border-2 border-500 mt-[20px] '
+          className='p-2 '
           onClick={toggleNavigationBar}
-          style={{ minWidth: '50px', visibility: isNavigationBarVisible ? 'hidden' : 'visible' }}
+          style={{ minWidth: '40px', visibility: isNavigationBarVisible ? 'hidden' : 'visible' }}
 
         >
-          <DensityMedium className='text-[#EAF4CD] h-[18px] w-[18px]' />
+          <div className='mt-[10px] cursor-pointer hover:bg-[#429051] flex items-center justify-center h-[40px] w-[40px] rounded-[50%] border-2 border-500-[red]'>
+            <DensityMedium className='text-[#EAF4CD]' style={{ fontSize: 'medium' }} />
+          </div>
         </div>
 
-        <main className='bg-[#EAF4CD] p-[32px] mt-[20px] rounded-[8px] flex-1 mr-[10px]'>
+        <main className='bg-[#EAF4CD] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1 '>
           <Component {...otherProps} />
         </main>
       </div>
