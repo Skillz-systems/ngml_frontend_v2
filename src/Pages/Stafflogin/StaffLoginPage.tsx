@@ -94,7 +94,7 @@ const StaffLoginPage: React.FC = () => {
     };
 
     return (
-        <div className="h-screen flex flex-col bg-nnpc-700">
+        <div className="min-h-screen flex flex-col bg-nnpc-700">
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
                     <h1 className='text-[20px] font-semibold text-white'>NGML STAFF LOGIN</h1>
@@ -148,7 +148,7 @@ const StaffLoginPage: React.FC = () => {
                 </AuthContainer>
             </div>
             <div className='flex justify-center relative'>
-    <div className='w-full md:w-[400px] absolute bottom-[7rem]'>
+    <div className='w-full md:w-[400px] absolute bottom-[4rem]'>
         <ContentContainer type="translucent" height="40px" borderRadius={20}>
             <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
                 <p className='text-center text-[10px] md:text-sm text-white'>New to the Portal, Sign in Here</p>
