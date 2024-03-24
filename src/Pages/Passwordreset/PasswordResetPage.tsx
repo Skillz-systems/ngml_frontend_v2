@@ -6,68 +6,100 @@ import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
 
+const backgroundStyle = {
+    background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)'
+  };
+
 const PasswordResetPage: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        confirmPassword: '',
+    });
+    const [errors, setErrors] = useState({
+        emailError: '',
+        passwordError: '',
+        confirmPasswordError: '',
+        commonError: '',
+    });
 
-    const handleEmailChange = (value: string | number | boolean | readonly string[] | undefined) => {
+    const handleChange = (key: any) => (value: any) => {
         console.log(value)
-        setEmail(value as string);
-    };
-
-    const handlePasswordChange = (value: string | number | boolean | readonly string[] | undefined) => {
-        setPassword(value as string);
-    };
-
-    const handleConfirmPasswordChange = (value: string | number | boolean | readonly string[] | undefined) => {
-        setConfirmPassword(value as string);
+        setFormData({ ...formData, [key]: value });
+        setErrors({ ...errors, [`${key}Error`]: '' });
     };
 
     const handleResetPassword = () => {
-        if (password !== confirmPassword) {
-            setError('Passwords do not match');
-        } else {
+        let valid = true;
+        const newErrors = { ...errors };
+
+        // Email validation
+        if (!formData.email) {
+            newErrors.emailError = 'Email is required';
+            valid = false;
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.emailError = 'Invalid email address';
+            valid = false;
+        }
+
+        // Password validation
+        if (!formData.password) {
+            newErrors.passwordError = 'Password is required';
+            valid = false;
+        }
+
+        // Confirm password validation
+        if (!formData.confirmPassword) {
+            newErrors.confirmPasswordError = 'Confirm password is required';
+            valid = false;
+        } else if (formData.password !== formData.confirmPassword) {
+            newErrors.confirmPasswordError = 'Passwords do not match';
+            valid = false;
+        }
+
+        if (valid) {
             // Call your password reset API or logic here
             console.log('Resetting password...');
+            setFormData({ email: '', password: '', confirmPassword: '' });
+        } else {
+            setErrors(newErrors);
         }
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-400 via-yellow-300 to-green-100 flex flex-col" style={{ background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)' }}>
+        <div className="h-screen flex flex-col" style={backgroundStyle}>
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
                     <h1 className='text-[25px] text-gray-500 font-semibold'>Set New Password</h1>
                     <div className='w-[100%] md:w-[350px] mx-auto space-y-4'>
                         <CustomInput
                             type="text"
-                            label=""
-                            value={email}
-                            onChange={handleEmailChange}
+                            value={formData.email}
+                            onChange={handleChange('email')}
                             placeholder="Enter your email"
                             styleVariant='customStyle1'
                             icon={<img src={Email} alt='Email Icon' />}
+                            error={errors.emailError}
                         />
                         <CustomInput
                             type="password"
-                            label=""
-                            value={password}
-                            onChange={handlePasswordChange}
+                            value={formData.password}
+                            onChange={handleChange('password')}
                             placeholder="Enter a password"
                             styleVariant='customStyle1'
                             icon={<img src={Password} alt='Password Icon' />}
+                            error={errors.passwordError}
                         />
                         <CustomInput
                             type="password"
-                            label=""
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
+                            value={formData.confirmPassword}
+                            onChange={handleChange('confirmPassword')}
                             placeholder="Re-Enter the password"
                             styleVariant='customStyle1'
                             icon={<img src={Password} alt='Password Icon' />}
+                            error={errors.confirmPasswordError}
                         />
-                        {error && <p className="text-red-500">{error}</p>}
+                        {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
                     </div>
                     <div className='mt-3 w-[98%] flex items-center justify-center'>
                         <Button
@@ -85,9 +117,9 @@ const PasswordResetPage: React.FC = () => {
                 </AuthContainer>
             </div>
             <div className='mb-10 mr-6 ml-6'>
-                <ContentContainer type="white" width="100%" height="30px" borderRadius={20}>
+                <ContentContainer type="translucent" width="100%" height="30px" borderRadius={20}>
                     <div className="w-full h-full flex justify-center items-center">
-                        <p className='text-center text-sm md:text-sm'>This Portal is a Property of NNPC Gas Marketing Limited</p>
+                        <p className='text-center text-[10px] md:text-sm'>This Portal is a Property of NNPC Gas Marketing Limited</p>
                     </div>
                 </ContentContainer>
             </div>
