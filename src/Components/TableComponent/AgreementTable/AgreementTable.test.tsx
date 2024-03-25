@@ -18,5 +18,5 @@ describe('AgreementTable', () => {
     expect(filteredRows.length).toBeLessThan(AgreementData.length + 1); 
   });
 
-
+  
 });
