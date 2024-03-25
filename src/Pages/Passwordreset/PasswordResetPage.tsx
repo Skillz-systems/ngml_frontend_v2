@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Email from '../../../public/assets/png-icons/Email.png';
 import Password from '../../../public/assets/png-icons/Password.png';
-import AuthContainer from '../../Components/Authcontainer/AuthContainer';
 import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
+import AuthContainer from '@/Components/authContainer/AuthContainer';
 
 const backgroundStyle = {
     background: 'linear-gradient(108deg, #AAE4C5 -6.77%, #EFEC80 45.65%, #D2F69E 108.92%)'
