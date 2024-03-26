@@ -1,8 +1,8 @@
 
 import React, {useState, type ComponentType } from 'react';
 import NavigationBar from '../Components/NavigationMenu/NavigationBar';
-import { Navigationlinks } from '../Components/NavigationMenu/Navigationlinks';
 import { DensityMedium } from '@mui/icons-material';
+import { AdminLinks } from '@/Links/AdminLinks';
 
 interface AdminLayoutProps {
   Component: ComponentType<unknown>;
@@ -30,10 +30,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
   };
 
   return (
-    <div className='flex w-full h-screen gradient'>
+    <div className='flex w-full h-screen bg-[#EAEEF2]'>
       <div className={`w-[260px] ${isNavigationBarVisible ? '' : 'hidden'}`} >
         <NavigationBar
-          Navigationlinks={Navigationlinks}
+          Navigationlinks={AdminLinks}
           isNavigationBarVisible={isNavigationBarVisible}
           toggleNavigationBar={toggleNavigationBar}
         />
@@ -51,7 +51,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
           </div>
         </div>
 
-        <main className='bg-[#EAF4CD] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1 '>
+        <main className='bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1 '>
           <Component {...otherProps} />
         </main>
       </div>
