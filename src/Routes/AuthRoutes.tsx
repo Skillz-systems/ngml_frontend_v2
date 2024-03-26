@@ -1,10 +1,15 @@
-import PasswordResetPage from '@/Pages/Passwordreset/PasswordResetPage';
+import ForgotPassword from '@/Pages/Forgotpassword/ForgotPassword';
 
 
 export const AuthRoutes = [
+    // {
+    //     title: 'passwordRest',
+    //     path: '/',
+    //     component: PasswordResetPage
+    // },
     {
-        title: 'passwordRest',
+        title: 'forgotpassword',
         path: '/',
-        component: PasswordResetPage
+        component: ForgotPassword
     },
 ]
