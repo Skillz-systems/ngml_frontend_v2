@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import AltDownArrow from '/assets/png-icons/AltDownArrow.png';
 import Eyeclosed from '/assets/png-icons/Eyeclosed.png';
 import Eyeopen from '/assets/png-icons/Eyeopen.png';
@@ -94,7 +94,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     <input
                         type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
                         value={value as string | number | undefined}
-                        onChange={(e) => onChange(e.target.value)}
+                        onChange={(e:ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
                         onBlur={handleBlur}
                         placeholder={placeholder}
                         className={inputClasses}
@@ -104,7 +104,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 return (
                     <div className='relative'>
                         <select value={Array.isArray(value) ? value : undefined}
-                            onChange={(e) => onChange(e.target.value)}
+                            onChange={(e:ChangeEvent<HTMLSelectElement>) => onChange(e.target.value)}
                             className={`${inputClasses} appearance-none select-none`} onBlur={handleBlur} >
                             {options?.map((option) => (
                                 <option key={option} value={option}>

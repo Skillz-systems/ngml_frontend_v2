@@ -13,6 +13,7 @@ const meta = {
     argTypes: {
         Navigationlinks: { control: 'object' },
         sliceLength: { control: { type: 'number', required: false } },
+        isNavigationBarVisible: {control: 'boolean'},
 
 
     },
@@ -60,6 +61,7 @@ export const Primary: Story = {
                 type: 'primary'
             },
         ],
+        isNavigationBarVisible: true,
         // sliceLength: 7
     },
 };
@@ -170,7 +172,9 @@ export const Secondary: Story = {
                 type: 'primary'
             },
         ],
-        sliceLength: 4
+        sliceLength: 4,
+        isNavigationBarVisible: true,
+
     },
 };
 
@@ -207,7 +211,8 @@ export const Tertiary: Story = {
             },
            
         ],
-        sliceLength: 2
+        sliceLength: 2,
+        isNavigationBarVisible: true,
     },
 };
 

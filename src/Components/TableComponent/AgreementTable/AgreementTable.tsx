@@ -1,13 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-<<<<<<< HEAD
-import { FilterList } from '@mui/icons-material';
-import { IconButton, Modal, TextField } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
-import { AgreementData } from '../../../Data';
-import SelectedDateModal from '../SelectedDate/SelectedDateModal';
-
-=======
 import { AgreementData } from '@/Data';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
 import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
@@ -31,7 +22,6 @@ import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
  * @property {string} companyNumber - Optional. Contact number of the company.
  * @property {string} companyAddress - Optional. Physical address of the company.
  */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
 
 interface AgreementTableProps {
     id: number;
@@ -60,23 +50,16 @@ const AgreementTable = () => {
     const [selectedAgreement, setSelectedAgreement] = useState<string>('All Contracts');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-<<<<<<< HEAD
-=======
     /**
      * useEffect hook to filter data whenever searchText or selectedAgreement changes.
      */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
     useEffect(() => {
         filterData(searchText);
     }, [searchText, selectedAgreement]);
 
-<<<<<<< HEAD
-
-=======
     /**
      * Toggles the dropdown menu for the agreement filter.
      */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedAgreement('All Contracts');
@@ -84,13 +67,10 @@ const AgreementTable = () => {
 
     const agreementNames = [...new Set(rows.map(row => row.agreementType))];
 
-<<<<<<< HEAD
-=======
     /**
      * Opens a modal to show detailed information for the selected row.
      * @param {AgreementTableProps} row - The selected row's data.
      */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
     const handleOpen = (row: AgreementTableProps) => {
         setSelectedRow(row);
         setOpen(true);
@@ -98,26 +78,20 @@ const AgreementTable = () => {
 
     const handleClose = () => setOpen(false);
 
-<<<<<<< HEAD
-=======
     /**
      * Handles changes to the search input field and updates the searchText state.
      * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
      */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
     };
 
-<<<<<<< HEAD
-=======
 
     /**
     * Filters the rows based on the search text and selected agreement type.
     * @param {string} search - The current text in the search input field.
     */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
     const filterData = (search: string) => {
         const lowercasedSearch = search.toLowerCase();
         let filtered = rows.filter((row) =>
@@ -132,14 +106,11 @@ const AgreementTable = () => {
 
 
 
-<<<<<<< HEAD
-=======
     /**
     * Returns a style object based on the agreement's status.
     * @param {string} status - The status of the agreement.
     * @returns {React.CSSProperties} The style object for the status.
     */
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
     const getStatusStyle = (status: string) => {
         switch (status) {
             case 'Signed':
@@ -285,16 +256,6 @@ const AgreementTable = () => {
                         value={searchText}
                         onChange={handleSearchChange}
                         InputProps={{
-<<<<<<< HEAD
-                            style: {
-                                borderRadius: '32px',
-                                width: '200px',
-                                height: '35px',
-
-                            }
-                        }}
-
-=======
                             endAdornment: (
                               <InputAdornment position="end">
                                 <SearchOutlined/> 
@@ -306,7 +267,6 @@ const AgreementTable = () => {
                               height: '35px',
                             },
                           }}
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
                         sx={{
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': {
@@ -328,10 +288,7 @@ const AgreementTable = () => {
                                 },
                             },
                         }}
-<<<<<<< HEAD
-=======
                        
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
                     />
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
                         <div className='text-[12px] font-[400] text-[#828DA9] '>Filter</div>
@@ -339,11 +296,7 @@ const AgreementTable = () => {
                             <FilterList />
                         </IconButton>
                         {dropdownOpen && (
-<<<<<<< HEAD
-                            <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[190px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
-=======
                             <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[155px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
                                 {agreementNames.map(name => (
                                     <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedAgreement(name)}>
                                         {name}
@@ -368,10 +321,6 @@ const AgreementTable = () => {
                         },
                     }}
 
-<<<<<<< HEAD
-                    pageSizeOptions={[5, 10]}
-=======
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
                     sx={{
 
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
@@ -387,11 +336,7 @@ const AgreementTable = () => {
                         },
                     }}
                 />
-<<<<<<< HEAD
-            </div>
-=======
             </div>            
->>>>>>> 4bffe1295015c5db1998855cdd47d5443b2b2cc4
         </div>
     );
 }
