@@ -11,6 +11,7 @@ const ForgotPassword: React.FC = () => {
     const [errors, setErrors] = useState({
         emailError: '',
     });
+    const [submitted, setSubmitted] = useState(false);
 
     const handleChange = (key: any) => (value: any) => {
         setFormData({ ...formData, [key]: value });
@@ -32,6 +33,7 @@ const ForgotPassword: React.FC = () => {
 
         if (valid) {
             console.log('Submitting Staff ID....');
+            setSubmitted(true);
             setFormData({ email: '' });
         } else {
             setErrors(newErrors);
@@ -39,9 +41,7 @@ const ForgotPassword: React.FC = () => {
     };
 
     const handleCancellation = () => {
-        // Add cancellation logic here
         console.log('Cancellation action triggered');
-        // Reset form data and clear errors
         setFormData({ email: '' });
         setErrors({ emailError: '' });
     };
@@ -73,6 +73,10 @@ const ForgotPassword: React.FC = () => {
                         />
                         {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[106px] text-[14px]">{errors.emailError}</p>}
                     </div>
+                    {/* Conditional rendering of the message */}
+                    {submitted && (
+                        <p className="text-white mt-6 text-[12px]">We will send you an email to enable you to create a new password.</p>
+                    )}
                     <div className='mt-10 w-[98%] flex items-center justify-center'>
                         <Button
                             type="primary"
