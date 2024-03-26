@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import Cancelicon from '../../../public/assets/png-icons/Cancellation.png';
 import Email from '../../../public/assets/png-icons/Email.png';
-import AuthContainer from '../../Components/Authcontainer/AuthContainer';
 import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
+import AuthContainer from '@/Components/authContainer/AuthContainer';
 
 const ForgotPassword: React.FC = () => {
     const [formData, setFormData] = useState({ email: '' });

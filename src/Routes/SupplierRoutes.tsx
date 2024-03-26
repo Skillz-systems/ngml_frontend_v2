@@ -1,4 +1,4 @@
-import SamplePage from '@/Pages/SamplePage/SamplePage';
+import SamplePage from '@/Pages/AdminDashboardPage/AdminHomePage';
 import SupplierInternalLayout from '../Hoc/SupplierInternalLayout';
 
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * React functional component for staff login page.
  * @module StaffLoginPage
@@ -6,10 +7,10 @@
 import React, { useState } from 'react';
 import Email from '../../../public/assets/png-icons/Email.png';
 import Password from '../../../public/assets/png-icons/Password.png';
-import AuthContainer from '../../Components/Authcontainer/AuthContainer';
 import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
+import AuthContainer from '@/Components/authContainer/AuthContainer';
 
 /**
  * Functional component representing the staff login page.

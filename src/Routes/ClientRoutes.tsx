@@ -1,7 +1,7 @@
-import SamplePage from '@/Pages/SamplePage/SamplePage';
-import ClientInternalLayout from '../Hoc/ClientInternalLayout';
+import SamplePage from '@/Pages/AdminDashboardPage/AdminHomePage';
 import BusinessPage from '@/Pages/BusinessPage';
 import HomePage from '@/Pages/HomePage';
+import ClientInternalLayout from '../Hoc/ClientInternalLayout';
 
 export const ClientRoutes = [
   {

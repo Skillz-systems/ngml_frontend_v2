@@ -15,13 +15,13 @@ interface StatisticRectangleCardProps {
 const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
   icon = null,
   title,
-  value='32',
-  valueColor='text-gray-700',
+  value = '32',
+  valueColor = 'text-gray-700',
   backgroundColor = 'bg-white',
   color = 'text-gray-700',
-  size = 'w-64',
-  iconBgColor = 'bg-green-500 rounded-[5px]',
-  iconSize = 'w-5'
+  size,
+  iconBgColor = 'bg-[#00AF50]',
+  iconSize = 'w-5 '
 }) => {
   const [iconHovered, setIconHovered] = useState(false);
 
@@ -34,7 +34,8 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
   };
 
   return (
-    <div className={`rounded-lg p-4 ${backgroundColor} ${color} ${size} shadow-sm flex items-center justify-between border-[1px]`} aria-label={title}>
+    <div style={{ width: '360px', height: '64px' }}
+      className={`rounded-[12px] p-4 ${backgroundColor} ${color} ${size} shadow-sm flex items-center justify-between border-[1px]`} aria-label={title}>
       <div className='flex items-center gap-2'>
         <div
           className={`${iconBgColor} p-1`}
@@ -42,9 +43,9 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
           onMouseLeave={handleIconLeave}
           style={{ backgroundColor: iconHovered ? '#dddddd' : '' }}
         >
-          {icon &&  <div className={`${iconSize}`}>{icon}</div>}
+          {icon && <div className={`${iconSize}`} style={{ fontSize: 'small', }}>{icon}</div>}
         </div>
-        <h3 className="text-lg font-[400]">{title}</h3>
+        <h3 className="text-lg font-[400] text-[#828DA9]">{title}</h3>
       </div>
       <div>
         <h3 className={`text-lg font-bold ${valueColor}`}>{value}</h3>
