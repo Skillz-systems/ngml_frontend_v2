@@ -5,7 +5,7 @@ import Email from '../../../public/assets/png-icons/Email.png';
 import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
-import AuthContainer from '@/Components/authContainer/AuthContainer';
+import AuthContainer from '@/Components/Authcontainer/AuthContainer';
 
 const ForgotPassword: React.FC = () => {
     const [formData, setFormData] = useState({ email: '' });
