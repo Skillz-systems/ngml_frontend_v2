@@ -5,7 +5,7 @@ import profileicon from '../../src/assets/images/png-icons/Profile.png';
 
 
 export const AdminLinks = [
-  { id: 1, name: 'Home', to: '/admin/adminhomepage', icon: Homeicon, type: 'primary' },
+  { id: 1, name: 'Home', to: '/ c ustom', icon: Homeicon, type: 'primary' },
   {
      id: 2,
      name: 'Business',
@@ -19,6 +19,7 @@ export const AdminLinks = [
      ]
   },
   { id: 3, name: 'Profile', to: '/admin/profilePage', icon: profileicon, type: 'primary' },
+  { id: 3, name: 'Existing Customers', to: '/admin/customerdetailslayout', icon: profileicon, type: 'primary' },
 //   {
 //      id: 4, name: 'Settings', to: '/client/businessPage', icon: Settingsicon, type: 'secondary', 
 //      subMenu: [

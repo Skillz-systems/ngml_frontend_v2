@@ -32,6 +32,8 @@ interface CardProps {
   width?: string;
   height?: string;
   borderRadius?: number;
+  borderColor?: string;
+  borderWidth?: number;
   children: ReactNode;
 }
 
@@ -40,6 +42,8 @@ const ContentContainer: React.FC<CardProps> = ({
   width = '100%',
   height = '100%',
   borderRadius = 5,
+  borderColor = 'red',
+  borderWidth = 1,
   children,
 }: CardProps) => {
   const getCardStyles = (): React.CSSProperties => {
@@ -47,6 +51,8 @@ const ContentContainer: React.FC<CardProps> = ({
       width,
       height,
       borderRadius,
+      borderColor,
+      borderWidth: `${borderWidth}px`,
       padding: '10px',
       boxSizing: 'border-box',
     };

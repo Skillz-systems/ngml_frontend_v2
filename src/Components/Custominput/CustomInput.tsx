@@ -32,7 +32,7 @@ interface CustomInputProps {
     error?: string;
     required?: boolean;
     icon?: React.ReactNode;
-    styleVariant?: 'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4'
+    styleVariant?: 'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4' | 'customStyle5'
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -70,6 +70,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
         customStyle2: `rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
         customStyle3: `rounded-full placeholder-gray-300 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:border-lime-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-4`, // for inputs with gray background focused, rounded radius and wider input 
         customStyle4: `placeholder-black pl-12 focus:outline-none font-[400] focus:border-lime-200 focus:bg-white-600 border-1 solid w-full py-2`, // no border input
+        customStyle5: `rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background
     };
 
     const inputClasses = `${styleVariants[styleVariant]} ${!icon ? 'pl-3' : ''

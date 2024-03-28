@@ -10,7 +10,7 @@ import Password from '../../../public/assets/png-icons/Password.png';
 import Button from '../../Components/ButtonComponent/Button';
 import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
 import CustomInput from '../../Components/Custominput/CustomInput';
-import AuthContainer from '@/Components/authContainer/AuthContainer';
+import AuthContainer from '@/Components/Authcontainer/AuthContainer';
 
 /**
  * Functional component representing the staff login page.

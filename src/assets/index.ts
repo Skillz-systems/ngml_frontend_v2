@@ -11,7 +11,10 @@ import homeicons from './images/HomeIcons.png';
 import nnpc from './images/nnpc.png';
 import nnpclogo from './images/nnpclogo.png';
 import attachment from './images/png-icons/Attachment.png';
+import LeftArrow from './images/png-icons/LeftArrow.png';
 import polygon from './images/Polygon.png';
+import Communication from './images/png-icons/Communication.png'
+import Close from './images/png-icons/Close.png'
 
 const images = {
   cancelicon,
@@ -27,7 +30,10 @@ const images = {
   guy,
   homeicons,
   polygon,
-  attachment
+  attachment,
+  LeftArrow,
+  Communication,
+  Close
 };
 
 export default images;
