@@ -1,7 +1,8 @@
 import Notification from '@/Components/NotificationComponent/Notification';
+import StatisticDynamicCard from '@/Components/StatisticCardComponent/StatisticDynamicCard';
 import StatisticCard from '@/Components/Statisticccard/StatisticCard';
 import StatisticRectangleCard from '@/Components/Statisticrectanclecard/StatisticRectangleCard';
-import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined, NotificationImportantOutlined } from '@mui/icons-material';
+import { ArrowDownward, FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined, NotificationImportantOutlined, VerifiedUserOutlined } from '@mui/icons-material';
 import React from 'react';
 
 const AdminHomePage = () => {
@@ -60,6 +61,36 @@ const AdminHomePage = () => {
   ];
 
 
+  const statisticDynamicData = [
+    {
+      type: 'primary',
+      title: 'Total Revenue',
+      content: '$2,305',
+      icon: <VerifiedUserOutlined />,
+      dropdownIcon: <ArrowDownward />,
+      onSortChange: (sortType: unknown, value: unknown) => console.log(`Sorted by ${sortType}: ${value}`),
+      yearOptions: [2020, 2021, 2022],
+      valueOptions: [
+        { label: 'Revenue', value: 'revenue' },
+        { label: 'Profit', value: 'profit' }
+      ],
+    },
+    {
+      type: 'secondary',
+      title: 'Total Revenue',
+      content: '$2,305',
+      icon: <VerifiedUserOutlined />,
+      dropdownIcon: <ArrowDownward />,
+      onSortChange: (sortType: unknown, value: unknown) => console.log(`Sorted by ${sortType}: ${value}`),
+      yearOptions: [2020, 2021, 2022],
+      valueOptions: [
+        { label: 'Revenue', value: 'revenue' },
+        { label: 'Profit', value: 'profit' }
+      ],
+    },
+  ];
+
+
   return (
     <div className="h-fit" >
       <div className='flex justify-between'>
@@ -106,8 +137,24 @@ const AdminHomePage = () => {
           </div>
 
         </div>
-        <div className='w-[35%]' style={{ border: '2px solid blue' }}>DDDDDDDD</div>
-
+        <div className='w-[35%]' style={{ border: '2px solid blue' }}></div>
+      </div>
+      <div>
+        <div>
+          {statisticDynamicData.map((card, index) => (
+            <StatisticDynamicCard
+              key={index}
+              type={card.type}
+              title={card.title}
+              content={card.content}
+              icon={card.icon}
+              dropdownIcon={card.dropdownIcon}
+              onSortChange={card.onSortChange}
+              yearOptions={card.yearOptions}
+              valueOptions={card.valueOptions}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
