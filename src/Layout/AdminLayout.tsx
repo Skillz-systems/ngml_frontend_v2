@@ -3,6 +3,7 @@ import React, {useState, type ComponentType } from 'react';
 import NavigationBar from '../Components/NavigationMenu/NavigationBar';
 import { DensityMedium } from '@mui/icons-material';
 import { AdminLinks } from '@/Links/AdminLinks';
+import TopNavigationBar from '@/Components/TopNavigationBar/TopNavigationBar';
 
 interface AdminLayoutProps {
   Component: ComponentType<unknown>;
@@ -30,6 +31,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
   };
 
   return (
+    <>
+    <TopNavigationBar/>
     <div className='flex w-full h-screen bg-[#EAEEF2]'>
       <div className={`w-[260px] ${isNavigationBarVisible ? '' : 'hidden'}`} >
         <NavigationBar
@@ -56,6 +59,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
         </main>
       </div>
     </div>
+    </>
   );
 };
 

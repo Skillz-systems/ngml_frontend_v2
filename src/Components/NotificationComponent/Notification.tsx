@@ -1,14 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import NotificationContents from './NotificationContents';
+import { Modal } from '@mui/material';
 
 
 /**
  * Props interface for the Notification component
  */
 interface NotificationProps {
-    count: number;
+    count?: number;
     headerTitle?: string;
-    notifications: {
+    notifications?: {
         title: string;
         date: string;
         content: string;
@@ -31,7 +32,7 @@ const Notification: React.FC<NotificationProps> = ({
     notifications = [],
     onClick,
     renderIcon,
-    
+
 }) => {
 
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
@@ -75,55 +76,62 @@ const Notification: React.FC<NotificationProps> = ({
     };
 
     return (
-        <div
-
-        >
-            <div ref={notificationRef} data-testid='notification-icon'>
-                <div
-                    className='notification-icon'
-                    style={{
-                        border: isHovering ? '1px solid #005828' : '1px solid #CCD0DC',
-                        height: '32px',
-                        width: '32px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: '100%',
-                        cursor: 'pointer',
-                        transition: 'background-color 0.3s ease-in-out',
-                        backgroundColor: isNotificationOpen ? '#D2F69E' : 'transparent',
-                    }}
-                    onClick={handleIconClick}
-                >
-                    {renderIcon && (
-                        <div style={{
-                            color: isHovering ? '#005828' : '#828DA9',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            {renderIcon()}
-                        </div>
-                    )}
+        <div ref={notificationRef} data-testid='notification-icon'>
+            <div
+                className='notification-icon'
+                style={{
+                    border: isHovering ? '1px solid #005828' : '1px solid #CCD0DC',
+                    height: '32px',
+                    width: '32px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '100%',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease-in-out',
+                    backgroundColor: isNotificationOpen ? '#D2F69E' : 'transparent',
+                }}
+                onClick={handleIconClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                {renderIcon && renderIcon()}
+                {notifications && notifications.length > 0 && (
                     <div>
                         <span className='notification-count'>{count}</span>
                     </div>
-                </div>
+                )}
+            </div>
 
-                {isNotificationOpen && (
-                    <div>
+            {isNotificationOpen && notifications && notifications.length > 0 && (
+                <Modal
+                    open={isNotificationOpen}
+                    onClose={() => setIsNotificationOpen(false)}
+                    aria-labelledby="notification-modal-title"
+                    aria-describedby="notification-modal-description"
+                    style={{
+                        display: 'flex',
+                        alignItems: 'start',
+                        justifyContent: 'flex-end',
+                        overflow: 'visible',
+                    }}
+                >
+                    <div style={{
+                        position: 'fixed',
+                        top: 0,
+                        right: 0,
+                        transform: 'translateX(0)',
+                        margin: '20px',
+                    }}>
                         <NotificationContents
                             headerTitle={headerTitle}
                             notifications={notifications}
                             onClose={() => setIsNotificationOpen(false)}
                         />
                     </div>
-                )}
-            </div></div>
-
+                </Modal>
+            )}
+        </div>
     );
 };
 

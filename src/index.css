@@ -65,13 +65,13 @@
 }
 
 .layout-main {
-  width: '100%';
-  overflow-y: 'auto';
-  margin-left: '260px';
-  background-color: 'rgba(255, 255, 255, 0.5)';
-  padding: '32px';
-  margin-top: '20px';
-  border-radius: '8px';
+  width: "100%";
+  overflow-y: "auto";
+  margin-left: "260px";
+  background-color: "rgba(255, 255, 255, 0.5)";
+  padding: "32px";
+  margin-top: "20px";
+  border-radius: "8px";
 }
 
 .layout-icon-body {
@@ -93,3 +93,15 @@
 .margin-left-negative-260px {
   margin-left: -260px;
 }
+
+/* .modalStyle {
+  position: "absolute";
+  top: "50%";
+  left: "50%";
+  transform: "translate(-50%, -50%)";
+  width: 200;
+  background-color: "red";
+  border: "2px solid red";
+  box-shadow: 24;
+  padding: 4;
+} */
