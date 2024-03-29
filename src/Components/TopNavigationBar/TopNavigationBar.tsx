@@ -3,6 +3,14 @@ import Logo from '../../assets/images/CompanyLogo.png';
 import Notification from '../NotificationComponent/Notification';
 import SearchInput from '../Searchinput/SearchInput';
 
+
+/**
+ * Represents the top navigation bar of the application.
+ * It includes the company logo, a search input, and three types of notifications:
+ * messages, alerts, and reminders.
+ * 
+ * Each notification type is displayed using the `Notification` component with specific data.
+ */
 const TopNavigationBar = () => {
 
     const messageNotifications = [
@@ -25,6 +33,10 @@ const TopNavigationBar = () => {
 
     ];
 
+    /**
+     * Handles the search functionality in the top navigation bar.
+     * @param {unknown} query - The search query entered by the user.
+     */
     const handleSearch = (query: unknown) => {
         console.log('User searched for:', query);
     };
