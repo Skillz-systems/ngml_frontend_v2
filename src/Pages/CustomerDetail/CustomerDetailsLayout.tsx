@@ -1,40 +1,105 @@
-import TabsCustomer from '@/Components/CustomerTabs/CustomerTab';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import images from '../../assets/index';
+import React from 'react';
+import { TabLayout } from '../../Components/index';
+import CustomerDetail from './CustomerDetail';
+// import images from '../../assets/index';
+
+
 
 const CustomerDetailsLayout: React.FC = () => {
-    const { id } = useParams()
 
-    const [activeTab, setActiveTab] = useState<string>('eoirequest')
-    const navigate = useNavigate()
-    useEffect(() => {
+    const tablist = [
+        {
+            name: 'overview',
+            ref: 'overview',
+            // content: 'numeric',
+            // content: 'icon',
+            // icon: <img src={images.LeftArrow} alt="logo" />
+        },
+        {
+            name: 'customers',
+            ref: 'customers',
+            // content: 'numeric',
+            // content: 'icon',
+            // icon: <img src={images.LeftArrow} alt="logo" />
+        },
+        {
+            name: 'customer details',
+            ref: 'customerdetails',
+            // content: 'numeric',
+            // content: 'icon',
+            // icon: <img src={images.LeftArrow} alt="logo" />,
+            // sublist: [
+            //     {
+            //         name: 'Sub Detail 1',
+            //         ref: 'subdetail1'
+            //     },
+            //     {
+            //         name: 'Sub Detail 2',
+            //         ref: 'subdetail2'
+            //     }
+            // ]
+        },
+        {
+            name: 'Eoi request',
+            ref: 'eoirequest',
+            // content: 'numeric'
+        },
+        {
+            name: 'DDQ',
+            ref: 'ddq',
+            // content: 'numeric'
+        },
+        {
+            name: 'site visit',
+            ref: 'sitevisit',
+            // content: 'numeric'
+        },
+        {
+            name: 'cost analysis',
+            ref: 'costanalysis',
+            // content: 'numeric'
+        },
+        {
+            name: 'agreement',
+            ref: 'agreement',
+            // content: 'numeric'
+        },
+        {
+            name: 'connect project',
+            ref: 'connectproject',
+            // content: 'numeric'
+        },
+        {
+            name: 'customer manager',
+            ref: 'customermanager',
+            // content: 'numeric'
+        }
+    ]
 
-    }, [activeTab])
+    // Define the content or pages here
+    const tabContent = {
+        overview: <div className="flex-1 w-full"><p>Overview Content Here</p></div>,
+        customers: <div className="flex-1 w-full"><p>Customers Content Here</p></div>,
+        customerdetails: <CustomerDetail />,
+        subdetail1: <p>tyfyufuyfifyt</p>
+    };
 
     return (
-        <div className="m-5 bg-white flex-1 p-5 rounded-xl">
-            <div className="w-full h-8 justify-between items-center inline-flex flex-wrap"> {/* flex-wrap added */}
-                <div className="justify-start items-center gap-3 flex flex-grow"> {/* flex-grow added */}
-                    <div className="text-center text-slate-600 text-[32px] font-semibold font-['Mulish'] leading-loose">Dangote Cement</div>
-                </div>
-                <div className="justify-end items-center gap-4 flex">
-                    <div className="w-8 h-8 p-2.5 rounded-[40px] border border-gray-300 flex-col justify-center items-center gap-2.5 inline-flex">
-                        <div className="p-1 bg-green-600 rounded-3xl flex-col justify-end items-center gap-2.5 flex">
-                            <div className="text-white text-[10px] font-medium font-['Mulish'] leading-[10px] tracking-tight">04</div>
-                        </div>
-                        <div className="w-4 h-4 justify-center items-center inline-flex">
-                            <div className="w-4 h-4 relative flex-col justify-start items-start flex"><img src={images.Communication} alt="logo" className='absolute top-[-12px]' /></div>
-                        </div>
-                    </div>
-                    <div className="w-[80px] px-2 py-[4px] rounded-[20px] border border-gray-200">
-                        <div className="text-slate-600 text-sm font-normal font-['Mulish'] flex justify-between items-center gap-2"><img src={images.Close} alt="close icon" /><p>close</p></div>
-                    </div>
-                </div>
-            </div>
-            <TabsCustomer setActiveTab={setActiveTab} activeTab={activeTab} />
+        <div>
+            <TabLayout
+                title="Dangote Cement"
+                width=""
+                height=""
+                backgroundColor="#ffffff"
+                color="#000000"
+                borderColor=""
+                borderWidth=""
+                borderRadius="10px"
+                tablist={tablist}
+                tabContent={tabContent}
+            />
         </div>
     )
 }
 
-export default CustomerDetailsLayout
+export default CustomerDetailsLayout;

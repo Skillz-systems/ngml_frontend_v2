@@ -15,6 +15,7 @@ import LeftArrow from './images/png-icons/LeftArrow.png';
 import polygon from './images/Polygon.png';
 import Communication from './images/png-icons/Communication.png'
 import Close from './images/png-icons/Close.png'
+import Done from './images/png-icons/Done.png'
 
 const images = {
   cancelicon,
@@ -33,7 +34,8 @@ const images = {
   attachment,
   LeftArrow,
   Communication,
-  Close
+  Close,
+  Done
 };
 
 export default images;
