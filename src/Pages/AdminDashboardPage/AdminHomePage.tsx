@@ -1,7 +1,8 @@
-import StatisticCard from '@/Components/Statisticccard/StatisticCard';
-import StatisticRectangleCard from '@/Components/Statisticrectanclecard/StatisticRectangleCard';
+
 import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined } from '@mui/icons-material';
 import React from 'react';
+
+import { StatisticCard, StatisticRectangleCard } from '../../Components/index';
 
 const AdminHomePage = () => {
 

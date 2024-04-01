@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import Cancelicon from '../../../public/assets/png-icons/Cancellation.png';
-import Email from '../../../public/assets/png-icons/Email.png';
-import Button from '../../Components/ButtonComponent/Button';
-import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
-import CustomInput from '../../Components/Custominput/CustomInput';
-import AuthContainer from '@/Components/Authcontainer/AuthContainer';
+import images from '../../assets/index';
+import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
 
 const ForgotPassword: React.FC = () => {
     const [formData, setFormData] = useState({ email: '' });
@@ -48,10 +44,10 @@ const ForgotPassword: React.FC = () => {
     };
 
     return (
-        <div className="h-screen flex flex-col bg-nnpc-700 relative">
+        <div className="h-screen flex flex-col gradient-bg relative">
             <div className="absolute top-20 right-20">
                 <Button
-                    icon={<img src={Cancelicon} alt="cancel icon" />}
+                    icon={<img src={images.cancelicon} alt="cancel icon" />}
                     type="icon"
                     action={handleCancellation}
                     iconColor="#E2E4EB"
@@ -62,7 +58,7 @@ const ForgotPassword: React.FC = () => {
             </div>
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
-                    <h1 className='text-[20px] text-gray-500 font-semibold text-white'>FORGOT PASSWORD</h1>
+                    <h1 className='text-[20px]  font-semibold text-white'>FORGOT PASSWORD</h1>
                     <div className='w-[100%] md:w-[350px] mx-auto space-y-4'>
                         <CustomInput
                             type="text"
@@ -70,7 +66,7 @@ const ForgotPassword: React.FC = () => {
                             onChange={handleChange('email')}
                             placeholder="Enter email here"
                             styleVariant='customStyle1'
-                            icon={<img src={Email} alt='Email' />}
+                            icon={<img src={images.emailicons} alt='Email' />}
                         />
                         {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[106px] text-[14px]">{errors.emailError}</p>}
                     </div>

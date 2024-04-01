@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import Email from '../../../public/assets/png-icons/Email.png';
-import Password from '../../../public/assets/png-icons/Password.png';
-import AuthContainer from '../../Components/Authcontainer/AuthContainer';
-import Button from '../../Components/ButtonComponent/Button';
-import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
-import CustomInput from '../../Components/Custominput/CustomInput';
-
-
+import images from '../../assets/index';
+import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
 
 const PasswordResetPage: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -76,7 +70,7 @@ const PasswordResetPage: React.FC = () => {
                             onChange={handleChange('email')}
                             placeholder="Enter your email"
                             styleVariant='customStyle1'
-                            icon={<img src={Email} alt='Email Icon' />}
+                            icon={<img src={images.email} alt='Email Icon' />}
                             error={errors.emailError}
                         />
                         <CustomInput
@@ -85,7 +79,7 @@ const PasswordResetPage: React.FC = () => {
                             onChange={handleChange('password')}
                             placeholder="Enter a password"
                             styleVariant='customStyle1'
-                            icon={<img src={Password} alt='Password Icon' />}
+                            icon={<img src={images.password} alt='Password Icon' />}
                             error={errors.passwordError}
                         />
                         <CustomInput
@@ -94,7 +88,7 @@ const PasswordResetPage: React.FC = () => {
                             onChange={handleChange('confirmPassword')}
                             placeholder="Re-Enter the password"
                             styleVariant='customStyle1'
-                            icon={<img src={Password} alt='Password Icon' />}
+                            icon={<img src={images.password} alt='Password Icon' />}
                             error={errors.confirmPasswordError}
                         />
                         {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
