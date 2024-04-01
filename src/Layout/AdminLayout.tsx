@@ -1,8 +1,8 @@
 
-import React, {useState, type ComponentType } from 'react';
-import NavigationBar from '../Components/NavigationMenu/NavigationBar';
-import { DensityMedium } from '@mui/icons-material';
 import { AdminLinks } from '@/Links/AdminLinks';
+import { DensityMedium } from '@mui/icons-material';
+import React, { useState, type ComponentType } from 'react';
+import { NavigationBar } from '../Components/index';
 
 interface AdminLayoutProps {
   Component: ComponentType<unknown>;
