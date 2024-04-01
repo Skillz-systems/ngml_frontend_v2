@@ -35,7 +35,7 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
 
   return (
     <div style={{ width: '360px', height: '64px' }}
-      className={`rounded-[12px] p-4 ${backgroundColor} ${color} ${size} shadow-sm flex items-center justify-between border-[1px]`} aria-label={title}>
+      className={`rounded-[12px] p-4 ${backgroundColor} ${color} ${size} shadow-sm flex items-center justify-between border-[1px] border-gray-300/40`} aria-label={title}>
       <div className='flex items-center gap-2'>
         <div
           className={`${iconBgColor} p-1`}
