@@ -3,6 +3,7 @@ import biqrcode from './images/bi_qr-code.png';
 import cancel from './images/png-icons/Cancellation.png';
 import cancelicon from './images/Cancelicon.png';
 import companylogo from './images/CompanyLogo.png';
+import databox from './images/DataBox.png';
 import email from './images/Email.png';
 import emailicons from './images/emailIcons.png';
 import eyeicons from './images/eyeIcons.png';
@@ -33,7 +34,8 @@ const images = {
   attachment,
   password,
   email,
-  profile
+  profile,
+  databox
 };
 
 export default images;

@@ -1,8 +1,8 @@
-import Notification from '@/Components/NotificationComponent/Notification';
-import StatisticCard from '@/Components/Statisticccard/StatisticCard';
-import StatisticRectangleCard from '@/Components/Statisticrectanclecard/StatisticRectangleCard';
+
 import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined, NotificationImportantOutlined } from '@mui/icons-material';
 import React from 'react';
+
+import { Notification, StatisticCard, StatisticRectangleCard } from '../../Components/index';
 
 const AdminHomePage = () => {
 
@@ -63,7 +63,7 @@ const AdminHomePage = () => {
   return (
     <div className="h-fit" >
       <div className='flex justify-between'>
-        <div className='text-[30px] text-[#49526A] font-[700]'>Welcome John,</div>
+        <div className='text-[30px] text-gray-200 font-[700]'>Welcome John,</div>
         <div>
           <Notification
             headerTitle='Recent Activity'
@@ -91,7 +91,7 @@ const AdminHomePage = () => {
           );
         })}
       </div>
-      <div className='mt-8 h-fit flex w-[100%] space-x-4 flex'
+      <div className='mt-8 h-fit w-[100%] space-x-4 flex'
         style={{ border: '2px solid red', }}>
         <div className='w-[72%] flex ' style={{ border: '2px solid green' }}>
           <div className=' h-fit flex space-x-4'>
