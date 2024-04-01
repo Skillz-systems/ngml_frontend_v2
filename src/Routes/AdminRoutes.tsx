@@ -1,7 +1,7 @@
 import AdminDashboard from '@/Pages/AdminDashboardPage/AdminHomePage';
-import AdminInternalLayout from '../Hoc/AdminInternalLayout';
+import BusinessPage from '@/Pages/BusinessPage';
 import ProfilePage from '@/Pages/ProfilePage/Profilepage';
-import CustomerDetailsLayout from '@/Pages/CustomerDetail/CustomerDetailsLayout';
+import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 
 export const AdminRoutes = [
   {
@@ -13,7 +13,7 @@ export const AdminRoutes = [
   {
     title: 'Admin Business page',
     path: '/admin/businessPage',
-    component: AdminInternalLayout(AdminDashboard),
+    component: AdminInternalLayout(BusinessPage),
     exact: true
   },
   {

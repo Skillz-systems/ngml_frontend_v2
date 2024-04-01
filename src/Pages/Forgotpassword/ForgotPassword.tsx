@@ -45,7 +45,7 @@ const ForgotPassword: React.FC = () => {
     };
 
     return (
-        <div className="h-screen flex flex-col bg-nnpc-700 relative">
+        <div className="h-screen flex flex-col gradient-bg relative">
             <div className="absolute top-20 right-20">
                 <Button
                     icon={<img src={images.cancelicon} alt="cancel icon" />}

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-import colors from 'tailwindcss/colors';
+// import colors from 'tailwindcss/colors';
+import colors from './src/Utils/colors'
 export default {
   content: [
     './index.html',
@@ -14,21 +15,14 @@ export default {
         'NGML-SEC': 'var(--NGML-SEC, #005828)',
       },
       colors: {
-        primary: colors.blue,
-
-        nnpc: {
-          50: '#f2fbf6',
-          100: '#e1f7ea',
-          200: '#c4eed8',
-          300: '#95e0b8',
-          400: '#60c892',
-          500: '#3aad71',
-          600: '#2b8e5a',
-          700: '#226844',
-          800: '#22593d',
-          900: '#1d4a34',
-          950: '#0b281a',
-        },
+        primary: colors.medium,
+        nnpc: colors.nnpc,
+        gray: colors.gray,
+        medium: colors.medium,
+        dark: colors.dark,
+        light: colors.light,
+        red: colors.red,
+        yellow: colors.yellow,
       },
       backgroundColor: {
         customYellow: '#FDF6E4',

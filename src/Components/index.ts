@@ -8,6 +8,7 @@ export { default as CustomInput } from './Custominput/CustomInput';
 export { default as DateCard } from './DateCardComponent/DateCard';
 export { default as DocumentCard } from './Documentcard/DocumentCard';
 export { default as FileUploadInput } from './Fileuploadinput/FileUploadInput';
+export { default as Heading } from './Heading/Heading';
 export { default as InfoCardComponent } from './InfoCardComponent/InfoCardComponent';
 export { default as Modal } from './Modal/Modal';
 export { default as NavigationBar } from './NavigationMenu/NavigationBar';

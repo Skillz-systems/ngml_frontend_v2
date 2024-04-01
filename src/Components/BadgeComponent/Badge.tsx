@@ -1,10 +1,10 @@
-import React from 'react'
-
+import React from 'react';
+import colors, { useColor } from '../../Utils/colors';
 /**
  * Badge Component
- * 
+ *
  * A custom dynamic badge component that supports various styles, icons, and customization options.
- 
+
  *
  * @param {Object} props - The properties of the Badge component.
  * @param {string} props.type - The type of the badge. Possible values are "primary", "secondary", "transparent", "outline".
@@ -59,25 +59,27 @@ const Badge: React.FC<BadgeProps> = ({
 
     /**
     * Get the inline styles based on the badge type.
-    * 
+    *
     * @function
     * @private
     * @returns {React.CSSProperties} Returns the inline styles for the badge container.
     */
 
+    const primaryColor = useColor('nnpc', 100);
+
     const getBadgeStyles = (): React.CSSProperties => {
         switch (type) {
             case 'primary':
-                return { backgroundColor: '#53B052', color: 'white', width, height, fontSize, borderRadius: radius, fontWeight }
+                return { backgroundColor: primaryColor, color: colors.gray[50], width, height, fontSize, borderRadius: radius, fontWeight }
             case 'secondary':
-                return { backgroundColor: '#D2F69E', color: '#53B052', width, height, fontSize, borderRadius: radius, fontWeight }
+                return { backgroundColor: colors.nnpc[50], color: primaryColor, width, height, fontSize, borderRadius: radius, fontWeight }
             case 'transparent':
-                return { backgroundColor: '#E2E4EB', color: '#49526A', width, height, fontSize, borderRadius: radius, fontWeight }
+                return { backgroundColor: '#E2E4EB', color: colors.gray[200], width, height, fontSize, borderRadius: radius, fontWeight }
             case 'outline':
-                return { border: '2px solid #DCDFE4', color: '#49526A', width, height, fontSize, borderRadius: radius, fontWeight }
+                return { border: '2px solid #DCDFE4', color: colors.gray[200], width, height, fontSize, borderRadius: radius, fontWeight }
 
             default:
-                return { backgroundColor: 'green', color: 'white' }
+                return { backgroundColor: 'green', color: colors.gray[50] }
         }
     }
 
