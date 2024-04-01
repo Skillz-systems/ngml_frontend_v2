@@ -1,6 +1,6 @@
 import { TabCustomer } from '../../Components/index';
 import React, { useState } from 'react';
-import images from '../../assets/index';
+// import images from '../../assets/index';
 
 interface Tab {
     name: string;

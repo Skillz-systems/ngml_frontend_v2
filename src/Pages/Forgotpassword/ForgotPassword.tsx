@@ -67,7 +67,7 @@ const ForgotPassword: React.FC = () => {
                             onChange={handleChange('email')}
                             placeholder="Enter email here"
                             styleVariant='customStyle1'
-                            icon={<img src={images.email} alt='Email' />}
+                            icon={<img src={images.emailicons} alt='Email' />}
                         />
                         {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[106px] text-[14px]">{errors.emailError}</p>}
                     </div>

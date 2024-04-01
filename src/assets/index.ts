@@ -1,6 +1,6 @@
 import avatar from './images/avatar.png';
 import biqrcode from './images/bi_qr-code.png';
-import cancel from './images/cancel.png';
+import cancel from './images/png-icons/Cancellation.png';
 import cancelicon from './images/Cancelicon.png';
 import companylogo from './images/CompanyLogo.png';
 import email from './images/Email.png';
@@ -13,7 +13,6 @@ import nnpc from './images/nnpc.png';
 import nnpclogo from './images/nnpclogo.png';
 import password from './images/Password.png';
 import attachment from './images/png-icons/Attachment.png';
-import LeftArrow from './images/png-icons/LeftArrow.png';
 import polygon from './images/Polygon.png';
 import profile from './images/Profile.png';
 
@@ -34,8 +33,7 @@ const images = {
   attachment,
   password,
   email,
-  profile,
-  LeftArrow
+  profile
 };
 
 export default images;
