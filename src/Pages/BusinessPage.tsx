@@ -74,6 +74,14 @@ const BusinessPage = () => {
           title='Customer Consumption Chart'
         />
         <Chart
+          data={dataNNPC}
+          chartType="pie"
+          yAxisLabel="NNPC"
+          xAxisDataKey="month"
+          colors={chartColors}
+          title='Customer Consumption Pie'
+        />
+        <Chart
           data={[]}
           chartType="bar"
           yAxisLabel="NNPC"
