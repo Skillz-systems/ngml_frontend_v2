@@ -92,7 +92,7 @@ const AdminHomePage = () => {
           </div>
 
         </div>
-        <div className='w-[35%]' style={{ border: '2px solid blue' }}>DDDDDDDD</div>
+        <div className='w-[50%]' style={{ border: '2px solid blue' }}>DDDDDDDD</div>
 
       </div>
     </div>
