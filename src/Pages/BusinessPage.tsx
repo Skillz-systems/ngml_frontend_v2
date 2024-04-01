@@ -53,6 +53,7 @@ const BusinessPage = () => {
           xAxisDataKey="month"
           yAxisLabel="NNPC"
           colors={chartColors}
+          title='Customer Consumption Chart'
         />
 
         <h2 className="text-2xl font-bold mb-4 mt-8">Line Chart</h2>
@@ -62,6 +63,7 @@ const BusinessPage = () => {
           yAxisLabel="NNPC"
           xAxisDataKey="month"
           colors={chartColors}
+          title='P & L for NNPC'
         />
         <Chart
           data={dataNNPC}
@@ -69,6 +71,15 @@ const BusinessPage = () => {
           yAxisLabel="NNPC"
           xAxisDataKey="month"
           colors={chartColors}
+          title='Customer Consumption Chart'
+        />
+        <Chart
+          data={[]}
+          chartType="bar"
+          yAxisLabel="NNPC"
+          xAxisDataKey="month"
+          colors={chartColors}
+          title='NO DATA Chart'
         />
       </div>
     </div>
