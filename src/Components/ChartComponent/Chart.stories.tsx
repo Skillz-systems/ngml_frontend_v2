@@ -50,7 +50,7 @@ export const BarChart: Story = {
         data,
         chartType: 'bar',
         xAxisDataKey: 'month',
-        yAxisLabel: 'Values',
+        yAxisLabel: 'NNPC',
         colors: chartColors,
     },
 };
@@ -61,6 +61,7 @@ export const LineChart: Story = {
         data,
         chartType: 'line',
         xAxisDataKey: 'month',
+        yAxisLabel: 'NNPC',
         colors: chartColors,
     },
 };
@@ -71,6 +72,7 @@ export const AreaChart: Story = {
         data,
         chartType: 'area',
         xAxisDataKey: 'month',
+        yAxisLabel: 'NNPC',
         colors: chartColors,
     },
 };
@@ -81,6 +83,7 @@ export const PieChart: Story = {
         data,
         chartType: 'pie',
         xAxisDataKey: 'month',
+        yAxisLabel: 'NNPC',
         colors: chartColors,
     },
 };

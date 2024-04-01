@@ -45,23 +45,32 @@ const Chart = <T extends Record<string, any>>({
     };
 
     return (
-        <div className="bg-white p-4">
-            <ResponsiveContainer width="100%" height={400}>
-                <ComposedChart data={data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey={xAxisDataKey as string} />
-                    {yAxisLabel && <YAxis label={{ value: yAxisLabel, angle: -90, position: 'insideLeft' }} />}
-                    <YAxis />
-                    <Tooltip />
-                    <Legend verticalAlign="top" height={36} />
-                    {Object.keys(data[0]).map((dataKey, index) => {
-                        if (dataKey !== xAxisDataKey) {
-                            return renderChartComponent(dataKey, colors[index % colors.length], index);
-                        }
-                        return null;
-                    })}
-                </ComposedChart>
-            </ResponsiveContainer>
+        <div className="bg-white rounded-lg border border-gray-100 mt-4" data-testid="chart">
+            <div className='flex justify-between items-center space-x-3 p-4 bg-medium-100 border-b border-gray-200/20'>
+                <p>TOTAL FOR 1000,0000</p>
+                <div>submit</div>
+
+            </div>
+
+            <div className='p-4'>
+
+                <ResponsiveContainer width="100%" height={400}>
+                    <ComposedChart data={data} >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey={xAxisDataKey as string} />
+                        {yAxisLabel && <YAxis label={{ value: yAxisLabel, angle: -90, position: 'insideLeft' }} />}
+                        <YAxis />
+                        <Tooltip />
+                        <Legend verticalAlign="top" height={36} />
+                        {Object.keys(data[0]).map((dataKey, index) => {
+                            if (dataKey !== xAxisDataKey) {
+                                return renderChartComponent(dataKey, colors[index % colors.length], index);
+                            }
+                            return null;
+                        })}
+                    </ComposedChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     );
 };
