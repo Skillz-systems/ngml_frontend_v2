@@ -5,12 +5,9 @@
  */
 
 import React, { useState } from 'react';
-import Email from '../../../public/assets/png-icons/Email.png';
-import Password from '../../../public/assets/png-icons/Password.png';
-import Button from '../../Components/ButtonComponent/Button';
-import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
-import CustomInput from '../../Components/Custominput/CustomInput';
-import AuthContainer from '@/Components/Authcontainer/AuthContainer';
+
+import images from '../../assets/index';
+import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
 
 /**
  * Functional component representing the staff login page.
@@ -100,40 +97,40 @@ const StaffLoginPage: React.FC = () => {
                 <AuthContainer>
                     <h1 className='text-[20px] font-semibold text-white'>NGML STAFF LOGIN</h1>
                     <div className='relative'>
-                    <div className='w-[100%] md:w-[350px] mx-auto space-y-6'>
-                        <CustomInput
-                            type="text"
-                            value={formData.email}
-                            onChange={handleChange('email')}
-                            placeholder="Enter your email"
-                            styleVariant='customStyle1'
-                            icon={<img src={Email} alt='Email Icon' />}
-                        />
-                        {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[22px] text-[14px]">{errors.emailError}</p>}
-                        <CustomInput
-                            type="password"
-                            value={formData.password}
-                            onChange={handleChange('password')}
-                            placeholder="Enter a password"
-                            styleVariant='customStyle1'
-                            icon={<img src={Password} alt='Password Icon' />}
-                        />
-                        {errors.passwordError && <p className="text-red-500 h-[1px] absolute top-[88px] text-[14px]">{errors.passwordError}</p>}
-                        {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
-                    </div>
-                    <div className='mt-6 w-[98%] flex items-center justify-center'>
-                        <Button
-                            type="primary"
-                            label="Login"
-                            action={handleLogin}
-                            color="#FFFFFF"
-                            fontStyle="italic"
-                            width="100%"
-                            height="40px"
-                            fontSize="16px"
-                            radius="20px"
-                        />
-                    </div>
+                        <div className='w-[100%] md:w-[350px] mx-auto space-y-6'>
+                            <CustomInput
+                                type="text"
+                                value={formData.email}
+                                onChange={handleChange('email')}
+                                placeholder="Enter your email"
+                                styleVariant='customStyle1'
+                                icon={<img src={images.email} alt='Email Icon' />}
+                            />
+                            {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[22px] text-[14px]">{errors.emailError}</p>}
+                            <CustomInput
+                                type="password"
+                                value={formData.password}
+                                onChange={handleChange('password')}
+                                placeholder="Enter a password"
+                                styleVariant='customStyle1'
+                                icon={<img src={images.password} alt='Password Icon' />}
+                            />
+                            {errors.passwordError && <p className="text-red-500 h-[1px] absolute top-[88px] text-[14px]">{errors.passwordError}</p>}
+                            {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
+                        </div>
+                        <div className='mt-6 w-[98%] flex items-center justify-center'>
+                            <Button
+                                type="primary"
+                                label="Login"
+                                action={handleLogin}
+                                color="#FFFFFF"
+                                fontStyle="italic"
+                                width="100%"
+                                height="40px"
+                                fontSize="16px"
+                                radius="20px"
+                            />
+                        </div>
                     </div>
                     <div className='mt-6'>
                         <Button
@@ -149,25 +146,25 @@ const StaffLoginPage: React.FC = () => {
                 </AuthContainer>
             </div>
             <div className='flex justify-center relative'>
-    <div className='w-full md:w-[400px] absolute bottom-[4rem]'>
-        <ContentContainer type="translucent" height="40px" borderRadius={20}>
-            <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
-                <p className='text-center text-[10px] md:text-sm text-white'>New to the Portal, Sign in Here</p>
-                <Button
-                    type="outline"
-                    label="New Sign In"
-                    width='120px'
-                    height='32px'
-                    radius='32px'
-                    color='#FFFFFF'
-                    fontWeight='500'
-                    lineHeight='24px'
-                    action={handleNewSignIn}
-                />
+                <div className='w-full md:w-[400px] absolute bottom-[4rem]'>
+                    <ContentContainer type="translucent" height="40px" borderRadius={20}>
+                        <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
+                            <p className='text-center text-[10px] md:text-sm text-white'>New to the Portal, Sign in Here</p>
+                            <Button
+                                type="outline"
+                                label="New Sign In"
+                                width='120px'
+                                height='32px'
+                                radius='32px'
+                                color='#FFFFFF'
+                                fontWeight='500'
+                                lineHeight='24px'
+                                action={handleNewSignIn}
+                            />
+                        </div>
+                    </ContentContainer>
+                </div>
             </div>
-        </ContentContainer>
-    </div>
-</div>
             <div className='mb-10 mr-6 ml-6'>
                 <ContentContainer type="translucent" width="100%" height="30px" borderRadius={20}>
                     <div className="w-full h-full flex justify-center items-center">
