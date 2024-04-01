@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import Cancelicon from '../../../public/assets/png-icons/Cancellation.png';
-import Profile from '../../../public/assets/png-icons/Profile.png';
-import AuthContainer from '../../Components/Authcontainer/AuthContainer';
-import Button from '../../Components/ButtonComponent/Button';
-import ContentContainer from '../../Components/Contentcontainer/ContentContainer';
-import CustomInput from '../../Components/Custominput/CustomInput';
+
+import images from '../../assets/index';
+import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
 
 const PortalEnrollment: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -52,7 +49,7 @@ const PortalEnrollment: React.FC = () => {
         <div className="h-screen flex flex-col bg-nnpc-700 relative">
             <div className="absolute top-20 right-20">
                 <Button
-                    icon={<img src={Cancelicon} alt="cancel icon" />}
+                    icon={<img src={images.cancelicon} alt="cancel icon" />}
                     type="icon"
                     action={handleCancellation}
                     iconColor="#E2E4EB"
@@ -63,7 +60,7 @@ const PortalEnrollment: React.FC = () => {
             </div>
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
-                    <h1 className='text-[20px] text-gray-500 font-semibold text-white'>PORTAL ENROLLMENT</h1>
+                    <h1 className='text-[20px] font-semibold text-white'>PORTAL ENROLLMENT</h1>
                     <div className='w-[100%] md:w-[350px] mx-auto space-y-4'>
                         <CustomInput
                             type="text"
@@ -71,7 +68,7 @@ const PortalEnrollment: React.FC = () => {
                             onChange={handleChange('email')}
                             placeholder="Enter your Staff ID"
                             styleVariant='customStyle1'
-                            icon={<img src={Profile} alt='Profile Icon' />}
+                            icon={<img src={images.profile} alt='Profile Icon' />}
                         />
                         {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[106px] text-[14px]">{errors.emailError}</p>}
                     </div>

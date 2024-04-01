@@ -30,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 export const WithoutLink: Story = {
   args: {
     type: 'withoutLink',
-    icon: "/assets/png-icons/Reports.png",
+    icon: '/assets/png-icons/Reports.png',
     title: 'Document Title',
     subtitle: 'Document Subtitle',
   },
@@ -40,7 +40,7 @@ export const WithLink: Story = {
   args: {
 
     type: 'withLink',
-    icon: "/assets/png-icons/Reports.png",
+    icon: '/assets/png-icons/Reports.png',
     title: 'Document Title',
     linkText: 'Link Text',
     linkText2: 'Link Text 2',
@@ -50,7 +50,7 @@ export const WithLink: Story = {
 export const WithReport: Story = {
   args: {
     type: 'withReport',
-    icon: "/assets/png-icons/Customers.png",
+    icon: '/assets/png-icons/Customers.png',
     title: 'Document Title',
   },
 };
