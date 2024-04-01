@@ -1,7 +1,6 @@
-import Notification from '@/Components/NotificationComponent/Notification';
 import StatisticCard from '@/Components/Statisticccard/StatisticCard';
 import StatisticRectangleCard from '@/Components/Statisticrectanclecard/StatisticRectangleCard';
-import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined, NotificationImportantOutlined } from '@mui/icons-material';
+import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined } from '@mui/icons-material';
 import React from 'react';
 
 const AdminHomePage = () => {
@@ -61,23 +60,11 @@ const AdminHomePage = () => {
 
 
   return (
-    <div className="h-fit" >
-      <div className='flex justify-between'>
+    <div className="h-fit w-[100%]" >
+      <div>
         <div className='text-[30px] text-[#49526A] font-[700]'>Welcome John,</div>
-        <div>
-          <Notification
-            headerTitle='Recent Activity'
-            count={6}
-            notifications={[
-              { title: 'New Message', date: '2023-01-01', content: 'You have a new message from John.' },
-              { title: 'System Update', date: '2023-01-02', content: 'System update is scheduled for 2 AM.' },
-              { title: 'Meeting Reminder', date: '2023-01-03', content: 'Reminder: Meeting with the team at 10 AM.' },
-            ]}
-            renderIcon={() => <NotificationImportantOutlined />}
-          />
-        </div>
       </div>
-      <div className="flex space-x-4 mt-6">
+      <div className="w-[100%] flex flex-col md:flex-row gap-[10px] mt-6" >
         {cardData.map((card, index) => {
           const { bgColor, iconColor } = getIconStyles(card.title);
           return (
@@ -91,10 +78,9 @@ const AdminHomePage = () => {
           );
         })}
       </div>
-      <div className='mt-8 h-fit flex w-[100%] space-x-4 flex'
-        style={{ border: '2px solid red', }}>
-        <div className='w-[72%] flex ' style={{ border: '2px solid green' }}>
-          <div className=' h-fit flex space-x-4'>
+      <div className='mt-8 h-fit flex w-[100%] gap-[16px] flex flex-col md:flex-row'>
+        <div className='w-[100%] flex '>
+          <div className='w-[100%] flex gap-[16px] w-[100%] flex flex-col md:flex-row'>
             {statisticCardData.map((card, index) => (
               <StatisticCard
                 key={index}

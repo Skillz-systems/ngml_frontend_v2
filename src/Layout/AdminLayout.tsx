@@ -1,9 +1,9 @@
 
-import React, {useState, type ComponentType } from 'react';
-import NavigationBar from '../Components/NavigationMenu/NavigationBar';
-import { DensityMedium } from '@mui/icons-material';
-import { AdminLinks } from '@/Links/AdminLinks';
 import TopNavigationBar from '@/Components/TopNavigationBar/TopNavigationBar';
+import { AdminLinks } from '@/Links/AdminLinks';
+import { DensityMedium } from '@mui/icons-material';
+import React, { useState, type ComponentType } from 'react';
+import NavigationBar from '../Components/NavigationMenu/NavigationBar';
 
 interface AdminLayoutProps {
   Component: ComponentType<unknown>;
@@ -31,35 +31,36 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
   };
 
   return (
-    <>
-    <TopNavigationBar/>
-    <div className='flex w-full h-screen bg-[#EAEEF2]'>
-      <div className={`w-[260px] ${isNavigationBarVisible ? '' : 'hidden'}`} >
-        <NavigationBar
-          Navigationlinks={AdminLinks}
-          isNavigationBarVisible={isNavigationBarVisible}
-          toggleNavigationBar={toggleNavigationBar}
-        />
-      </div>
-
-      <div className='flex-1 flex '>
-        <div
-          className='p-2 '
-          onClick={toggleNavigationBar}
-          style={{ minWidth: '40px', visibility: isNavigationBarVisible ? 'hidden' : 'visible' }}
-
-        >
-          <div className='mt-[10px] cursor-pointer hover:bg-[#429051] flex items-center justify-center h-[40px] w-[40px] rounded-[50%] border-2 border-500-[red]'>
-            <DensityMedium className='text-[#EAF4CD]' style={{ fontSize: 'medium' }} />
-          </div>
+    <div className='w-[100%]' >
+      <TopNavigationBar />
+      <div className='flex w-[100%] h-[100%] bg-[#EAEEF2] '>
+        <div className={`w-[270px] ${isNavigationBarVisible ? 'md:block hidden' : 'hidden'}`} >
+          <NavigationBar
+            Navigationlinks={AdminLinks}
+            isNavigationBarVisible={isNavigationBarVisible}
+            toggleNavigationBar={toggleNavigationBar}
+          />
         </div>
 
-        <main className='bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1 '>
-          <Component {...otherProps} />
-        </main>
+        <div className='flex-1 flex w-[100%]'>
+          <div
+            className='p-2 '
+            onClick={toggleNavigationBar}
+            style={{ minWidth: '40px', visibility: isNavigationBarVisible ? 'hidden' : 'visible' }}
+
+          >
+            <div className='mt-[10px] cursor-pointer hover:bg-[#429051] flex items-center justify-center h-[40px] w-[40px] rounded-[50%] border-2 border-500-[red]'>
+              <DensityMedium className='text-[#EAF4CD]' style={{ fontSize: 'medium' }} />
+            </div>
+          </div>
+
+          <main className='w-[100%] bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1 '
+          >
+            <Component {...otherProps} />
+          </main>
+        </div>
       </div>
     </div>
-    </>
   );
 };
 

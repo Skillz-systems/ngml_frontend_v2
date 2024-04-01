@@ -34,9 +34,12 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
   };
 
   return (
-    <div style={{ width: '360px', height: '64px' }}
-      className={`rounded-[12px] p-4 ${backgroundColor} ${color} ${size} shadow-sm flex items-center justify-between border-[1px]`} aria-label={title}>
-      <div className='flex items-center gap-2'>
+    <div style={{ width: '100%', height: '100%',}}
+      className={`rounded-[12px] p-[8px] flex-col md:flex-row  
+      ${backgroundColor} ${color} ${size} shadow-sm flex items-center 
+      justify-between border-[1px]`} aria-label={title}
+      >
+      <div className='flex items-center gap-2 w-[100%] flex-col md:flex-row'>
         <div
           className={`${iconBgColor} p-1`}
           onMouseEnter={handleIconHover}
@@ -45,9 +48,9 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
         >
           {icon && <div className={`${iconSize}`} style={{ fontSize: 'small', }}>{icon}</div>}
         </div>
-        <h3 className="text-lg font-[400] text-[#828DA9]">{title}</h3>
+        <h3 className="text-lg font-[400] text-[#828DA9] ">{title}</h3>
       </div>
-      <div>
+      <div >
         <h3 className={`text-lg font-bold ${valueColor}`}>{value}</h3>
       </div>
     </div>

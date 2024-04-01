@@ -64,18 +64,18 @@ const UserType: React.FC<{
 
 }> = ({ userInfo, handleToggleNavigationBar }) => {
   return (
-    <div>
+    <div className='w-[100%]'>
       <div
         style={{
           backgroundColor: '#FFFFFF',
-          height: '40px',
-          width: '216px',
+          height: '100%',
+          width: '100%',
           display: 'flex',
           justifyContent: 'start',
           alignItems: 'center',
           flexDirection: 'row',
           borderRadius: '30px',
-          padding: '6px'
+          padding: '3px 6px'
         }}
       >
         <div
@@ -83,15 +83,16 @@ const UserType: React.FC<{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            width: '205px'
+            width: '100%',
+            height: '100%'
           }}
         >
           <div
             style={{
-              width: '200px',
+              width: '100%',
               display: 'flex',
               alignItems: 'center',
-              flexDirection: 'row'
+              flexDirection: 'row',
             }}
           >
             <div>
@@ -107,7 +108,7 @@ const UserType: React.FC<{
                 justifyContent: 'center',
                 alignItems: 'center',
                 flexDirection: 'column',
-                gap: '8px'
+                gap: '4px'
               }}
             >
               <div
@@ -218,14 +219,15 @@ const NavigationBarItem: React.FC<{
         padding: '9px',
         borderRadius: '8px',
         cursor: 'pointer',
-        backgroundColor: backgroundColor
+        backgroundColor: backgroundColor,
+        width: '100%'
       }}
       className="flex flex-col "
     >
       <Link to={item.to ?? '#'}>
         <div
           className="flex gap-[10px]"
-          style={{ alignItems: 'center', justifyContent: 'start' }}
+          style={{ alignItems: 'center', justifyContent: 'start', }}
         >
           <div
             style={{
@@ -247,11 +249,10 @@ const NavigationBarItem: React.FC<{
             </span>
           </div>
           <div
-            className="flex gap-[70px]"
+            className="flex gap-[90px]"
             style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
             }}
           >
             <div>
@@ -269,7 +270,7 @@ const NavigationBarItem: React.FC<{
             {item.subMenu && (
               <div
                 onClick={handleSubMenuToggle}
-                style={{ cursor: 'pointer' }}>
+                style={{ cursor: 'pointer'}}>
                 {isSubMenuVisible ? (
                   <KeyboardArrowLeft style={{ color: '#CCD0DC' }} />
                 ) : (
@@ -296,7 +297,7 @@ const NavigationBarItem: React.FC<{
                 alignItems: 'center',
                 cursor: 'pointer',
                 padding: '9px',
-                borderRadius: activeSubMenuItemId === subItem.id ? '10px' : '0px'
+                borderRadius: activeSubMenuItemId === subItem.id ? '10px' : '0px',
               }}
               className="gap-[10px]"
             >
@@ -395,8 +396,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               display: 'flex',
               flexDirection: 'column',
               borderRadius: '14px',
-              background: 'white',
-              width: '216px',
+              background: '#FFFFFF',
+              width: '100%',
               marginTop: '16px',
               padding: '8px'
             }}

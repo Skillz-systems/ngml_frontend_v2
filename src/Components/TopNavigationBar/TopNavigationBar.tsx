@@ -26,12 +26,12 @@ const TopNavigationBar = () => {
 
     ];
 
-    const reminderNotifications = [
-        { title: 'Meeting Reminder', date: '2024-03-31', content: 'Reminder content 1' },
-        { title: 'Meeting Reminder', date: '2024-03-31', content: 'Reminder content 1' },
-        { title: 'Meeting Reminder', date: '2024-03-31', content: 'Reminder content 1' },
+    // const reminderNotifications = [
+    //     { title: 'Meeting Reminder', date: '2024-03-31', content: 'Reminder content 1' },
+    //     { title: 'Meeting Reminder', date: '2024-03-31', content: 'Reminder content 1' },
+    //     { title: 'Meeting Reminder', date: '2024-03-31', content: 'Reminder content 1' },
 
-    ];
+    // ];
 
     /**
      * Handles the search functionality in the top navigation bar.
@@ -44,15 +44,15 @@ const TopNavigationBar = () => {
 
     return (
 
-        <div className="h-[56px] w-[100%] flex items-center bg-[#FFFFFF] justify-between p-[18px]">
-            <div>
+        <div className="h-[100%] w-[100%] gap-[10px] flex flex-col md:flex-row items-center bg-[#FFFFFF] justify-between p-[18px] ">
+            <div className='w-[100%]'>
                 <img src={Logo} alt='companylogo' className='w-[32px] h-[32px] rounded-[50%]' />
             </div>
-            <div className='flex gap-[16px]'>
-                <div>
+            <div className='flex flex-col md:flex-row gap-[16px] justify-end w-[100%]'>
+                <div className='w-[100%]'>
                     <SearchInput
                         onSearch={handleSearch}
-                        className="ml-4 w-[450px]"
+                        className=" w-[100%] "
                     />
                 </div>
                 <div className='flex gap-[16px]'>
@@ -69,9 +69,9 @@ const TopNavigationBar = () => {
                         renderIcon={() => <div><NotificationImportantOutlined style={{ fontSize: 'medium' }} /></div>}
                     />
                     <Notification
-                        count={reminderNotifications.length}
-                        headerTitle="Reminders"
-                        notifications={reminderNotifications}
+                        // count={reminderNotifications.length}
+                        // headerTitle="Reminders"
+                        // notifications={reminderNotifications}
                         renderIcon={() => <div><PowerSettingsNewOutlined style={{ fontSize: 'medium' }} /></div>}
                     />
                 </div>
