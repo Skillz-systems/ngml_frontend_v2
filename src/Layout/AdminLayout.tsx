@@ -1,6 +1,5 @@
 
 import { AdminLinks } from '@/Links/AdminLinks';
-import { DensityMedium } from '@mui/icons-material';
 import React, { useState, type ComponentType } from 'react';
 import { NavigationBar, TopNavigationBar } from '../Components/index';
 
@@ -30,16 +29,18 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
   };
 
   return (
-    <div className='w-[100%] '>
+    <div className='w-full h-full '>
       <TopNavigationBar />
-      <div className='flex w-[100%] h-[100%] bg-[#EAEEF2] pt-[70px]'>
-        <div className={`w-[17%] ${isNavigationBarVisible ? 'md:block hidden' : 'hidden'}`}>
-          <NavigationBar
-            Navigationlinks={AdminLinks}
-            isNavigationBarVisible={isNavigationBarVisible}
-            toggleNavigationBar={toggleNavigationBar}
-          />
-          {/* {isNavigationBarVisible && (
+      <div className='flex bg-[#EAEEF2] pt-[70px]'>
+        {/* <div className="bg-pink-700 p-2"> */}
+        {/* {isNavigationBarVisible ? ( */}
+        {/* <div className={`w-[100%] bg-blue-300 ${isNavigationBarVisible ? 'md:block hidden' : 'hidden'}`}> */}
+        <NavigationBar
+          Navigationlinks={AdminLinks}
+          isNavigationBarVisible={isNavigationBarVisible}
+          toggleNavigationBar={toggleNavigationBar}
+        />
+        {/* {isNavigationBarVisible && (
             <div
               className='p-2 '
               onClick={toggleNavigationBar}
@@ -50,10 +51,25 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
               </div>
             </div>
           )} */}
-        </div>
 
-        <div className='flex-1 flex'>
-          {!isNavigationBarVisible && (
+        {/* </div>
+          ) : (
+            <div
+              className='p-2 bg-red-500'
+              onClick={toggleNavigationBar}
+              style={{ minWidth: '40px', visibility: 'hidden' }}
+            >
+              <div className='mt-[10px] cursor-pointer hover:bg-[#429051] flex items-center justify-center h-[40px] w-[40px] rounded-[50%] '>
+                <DensityMedium className='text-[#EAF4CD]' style={{ fontSize: 'medium' }} />
+              </div>
+            </div>
+          )} */}
+
+
+        {/* </div> */}
+
+        {/* <div className='flex-1 flex w-[100%]'> */}
+        {/* {!isNavigationBarVisible && (
             <div
               className='p-2 '
               onClick={toggleNavigationBar}
@@ -63,13 +79,13 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
                 <DensityMedium className='text-[#EAF4CD]' style={{ fontSize: 'medium' }} />
               </div>
             </div>
-          )}
-          <main className='w-[100%] h-[100%] bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1 '
-          >
-            <Component {...otherProps} />
-          </main>
-        </div>
+          )} */}
+        <main className='2xl:bg-[red] bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1'
+        >
+          <Component {...otherProps} />
+        </main>
       </div>
+      {/* </div> */}
     </div>
   );
 };

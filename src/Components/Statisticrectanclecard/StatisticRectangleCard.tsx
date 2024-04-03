@@ -34,12 +34,12 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
   };
 
   return (
-    <div style={{ width: '100%', height: '100%',}}
-      className={`rounded-[12px] p-[8px] flex-col md:flex-row  
-      ${backgroundColor} ${color} ${size} shadow-sm flex items-center 
+    <div style={{ width: '100%', height: '100%', }}
+      className={`rounded-[12px] p-[8px]
+      ${backgroundColor} ${color} ${size} shadow-sm flex items-center
       justify-between `} aria-label={title}
-      >
-      <div className='flex items-center gap-2 w-[100%] flex-col md:flex-row'>
+    >
+      <div className='flex items-center gap-2 w-[100%]'>
         <div
           className={`${iconBgColor} p-1`}
           onMouseEnter={handleIconHover}

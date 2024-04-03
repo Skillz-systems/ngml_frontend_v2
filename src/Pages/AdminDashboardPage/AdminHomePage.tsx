@@ -1,7 +1,7 @@
 
 import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined, RestaurantMenuOutlined } from '@mui/icons-material';
 import React, { useState } from 'react';
-import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
+import { ActivityLogCard, Chart, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
 
 
 interface SelectOption {
@@ -151,11 +151,11 @@ const AdminHomePage = () => {
 
 
   return (
-    <div className="h-fit w-[100%]" >
+    <div className="h-fit w-full" >
       <div>
         <div className='text-[30px] text-[#49526A] font-[700]'>Welcome John,</div>
       </div>
-      <div className="w-[100%] flex flex-col md:flex-row gap-[10px] mt-6" >
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4" >
         {cardData.map((card, index) => {
           const { bgColor, iconColor } = getIconStyles(card.title);
           return (
@@ -168,55 +168,53 @@ const AdminHomePage = () => {
             />
           );
         })}
+
       </div>
-      <div className='mt-8 h-fit flex w-[100%] gap-[16px] flex flex-col md:flex-row'>
-        <div className='w-[100%] flex flex-col md:flex-row'>
-          <div>
-            <div className='w-[100%] gap-[16px] flex flex-col md:flex-row'>
-              {statisticCardData.map((card, index) => (
-                <StatisticCard
-                  key={index}
-                  label={card.label}
-                  value={card.value}
-                  primary={card.primary}
-                />
-              ))}
-            </div>
-            <div className='mt-[20px]'>
-              <div className='w-[100%] flex flex-col md:flex-row '>
-                {dynamicCardData.map((card, index) => (
-                  <div key={index} className='mt-[20px]'>
-                    <StatisticDynamicCard
-                      type={card.type}
-                      title={card.title}
-                      content={card.content}
-                      icon={card.icon}
-                      onSortChange={handleSortChange}
-                      yearOptions={card.yearOptions}
-                      valueOptions={card.valueOptions}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className='mt-[20px]'>
-              <Chart
-                data={dataNNPC}
-                chartType="bar"
-                yAxisLabel="NNPC"
-                xAxisDataKey="month"
-                colors={chartColors}
-                title='Customer Consumption Chart'
+
+      <div className='mt-8 h-fit grid grid-cols-1 xl:grid-cols-7 gap-4 ' id="stat-card-chart-parent">
+
+        <div className="xl:col-span-5 col-span-1  order-last lg:order-first xl:order-last" id="cards">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
+            {statisticCardData.map((card, index) => (
+              <StatisticCard
+                key={index}
+                label={card.label}
+                value={card.value}
+                primary={card.primary}
               />
-            </div>
+            ))}
           </div>
+          <div className="flex flex-wrap gap-2">
+            {dynamicCardData.map((card, index) => (
+              <div key={index} className='mt-[20px]'>
+                <StatisticDynamicCard
+                  type={card.type}
+                  title={card.title}
+                  content={card.content}
+                  icon={card.icon}
+                  onSortChange={handleSortChange}
+                  yearOptions={card.yearOptions}
+                  valueOptions={card.valueOptions}
+                />
+              </div>
+            ))}
+          </div>
+
+          <Chart
+            data={dataNNPC}
+            chartType="bar"
+            yAxisLabel="NNPC"
+            xAxisDataKey="month"
+            colors={chartColors}
+            title='Customer Consumption Chart'
+          />
         </div>
-        <div className='w-[100%] bg-[#FFFFFF] rounded-b-lg '>
+        <div className='w-[100%] bg-[#FFFFFF] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
           <div className='h-[48px] rounded-t-lg bg-[#F6FDEC] flex items-center p-[10px]'>
             <div className='text-[#828DA9] text-[20px] font-[400]'>Recent Activity</div>
             <div></div>
           </div>
-          <div className='w-[100%] p-[10px] pt-[0px]'>
+          <div className='w-[100%] p-[10px] pt-[0px] '>
             {activities.map((activity, index) => (
               <ActivityLogCard
                 key={index}
@@ -227,7 +225,12 @@ const AdminHomePage = () => {
             ))}
           </div>
         </div>
+
+
+
+
       </div>
+      {/*
       <div>
         <div className='mt-[28px]'>
           <Chart
@@ -242,7 +245,18 @@ const AdminHomePage = () => {
       </div>
       <div>
         <DailyVolumnTable />
-      </div>
+      </div> */}
+
+      {/* <DailyVolumnTable /> */}
+      <Chart
+        data={dataNNPC}
+        chartType="line"
+        yAxisLabel="NNPC"
+        xAxisDataKey="month"
+        colors={chartColors}
+        title='Customer Consumption Chart'
+      />
+
     </div>
   );
 }

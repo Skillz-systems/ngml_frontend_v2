@@ -376,11 +376,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
   return (
     <>
-      {isNavigationBarVisible && (
+      {isNavigationBarVisible ? (
         <div
           style={{
             padding: '18px',
             overflowY: 'auto',
+            width: '235px',
+            // width: '220px',
           }}
         >
           <div>
@@ -396,6 +398,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               borderRadius: '14px',
               background: '#FFFFFF',
               width: '100%',
+              // width: '256px',
               marginTop: '16px',
               padding: '8px'
             }}
@@ -417,7 +420,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 flexDirection: 'column',
                 borderRadius: '14px',
                 background: 'white',
-                width: '216px',
+                width: '225px',
+                // width: '216px',
                 marginTop: '16px',
                 padding: '8px',
                 border: '2px solid blue'
@@ -437,26 +441,31 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             </div>
           )}
         </div>
-      )}
+      )
+        : (
+          <div
+            style={{
+              border: '2px solid #e8eaed',
+              height: '24px',
+              width: '24px',
+              borderRadius: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: '20px',
+              margin: '10px'
+            }}
+            className="cursor-pointer"
+            onClick={toggleNavigationBar}
+          >
+            <DensityMedium
+              style={{ color: '#CCD0DC', height: '18px', width: '18px' }}
+            />
+          </div>
+        )
 
-      {!isNavigationBarVisible && (
-        <div
-          style={{
-            border: '2px solid #e8eaed',
-            height: '24px',
-            width: '24px',
-            borderRadius: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '20px'
-          }}
-          onClick={toggleNavigationBar}
-        >
-          <DensityMedium
-            style={{ color: '#CCD0DC', height: '18px', width: '18px' }}
-          />
-        </div>)}
+      }
+
 
 
     </>
