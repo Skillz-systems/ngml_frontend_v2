@@ -37,7 +37,7 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
     <div style={{ width: '100%', height: '100%',}}
       className={`rounded-[12px] p-[8px] flex-col md:flex-row  
       ${backgroundColor} ${color} ${size} shadow-sm flex items-center 
-      justify-between border-[1px]`} aria-label={title}
+      justify-between `} aria-label={title}
       >
       <div className='flex items-center gap-2 w-[100%] flex-col md:flex-row'>
         <div

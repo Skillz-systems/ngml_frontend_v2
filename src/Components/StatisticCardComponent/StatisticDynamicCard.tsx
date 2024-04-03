@@ -112,7 +112,7 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
 
 
     return (
-        <div className="card" style={cardStyle}>
+        <div className="card w-[100%]" style={cardStyle}>
             <div className='flex justify-between'>
                 <div>
                     {icon && <div className="card-icon">{icon}</div>}
@@ -160,7 +160,7 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                 <div className='tracking-wide' style={{ ...scfStyle, fontSize: '16px', lineHeight: '16px', fontWeight: '400' }}>(Scf)</div>
                 <div style={{ fontSize: '32px', lineHeight: '32px', fontWeight: '600', marginTop: '20px' }}>{content}</div>
             </div>
-            <div style={{ marginTop: '22px' }}>
+            <div className='mt-[20px]'>
                 <div className="select-container" style={{
                     position: 'relative',
                     display: 'inline-block',

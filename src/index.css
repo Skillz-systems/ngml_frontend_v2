@@ -161,3 +161,11 @@
 .margin-left-negative-260px {
   margin-left: -260px;
 }
+
+
+.fixed-topbar {
+  position: fixed;
+  top: 0;
+  width: 100%; 
+  z-index: 1000; 
+}

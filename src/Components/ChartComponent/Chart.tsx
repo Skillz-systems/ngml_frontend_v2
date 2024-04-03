@@ -16,7 +16,7 @@ import { Heading } from '../index';
 
 type ChartType = 'bar' | 'line' | 'area' | 'pie';
 
-interface ComposedChartProps<T extends Record<string, any>> {
+interface ComposedChartProps<T extends Record<string, unknown>> {
     data: T[];
     chartType: ChartType;
     xAxisDataKey: keyof T;
@@ -25,7 +25,7 @@ interface ComposedChartProps<T extends Record<string, any>> {
     title: string;
 }
 
-const Chart = <T extends Record<string, any>>({
+const Chart = <T extends Record<string, unknown>>({
     data,
     chartType,
     xAxisDataKey,
@@ -70,7 +70,7 @@ const Chart = <T extends Record<string, any>>({
         <div className="bg-white rounded-lg border border-gray-100 mt-4" data-testid="chart">
             <div className='flex justify-between items-center space-x-3 p-4 bg-medium-100 border-b border-gray-200/20'>
 
-                <Heading as="p" size="h5" className='capitalize font-normal'>
+                <Heading as="p" size="h6" className='capitalize font-normal'>
                     {title}
                 </Heading>
                 <div className="flex items-center space-x-2">

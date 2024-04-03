@@ -180,7 +180,7 @@ const DailyVolumnTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[1112px] '>
+        <div className='mt-[20px] w-[100%] '>
             <Modal
                 open={open}
                 onClose={handleClose}

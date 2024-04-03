@@ -27,11 +27,11 @@ const StatisticCard: React.FC<StatisticCardProps> = ({
   primary = true,
   labelSpan,
 }) => {
-  const labelBgColor = primary ? 'bg-green-700 text-white' : 'bg-gray-200 text-gray-500';
+  const labelBgColor = primary ? 'bg-green-700 text-white' : 'bg-gray-100 text-gray-500';
   const valueBgColor = primary ? 'bg-green-500 text-white' : 'bg-white-500 text-black-700';
 
   return (
-    <div className={`w-[100%] h-44 relative rounded-[20px] ${!primary ? 'border-2' : ''}`}>
+    <div className={`w-[100%] h-44 relative rounded-[20px] ${!primary ? 'shadow-xl' : ''}`}>
       <img className="absolute w-[100%] h-[100%] inset-0 z-0 object-cover" src={DataBox} alt="data box" />
       <div className={`p-3 w-full rounded-t-[20px] ${labelBgColor} h-2/5 flex flex-col justify-center items-center`}>
         <span className='text-[24px] font-[400]'>{label}</span>

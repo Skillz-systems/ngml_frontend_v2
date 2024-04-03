@@ -44,7 +44,7 @@ const TopNavigationBar = () => {
 
     return (
 
-        <div className="h-[100%] w-[100%] gap-[10px] flex flex-col md:flex-row items-center bg-[#FFFFFF] justify-between p-[18px] ">
+        <div className=" w-[100%] flex flex-col md:flex-row items-center bg-[#FFFFFF] justify-between p-[18px]  fixed top-0 left-0 z-50">
             <div className='w-[100%]'>
                 <img src={Logo} alt='companylogo' className='w-[32px] h-[32px] rounded-[50%]' />
             </div>

@@ -220,7 +220,7 @@ const NavigationBarItem: React.FC<{
         borderRadius: '8px',
         cursor: 'pointer',
         backgroundColor: backgroundColor,
-        width: '100%'
+        width: '100%',
       }}
       className="flex flex-col "
     >
@@ -249,7 +249,7 @@ const NavigationBarItem: React.FC<{
             </span>
           </div>
           <div
-            className="flex gap-[90px]"
+            className="flex gap-[50px]"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -270,7 +270,7 @@ const NavigationBarItem: React.FC<{
             {item.subMenu && (
               <div
                 onClick={handleSubMenuToggle}
-                style={{ cursor: 'pointer'}}>
+                style={{ cursor: 'pointer' }}>
                 {isSubMenuVisible ? (
                   <KeyboardArrowLeft style={{ color: '#CCD0DC' }} />
                 ) : (
@@ -378,9 +378,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
     <>
       {isNavigationBarVisible && (
         <div
-          className="fixed"
           style={{
-            width: '20%',
             padding: '18px',
             overflowY: 'auto',
           }}
@@ -421,7 +419,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 background: 'white',
                 width: '216px',
                 marginTop: '16px',
-                padding: '8px'
+                padding: '8px',
+                border: '2px solid blue'
               }}
             >
               {Navigationlinks.slice(
