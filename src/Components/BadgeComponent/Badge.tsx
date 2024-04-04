@@ -70,16 +70,16 @@ const Badge: React.FC<BadgeProps> = ({
     const getBadgeStyles = (): React.CSSProperties => {
         switch (type) {
             case 'primary':
-                return { backgroundColor: primaryColor, color: colors.gray[50], width, height, fontSize, borderRadius: radius, fontWeight }
+                return { backgroundColor: primaryColor, color: colors.dark[50], width, height, fontSize, borderRadius: radius, fontWeight }
             case 'secondary':
                 return { backgroundColor: colors.nnpc[50], color: primaryColor, width, height, fontSize, borderRadius: radius, fontWeight }
             case 'transparent':
-                return { backgroundColor: '#E2E4EB', color: colors.gray[200], width, height, fontSize, borderRadius: radius, fontWeight }
+                return { backgroundColor: '#E2E4EB', color: colors.dark[200], width, height, fontSize, borderRadius: radius, fontWeight }
             case 'outline':
-                return { border: '2px solid #DCDFE4', color: colors.gray[200], width, height, fontSize, borderRadius: radius, fontWeight }
+                return { border: '2px solid #DCDFE4', color: colors.dark[200], width, height, fontSize, borderRadius: radius, fontWeight }
 
             default:
-                return { backgroundColor: 'green', color: colors.gray[50] }
+                return { backgroundColor: 'green', color: colors.dark[50] }
         }
     }
 

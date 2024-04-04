@@ -26,16 +26,17 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ Component, ...otherProps })
   };
 
   return (
-    <div className='w-full h-full '>
+    <div className='w-full h-full'>
       <TopNavigationBar />
-      <div className='flex bg-[#EAEEF2] pt-[70px]'>
-        <NavigationBar
-          Navigationlinks={Navigationlinks}
-          isNavigationBarVisible={isNavigationBarVisible}
-          toggleNavigationBar={toggleNavigationBar}
-        />
-        <main className='2xl:bg-[red] bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1'
-        >
+      <div className='flex bg-[#EAEEF2] pt-[70px] w-[100%]'>
+        <div className='hidden sm:block'>
+          <NavigationBar
+            Navigationlinks={Navigationlinks}
+            isNavigationBarVisible={isNavigationBarVisible}
+            toggleNavigationBar={toggleNavigationBar}
+          />
+        </div>
+        <main className='2xl:bg-[red] bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1'>
           <Component {...otherProps} />
         </main>
       </div>
