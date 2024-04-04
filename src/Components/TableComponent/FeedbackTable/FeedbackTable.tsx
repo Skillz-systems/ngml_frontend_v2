@@ -79,7 +79,7 @@ const FeedbackTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -90,7 +90,7 @@ const FeedbackTable = () => {
         {
             field: 'datereceived',
             headerName: 'DATE SENT',
-            width: 127,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.datereceived}
@@ -100,7 +100,7 @@ const FeedbackTable = () => {
         {
             field: 'name',
             headerName: 'RECEIVER',
-            width: 200,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-[12px] font-[600] text-[#49526A] leading-3'>
                     {params.row.companyname}
@@ -111,7 +111,7 @@ const FeedbackTable = () => {
         {
             field: 'subject',
             headerName: 'SUBJECT',
-            width: 350,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[400] text-[#49526A] leading-3 text-wrap '>
@@ -123,7 +123,7 @@ const FeedbackTable = () => {
         {
             field: 'status',
             headerName: 'STATUS',
-            width: 149,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
@@ -191,7 +191,7 @@ const FeedbackTable = () => {
                     }}
 
                     sx={{
-
+                        width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

@@ -88,7 +88,7 @@ const BidsTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -99,7 +99,7 @@ const BidsTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            width: 180,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='flex flex-col gap-[4px]'>
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
@@ -115,7 +115,7 @@ const BidsTable = () => {
         {
             field: 'tenderTitle',
             headerName: 'TITLE OF TENDER',
-            width: 433,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[14px] font-[700] text-[#49526A] leading-3'>
@@ -126,7 +126,7 @@ const BidsTable = () => {
         {
             field: 'datesubmitted',
             headerName: 'DATE SUBMITTED',
-            width: 124,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.datesubmitted}
@@ -136,7 +136,7 @@ const BidsTable = () => {
         {
             field: 'details',
             headerName: 'DETAILS',
-            width: 215,
+            flex: 1,
             renderCell: (params) => (
                 <ul className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.details.map((detail: Detail, index: number) => (
@@ -163,7 +163,7 @@ const BidsTable = () => {
         {
             field: 'action',
             headerName: 'ACTION',
-            width: 100,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
@@ -178,7 +178,7 @@ const BidsTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[1112px] '>
+        <div className='ml-[70px] mt-[20px] w-[100%] '>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -197,8 +197,6 @@ const BidsTable = () => {
                             availableDates={selectedRow.selectedDates || ['No Dates Available']}
                             companyAddress={selectedRow.companyAddress || 'Provide an Address'}
                             statusHeading={selectedRow.status}
-                        // statusStyle={getStatusStyle(selectedRow.status)}
-
                         />
                     )}
                 </div>
@@ -273,7 +271,7 @@ const BidsTable = () => {
                     }}
 
                     sx={{
-
+                        width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

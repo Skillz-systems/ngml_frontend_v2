@@ -356,10 +356,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 }) => {
   const [activeItemId, setActiveItemId] = useState<number | null>(null);
 
-  // const handleToggleNavigationBar = () => {
-  //   setIsNavigationBarVisible(!isNavigationBarVisible);
-  // };
-
   const handleItemClick = (id: number) => {
     setActiveItemId(id);
   };
@@ -382,7 +378,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             padding: '18px',
             overflowY: 'auto',
             width: '235px',
-            // width: '220px',
           }}
         >
           <div>
@@ -398,7 +393,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               borderRadius: '14px',
               background: '#FFFFFF',
               width: '100%',
-              // width: '256px',
               marginTop: '16px',
               padding: '8px'
             }}
@@ -421,7 +415,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 borderRadius: '14px',
                 background: 'white',
                 width: '225px',
-                // width: '216px',
                 marginTop: '16px',
                 padding: '8px',
                 border: '2px solid blue'

@@ -128,7 +128,7 @@ const AgreementTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -139,7 +139,7 @@ const AgreementTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            width: 228,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='flex flex-col gap-[4px]'>
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
@@ -155,7 +155,7 @@ const AgreementTable = () => {
         {
             field: 'agreementType',
             headerName: 'AGREEMENT NAME',
-            width: 444,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[700] text-[#49526A] leading-3'>
@@ -166,7 +166,7 @@ const AgreementTable = () => {
         {
             field: 'datesent',
             headerName: 'DATE SENT',
-            width: 180,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.datesent}
@@ -176,7 +176,7 @@ const AgreementTable = () => {
         {
             field: 'status',
             headerName: 'STATUS',
-            width: 100,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
@@ -203,7 +203,7 @@ const AgreementTable = () => {
         {
             field: 'action',
             headerName: 'ACTION',
-            width: 100,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
@@ -218,7 +218,7 @@ const AgreementTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[1112px] '>
+        <div className='ml-[70px] mt-[20px] w-[100%] '>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -308,7 +308,7 @@ const AgreementTable = () => {
                 </div>
             </div>
 
-            <div>
+            <div className='w-[100%]'>
                 <DataGrid
                     className="pointer-cursor-datagrid"
                     rows={filteredRows}
@@ -322,7 +322,7 @@ const AgreementTable = () => {
                     }}
 
                     sx={{
-
+                        width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

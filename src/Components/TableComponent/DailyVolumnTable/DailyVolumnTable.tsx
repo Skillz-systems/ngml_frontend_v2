@@ -87,7 +87,7 @@ const DailyVolumnTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -98,7 +98,7 @@ const DailyVolumnTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            width: 228,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='flex flex-col gap-[4px]'>
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
@@ -114,7 +114,7 @@ const DailyVolumnTable = () => {
         {
             field: 'frequency',
             headerName: 'FREQUENCY',
-            width: 124,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[600] text-[#49526A] leading-3'>
@@ -125,7 +125,7 @@ const DailyVolumnTable = () => {
         {
             field: 'date',
             headerName: 'DATE',
-            width: 120,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.datesent}
@@ -135,7 +135,7 @@ const DailyVolumnTable = () => {
         {
             field: 'value',
             headerName: 'VALUE (MILLION CUBIC FEET)',
-            width: 200,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.value}
@@ -145,7 +145,7 @@ const DailyVolumnTable = () => {
         {
             field: 'rate',
             headerName: 'RATE (NGN)',
-            width: 100,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.rate}
@@ -155,7 +155,7 @@ const DailyVolumnTable = () => {
         {
             field: 'amount',
             headerName: 'AMOUNT',
-            width: 180,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.amount}
@@ -165,7 +165,7 @@ const DailyVolumnTable = () => {
         {
             field: 'action',
             headerName: 'ACTION',
-            width: 100,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
@@ -244,7 +244,7 @@ const DailyVolumnTable = () => {
                 </div>
             </div>
 
-            <div>
+            <div className='w-[100%]'>
                 <DataGrid
                     className="pointer-cursor-datagrid"
                     rows={filteredRows}
@@ -258,7 +258,7 @@ const DailyVolumnTable = () => {
                     }}
 
                     sx={{
-
+                        width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

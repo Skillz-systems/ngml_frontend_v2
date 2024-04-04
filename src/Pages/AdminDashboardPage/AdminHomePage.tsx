@@ -1,7 +1,7 @@
 
 import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined, RestaurantMenuOutlined } from '@mui/icons-material';
 import React, { useState } from 'react';
-import { ActivityLogCard, Chart, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
+import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
 
 
 interface SelectOption {
@@ -168,11 +168,9 @@ const AdminHomePage = () => {
             />
           );
         })}
-
       </div>
 
       <div className='mt-8 h-fit grid grid-cols-1 xl:grid-cols-7 gap-4 ' id="stat-card-chart-parent">
-
         <div className="xl:col-span-5 col-span-1  order-last lg:order-first xl:order-last" id="cards">
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
             {statisticCardData.map((card, index) => (
@@ -184,9 +182,9 @@ const AdminHomePage = () => {
               />
             ))}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-6 w-[100%]">
             {dynamicCardData.map((card, index) => (
-              <div key={index} className='mt-[20px]'>
+              <div key={index} className='mt-[15px]'>
                 <StatisticDynamicCard
                   type={card.type}
                   title={card.title}
@@ -199,15 +197,16 @@ const AdminHomePage = () => {
               </div>
             ))}
           </div>
-
-          <Chart
-            data={dataNNPC}
-            chartType="bar"
-            yAxisLabel="NNPC"
-            xAxisDataKey="month"
-            colors={chartColors}
-            title='Customer Consumption Chart'
-          />
+          <div >
+            <Chart
+              data={dataNNPC}
+              chartType="bar"
+              yAxisLabel="NNPC"
+              xAxisDataKey="month"
+              colors={chartColors}
+              title='Customer Consumption Chart'
+            />
+          </div>
         </div>
         <div className='w-[100%] bg-[#FFFFFF] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
           <div className='h-[48px] rounded-t-lg bg-[#F6FDEC] flex items-center p-[10px]'>
@@ -225,12 +224,8 @@ const AdminHomePage = () => {
             ))}
           </div>
         </div>
-
-
-
-
       </div>
-      {/*
+
       <div>
         <div className='mt-[28px]'>
           <Chart
@@ -243,20 +238,9 @@ const AdminHomePage = () => {
           />
         </div>
       </div>
-      <div>
+      <div className='w-[100%] mt-[28px] border-4 border-red-600'>
         <DailyVolumnTable />
-      </div> */}
-
-      {/* <DailyVolumnTable /> */}
-      <Chart
-        data={dataNNPC}
-        chartType="line"
-        yAxisLabel="NNPC"
-        xAxisDataKey="month"
-        colors={chartColors}
-        title='Customer Consumption Chart'
-      />
-
+      </div>
     </div>
   );
 }

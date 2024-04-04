@@ -1,7 +1,6 @@
-import { cva } from 'class-variance-authority';
 import React from 'react';
-// import { tmerge } from 'tailwind-merge';
-import { cn } from '@/Utils';
+
+
 /**
  * Props for the StatisticDynamicCard component.
  * @typeof CardProps
@@ -38,64 +37,6 @@ interface SelectOption {
     value: string;
 }
 
-// Styles using cva
-const cardStyle = cva(
-    'w-full flex flex-col justify-between p-4 xl:p-6 rounded-lg shadow-md',
-    {
-        variants: {
-            type: {
-                primary: 'bg-[#005828] text-white',
-                secondary: 'bg-[#F6FDEC] text-[#005828]',
-            },
-        },
-        defaultVariants: {
-            type: 'primary',
-        },
-    }
-);
-
-const titleStyle = cva('font-bold', {
-    variants: {
-        type: {
-            primary: 'text-[#D2F69E]',
-            secondary: 'text-[#005828]',
-        },
-    },
-    defaultVariants: {
-        type: 'primary',
-    },
-});
-
-const contentStyle = cva('font-semibold text-xl lg:text-2xl 2xl:text-3xl mt-4', {
-    variants: {
-        type: {
-            primary: 'text-[#D2F69E]',
-            secondary: 'text-[#005828]',
-        },
-    },
-    defaultVariants: {
-        type: 'primary',
-    },
-});
-
-const selectStyle = cva(
-    'block w-full appearance-none bg-inherit rounded-3xl px-4 py-2 text-sm',
-    {
-        variants: {
-            type: {
-                primary: 'text-white border border-white',
-                secondary: 'text-[#005828] border border-[#005828]',
-            },
-        },
-        defaultVariants: {
-            type: 'primary',
-        },
-    }
-);
-
-const dropdownIconContainerStyle = cva(
-    'absolute right-2 top-1/2 -translate-y-1/2',
-);
 
 /**
  * A dynamic card component for displaying statistical information with customizable sorting options.
@@ -103,6 +44,12 @@ const dropdownIconContainerStyle = cva(
  * @returns {React.FC} A functional React component.
  */
 const StatisticDynamicCard: React.FC<CardProps> = ({
+    /**
+    * Handles changes in sort selection.
+    * @param {React.ChangeEvent<HTMLSelectElement>} e - The change event from the select input.
+    * @param {'year' | 'value'} sortType - The type of sorting (by year or value).
+    */
+
     type,
     title,
     content,
@@ -110,68 +57,142 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
     dropdownIcon,
     onSortChange,
     yearOptions,
-    valueOptions,
+    valueOptions
 }) => {
-    /**
-     * Handles changes in sort selection.
-     * @param {React.ChangeEvent<HTMLSelectElement>} e - The change event from the select input.
-     * @param {'year' | 'value'} sortType - The type of sorting (by year or value).
-     */
-    const handleSortChange = (
-        e: React.ChangeEvent<HTMLSelectElement>,
-        sortType: 'year' | 'value'
-    ) => {
+    const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>, sortType: 'year' | 'value') => {
         onSortChange(sortType, e.target.value);
     };
 
+
+    /**
+     * Determines the card's style based on its type.
+     * @param {'primary' | 'secondary'} type - The card's type.
+     * @returns {object} The style object for the card.
+     */
+
+    const getCardStyle = (type: 'primary' | 'secondary') => {
+        switch (type) {
+            case 'primary':
+                return { backgroundColor: '#005828', color: '#ffffff' };
+            case 'secondary':
+                return { backgroundColor: '#F6FDEC', color: '#005828' };
+            default:
+                return { backgroundColor: 'green' };
+        }
+    };
+
+
+    const getSelectStyle = (type: 'primary' | 'secondary') => {
+        switch (type) {
+            case 'primary':
+                return {
+                    backgroundColor: '#005828',
+                    color: '#ffffff',
+                    border: '1px solid #ffffff'
+                };
+            case 'secondary':
+                return {
+                    backgroundColor: '#F6FDEC',
+                    color: '#005828',
+                    border: '1px solid #005828'
+                };
+            default:
+                return {
+                    backgroundColor: 'blue',
+                    color: 'black',
+                    border: '1px solid green'
+                };
+        }
+    };
+
+    const cardStyle = getCardStyle(type);
+    const selectStyle = getSelectStyle(type);
+    const titleStyle = { color: type === 'primary' ? '#D2F69E' : '#005828' }
+    const scfStyle = { color: type === 'primary' ? '#D2F69E' : '#005828' }
+
+
     return (
-        <div className={cardStyle({ type })}>
-            <div className="flex justify-between items-center">
-                <div>{icon && <div className="card-icon">{icon}</div>}</div>
-                <div className="relative w-fit">
-                    <select
-                        aria-label="Sort by year"
-                        onChange={(e) => handleSortChange(e, 'year')}
-                        className={cn(
-                            selectStyle({ type }),
-                            'leading-5 text-right pr-8'
-                        )}
-                    >
-                        {yearOptions.map((year) => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
-                    </select>
-                    <div className={dropdownIconContainerStyle()}>
+        <div className="card " style={cardStyle}>
+            <div className='flex justify-between'>
+                <div>
+                    {icon && <div className="card-icon">{icon}</div>}
+                </div>
+                <div className="select-container" style={{
+                    position: 'relative',
+                    display: 'inline-block',
+                    width: '83px',
+                    justifyContent: 'space-between',
+                }}>
+                    <div>
+                        <select
+                            aria-label="Sort by year"
+                            onChange={(e) => handleSortChange(e, 'year')}
+                            style={{
+                                ...selectStyle,
+                                display: 'block',
+                                width: '100%',
+                                backgroundColor: 'inherit',
+                                height: '35px',
+                                borderRadius: '40px',
+                                fontSize: '12px',
+                                lineHeight: '15.06px',
+                                textAlignLast: 'start',
+                                appearance: 'none',
+                                padding: '10px'
+
+                            }}
+                        >
+                            {yearOptions.map(year => <option style={{ ...selectStyle }} key={year} value={year}>{year}</option>)}
+                        </select>
+                    </div>
+                    <div style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                    }}>
                         {dropdownIcon}
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col items-center pt-7">
-                <div className={titleStyle({ type })}>{title}</div>
-                <div className={cn(contentStyle({ type }), 'tracking-wide')}>
-                    (Scf)
-                </div>
-                <div className={contentStyle({ type })}>{content}</div>
+            <div className='flex flex-col items-center pt-[28px]'>
+                <div className='tracking-wide' style={{ ...titleStyle, fontSize: '20px', lineHeight: '20px', fontWeight: '700' }}>{title}</div>
+                <div className='tracking-wide' style={{ ...scfStyle, fontSize: '16px', lineHeight: '16px', fontWeight: '400' }}>(Scf)</div>
+                <div style={{ fontSize: '32px', lineHeight: '32px', fontWeight: '600', marginTop: '20px' }}>{content}</div>
             </div>
-            <div className="mt-5">
-                <div className="relative w-full">
+            <div className='mt-[20px]'>
+                <div className="select-container" style={{
+                    position: 'relative',
+                    display: 'inline-block',
+                    width: '100%',
+                }}>
                     <select
                         aria-label="Sort by value"
                         onChange={(e) => handleSortChange(e, 'value')}
-                        className={cn(
-                            selectStyle({ type }),
-                            'leading-5 text-left pr-8'
-                        )}
+                        style={{
+                            ...selectStyle,
+                            display: 'block',
+                            width: '100%',
+                            backgroundColor: 'inherit',
+                            height: '44px',
+                            borderRadius: '30px',
+                            fontSize: '12px',
+                            lineHeight: '15.06px',
+                            padding: '10px 20px',
+                            textAlignLast: 'start',
+                            appearance: 'none',
+                        }}
                     >
-                        {valueOptions.map((option) => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
+                        {valueOptions.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
                     </select>
-                    <div className={dropdownIconContainerStyle()}>{dropdownIcon}</div>
+                    <div style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                    }}>
+                        {dropdownIcon}
+                    </div>
                 </div>
             </div>
         </div>

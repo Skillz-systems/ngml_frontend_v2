@@ -93,7 +93,7 @@ const ProcessingCustomerTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -104,7 +104,7 @@ const ProcessingCustomerTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            width: 250,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='flex flex-col gap-[4px]'>
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
@@ -120,7 +120,7 @@ const ProcessingCustomerTable = () => {
         {
             field: 'request',
             headerName: 'REQUEST',
-            width: 110,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] flex justify-center items-center px-2.5 ';
 
@@ -148,7 +148,7 @@ const ProcessingCustomerTable = () => {
         {
             field: 'ddqform',
             headerName: 'DDQ FORM',
-            width: 110,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] flex justify-center items-center px-2.5 ';
 
@@ -172,7 +172,7 @@ const ProcessingCustomerTable = () => {
         {
             field: 'sitevisits',
             headerName: 'SITE VISITS',
-            width: 110,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] flex justify-center items-center px-2.5 ';
 
@@ -196,7 +196,7 @@ const ProcessingCustomerTable = () => {
         {
             field: 'analysis',
             headerName: 'ANALYSIS',
-            width: 110,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] flex justify-center items-center px-2.5 ';
 
@@ -220,7 +220,7 @@ const ProcessingCustomerTable = () => {
         {
             field: 'agreement',
             headerName: 'AGREEMENT',
-            width: 110,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] flex justify-center items-center px-2.5 ';
 
@@ -244,7 +244,7 @@ const ProcessingCustomerTable = () => {
         {
             field: 'connectProject',
             headerName: 'CONNECT PROJECT',
-            width: 126,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[500] text-[#49526A] leading-3 '>
                     {params.row.connectProject}
@@ -254,7 +254,7 @@ const ProcessingCustomerTable = () => {
         {
             field: 'statusUpdate',
             headerName: 'STATUS UPDATES',
-            width: 126,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[500] text-[#49526A] leading-3 text-wrap'>
                     {params.row.statusUpdate}
@@ -348,7 +348,7 @@ const ProcessingCustomerTable = () => {
                     }}
 
                     sx={{
-
+                        width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },
