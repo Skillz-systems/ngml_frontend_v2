@@ -19,6 +19,7 @@ export const AdminLinks = [
      ]
   },
   { id: 3, name: 'Profile', to: '/admin/profilePage', icon: profileicon, type: 'primary' },
+  {id: 4, name: 'Existing Customers', to: 'admin/customerdetailslist', icon: profileicon, type: 'primary'}
 //   {
 //      id: 4, name: 'Settings', to: '/client/businessPage', icon: Settingsicon, type: 'secondary', 
 //      subMenu: [

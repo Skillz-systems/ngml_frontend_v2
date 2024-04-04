@@ -18,7 +18,7 @@ import Eyeopen from '/assets/png-icons/Eyeopen.png';
  * @param {string} [props.error] - The error message to display.
  * @param {boolean} [props.required=false] - Whether the input is required.
  * @param {React.ReactNode} [props.icon] - The icon to be displayed with the input.
- * @param {'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4'} [props.styleVariant='default'] - The style variant for the input.
+ * @param {'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4' | 'customStyle5'} [props.styleVariant='default'] - The style variant for the input.
  * @returns {JSX.Element} The rendered CustomInput component.
  */
 
@@ -32,7 +32,7 @@ interface CustomInputProps {
     error?: string;
     required?: boolean;
     icon?: React.ReactNode;
-    styleVariant?: 'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4'
+    styleVariant?: 'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4' | 'customStyle5'
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -70,6 +70,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
         customStyle2: `rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
         customStyle3: `rounded-full placeholder-gray-300 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:border-lime-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-4`, // for inputs with gray background focused, rounded radius and wider input 
         customStyle4: `placeholder-black pl-12 focus:outline-none font-[400] focus:border-lime-200 focus:bg-white-600 border-1 solid w-full py-2`, // no border input
+        customStyle5: `rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
     };
 
     const inputClasses = `${styleVariants[styleVariant]} ${!icon ? 'pl-3' : ''
@@ -94,7 +95,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     <input
                         type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
                         value={value as string | number | undefined}
-                        onChange={(e:ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
                         onBlur={handleBlur}
                         placeholder={placeholder}
                         className={inputClasses}
@@ -104,7 +105,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 return (
                     <div className='relative'>
                         <select value={Array.isArray(value) ? value : undefined}
-                            onChange={(e:ChangeEvent<HTMLSelectElement>) => onChange(e.target.value)}
+                            onChange={(e: ChangeEvent<HTMLSelectElement>) => onChange(e.target.value)}
                             className={`${inputClasses} appearance-none select-none`} onBlur={handleBlur} >
                             {options?.map((option) => (
                                 <option key={option} value={option}>
