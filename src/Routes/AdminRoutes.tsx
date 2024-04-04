@@ -2,6 +2,7 @@ import AdminDashboard from '@/Pages/AdminDashboardPage/AdminHomePage';
 import BusinessPage from '@/Pages/BusinessPage';
 import ProfilePage from '@/Pages/ProfilePage/Profilepage';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
+import CustomerDetailsLayout from '@/Pages/CustomerDetail/CustomerDetailsLayout';
 
 export const AdminRoutes = [
   {
