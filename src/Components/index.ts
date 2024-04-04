@@ -3,6 +3,7 @@ export { default as AgreementTemplate } from './AgreementTemplateComponent/Agree
 export { default as AuthContainer } from './Authcontainer/AuthContainer';
 export { default as Badge } from './BadgeComponent/Badge';
 export { default as Button } from './ButtonComponent/Button';
+export { default as Chart } from './ChartComponent/Chart';
 export { default as ContentContainer } from './Contentcontainer/ContentContainer';
 export { default as CustomInput } from './Custominput/CustomInput';
 export { default as DateCard } from './DateCardComponent/DateCard';
