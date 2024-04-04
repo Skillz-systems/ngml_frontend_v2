@@ -238,7 +238,7 @@ const AdminHomePage = () => {
           />
         </div>
       </div>
-      <div className='w-[100%] mt-[28px] border-4 border-red-600'>
+      <div className='w-[100%] mt-[28px]'>
         <DailyVolumnTable />
       </div>
     </div>
