@@ -1,6 +1,6 @@
-import images from '../../assets/index';
 import React, { useState } from 'react';
-import { CustomInput, ContentContainer } from '../../Components/index';
+import { ContentContainer, CustomInput } from '../../Components/index';
+import images from '../../assets/index';
 
 const CustomerDetail: React.FC = () => {
     const [formData, setFormData] = useState({
