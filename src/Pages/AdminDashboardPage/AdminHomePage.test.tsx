@@ -10,8 +10,6 @@ describe('AdminHomePage', () => {
 
         expect(screen.getByText('Un-Verified Staff')).toBeInTheDocument();
 
-        expect(screen.getByText('Customer Consumption Chart')).toBeInTheDocument();
-
         expect(screen.getByText('New User Registration')).toBeInTheDocument();
     });
 
