@@ -5,7 +5,7 @@ import CustomerDetail from './CustomerDetail';
 
 
 
-const CustomerDetailsList: React.FC = () => {
+const CustomerDetailsLayout: React.FC = () => {
 
     const tablist = [
         {
@@ -102,4 +102,4 @@ const CustomerDetailsList: React.FC = () => {
     )
 }
 
-export default CustomerDetailsList;
+export default CustomerDetailsLayout;

@@ -1,4 +1,4 @@
-import ForgotPassword from '@/Pages/Forgotpassword/ForgotPassword';
+import PortalEnrollment from '@/Pages/Portalenrollment/PortalEnrollment';
 
 
 export const AuthRoutes = [
@@ -8,8 +8,8 @@ export const AuthRoutes = [
     //     component: PasswordResetPage
     // },
     {
-        title: 'forgotpassword',
+        title: 'portalenrollment',
         path: '/',
-        component: ForgotPassword
+        component: PortalEnrollment
     },
 ]

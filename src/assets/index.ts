@@ -1,6 +1,6 @@
 import avatar from './images/avatar.png';
 import biqrcode from './images/bi_qr-code.png';
-import cancel from './images/cancel.png';
+import cancel from './images/png-icons/Cancellation.png';
 import cancelicon from './images/Cancelicon.png';
 import companylogo from './images/CompanyLogo.png';
 import databox from './images/DataBox.png';
