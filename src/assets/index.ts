@@ -12,6 +12,8 @@ import nnpc from './images/nnpc.png';
 import nnpclogo from './images/nnpclogo.png';
 import attachment from './images/png-icons/Attachment.png';
 import polygon from './images/Polygon.png';
+import customers from './images/png-icons/Customers.png';
+import warning from './images/png-icons/Warning.png';
 
 const images = {
   cancelicon,
@@ -27,7 +29,9 @@ const images = {
   guy,
   homeicons,
   polygon,
-  attachment
+  attachment,
+  customers,
+  warning
 };
 
 export default images;

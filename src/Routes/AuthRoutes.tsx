@@ -2,13 +2,14 @@ import PasswordResetPage from '@/Pages/Passwordreset/PasswordResetPage';
 import ForgotPassword from '@/Pages/Forgotpassword/ForgotPassword';
 import PortalEnrollment from '@/Pages/Portalenrollment/PortalEnrollment';
 import StaffLoginPage from '@/Pages/Stafflogin/StaffLoginPage';
+import CustomerDashboard from '@/Pages/CustomerDashboard/CustomerDashboard';
 
 
 export const AuthRoutes = [
     {
-        title: 'passwordRest',
+        title: 'customerdashboard',
         path: '/',
-        component: PasswordResetPage
+        component: CustomerDashboard
     },
     {
         title: 'forgotpassword',
