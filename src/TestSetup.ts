@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import '@testing-library/jest-dom';
-import '@testing-library/jest-dom';
 import 'resize-observer-polyfill';
 
 class MockResizeObserver {
