@@ -1,8 +1,7 @@
 
 import { AdminLinks } from '@/Links/AdminLinks';
-import { DensityMedium } from '@mui/icons-material';
 import React, { useState, type ComponentType } from 'react';
-import { NavigationBar } from '../Components/index';
+import { NavigationBar, TopNavigationBar } from '../Components/index';
 
 interface AdminLayoutProps {
   Component: ComponentType<unknown>;
@@ -30,28 +29,17 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
   };
 
   return (
-    <div className='flex w-full h-screen bg-[#EAEEF2]'>
-      <div className={`w-[260px] ${isNavigationBarVisible ? '' : 'hidden'}`} >
-        <NavigationBar
-          Navigationlinks={AdminLinks}
-          isNavigationBarVisible={isNavigationBarVisible}
-          toggleNavigationBar={toggleNavigationBar}
-        />
-      </div>
-
-      <div className='flex-1 flex '>
-        <div
-          className='p-2 '
-          onClick={toggleNavigationBar}
-          style={{ minWidth: '40px', visibility: isNavigationBarVisible ? 'hidden' : 'visible' }}
-
-        >
-          <div className='mt-[10px] cursor-pointer hover:bg-[#429051] flex items-center justify-center h-[40px] w-[40px] rounded-[50%] border-2 border-500-[red]'>
-            <DensityMedium className='text-[#EAF4CD]' style={{ fontSize: 'medium' }} />
-          </div>
+    <div className='w-full h-full'>
+      <TopNavigationBar />
+      <div className='flex bg-[#EAEEF2] pt-[70px] w-[100%]'>
+        <div className='hidden sm:block'>
+          <NavigationBar
+            Navigationlinks={AdminLinks}
+            isNavigationBarVisible={isNavigationBarVisible}
+            toggleNavigationBar={toggleNavigationBar}
+          />
         </div>
-
-        <main className='bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1 '>
+        <main className='2xl:bg-[red] bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1'>
           <Component {...otherProps} />
         </main>
       </div>

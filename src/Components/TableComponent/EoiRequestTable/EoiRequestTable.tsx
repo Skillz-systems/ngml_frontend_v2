@@ -111,7 +111,7 @@ const EoiRequestTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -122,7 +122,7 @@ const EoiRequestTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            width: 304,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-[12px] font-[600] text-[#49526A] leading-3'>
                     {params.row.companyname}
@@ -132,7 +132,7 @@ const EoiRequestTable = () => {
         {
             field: 'companyType',
             headerName: 'COMPANY TYPE',
-            width: 151,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[400] text-[#49526A] leading-3'>
@@ -143,7 +143,7 @@ const EoiRequestTable = () => {
         {
             field: 'customerID',
             headerName: 'CUSTOMER ID',
-            width: 151,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.customerID}
@@ -153,7 +153,7 @@ const EoiRequestTable = () => {
         {
             field: 'companyEmail',
             headerName: 'EMAIL',
-            width: 200,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.companyEmail}
@@ -163,7 +163,7 @@ const EoiRequestTable = () => {
         {
             field: 'companyStatus',
             headerName: 'STATUS',
-            width: 146,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
@@ -196,7 +196,7 @@ const EoiRequestTable = () => {
         {
             field: 'action',
             headerName: 'ACTION',
-            width: 100,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
@@ -313,7 +313,7 @@ const EoiRequestTable = () => {
                     }}
 
                     sx={{
-
+                        width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

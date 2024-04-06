@@ -91,7 +91,7 @@ const SelectedDateTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -102,7 +102,7 @@ const SelectedDateTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            width: 304,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.companyname}
@@ -112,7 +112,7 @@ const SelectedDateTable = () => {
         {
             field: 'companyType',
             headerName: 'COMPANY TYPE',
-            width: 151,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[400] text-[#49526A] leading-3'>
@@ -123,7 +123,7 @@ const SelectedDateTable = () => {
         {
             field: 'selectedDates',
             headerName: 'SELECTED DATES',
-            width: 351,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[500] text-[#49526A] leading-3 flex gap-[10px]'>
                     {params.row.selectedDates ? params.row.selectedDates.map((date: string, index: number) => (
@@ -137,7 +137,7 @@ const SelectedDateTable = () => {
         {
             field: 'status',
             headerName: 'STATUS',
-            width: 146,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-xs h-6 rounded-full flex justify-center items-center px-2.5 ';
 
@@ -167,7 +167,7 @@ const SelectedDateTable = () => {
         {
             field: 'action',
             headerName: 'ACTION',
-            width: 100,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
@@ -182,7 +182,7 @@ const SelectedDateTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[1112px] '>
+        <div className='ml-[70px] mt-[20px] w-[100%] '>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -275,6 +275,7 @@ const SelectedDateTable = () => {
                         },
                     }}
                     sx={{
+                        width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

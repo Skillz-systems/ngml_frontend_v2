@@ -128,7 +128,7 @@
   border-radius: 14px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 10px;
-  width: 352px;
+  width: 330px;
   height: 250px;
 }
 
@@ -160,4 +160,12 @@
 
 .margin-left-negative-260px {
   margin-left: -260px;
+}
+
+
+.fixed-topbar {
+  position: fixed;
+  top: 0;
+  width: 100%; 
+  z-index: 1000; 
 }

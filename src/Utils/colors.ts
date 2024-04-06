@@ -1,4 +1,3 @@
-// FIXME: for usage go to Badge component or BusinessPage
 const colors = {
   nnpc: {
     50:'#D2F69E',
@@ -8,13 +7,13 @@ const colors = {
     400: '#E9E500',
     500: '#EC0000',
   },
-  gray: {
+  dark: {
     50:'#ffffff',
     100: '#EAEEF2',
     200: '#49526A',
     500: '#050505',
   },
-  medium: {
+  nnpcmediumgreen: {
     50: '#f2fbf6',
     100: '#e1f7ea',
     200: '#c4eed8',
@@ -27,7 +26,7 @@ const colors = {
     900: '#1d4a34',
     950: '#0b281a',
   },
-  dark: {
+  nnpcdarkgreen: {
     50: '#eefff0',
     100: '#d8ffe0',
     200: '#b4fec2',
@@ -40,7 +39,7 @@ const colors = {
     900: '#0c5b1e',
     950: '#004010',
   },
-  light: {
+  nnpclightgreen: {
     50: '#eefff5',
     100: '#d7ffe9',
     200: '#b2ffd4',
@@ -53,7 +52,7 @@ const colors = {
     900: '#0a5d32',
     950: '#00341a',
   },
-  red: {
+  nnpcred: {
     50: '#fff0f0',
     100: '#ffdddd',
     200: '#ffc0c0',
@@ -66,7 +65,7 @@ const colors = {
     900: '#920a0a',
     950: '#500000',
   },
-  yellow: {
+  nnpcyellow: {
     50: '#fcffe7',
     100: '#f5ffc1',
     200: '#f0ff86',
@@ -102,4 +101,3 @@ const getShadeNames = (colorName: ColorName) => {
 
 export default colors;
 export { getColorNames, getColorShades, getShadeNames, useColor };
-

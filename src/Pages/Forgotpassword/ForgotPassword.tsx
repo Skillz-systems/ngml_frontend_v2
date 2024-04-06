@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import images from '../../assets/index';
-
 import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
 
 const ForgotPassword: React.FC = () => {

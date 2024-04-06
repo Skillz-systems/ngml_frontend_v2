@@ -87,7 +87,7 @@ const ComplaintTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -98,7 +98,7 @@ const ComplaintTable = () => {
         {
             field: 'datereceived',
             headerName: 'DATE RECEIVED',
-            width: 127,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.datereceived}
@@ -108,7 +108,7 @@ const ComplaintTable = () => {
         {
             field: 'name',
             headerName: 'RECEIVED FROM',
-            width: 200,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-[12px] font-[600] text-[#49526A] leading-3'>
                     {params.row.companyname}
@@ -119,7 +119,7 @@ const ComplaintTable = () => {
         {
             field: 'agreementType',
             headerName: 'ISSUE',
-            width: 395,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[400] text-[#49526A] leading-3 text-wrap '>
@@ -131,7 +131,7 @@ const ComplaintTable = () => {
         {
             field: 'status',
             headerName: 'STATUS',
-            width: 110,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => {
                 let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
@@ -244,7 +244,7 @@ const ComplaintTable = () => {
                     }}
 
                     sx={{
-
+                        width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

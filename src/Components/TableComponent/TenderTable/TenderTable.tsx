@@ -122,7 +122,7 @@ const TenderTable = () => {
         {
             field: 'sn',
             headerName: '',
-            width: 80,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='bg-[#D2F69E] rounded-[10px] w-[68px] h-[48px] items-center flex justify-center'>
                     <img src={params.row.sn} alt='jjjj' />
@@ -133,7 +133,7 @@ const TenderTable = () => {
         {
             field: 'dateopened',
             headerName: 'DATE OPENED',
-            width: 124,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[700] text-[#49526A] leading-3'>
@@ -144,7 +144,7 @@ const TenderTable = () => {
         {
             field: 'tenderType',
             headerName: 'TENDER TYPE',
-            width: 151,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[700] text-[#49526A] leading-3'>
@@ -155,7 +155,7 @@ const TenderTable = () => {
         {
             field: 'titleDescription',
             headerName: 'TITLE AND DESCRIPTION',
-            width: 499,
+            flex: 1,
             renderCell: (params) => (
                 <div className='flex flex-col gap-[16px]'>
                     <div className='text-[14px] font-[700] text-[#49526A] leading-3 '>
@@ -169,7 +169,7 @@ const TenderTable = () => {
         {
             field: 'category',
             headerName: 'CATEGORY',
-            width: 160,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className=' bg-[#EAEEF2] h-[24px] p-[8px] rounded-[24px] flex items-center justify-center'>
                     <div className='text-[#050505] font-[700] text-[12px]'>{params.row.category}</div>
@@ -181,7 +181,7 @@ const TenderTable = () => {
         {
             field: 'action',
             headerName: 'ACTION',
-            width: 100,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
@@ -309,7 +309,7 @@ const TenderTable = () => {
                     }}
 
                     sx={{
-
+                        width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

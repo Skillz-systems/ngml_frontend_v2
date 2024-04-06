@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { Modal } from '@mui/material';
-import SelectedDateModal from '../SelectedDate/SelectedDateModal';
 import { DailyFrequencyData } from '../../../Data';
+import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
 interface DailyFrequencyProps {
     id: number;
@@ -66,7 +66,7 @@ const DailyFrequencyTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -77,7 +77,7 @@ const DailyFrequencyTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            width: 228,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='flex flex-col gap-[4px]'>
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
@@ -93,7 +93,7 @@ const DailyFrequencyTable = () => {
         {
             field: 'frequency',
             headerName: 'FREQUENCY',
-            width: 124,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[600] text-[#49526A] leading-3'>
@@ -104,7 +104,7 @@ const DailyFrequencyTable = () => {
         {
             field: 'date',
             headerName: 'DATE',
-            width: 120,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.datesent}
@@ -114,7 +114,7 @@ const DailyFrequencyTable = () => {
         {
             field: 'value',
             headerName: 'VALUE (MILLION CUBIC FEET)',
-            width: 200,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.value}
@@ -124,7 +124,7 @@ const DailyFrequencyTable = () => {
         {
             field: 'rate',
             headerName: 'RATE (NGN)',
-            width: 100,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.rate}
@@ -134,7 +134,7 @@ const DailyFrequencyTable = () => {
         {
             field: 'amount',
             headerName: 'AMOUNT',
-            width: 180,
+            flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.amount}
@@ -144,7 +144,7 @@ const DailyFrequencyTable = () => {
         {
             field: 'action',
             headerName: 'ACTION',
-            width: 100,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
@@ -159,7 +159,7 @@ const DailyFrequencyTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[1112px] '>
+        <div className='ml-[70px] mt-[20px] w-[100%] '>
             <Modal
                 open={open}
                 onClose={handleClose}

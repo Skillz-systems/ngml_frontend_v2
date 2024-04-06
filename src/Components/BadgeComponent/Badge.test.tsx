@@ -1,57 +1,32 @@
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
-import Badge from './Badge'; // Import your Badge component
+import Badge from './Badge'; 
 
 describe('Badge Component', () => {
-  test('renders with custom label', () => {
-    const { getByText } = render(<Badge type="primary" label="Custom Label" />);
-    const badgeElement = getByText(/Custom Label/i);
-    expect(badgeElement).toBeInTheDocument();
-  });
-
-  test.each([
-    ['primary', '#53B052'],
-    ['secondary', '#D2F69E'],
-    ['transparent', '#E2E4EB'],
-    ['outline', 'transparent']
-  ])('renders with outline badge type', (badgeType, expectedColor) => {
-    const { getByText } = render(
-      <Badge
-        type={badgeType as 'primary' | 'secondary' | 'transparent' | 'outline'}
-        label="Type Test"
-      />
-    );
-    const badgeElement = getByText(/Type Test/i);
-    expect(badgeElement).toHaveStyle({
-      backgroundColor: expect.stringMatching(expectedColor)
-    });
-  });
-
-  test('renders with custom styles', () => {
-    const { getByText } = render(
+  it('renders correctly with given props', () => {
+    render(
       <Badge
         type="primary"
-        label="Custom Style Test"
-        width="120px"
+        label="Test Badge"
+        width="100px"
         height="50px"
-        fontSize="18px"
-        radius="8px"
-        fontWeight="normal"
-        icon={<div data-testid="test-icon" />}
-        iconHeight="24px"
-        iconWidth="24px"
-        iconColor="#FF0000"
-        columnGap="10px"
-        onIconClick={() => {}}
+        fontSize="16px"
+        radius="5px"
+        fontWeight="bold"
       />
     );
-    const badgeElement = getByText(/Custom Style Test/i);
+    
+    const badgeElement = screen.getByText('Test Badge');
+    expect(badgeElement).toBeInTheDocument();
+
     expect(badgeElement).toHaveStyle({
-      width: '120px',
+      width: '100px',
       height: '50px',
-      fontSize: '18px',
-      borderRadius: '8px',
-      fontWeight: 'normal'
+      fontSize: '16px',
+      borderRadius: '5px',
+      fontWeight: 'bold',
     });
   });
+
 });

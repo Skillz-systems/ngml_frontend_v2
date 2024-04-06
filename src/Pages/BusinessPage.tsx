@@ -47,6 +47,50 @@ const BusinessPage = () => {
 
       <div className="container mx-auto p-4">
         <h2 className="text-2xl font-bold mb-4">Bar Chart</h2>
+        <div className='grid grid-cols-1 lg:grid-cols-2  gap-4'>
+          <Chart
+            data={dataNNPC}
+            chartType="bar"
+            xAxisDataKey="month"
+            yAxisLabel="NNPC"
+            colors={chartColors}
+            title='Customer Consumption Chart'
+          />
+
+          {/* <h2 className="text-2xl font-bold mb-4 mt-8">Line Chart</h2> */}
+          <Chart
+            data={dataNNPC}
+            chartType="line"
+            yAxisLabel="NNPC"
+            xAxisDataKey="month"
+            colors={chartColors}
+            title='P & L for NNPC'
+          />
+          <Chart
+            data={dataNNPC}
+            chartType="area"
+            yAxisLabel="NNPC"
+            xAxisDataKey="month"
+            colors={chartColors}
+            title='Customer Consumption Chart'
+          />
+          <Chart
+            data={dataNNPC}
+            chartType="pie"
+            yAxisLabel="NNPC"
+            xAxisDataKey="month"
+            colors={chartColors}
+            title='Customer Consumption Pie'
+          />
+          <Chart
+            data={[]}
+            chartType="bar"
+            yAxisLabel="NNPC"
+            xAxisDataKey="month"
+            colors={chartColors}
+            title='NO DATA Chart'
+          />
+        </div>
         <Chart
           data={dataNNPC}
           chartType="bar"
@@ -56,7 +100,7 @@ const BusinessPage = () => {
           title='Customer Consumption Chart'
         />
 
-        <h2 className="text-2xl font-bold mb-4 mt-8">Line Chart</h2>
+        {/* <h2 className="text-2xl font-bold mb-4 mt-8">Line Chart</h2> */}
         <Chart
           data={dataNNPC}
           chartType="line"

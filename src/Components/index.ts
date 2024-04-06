@@ -19,6 +19,9 @@ export { default as SearchInput } from './Searchinput/SearchInput';
 export { default as StatisticDynamicCard } from './StatisticCardComponent/StatisticDynamicCard';
 export { default as StatisticCard } from './Statisticccard/StatisticCard';
 export { default as StatisticRectangleCard } from './Statisticrectanclecard/StatisticRectangleCard';
+export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
+
+
 
 // TABLES
 
