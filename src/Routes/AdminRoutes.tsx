@@ -1,6 +1,7 @@
 import AdminDashboard from '@/Pages/AdminDashboardPage/AdminHomePage';
 import BusinessPage from '@/Pages/BusinessPage';
 import ProfilePage from '@/Pages/ProfilePage/Profilepage';
+import AdminCustomerList from '@/Pages/AdminCustomerList/AdminCustomerList';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 
 export const AdminRoutes = [
@@ -20,6 +21,12 @@ export const AdminRoutes = [
     title: 'Admin Profile page',
     path: '/admin/profilePage',
     component: AdminInternalLayout(ProfilePage),
+    exact: true
+  },
+  {
+    title: 'Admin Customer List',
+    path: '/admin/customerlist',
+    component: AdminInternalLayout(AdminCustomerList),
     exact: true
   },
 ]
