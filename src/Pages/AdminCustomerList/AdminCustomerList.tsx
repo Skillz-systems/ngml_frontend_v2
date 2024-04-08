@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, CustomInput, Modal, StatisticRectangleCard, Heading, EoiRequestTable } from '../../Components/index';
+import { Button, CustomInput, EoiRequestTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
 
 const AdminCustomerList: React.FC = () => {
@@ -37,41 +37,41 @@ const AdminCustomerList: React.FC = () => {
     return (
         <div className="p-4 md:p-8 lg:p-8">
             <div className='ml-[70px]'>
-            <div className='flex flex-col md:flex-row items-center justify-between'>
-                <Heading as="h4" size="h4" color='primaryColor' className="font-normal text-gray-600">CUSTOMERS</Heading>
-                <Button
-                    type='outline'
-                    label='Add Customer'
-                    radius='20px'
-                    width='150px'
-                    height='30px'
-                    action={toggleModal}
-                />
-            </div>
-            <div className='flex flex-col md:flex-row items-center gap-4 mt-6'>
-                <StatisticRectangleCard
-                    title='Total Customers'
-                    icon={<img src={images.customers} alt="staff icon" />}
-                    value='554'
-                    valueColor='text-green-800'
-                    iconBgColor='rounded-[5px] bg-nnpcmediumgreen-500'
-                />
-                <StatisticRectangleCard
-                    title='Active Customers'
-                    icon={<img src={images.customers} alt="staff icon" />}
-                    value='442'
-                    valueColor='text-black'
-                    iconBgColor='bg-nnpc-50 rounded-[5px]'
-                />
-                <StatisticRectangleCard
-                    title='Processing Customers'
-                    icon={<img src={images.warning} alt="staff icon" />}
-                    value='112'
-                    valueColor='text-green-800'
-                    backgroundColor='bg-orange-100'
-                    iconBgColor='rounded-full bg-nnpcred-200'
-                />
-            </div>
+                <div className='flex flex-col md:flex-row items-center justify-between'>
+                    <Heading as="h4" size="h4" color='primaryColor' className="font-normal text-gray-600">CUSTOMERS</Heading>
+                    <Button
+                        type='outline'
+                        label='Add Customer'
+                        radius='20px'
+                        width='150px'
+                        height='30px'
+                        action={toggleModal}
+                    />
+                </div>
+                <div className='flex flex-col md:flex-row items-center gap-4 mt-6'>
+                    <StatisticRectangleCard
+                        title='Total Customers'
+                        icon={<img src={images.customers} alt="staff icon" />}
+                        value='554'
+                        valueColor='text-green-800'
+                        iconBgColor='rounded-[5px] bg-nnpcmediumgreen-500'
+                    />
+                    <StatisticRectangleCard
+                        title='Active Customers'
+                        icon={<img src={images.customers} alt="staff icon" />}
+                        value='442'
+                        valueColor='text-black'
+                        iconBgColor='bg-nnpc-50 rounded-[5px]'
+                    />
+                    <StatisticRectangleCard
+                        title='Processing Customers'
+                        icon={<img src={images.warning} alt="staff icon" />}
+                        value='112'
+                        valueColor='text-green-800'
+                        backgroundColor='bg-orange-100'
+                        iconBgColor='rounded-full bg-nnpcred-200'
+                    />
+                </div>
             </div>
             <Modal
                 isOpen={isModalOpen}
