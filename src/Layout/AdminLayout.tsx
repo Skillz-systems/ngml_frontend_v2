@@ -39,7 +39,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
             toggleNavigationBar={toggleNavigationBar}
           />
         </div>
-        <main className='2xl:bg-[red] bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1'>
+        <main className='2xl:bg-[red] bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] w-[100%]'>
           <Component {...otherProps} />
         </main>
       </div>

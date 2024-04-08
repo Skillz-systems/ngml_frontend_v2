@@ -152,7 +152,7 @@ const FeedbackTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[892px] '>
+        <div className='mt-[20px] w-[892px] '>
 
             <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
                 <div className='italic text-[12px] text-[#828DA9]'>

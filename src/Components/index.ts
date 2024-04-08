@@ -19,20 +19,23 @@ export { default as SearchInput } from './Searchinput/SearchInput';
 export { default as StatisticDynamicCard } from './StatisticCardComponent/StatisticDynamicCard';
 export { default as StatisticCard } from './Statisticccard/StatisticCard';
 export { default as StatisticRectangleCard } from './Statisticrectanclecard/StatisticRectangleCard';
+
 export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
 
 
 
-// TABLES
+// TABLES 
 
 export { default as AgreementTable } from './TableComponent/AgreementTable/AgreementTable';
 export { default as BidsTable } from './TableComponent/BidsTable/BidsTable';
 export { default as ComplaintTable } from './TableComponent/ComplaintTable/ComplaintTable';
-// export { default as DailyFrequencyTable } from './TableComponent/DailyFrequencyTable/DailyFrequencyTable';
+export { default as DailyFrequencyTable } from './TableComponent/DailyFrequencyTable/DailyFrequencyTable';
 export { default as DailyVolumnTable } from './TableComponent/DailyVolumnTable/DailyVolumnTable';
 export { default as EoiRequestTable } from './TableComponent/EoiRequestTable/EoiRequestTable';
 export { default as FeedbackTable } from './TableComponent/FeedbackTable/FeedbackTable';
 export { default as ProcessingCustomerTable } from './TableComponent/ProcessingCustomerTable/ProcessingCustomerTable';
 export { default as SiteVistTable } from './TableComponent/SiteVistTable/SiteVistTable';
 export { default as TenderTable } from './TableComponent/TenderTable/TenderTable';
+export { default as CustomerListTable } from './TableComponent/CustomerListTable/CustomerListTable';
+
 

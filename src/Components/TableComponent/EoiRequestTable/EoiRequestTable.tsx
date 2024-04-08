@@ -94,9 +94,9 @@ const EoiRequestTable = () => {
     };
 
 
-     /**
-     * Toggles the visibility of the status filter dropdown.
-     */
+    /**
+    * Toggles the visibility of the status filter dropdown.
+    */
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedStatus('All Contracts');
@@ -111,7 +111,7 @@ const EoiRequestTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            flex: 1,
+            width: 60,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -211,7 +211,7 @@ const EoiRequestTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[1112px] '>
+        <div className=' mt-[20px] w-[1112px] '>
             <Modal
                 open={open}
                 onClose={handleClose}

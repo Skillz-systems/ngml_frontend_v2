@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { Modal } from '@mui/material';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { useEffect, useState } from 'react';
 import { DailyFrequencyData } from '../../../Data';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
@@ -66,7 +66,7 @@ const DailyFrequencyTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            flex: 1,
+            width: 60,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -159,7 +159,7 @@ const DailyFrequencyTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[100%] '>
+        <div className=' mt-[20px] w-[100%] ' style={{border: '4px solid red'}}>
             <Modal
                 open={open}
                 onClose={handleClose}

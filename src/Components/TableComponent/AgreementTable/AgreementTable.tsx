@@ -218,7 +218,7 @@ const AgreementTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[100%] '>
+        <div className='mt-[20px] w-[100%] '>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -257,16 +257,16 @@ const AgreementTable = () => {
                         onChange={handleSearchChange}
                         InputProps={{
                             endAdornment: (
-                              <InputAdornment position="end">
-                                <SearchOutlined/> 
-                              </InputAdornment>
+                                <InputAdornment position="end">
+                                    <SearchOutlined />
+                                </InputAdornment>
                             ),
                             style: {
-                              borderRadius: '32px',
-                              width: '200px',
-                              height: '35px',
+                                borderRadius: '32px',
+                                width: '200px',
+                                height: '35px',
                             },
-                          }}
+                        }}
                         sx={{
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': {
@@ -288,7 +288,7 @@ const AgreementTable = () => {
                                 },
                             },
                         }}
-                       
+
                     />
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
                         <div className='text-[12px] font-[400] text-[#828DA9] '>Filter</div>
@@ -336,7 +336,7 @@ const AgreementTable = () => {
                         },
                     }}
                 />
-            </div>            
+            </div>
         </div>
     );
 }

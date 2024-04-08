@@ -1,8 +1,11 @@
+import { CustomerListTable } from '../../Components/index';
 
 const ProfilePage = () => {
     return (
         <div>
-            Yoo This is ProfilePage !!!
+            <div className='w-[100%]'>
+                <CustomerListTable/>
+            </div>
         </div>
     );
 }

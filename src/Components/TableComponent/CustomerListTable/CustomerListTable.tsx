@@ -1,28 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { CustomerListtData } from '@/Data';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
 import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useState } from 'react';
-import { fundersData } from '../../../Data';
-import SelectedDateModal from './SiteVistTableModal';
-
+import { useEffect, useState } from 'react';
+import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
 
 
 /**
- * Interface representing the properties of a selected date entry for a company.
- * @typeof {Object} SelectedDateTableProps
- * @property {number} id - Unique identifier for the entry.
- * @property {string} companyname - Name of the company.
- * @property {string} companyType - Type of the company (e.g., LLC, Corporation).
- * @property {string[]} [selectedDates] - Dates selected by the company.
- * @property {string} status - Current status of the date selection (e.g., Date Approved, Request Approval).
- * @property {string} action - Action to be taken on the entry.
- * @property {string} [deadline] - Optional deadline associated with the date selection.
- * @property {string} [companyEmail] - Optional email address of the company.
- * @property {string} [companyNumber] - Optional contact number of the company.
- * @property {string} [companyAddress] - Optional physical address of the company.
+ * Defines the structure for Agreement properties used in the AgreementTable.
+ * 
+ * @interface
+ * @property {number} id - Unique identifier for the agreement.
+ * @property {string} companyname - Name of the company associated with the agreement.
+ * @property {string} companyType - Type of the company (e.g., LLC, Inc., etc.).
+ * @property {string[]} selectedDates - Optional. Dates selected for the agreement.
+ * @property {string} status - Current status of the agreement (e.g., Signed, Unsigned).
+ * @property {string} action - Action available for the agreement (e.g., View, Edit).
+ * @property {string} deadline - Optional. Deadline for the agreement.
+ * @property {string} companyEmail - Optional. Email address of the company.
+ * @property {string} companyNumber - Optional. Contact number of the company.
+ * @property {string} companyAddress - Optional. Physical address of the company.
  */
 
-interface SelectedDateTableProps {
+interface CustomerListTableProps {
     id: number;
     companyname: string;
     companyType: string;
@@ -36,50 +37,86 @@ interface SelectedDateTableProps {
 
 }
 
-const rows = fundersData
+const rows = CustomerListtData
 
 
 
 
-const SiteVistTable = () => {
+const CustomerListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<SelectedDateTableProps[]>(rows);
+    const [filteredRows, setFilteredRows] = useState<CustomerListTableProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<SelectedDateTableProps | null>(null);
+    const [selectedRow, setSelectedRow] = useState<CustomerListTableProps | null>(null);
+    const [selectedStatus, setSelectedStatus] = useState<string>('All Statuses');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const handleOpen = (row: SelectedDateTableProps) => {
+    /**
+     * useEffect hook to filter data whenever searchText or selectedAgreement changes.
+     */
+    useEffect(() => {
+        filterData();
+    }, [searchText, selectedStatus]);
+
+    /**
+     * Toggles the dropdown menu for the agreement filter.
+     */
+    const handleFilterClick = () => {
+        setDropdownOpen(!dropdownOpen);
+        setSelectedStatus('All Statuses');
+    };
+
+    const uniqueStatuses = [...new Set(rows.map(row => row.status))];
+
+    /**
+     * Opens a modal to show detailed information for the selected row.
+     * @param {AgreementTableProps} row - The selected row's data.
+     */
+    const handleOpen = (row: CustomerListTableProps) => {
         setSelectedRow(row);
         setOpen(true);
     };
 
     const handleClose = () => setOpen(false);
 
-
+    /**
+     * Handles changes to the search input field and updates the searchText state.
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
+     */
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
-        filterData(value);
     };
 
-    const filterData = (search: string) => {
-        const lowercasedSearch = search.toLowerCase();
-        const filtered = rows.filter((row) =>
+
+    /**
+    * Filters the rows based on the search text and selected agreement type.
+    * @param {string} search - The current text in the search input field.
+    */
+    const filterData = () => {
+        const lowercasedSearch = searchText.toLowerCase();
+        let filtered = rows.filter(row =>
             row.companyname.toLowerCase().includes(lowercasedSearch) ||
             row.companyType.toLowerCase().includes(lowercasedSearch)
         );
+        if (selectedStatus !== 'All Statuses') {
+            filtered = filtered.filter(row => row.status === selectedStatus);
+        }
         setFilteredRows(filtered);
     };
 
-    const handleFilterClick = () => {
-        console.log('Filter icon clicked');
-    };
-
+    /**
+    * Returns a style object based on the agreement's status.
+    * @param {string} status - The status of the agreement.
+    * @returns {React.CSSProperties} The style object for the status.
+    */
     const getStatusStyle = (status: string) => {
         switch (status) {
-            case 'Date Approved':
+            case 'Active':
                 return { backgroundColor: '#D2F69E', color: '#005828' };
-            case 'Request Approval':
-                return { backgroundColor: '#FFF3D5', color: '#475467' };
+            case 'Processing':
+                return { backgroundColor: '#FFD181', color: '#475467' };
+            case 'In-Active':
+                return { border: '2px solid red', color: '#475467' };
             default:
                 return {};
         }
@@ -91,7 +128,7 @@ const SiteVistTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            flex: 1,
+            width: 60,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -104,33 +141,55 @@ const SiteVistTable = () => {
             headerName: 'COMPANY NAME',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className='text-xs font-[600] text-[#49526A] leading-3'>
-                    {params.row.companyname}
+                <div className='flex flex-col gap-[4px]'>
+                    <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
+                        {params.row.companyname}
+                    </div>
+                    <div
+                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
+                        {params.row.companyType}
+                    </div>
                 </div>
             ),
         },
         {
-            field: 'companyType',
-            headerName: 'COMPANY TYPE',
+            field: 'customerID',
+            headerName: 'CUSTOMER ID',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
-                    className='text-[12px] font-[400] text-[#49526A] leading-3'>
-                    {params.row.companyType}
+                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
+                    {params.row.customerID}
                 </div>
             ),
         },
         {
-            field: 'selectedDates',
-            headerName: 'SELECTED DATES',
+            field: 'totalConsumed',
+            headerName: 'TOTAL CONSUMED SCF',
             flex: 1,
             renderCell: (params) => (
-                <div className='text-[12px] font-[500] text-[#49526A] leading-3 flex gap-[10px]'>
-                    {params.row.selectedDates ? params.row.selectedDates.map((date: string, index: number) => (
-                        <div key={index} className='bg-[#EAEEF2] h-[24px] w-[92px] flex items-center justify-center rounded-[24px] '>
-                            {date}
-                        </div>
-                    )) : 'No Dates Selected'}
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.totalConsumed}
+                </div>
+            )
+        },
+        {
+            field: 'datesent',
+            headerName: 'DATE SENT',
+            flex: 1,
+            renderCell: (params) => (
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.datesent}
+                </div>
+            )
+        },
+        {
+            field: 'lastInvoice',
+            headerName: 'LAST INVOICE ADVICE',
+            flex: 1,
+            renderCell: (params) => (
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.lastInvoice}
                 </div>
             )
         },
@@ -139,17 +198,17 @@ const SiteVistTable = () => {
             headerName: 'STATUS',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => {
-                let classNames = 'text-xs h-6 rounded-full flex justify-center items-center px-2.5 ';
+                let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
                 switch (params.row.status) {
-                    case 'Date Approved':
+                    case 'Processing':
+                        classNames += 'bg-[#FFD181] text-[#050505] ';
+                        break;
+                    case 'Active':
                         classNames += 'bg-[#D2F69E] text-[#005828] ';
                         break;
-                    case 'Request Approval':
-                        classNames += 'bg-[#FFF3D5] text-[#475467] border border-[ #E2E4EB] ';
-                        break;
-                    case 'Dates Selected':
-                        classNames += 'border border-[E2E4EB] ';
+                    case 'In-Active':
+                        classNames += 'border-2 ';
                         break;
                     default:
                         classNames += 'text-[E2E4EB] ';
@@ -207,11 +266,11 @@ const SiteVistTable = () => {
                     )}
                 </div>
             </Modal>
-            <div className='flex items-center justify-between border border-[#CCD0DC] h-[60px] p-[20px] '>
+            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
                 <div className='italic text-[12px] text-[#828DA9]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex justify-end  items-center gap-[8px]	'>
+                <div className='flex justify-end  items-center gap-[8px] relative'>
                     <TextField
                         id="search-input"
                         label="Search this list"
@@ -252,17 +311,27 @@ const SiteVistTable = () => {
                                 },
                             },
                         }}
+
                     />
-                    <div className='flex items-center rounded-[32px]  h-[32px] w-[98px] justify-center border border-[#CCD0DC] flex-row'>
-                        <div className='text-[10px] font-[400] text-[#828DA9] italic'>Filter</div>
-                        <IconButton onClick={handleFilterClick}  >
+                    <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
+                        <div className='text-[12px] font-[400] text-[#828DA9] '>All Customer</div>
+                        <IconButton onClick={handleFilterClick}>
                             <FilterList />
                         </IconButton>
+                        {dropdownOpen && (
+                            <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[155px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
+                                {uniqueStatuses.map(status => (
+                                    <div key={status} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedStatus(status)}>
+                                        {status}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
 
-            <div style={{ width: '100%' }}>
+            <div className='w-[100%]'>
                 <DataGrid
                     className="pointer-cursor-datagrid"
                     rows={filteredRows}
@@ -274,6 +343,7 @@ const SiteVistTable = () => {
                             paginationModel: { page: 0, pageSize: 13 },
                         },
                     }}
+
                     sx={{
                         width: '100%',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
@@ -283,10 +353,10 @@ const SiteVistTable = () => {
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
                                 fontWeight: '700',
-                                fontSize: '12px'
+                                fontSize: '12px',
+
                             },
                         },
-
                     }}
                 />
             </div>
@@ -294,6 +364,6 @@ const SiteVistTable = () => {
     );
 }
 
-export default SiteVistTable
+export default CustomerListTable
 
 

@@ -1,8 +1,6 @@
 import { GppMaybeOutlined, NotificationImportantOutlined, PowerSettingsNewOutlined } from '@mui/icons-material';
 import Logo from '../../assets/images/CompanyLogo.png';
-import Notification from '../NotificationComponent/Notification';
-import SearchInput from '../Searchinput/SearchInput';
-
+import { Notification, SearchInput  } from '../../Components/index';
 
 /**
  * Represents the top navigation bar of the application.
