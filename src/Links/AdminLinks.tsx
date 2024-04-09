@@ -1,6 +1,7 @@
 import Businessicon from '../../src/assets/images/png-icons/Business.png';
 import Homeicon from '../../src/assets/images/png-icons/Home.png';
 import profileicon from '../../src/assets/images/png-icons/Profile.png';
+import customers from '../../src/assets/images/png-icons/Customers.png'
 // import Settingsicon from '../../src/assets/images/png-icons/Settings.png'
 
 
@@ -19,6 +20,7 @@ export const AdminLinks = [
      ]
   },
   { id: 3, name: 'Profile', to: '/admin/profilePage', icon: profileicon, type: 'primary' },
+  {id: 4, name: 'Customer', to: '/admin/customerlist', icon: customers, type: 'primary'}
 //   {
 //      id: 4, name: 'Settings', to: '/client/businessPage', icon: Settingsicon, type: 'secondary', 
 //      subMenu: [

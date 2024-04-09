@@ -129,38 +129,38 @@ describe('CustomInput', () => {
     it('applies default style', () => {
         render(<CustomInput type="text" label="Username" value="" onChange={() => { }} />);
         const inputElement = screen.getByRole('textbox');
-    
+
         expect(inputElement).toHaveClass('border-b');
-      });
-    
-      it('applies customStyle1', () => {
+    });
+
+    it('applies customStyle1', () => {
         render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle1" />);
         const inputElement = screen.getByRole('textbox');
-    
+
         expect(inputElement).toHaveClass('rounded-full');
-      });
-    
-      it('applies customStyle2', () => {
+    });
+
+    it('applies customStyle2', () => {
         render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle2" />);
         const inputElement = screen.getByRole('textbox');
-    
+
         expect(inputElement).toHaveClass('focus:bg-gray-200');
-      });
-    
-      it('applies customStyle3', () => {
+    });
+
+    it('applies customStyle3', () => {
         render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle3" />);
         const inputElement = screen.getByRole('textbox');
-    
+
         expect(inputElement).toHaveClass('rounded-full');
         expect(inputElement).toHaveClass('w-full');
-      });
-    
-      it('applies customStyle4', () => {
+    });
+
+    it('applies customStyle4', () => {
         render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle4" />);
         const inputElement = screen.getByRole('textbox');
-    
+
         expect(inputElement).not.toHaveClass('border');
-      });
+    });
 
 
 });

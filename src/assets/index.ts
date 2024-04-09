@@ -14,6 +14,8 @@ import nnpc from './images/nnpc.png';
 import nnpclogo from './images/nnpclogo.png';
 import password from './images/Password.png';
 import attachment from './images/png-icons/Attachment.png';
+import customers from './images/png-icons/Customers.png';
+import warning from './images/png-icons/Warning.png';
 import polygon from './images/Polygon.png';
 import profile from './images/Profile.png';
 
@@ -35,7 +37,9 @@ const images = {
   password,
   email,
   profile,
-  databox
+  databox,
+  customers,
+  warning
 };
 
 export default images;

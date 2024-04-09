@@ -19,6 +19,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
     args: {
-        logoSrc: '../../assets/images/CompanyLogo.png', 
+        logoSrc: '../../assets/images/CompanyLogo.png',
     },
 };
