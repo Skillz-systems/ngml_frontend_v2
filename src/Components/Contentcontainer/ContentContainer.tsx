@@ -18,6 +18,8 @@ import React, { ReactNode } from 'react';
  * @param {string} [props.type='solid'] - The type of card. Possible values: 'translucent', 'white', 'dashes', 'solid'.
  * @param {string} [props.width='100%'] - The width of the card.
  * @param {string} [props.height='100%'] - The height of the card.
+ * @param {number} [props.borderWidth=3] - The border width of the card.
+ * @param {string} [props.borderColor='green'] - The border color of the card.
  * @param {number} [props.borderRadius=5] - The border radius of the card.
  * @param {ReactNode} props.children - The content inside the card.
  * @returns {ReactElement} The rendered Card component.
@@ -31,6 +33,8 @@ interface CardProps {
   type?: CardType;
   width?: string;
   height?: string;
+  borderWidth?: number;
+  borderColor?: string;
   borderRadius?: number;
   children: ReactNode;
 }
@@ -39,6 +43,8 @@ const ContentContainer: React.FC<CardProps> = ({
   type = 'solid',
   width = '100%',
   height = '100%',
+  borderWidth = 3,
+  borderColor = 'green',
   borderRadius = 5,
   children,
 }: CardProps) => {
@@ -47,6 +53,8 @@ const ContentContainer: React.FC<CardProps> = ({
       width,
       height,
       borderRadius,
+      borderWidth,
+      borderColor,
       padding: '10px',
       boxSizing: 'border-box',
     };
