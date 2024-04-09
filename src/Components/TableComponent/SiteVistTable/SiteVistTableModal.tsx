@@ -15,7 +15,7 @@ interface SelectedDateModalprops {
   statusStyle?: React.CSSProperties;
 }
 
-const SelectedDateModal: React.FC<SelectedDateModalprops> = ({
+const SiteVistTableModal: React.FC<SelectedDateModalprops> = ({
   dateTime,
   status,
   companyName,
@@ -111,4 +111,4 @@ const SelectedDateModal: React.FC<SelectedDateModalprops> = ({
   );
 };
 
-export default SelectedDateModal;
+export default SiteVistTableModal;

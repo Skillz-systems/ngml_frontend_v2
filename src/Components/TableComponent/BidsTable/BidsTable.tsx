@@ -178,7 +178,7 @@ const BidsTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[100%] '>
+        <div className='mt-[20px] w-[100%] '>
             <Modal
                 open={open}
                 onClose={handleClose}

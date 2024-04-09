@@ -87,21 +87,21 @@ const TenderTable = () => {
     const handleClose = () => setOpen(false);
 
 
-     /**
-     * Updates the search text state based on user input in the search field.
-     * Filters the tender rows based on the updated search text.
-     * @param {React.ChangeEvent<HTMLInputElement>} event - The change event from the search input field.
-     */
+    /**
+    * Updates the search text state based on user input in the search field.
+    * Filters the tender rows based on the updated search text.
+    * @param {React.ChangeEvent<HTMLInputElement>} event - The change event from the search input field.
+    */
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
     };
 
 
-     /**
-     * Filters the tender rows based on search text, selected tender type, and category.
-     * @param {string} search - The current search text.
-     */
+    /**
+    * Filters the tender rows based on search text, selected tender type, and category.
+    * @param {string} search - The current search text.
+    */
     const filterData = (search: string) => {
         const lowercasedSearch = search.toLowerCase();
         let filtered = rows.filter((row) =>
@@ -196,7 +196,7 @@ const TenderTable = () => {
 
 
     return (
-        <div className='ml-[70px] mt-[20px] w-[1112px] '>
+        <div className='mt-[20px] w-[1112px] '>
             <Modal
                 open={open}
                 onClose={handleClose}
