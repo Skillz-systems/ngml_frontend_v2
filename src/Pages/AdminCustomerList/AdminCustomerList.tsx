@@ -21,7 +21,6 @@ const AdminCustomerList: React.FC = () => {
     };
 
     const handleCreateCustomer = () => {
-        // Validation checks, you can customize these as per your requirements
         if (customerData.name.trim() === '' || customerData.email.trim() === '') {
             alert('Please fill in all required fields.');
             return;
@@ -35,8 +34,8 @@ const AdminCustomerList: React.FC = () => {
     const options = ['Option 1', 'Option 2', 'Option 3'];
 
     return (
-        <div className="p-4 md:p-8 lg:p-8">
-            <div className='ml-[70px]'>
+        <div className="">
+            <div className='ml-[70px] mr-[25px]'>
                 <div className='flex flex-col md:flex-row items-center justify-between'>
                     <Heading as="h4" size="h4" color='primaryColor' className="font-normal text-gray-600">CUSTOMERS</Heading>
                     <Button
@@ -53,7 +52,7 @@ const AdminCustomerList: React.FC = () => {
                         title='Total Customers'
                         icon={<img src={images.customers} alt="staff icon" />}
                         value='554'
-                        valueColor='text-green-800'
+                        valueColor='text-nnpcmediumgreen-700'
                         iconBgColor='rounded-[5px] bg-nnpcmediumgreen-500'
                     />
                     <StatisticRectangleCard
