@@ -5,7 +5,7 @@ import TopNavigationBar from './TopNavigationBar';
 describe('TopNavigationBar', () => {
   it('renders the company logo', () => {
     render(<TopNavigationBar />);
-    const logoImage = screen.getByAltText('companylogo');
+    const logoImage = screen.getByAltText('nnpc logo');
     expect(logoImage).toBeInTheDocument();
   });
 

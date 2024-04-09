@@ -8,7 +8,7 @@ import SearchInput from '../Searchinput/SearchInput';
  * Represents the top navigation bar of the application.
  * It includes the company logo, a search input, and three types of notifications:
  * messages, alerts, and reminders.
- * 
+ *
  * Each notification type is displayed using the `Notification` component with specific data.
  */
 const TopNavigationBar = () => {
@@ -44,18 +44,15 @@ const TopNavigationBar = () => {
 
     return (
 
-        <div className="h-[100%] w-[100%] gap-[10px] flex flex-col md:flex-row items-center bg-[#FFFFFF] justify-between p-[18px] ">
-            <div className='w-[100%]'>
-                <img src={Logo} alt='companylogo' className='w-[32px] h-[32px] rounded-[50%]' />
-            </div>
-            <div className='flex flex-col md:flex-row gap-[16px] justify-end w-[100%]'>
-                <div className='w-[100%]'>
-                    <SearchInput
-                        onSearch={handleSearch}
-                        className=" w-[100%] "
-                    />
-                </div>
-                <div className='flex gap-[16px]'>
+        <div className=" w-full flex items-center bg-[#FFFFFF] justify-between px-5 py-3  fixed top-0 left-0 z-50">
+            <img src={Logo} alt='nnpc logo' className='size-8 rounded-full' />
+
+            <div className='flex  gap-4 justify-end w-[100%]'>
+                <SearchInput
+                    onSearch={handleSearch}
+                    className="w-28 sm:w-36 md:w-48 lg:w-56 xl:w-1/3"
+                />
+                <div className='flex gap-4'>
                     <Notification
                         count={messageNotifications.length}
                         headerTitle="Messages"
