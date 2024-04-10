@@ -3,7 +3,7 @@ import CustomInput from './CustomInput';
 
 describe('CustomInput', () => {
     it('renders input with label', () => {
-        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} />);
+        render(<CustomInput type="text" label="Username" value="" handleChangeEvent={() => { }} />);
         const labelElement = screen.getByText('Username');
         const inputElement = screen.getByRole('textbox');
 
@@ -13,7 +13,7 @@ describe('CustomInput', () => {
 
     it('calls onChange when input value changes', () => {
         const mockOnChange = vi.fn();
-        render(<CustomInput type="text" label="Username" value="" onChange={mockOnChange} />);
+        render(<CustomInput type="text" label="Username" value="" handleChangeEvent={mockOnChange} />);
         const inputElement = screen.getByRole('textbox');
 
         fireEvent.change(inputElement, { target: { value: 'testUser' } });
@@ -22,7 +22,7 @@ describe('CustomInput', () => {
 
     it('renders select with options', () => {
         render(
-            <CustomInput type="select" label="Select Option" value="" onChange={() => { }} options={['Option 1', 'Option 2']} />
+            <CustomInput type="select" label="Select Option" value="" handleChangeEvent={() => { }} options={['Option 1', 'Option 2']} />
         );
         const labelElement = screen.getByText('Select Option');
         const selectElement = screen.getByRole('combobox');
@@ -36,7 +36,7 @@ describe('CustomInput', () => {
     it('calls onChange when select value changes', () => {
         const mockOnChange = vi.fn();
         render(
-            <CustomInput type="select" label="Select Option" value="" onChange={mockOnChange} options={['Option 1', 'Option 2']} />
+            <CustomInput type="select" label="Select Option" value="" handleChangeEvent={mockOnChange} options={['Option 1', 'Option 2']} />
         );
         const selectElement = screen.getByRole('combobox');
 
@@ -45,7 +45,7 @@ describe('CustomInput', () => {
     });
 
     it('renders textarea', () => {
-        render(<CustomInput type="textarea" label="Description" value="" onChange={() => { }} />);
+        render(<CustomInput type="textarea" label="Description" value="" handleChangeEvent={() => { }} />);
         const labelElement = screen.getByText('Description');
         const textareaElement = screen.getByRole('textbox');
 
@@ -55,7 +55,7 @@ describe('CustomInput', () => {
 
     it('calls onChange when textarea value changes', () => {
         const mockOnChange = vi.fn();
-        render(<CustomInput type="textarea" label="Description" value="" onChange={mockOnChange} />);
+        render(<CustomInput type="textarea" label="Description" value="" handleChangeEvent={mockOnChange} />);
         const textareaElement = screen.getByRole('textbox');
 
         fireEvent.change(textareaElement, { target: { value: 'Test description' } });
@@ -63,7 +63,7 @@ describe('CustomInput', () => {
     });
 
     it('renders checkbox', () => {
-        render(<CustomInput type="checkbox" label="Agree" value={false} onChange={() => { }} />);
+        render(<CustomInput type="checkbox" label="Agree" value={false} handleChangeEvent={() => { }} />);
         const labelElement = screen.getByText('Agree');
         const checkboxElement = screen.getByRole('checkbox');
 
@@ -72,14 +72,14 @@ describe('CustomInput', () => {
     });
 
     it('renders radio button', () => {
-        render(<CustomInput type="radio" label="Radio" value="radioValue" onChange={() => { }} options={['Option1', 'Option2']} />);
+        render(<CustomInput type="radio" label="Radio" value="radioValue" handleChangeEvent={() => { }} options={['Option1', 'Option2']} />);
         const radioElement = screen.getByLabelText('Option1');
         expect(radioElement).toBeInTheDocument();
         expect(radioElement).toHaveAttribute('type', 'radio');
     });
 
     it('applies default styles to text input', () => {
-        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} />);
+        render(<CustomInput type="text" label="Username" value="" handleChangeEvent={() => { }} />);
         const inputElement = screen.getByRole('textbox');
 
         expect(inputElement).toHaveClass('border-b', 'border-solid', 'border-2', 'border-gray-300');
@@ -93,7 +93,7 @@ describe('CustomInput', () => {
                 type="select"
                 label="Select Option"
                 value=""
-                onChange={() => { }}
+                handleChangeEvent={() => { }}
                 options={['Option 1', 'Option 2']}
                 styleVariant="customStyle1"
             />
@@ -104,7 +104,7 @@ describe('CustomInput', () => {
     });
 
     it('applies custom styles to textarea', () => {
-        render(<CustomInput type="textarea" label="Description" value="" onChange={() => { }} />);
+        render(<CustomInput type="textarea" label="Description" value="" handleChangeEvent={() => { }} />);
         const textareaElement = screen.getByRole('textbox');
 
         expect(textareaElement).toHaveClass('border-b', 'border-solid', 'border-2', 'border-gray-300');
@@ -113,42 +113,42 @@ describe('CustomInput', () => {
     });
 
     it('applies custom styles to checkbox', () => {
-        render(<CustomInput type="checkbox" label="Agree" value={false} onChange={() => { }} />);
+        render(<CustomInput type="checkbox" label="Agree" value={false} handleChangeEvent={() => { }} />);
         const checkboxElement = screen.getByRole('checkbox');
 
         expect(checkboxElement).toHaveClass('hidden');
     });
 
     it('applies custom styles to radio button', () => {
-        render(<CustomInput type="radio" label="Radio" value="radioValue" onChange={() => { }} options={['Option1', 'Option2']} />);
+        render(<CustomInput type="radio" label="Radio" value="radioValue" handleChangeEvent={() => { }} options={['Option1', 'Option2']} />);
         const radioElement = screen.getByLabelText('Option1');
 
         expect(radioElement).toHaveClass('w-5', 'h-5');
     });
 
     it('applies default style', () => {
-        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} />);
+        render(<CustomInput type="text" label="Username" value="" handleChangeEvent={() => { }} />);
         const inputElement = screen.getByRole('textbox');
 
         expect(inputElement).toHaveClass('border-b');
     });
 
     it('applies customStyle1', () => {
-        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle1" />);
+        render(<CustomInput type="text" label="Username" value="" handleChangeEvent={() => { }} styleVariant="customStyle1" />);
         const inputElement = screen.getByRole('textbox');
 
         expect(inputElement).toHaveClass('rounded-full');
     });
 
     it('applies customStyle2', () => {
-        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle2" />);
+        render(<CustomInput type="text" label="Username" value="" handleChangeEvent={() => { }} styleVariant="customStyle2" />);
         const inputElement = screen.getByRole('textbox');
 
         expect(inputElement).toHaveClass('focus:bg-gray-200');
     });
 
     it('applies customStyle3', () => {
-        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle3" />);
+        render(<CustomInput type="text" label="Username" value="" handleChangeEvent={() => { }} styleVariant="customStyle3" />);
         const inputElement = screen.getByRole('textbox');
 
         expect(inputElement).toHaveClass('rounded-full');
@@ -156,7 +156,7 @@ describe('CustomInput', () => {
     });
 
     it('applies customStyle4', () => {
-        render(<CustomInput type="text" label="Username" value="" onChange={() => { }} styleVariant="customStyle4" />);
+        render(<CustomInput type="text" label="Username" value="" handleChangeEvent={() => { }} styleVariant="customStyle4" />);
         const inputElement = screen.getByRole('textbox');
 
         expect(inputElement).not.toHaveClass('border');

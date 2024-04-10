@@ -65,7 +65,7 @@ const PortalEnrollment: React.FC = () => {
                         <CustomInput
                             type="text"
                             value={formData.email}
-                            onChange={handleChange('email')}
+                            handleChangeEvent={handleChange('email')}
                             placeholder="Enter your Staff ID"
                             styleVariant='customStyle1'
                             icon={<img src={images.profile} alt='Profile Icon' />}
