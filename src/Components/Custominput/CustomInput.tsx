@@ -26,7 +26,7 @@ interface CustomInputProps {
     type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio';
     label?: string;
     value?: string | number | boolean | readonly string[];
-    onChange: (value: string | number | boolean | readonly string[] | undefined) => void;
+    handleChangeEvent: (value: string | number | boolean | readonly string[] | undefined) => void;
     placeholder?: string;
     options?: string[];
     error?: string;
@@ -39,7 +39,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
     type,
     label,
     value,
-    onChange,
+    handleChangeEvent,
     placeholder,
     options,
     error,
@@ -95,7 +95,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     <input
                         type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
                         value={value as string | number | undefined}
-                        onChange={(e:ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+                        onChange={(e:ChangeEvent<HTMLInputElement>) => handleChangeEvent(e.target.value)}
                         onBlur={handleBlur}
                         placeholder={placeholder}
                         className={inputClasses}
@@ -105,7 +105,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 return (
                     <div className='relative'>
                         <select value={Array.isArray(value) ? value : undefined}
-                            onChange={(e:ChangeEvent<HTMLSelectElement>) => onChange(e.target.value)}
+                            onChange={(e:ChangeEvent<HTMLSelectElement>) => handleChangeEvent(e.target.value)}
                             className={`${inputClasses} appearance-none select-none`} onBlur={handleBlur} >
                             {options?.map((option) => (
                                 <option key={option} value={option}>
@@ -122,7 +122,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 return (
                     <textarea
                         value={value as string}
-                        onChange={(e) => onChange(e.target.value)}
+                        onChange={(e) => handleChangeEvent(e.target.value)}
                         placeholder={placeholder}
                         className={inputClasses}
                         onBlur={handleBlur}
@@ -160,7 +160,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                                     id={option}
                                     value={option}
                                     checked={value === option}
-                                    onChange={() => onChange(option)}
+                                    onChange={() => handleChangeEvent(option)}
                                     className="w-5 h-5"
                                 />
                                 <label htmlFor={option} className="ml-2">{option}</label>

@@ -63,7 +63,7 @@ const ForgotPassword: React.FC = () => {
                         <CustomInput
                             type="text"
                             value={formData.email}
-                            onChange={handleChange('email')}
+                            handleChangeEvent={handleChange('email')}
                             placeholder="Enter email here"
                             styleVariant='customStyle1'
                             icon={<img src={images.emailicons} alt='Email' />}
