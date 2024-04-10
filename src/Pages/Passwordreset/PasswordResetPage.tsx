@@ -67,7 +67,7 @@ const PasswordResetPage: React.FC = () => {
                         <CustomInput
                             type="text"
                             value={formData.email}
-                            onChange={handleChange('email')}
+                            handleChangeEvent={handleChange('email')}
                             placeholder="Enter your email"
                             styleVariant='customStyle1'
                             icon={<img src={images.email} alt='Email Icon' />}
@@ -76,7 +76,7 @@ const PasswordResetPage: React.FC = () => {
                         <CustomInput
                             type="password"
                             value={formData.password}
-                            onChange={handleChange('password')}
+                            handleChangeEvent={handleChange('password')}
                             placeholder="Enter a password"
                             styleVariant='customStyle1'
                             icon={<img src={images.password} alt='Password Icon' />}
@@ -85,7 +85,7 @@ const PasswordResetPage: React.FC = () => {
                         <CustomInput
                             type="password"
                             value={formData.confirmPassword}
-                            onChange={handleChange('confirmPassword')}
+                            handleChangeEvent={handleChange('confirmPassword')}
                             placeholder="Re-Enter the password"
                             styleVariant='customStyle1'
                             icon={<img src={images.password} alt='Password Icon' />}
