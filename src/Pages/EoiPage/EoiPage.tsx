@@ -1,23 +1,35 @@
-// import SiteVistTableModal from '@/Components/TableComponent/SiteVistTable/SiteVistTableModal'
-
+import { useState } from 'react';
+import { EoiRequestTemplate } from '@/Components';
 
 const EoiPage = () => {
 
+    const [status] = useState('Default Status');
+    const [selectedRow] = useState({
+        companyName: 'Provide Company Name',
+        companyEmail: 'Provide an email address',
+        companyNumber: 'Provide a number',
+        status: 'Approved',
+        approverName: 'Okoro Florish',
+    });
+
+    const handleClose = () => {
+    };
+
+
     return (
         <div>
-            Yoo
-            {/* <SiteVistTableModal 
-           dateTime={'09th, Nov, 2023; 09:23:44Am'}
-           status={ 'Default Status'}
-           companyName={ 'Provide Company Name'}
-           companyEmail={ 'Provide an email address'}
-           companyNumber={ 'Provide a number'}
-           availableDates={ ['No Dates Available']}
-           companyAddress={ 'Provide an Address'}
-        //    statusHeading={selectedRow.status} */}
-           
+            <EoiRequestTemplate
+                handleClose={handleClose}
+                dateTime={'09th, Nov, 2023; 09:23:44 AM'}
+                status={status}
+                companyName={selectedRow.companyName}
+                companyEmail={selectedRow.companyEmail}
+                companyNumber={selectedRow.companyNumber}
+                statusHeading={selectedRow.status}
+                approverName={selectedRow.approverName}
+            />
         </div>
-    )
-}
+    );
+};
 
-export default EoiPage
+export default EoiPage;

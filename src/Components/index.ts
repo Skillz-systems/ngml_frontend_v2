@@ -21,12 +21,14 @@ export { default as StatisticCard } from './Statisticccard/StatisticCard';
 export { default as StatisticRectangleCard } from './Statisticrectanclecard/StatisticRectangleCard';
 export { default as TabLayout } from './CustomerTabs/TabLayout';
 export { default as TabCustomer } from './CustomerTabs/TabCustomer';
+export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTemplate';
+
 
 export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
 
 
 
-// TABLES 
+// TABLES  
 
 export { default as AgreementTable } from './TableComponent/AgreementTable/AgreementTable';
 export { default as BidsTable } from './TableComponent/BidsTable/BidsTable';
