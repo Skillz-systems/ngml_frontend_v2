@@ -159,7 +159,7 @@ const DailyFrequencyTable = () => {
 
 
     return (
-        <div className=' mt-[20px] w-[100%] ' style={{border: '4px solid red'}}>
+        <div className=' mt-[20px] w-[100%] '>
             <Modal
                 open={open}
                 onClose={handleClose}

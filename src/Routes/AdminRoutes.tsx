@@ -1,8 +1,9 @@
 import AdminDashboard from '@/Pages/AdminDashboardPage/AdminHomePage';
 import BusinessPage from '@/Pages/BusinessPage';
-import ProfilePage from '@/Pages/ProfilePage/Profilepage';
+// import ProfilePage from '@/Pages/ProfilePage/Profilepage';
 import AdminCustomerList from '@/Pages/AdminCustomerList/AdminCustomerList';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
+import EoiPage from '@/Pages/EoiPage/EoiPage';
 import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
 import CustomerLayout from '@/Pages/CustomerLayout/CustomerLayout';
 
@@ -22,7 +23,7 @@ export const AdminRoutes = [
   {
     title: 'Admin Profile page',
     path: '/admin/profilePage',
-    component: AdminInternalLayout(ProfilePage),
+    component: AdminInternalLayout(EoiPage),
     exact: true
   },
   {

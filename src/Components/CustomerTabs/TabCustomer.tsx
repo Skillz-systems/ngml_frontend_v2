@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, ReactNode, useState } from 'react';
 
 interface TabInterface {
@@ -34,15 +35,15 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
   };
 
   return (
-    <div className="flex flex-1 mt-4">
+    <div className="flex flex-1 mt-8">
       <div className='w-1/4 flex flex-col items-start justify-start space-y-2 mr-3 '>
         {tablist.map((tab) => (
-          <div key={tab.ref} className="flex flex-col w-full space-y-2 ">
+          <div key={tab.ref} className="flex flex-col w-full space-y-4  " >
             <div className="flex justify-between items-center gap-x-2 cursor-pointer capitalize" onClick={() => { handleTabChange(tab) }}>
               <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
                 {tab.content === 'icon' && tab.icon}
                 {tab.content === 'numeric' && <span className="mr-1">{tablist.indexOf(tab) + 1}</span>}
-                <h4 className='truncate text-neutral-600 font-medium text-base capitalize leading-relaxed ml-1'>{tab.name}</h4>
+                <h4 className='truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1'>{tab.name}</h4>
               </div>
               {tab.ref === activeTab && (
                 <span className='h-1.5 w-1.5 rounded-full bg-[#00AF50] transition-all ease-in-out duration-300'></span>

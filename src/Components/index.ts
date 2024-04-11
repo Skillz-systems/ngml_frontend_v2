@@ -27,7 +27,7 @@ export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar
 
 
 
-// TABLES 
+// TABLES  
 
 export { default as AgreementTable } from './TableComponent/AgreementTable/AgreementTable';
 export { default as BidsTable } from './TableComponent/BidsTable/BidsTable';

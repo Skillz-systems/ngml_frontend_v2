@@ -10,7 +10,7 @@ export const AdminLinks = [
   {
      id: 2,
      name: 'Business',
-     to: '/admin/businessPage',
+     to: '',
      icon: Businessicon,
      type: 'secondary',
      subMenu: [

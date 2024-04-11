@@ -1,10 +1,10 @@
-import { CustomerListTable } from '../../Components/index';
+// import { CustomerListTable } from '../../Components/index';
 
 const ProfilePage = () => {
     return (
         <div>
             <div className='w-[100%]'>
-                <CustomerListTable/>
+                {/* <CustomerListTable/> */}
             </div>
         </div>
     );
