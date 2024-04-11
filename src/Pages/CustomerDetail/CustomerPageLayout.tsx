@@ -1,6 +1,7 @@
 import React from 'react';
 import { TabLayout } from '../../Components/index';
 import CustomerDetail from './CustomerDetail';
+import EoiPage from '../EoiPage/EoiPage';
 // import images from '../../assets/index';
 
 
@@ -81,20 +82,21 @@ const CustomerPageLayout: React.FC = () => {
         overview: <div className="flex-1 w-full"><p>Overview Content Here</p></div>,
         customers: <div className="flex-1 w-full"><p>Customers Content Here</p></div>,
         customerdetails: <CustomerDetail />,
+        eoirequest: <EoiPage />,
         subdetail1: <p>tyfyufuyfifyt</p>
     };
 
     return (
-        <div className='mt-[-30px]'>
+        <div >
             <TabLayout
                 title="Dangote Cement"
                 width=""
                 height=""
                 backgroundColor="#F5F7F9"
-                color="#000000"
+                color="#49526A"
                 borderColor=""
-                borderWidth=""
-                borderRadius="10px"
+                borderWidth="4px"
+                borderRadius=""
                 tablist={tablist}
                 tabContent={tabContent}
             />

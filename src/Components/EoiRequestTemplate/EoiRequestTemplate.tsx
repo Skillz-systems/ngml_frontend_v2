@@ -1,21 +1,21 @@
-import { ContentPasteOutlined, HighlightOff } from '@mui/icons-material';
+import { Button } from '@/Components';
+import { ContentPasteOutlined } from '@mui/icons-material';
 import { Box } from '@mui/material';
-import Button from '../../ButtonComponent/Button';
 
-interface EoiModalprops {
+interface EoiRequestTemplateprops {
     dateTime?: string;
     status?: string;
     companyName?: string;
     companyEmail?: string;
     companyNumber?: string;
-    statusHeading?: string;
     handleClose: () => void;
+    statusHeading?: string;
     statusStyle?: React.CSSProperties;
     approverName?: string;
     disapprovalReason?: string;
 }
 
-const EoiModal: React.FC<EoiModalprops> = ({
+const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
     dateTime,
     status,
     companyName,
@@ -81,27 +81,10 @@ const EoiModal: React.FC<EoiModalprops> = ({
 
 
     return (
-        <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 h-[700px] -translate-y-1/2 w-[750px] bg-white shadow-2xl rounded-md h-fit">
+        <div className="  h-[100%] w-[100%] bg-white rounded-[6px] border">
             <Box>
-                <div className='flex justify-between items-center h-[100%] p-[10px]'>
+                <div className='items-center h-[100%] p-[10px]'>
                     <div className='text-[20px] text-[#49526A] font-[700]'>EOI REQUEST</div>
-                    <div>
-                        <Button
-                            type='tertiary'
-                            label='Cancel'
-                            width='84px'
-                            height='32px'
-                            radius='32px'
-                            color='#828DA9'
-                            fontWeight='400'
-                            fontSize='8px'
-                            iconPosition='left'
-                            icon={<div><HighlightOff /></div>}
-                            iconColor='#828DA9'
-                            action={handleClose}
-                        />
-                    </div>
                 </div>
             </Box>
             <div className='h-fit bg-[#F6FDEC] p-[10px]'>
@@ -143,7 +126,7 @@ const EoiModal: React.FC<EoiModalprops> = ({
                     <textarea className='text-[#050505] text-[16px] h-[340px] outline-none font-[500] rounded-md' placeholder='Enter your reason here...'></textarea>
                 </div>
             </div>
-            <div className='h-fit p-[20px] bg-[#FFF3D5] '>
+            <div className='h-fit p-[20px] bg-[#FFF3D5] ' >
                 <div>{renderStatusContent()}</div>
             </div>
 
@@ -151,4 +134,4 @@ const EoiModal: React.FC<EoiModalprops> = ({
     );
 };
 
-export default EoiModal;
+export default EoiRequestTemplate;

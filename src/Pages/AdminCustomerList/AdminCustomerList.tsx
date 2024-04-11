@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Button, CustomInput, EoiRequestTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
@@ -25,9 +26,7 @@ const AdminCustomerList: React.FC = () => {
             alert('Please fill in all required fields.');
             return;
         }
-        // Your logic for creating a new customer
         console.log('Creating customer:', customerData);
-        // Close the modal after creating the customer
         toggleModal();
     };
 
@@ -35,9 +34,9 @@ const AdminCustomerList: React.FC = () => {
 
     return (
         <div className="">
-            <div className='ml-[70px] mr-[25px]'>
+            <div className=' mr-[25px]'>
                 <div className='flex flex-col md:flex-row items-center justify-between'>
-                    <Heading as="h4" size="h4" color='primaryColor' className="font-normal text-gray-600">CUSTOMERS</Heading>
+                    <Heading as="h4" size="h4" color='primaryColor' className="font-semibold text-gray-600">CUSTOMERS</Heading>
                     <Button
                         type='outline'
                         label='Add Customer'
@@ -114,7 +113,7 @@ const AdminCustomerList: React.FC = () => {
                     type="text"
                     label='Name of Customer'
                     value={customerData.name}
-                    onChange={(value) => handleInputChange(value, "name")}
+                    onChange={(value) => handleInputChange(value, 'name')}
                     placeholder="Enter Name of Customer"
                 />
                 <CustomInput
@@ -122,14 +121,14 @@ const AdminCustomerList: React.FC = () => {
                     type="text"
                     label='Email'
                     value={customerData.email}
-                    onChange={(value) => handleInputChange(value, "email")}
+                    onChange={(value) => handleInputChange(value, 'email')}
                     placeholder="Enter email"
                 />
                 <CustomInput
                     type="select"
                     label='Customer Location'
                     value={customerData.location}
-                    onChange={(value) => handleInputChange(value, "location")}
+                    onChange={(value) => handleInputChange(value, 'location')}
                     placeholder="Choose Type"
                     options={options}
                 />
@@ -137,7 +136,7 @@ const AdminCustomerList: React.FC = () => {
                     type="select"
                     label='Customer Type'
                     value={customerData.type}
-                    onChange={(value) => handleInputChange(value, "type")}
+                    onChange={(value) => handleInputChange(value, 'type')}
                     placeholder="Choose Type"
                     options={options}
                 />
@@ -145,7 +144,7 @@ const AdminCustomerList: React.FC = () => {
                     type="text"
                     label='Customer Phone Number'
                     value={customerData.phoneNumber}
-                    onChange={(value) => handleInputChange(value, "phoneNumber")}
+                    onChange={(value) => handleInputChange(value, 'phoneNumber')}
                     placeholder="Enter Phone Number"
                 />
             </Modal>

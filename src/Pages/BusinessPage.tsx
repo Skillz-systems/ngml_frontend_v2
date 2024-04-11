@@ -9,7 +9,7 @@ const BusinessPage = () => {
   const primaryColor = useColor('nnpc', 500); // returns '#EC0000'
   const nncpShades = getColorShades('nnpc'); // returns { 100: '#00af50', 200: '#226844', ... }
   const colorNames = getColorNames(); // returns ['nnpc', 'gray', 'medium', 'dark', 'light', 'red', 'yellow']
-  const mediumShadeNames = getShadeNames('medium'); // returns ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950']
+  const mediumShadeNames = getShadeNames('dark'); // returns ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950']
   const dataNNPC = [
     { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
     { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },

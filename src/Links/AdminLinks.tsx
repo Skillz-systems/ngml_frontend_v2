@@ -10,7 +10,7 @@ export const AdminLinks = [
   {
      id: 2,
      name: 'Business',
-     to: '/admin/businessPage',
+     to: '',
      icon: Businessicon,
      type: 'secondary',
      subMenu: [
@@ -21,7 +21,7 @@ export const AdminLinks = [
   },
   { id: 3, name: 'Profile', to: '/admin/profilePage', icon: profileicon, type: 'primary' },
   {id: 4, name: 'Customer', to: '/admin/customerlist', icon: customers, type: 'primary'},
-  {id: 5, name: 'Existing Customer', to: 'admin/customerpagelayout', icon: customers, type: 'primary'},
+  {id: 5, name: 'Existing Customer', to: '/admin/customerpagelayout', icon: customers, type: 'primary'},
 //   {
 //      id: 4, name: 'Settings', to: '/client/businessPage', icon: Settingsicon, type: 'secondary', 
 //      subMenu: [
