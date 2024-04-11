@@ -1,7 +1,7 @@
 import React from 'react';
 import { TabLayout } from '../../Components/index';
 import CustomerPageDetails from './CustomerPageDetails';
-// import images from '../../assets/index';
+import images from '../../assets/index';
 
 
 
@@ -12,15 +12,15 @@ const CustomerLayout: React.FC = () => {
             name: 'overview',
             ref: 'overview',
             // content: 'numeric',
-            // content: 'icon',
-            // icon: <img src={images.LeftArrow} alt="logo" />
+            content: 'icon',
+            icon: <img src={images.business} alt="logo" className='w-6'/>
         },
         {
             name: 'customer details',
             ref: 'customerdetails',
             // content: 'numeric',
             // content: 'icon',
-            // icon: <img src={images.LeftArrow} alt="logo" />,
+            // icon: <img src={images.email} alt="logo" />,
             // sublist: [
             //     {
             //         name: 'Sub Detail 1',
@@ -85,7 +85,7 @@ const CustomerLayout: React.FC = () => {
     return (
         <div className='mt-[-30px]'>
             <TabLayout
-                title="bucketfull Industries"
+                title="Bucketfull Industries"
                 width=""
                 height=""
                 backgroundColor="#F5F7F9"
