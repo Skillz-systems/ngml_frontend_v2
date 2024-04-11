@@ -1,6 +1,4 @@
 import ForgotPassword from '@/Pages/Forgotpassword/ForgotPassword';
-import StatisticDynamicCardTwo from '@/Components/StatisticDynamicCardTwo/StatisticDynamicCardTwo';
-
 
 export const AuthRoutes = [
     // {
@@ -8,14 +6,9 @@ export const AuthRoutes = [
     //     path: '/',
     //     component: PasswordResetPage
     // },
-    // {
-    //     title: 'forgotpassword',
-    //     path: '/',
-    //     component: ForgotPassword
-    // },
     {
-        title: 'statisticdynamiccardtwo',
+        title: 'forgotpassword',
         path: '/',
-        component: StatisticDynamicCardTwo
-    }
+        component: ForgotPassword
+    },
 ]
