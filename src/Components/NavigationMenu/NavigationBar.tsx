@@ -376,7 +376,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div
           style={{
             padding: '18px',
-            overflowY: 'auto',
             width: '235px',
           }}
         >

@@ -1,0 +1,69 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { CustomInput, Heading } from '@/Components'
+import colors from '@/Utils/colors'
+import { useState } from 'react';
+
+
+const SiteVisitationPage = () => {
+    const [formData, setFormData] = useState({
+        companyName: '',
+        companyEmail: '',
+        companyPhoneNumber: '',
+        representativeName: '',
+        representativeEmail: '',
+        customerType: '',
+        industrial: ''
+    });
+
+    const handleInputChange = (name: any, value: any) => {
+        console.log(value)
+        setFormData((prevState: any) => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    return (
+        <div className="p-[20px] rounded-[20px] w-[100%] h-fit " style={{ background: colors.dark[50] }}>
+            <div className='border-2 border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
+                <Heading as="h4" size="h6" color='primaryColor' className="font-[2px] text-dark-100">PICK DATES FOR SITE VISITES</Heading>
+                <div className='mt-[20px]'>
+                    <CustomInput
+                        type="date"
+                        label='1st Site Visit Date'
+                        value={formData.companyName}
+                        handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
+                        placeholder="Select First Date"
+                        styleVariant='customStyle3'
+                    />
+                </div>
+                <div className='mt-[20px]'>
+                    <CustomInput
+                        type="date"
+                        label='2nd Site Visit Date'
+                        value={formData.companyName}
+                        handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
+                        placeholder="Select First Date"
+                        styleVariant='customStyle3'
+                    />
+                </div>
+                <div className='mt-[20px]'>
+                    <CustomInput
+                        type="date"
+                        label='3rd Site Visit Date'
+                        value={formData.companyName}
+                        handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
+                        placeholder="Select First Date"
+                        styleVariant='customStyle3'
+                    />
+                </div>
+
+
+
+            </div>
+
+        </div>
+    )
+}
+export default SiteVisitationPage
+
