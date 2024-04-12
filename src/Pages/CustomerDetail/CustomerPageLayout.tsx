@@ -2,6 +2,7 @@ import React from 'react';
 import { TabLayout } from '../../Components/index';
 import CustomerDetail from './CustomerDetail';
 import EoiPage from '../EoiPage/EoiPage';
+import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 // import images from '../../assets/index';
 
 
@@ -83,6 +84,7 @@ const CustomerPageLayout: React.FC = () => {
         customers: <div className="flex-1 w-full"><p>Customers Content Here</p></div>,
         customerdetails: <CustomerDetail />,
         eoirequest: <EoiPage />,
+        sitevisit: <SiteVisitationPage/>,
         subdetail1: <p>tyfyufuyfifyt</p>
     };
 

@@ -17,7 +17,7 @@ const EoiPage = () => {
 
 
     return (
-        <div>
+        <div >
             <EoiRequestTemplate
                 handleClose={handleClose}
                 dateTime={'09th, Nov, 2023; 09:23:44 AM'}

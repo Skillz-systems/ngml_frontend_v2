@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { CustomInput } from '../../Components/index';
 import images from '../../assets/index';
+import colors from '@/Utils/colors';
 
 const CustomerDetail: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const CustomerDetail: React.FC = () => {
     };
 
     return (
-        <div className="p-[20px] bg-dark-50 border rounded-[20px]">
+        <div className="p-[20px] rounded-[20px]" style={{background:colors.dark[50]}}>
             <div className='border-2 border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
                 <div className='flex-col space-y-5'>
                     <h3 className='text-[#49526A] font-[700]'>PERSONAL DETAILS</h3>
