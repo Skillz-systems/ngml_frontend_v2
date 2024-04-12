@@ -1,6 +1,5 @@
 import ForgotPassword from '@/Pages/Forgotpassword/ForgotPassword';
 
-
 export const AuthRoutes = [
     // {
     //     title: 'passwordRest',

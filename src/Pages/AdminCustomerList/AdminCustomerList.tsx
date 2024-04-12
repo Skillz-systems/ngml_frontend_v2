@@ -113,7 +113,7 @@ const AdminCustomerList: React.FC = () => {
                     type="text"
                     label='Name of Customer'
                     value={customerData.name}
-                    onChange={(value) => handleInputChange(value, 'name')}
+                    handleChangeEvent={(value) => handleInputChange(value, "name")}
                     placeholder="Enter Name of Customer"
                 />
                 <CustomInput
@@ -121,14 +121,14 @@ const AdminCustomerList: React.FC = () => {
                     type="text"
                     label='Email'
                     value={customerData.email}
-                    onChange={(value) => handleInputChange(value, 'email')}
+                    handleChangeEvent={(value) => handleInputChange(value, "email")}
                     placeholder="Enter email"
                 />
                 <CustomInput
                     type="select"
                     label='Customer Location'
                     value={customerData.location}
-                    onChange={(value) => handleInputChange(value, 'location')}
+                    handleChangeEvent={(value) => handleInputChange(value, "location")}
                     placeholder="Choose Type"
                     options={options}
                 />
@@ -136,7 +136,7 @@ const AdminCustomerList: React.FC = () => {
                     type="select"
                     label='Customer Type'
                     value={customerData.type}
-                    onChange={(value) => handleInputChange(value, 'type')}
+                    handleChangeEvent={(value) => handleInputChange(value, "type")}
                     placeholder="Choose Type"
                     options={options}
                 />
@@ -144,7 +144,7 @@ const AdminCustomerList: React.FC = () => {
                     type="text"
                     label='Customer Phone Number'
                     value={customerData.phoneNumber}
-                    onChange={(value) => handleInputChange(value, 'phoneNumber')}
+                    handleChangeEvent={(value) => handleInputChange(value, "phoneNumber")}
                     placeholder="Enter Phone Number"
                 />
             </Modal>

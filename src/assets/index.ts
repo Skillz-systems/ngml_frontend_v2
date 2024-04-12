@@ -1,23 +1,26 @@
-import avatar from './images/avatar.png';
-import biqrcode from './images/bi_qr-code.png';
-import cancel from './images/cancel.png';
 import cancelicon from './images/Cancelicon.png';
 import companylogo from './images/CompanyLogo.png';
 import databox from './images/DataBox.png';
 import email from './images/Email.png';
+import homeicons from './images/HomeIcons.png';
+import password from './images/Password.png';
+import polygon from './images/Polygon.png';
+import profile from './images/Profile.png';
+import avatar from './images/avatar.png';
+import biqrcode from './images/bi_qr-code.png';
+import cancel from './images/cancel.png';
 import emailicons from './images/emailIcons.png';
 import eyeicons from './images/eyeIcons.png';
 import greenicon from './images/greenIcon.png';
 import guy from './images/guy.jpeg';
-import homeicons from './images/HomeIcons.png';
 import nnpc from './images/nnpc.png';
 import nnpclogo from './images/nnpclogo.png';
-import password from './images/Password.png';
 import attachment from './images/png-icons/Attachment.png';
 import customers from './images/png-icons/Customers.png';
 import warning from './images/png-icons/Warning.png';
-import polygon from './images/Polygon.png';
-import profile from './images/Profile.png';
+import firewood from './images/png-icons/firewood.png';
+import firewood2 from './images/png-icons/firewood2.png';
+import business from './images/png-icons/Business.png';
 
 const images = {
   cancelicon,
@@ -39,7 +42,10 @@ const images = {
   profile,
   databox,
   customers,
-  warning
+  warning,
+  firewood,
+  firewood2,
+  business
 };
 
 export default images;

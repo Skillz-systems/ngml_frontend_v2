@@ -21,8 +21,8 @@ export { default as StatisticCard } from './Statisticccard/StatisticCard';
 export { default as StatisticRectangleCard } from './Statisticrectanclecard/StatisticRectangleCard';
 export { default as TabLayout } from './CustomerTabs/TabLayout';
 export { default as TabCustomer } from './CustomerTabs/TabCustomer';
-export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTemplate';
-
+export { default as StatisticDynamicCardTwo } from './StatisticDynamicCardTwo/StatisticDynamicCardTwo'
+export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTemplate'
 
 export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
 
