@@ -87,7 +87,7 @@ const DailyVolumnTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            flex: 1,
+            width: 60,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}

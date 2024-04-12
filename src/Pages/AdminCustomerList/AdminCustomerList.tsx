@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import { Button, CustomInput, EoiRequestTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
+import { Button, CustomInput, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
 
 const AdminCustomerList: React.FC = () => {
@@ -149,7 +149,7 @@ const AdminCustomerList: React.FC = () => {
                 />
             </Modal>
             <div className='w-full'>
-                <EoiRequestTable />
+                <CustomerListTable />
             </div>
         </div>
     );
