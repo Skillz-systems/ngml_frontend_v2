@@ -1,18 +1,5 @@
 import { FC, ReactNode } from 'react';
 
-/**
- * Modal component that displays a dialog box on top of the content with an optional backdrop.
- * @param {Object} props - Component props.
- * @param {boolean} props.isOpen - Flag indicating whether the modal is open.
- * @param {Function} props.onClose - Function to handle closing the modal.
- * @param {'small' | 'medium' | 'large'} [props.size='medium'] - Optional size of the modal.
- * @param {string} props.title - Title of the modal.
- * @param {string} [props.subTitle] - Subtitle of the modal.
- * @param {ReactNode[]} [props.buttons] - Custom buttons to be displayed in the modal.
- * @param {ReactNode} props.children - Child components to be rendered within the modal.
- * @returns {JSX.Element} Modal component.
- */
-
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -32,12 +19,6 @@ const Modal: FC<ModalProps> = ({
   children,
 }) => {
   const getSizeClass = () => {
-
-    /**
-     * Get the CSS class based on the modal size.
-     * @returns {string} CSS class for modal size.
-     */
-
     switch (size) {
       case 'small':
         return 'max-w-sm';
@@ -70,7 +51,9 @@ const Modal: FC<ModalProps> = ({
                       {subTitle}
                     </h3>
                   </div>
-                  <div className="">{children}</div>
+                  <div className="overflow-y-auto max-h-96">{/* Apply overflow-y-auto and max-height here */}
+                    {children}
+                  </div>
                 </div>
                 <div className="relative">
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white w-10 h-4 -rotate-45"></div>
