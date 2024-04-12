@@ -35,6 +35,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
         <div className='hidden sm:block'>
           <NavigationBar
             Navigationlinks={AdminLinks}
+            sliceLength={5}
             isNavigationBarVisible={isNavigationBarVisible}
             toggleNavigationBar={toggleNavigationBar}
           />

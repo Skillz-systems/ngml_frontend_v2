@@ -1,37 +1,29 @@
-import AdminDashboard from '@/Pages/AdminDashboardPage/AdminHomePage';
-import BusinessPage from '@/Pages/BusinessPage';
-// import ProfilePage from '@/Pages/ProfilePage/Profilepage';
 import AdminCustomerList from '@/Pages/AdminCustomerList/AdminCustomerList';
-import AdminInternalLayout from '../Hoc/AdminInternalLayout';
-import EoiPage from '@/Pages/EoiPage/EoiPage';
+import AdminHomePage from '@/Pages/AdminHomePage/AdminHomePage';
 import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
 import CustomerLayout from '@/Pages/CustomerLayout/CustomerLayout';
+import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 
 export const AdminRoutes = [
   {
     title: 'Admin Home page',
-    path: '/admin/adminhomepage',
-    component: AdminInternalLayout(AdminDashboard),
-    exact: true
-  },
-  {
-    title: 'Admin Business page',
-    path: '/admin/businessPage',
-    component: AdminInternalLayout(BusinessPage),
-    exact: true
-  },
-  {
-    title: 'Admin Profile page',
-    path: '/admin/profilePage',
-    component: AdminInternalLayout(EoiPage),
+    path: '/admin/homepage',
+    component: AdminInternalLayout(AdminHomePage),
     exact: true
   },
   {
     title: 'Admin Customer List',
-    path: '/admin/customerlist',
+    path: '/admin/records/customer',
     component: AdminInternalLayout(AdminCustomerList),
     exact: true
   },
+
+
+
+
+
+
+
   {
     title: 'Admin Customer Page Layout',
     path: '/admin/customerpagelayout',

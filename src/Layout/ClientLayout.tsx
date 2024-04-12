@@ -1,8 +1,8 @@
 
+import TopNavigationBar from '@/Components/TopNavigationBar/TopNavigationBar';
 import React, { useState, type ComponentType } from 'react';
 import NavigationBar from '../Components/NavigationMenu/NavigationBar';
-import { Navigationlinks } from '../Components/NavigationMenu/Navigationlinks';
-import TopNavigationBar from '@/Components/TopNavigationBar/TopNavigationBar';
+import { Navigationlinks } from '../Links/Navigationlinks';
 
 interface ClientLayoutProps {
   Component: ComponentType<unknown>;
