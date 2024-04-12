@@ -32,7 +32,7 @@ const NnpcDocument: React.FC = () => {
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet, odio sit amet luctus sodales,
           sapien purus viverra metus, nec fermentum felis diam non risus.
-          
+
         </p>
         <p className='text-sm'>
           Sincerely,

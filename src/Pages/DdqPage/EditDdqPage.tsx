@@ -6,7 +6,7 @@ interface EditModalContentProps {
     setCompanyData: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const EditDdqPage: React.FC<EditModalContentProps> = ({companyData, setCompanyData}) => {
+const EditDdqPage: React.FC<EditModalContentProps> = ({ companyData, setCompanyData }) => {
 
     const handleInputChange = (value: any, key: any) => {
         console.log(value)
