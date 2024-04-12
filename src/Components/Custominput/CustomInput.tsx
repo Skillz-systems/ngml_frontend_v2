@@ -66,18 +66,18 @@ const CustomInput: React.FC<CustomInputProps> = ({
     const styleVariants = {
         default: `appearance-none block w-full px-3 py-3 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
             } rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-sm`, //default input
-        customStyle1: `border border-solid border-lime-500 placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-lime-500 focus:bg-gray-100`, // inputs with well rounded border radius
-        customStyle2: `rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background focused
-        customStyle3: `rounded-full placeholder-gray-300 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:border-lime-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-4`, // for inputs with gray background focused, rounded radius and wider input 
-        customStyle4: `placeholder-black pl-12 focus:outline-none font-[400] focus:border-lime-200 focus:bg-white-600 border-1 solid w-full py-2`, // no border input
-        customStyle5: `rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 bg-gray-200 sm:text-sm border border-2 solid w-full py-2`, // for inputs with gray background
+        customStyle1: 'border border-solid border-lime-500 placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-lime-500 focus:bg-gray-100', // inputs with well rounded border radius
+        customStyle2: 'rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-sm border border-2 solid w-full py-2', // for inputs with gray background focused
+        customStyle3: 'rounded-full placeholder-gray-300 placeholder:italic placeholder:font-[400] font-[500] pl-6 pr-6 focus:outline-none focus:border-lime-700 focus:bg-gray-100 sm:text-sm border border-2 solid w-full py-3', // for inputs with gray background focused, rounded radius and wider input 
+        customStyle4: 'placeholder-black pl-12 focus:outline-none font-[400] focus:border-lime-200 focus:bg-white-600 border-1 solid w-full py-2', // no border input
+        customStyle5: 'rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 bg-gray-200 sm:text-sm border border-2 solid w-full py-2', // for inputs with gray background
     };
 
     const inputClasses = `${styleVariants[styleVariant]} ${!icon ? 'pl-3' : ''
         } ${touched && !value ? 'border-red-500' : ''}`;
 
 
-    const containerClasses = 'mt-1 relative';
+    const containerClasses = 'mt-1 relative ';
     const renderError = () => {
         if (touched && !value && required) {
             return <p className="mt-2 text-sm text-red-600">This field is required</p>;
@@ -95,7 +95,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     <input
                         type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
                         value={value as string | number | undefined}
-                        onChange={(e:ChangeEvent<HTMLInputElement>) => handleChangeEvent(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeEvent(e.target.value)}
                         onBlur={handleBlur}
                         placeholder={placeholder}
                         className={inputClasses}
@@ -105,7 +105,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 return (
                     <div className='relative'>
                         <select value={Array.isArray(value) ? value : undefined}
-                            onChange={(e:ChangeEvent<HTMLSelectElement>) => handleChangeEvent(e.target.value)}
+                            onChange={(e: ChangeEvent<HTMLSelectElement>) => handleChangeEvent(e.target.value)}
                             className={`${inputClasses} appearance-none select-none`} onBlur={handleBlur} >
                             {options?.map((option) => (
                                 <option key={option} value={option}>
@@ -175,13 +175,13 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
     return (
         <div className={containerClasses}>
-            <label className={`block ${required ? 'text-gray-700' : ''}`}>
+            <label className={`block ${required ? 'text-gray-700' : ''} text-[14px] ml-[6px] font-[400]`} >
                 {label}
                 {label && required && <span className="text-red-500">*</span>}
             </label>
             <div className={containerClasses}>
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    {icon && <span className="text-gray-500 sm:text-sm bg-lime-200 rounded-full p-1">{icon}</span>}
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" >
+                    {icon && <span className="text-gray-500 sm:text-sm bg-lime-200 rounded-full p-1" >{icon}</span>}
                 </div>
                 {renderInput()}
                 {type === 'password' && (

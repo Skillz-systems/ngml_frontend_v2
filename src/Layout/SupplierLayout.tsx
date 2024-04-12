@@ -26,9 +26,9 @@ const SupplierLayout: React.FC<SupplierLayoutProps> = ({ Component, ...otherProp
   };
 
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full fixed'>
       <TopNavigationBar />
-      <div className='flex bg-[#EAEEF2] pt-[70px] w-[100%]'>
+      <div className='flex bg-[#EAEEF2] pt-[70px] w-[100%] h-[100vh]'>
         <div className='hidden sm:block'>
           <NavigationBar
             Navigationlinks={Navigationlinks}
@@ -36,7 +36,7 @@ const SupplierLayout: React.FC<SupplierLayoutProps> = ({ Component, ...otherProp
             toggleNavigationBar={toggleNavigationBar}
           />
         </div>
-        <main className='2xl:bg-[red] bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] flex-1'>
+        <main className='bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] w-[100%] h-[100%] overflow-y-auto'>
           <Component {...otherProps} />
         </main>
       </div>

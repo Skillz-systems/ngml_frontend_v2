@@ -1,4 +1,5 @@
-import { Button } from '@/Components';
+import { Button, Heading } from '@/Components';
+import colors from '@/Utils/colors';
 import { ContentPasteOutlined } from '@mui/icons-material';
 import { Box } from '@mui/material';
 
@@ -78,13 +79,13 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
     }
 
 
-
-
     return (
-        <div className="  h-[100%] w-[100%] bg-white rounded-[6px] border">
+        <div className="  h-[100%] w-[100%] rounded-[6px]" style={{background:colors.dark[50]}}>
             <Box>
                 <div className='items-center h-[100%] p-[10px]'>
-                    <div className='text-[20px] text-[#49526A] font-[700]'>EOI REQUEST</div>
+                <Heading as="h6" size="h6" color='primaryColor' className="font-[2px] text-dark-400">EOI REQUEST</Heading>
+
+                    {/* <div className='text-[20px] text-[#49526A] font-[700]'>EOI REQUEST</div> */}
                 </div>
             </Box>
             <div className='h-fit bg-[#F6FDEC] p-[10px]'>
