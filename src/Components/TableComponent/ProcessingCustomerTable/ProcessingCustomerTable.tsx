@@ -268,7 +268,7 @@ const ProcessingCustomerTable = () => {
 
 
     return (
-        <div className=' mt-[20px] w-[1112px] '>
+        <div className=' mt-[20px] w-[100%] '>
             <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
                 <div className='italic text-[12px] text-[#828DA9]'>
                     Showing {filteredRows.length} of {rows.length} site visits
@@ -349,6 +349,7 @@ const ProcessingCustomerTable = () => {
 
                     sx={{
                         width: '100%',
+                        background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

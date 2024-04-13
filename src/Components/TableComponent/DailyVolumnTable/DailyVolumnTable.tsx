@@ -196,7 +196,7 @@ const DailyVolumnTable = () => {
                     )}
                 </div>
             </Modal>
-            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
+            <div className='flex items-center justify-between border bg-[#F6FDEC] border-b-0 h-[60px] p-[20px] '>
                 <div className='italic text-[12px] text-[#828DA9]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
@@ -252,10 +252,12 @@ const DailyVolumnTable = () => {
 
                     sx={{
                         width: '100%',
+                        background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },
                         '& .MuiDataGrid-columnHeaders': {
+
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
                                 fontWeight: '700',

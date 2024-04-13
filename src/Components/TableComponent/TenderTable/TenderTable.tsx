@@ -196,7 +196,7 @@ const TenderTable = () => {
 
 
     return (
-        <div className='mt-[20px] w-[1112px] '>
+        <div className='mt-[20px] w-[100%] '>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -310,6 +310,7 @@ const TenderTable = () => {
 
                     sx={{
                         width: '100%',
+                        background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

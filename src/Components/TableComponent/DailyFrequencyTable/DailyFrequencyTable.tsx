@@ -238,7 +238,8 @@ const DailyFrequencyTable = () => {
 
                     pageSizeOptions={[5, 10]}
                     sx={{
-
+                        width: '100%',
+                        background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },
