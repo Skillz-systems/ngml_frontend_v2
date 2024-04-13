@@ -79,10 +79,6 @@ const DailyVolumnTable = () => {
         setFilteredRows(filtered);
     };
 
-
-
-
-
     const columns: GridColDef[] = [
         {
             field: 'sn',
@@ -175,9 +171,6 @@ const DailyVolumnTable = () => {
             ),
         },
     ]
-
-
-
 
     return (
         <div className='mt-[20px] w-[100%] '>

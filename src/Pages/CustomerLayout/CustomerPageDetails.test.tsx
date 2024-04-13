@@ -15,7 +15,7 @@ describe('CustomerPageDetails component', () => {
 
         // Secondary StatisticDynamicCardTwo
         expect(getByAltText('firewood2 icon')).toBeInTheDocument();
-        expect(getByText("Yesterday's Consumed Volume")).toBeInTheDocument();
+        expect(getByText('Yesterday\'s Consumed Volume')).toBeInTheDocument();
     });
 
     test('renders Chart component with correct props', () => {

@@ -66,8 +66,8 @@ const AdminCustomerList: React.FC = () => {
                         icon={<img src={images.warning} alt="staff icon" />}
                         value='112'
                         valueColor='text-green-800'
-                        backgroundColor='bg-orange-100'
-                        iconBgColor='rounded-full bg-nnpcred-200'
+                        backgroundColor='bg-nnpc-600'
+                        iconBgColor='rounded-full bg-nnpc-700'
                     />
                 </div>
             </div>

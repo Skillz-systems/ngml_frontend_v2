@@ -17,19 +17,17 @@ export const AdminRoutes = [
     component: AdminInternalLayout(AdminCustomerList),
     exact: true
   },
-
-
-
-
-
-
-
   {
-    title: 'Admin Customer Page Layout',
-    path: '/admin/customerpagelayout',
+    title: 'Admin Customer Page ',
+    path: '/admin/records/customer/id',
     component: AdminInternalLayout(CustomerPageLayout),
     exact: true
   },
+
+
+
+
+  
   {
     title: 'Customer Layout',
     path: '/admin/customerlayout',
