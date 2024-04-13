@@ -16,8 +16,8 @@ const CustomerLayout: React.FC = () => {
             name: 'overview',
             ref: 'overview',
             // content: 'numeric',
-            content: 'icon',
-            icon: <img src={images.business} alt="logo" className='w-6' />
+            // content: 'icon',
+            // icon: <img src={images.business} alt="logo" className='w-6' />
         },
         {
             name: 'customer details',

@@ -62,7 +62,7 @@ const Modal: FC<ModalProps> = ({
                 aria-modal="true"
                 aria-labelledby="modal-headline"
               >
-                <div className="p-6">
+                <div className="p-3">
                   <div className="mb-4">
                     <h2 id="modal-headline" className="text-lg font-semibold text-center">
                       {title}
@@ -71,7 +71,7 @@ const Modal: FC<ModalProps> = ({
                       {subTitle}
                     </h3>
                   </div>
-                  <div className="overflow-y-auto max-h-96">{/* Apply overflow-y-auto and max-height here */}
+                  <div className="overflow-y-auto max-h-96">
                     {children}
                   </div>
                 </div>
