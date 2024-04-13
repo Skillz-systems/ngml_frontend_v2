@@ -46,7 +46,7 @@ const AdminCustomerList: React.FC = () => {
                         action={toggleModal}
                     />
                 </div>
-                <div className='flex flex-col md:flex-row items-center gap-4 mt-6'>
+                <div className='flex flex-col md:flex-row items-center gap-4 mt-6 ' >
                     <StatisticRectangleCard
                         title='Total Customers'
                         icon={<img src={images.customers} alt="staff icon" />}
@@ -148,7 +148,7 @@ const AdminCustomerList: React.FC = () => {
                     placeholder="Enter Phone Number"
                 />
             </Modal>
-            <div className='w-full'>
+            <div className='w-full mt-10'>
                 <CustomerListTable />
             </div>
         </div>
