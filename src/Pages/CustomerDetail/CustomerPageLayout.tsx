@@ -3,6 +3,8 @@ import { TabLayout } from '../../Components/index';
 import CustomerDetail from './CustomerDetail';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
+import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
+import DdqPage from '../DdqPage/DdqPage'
 // import images from '../../assets/index';
 
 
@@ -80,10 +82,11 @@ const CustomerPageLayout: React.FC = () => {
 
     // Define the content or pages here
     const tabContent = {
-        overview: <div className="flex-1 w-full"><p>Overview Content Here</p></div>,
+        overview: <CustomerPageDetails />,
         customers: <div className="flex-1 w-full"><p>Customers Content Here</p></div>,
         customerdetails: <CustomerDetail />,
         eoirequest: <EoiPage />,
+        ddq: <DdqPage />,
         sitevisit: <SiteVisitationPage/>,
         subdetail1: <p>tyfyufuyfifyt</p>
     };

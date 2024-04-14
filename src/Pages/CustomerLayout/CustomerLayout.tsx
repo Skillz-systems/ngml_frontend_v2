@@ -1,7 +1,11 @@
 import React from 'react';
 import { TabLayout } from '../../Components/index';
-import CustomerPageDetails from './CustomerPageDetails';
 import images from '../../assets/index';
+import CustomerPageDetails from './CustomerPageDetails';
+import CustomerDetail from '../CustomerDetail/CustomerDetail';
+import EoiPage from '../EoiPage/EoiPage';
+import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
+import DdqPage from '../DdqPage/DdqPage';
 
 
 
@@ -12,8 +16,8 @@ const CustomerLayout: React.FC = () => {
             name: 'overview',
             ref: 'overview',
             // content: 'numeric',
-            content: 'icon',
-            icon: <img src={images.business} alt="logo" className='w-6'/>
+            // content: 'icon',
+            // icon: <img src={images.business} alt="logo" className='w-6' />
         },
         {
             name: 'customer details',
@@ -77,8 +81,10 @@ const CustomerLayout: React.FC = () => {
     // Define the content or pages here
     const tabContent = {
         overview: <CustomerPageDetails />,
-        customers: <div className="flex-1 w-full"><p>Customers Content Here</p></div>,
-        customerdetails: <div className="flex-1 w-full"><p>Customers details Content Here</p></div>,
+        customerdetails: <CustomerDetail />,
+        ddq: <DdqPage />,
+        eoirequest: <EoiPage />,
+        sitevisit: <SiteVisitationPage />,
         subdetail1: <p>tyfyufuyfifyt</p>
     };
 

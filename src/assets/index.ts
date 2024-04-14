@@ -21,6 +21,9 @@ import warning from './images/png-icons/Warning.png';
 import firewood from './images/png-icons/firewood.png';
 import firewood2 from './images/png-icons/firewood2.png';
 import business from './images/png-icons/Business.png';
+import rightarrow from './images/png-icons/Rightarrow.png';
+import leftarrow from './images/png-icons/LeftArrow.png';
+import edit from './images/png-icons/Edit.png'
 
 const images = {
   cancelicon,
@@ -45,7 +48,10 @@ const images = {
   warning,
   firewood,
   firewood2,
-  business
+  business,
+  rightarrow,
+  leftarrow,
+  edit
 };
 
 export default images;
