@@ -33,11 +33,12 @@ const Modal: FC<ModalProps> = ({
 }) => {
   const getSizeClass = () => {
 
-    /**
+    
+ /**
      * Get the CSS class based on the modal size.
      * @returns {string} CSS class for modal size.
      */
-
+    
     switch (size) {
       case 'small':
         return 'max-w-sm';
@@ -61,7 +62,7 @@ const Modal: FC<ModalProps> = ({
                 aria-modal="true"
                 aria-labelledby="modal-headline"
               >
-                <div className="p-6">
+                <div className="p-3">
                   <div className="mb-4">
                     <h2 id="modal-headline" className="text-lg font-semibold text-center">
                       {title}
@@ -70,7 +71,9 @@ const Modal: FC<ModalProps> = ({
                       {subTitle}
                     </h3>
                   </div>
-                  <div className="">{children}</div>
+                  <div className="overflow-y-auto max-h-96">
+                    {children}
+                  </div>
                 </div>
                 <div className="relative">
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white w-10 h-4 -rotate-45"></div>

@@ -1,5 +1,37 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, useState, useEffect } from 'react';
+
+/**
+ * Represents a tab item.
+ * @typedef {Object} TabInterface
+ * @property {string} name - The name of the tab.
+ * @property {string} ref - The reference of the tab.
+ */
+
+/**
+ * Represents a list of tabs.
+ * @typedef {Object} TabListInterface
+ * @property {string} name - The name of the tab list.
+ * @property {string} ref - The reference of the tab list.
+ * @property {TabInterface[]} [children] - Children tabs of the current tab.
+ * @property {TabListInterface[]} [sublist] - Sublist of tabs for nested tabs.
+ * @property {'icon' | 'numeric'} [content] - Type of content for the tab.
+ * @property {ReactNode} [icon] - Icon for the tab if the content type is 'icon'.
+ */
+
+/**
+ * Props for the TabCustomer component.
+ * @typedef {Object} TabsProps
+ * @property {string} activeTab - The reference of the active tab.
+ * @property {(tab: string) => void} setActiveTab - Function to set the active tab.
+ * @property {TabListInterface[]} tablist - List of tab items.
+ * @property {{ [key: string]: ReactNode }} tabContent - Content associated with each tab.
+ */
+
+/**
+ * A component representing a tabbed interface for customer details.
+ * @param {TabsProps} props - Props for the component.
+ * @returns {ReactNode} - The rendered component.
+ */
 
 interface TabInterface {
   name: string;
@@ -23,7 +55,11 @@ interface TabsProps {
 }
 
 const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabContent }) => {
-  const [panelName, setPanelName] = useState<string>('eoirequest');
+  const [panelName, setPanelName] = useState<string>('overview');
+
+  useEffect(() => {
+    setActiveTab(panelName);
+  }, []);
 
   const handleTabChange = (tab: TabListInterface): void => {
     setActiveTab(tab.ref);

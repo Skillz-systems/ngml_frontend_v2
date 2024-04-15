@@ -6,6 +6,9 @@ import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 import { ArrowBack } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import images from '../../assets/index';
+import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
+import DdqPage from '../DdqPage/DdqPage'
+// import images from '../../assets/index';
 
 
 
@@ -86,11 +89,12 @@ const AdminCustomerPageLayout: React.FC = () => {
 
     // Define the content or pages here
     const tabContent = {
-        overview: <div className="flex-1 w-full"><p>Overview Content Here</p></div>,
+        overview: <CustomerPageDetails />,
         customers: <div className="flex-1 w-full"><p>Customers Content Here</p></div>,
         customerdetails: <CustomerDetail />,
         eoirequest: <EoiPage />,
-        sitevisit: <SiteVisitationPage />,
+        ddq: <DdqPage />,
+        sitevisit: <SiteVisitationPage/>,
         subdetail1: <p>tyfyufuyfifyt</p>
     };
 
