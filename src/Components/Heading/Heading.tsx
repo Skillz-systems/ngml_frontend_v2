@@ -4,7 +4,7 @@ import React from 'react';
 import { cn } from '@/Utils';
 
 const headingBase = cva(
-    'font-bold text-gray-200 uppercase',
+    'font-bold text-nnpcdark-50 uppercase',
     {
         variants: {
             size: {

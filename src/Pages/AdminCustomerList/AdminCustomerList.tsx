@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import { Button, CustomInput, EoiRequestTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
+import { Button, CustomInput, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
 
 const AdminCustomerList: React.FC = () => {
@@ -46,7 +46,7 @@ const AdminCustomerList: React.FC = () => {
                         action={toggleModal}
                     />
                 </div>
-                <div className='flex flex-col md:flex-row items-center gap-4 mt-6'>
+                <div className='flex flex-col md:flex-row items-center gap-4 mt-6 ' >
                     <StatisticRectangleCard
                         title='Total Customers'
                         icon={<img src={images.customers} alt="staff icon" />}
@@ -66,8 +66,8 @@ const AdminCustomerList: React.FC = () => {
                         icon={<img src={images.warning} alt="staff icon" />}
                         value='112'
                         valueColor='text-green-800'
-                        backgroundColor='bg-orange-100'
-                        iconBgColor='rounded-full bg-nnpcred-200'
+                        backgroundColor='bg-nnpc-600'
+                        iconBgColor='rounded-full bg-nnpc-700'
                     />
                 </div>
             </div>
@@ -113,7 +113,7 @@ const AdminCustomerList: React.FC = () => {
                     type="text"
                     label='Name of Customer'
                     value={customerData.name}
-                    handleChangeEvent={(value) => handleInputChange(value, "name")}
+                    handleChangeEvent={(value) => handleInputChange(value, 'name')}
                     placeholder="Enter Name of Customer"
                 />
                 <CustomInput
@@ -121,14 +121,14 @@ const AdminCustomerList: React.FC = () => {
                     type="text"
                     label='Email'
                     value={customerData.email}
-                    handleChangeEvent={(value) => handleInputChange(value, "email")}
+                    handleChangeEvent={(value) => handleInputChange(value, 'email')}
                     placeholder="Enter email"
                 />
                 <CustomInput
                     type="select"
                     label='Customer Location'
                     value={customerData.location}
-                    handleChangeEvent={(value) => handleInputChange(value, "location")}
+                    handleChangeEvent={(value) => handleInputChange(value, 'location')}
                     placeholder="Choose Type"
                     options={options}
                 />
@@ -136,7 +136,7 @@ const AdminCustomerList: React.FC = () => {
                     type="select"
                     label='Customer Type'
                     value={customerData.type}
-                    handleChangeEvent={(value) => handleInputChange(value, "type")}
+                    handleChangeEvent={(value) => handleInputChange(value, 'type')}
                     placeholder="Choose Type"
                     options={options}
                 />
@@ -144,12 +144,12 @@ const AdminCustomerList: React.FC = () => {
                     type="text"
                     label='Customer Phone Number'
                     value={customerData.phoneNumber}
-                    handleChangeEvent={(value) => handleInputChange(value, "phoneNumber")}
+                    handleChangeEvent={(value) => handleInputChange(value, 'phoneNumber')}
                     placeholder="Enter Phone Number"
                 />
             </Modal>
-            <div className='w-full'>
-                <EoiRequestTable />
+            <div className='w-full mt-10'>
+                <CustomerListTable />
             </div>
         </div>
     );

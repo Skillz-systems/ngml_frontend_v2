@@ -249,7 +249,7 @@ const NavigationBarItem: React.FC<{
             </span>
           </div>
           <div
-            className="flex gap-[50px]"
+            className="flex gap-[70px]"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -376,7 +376,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div
           style={{
             padding: '18px',
-            width: '235px',
+            width: '255px',
           }}
         >
           <div>
@@ -416,7 +416,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 width: '225px',
                 marginTop: '16px',
                 padding: '8px',
-                border: '2px solid blue'
               }}
             >
               {Navigationlinks.slice(

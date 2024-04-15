@@ -1,7 +1,7 @@
-import Businessicon from '../../../public/assets/png-icons/Business.png';
-import Homeicon from '../../../public/assets/png-icons/Home.png';
-import profileicon from '../../../public/assets/png-icons/Profile.png';
-import Settingsicon from '../../../public/assets/png-icons/Settings.png';
+import Businessicon from '../../public/assets/png-icons/Business.png';
+import Homeicon from '../../public/assets/png-icons/Home.png';
+import profileicon from '../../public/assets/png-icons/Profile.png';
+import Settingsicon from '../../public/assets/png-icons/Settings.png';
 
 
 export const Navigationlinks = [

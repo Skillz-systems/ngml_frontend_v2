@@ -79,15 +79,11 @@ const DailyVolumnTable = () => {
         setFilteredRows(filtered);
     };
 
-
-
-
-
     const columns: GridColDef[] = [
         {
             field: 'sn',
             headerName: 'SN',
-            flex: 1,
+            width: 60,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -176,9 +172,6 @@ const DailyVolumnTable = () => {
         },
     ]
 
-
-
-
     return (
         <div className='mt-[20px] w-[100%] '>
             <Modal
@@ -203,7 +196,7 @@ const DailyVolumnTable = () => {
                     )}
                 </div>
             </Modal>
-            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
+            <div className='flex items-center justify-between border bg-[#F6FDEC] border-b-0 h-[60px] p-[20px] '>
                 <div className='italic text-[12px] text-[#828DA9]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
@@ -259,10 +252,12 @@ const DailyVolumnTable = () => {
 
                     sx={{
                         width: '100%',
+                        background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },
                         '& .MuiDataGrid-columnHeaders': {
+
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
                                 fontWeight: '700',

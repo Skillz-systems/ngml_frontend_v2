@@ -34,15 +34,16 @@ const Chart = <T extends Record<string, unknown>>({
     title
 }: ComposedChartProps<T>) => {
     const renderChartComponent = (dataKey: string, color: string, index: number) => {
+        const fillColor = '#53B052';
         switch (chartType) {
             case 'bar':
-                return <Bar key={index} dataKey={dataKey} fill={color} />;
+                return <Bar key={index} dataKey={dataKey} fill={fillColor} />;
             case 'line':
-                return <Line key={index} type="monotone" dataKey={dataKey} stroke={color} />;
+                return <Line key={index} type="monotone" dataKey={dataKey} stroke={color} fill={fillColor}/>;
             case 'area':
-                return <Area key={index} type="monotone" dataKey={dataKey} stackId="1" stroke={color} fill={color} />;
+                return <Area key={index} type="monotone" dataKey={dataKey} stackId="1" stroke={color} fill={fillColor} />;
             case 'pie':
-                return <Pie key={index} dataKey={dataKey} data={data} outerRadius={80} fill={color} />;
+                return <Pie key={index} dataKey={dataKey} data={data} outerRadius={80} fill={fillColor}/>;
             default:
                 return null;
         }

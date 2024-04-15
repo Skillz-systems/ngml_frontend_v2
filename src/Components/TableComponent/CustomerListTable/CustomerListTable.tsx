@@ -1,11 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { CustomerListtData } from '@/Data';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
-import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
+import { useNavigate } from 'react-router-dom';
 
+
+
+interface NavigateButtonProps {
+    to: string; // This specifies that `to` must be a string.
+}
 
 /**
  * Defines the structure for Agreement properties used in the AgreementTable.
@@ -45,8 +50,7 @@ const rows = CustomerListtData
 const CustomerListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [filteredRows, setFilteredRows] = useState<CustomerListTableProps[]>(rows);
-    const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<CustomerListTableProps | null>(null);
+    // const [, setSelectedRow] = useState<CustomerListTableProps | null>(null);
     const [selectedStatus, setSelectedStatus] = useState<string>('All Statuses');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -67,17 +71,7 @@ const CustomerListTable = () => {
 
     const uniqueStatuses = [...new Set(rows.map(row => row.status))];
 
-    /**
-     * Opens a modal to show detailed information for the selected row.
-     * @param {AgreementTableProps} row - The selected row's data.
-     */
-    const handleOpen = (row: CustomerListTableProps) => {
-        setSelectedRow(row);
-        setOpen(true);
-    };
-
-    const handleClose = () => setOpen(false);
-
+   
     /**
      * Handles changes to the search input field and updates the searchText state.
      * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
@@ -104,22 +98,15 @@ const CustomerListTable = () => {
         setFilteredRows(filtered);
     };
 
-    /**
-    * Returns a style object based on the agreement's status.
-    * @param {string} status - The status of the agreement.
-    * @returns {React.CSSProperties} The style object for the status.
-    */
-    const getStatusStyle = (status: string) => {
-        switch (status) {
-            case 'Active':
-                return { backgroundColor: '#D2F69E', color: '#005828' };
-            case 'Processing':
-                return { backgroundColor: '#FFD181', color: '#475467' };
-            case 'In-Active':
-                return { border: '2px solid red', color: '#475467' };
-            default:
-                return {};
-        }
+    const NavigateButton: React.FC<NavigateButtonProps> = ({ to }) => {
+        const navigate = useNavigate();
+        return (
+            <div
+                onClick={() => navigate(to)}
+                className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
+                View
+            </div>
+        );
     };
 
 
@@ -222,17 +209,12 @@ const CustomerListTable = () => {
             }
         },
 
-
         {
             field: 'action',
             headerName: 'ACTION',
             flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div
-                    onClick={() => handleOpen(params.row)}
-                    className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
-                    View
-                </div>
+            renderCell: () => (  
+                 <NavigateButton to="/admin/records/customer/id" />   
             ),
         },
     ]
@@ -242,31 +224,8 @@ const CustomerListTable = () => {
 
     return (
         <div className='mt-[20px] w-[100%] '>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
-            >
-                <div >
-                    {selectedRow && (
-                        <SelectedDateModal
-                            handleClose={handleClose}
-                            dateTime={'09th, Nov, 2023; 09:23:44Am'}
-                            status={selectedRow.status || 'Default Status'}
-                            companyName={selectedRow.companyname || 'Provide Company Name'}
-                            companyEmail={selectedRow.companyEmail || 'Provide an email address'}
-                            companyNumber={selectedRow.companyNumber || 'Provide a number'}
-                            availableDates={selectedRow.selectedDates || ['No Dates Available']}
-                            companyAddress={selectedRow.companyAddress || 'Provide an Address'}
-                            statusHeading={selectedRow.status}
-                            statusStyle={getStatusStyle(selectedRow.status)}
 
-                        />
-                    )}
-                </div>
-            </Modal>
-            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
+            <div className='flex items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
                 <div className='italic text-[12px] text-[#828DA9]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
@@ -346,6 +305,7 @@ const CustomerListTable = () => {
 
                     sx={{
                         width: '100%',
+                        background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
                             outline: 'solid #00AF50 1px',
                         },

@@ -6,13 +6,9 @@ import { useState } from 'react';
 
 const SiteVisitationPage = () => {
     const [formData, setFormData] = useState({
-        companyName: '',
-        companyEmail: '',
-        companyPhoneNumber: '',
-        representativeName: '',
-        representativeEmail: '',
-        customerType: '',
-        industrial: ''
+        firstSiteVisitDate: '',
+        secondSiteVisitDate: '',
+        thirdSiteVisitDate: '',
     });
 
     const handleInputChange = (name: any, value: any) => {
@@ -31,7 +27,7 @@ const SiteVisitationPage = () => {
                     <CustomInput
                         type="date"
                         label='1st Site Visit Date'
-                        value={formData.companyName}
+                        value={formData.firstSiteVisitDate}
                         handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
                         placeholder="Select First Date"
                         styleVariant='customStyle3'
@@ -41,7 +37,7 @@ const SiteVisitationPage = () => {
                     <CustomInput
                         type="date"
                         label='2nd Site Visit Date'
-                        value={formData.companyName}
+                        value={formData.secondSiteVisitDate}
                         handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
                         placeholder="Select First Date"
                         styleVariant='customStyle3'
@@ -51,7 +47,7 @@ const SiteVisitationPage = () => {
                     <CustomInput
                         type="date"
                         label='3rd Site Visit Date'
-                        value={formData.companyName}
+                        value={formData.thirdSiteVisitDate}
                         handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
                         placeholder="Select First Date"
                         styleVariant='customStyle3'

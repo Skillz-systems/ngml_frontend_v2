@@ -1,4 +1,4 @@
-import SamplePage from '@/Pages/AdminDashboardPage/AdminHomePage';
+import SamplePage from '@/Pages/AdminHomePage/AdminHomePage';
 import StaffInternalLayout from '../Hoc/StaffInternalLayout';
 
 
