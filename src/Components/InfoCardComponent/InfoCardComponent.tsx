@@ -10,6 +10,7 @@ import React from 'react';
 interface InfoCardProps {
   title: string;
   number: number | string;
+  
 }
 
 /**
@@ -49,7 +50,7 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, number }) => {
       <Divider />
       <div style={{
         height: '87px',
-        backgroundColor: '#F6F8FA',
+        backgroundColor: '#F9F9F9',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

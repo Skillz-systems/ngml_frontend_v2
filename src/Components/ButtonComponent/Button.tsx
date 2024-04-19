@@ -143,6 +143,7 @@ const Button: React.FC<ButtonProps> = ({
                 textDecoration: underline ? 'underline' : 'none',
                 columnGap,
                 backgroundColor,
+                fontSize,
                 color,       
                 border: borderColor,       
                 ...getButtonStyles(),
