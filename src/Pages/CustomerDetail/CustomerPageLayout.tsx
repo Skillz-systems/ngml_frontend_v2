@@ -19,8 +19,8 @@ const AdminCustomerPageLayout: React.FC = () => {
         {
             name: 'overview',
             ref: 'overview',
-            icon: <img src={images.business} alt="logo" className='w-4 h-4' />,
-            content: 'icon',
+            // icon: <img src={images.business} alt="logo" className='w-4 h-4' />,
+            // content: 'icon',
 
             // content: 'numeric',
             // content: 'icon',

@@ -1,5 +1,5 @@
-import { TabCustomer } from '../../Components/index';
 import React, { useState } from 'react';
+import { TabCustomer } from '../../Components/index';
 // import images from '../../assets/index';
 
 interface Tab {
@@ -54,7 +54,7 @@ const TabLayout: React.FC<TabLayoutProps> = ({
         <div className="flex-1 p-5 rounded-xl" style={containerStyle}>
             <div className="w-full h-8 justify-between items-center inline-flex flex-wrap">
                 <div className="justify-start items-center gap-3 flex flex-grow">
-                <div className="text-center text-slate-600 font-semibold font-Mulish leading-loose text-lg md:text-2xl lg:text-3xl">{title}</div>
+                    <div className="text-center text-slate-600 font-semibold font-Mulish leading-loose text-lg md:text-3xl lg:text-3xl">{title}</div>
                 </div>
                 {/* <div className="justify-end items-center gap-4 flex">
                     <div className="w-8 h-8 p-2.5 rounded-[40px] border border-gray-300 flex-col justify-center items-center gap-2.5 inline-flex">
