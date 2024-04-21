@@ -76,7 +76,7 @@ const DdqPage: React.FC = () => {
             <div className="bg-dark-50 justify-between items-start flex flex-col sm:flex-row">
                 <div className="w-full p-4 bg-dark-50 flex-col justify-start items-center">
                     <div className="self-stretch py-1 justify-start items-center gap-2.5 inline-flex">
-                        <div className="grow shrink basis-0 text-nnpc-700 text-xs font-medium font-['Mulish'] uppercase leading-3">The document below will be your guide to providing answers properly to question outlined in the Due Diligence Questionnaire.</div>
+                        <div className="grow shrink basis-0 text-nnpcdark-200 text-xs font-medium font-['Mulish'] uppercase leading-3">The document below will be your guide to providing answers properly to question outlined in the Due Diligence Questionnaire.</div>
                     </div>
                     <div className="DocumentEntry w-full h-full sm:h-[450px] p-4 mt-4 rounded-xl border"><NnpcDocument /> </div>
                     <div className="w-full p-2 mt-4 rounded-xl border justify-between items-center inline-flex">

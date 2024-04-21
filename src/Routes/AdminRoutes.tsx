@@ -23,14 +23,9 @@ export const AdminRoutes = [
     component: AdminInternalLayout(CustomerPageLayout),
     exact: true
   },
-
-
-
-
-  
   {
-    title: 'Customer Layout',
-    path: '/admin/customerlayout',
+    title: 'Admin New Customer Page ',
+    path: '/admin/records/newcustomer/id',
     component: AdminInternalLayout(CustomerLayout),
     exact: true
   },

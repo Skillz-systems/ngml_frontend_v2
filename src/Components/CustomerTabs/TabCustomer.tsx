@@ -1,51 +1,76 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 
+/**
+ * Interface representing a single tab item.
+ */
 interface TabInterface {
-  name: string;
-  ref: string;
+  name: string; // Name of the tab
+  ref: string; // Reference for the tab
 }
 
+/**
+ * Interface representing a list of tabs.
+ */
 export interface TabListInterface {
-  name: string;
-  ref: string;
-  children?: TabInterface[];
-  sublist?: TabListInterface[];
-  content?: 'icon' | 'numeric';
-  icon?: ReactNode;
+  name: string; // Name of the tab list
+  ref: string; // Reference for the tab list
+  children?: TabInterface[]; // Children tabs
+  sublist?: TabListInterface[]; // Sublist of tabs
+  content?: 'icon' | 'numeric'; // Type of content for the tab
+  icon?: ReactNode; // Icon for the tab
 }
 
+/**
+ * Props for the Tabs component.
+ */
 interface TabsProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-  tablist: TabListInterface[];
-  tabContent: { [key: string]: ReactNode };
+  activeTab: string; // Currently active tab
+  setActiveTab: (tab: string) => void; // Function to set the active tab
+  tablist: TabListInterface[]; // List of tabs
+  tabContent: { [key: string]: ReactNode }; // Content for each tab
 }
 
+/**
+ * Functional component representing a tabbed interface.
+ * @param {TabsProps} param0 Props for the Tabs component.
+ * @returns {JSX.Element} The Tabs component.
+ */
 const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabContent }) => {
-  const [panelName, setPanelName] = useState<string>('overview');
-  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [panelName, setPanelName] = useState<string>('overview'); // State for the panel name
+  const [showDropdown, setShowDropdown] = useState<boolean>(false); // State for showing/hiding dropdown
 
   useEffect(() => {
     setActiveTab(panelName);
   }, []);
 
+  /**
+   * Handles tab change.
+   * @param {TabListInterface} tab The tab to change to.
+   */
   const handleTabChange = (tab: TabListInterface): void => {
     setActiveTab(tab.ref);
     setPanelName(tab.name);
     setShowDropdown(false);
   };
 
+  /**
+   * Handles click on sublist item.
+   * @param {string} sublistRef Reference for the sublist item.
+   */
   const handleSublistItemClick = (sublistRef: string): void => {
     setActiveTab(sublistRef);
     setShowDropdown(false);
   };
 
+  /**
+   * Toggles the dropdown visibility.
+   */
   const toggleDropdown = (): void => {
     setShowDropdown(!showDropdown);
   };
 
   return (
-    <div className="flex flex-col mt-[-30px] md:mt-[20px]">
+    <div className="flex flex-col mt-[-10px] md:mt-[20px]">
       <div className="flex items-center justify-end lg:hidden mb-3">
         <button
           onClick={toggleDropdown}

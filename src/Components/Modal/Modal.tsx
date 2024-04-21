@@ -76,7 +76,7 @@ const Modal: FC<ModalProps> = ({
                   </div>
                 </div>
                 <div className="relative">
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white w-10 h-4 -rotate-45"></div>
+                  <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 bg-white w-4 h-4 -rotate-45"></div>
                 </div>
                 <div className="bg-green-500 p-6 rounded-b-[20px]">
                   <div className="flex justify-center sm:justify-end flex-wrap">
