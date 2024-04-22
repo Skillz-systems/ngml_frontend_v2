@@ -1,7 +1,6 @@
 import AdminCustomerList from '@/Pages/AdminCustomerList/AdminCustomerList';
 import AdminHomePage from '@/Pages/AdminHomePage/AdminHomePage';
 import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
-import CustomerLayout from '@/Pages/CustomerLayout/CustomerLayout';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 
 export const AdminRoutes = [
@@ -21,12 +20,6 @@ export const AdminRoutes = [
     title: 'Admin Customer Page ',
     path: '/admin/records/customer/id',
     component: AdminInternalLayout(CustomerPageLayout),
-    exact: true
-  },
-  {
-    title: 'Admin New Customer Page ',
-    path: '/admin/records/newcustomer/id',
-    component: AdminInternalLayout(CustomerLayout),
     exact: true
   },
 ]

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TabCustomer } from '../../Components/index';
 import images from '../../assets/index';
-import { useNavigate } from 'react-router-dom';
 
 interface Tab {
     name: string;
@@ -53,14 +53,14 @@ const TabLayout: React.FC<TabLayoutProps> = ({
         console.log('Updating content for tab:', activeTab);
         if (onUpdate) {
             onUpdate(activeTab);
-          } else {
+        } else {
             console.warn('No onUpdate callback provided');
-          }
-      };
+        }
+    };
 
-      const handleClose = () => {
+    const handleClose = () => {
         navigate(-1)
-      };
+    };
 
     const containerStyle: React.CSSProperties = {
         width: width,
@@ -79,14 +79,14 @@ const TabLayout: React.FC<TabLayoutProps> = ({
                     <div className="text-center text-[#49526A] font-semibold font-Mulish leading-loose text-lg md:text-3xl lg:text-3xl">{title}</div>
                 </div>
                 {showButtons && (
-                <div className="justify-end items-center gap-4 flex">
-                <div className="w-[90px] px-2 py-[4px] rounded-[20px] border border-gray-200">
-                        <div className="text-sm font-normal font-['Mulish'] flex justify-center cursor-pointer items-center gap-2" onClick={handleUpdate}><p>Update</p></div>
+                    <div className="justify-end items-center gap-4 flex">
+                        <div className="w-[90px] px-2 py-[4px] rounded-[20px] border border-gray-200">
+                            <div className="text-sm font-normal font-['Mulish'] flex justify-center cursor-pointer items-center gap-2" onClick={handleUpdate}><p>Update</p></div>
+                        </div>
+                        <div className="w-[60px] px-2 py-[4px] rounded-[20px] border border-gray-200">
+                            <div className="text-sm font-normal font-['Mulish'] flex justify-between items-center cursor-pointer gap-1" onClick={handleClose}><img src={images.cancel} alt="close icon" width={'10px'} /><p>close</p></div>
+                        </div>
                     </div>
-                    <div className="w-[60px] px-2 py-[4px] rounded-[20px] border border-gray-200">
-                        <div className="text-sm font-normal font-['Mulish'] flex justify-between items-center cursor-pointer gap-1" onClick={handleClose}><img src={images.cancel} alt="close icon" width={'10px'} /><p>close</p></div>
-                    </div>
-                </div>
                 )}
             </div>
             {/* Pass tabContent as tabContent prop */}

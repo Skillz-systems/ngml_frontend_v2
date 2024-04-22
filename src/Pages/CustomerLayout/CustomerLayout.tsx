@@ -126,7 +126,7 @@ const CustomerLayout: React.FC = () => {
                     borderRadius="10px"
                     tablist={tablist}
                     tabContent={tabContent}
-                    // onUpdate={handleUpdate}
+                // onUpdate={handleUpdate}
                 />
             </div>
         </div>
