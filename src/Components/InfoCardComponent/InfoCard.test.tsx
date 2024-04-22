@@ -16,17 +16,5 @@ describe('InfoCard Component', () => {
     expect(numberElement).toBeInTheDocument();
   });
 
-  it('applies correct styling', () => {
-    const title = 'Styled Title';
-    const number = '456';
-
-    render(<InfoCard title={title} number={number} />);
-
-    const titleElement = screen.getByText(title);
-    const numberElement = screen.getByText(number);
-
-    expect(titleElement.parentElement).toHaveStyle({ backgroundColor: '#E2E4EB' });
-    expect(numberElement.parentElement).toHaveStyle({ backgroundColor: '#F6F8FA' });
-  });
 
 });

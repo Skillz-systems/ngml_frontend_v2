@@ -23,6 +23,7 @@ export { default as TabLayout } from './CustomerTabs/TabLayout';
 export { default as TabCustomer } from './CustomerTabs/TabCustomer';
 export { default as StatisticDynamicCardTwo } from './StatisticDynamicCardTwo/StatisticDynamicCardTwo'
 export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTemplate'
+// export { default as SuppliersPage } from './SuppliersPage/SuppliersPage'
 
 export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
 
