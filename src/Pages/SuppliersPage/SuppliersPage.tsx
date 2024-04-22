@@ -59,7 +59,7 @@ const SuppliersPage: React.FC = () => {
                     />
                 </div>
             </div>
-            <div className='mt-[70px] flex flex-col md:flex-row md:mt-[70px] gap-[16px] w-[100%]'>
+            <div className=' flex flex-col md:flex-row md:mt-[30px] gap-[16px] w-[100%]'>
                 <InfoCard
                     title={'Aggregate Monthly Supply Volume'}
                     number={'472,593,854.00'}
@@ -77,7 +77,7 @@ const SuppliersPage: React.FC = () => {
                 
             </div>
 
-            <div className='w-full mt-20'>
+            <div className='w-full mt-9'>
                 <CustomerListTable />
             </div>
         </div>
