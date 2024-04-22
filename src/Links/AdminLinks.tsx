@@ -26,7 +26,7 @@ export const AdminLinks = [
     icon: Businessicon,
     type: 'secondary',
     subMenu: [
-      { id: 1, name: 'Suppliers', to: '', icon: Businessicon, type: 'primary' },
+      { id: 1, name: 'Suppliers', to: '/admin/records/suppliers', icon: Businessicon, type: 'primary' },
       { id: 2, name: 'Customers', to: '/admin/records/customer', icon: Businessicon, type: 'primary' },
       { id: 3, name: 'Request', to: '', icon: Businessicon, type: 'primary' },
       { id: 4, name: 'Site Visits', to: '', icon: Businessicon, type: 'primary' },

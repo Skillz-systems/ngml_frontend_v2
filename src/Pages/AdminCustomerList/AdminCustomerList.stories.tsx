@@ -1,5 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import AdminCustomerList from './AdminCustomerList';
+import { MemoryRouter } from 'react-router-dom';
+
 
 const meta: Meta = {
     title: 'Pages/AdminCustomerList',
@@ -15,17 +17,25 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    args: {
-        email: 'example@example.com',
-    },
+    render: () => (
+        <MemoryRouter>
+            <AdminCustomerList />
+        </MemoryRouter>
+    ),
 };
+
 export const WithCustomers: Story = {
-    args: {
-        email: 'example@example.com',
-    },
+    render: () => (
+        <MemoryRouter>
+            <AdminCustomerList/>
+        </MemoryRouter>
+    ),
 };
+
 export const WithModalOpen: Story = {
-    args: {
-        email: 'example@example.com',
-    },
+    render: () => (
+        <MemoryRouter>
+            <AdminCustomerList />
+        </MemoryRouter>
+    ),
 };
