@@ -83,8 +83,8 @@ const TabLayout: React.FC<TabLayoutProps> = ({
                 <div className="w-[90px] px-2 py-[4px] rounded-[20px] border border-gray-200">
                         <div className="text-sm font-normal font-['Mulish'] flex justify-center cursor-pointer items-center gap-2" onClick={handleUpdate}><p>Update</p></div>
                     </div>
-                    <div className="w-[70px] px-2 py-[4px] rounded-[20px] border border-gray-200">
-                        <div className="text-sm font-normal font-['Mulish'] flex justify-between items-center cursor-pointer gap-2" onClick={handleClose}><img src={images.cancel} alt="close icon" width={'15px'} /><p>close</p></div>
+                    <div className="w-[60px] px-2 py-[4px] rounded-[20px] border border-gray-200">
+                        <div className="text-sm font-normal font-['Mulish'] flex justify-between items-center cursor-pointer gap-1" onClick={handleClose}><img src={images.cancel} alt="close icon" width={'10px'} /><p>close</p></div>
                     </div>
                 </div>
                 )}
