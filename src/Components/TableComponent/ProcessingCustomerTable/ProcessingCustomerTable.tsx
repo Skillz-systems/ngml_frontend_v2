@@ -269,11 +269,11 @@ const ProcessingCustomerTable = () => {
 
     return (
         <div className=' mt-[20px] w-[100%] '>
-            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
-                <div className='italic text-[12px] text-[#828DA9]'>
+            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 h-[100%] p-[18px] w-[100%] '>
+                <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex justify-end  items-center gap-[8px] relative'>
+                <div className='flex flex-col md:flex-row justify-end  items-center gap-[8px] relative w-[100%]' >
                     <TextField
                         id="search-input"
                         label="Search this list"

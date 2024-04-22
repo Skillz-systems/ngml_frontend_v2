@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CustomerListtData } from '@/Data';
+import { SuppliersListData } from '@/Data';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
@@ -28,10 +28,9 @@ interface NavigateButtonProps {
  * @property {string} companyAddress - Optional. Physical address of the company.
  */
 
-interface CustomerListTableProps {
+interface SuppliersListTableProps {
     id: number;
     companyname: string;
-    companyType: string;
     selectedDates?: string[];
     status: string;
     action: string;
@@ -42,14 +41,14 @@ interface CustomerListTableProps {
 
 }
 
-const rows = CustomerListtData
+const rows = SuppliersListData
 
 
 
 
-const CustomerListTable = () => {
+const SuppliersListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<CustomerListTableProps[]>(rows);
+    const [filteredRows, setFilteredRows] = useState<SuppliersListTableProps[]>(rows);
     const [selectedStatus, setSelectedStatus] = useState<string>('All Statuses');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -70,7 +69,7 @@ const CustomerListTable = () => {
 
     const uniqueStatuses = [...new Set(rows.map(row => row.status))];
 
-
+   
     /**
      * Handles changes to the search input field and updates the searchText state.
      * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
@@ -89,7 +88,7 @@ const CustomerListTable = () => {
         const lowercasedSearch = searchText.toLowerCase();
         let filtered = rows.filter(row =>
             row.companyname.toLowerCase().includes(lowercasedSearch) ||
-            row.companyType.toLowerCase().includes(lowercasedSearch)
+            row.lastSupply.toLowerCase().includes(lowercasedSearch)
         );
         if (selectedStatus !== 'All Statuses') {
             filtered = filtered.filter(row => row.status === selectedStatus);
@@ -127,55 +126,42 @@ const CustomerListTable = () => {
             headerName: 'COMPANY NAME',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className='flex flex-col gap-[4px]'>
+                <div>
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
                         {params.row.companyname}
-                    </div>
-                    <div
-                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
-                        {params.row.companyType}
                     </div>
                 </div>
             ),
         },
         {
-            field: 'customerID',
-            headerName: 'CUSTOMER ID',
+            field: 'email',
+            headerName: 'EMAIL',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[700] text-[#49526A] leading-3'>
-                    {params.row.customerID}
+                    {params.row.companyEmail}
                 </div>
             ),
         },
+    
         {
-            field: 'totalConsumed',
-            headerName: 'TOTAL CONSUMED SCF',
+            field: 'lastSupply',
+            headerName: 'LAST SUPPLY DATE',
             flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
-                    {params.row.totalConsumed}
+                    {params.row.lastSupply}
                 </div>
             )
         },
         {
-            field: 'datesent',
-            headerName: 'DATE SENT',
+            field: 'totalSupply',
+            headerName: 'TOTAL SUPPLIED SCF',
             flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
-                    {params.row.datesent}
-                </div>
-            )
-        },
-        {
-            field: 'lastInvoice',
-            headerName: 'LAST INVOICE ADVICE',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
-                    {params.row.lastInvoice}
+                    {params.row.totalSupply}
                 </div>
             )
         },
@@ -212,8 +198,8 @@ const CustomerListTable = () => {
             field: 'action',
             headerName: 'ACTION',
             flex: 1,
-            renderCell: () => (
-                <NavigateButton to="/admin/records/customer/id" />
+            renderCell: () => (  
+                 <NavigateButton to="/admin/records/customer/id" />   
             ),
         },
     ]
@@ -291,6 +277,7 @@ const CustomerListTable = () => {
 
             <div className='w-[100%]'>
                 <DataGrid
+                    data-testid="data-grid"
                     className="pointer-cursor-datagrid"
                     rows={filteredRows}
                     columns={columns}
@@ -323,6 +310,6 @@ const CustomerListTable = () => {
     );
 }
 
-export default CustomerListTable
+export default SuppliersListTable
 
 

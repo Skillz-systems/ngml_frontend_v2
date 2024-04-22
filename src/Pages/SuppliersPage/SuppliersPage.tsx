@@ -1,5 +1,5 @@
 import InfoCard from '@/Components/InfoCardComponent/InfoCardComponent';
-import { Button, CustomerListTable, Heading, StatisticRectangleCard } from '../../Components/index';
+import { Button, Heading, StatisticRectangleCard, SuppliersListTable } from '../../Components/index';
 import images from '../../assets/index';
 
 const SuppliersPage: React.FC = () => {
@@ -78,7 +78,7 @@ const SuppliersPage: React.FC = () => {
             </div>
 
             <div className='w-full mt-9'>
-                <CustomerListTable />
+                <SuppliersListTable />
             </div>
         </div>
     );
