@@ -10,7 +10,7 @@ const SuppliersPage: React.FC = () => {
     return (
         <div className="">
             <div className=' mr-[25px]'>
-                <div className='flex flex-col md:flex-row items-center justify-between'>
+                <div className='flex flex-col md:flex-row items-center justify-between '>
                     <Heading as="h4" size="h4" color='primaryColor' className="font-semibold text-gray-600">SUPPLIERS</Heading>
                     <div className='flex gap-[16px]'>
                         <Button
@@ -34,7 +34,7 @@ const SuppliersPage: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div className='flex flex-col md:flex-row items-center gap-4 mt-6 ' >
+                <div className='flex flex-col md:flex-row items-center gap-4 mt-6 mb-[20px]' >
                     <StatisticRectangleCard
                         title='Suppliers'
                         icon={<img src={images.customers} alt="staff icon" />}

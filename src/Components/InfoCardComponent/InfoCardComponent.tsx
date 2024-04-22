@@ -79,7 +79,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
         padding: '20px',
         flexDirection: 'column',
       }}>
-        <p className='text-[32px] ' style={{color: colors.nnpcdarkgreen[800]}}>{number}</p>
+        <p className='text-[32px]' style={{color: colors.nnpcdarkgreen[800]}}>{number}</p>
         {showDropdown && options && (
           <select
             value={selectedOption}
