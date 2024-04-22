@@ -1,10 +1,11 @@
 import InfoCard from '@/Components/InfoCardComponent/InfoCardComponent';
-import { Button, CustomerListTable, Heading,  StatisticRectangleCard } from '../../Components/index';
+import { Button, CustomerListTable, Heading, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
 
 const SuppliersPage: React.FC = () => {
-   
-   
+
+    const dropdownOptions = ['All Suppliers', 'Option 2', 'Option 3'];
+
 
     return (
         <div className="">
@@ -12,25 +13,25 @@ const SuppliersPage: React.FC = () => {
                 <div className='flex flex-col md:flex-row items-center justify-between'>
                     <Heading as="h4" size="h4" color='primaryColor' className="font-semibold text-gray-600">SUPPLIERS</Heading>
                     <div className='flex gap-[16px]'>
-                    <Button
-                        type='outline'
-                        label='Create PDF'
-                        radius='20px'
-                        width='120px'
-                        height='30px'
-                        fontSize='10px'
-                        action={() => {}}
-                    />
-                    <Button
-                        type='outline'
-                        label='New Supplier'
-                        radius='20px'
-                        width='120px'
-                        height='30px'
-                        fontSize='10px'
-                        action={() => {}}
+                        <Button
+                            type='outline'
+                            label='Create PDF'
+                            radius='20px'
+                            width='120px'
+                            height='30px'
+                            fontSize='10px'
+                            action={() => { }}
+                        />
+                        <Button
+                            type='outline'
+                            label='New Supplier'
+                            radius='20px'
+                            width='120px'
+                            height='30px'
+                            fontSize='10px'
+                            action={() => { }}
 
-                    />
+                        />
                     </div>
                 </div>
                 <div className='flex flex-col md:flex-row items-center gap-4 mt-6 ' >
@@ -58,12 +59,25 @@ const SuppliersPage: React.FC = () => {
                     />
                 </div>
             </div>
-            <div className='mt-[20px] flex'>
-                <InfoCard title={'YOOO GIRL'} number={'666'}/>
-                <InfoCard title={'YOOO GIRL'} number={'666'}/>
+            <div className='mt-[70px] flex flex-col md:flex-row md:mt-[70px] gap-[16px] w-[100%]'>
+                <InfoCard
+                    title={'Aggregate Monthly Supply Volume'}
+                    number={'472,593,854.00'}
+                    subtitle={'(Srf)'}
+                    showDropdown={true}
+                    options={dropdownOptions} />
+                <InfoCard
+                    title={'Aggregate Daily Supply Volume'}
+                    number={'793,854.00'}
+                    subtitle={'(Srf)'}
+                    showDropdown={true}
+                    options={dropdownOptions}
+                     />
+                    
+                
             </div>
-         
-            <div className='w-full mt-10'>
+
+            <div className='w-full mt-20'>
                 <CustomerListTable />
             </div>
         </div>
