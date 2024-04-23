@@ -1,6 +1,7 @@
-import { TabCustomer } from '../../Components/index';
 import React, { useState } from 'react';
-// import images from '../../assets/index';
+import { useNavigate } from 'react-router-dom';
+import { TabCustomer } from '../../Components/index';
+import images from '../../assets/index';
 
 interface Tab {
     name: string;
@@ -23,6 +24,10 @@ interface TabLayoutProps {
     borderRadius?: string;
     tablist: Tab[];
     tabContent: TabContent;
+    showButtons?: boolean;
+    // activeTab: string;
+    // setActiveTab: (tab: string) => void;
+    onUpdate?: (activeTab: string) => void;
 }
 
 const TabLayout: React.FC<TabLayoutProps> = ({
@@ -35,10 +40,27 @@ const TabLayout: React.FC<TabLayoutProps> = ({
     borderWidth,
     borderRadius,
     tablist,
-    tabContent
+    tabContent,
+    onUpdate,
+    showButtons = true,
 }) => {
 
     const [activeTab, setActiveTab] = useState<string>('')
+
+    const navigate = useNavigate();
+
+    const handleUpdate = () => {
+        console.log('Updating content for tab:', activeTab);
+        if (onUpdate) {
+            onUpdate(activeTab);
+        } else {
+            console.warn('No onUpdate callback provided');
+        }
+    };
+
+    const handleClose = () => {
+        navigate(-1)
+    };
 
     const containerStyle: React.CSSProperties = {
         width: width,
@@ -54,21 +76,18 @@ const TabLayout: React.FC<TabLayoutProps> = ({
         <div className="flex-1 p-5 rounded-xl" style={containerStyle}>
             <div className="w-full h-8 justify-between items-center inline-flex flex-wrap">
                 <div className="justify-start items-center gap-3 flex flex-grow">
-                <div className="text-center text-slate-600 font-semibold font-Mulish leading-loose text-lg md:text-2xl lg:text-3xl">{title}</div>
+                    <div className="text-center text-[#49526A] font-semibold font-Mulish leading-loose text-lg md:text-3xl lg:text-3xl">{title}</div>
                 </div>
-                {/* <div className="justify-end items-center gap-4 flex">
-                    <div className="w-8 h-8 p-2.5 rounded-[40px] border border-gray-300 flex-col justify-center items-center gap-2.5 inline-flex">
-                        <div className="p-1 bg-green-600 rounded-3xl flex-col justify-end items-center gap-2.5 flex">
-                            <div className="text-white text-[10px] font-medium font-['Mulish'] leading-[10px] tracking-tight">04</div>
+                {showButtons && (
+                    <div className="justify-end items-center gap-4 flex">
+                        <div className="w-[90px] px-2 py-[4px] rounded-[20px] border border-gray-200">
+                            <div className="text-sm font-normal font-['Mulish'] flex justify-center cursor-pointer items-center gap-2" onClick={handleUpdate}><p>Update</p></div>
                         </div>
-                        <div className="w-4 h-4 justify-center items-center inline-flex">
-                            <div className="w-4 h-4 relative flex-col justify-start items-start flex"><img src={images.Communication} alt="logo" className='absolute top-[-12px]' /></div>
+                        <div className="w-[60px] px-2 py-[4px] rounded-[20px] border border-gray-200">
+                            <div className="text-sm font-normal font-['Mulish'] flex justify-between items-center cursor-pointer gap-1" onClick={handleClose}><img src={images.cancel} alt="close icon" width={'10px'} /><p>close</p></div>
                         </div>
                     </div>
-                    <div className="w-[80px] px-2 py-[4px] rounded-[20px] border border-gray-200">
-                        <div className="text-slate-600 text-sm font-normal font-['Mulish'] flex justify-between items-center gap-2"><img src={images.Close} alt="close icon" /><p>close</p></div>
-                    </div>
-                </div> */}
+                )}
             </div>
             {/* Pass tabContent as tabContent prop */}
             <TabCustomer setActiveTab={setActiveTab} activeTab={activeTab} tablist={tablist} tabContent={tabContent} />

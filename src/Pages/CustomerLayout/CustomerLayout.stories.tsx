@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CustomerLayout from './CustomerLayout';
+import { MemoryRouter } from 'react-router-dom';
 
 const meta: Meta = {
     title: 'Pages/CustomerLayout',
@@ -15,5 +16,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    args: {},
+    render: () => (
+        <MemoryRouter>
+            <CustomerLayout />
+        </MemoryRouter>
+    ), 
 };
