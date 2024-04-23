@@ -1,13 +1,12 @@
+import { ArrowBack } from '@mui/icons-material';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
-import CustomerDetail from './CustomerDetail';
+import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
+import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
-import { ArrowBack } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
-import images from '../../assets/index';
-import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
-import DdqPage from '../DdqPage/DdqPage'
+import CustomerDetail from './CustomerDetail';
 // import images from '../../assets/index';
 
 
@@ -19,8 +18,8 @@ const AdminCustomerPageLayout: React.FC = () => {
         {
             name: 'overview',
             ref: 'overview',
-            icon: <img src={images.business} alt="logo" className='w-4 h-4' />,
-            content: 'icon',
+            // icon: <img src={images.business} alt="logo" className='w-4 h-4' />,
+            // content: 'icon',
 
             // content: 'numeric',
             // content: 'icon',
@@ -94,7 +93,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         customerdetails: <CustomerDetail />,
         eoirequest: <EoiPage />,
         ddq: <DdqPage />,
-        sitevisit: <SiteVisitationPage/>,
+        sitevisit: <SiteVisitationPage />,
         subdetail1: <p>tyfyufuyfifyt</p>
     };
 
@@ -116,6 +115,7 @@ const AdminCustomerPageLayout: React.FC = () => {
                 borderRadius=""
                 tablist={tablist}
                 tabContent={tabContent}
+                showButtons={false}
             />
         </div>
     )
