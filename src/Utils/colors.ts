@@ -23,6 +23,7 @@ const colors = {
     50:'#EAEEF2',
     100: '#808080',
     200: '#49526A',
+    300: '#e8e9eb'
   },
   nnpcmediumgreen: {
     50: '#f2fbf6',

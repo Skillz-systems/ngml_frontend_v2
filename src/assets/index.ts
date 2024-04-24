@@ -24,6 +24,8 @@ import business from './images/png-icons/Business.png';
 import rightarrow from './images/png-icons/Rightarrow.png';
 import leftarrow from './images/png-icons/LeftArrow.png';
 import edit from './images/png-icons/Edit.png'
+import copy from './images/png-icons/Copy.png';
+import upload from './images/png-icons/Upload.png';
 
 const images = {
   cancelicon,
@@ -51,7 +53,9 @@ const images = {
   business,
   rightarrow,
   leftarrow,
-  edit
+  edit,
+  copy,
+  upload
 };
 
 export default images;

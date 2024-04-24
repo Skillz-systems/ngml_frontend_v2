@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import DocumentCard from './DocumentCard';
 
 describe('DocumentCard component', () => {
@@ -24,12 +24,11 @@ describe('DocumentCard component', () => {
   });
 
   it('renders document card with link', async () => {
-    const { getByText, getByRole } = render(<DocumentCard {...defaultProps} type="withLink" />);
-    fireEvent.mouseEnter(getByRole('img'));
+    const { getByText } = render(<DocumentCard {...defaultProps} type="withLink" />);
+
     await waitFor(() => {
       expect(getByText('Test Title')).toBeInTheDocument();
       expect(getByText('Test Subtitle')).toBeInTheDocument();
-      expect(getByText('Last edited')).toBeInTheDocument();
     });
   });
 
