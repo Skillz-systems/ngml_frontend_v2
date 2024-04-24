@@ -34,7 +34,7 @@ const SuppliersPage: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div className='flex flex-col md:flex-row items-center gap-4 mt-6 mb-[20px]' >
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4 items-center gap-4 mt-6 mb-[20px]' >
                     <StatisticRectangleCard
                         title='Suppliers'
                         icon={<img src={images.customers} alt="staff icon" />}
@@ -59,13 +59,14 @@ const SuppliersPage: React.FC = () => {
                     />
                 </div>
             </div>
-            <div className=' flex flex-col md:flex-row md:mt-[30px] gap-[16px] w-[100%]'>
+            <div className=' flex flex-col md:flex-row md:mt-[30px] gap-[16px] w-[100%] '>
                 <InfoCard
                     title={'Aggregate Monthly Supply Volume'}
                     number={'472,593,854.00'}
                     subtitle={'(Srf)'}
                     showDropdown={true}
-                    options={dropdownOptions} />
+                    options={dropdownOptions} 
+                    />
                 <InfoCard
                     title={'Aggregate Daily Supply Volume'}
                     number={'793,854.00'}

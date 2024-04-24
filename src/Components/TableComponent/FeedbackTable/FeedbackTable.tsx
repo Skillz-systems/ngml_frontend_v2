@@ -158,7 +158,7 @@ const FeedbackTable = () => {
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex flex-col md:flex-row justify-end  items-center gap-[8px] relative w-[100%]' >
+                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]' >
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
                         <div className='text-[12px] font-[400] text-[#828DA9] '>All Forms</div>
                         <IconButton onClick={handleFilterClick}>
