@@ -16,14 +16,16 @@ import icons from '/assets/png-icons/icons.png';
 
 interface DocumentCardProps {
   type: 'withLink' | 'withoutLink' | 'withReport';
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   subtitle?: string;
   linkText?: string;
   linkText2?: string;
+  width?: number | string;
+  height?: number | string;
 }
 
-const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle, linkText, linkText2 }) => {
+const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle, linkText, linkText2, width = '320px', height = '250px' }) => {
   const [hovered, setHovered] = useState(false);
 
   const currentDate = new Date();
@@ -32,20 +34,19 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
 
   return (
     <div
-      className={(type === 'withLink' || type === 'withReport') ? `bg-gray-100 shadow-md rounded-[20px] p-4 mb-4 md:w-80 ${hovered ? 'bg-gray-100' : ''}` : `bg-gray-100 shadow-md mb-4 rounded-[20px] p-4 md:w-80 ${hovered ? 'bg-gray-100' : ''}`}
+      className={(type === 'withLink' || type === 'withReport') ? `bg-nnpcdarkgreen-50 shadow-md rounded-[20px] p-4 mb-4 md:w-80 ${hovered ? 'bg-[#e8e9eb]' : ''}` : `bg-nnpcdarkgreen-50 shadow-md mb-4 rounded-[20px] p-4 md:w-80 ${hovered ? 'bg-gray-100' : ''}`}
       style={{
-        backgroundImage: type === 'withReport' ? `url(${icons})` : 'none',
-        backgroundSize: type === 'withReport' ? 'cover' : 'auto'
+        backgroundImage: type === 'withReport' ? `url(${icons})` : 'none', backgroundSize: type === 'withReport' ? 'cover' : 'auto',
+        width,
+        height
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img
-        src={icon}
-        alt="Icon"
-        className={`w-8 h-8 mr-2 ${(type === 'withLink' && hovered) || (type === 'withoutLink' && hovered) ? 'bg-gray-100 p-2 border-2 rounded-full' : type === 'withLink' || type === 'withoutLink' ? 'bg-green-500 p-2 rounded-full' : ''
-          }`}
-      />
+      {icon &&
+        <div className={`w-8 h-8 mr-2 ${(type === 'withLink' && hovered) || (type === 'withoutLink' && hovered) ? 'bg-[#e8e9eb] p-2 border-2 rounded-full' : type === 'withLink' || type === 'withoutLink' ? 'bg-green-500 p-2 rounded-full' : ''
+          }`}>{icon}</div>}
+
       {type === 'withoutLink' && hovered ? <div className="">
         <h2 className={`text-lg font-bold ${type === 'withoutLink' || type === 'withReport' ? 'mt-[90px]' : ''}`}>{title}</h2>
         {subtitle && (
@@ -82,7 +83,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
           </a>
           <div>
             <div className='border-2 rounded-full p-2 bg-gray-100 hover:bg-gray-200 cursor-pointer'>
-              <img src={callmade} alt="callmade Icon" className= 'w-4 h-4'  />
+              <img src={callmade} alt="callmade Icon" className='w-4 h-4' />
             </div>
           </div>
         </div>
