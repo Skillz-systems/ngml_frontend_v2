@@ -1,7 +1,6 @@
 import AdminCustomerList from '@/Pages/AdminCustomerList/AdminCustomerList';
 import AdminHomePage from '@/Pages/AdminHomePage/AdminHomePage';
 import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
-import CustomerLayout from '@/Pages/CustomerLayout/CustomerLayout';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 
@@ -28,16 +27,6 @@ export const AdminRoutes = [
     title: 'Admin Customer List',
     path: '/admin/records/suppliers',
     component: AdminInternalLayout(SuppliersPage),
-    exact: true
-  },
-
-
-
-  
-  {
-    title: 'Customer Layout',
-    path: '/admin/customerlayout',
-    component: AdminInternalLayout(CustomerLayout),
     exact: true
   },
 ]

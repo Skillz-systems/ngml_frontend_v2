@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Button, CustomInput, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
+// import { useNavigate } from 'react-router-dom';
 
 const AdminCustomerList: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,6 +13,8 @@ const AdminCustomerList: React.FC = () => {
         type: '',
         phoneNumber: ''
     });
+
+    // const navigate = useNavigate();
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
@@ -28,6 +31,9 @@ const AdminCustomerList: React.FC = () => {
         }
         console.log('Creating customer:', customerData);
         toggleModal();
+        alert('Customer successfully registered!');
+        // window.location.href = '/admin/records/newcustomer/id';
+        // navigate('/admin/records/newcustomer/id');
     };
 
     const options = ['Option 1', 'Option 2', 'Option 3'];

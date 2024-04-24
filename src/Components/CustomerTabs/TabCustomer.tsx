@@ -1,36 +1,37 @@
-import { FC, ReactNode, useState, useEffect } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 
 /**
- * Represents a tab item.
+ * Interface for individual tab information.
  * @typedef {Object} TabInterface
  * @property {string} name - The name of the tab.
- * @property {string} ref - The reference of the tab.
+ * @property {string} ref - The unique identifier for the tab.
  */
 
 /**
- * Represents a list of tabs.
+ * Interface for the list of tabs, which can contain nested tab lists.
  * @typedef {Object} TabListInterface
- * @property {string} name - The name of the tab list.
- * @property {string} ref - The reference of the tab list.
- * @property {TabInterface[]} [children] - Children tabs of the current tab.
- * @property {TabListInterface[]} [sublist] - Sublist of tabs for nested tabs.
- * @property {'icon' | 'numeric'} [content] - Type of content for the tab.
- * @property {ReactNode} [icon] - Icon for the tab if the content type is 'icon'.
+ * @property {string} name - The name of the tab.
+ * @property {string} ref - The unique identifier for the tab.
+ * @property {TabInterface[]} [children] - A list of child tabs, if any.
+ * @property {TabListInterface[]} [sublist] - A list of sub-tabs, if any.
+ * @property {'icon' | 'numeric'} [content] - Type of content (icon or numeric).
+ * @property {ReactNode} [icon] - An optional icon to be displayed on the tab.
  */
 
 /**
- * Props for the TabCustomer component.
+ * Props for the `TabCustomer` component.
  * @typedef {Object} TabsProps
- * @property {string} activeTab - The reference of the active tab.
+ * @property {string} activeTab - The current active tab identifier.
  * @property {(tab: string) => void} setActiveTab - Function to set the active tab.
- * @property {TabListInterface[]} tablist - List of tab items.
- * @property {{ [key: string]: ReactNode }} tabContent - Content associated with each tab.
+ * @property {TabListInterface[]} tablist - The list of tabs to be displayed.
+ * @property {{ [key: string]: ReactNode }} tabContent - The content associated with each tab.
  */
 
 /**
- * A component representing a tabbed interface for customer details.
- * @param {TabsProps} props - Props for the component.
- * @returns {ReactNode} - The rendered component.
+ * A component that displays a list of tabs with optional dropdown for smaller screens.
+ * 
+ * @param {TabsProps} props - The props for the component.
+ * @returns {JSX.Element} - The rendered JSX element.
  */
 
 interface TabInterface {
@@ -61,62 +62,100 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
     setActiveTab(panelName);
   }, []);
 
+  /**
+ * Handle tab change by setting the active tab and panel name.
+ * 
+ * @param {TabListInterface} tab - The tab to set as active.
+ * @returns {void}
+ */
+
   const handleTabChange = (tab: TabListInterface): void => {
     setActiveTab(tab.ref);
     setPanelName(tab.name);
   };
 
-  const handleSublistItemClick = (sublistRef: string): void => {
-    setActiveTab(sublistRef);
+  /**
+ * Handle dropdown change for mobile or smaller screen views.
+ * 
+ * @param {React.ChangeEvent<HTMLSelectElement>} e - The change event from the dropdown.
+ * @returns {void}
+ */
+
+  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    const selectedRef = e.target.value;
+    const selectedTab = tablist.find((tab) => tab.ref === selectedRef);
+    if (selectedTab) {
+      handleTabChange(selectedTab);
+    }
   };
 
   return (
-    <div className="flex flex-1 mt-8">
-      <div className='w-1/4 flex flex-col items-start justify-start space-y-2 mr-3 '>
-        {tablist.map((tab) => (
-          <div key={tab.ref} className="flex flex-col w-full space-y-4  " >
-            <div className="flex justify-between items-center gap-x-2 cursor-pointer capitalize" onClick={() => { handleTabChange(tab) }}>
-              <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
-                {tab.content === 'icon' && tab.icon}
-                {tab.content === 'numeric' && <span className="mr-1">{tablist.indexOf(tab) + 1}</span>}
-                <h4 className='truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1'>{tab.name}</h4>
+    <div className="flex flex-col mt-3">
+      <div className="mb-3 lg:hidden">
+        <select
+          className="block w-full p-2 border rounded-md"
+          value={activeTab}
+          onChange={handleDropdownChange}
+        >
+          {tablist.map((tab) => (
+            <option key={tab.ref} value={tab.ref}>
+              {tab.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex flex-1">
+        <div className="lg:w-1/4 flex flex-col items-start justify-start space-y-2 mr-3 ">
+          <div className="hidden lg:flex flex-col w-full space-y-4">
+            {tablist.map((tab) => (
+              <div
+                key={tab.ref}
+                className={`flex justify-between items-center gap-x-2 cursor-pointer capitalize ${tab.ref === activeTab ? 'text-primary' : 'text-neutral-600'
+                  }`}
+                onClick={() => handleTabChange(tab)}
+              >
+                <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
+                  {tab.content === 'icon' && tab.icon}
+                  {tab.content === 'numeric' && <span className="mr-1">{tablist.indexOf(tab) + 1}</span>}
+                  <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">
+                    {tab.name}
+                  </h4>
+                </div>
+                {tab.ref === activeTab && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#00AF50] transition-all ease-in-out duration-300"></span>
+                )}
               </div>
-              {tab.ref === activeTab && (
-                <span className='h-1.5 w-1.5 rounded-full bg-[#00AF50] transition-all ease-in-out duration-300'></span>
-              )}
-            </div>
-            {activeTab === tab.ref && (
-              <>
-                {tab.children?.map((child) => (
-                  <a key={child.ref} className="space-y-2  cursor-pointer no-underline hover:no-underline " href={`#${child.ref}`} >
-                    <div className="flex justify-between items-center gap-x-2  ml-8">
-                      <h4 className='truncate text-neutral-500 text-base capitalize hover:text-neutral-700'>{child?.name}</h4>
-                      <span className='h-1.5 w-1.5 rounded-full' ></span>
+            ))}
+          </div>
+          <div className="hidden lg:block ml-4">
+            {tablist.map((tab) => (
+              <div
+                key={tab.ref}
+                className={`${activeTab === tab.ref ? '' : 'hidden'} lg:block lg:mt-2`}
+              >
+                {tab.sublist?.map((sub) => (
+                  <div
+                    key={sub.ref}
+                    className="flex justify-between items-center gap-x-2 cursor-pointer capitalize"
+                    onClick={() => handleTabChange(sub)}
+                  >
+                    <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
+                      <h4 className="truncate text-neutral-600 font-medium text-base capitalize leading-relaxed ml-1">
+                        {sub.name}
+                      </h4>
                     </div>
-                  </a>
-                ))}
-                {tab.sublist && tab.sublist.map((sub) => (
-                  <div key={sub.ref} className="flex flex-col w-full space-y-2 ml-2" onClick={() => handleSublistItemClick(sub.ref)}>
-                    <div className="flex justify-between items-center gap-x-2 cursor-pointer capitalize">
-                      <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
-                        <h4 className='truncate text-neutral-600 font-medium text-base capitalize leading-relaxed ml-1'>{sub.name}</h4>
-                      </div>
-                      {sub.ref === activeTab && (
-                        <span className='h-1.5 w-1.5 rounded-full bg-[#00AF50] transition-all ease-in-out duration-300'></span>
-                      )}
-                    </div>
-                    {activeTab === sub.ref && (
-                      <TabCustomer activeTab={activeTab} setActiveTab={setActiveTab} tablist={sub.sublist || []} tabContent={tabContent} />
+                    {sub.ref === activeTab && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#00AF50] transition-all ease-in-out duration-300"></span>
                     )}
                   </div>
                 ))}
-              </>
-            )}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div style={{ border: '1px', width: '100%' }} className=''>
-        {tabContent[activeTab]}
+        </div>
+        <div style={{ border: '1px', width: '100%' }} className="">
+          {tabContent[activeTab]}
+        </div>
       </div>
     </div>
   );

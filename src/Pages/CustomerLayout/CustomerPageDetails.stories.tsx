@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CustomerLayout from './CustomerLayout';
+import CustomerPageDetails from './CustomerPageDetails';
 
 const meta: Meta = {
-    title: 'Pages/CustomerLayout',
-    component: CustomerLayout,
+    title: 'Pages/CustomerPageDetails',
+    component: CustomerPageDetails,
     parameters: {
     }, tags: ['autodocs'],
     argTypes: {},
 
-} satisfies Meta<typeof CustomerLayout>;
+} satisfies Meta<typeof CustomerPageDetails>;
 
 export default meta;
 
