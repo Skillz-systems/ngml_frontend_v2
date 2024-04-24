@@ -42,5 +42,7 @@ export { default as ProcessingCustomerTable } from './TableComponent/ProcessingC
 export { default as SiteVistTable } from './TableComponent/SiteVistTable/SiteVistTable';
 export { default as TenderTable } from './TableComponent/TenderTable/TenderTable';
 export { default as CustomerListTable } from './TableComponent/CustomerListTable/CustomerListTable';
+export { default as SuppliersListTable } from './TableComponent/SuppliersListTable/SuppliersListTable';
+
 
 

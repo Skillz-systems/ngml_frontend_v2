@@ -50,7 +50,6 @@ const rows = CustomerListtData
 const CustomerListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [filteredRows, setFilteredRows] = useState<CustomerListTableProps[]>(rows);
-    // const [, setSelectedRow] = useState<CustomerListTableProps | null>(null);
     const [selectedStatus, setSelectedStatus] = useState<string>('All Statuses');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -71,7 +70,7 @@ const CustomerListTable = () => {
 
     const uniqueStatuses = [...new Set(rows.map(row => row.status))];
 
-   
+
     /**
      * Handles changes to the search input field and updates the searchText state.
      * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
@@ -213,8 +212,8 @@ const CustomerListTable = () => {
             field: 'action',
             headerName: 'ACTION',
             flex: 1,
-            renderCell: () => (  
-                 <NavigateButton to="/admin/records/customer/id" />   
+            renderCell: () => (
+                <NavigateButton to="/admin/records/customer/id" />
             ),
         },
     ]
@@ -225,11 +224,11 @@ const CustomerListTable = () => {
     return (
         <div className='mt-[20px] w-[100%] '>
 
-            <div className='flex items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
-                <div className='italic text-[12px] text-[#828DA9]'>
+            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 h-[100%] p-[18px] w-[100%] '>
+                <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex justify-end  items-center gap-[8px] relative'>
+                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]' >
                     <TextField
                         id="search-input"
                         label="Search this list"

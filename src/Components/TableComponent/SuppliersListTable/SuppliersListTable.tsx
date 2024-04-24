@@ -1,11 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AgreementData } from '@/Data';
+import { SuppliersListData } from '@/Data';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
-import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
+import { useNavigate } from 'react-router-dom';
 
+
+
+interface NavigateButtonProps {
+    to: string; // This specifies that `to` must be a string.
+}
 
 /**
  * Defines the structure for Agreement properties used in the AgreementTable.
@@ -23,10 +28,9 @@ import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
  * @property {string} companyAddress - Optional. Physical address of the company.
  */
 
-interface AgreementTableProps {
+interface SuppliersListTableProps {
     id: number;
     companyname: string;
-    companyType: string;
     selectedDates?: string[];
     status: string;
     action: string;
@@ -37,47 +41,35 @@ interface AgreementTableProps {
 
 }
 
-const rows = AgreementData
+const rows = SuppliersListData
 
 
 
 
-const AgreementTable = () => {
+const SuppliersListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<AgreementTableProps[]>(rows);
-    const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<AgreementTableProps | null>(null);
-    const [selectedAgreement, setSelectedAgreement] = useState<string>('All Contracts');
+    const [filteredRows, setFilteredRows] = useState<SuppliersListTableProps[]>(rows);
+    const [selectedStatus, setSelectedStatus] = useState<string>('All Statuses');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     /**
      * useEffect hook to filter data whenever searchText or selectedAgreement changes.
      */
     useEffect(() => {
-        filterData(searchText);
-    }, [searchText, selectedAgreement]);
+        filterData();
+    }, [searchText, selectedStatus]);
 
     /**
      * Toggles the dropdown menu for the agreement filter.
      */
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
-        setSelectedAgreement('All Contracts');
+        setSelectedStatus('All Statuses');
     };
 
-    const agreementNames = [...new Set(rows.map(row => row.agreementType))];
+    const uniqueStatuses = [...new Set(rows.map(row => row.status))];
 
-    /**
-     * Opens a modal to show detailed information for the selected row.
-     * @param {AgreementTableProps} row - The selected row's data.
-     */
-    const handleOpen = (row: AgreementTableProps) => {
-        setSelectedRow(row);
-        setOpen(true);
-    };
-
-    const handleClose = () => setOpen(false);
-
+   
     /**
      * Handles changes to the search input field and updates the searchText state.
      * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
@@ -92,34 +84,27 @@ const AgreementTable = () => {
     * Filters the rows based on the search text and selected agreement type.
     * @param {string} search - The current text in the search input field.
     */
-    const filterData = (search: string) => {
-        const lowercasedSearch = search.toLowerCase();
-        let filtered = rows.filter((row) =>
+    const filterData = () => {
+        const lowercasedSearch = searchText.toLowerCase();
+        let filtered = rows.filter(row =>
             row.companyname.toLowerCase().includes(lowercasedSearch) ||
-            row.companyType.toLowerCase().includes(lowercasedSearch)
+            row.lastSupply.toLowerCase().includes(lowercasedSearch)
         );
-        if (selectedAgreement !== 'All Contracts') {
-            filtered = filtered.filter(row => row.agreementType === selectedAgreement);
+        if (selectedStatus !== 'All Statuses') {
+            filtered = filtered.filter(row => row.status === selectedStatus);
         }
         setFilteredRows(filtered);
     };
 
-
-
-    /**
-    * Returns a style object based on the agreement's status.
-    * @param {string} status - The status of the agreement.
-    * @returns {React.CSSProperties} The style object for the status.
-    */
-    const getStatusStyle = (status: string) => {
-        switch (status) {
-            case 'Signed':
-                return { backgroundColor: '#D2F69E', color: '#005828' };
-            case 'Unsigned':
-                return { backgroundColor: '#FFD181', color: '#475467' };
-            default:
-                return {};
-        }
+    const NavigateButton: React.FC<NavigateButtonProps> = ({ to }) => {
+        const navigate = useNavigate();
+        return (
+            <div
+                onClick={() => navigate(to)}
+                className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
+                View
+            </div>
+        );
     };
 
 
@@ -128,7 +113,7 @@ const AgreementTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            flex: 1,
+            width: 60,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -141,35 +126,42 @@ const AgreementTable = () => {
             headerName: 'COMPANY NAME',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className='flex flex-col gap-[4px]'>
+                <div>
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
                         {params.row.companyname}
-                    </div>
-                    <div
-                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
-                        {params.row.companyType}
                     </div>
                 </div>
             ),
         },
         {
-            field: 'agreementType',
-            headerName: 'AGREEMENT NAME',
+            field: 'email',
+            headerName: 'EMAIL',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     className='text-[12px] font-[700] text-[#49526A] leading-3'>
-                    {params.row.agreementType}
+                    {params.row.companyEmail}
                 </div>
             ),
         },
+    
         {
-            field: 'datesent',
-            headerName: 'DATE SENT',
+            field: 'lastSupply',
+            headerName: 'LAST SUPPLY DATE',
             flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
-                    {params.row.datesent}
+                    {params.row.lastSupply}
+                </div>
+            )
+        },
+        {
+            field: 'totalSupply',
+            headerName: 'TOTAL SUPPLIED SCF',
+            flex: 1,
+            renderCell: (params) => (
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                    {params.row.totalSupply}
                 </div>
             )
         },
@@ -181,11 +173,14 @@ const AgreementTable = () => {
                 let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
                 switch (params.row.status) {
-                    case 'Unsigned':
+                    case 'Processing':
                         classNames += 'bg-[#FFD181] text-[#050505] ';
                         break;
-                    case 'Signed':
+                    case 'Active':
                         classNames += 'bg-[#D2F69E] text-[#005828] ';
+                        break;
+                    case 'In-Active':
+                        classNames += 'border-2 ';
                         break;
                     default:
                         classNames += 'text-[E2E4EB] ';
@@ -199,17 +194,12 @@ const AgreementTable = () => {
             }
         },
 
-
         {
             field: 'action',
             headerName: 'ACTION',
             flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div
-                    onClick={() => handleOpen(params.row)}
-                    className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
-                    View
-                </div>
+            renderCell: () => (  
+                 <NavigateButton to="/admin/records/customer/id" />   
             ),
         },
     ]
@@ -219,35 +209,12 @@ const AgreementTable = () => {
 
     return (
         <div className='mt-[20px] w-[100%] '>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
-            >
-                <div >
-                    {selectedRow && (
-                        <SelectedDateModal
-                            handleClose={handleClose}
-                            dateTime={'09th, Nov, 2023; 09:23:44Am'}
-                            status={selectedRow.status || 'Default Status'}
-                            companyName={selectedRow.companyname || 'Provide Company Name'}
-                            companyEmail={selectedRow.companyEmail || 'Provide an email address'}
-                            companyNumber={selectedRow.companyNumber || 'Provide a number'}
-                            availableDates={selectedRow.selectedDates || ['No Dates Available']}
-                            companyAddress={selectedRow.companyAddress || 'Provide an Address'}
-                            statusHeading={selectedRow.status}
-                            statusStyle={getStatusStyle(selectedRow.status)}
 
-                        />
-                    )}
-                </div>
-            </Modal>
-            <div className='flex flex-col md:flex-row items-center justify-between border border-[#CCD0DC] border-b-0 h-[100%] p-[20px] w-[100%]'>
+            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 h-[100%] p-[18px] w-[100%] '>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]'>
+                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]' >
                     <TextField
                         id="search-input"
                         label="Search this list"
@@ -291,15 +258,15 @@ const AgreementTable = () => {
 
                     />
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
-                        <div className='text-[12px] font-[400] text-[#828DA9] '>Filter</div>
+                        <div className='text-[12px] font-[400] text-[#828DA9] '>All Customer</div>
                         <IconButton onClick={handleFilterClick}>
                             <FilterList />
                         </IconButton>
                         {dropdownOpen && (
                             <div className='absolute z-10 top-full -right-3 mt-2 h-[100px] w-[155px] bg-[#FFFFFF] border border-[#E2E4EB] rounded-md shadow-lg'>
-                                {agreementNames.map(name => (
-                                    <div key={name} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedAgreement(name)}>
-                                        {name}
+                                {uniqueStatuses.map(status => (
+                                    <div key={status} className='cursor-pointer p-2 hover:bg-[#D2F69E] text-[12px]' onClick={() => setSelectedStatus(status)}>
+                                        {status}
                                     </div>
                                 ))}
                             </div>
@@ -310,6 +277,7 @@ const AgreementTable = () => {
 
             <div className='w-[100%]'>
                 <DataGrid
+                    data-testid="data-grid"
                     className="pointer-cursor-datagrid"
                     rows={filteredRows}
                     columns={columns}
@@ -342,6 +310,6 @@ const AgreementTable = () => {
     );
 }
 
-export default AgreementTable
+export default SuppliersListTable
 
 

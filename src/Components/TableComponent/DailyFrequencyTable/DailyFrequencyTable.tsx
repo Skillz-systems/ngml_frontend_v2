@@ -182,12 +182,12 @@ const DailyFrequencyTable = () => {
                     )}
                 </div>
             </Modal>
-            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
-                <div className='italic text-[12px] text-[#828DA9]'>
+            <div className='flex flex-col md:flex-row justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 h-[100%] p-[18px] w-[100%] '>
+                <div className='flex items-center italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex items-center justify-between h-[60px] p-[20px]'>
-                    <div className='flex items-center gap-[10px]'>
+                <div className='flex items-center justify-between h-[60px] ' >
+                    <div className='flex gap-[10px]'>
                         <select
                             value={selectedMonth}
                             onChange={e => setSelectedMonth(e.target.value)}
@@ -225,6 +225,7 @@ const DailyFrequencyTable = () => {
 
             <div>
                 <DataGrid
+                    data-testid="data-grid"
                     className="pointer-cursor-datagrid"
                     rows={filteredRows}
                     columns={columns}
