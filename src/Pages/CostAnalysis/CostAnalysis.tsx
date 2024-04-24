@@ -41,7 +41,7 @@ const CostAnalysis = () => {
 
     return (
         <div className="w-full h-full p-4 bg-white rounded-xl flex flex-col gap-4 md:gap-6">
-            <div className="w-full h-96 bg-white rounded-xl border flex flex-col justify-start items-start gap-4">
+            <div className="w-full h-full bg-white rounded-xl border flex flex-col justify-start items-start gap-4">
                 <div className="w-full flex flex-col md:flex-row justify-between items-center p-4 bg-white border rounded-xl">
                     <div className="text-lg md:text-xl font-bold font-['Mulish']">
                         Documents
@@ -65,7 +65,7 @@ const CostAnalysis = () => {
                         linkText2="12/13/2023"
                         icon={<img src={images.copy} alt="Copy Icon" className="w-5 h-5" />}
                         width="200px"
-                        height="230px"
+                        height="250px"
                     />
                 </div>
             </div>
