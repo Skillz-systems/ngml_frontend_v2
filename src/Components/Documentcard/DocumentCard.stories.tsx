@@ -1,5 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import DocumentCard from './DocumentCard';
+import copy from './assets/images/png-icons/Copy.png'
+import report from './assets/images/png-icons/Report.png'
+import customer from './assets/images/png-icons/Customer.png'
 
 const meta: Meta = {
   title: 'Components/DocumentCard',
@@ -30,7 +33,7 @@ type Story = StoryObj<typeof meta>;
 export const WithoutLink: Story = {
   args: {
     type: 'withoutLink',
-    icon: '/assets/png-icons/Reports.png',
+    icon: <img src={copy} alt='icon' />,
     title: 'Document Title',
     subtitle: 'Document Subtitle',
   },
@@ -40,7 +43,7 @@ export const WithLink: Story = {
   args: {
 
     type: 'withLink',
-    icon: '/assets/png-icons/Reports.png',
+    icon: <img src={report} alt='icon' />,
     title: 'Document Title',
     linkText: 'Link Text',
     linkText2: 'Link Text 2',
@@ -50,7 +53,7 @@ export const WithLink: Story = {
 export const WithReport: Story = {
   args: {
     type: 'withReport',
-    icon: '/assets/png-icons/Customers.png',
+    icon: <img src={customer} alt='icon' />,
     title: 'Document Title',
   },
 };
