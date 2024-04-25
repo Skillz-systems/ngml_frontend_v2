@@ -26,6 +26,7 @@ export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTe
 // export { default as SuppliersPage } from './SuppliersPage/SuppliersPage'
 
 export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
+// export { default as SupplierRegistrationLayout } from './SupplierRegistrationLayout/SupplierRegistration';
 
 
 

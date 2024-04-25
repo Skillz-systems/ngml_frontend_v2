@@ -73,8 +73,8 @@ const TabLayout: React.FC<TabLayoutProps> = ({
     };
 
     return (
-        <div className="flex-1 p-5 rounded-xl" style={containerStyle}>
-            <div className="w-full h-8 justify-between items-center inline-flex flex-wrap">
+        <div className="flex-1 ml-[6px] rounded-xl" style={containerStyle}>
+            <div className="w-full h-8 mb-[30px] justify-between items-center inline-flex flex-wrap" >
                 <div className="justify-start items-center gap-3 flex flex-grow">
                     <div className="text-center text-[#49526A] font-semibold font-Mulish leading-loose text-2xl md:text-3xl lg:text-3xl">{title}</div>
                 </div>
