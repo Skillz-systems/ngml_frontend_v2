@@ -2,13 +2,13 @@ import { ArrowBack } from '@mui/icons-material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
+import ConnectProject from '../ConnectProject/ConnectProject';
 import CostAnalysis from '../CostAnalysis/CostAnalysis';
 import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
 import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 import CustomerDetail from './CustomerDetail';
-import ConnectProject from '../ConnectProject/ConnectProject';
 // import images from '../../assets/index';
 
 
@@ -40,16 +40,16 @@ const AdminCustomerPageLayout: React.FC = () => {
             // content: 'numeric',
             // content: 'icon',
             // icon: <img src={images.LeftArrow} alt="logo" />,
-            // sublist: [
-            //     {
-            //         name: 'Sub Detail 1',
-            //         ref: 'subdetail1'
-            //     },
-            //     {
-            //         name: 'Sub Detail 2',
-            //         ref: 'subdetail2'
-            //     }
-            // ]
+            sublist: [
+                {
+                    name: 'Sub Detail 1',
+                    ref: 'subdetail1'
+                },
+                {
+                    name: 'Sub Detail 2',
+                    ref: 'subdetail2'
+                }
+            ]
         },
         {
             name: 'Eoi request',
@@ -98,8 +98,8 @@ const AdminCustomerPageLayout: React.FC = () => {
         sitevisit: <SiteVisitationPage />,
         costanalysis: <CostAnalysis />,
         connectproject: <ConnectProject />,
-        // subdetail1: <p>tyfyufuyfifyt</p>,
-        // subdetail2: <p>tyfyufuyfifyt</p>
+        subdetail1: <p>tyfyufuyfifyt</p>,
+        subdetail2: <p>tyfyufuyfifyt</p>
     };
 
     return (

@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 /**
  * Interface for individual tab information.
@@ -84,7 +84,10 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
 
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const selectedRef = e.target.value;
-    const selectedTab = tablist.find((tab) => tab.ref === selectedRef);
+    const selectedTab = tablist
+      .flatMap((tab) => [tab, ...(tab.sublist || [])])
+      .find((tab) => tab.ref === selectedRef);
+
     if (selectedTab) {
       handleTabChange(selectedTab);
     }
@@ -99,9 +102,14 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
           onChange={handleDropdownChange}
         >
           {tablist.map((tab) => (
-            <option key={tab.ref} value={tab.ref}>
-              {tab.name}
-            </option>
+            <React.Fragment key={tab.ref}>
+              <option value={tab.ref}>{tab.name}</option>
+              {tab.sublist && tab.sublist.map((sub) => (
+                <option key={sub.ref} value={sub.ref}>
+                  &nbsp;&nbsp;{sub.name}
+                </option>
+              ))}
+            </React.Fragment>
           ))}
         </select>
       </div>
@@ -128,7 +136,6 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                   )}
                 </div>
 
-                {/* Display sublist only when the parent tab is active */}
                 {tab.ref === activeTab && tab.sublist && (
                   <div className="lg:ml-4">
                     {tab.sublist.map((sub) => (
