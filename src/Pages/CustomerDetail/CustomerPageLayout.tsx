@@ -20,12 +20,9 @@ const AdminCustomerPageLayout: React.FC = () => {
         {
             name: 'overview',
             ref: 'overview',
+            // content: 'numeric',
             // icon: <img src={images.business} alt="logo" className='w-4 h-4' />,
             // content: 'icon',
-
-            // content: 'numeric',
-            // content: 'icon',
-            // icon: <img src={images.LeftArrow} alt="logo" />
         },
         {
             name: 'customers',
@@ -40,16 +37,16 @@ const AdminCustomerPageLayout: React.FC = () => {
             // content: 'numeric',
             // content: 'icon',
             // icon: <img src={images.LeftArrow} alt="logo" />,
-            sublist: [
-                {
-                    name: 'Sub Detail 1',
-                    ref: 'subdetail1'
-                },
-                {
-                    name: 'Sub Detail 2',
-                    ref: 'subdetail2'
-                }
-            ]
+            // sublist: [
+            //     {
+            //         name: 'Sub Detail 1',
+            //         ref: 'subdetail1'
+            //     },
+            //     {
+            //         name: 'Sub Detail 2',
+            //         ref: 'subdetail2'
+            //     }
+            // ]
         },
         {
             name: 'Eoi request',
@@ -98,8 +95,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         sitevisit: <SiteVisitationPage />,
         costanalysis: <CostAnalysis />,
         connectproject: <ConnectProject />,
-        subdetail1: <p>tyfyufuyfifyt</p>,
-        subdetail2: <p>tyfyufuyfifyt</p>
+        // subdetail1: <p>tyfyufuyfifyt</p>
     };
 
     return (

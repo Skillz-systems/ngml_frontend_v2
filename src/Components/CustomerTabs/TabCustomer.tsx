@@ -126,7 +126,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                 >
                   <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
                     {tab.content === 'icon' && tab.icon}
-                    {tab.content === 'numeric' && <span className="mr-1">{tablist.indexOf(tab) + 1}</span>}
+                    {tab.content === 'numeric' && <span className="mr-1 text-[12px]">{tablist.indexOf(tab) + 1}</span>}
                     <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">
                       {tab.name}
                     </h4>
@@ -145,7 +145,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                         onClick={() => handleTabChange(sub)}
                       >
                         <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
-                          <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">
+                          <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-2">
                             {sub.name}
                           </h4>
                         </div>
