@@ -2,10 +2,24 @@ import { ArrowBack } from '@mui/icons-material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
+import SupplierInformation from './SupplierInformation';
 
 
-
+/**
+ * SupplierRegistrationLayout component represents the layout for supplier registration.
+ * It includes tabs for supplier information and uploads.
+ * @component
+ * @example
+ * // Usage:
+ * <SupplierRegistrationLayout />
+ */
 const SupplierRegistrationLayout: React.FC = () => {
+
+    /**
+     * List of tabs for the supplier registration layout.
+     * Each tab has a name, reference, and optionally a sublist.
+     * @type {Array<{ name: string, ref: string, sublist?: Array<{ name: string, ref: string }> }>}
+     */
 
     const tablist = [
         {
@@ -32,10 +46,12 @@ const SupplierRegistrationLayout: React.FC = () => {
        
     ]
 
-    // Define the content or pages here
-    const tabContent = {
-       
-        customers: <div className="flex-1 w-full"><p>Customers Content Here</p></div>,
+   /**
+     * Object containing the content or pages for each tab.
+     * @type {{ [key: string]: JSX.Element }}
+     */
+    const tabContent: { [key: string]: JSX.Element; } = {   
+        supplierinformation: <SupplierInformation/>,
         subdetail1: <p>tyfyufuyfifyt</p>
     };
 

@@ -31,7 +31,7 @@ export const AdminRoutes = [
     exact: true
   },
   {
-    title: 'Admin Supplier Registarion',
+    title: 'Admin Supplier Registration',
     path: '/admin/records/supplierregistration',
     component: AdminInternalLayout(SupplierRegistrationLayout),
     exact: true
