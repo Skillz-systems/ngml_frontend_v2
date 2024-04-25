@@ -94,7 +94,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
     <div className="flex flex-col mt-3">
       <div className="mb-3 lg:hidden ml-2">
         <select
-          className="block w-full p-2 border rounded-md focus:outline-none uppercase"
+          className="block p-2 border rounded-md focus:outline-none uppercase"
           value={activeTab}
           onChange={handleDropdownChange}
         >
