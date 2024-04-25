@@ -8,6 +8,7 @@ import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 import CustomerDetail from './CustomerDetail';
+import ConnectProject from '../ConnectProject/ConnectProject';
 // import images from '../../assets/index';
 
 
@@ -96,7 +97,9 @@ const AdminCustomerPageLayout: React.FC = () => {
         ddq: <DdqPage />,
         sitevisit: <SiteVisitationPage />,
         costanalysis: <CostAnalysis />,
-        subdetail1: <p>tyfyufuyfifyt</p>
+        connectproject: <ConnectProject />,
+        // subdetail1: <p>tyfyufuyfifyt</p>,
+        // subdetail2: <p>tyfyufuyfifyt</p>
     };
 
     return (

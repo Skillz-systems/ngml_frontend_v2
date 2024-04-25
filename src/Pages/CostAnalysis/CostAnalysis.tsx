@@ -27,7 +27,7 @@ import images from '../../assets/index';
  *   - `width` and `height`: Dimensions of the document card.
  */
 
-const CostAnalysis = () => {
+const CostAnalysis: React.FC = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
