@@ -36,5 +36,6 @@ export const AdminRoutes = [
     component: AdminInternalLayout(SupplierRegistrationLayout),
     exact: true
   },
+
 ]
 
