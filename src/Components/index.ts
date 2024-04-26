@@ -28,6 +28,8 @@ export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTe
 export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
 // export { default as SupplierRegistrationLayout } from './SupplierRegistrationLayout/SupplierRegistration';
 // export { default as SupplierInformation } from './SupplierInformation/SupplierRegistration';
+// export { default as SupplierRegistrationUpload } from './SupplierRegistrationUpload/SupplierRegistrationUpload'
+
 
 
 

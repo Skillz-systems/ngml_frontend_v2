@@ -83,7 +83,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, fil
 
     return (
         <div
-            className={classNames('border-[2px] border-slate-400 border-dashed rounded-2xl p-4 px-8', {
+            className={classNames('border-[2px] border-slate-300 border-dashed rounded-2xl p-4 px-8', {
                 'dragging-over': dragging,
                 'border-green-800': uploaded
             })}
@@ -92,8 +92,8 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, fil
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
         >
-            <h3>{title}</h3>
-            <div className={classNames('self-stretch p-4 px-8 rounded-xl border-2 border-slate-400 border-dashed justify-start items-center gap-4', {
+            <h3 className='text-[14px]'>{title}</h3>
+            <div className={classNames('self-stretch p-4 px-8 rounded-xl border-2 border-slate-300 border-dashed justify-start items-center gap-4', {
                 'bg-lime-50': file,
                 'bg-gray-100': !file,
                 'border-gray-500 border-[5px]': dragging,
@@ -113,7 +113,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, fil
                     {!file && <img src={Upload} className="w-6 h-6" alt="Upload Icon" />}
                     <label htmlFor={inputId} className="cursor-pointer">
                         <div className="flex-col justify-center items-start gap-1 inline-flex">
-                            <div className="text-zinc-950 text-md font-bold leading-[14px]">
+                            <div className="text-zinc-950 text-[16px] font-bold leading-[14px]">
                                 {file ? file.name : <h3 className='text-gray-400 font-semi-bold'>Drag and drop or <span className='text-green-500'>browse</span></h3>}
                             </div>
                             <div className="text-slate-400 text-xs font-normal leading-3">
@@ -137,8 +137,8 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, fil
                 </div>
             </div>
             {error && <span className="text-red-500 text-sm">{error}</span>}
-            <p className='text-sm text-gray-400'>{fileDescription}</p>
-            <div className='text-sm text-gray-400'>{`Maximum file size: ${maxSizeMB}MB`}</div>
+            <p className='text-[12px] text-gray-400'>{fileDescription}</p>
+            <div className='text-[12px] text-gray-400'>{`Maximum file size: ${maxSizeMB}MB`}</div>
         </div>
     );
 };

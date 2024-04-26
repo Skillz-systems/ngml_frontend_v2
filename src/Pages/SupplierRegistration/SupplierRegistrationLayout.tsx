@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
 import SupplierInformation from './SupplierInformation';
+import SupplierRegistrationUpload from '../SupplierRegistrationUpload/SupplierRegistrationUpload';
 
 
 /**
@@ -52,6 +53,7 @@ const SupplierRegistrationLayout: React.FC = () => {
      */
     const tabContent: { [key: string]: JSX.Element; } = {   
         supplierinformation: <SupplierInformation/>,
+        uploads: <SupplierRegistrationUpload/>,
         subdetail1: <p>tyfyufuyfifyt</p>
     };
 
