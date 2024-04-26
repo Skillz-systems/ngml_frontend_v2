@@ -1,3 +1,4 @@
+import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 /**
@@ -82,8 +83,8 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
   * @returns {void}
   */
 
-  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const selectedRef = e.target.value;
+  const handleDropdownChange = (event: SelectChangeEvent<string>): void => {
+    const selectedRef = event.target.value;
     const selectedTab = tablist
       .flatMap((tab) => [tab, ...(tab.sublist || [])])
       .find((tab) => tab.ref === selectedRef);
@@ -96,22 +97,32 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
   return (
     <div className="flex flex-col mt-3">
       <div className="mb-3 lg:hidden ml-2">
-        <select
-          className="block p-2 border rounded-md focus:outline-none uppercase"
+        <Select
           value={activeTab}
           onChange={handleDropdownChange}
+          displayEmpty
+          fullWidth
+          variant="outlined"
+          style={{ textTransform: 'uppercase', borderRadius: '10px', outline: 'none' }}
+          MenuProps={{
+            PaperProps: {
+              style: {
+                marginTop: 90,
+              },
+            },
+          }}
         >
-          {tablist.map((tab) => (
-            <React.Fragment key={tab.ref}>
-              <option value={tab.ref}>{tab.name}</option>
-              {tab.sublist && tab.sublist.map((sub) => (
-                <option key={sub.ref} value={sub.ref}>
-                  &nbsp;&nbsp;{sub.name}
-                </option>
-              ))}
-            </React.Fragment>
-          ))}
-        </select>
+          {tablist.map((tab) => [
+            <MenuItem key={tab.ref} value={tab.ref} style={{ textTransform: 'uppercase' }}>
+              {tab.name}
+            </MenuItem>,
+            ...(tab.sublist || []).map((sub) => (
+              <MenuItem key={sub.ref} value={sub.ref} style={{ marginLeft: '20px' }}>
+                - -{sub.name}
+              </MenuItem>
+            )),
+          ])}
+        </Select>
       </div>
 
       <div className="flex flex-1">
@@ -137,7 +148,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                 </div>
 
                 {tab.ref === activeTab && tab.sublist && (
-                  <div className="lg:ml-4">
+                  <div className="lg:ml-4 space-y-2">
                     {tab.sublist.map((sub) => (
                       <div
                         key={sub.ref}
