@@ -1,4 +1,5 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 /**
  * Interface for individual tab information.
@@ -82,9 +83,12 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
   * @returns {void}
   */
 
-  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const selectedRef = e.target.value;
-    const selectedTab = tablist.find((tab) => tab.ref === selectedRef);
+  const handleDropdownChange = (event: SelectChangeEvent<string>): void => {
+    const selectedRef = event.target.value;
+    const selectedTab = tablist
+      .flatMap((tab) => [tab, ...(tab.sublist || [])])
+      .find((tab) => tab.ref === selectedRef);
+
     if (selectedTab) {
       handleTabChange(selectedTab);
     }
@@ -93,17 +97,32 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
   return (
     <div className="flex flex-col mt-3">
       <div className="mb-3 lg:hidden ml-2">
-        <select
-          className="block w-full p-2 border rounded-md focus:outline-none uppercase"
+        <Select
           value={activeTab}
           onChange={handleDropdownChange}
+          displayEmpty
+          fullWidth
+          variant="outlined"
+          style={{ textTransform: 'uppercase', borderRadius: '10px', outline: 'none' }}
+          // MenuProps={{
+          //   PaperProps: {
+          //     style: {
+          //       marginTop: 0,
+          //     },
+          //   },
+          // }}
         >
-          {tablist.map((tab) => (
-            <option key={tab.ref} value={tab.ref}>
+          {tablist.map((tab) => [
+            <MenuItem key={tab.ref} value={tab.ref} style={{ textTransform: 'uppercase' }}>
               {tab.name}
-            </option>
-          ))}
-        </select>
+            </MenuItem>,
+            ...(tab.sublist || []).map((sub) => (
+              <MenuItem key={sub.ref} value={sub.ref} style={{ marginLeft: '20px' }}>
+                - -{sub.name}
+              </MenuItem>
+            )),
+          ])}
+        </Select>
       </div>
 
       <div className="flex flex-1">
@@ -118,7 +137,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                 >
                   <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
                     {tab.content === 'icon' && tab.icon}
-                    {tab.content === 'numeric' && <span className="mr-1">{tablist.indexOf(tab) + 1}</span>}
+                    {tab.content === 'numeric' && <span className="mr-1 text-[12px]">{tablist.indexOf(tab) + 1}</span>}
                     <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">
                       {tab.name}
                     </h4>
@@ -128,9 +147,8 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                   )}
                 </div>
 
-                {/* Display sublist only when the parent tab is active */}
                 {tab.ref === activeTab && tab.sublist && (
-                  <div className="lg:ml-4">
+                  <div className="lg:ml-4 space-y-2">
                     {tab.sublist.map((sub) => (
                       <div
                         key={sub.ref}
@@ -138,7 +156,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                         onClick={() => handleTabChange(sub)}
                       >
                         <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
-                          <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1 mt-[14px]">
+                          <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">
                             {sub.name}
                           </h4>
                         </div>
