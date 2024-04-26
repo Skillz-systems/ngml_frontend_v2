@@ -98,8 +98,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         sitevisit: <SiteVisitationPage />,
         costanalysis: <CostAnalysis />,
         connectproject: <ConnectProject />,
-        // subdetail1: <p>tyfyufuyfifyt</p>,
-        // subdetail2: <p>tyfyufuyfifyt</p>
+        
     };
 
     return (

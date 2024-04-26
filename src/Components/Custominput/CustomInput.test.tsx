@@ -83,8 +83,8 @@ describe('CustomInput', () => {
         const inputElement = screen.getByRole('textbox');
 
         expect(inputElement).toHaveClass('border-b', 'border-solid', 'border-2', 'border-gray-300');
-        expect(inputElement).toHaveClass(' appearance-none block w-full px-3 py-3 border border-b border-solid border-2 border-gray-300 rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-sm pl-3');
-        expect(inputElement).toHaveClass('appearance-none block w-full px-3 py-3 border border-b border-solid border-2 border-gray-300 rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-sm pl-3');
+        expect(inputElement).toHaveClass(' appearance-none block w-full px-3 py-3 border border-b border-solid border-2 border-gray-300 rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-[12px] pl-3');
+        expect(inputElement).toHaveClass('appearance-none block w-full px-3 py-3 border border-b border-solid border-2 border-gray-300 rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-[12px] pl-3');
     });
 
     it('applies customStyle1 to select input', () => {
@@ -108,8 +108,8 @@ describe('CustomInput', () => {
         const textareaElement = screen.getByRole('textbox');
 
         expect(textareaElement).toHaveClass('border-b', 'border-solid', 'border-2', 'border-gray-300');
-        expect(textareaElement).toHaveClass('appearance-none block w-full px-3 py-3 border border-b border-solid border-2 border-gray-300 rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-sm pl-3');
-        expect(textareaElement).toHaveClass('focus:outline-none', 'focus:ring-gray-700', 'sm:text-sm');
+        expect(textareaElement).toHaveClass('appearance-none block w-full px-3 py-3 border border-b border-solid border-2 border-gray-300 rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-[12px] pl-3');
+        expect(textareaElement).toHaveClass('focus:outline-none', 'focus:ring-gray-700', 'sm:text-[12px]');
     });
 
     it('applies custom styles to checkbox', () => {

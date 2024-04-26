@@ -1,4 +1,5 @@
 import InfoCard from '@/Components/InfoCardComponent/InfoCardComponent';
+import { Link } from 'react-router-dom';
 import { Button, Heading, StatisticRectangleCard, SuppliersListTable } from '../../Components/index';
 import images from '../../assets/index';
 
@@ -22,16 +23,18 @@ const SuppliersPage: React.FC = () => {
                             fontSize='10px'
                             action={() => { }}
                         />
-                        <Button
-                            type='outline'
-                            label='New Supplier'
-                            radius='20px'
-                            width='120px'
-                            height='30px'
-                            fontSize='10px'
-                            action={() => { }}
+                        <Link to={'/admin/records/supplierregistration'}>
+                            <Button
+                                type='outline'
+                                label='New Supplier'
+                                radius='20px'
+                                width='120px'
+                                height='30px'
+                                fontSize='10px'
+                                action={() => { }}
 
-                        />
+                            />
+                        </Link>
                     </div>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4 items-center gap-4 mt-6 mb-[20px]' >
@@ -65,17 +68,17 @@ const SuppliersPage: React.FC = () => {
                     number={'472,593,854.00'}
                     subtitle={'(Srf)'}
                     showDropdown={true}
-                    options={dropdownOptions} 
-                    />
+                    options={dropdownOptions}
+                />
                 <InfoCard
                     title={'Aggregate Daily Supply Volume'}
                     number={'793,854.00'}
                     subtitle={'(Srf)'}
                     showDropdown={true}
                     options={dropdownOptions}
-                     />
-                    
-                
+                />
+
+
             </div>
 
             <div className='w-full mt-9'>

@@ -112,7 +112,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
             {tablist.map((tab) => (
               <div key={tab.ref}>
                 <div
-                  className={`flex justify-between items-center gap-x-2 cursor-pointer capitalize ${tab.ref === activeTab ? 'text-primary' : 'text-neutral-600'
+                  className={`flex justify-between items-center cursor-pointer capitalize ${tab.ref === activeTab ? 'text-primary' : 'text-neutral-600'
                     }`}
                   onClick={() => handleTabChange(tab)}
                 >
@@ -134,11 +134,11 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                     {tab.sublist.map((sub) => (
                       <div
                         key={sub.ref}
-                        className="flex justify-between items-center gap-x-2 cursor-pointer capitalize"
+                        className="flex justify-between items-center gap-[30px] cursor-pointer capitalize"
                         onClick={() => handleTabChange(sub)}
                       >
                         <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
-                          <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">
+                          <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1 mt-[14px]">
                             {sub.name}
                           </h4>
                         </div>
