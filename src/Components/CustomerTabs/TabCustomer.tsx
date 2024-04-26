@@ -104,13 +104,13 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
           fullWidth
           variant="outlined"
           style={{ textTransform: 'uppercase', borderRadius: '10px', outline: 'none' }}
-          MenuProps={{
-            PaperProps: {
-              style: {
-                marginTop: 90,
-              },
-            },
-          }}
+          // MenuProps={{
+          //   PaperProps: {
+          //     style: {
+          //       marginTop: 0,
+          //     },
+          //   },
+          // }}
         >
           {tablist.map((tab) => [
             <MenuItem key={tab.ref} value={tab.ref} style={{ textTransform: 'uppercase' }}>
