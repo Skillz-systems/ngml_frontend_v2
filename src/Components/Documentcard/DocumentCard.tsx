@@ -21,11 +21,13 @@ interface DocumentCardProps {
   subtitle?: string;
   linkText?: string;
   linkText2?: string;
+  reports?: string;
+  reportTitle?: string;
   width?: number | string;
   height?: number | string;
 }
 
-const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle, linkText, linkText2, width = '320px', height = '250px' }) => {
+const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle, linkText, linkText2, reports, reportTitle, width = '320px', height = '250px' }) => {
   const [hovered, setHovered] = useState(false);
 
   const currentDate = new Date();
@@ -78,8 +80,8 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
       )}
       {type === 'withReport' && (
         <div className="flex items-center justify-between">
-          <a href="#" className="text-gray-500">
-            Reports
+          <a href="#" className={`${reportTitle ? 'text-xl font-bold' : 'text-gray-500'}`}>
+            {reports || reportTitle}
           </a>
           <div>
             <div className='border-2 rounded-full p-2 bg-gray-100 hover:bg-gray-200 cursor-pointer'>
