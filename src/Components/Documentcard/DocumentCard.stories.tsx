@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import DocumentCard from './DocumentCard';
-import copy from './assets/images/png-icons/Copy.png'
-import report from './assets/images/png-icons/Report.png'
-import customer from './assets/images/png-icons/Customer.png'
+import copy from 'src/assets/images/png-icons/Copy.png';
+import customer from 'src/assets/images/png-icons/Customers.png';
+import report from 'src/assets/images/png-icons/Reports.png';
 
 const meta: Meta = {
   title: 'Components/DocumentCard',
