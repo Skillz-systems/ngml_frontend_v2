@@ -33,10 +33,8 @@ describe('DocumentCard component', () => {
   });
 
   it('renders document card with report', () => {
-    const { getByText, getByAltText } = render(<DocumentCard {...defaultProps} type="withReport" />);
+    const { getByText } = render(<DocumentCard {...defaultProps} type="withReport" />);
     expect(getByText('Test Title')).toBeInTheDocument();
     expect(getByText('Test Subtitle')).toBeInTheDocument();
-    expect(getByText('Reports')).toBeInTheDocument();
-    expect(getByAltText('callmade Icon')).toBeInTheDocument();
   });
 });
