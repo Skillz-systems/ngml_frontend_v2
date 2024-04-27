@@ -104,9 +104,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
             case 'select':
                 return (
                     <div className='relative'>
-                        <select value={Array.isArray(value) ? value : undefined}
+
+                        <select
+                            value={Array.isArray(value) ? value : ''}
                             onChange={(e: ChangeEvent<HTMLSelectElement>) => handleChangeEvent(e.target.value)}
-                            className={`${inputClasses} appearance-none select-none`} onBlur={handleBlur} >
+                            className={`${inputClasses} appearance-none select-none`}
+                            onBlur={handleBlur} >
+
+                            <option value="" disabled hidden>{placeholder || 'Select an option'}</option>
                             {options?.map((option) => (
                                 <option key={option} value={option}>
                                     {option}

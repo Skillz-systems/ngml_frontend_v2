@@ -199,7 +199,7 @@ const SuppliersListTable = () => {
             headerName: 'ACTION',
             flex: 1,
             renderCell: () => (  
-                 <NavigateButton to="/admin/records/customer/id" />   
+                 <NavigateButton to="/admin/records/supplier/id" />   
             ),
         },
     ]
@@ -210,7 +210,7 @@ const SuppliersListTable = () => {
     return (
         <div className='mt-[20px] w-[100%] '>
 
-            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 h-[100%] p-[18px] w-[100%] '>
+            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%] '>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>

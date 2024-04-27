@@ -111,21 +111,23 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, fil
                         </div>
                     </div>
                     {!file && <img src={Upload} className="w-6 h-6" alt="Upload Icon" />}
-                    <label htmlFor={inputId} className="cursor-pointer">
-                        <div className="flex-col justify-center items-start gap-1 inline-flex">
-                            <div className="text-zinc-950 text-[16px] font-bold leading-[14px]">
-                                {file ? file.name : <h3 className='text-gray-400 font-semi-bold'>Drag and drop or <span className='text-green-500'>browse</span></h3>}
+                    <div className='w-[100%] flex justify-between'>
+                        <label htmlFor={inputId} className="cursor-pointer" >
+                            <div className="flex-col justify-center items-start gap-1 inline-flex">
+                                <div className="text-zinc-950 text-[16px] font-bold leading-[14px]">
+                                    {file ? file.name : <h3 className='text-gray-400 font-semi-bold '>Drag and drop or <span className='text-green-500'>browse</span></h3>}
+                                </div>
+                                <div className="text-slate-400 text-xs font-normal leading-3">
+                                    {file ? `${(file.size / 1024).toFixed(2)} KB` : ''}
+                                </div>
                             </div>
-                            <div className="text-slate-400 text-xs font-normal leading-3">
-                                {file ? `${(file.size / 1024).toFixed(2)} KB` : ''}
-                            </div>
-                        </div>
-                    </label>
-                    {file && (
-                        <button type="button" onClick={handleCancel} className="absolute right-[-1px] mr-14">
-                            <img src={Cancelicon} alt='cancel icon' />
-                        </button>
-                    )}
+                        </label>
+                        {file && (
+                            <button type="button" onClick={handleCancel}>
+                                <img src={Cancelicon} alt='cancel icon' />
+                            </button>
+                        )}
+                    </div>
                     <input
                         id={inputId}
                         type="file"
