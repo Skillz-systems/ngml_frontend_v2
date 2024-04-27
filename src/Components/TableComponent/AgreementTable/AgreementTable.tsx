@@ -243,7 +243,7 @@ const AgreementTable = () => {
                     )}
                 </div>
             </Modal>
-            <div className='flex flex-col md:flex-row items-center justify-between border border-[#CCD0DC] border-b-0 h-[100%] p-[20px] w-[100%]'>
+            <div className='flex flex-col md:flex-row items-center justify-between border border-[#CCD0DC] border-b-0 p-[20px] w-[100%]'>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>

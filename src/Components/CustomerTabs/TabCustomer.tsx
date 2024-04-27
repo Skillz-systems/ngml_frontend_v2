@@ -1,5 +1,5 @@
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import React, { FC, ReactNode, useEffect, useState } from 'react';
+import  { FC, ReactNode, useEffect, useState } from 'react';
 
 /**
  * Interface for individual tab information.
@@ -58,11 +58,16 @@ interface TabsProps {
 }
 
 const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabContent }) => {
-  const [panelName, setPanelName] = useState<string>('overview');
+  const [, setPanelName] = useState<string>('');
 
   useEffect(() => {
-    setActiveTab(panelName);
-  }, []);
+    if (tablist.length > 0) {
+      const initialTab = tablist[0];
+      setPanelName(initialTab.name);
+      setActiveTab(initialTab.ref);
+    }
+  }, [tablist, setActiveTab]);
+
 
   /**
   * Handle tab change by setting the active tab and panel name.
@@ -95,25 +100,25 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
   };
 
   return (
-    <div className="flex flex-col mt-3">
-      <div className="mb-3 lg:hidden ml-2">
+    <div className="flex flex-col ">
+      <div className="mb-3 lg:hidden ml-2 border h-[32] rounded-[10px]">
         <Select
           value={activeTab}
           onChange={handleDropdownChange}
           displayEmpty
           fullWidth
           variant="outlined"
-          style={{ textTransform: 'uppercase', borderRadius: '10px', outline: 'none' }}
-          // MenuProps={{
-          //   PaperProps: {
-          //     style: {
-          //       marginTop: 0,
-          //     },
-          //   },
-          // }}
+          sx={{
+            outline: 'none',
+            '& .MuiOutlinedInput-notchedOutline': {
+              border: 'none'  
+            },
+        
+          }}
+         
         >
           {tablist.map((tab) => [
-            <MenuItem key={tab.ref} value={tab.ref} style={{ textTransform: 'uppercase' }}>
+            <MenuItem key={tab.ref} value={tab.ref} >
               {tab.name}
             </MenuItem>,
             ...(tab.sublist || []).map((sub) => (
@@ -127,7 +132,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
 
       <div className="flex flex-1">
         <div className="lg:w-1/4 flex flex-col items-start justify-start space-y-2 mr-3 ">
-          <div className="hidden lg:flex flex-col w-full space-y-4">
+          <div className="hidden lg:flex flex-col w-full space-y-2">
             {tablist.map((tab) => (
               <div key={tab.ref}>
                 <div
@@ -138,7 +143,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                   <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
                     {tab.content === 'icon' && tab.icon}
                     {tab.content === 'numeric' && <span className="mr-1 text-[12px]">{tablist.indexOf(tab) + 1}</span>}
-                    <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">
+                    <h4 className="truncate text-neutral-600 font-[500] text-[12px] mb-[2px] capitalize leading-relaxed ml-1" >
                       {tab.name}
                     </h4>
                   </div>
@@ -152,11 +157,11 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                     {tab.sublist.map((sub) => (
                       <div
                         key={sub.ref}
-                        className="flex justify-between items-center gap-[30px] cursor-pointer capitalize"
+                        className="flex justify-between items-center mt-[10px] cursor-pointer capitalize"
                         onClick={() => handleTabChange(sub)}
                       >
                         <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
-                          <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">
+                          <h4 className="truncate text-neutral-600 font-[500] mb-[4px] text-[12px] capitalize leading-relaxed ml-1">
                             {sub.name}
                           </h4>
                         </div>

@@ -4,6 +4,7 @@ import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
+import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 
 export const AdminRoutes = [
   {
@@ -34,6 +35,12 @@ export const AdminRoutes = [
     title: 'Admin Supplier Registration',
     path: '/admin/records/supplierregistration',
     component: AdminInternalLayout(SupplierRegistrationLayout),
+    exact: true
+  },
+  {
+    title: 'Admin Supplier Registration',
+    path: '/admin/records/supplier/id',
+    component: AdminInternalLayout(SupplierOverviewLayout),
     exact: true
   },
 

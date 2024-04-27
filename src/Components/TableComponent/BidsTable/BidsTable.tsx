@@ -88,7 +88,7 @@ const BidsTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            flex: 1,
+            width: 60,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -136,7 +136,7 @@ const BidsTable = () => {
         {
             field: 'details',
             headerName: 'DETAILS',
-            flex: 1,
+            flex: 1.5,
             renderCell: (params) => (
                 <ul className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.details.map((detail: Detail, index: number) => (
@@ -167,7 +167,7 @@ const BidsTable = () => {
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
-                    className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
+                    className=' text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
                     View
                 </div>
             ),
@@ -201,7 +201,7 @@ const BidsTable = () => {
                     )}
                 </div>
             </Modal>
-            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 h-[100%] p-[18px] w-[100%] '>
+            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0  p-[18px] w-[100%] '>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
