@@ -29,6 +29,7 @@ export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar
 // export { default as SupplierRegistrationLayout } from './SupplierRegistrationLayout/SupplierRegistration';
 // export { default as SupplierInformation } from './SupplierInformation/SupplierRegistration';
 // export { default as SupplierRegistrationUpload } from './SupplierRegistrationUpload/SupplierRegistrationUpload'
+// export { default as SupplierPaymentHistory } from './SupplierPaymentHistory/SupplierPaymentHistory'
 
 
 
@@ -47,6 +48,8 @@ export { default as SiteVistTable } from './TableComponent/SiteVistTable/SiteVis
 export { default as TenderTable } from './TableComponent/TenderTable/TenderTable';
 export { default as CustomerListTable } from './TableComponent/CustomerListTable/CustomerListTable';
 export { default as SuppliersListTable } from './TableComponent/SuppliersListTable/SuppliersListTable';
+export { default as SupplierPaymentTable } from './TableComponent/SupplierPaymentTable/SupplierPaymentTable';
+
 
 
 

@@ -296,6 +296,7 @@ const SuppliersListTable = () => {
                             outline: 'solid #00AF50 1px',
                         },
                         '& .MuiDataGrid-columnHeaders': {
+                            backgroundColor: '#F6FDEC',
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
                                 fontWeight: '700',
