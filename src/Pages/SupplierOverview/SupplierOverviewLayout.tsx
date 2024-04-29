@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
 import SupplierOverviewPage from './SupplierOverviewPage';
+import SupplierPaymentHistory from '../SupplierPaymentHistory/SupplierPaymentHistory';
 
 
 
@@ -26,13 +27,13 @@ const SupplierOverviewLayout: React.FC = () => {
           
         },
        
-       
+        
     ]
 
   
     const tabContent: { [key: string]: JSX.Element; } = {   
         overview: <SupplierOverviewPage/>,
-       
+        paymenthistory: <SupplierPaymentHistory/>
     };
 
     return (
