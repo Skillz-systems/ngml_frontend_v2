@@ -27,7 +27,7 @@ interface DocumentCardProps {
   height?: number | string;
 }
 
-const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, reportIcon, title, subtitle, linkText, linkText2, reports, reportTitle, width = '320px', height = '250px' }) => {
+const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, reportIcon, title, subtitle, linkText, linkText2, reports, reportTitle, width = '100%', height = '100%' }) => {
   const [hovered, setHovered] = useState(false);
 
   const currentDate = new Date();
@@ -36,7 +36,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, reportIcon, tit
 
   return (
     <div
-      className={(type === 'withLink' || type === 'withReport') ? `bg-nnpcdarkgreen-50 shadow-md rounded-[20px] p-4 mb-4 w-full h-full ${hovered ? 'bg-[#e8e9eb]' : ''}` : `bg-nnpcdarkgreen-50 shadow-md mb-4 rounded-[20px] p-4 w-full ${hovered ? 'bg-gray-100' : ''}`}
+      className={(type === 'withLink' || type === 'withReport') ? `bg-nnpcdarkgreen-50 shadow-md rounded-[20px] p-4 mb-4 w-full h-full ${hovered ? 'bg-[#e8e9eb]' : ''}` : `bg-nnpcdarkgreen-50 shadow-md mb-4 rounded-[20px] p-4 w-full h-full ${hovered ? 'bg-gray-100' : ''}`}
       style={{
         backgroundImage: type === 'withReport' ? `url(${icons})` : 'none', backgroundSize: type === 'withReport' ? 'cover' : 'auto',
         width,
