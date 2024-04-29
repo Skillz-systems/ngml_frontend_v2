@@ -1,9 +1,10 @@
 
+import { MemoryRouter } from 'react-router-dom';
 import { Meta, StoryObj } from '@storybook/react';
 import SupplierPaymentHistory from './SupplierPaymentHistory';
 
 const meta: Meta = {
-    title: 'Pages/SupplierPaymentHistory',
+    title: 'Pages/SupplierPaymentHistory', 
     component: SupplierPaymentHistory,
     parameters: {
     },
@@ -16,5 +17,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    render: () => <SupplierPaymentHistory />,
+    render: () => (
+        <MemoryRouter>
+            <SupplierPaymentHistory />
+        </MemoryRouter>
+    ), 
 };

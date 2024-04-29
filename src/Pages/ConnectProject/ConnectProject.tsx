@@ -1,20 +1,57 @@
 import { useState } from 'react';
 import { Button, CustomInput } from '../../Components/index';
 
+/**
+ * ConnectProject component for handling project date selection and other project-related operations.
+ * 
+ * @component
+ * @example
+ * <ConnectProject />
+ * 
+ * @returns {React.FC} The ConnectProject component.
+ */
 
 const ConnectProject: React.FC = () => {
+
+    /**
+    * State for storing the project start and end dates.
+    * 
+    * @type {Object}
+    * @property {string} startdate - The proposed project start date.
+    * @property {string} enddate - The proposed project end date.
+    */
+
     const [projectDate, setProjectDate] = useState({
         startdate: '',
         enddate: '',
     });
+
+    /**
+    * Handles input changes for the date fields.
+    * 
+    * @param {any} value - The value to set for the specified key.
+    * @param {any} key - The key (state property name) to update.
+    */
+
     const handleInputChange = (value: any, key: any) => {
         console.log(value)
         setProjectDate({ ...projectDate, [key]: value });
     };
 
+    /**
+     * Placeholder function to create a customer. 
+     * (Functionality to be implemented.)
+     */
+
     const handleCreateCustomer = () => {
 
     };
+
+    /**
+     * Checks if both project start and end dates are selected.
+     * 
+     * @type {boolean}
+     */
 
     const areDatesSelected = projectDate.startdate && projectDate.enddate;
 

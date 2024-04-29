@@ -26,6 +26,10 @@ import leftarrow from './images/png-icons/LeftArrow.png';
 import edit from './images/png-icons/Edit.png'
 import copy from './images/png-icons/Copy.png';
 import upload from './images/png-icons/Upload.png';
+import callmade from './images/png-icons/callmade.png';
+import messenger from './images/png-icons/messenger.png';
+import receipt from './images/png-icons/receipt.png';
+import petrol from './images/png-icons/petrol.png'
 
 const images = {
   cancelicon,
@@ -55,7 +59,11 @@ const images = {
   leftarrow,
   edit,
   copy,
-  upload
+  upload,
+  callmade,
+  messenger,
+  receipt,
+  petrol
 };
 
 export default images;
