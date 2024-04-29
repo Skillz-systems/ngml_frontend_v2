@@ -1,11 +1,11 @@
-
 import type { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import CustomerListTable from './CustomerListTable';
+import SupplierPaymentTable from './SupplierPaymentTable';
 
-const meta: Meta<typeof CustomerListTable> = {
-    title: 'Tables/CustomerListTable',
-    component: CustomerListTable,
+
+const meta: Meta<typeof SupplierPaymentTable> = {
+    title: 'Tables/SupplierPaymentTable',
+    component: SupplierPaymentTable,
     parameters: {
         layout: 'fullscreen',
     },
@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const DefaultView: Story = {
     render: () => (
         <MemoryRouter>
-            <CustomerListTable />
+            <SupplierPaymentTable />
         </MemoryRouter>
     ),
 };

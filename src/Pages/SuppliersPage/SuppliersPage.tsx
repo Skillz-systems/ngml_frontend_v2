@@ -43,7 +43,7 @@ const SuppliersPage: React.FC = () => {
     ];
 
     return (
-        <div className="">
+        <div>
             <div className=' mr-[25px]'>
                 <div className='flex flex-col md:flex-row items-center justify-between '>
                     <Heading as="h4" size="h4" color='primaryColor' className="font-semibold text-gray-600">SUPPLIERS</Heading>
@@ -83,30 +83,6 @@ const SuppliersPage: React.FC = () => {
                         );
                     })}
                 </div>
-                {/* <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4 items-center gap-4 mt-6 mb-[20px]' >
-                    <StatisticRectangleCard
-                        title='Suppliers'
-                        icon={<img src={images.customers} alt="staff icon" />}
-                        value='9'
-                        valueColor='text-nnpcmediumgreen-700'
-                        iconBgColor='rounded-[5px] bg-nnpcmediumgreen-500'
-                    />
-                    <StatisticRectangleCard
-                        title='Active Suppliers'
-                        icon={<img src={images.customers} alt="staff icon" />}
-                        value='9'
-                        valueColor='text-black'
-                        iconBgColor='bg-nnpc-50 rounded-[5px]'
-                    />
-                    <StatisticRectangleCard
-                        title='Processing Suppliers'
-                        icon={<img src={images.warning} alt="staff icon" />}
-                        value='2'
-                        valueColor='text-green-800'
-                        backgroundColor='bg-nnpc-600'
-                        iconBgColor='rounded-full bg-nnpc-700'
-                    />
-                </div> */}
             </div>
             <div className=' flex flex-col md:flex-row md:mt-[30px] gap-[16px] w-[100%] '>
                 <InfoCard

@@ -1,10 +1,12 @@
-  
-  
-  
-  const SupplierPaymentHistory = () => {
-    return(
-        <div>jjjj</div>
-    )
-  }
+import { SupplierPaymentTable } from '@/Components';
 
-  export default SupplierPaymentHistory;
+
+const SupplierPaymentHistory = () => {
+  return (
+    <div className="grid grid-cols-1" >
+      <SupplierPaymentTable />
+    </div>
+  )
+}
+
+export default SupplierPaymentHistory;
