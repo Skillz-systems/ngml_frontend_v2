@@ -14,7 +14,7 @@ jobs:
       - run:
           name: Run npm
           command: |
-            cd Frontend && npm install && npm test
+            npm install && npm test
   deploy-frontend-dev:
     docker:
       - image: circleci/node:16
