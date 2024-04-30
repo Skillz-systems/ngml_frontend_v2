@@ -61,7 +61,7 @@ const CostAnalysis: React.FC = () => {
                         type="withLink"
                         title="Dangote Cement"
                         subtitle="Site Survey Report"
-                        linkText="Last edited"
+                        linkText="Last Updated"
                         linkText2="12/13/2023"
                         icon={<img src={images.copy} alt="Copy Icon" className="w-5 h-5" />}
                         width="200px"

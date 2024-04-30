@@ -30,6 +30,7 @@ import callmade from './images/png-icons/callmade.png';
 import messenger from './images/png-icons/messenger.png';
 import receipt from './images/png-icons/receipt.png';
 import petrol from './images/png-icons/petrol.png'
+import file from './images/png-icons/File.png'
 
 const images = {
   cancelicon,
@@ -63,7 +64,8 @@ const images = {
   callmade,
   messenger,
   receipt,
-  petrol
+  petrol,
+  file
 };
 
 export default images;

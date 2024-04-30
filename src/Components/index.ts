@@ -8,6 +8,7 @@ export { default as ContentContainer } from './Contentcontainer/ContentContainer
 export { default as CustomInput } from './Custominput/CustomInput';
 export { default as DateCard } from './DateCardComponent/DateCard';
 export { default as DocumentCard } from './Documentcard/DocumentCard';
+export { default as DocumentCardTwo } from './DocumentCardTwo/DocumentCardTwo'
 export { default as FileUploadInput } from './Fileuploadinput/FileUploadInput';
 export { default as Heading } from './Heading/Heading';
 export { default as InfoCardComponent } from './InfoCardComponent/InfoCardComponent';
@@ -24,6 +25,7 @@ export { default as TabCustomer } from './CustomerTabs/TabCustomer';
 export { default as StatisticDynamicCardTwo } from './StatisticDynamicCardTwo/StatisticDynamicCardTwo'
 export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTemplate'
 // export { default as SuppliersPage } from './SuppliersPage/SuppliersPage'
+
 
 export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
 // export { default as SupplierRegistrationLayout } from './SupplierRegistrationLayout/SupplierRegistration';
@@ -48,7 +50,8 @@ export { default as SiteVistTable } from './TableComponent/SiteVistTable/SiteVis
 export { default as TenderTable } from './TableComponent/TenderTable/TenderTable';
 export { default as CustomerListTable } from './TableComponent/CustomerListTable/CustomerListTable';
 export { default as SuppliersListTable } from './TableComponent/SuppliersListTable/SuppliersListTable';
-export { default as SupplierPaymentTable } from './TableComponent/SupplierPaymentTable/SupplierPaymentTable';
+// export { default as SupplierPaymentTable } from './TableComponent/SupplierPaymentTable/SupplierPaymentTable';
+
 
 
 
