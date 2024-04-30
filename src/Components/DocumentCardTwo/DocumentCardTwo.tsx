@@ -15,7 +15,7 @@ const DocumentCardTwo: React.FC<DocumentCardTwoProps> = ({ icon, title, subtitle
     return (
         <div
             style={{ width, height }}
-            className={`w-full h-full px-2.5 py-4 rounded-xl border flex-col justify-start items-center gap-2.5 inline-flex transition-all duration-200 ${isHovered ? 'bg-gray-200 border-gray-300' : 'bg-white border-gray-200'
+            className={`w-full h-full px-2.5 py-4 rounded-xl border flex-col justify-start items-center gap-2.5 inline-flex transition-all duration-200 ${isHovered ? 'bg-[#EAEEF2] border-[#EAEEF2]' : 'bg-[#FFFFFF] border-[#EAEEF2]'
                 }`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -25,13 +25,15 @@ const DocumentCardTwo: React.FC<DocumentCardTwoProps> = ({ icon, title, subtitle
                     <div>{icon}</div>
                 </div>
             }
-            <div className="space-y-[-2px]">
-                <div className="text-center text-slate-600 text-xs font-bold">{title}</div>
+            <div className="">
+                <div className="text-center text-xs font-bold">{title}</div>
                 <div className="text-xs text-center font-normal italic">{subtitle}</div>
             </div>
             {isHovered && (
-                <div className=" py-1.5 px-16 bg-green-500 hover:bg-white hover:text-gray-300 text-white text-xs flex justify-center items center rounded-[20px]">
-                    {buttonText}
+                <div className="flex justify-center items-center">
+                    <div className="py-1.5 px-8 bg-nnpclightgreen-600 hover:bg-[#FFFFFF] hover:text-[#808080] text-[#FFFFFF] text-xs rounded-[20px] text-center">
+                        {buttonText}
+                    </div>
                 </div>
             )}
         </div>

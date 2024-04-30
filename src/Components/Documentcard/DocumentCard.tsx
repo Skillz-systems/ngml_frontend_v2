@@ -73,7 +73,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, reportIcon, tit
       {(type === 'withLink') && linkText && (
         <div className="flex items-center justify-between border-2 p-1 rounded-[10px]">
           <a className="block text-[12px] text-gray-400">{hovered ? 'Last edited' : linkText}</a>
-          <a href="#" className="block text-gray-700 font-[600]">
+          <a href="#" className="block text-gray-700 text-sm font-[600]">
             {hovered ? formattedDate : linkText2}
           </a>
         </div>

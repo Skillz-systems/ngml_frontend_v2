@@ -1,12 +1,12 @@
-// import { SupplierPaymentTable } from '@/Components';
+import { SupplierPaymentTable } from '@/Components';
 
 
-// const SupplierPaymentHistory = () => {
-//   return (
-//     <div className="grid grid-cols-1" >
-//       <SupplierPaymentTable />
-//     </div>
-//   )
-// }
+const SupplierPaymentHistory = () => {
+  return (
+    <div className="grid grid-cols-1" >
+      <SupplierPaymentTable />
+    </div>
+  )
+}
 
-// export default SupplierPaymentHistory;
+export default SupplierPaymentHistory;

@@ -63,7 +63,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
   useEffect(() => {
     if (tablist.length > 0) {
       const initialTab = tablist[0];
-      setPanelName(initialTab.name);
+      setPanelName(capitalizeFirstLetter(initialTab.name));
       setActiveTab(initialTab.ref);
     }
   }, [tablist, setActiveTab]);
@@ -99,6 +99,11 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
     }
   };
 
+  const capitalizeFirstLetter = (str: string): string => {
+    if (str.length === 0) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   return (
     <div className="flex flex-col ">
       <div className="mb-3 lg:hidden ml-2 border h-[32] rounded-[10px]">
@@ -119,11 +124,11 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
         >
           {tablist.map((tab) => [
             <MenuItem key={tab.ref} value={tab.ref} >
-              {tab.name}
+              {capitalizeFirstLetter(tab.name)}
             </MenuItem>,
             ...(tab.sublist || []).map((sub) => (
               <MenuItem key={sub.ref} value={sub.ref} style={{ marginLeft: '20px' }}>
-                - -{sub.name}
+                - - {capitalizeFirstLetter(sub.name)}
               </MenuItem>
             )),
           ])}
