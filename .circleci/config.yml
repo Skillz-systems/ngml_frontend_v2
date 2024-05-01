@@ -36,9 +36,9 @@ jobs:
       - run: CI=false sudo apt update
       - run: CI=false sudo apt-get install rsync
 
-      - run:
-          name: Update known hosts
-          command: ssh-keyscan -H 185.160.67.60 >> ~/.ssh/known_hosts && cat ~/.ssh/known_hosts
+      # - run:
+      #     name: Update known hosts
+      #     command: ssh-keyscan -H 185.160.67.60 >> ~/.ssh/known_hosts && cat ~/.ssh/known_hosts
       - run:
           name: build file
           command: |
