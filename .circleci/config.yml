@@ -57,9 +57,9 @@ workflows:
       - deploy-frontend-dev: # Use the pre-configured job, deploy-via-git
           requires:
             - deploy-frontend-test
-          filters:
-            branches:
-              only: dev
+          # filters:
+          #   branches:
+          #     only: dev
 
       # - deploy-nest: # Use the pre-configured job, deploy-via-git
       #     filters:
