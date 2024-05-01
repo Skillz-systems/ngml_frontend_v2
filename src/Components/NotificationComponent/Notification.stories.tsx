@@ -1,7 +1,6 @@
-import React from 'react';
+import { NotificationImportantOutlined } from '@mui/icons-material';
 import type { Meta, StoryObj } from '@storybook/react';
 import Notification from './Notification';
-import { NotificationImportantOutlined } from '@mui/icons-material';
 
 const meta: Meta<typeof Notification> = {
     title: 'Components/Notification',
@@ -12,7 +11,7 @@ const meta: Meta<typeof Notification> = {
     argTypes: {
         count: { control: 'number' },
         onClick: { action: 'clicked' },
-        renderIcon: { control: null }, 
+        renderIcon: { control: null },
     },
 };
 

@@ -6,14 +6,14 @@ import 'resize-observer-polyfill';
 class MockResizeObserver {
   constructor(public callback: ResizeObserverCallback) {}
 
-  observe(target: Element): void {
-  }
+  // observe(target: Element): void {
+  // }
 
-  unobserve(target: Element): void {
-  }
+  // unobserve(target: Element): void {
+  // }
 
-  disconnect(): void {
-  }
+  // disconnect(): void {
+  // }
 }
 
 global.ResizeObserver = MockResizeObserver as any;
