@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
 import SupplierOverviewPage from './SupplierOverviewPage';
 import SupplierPaymentHistory from '../SupplierPaymentHistory/SupplierPaymentHistory';
+import SupplierProfileDetails from '../SupplierProfileDetails/SupplierProfileDetails';
 
 
 
@@ -33,9 +34,10 @@ const SupplierOverviewLayout: React.FC = () => {
   
     const tabContent: { [key: string]: JSX.Element; } = {   
         overview: <SupplierOverviewPage/>,
-        paymenthistory: <SupplierPaymentHistory/>
+        paymenthistory: <SupplierPaymentHistory/>,
+        profiledetails: <SupplierProfileDetails/>
     };
-
+    
     return (
         <div className='flex justify-end gap-[6px] ' >
             <Link to={'/admin/records/suppliers'}>
