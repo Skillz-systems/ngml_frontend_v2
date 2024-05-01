@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { SuppliersPaymentHistoryData } from '@/Data';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
@@ -19,7 +20,7 @@ const SupplierPaymentTable = () => {
 
     useEffect(() => {
         filterData();
-    },);
+    }, [selectedYear]); 
 
 
     const filterData = () => {

@@ -26,7 +26,7 @@ interface CustomInputProps {
     type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio';
     label?: string;
     value?: string | number | boolean | readonly string[];
-    handleChangeEvent: (value: string | number | boolean | readonly string[] | undefined) => void;
+    handleChangeEvent: (value: string) => void; 
     placeholder?: string;
     options?: string[];
     error?: string;
@@ -62,6 +62,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
     const handleBlur = () => {
         setTouched(true);
     };
+    
 
     const styleVariants = {
         default: `appearance-none block w-full px-3 py-3 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
