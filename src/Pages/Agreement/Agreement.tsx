@@ -74,7 +74,7 @@ const Agreement: React.FC = () => {
     return (
         <div className='p-4 bg-[#FFFFFF] rounded-[10px]'>
             <div className="w-full h-full border flex-col rounded-[10px]">
-                <div className="w-full px-3 py-2.5 bg-white border-b">
+                <div className="w-full px-3 py-2.5 bg-white border-b rounded-t-[10px]">
                     <div className="text-xl font-bold font-['Mulish']">AGREEMENT TEMPLATES</div>
                 </div>
                 <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] items-center gap-3">
@@ -96,7 +96,7 @@ const Agreement: React.FC = () => {
                         <div className="text-center text-xs font-medium font-['Mulish'] leading-3">01</div>
                     </div>
                 </div>
-                <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] items-center gap-3">
+                <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] items-center gap-3 rounded-b-[10px]">
                     {documentCardDataTwo.map((cards, index) => (
                         <div key={index} className="flex flex-1 min-w-[150px] max-w-[200px]">
                             <DocumentCard
