@@ -6,6 +6,31 @@ import AddNewInvoice from './AddNewInvoice';
 import images from '../../assets/index';
 
 
+/**
+ * Data structure for billing history information.
+ * 
+ * @typedef {Object} BillingHistoryData
+ * @property {'withLink' | 'withoutLink' | 'withReport'} type - The type of document card.
+ * @property {string} title - The title of the document card.
+ * @property {string} subtitle - The subtitle of the document card.
+ * @property {React.ReactNode} icon - The icon displayed on the document card.
+ * @property {string} linkText - The text for the document link.
+ * @property {string} linkText2 - Additional link text.
+ * @property {number|string} width - Width of the document card.
+ * @property {number|string} height - Height of the document card.
+ */
+
+/**
+ * BillingHistory Component that displays a list of invoice advice for each month.
+ * 
+ * @component
+ * 
+ * @example
+ * // To use the component, import and include it within a parent component or route
+ * <BillingHistory />
+ */
+
+
 interface BillingHistoryData {
     type: 'withLink' | 'withoutLink' | 'withReport';
     title: string;
