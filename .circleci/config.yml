@@ -37,9 +37,6 @@ jobs:
       - run: CI=false sudo apt-get install rsync
 
       - run:
-          name: Update known hosts
-          command: ssh-keyscan -H 185.160.67.60 >> ~/.ssh/known_hosts && cat ~/.ssh/known_hosts
-      - run:
           name: build file
           command: |
             CI=false npm run build
@@ -51,7 +48,7 @@ jobs:
 
 workflows:
   version: 2
-  revenue_hub_deploy:
+  nnpc_frontend_deploy:
     jobs:
       - deploy-frontend-test
       - deploy-frontend-dev: # Use the pre-configured job, deploy-via-git
@@ -60,8 +57,3 @@ workflows:
           filters:
             branches:
               only: dev
-
-      # - deploy-nest: # Use the pre-configured job, deploy-via-git
-      #     filters:
-      #       branches:
-      #         only: nest
