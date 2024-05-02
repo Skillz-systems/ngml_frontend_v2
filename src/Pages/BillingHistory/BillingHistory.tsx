@@ -158,7 +158,7 @@ const BillingHistory: React.FC = () => {
 
     return (
         <div className="w-full h-full">
-            <div className="w-full h-full p-8 bg-white bg-opacity-50 rounded-lg flex-col justify-start items-start gap-8 flex">
+            <div className="w-full h-full p-8 bg-[#FFFFFF] bg-opacity-50 rounded-lg flex-col justify-start items-start gap-8 flex">
                 <div className="w-full justify-between items-center flex">
                     <div className="text-center text-3xl font-semibold font-['Mulish']">Billing History</div>
                     <div className="items-center gap-4 flex">
@@ -166,14 +166,14 @@ const BillingHistory: React.FC = () => {
                             <div className="text-base font-normal font-['Mulish'] leading-none">New Invoice Advice</div>
                         </div>
                         <div className="w-16 p-2.5 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
-                            <div className="IconsPack w-4 h-4 justify-center items-center flex">
+                            <div className="w-4 h-4 justify-center items-center flex">
                                 <img src={images.cancel} alt="close icon" width={'10px'} />
                             </div>
-                            <div className="Close text-center text-slate-400 text-xs font-normal font-['Mulish']">Close</div>
+                            <div className="Close text-center text-[#808080] text-xs font-normal font-['Mulish']">Close</div>
                         </div>
                     </div>
                 </div>
-                <div className="w-full h-full bg-white rounded-xl border">
+                <div className="w-full h-full bg-[#FFFFFF] rounded-xl border">
                     <div className="w-full px-3 py-4 bg-[#f1f7ea] border-b justify-between items-center rounded-t-[10px] flex">
                         <div className="text-[#49526A] text-xl font-bold font-['Mulish'] leading-tight">INVOICE ADVICE</div>
                         <div className="items-center gap-4 flex">
@@ -194,7 +194,7 @@ const BillingHistory: React.FC = () => {
                                 </div>
                             </div>
                             <div className="p-2 bg-nnpc-50 rounded-3xl flex-col justify-center items-center gap-2.5 inline-flex">
-                                <div className="text-center text-zinc-950 text-xs font-medium font-['Mulish'] leading-3 tracking-tight">10</div>
+                                <div className="text-center text-[#49526A] text-xs font-medium font-['Mulish'] leading-3 tracking-tight">10</div>
                             </div>
                         </div>
                     </div>
