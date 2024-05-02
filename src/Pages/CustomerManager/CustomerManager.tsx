@@ -1,5 +1,6 @@
 import { DocumentCard } from '../../Components/index';
 import images from '../../assets/index';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * DocumentCardProps describes the props for the DocumentCard component.
@@ -27,6 +28,8 @@ import images from '../../assets/index';
 
 const CustomerManager: React.FC = () => {
 
+    const navigate = useNavigate();
+
   return (
     <div className="bg-white flex-row md:flex gap-4 items-center p-4 rounded-lg">
       <DocumentCard
@@ -45,7 +48,7 @@ const CustomerManager: React.FC = () => {
         subtitle='Last Updated'
         height='330px'
         reports='12/nov/2023'
-        reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4' />}
+        reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4' onClick={() => navigate('/admin/records/billinghistory')} />}
       />
       <DocumentCard
         type='withReport'

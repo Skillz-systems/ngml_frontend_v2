@@ -5,6 +5,7 @@ import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
+import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
 
 export const AdminRoutes = [
   {
@@ -41,6 +42,12 @@ export const AdminRoutes = [
     title: 'Admin Supplier Registration',
     path: '/admin/records/supplier/id',
     component: AdminInternalLayout(SupplierOverviewLayout),
+    exact: true
+  },
+  {
+    title: 'Billing History',
+    path: '/admin/records/billinghistory',
+    component: AdminInternalLayout(BillingHistory),
     exact: true
   },
 
