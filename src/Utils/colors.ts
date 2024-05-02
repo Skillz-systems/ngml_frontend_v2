@@ -96,9 +96,9 @@ const colors = {
 type ColorName = keyof typeof colors;
 type ColorShade = keyof typeof colors.nnpc;
 
-const useColor = (colorName: ColorName, colorShade: ColorShade) => {
-  return colors[colorName][colorShade] as string;
-};
+// const useColor = (colorName: ColorName, colorShade: ColorShade) => {
+//   return colors[colorName][colorShade] as string;
+// };
 
 const getColorShades = (colorName: ColorName) => {
   return colors[colorName];
@@ -113,4 +113,5 @@ const getShadeNames = (colorName: ColorName) => {
 };
 
 export default colors;
-export { getColorNames, getColorShades, getShadeNames, useColor };
+export { getColorNames, getColorShades, getShadeNames };
+

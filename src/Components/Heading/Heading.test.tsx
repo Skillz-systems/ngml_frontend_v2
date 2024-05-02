@@ -60,6 +60,7 @@ describe('Heading', () => {
 
         const headingElement = screen.getByRole('heading', {
             level: 3, name: (content: string, element: Element) => {
+                content;
                 const hasSpan = element.querySelector('span')?.textContent === 'H3';
                 const hasParagraph = element.querySelector('p')?.textContent === 'a paragraph';
                 return hasSpan && hasParagraph;

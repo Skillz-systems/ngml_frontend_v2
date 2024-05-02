@@ -7,9 +7,11 @@ class MockResizeObserver {
   constructor(public callback: ResizeObserverCallback) {}
 
   observe(target: Element): void {
+    target;
   }
 
   unobserve(target: Element): void {
+    target;
   }
 
   disconnect(): void {

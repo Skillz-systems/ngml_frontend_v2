@@ -17,7 +17,7 @@ jobs:
             npm install && npm test
   deploy-frontend-dev:
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:20.0.0
     working_directory: ~/repo
     steps:
       - add_ssh_keys:
@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Run npm
           command: |
-            cd Frontend && npm install
+            npm install
 
       - run: CI=false sudo apt update
       - run: CI=false sudo apt-get install rsync
@@ -42,16 +42,12 @@ jobs:
       - run:
           name: build file
           command: |
-            cd Frontend && CI=false npm run build
+            CI=false npm run build
 
       - run:
           name: ssh login
           command: |
-            rsync -va -e 'ssh -p 7822 -o StrictHostKeyChecking=no'  --delete   Frontend/dist/ Frontend/.htaccess  skillz@185.160.67.60:revenuehub/frontend
-      # - run:
-      #     name: ssh and run migration on live server
-      #     command: |
-      #       ssh bartumen@192.254.235.94 && cd devapi.bartumenergy.com &&  php artisan migrate && ls && exit
+            rsync -va -e 'ssh -p 7822 -o StrictHostKeyChecking=no'  --delete   dist/ .htaccess  skillz@185.160.67.60:nnpc/frontend
 
 workflows:
   version: 2
@@ -59,6 +55,8 @@ workflows:
     jobs:
       - deploy-frontend-test
       - deploy-frontend-dev: # Use the pre-configured job, deploy-via-git
+          requires:
+            - deploy-frontend-test
           filters:
             branches:
               only: dev
