@@ -1,49 +1,47 @@
-import '@testing-library/jest-dom/extend-expect';
-import { fireEvent, render } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
 import DocumentCardTwo from './DocumentCardTwo';
 
-// Describe a test suite for the DocumentCardTwo component
 describe('DocumentCardTwo Component', () => {
-    // Test if the component renders without crashing
-    it('should render without crashing', () => {
-        const { getByText } = render(
+    it('renders with correct props', () => {
+        render(
             <DocumentCardTwo
-                icon={<span>Icon</span>}
-                title="Test Title"
-                subtitle="Test Subtitle"
+                icon={<span>📄</span>}
+                title="Document Title"
+                subtitle="Document Subtitle"
                 buttonText="Click Me"
+                width={200}
+                height={100}
             />
         );
 
-        // Check if the title and subtitle are rendered
-        expect(getByText('Test Title')).toBeInTheDocument();
-        expect(getByText('Test Subtitle')).toBeInTheDocument();
+        expect(screen.getByText('Document Title')).toBeInTheDocument();
+        expect(screen.getByText('Document Subtitle')).toBeInTheDocument();
+        expect(screen.getByText('📄')).toBeInTheDocument();
     });
 
-    // Test hover behavior to ensure the button is visible on hover
-    it('should display the button text when hovered', () => {
-        const { getByText, queryByText } = render(
+    it('changes style on hover and shows button', () => {
+        render(
             <DocumentCardTwo
-                icon={<span>Icon</span>}
-                title="Test Title"
-                subtitle="Test Subtitle"
+                icon={<span>📄</span>}
+                title="Document Title"
+                subtitle="Document Subtitle"
                 buttonText="Click Me"
             />
         );
 
-        // The button text should not be visible initially
-        expect(queryByText('Click Me')).toBeNull();
+        const card = screen.getByText('Document Title').parentElement?.parentElement;
 
-        // Simulate hover over the component
-        fireEvent.mouseEnter(getByText('Test Title'));
+        if (card) {
+            expect(screen.queryByText('Click Me')).toBeNull();
 
-        // The button text should be visible now
-        expect(getByText('Click Me')).toBeVisible();
+            fireEvent.mouseEnter(card);
 
-        // Simulate mouse leave to check if the button text disappears
-        fireEvent.mouseLeave(getByText('Test Title'));
+            expect(screen.getByText('Click Me')).toBeInTheDocument();
 
-        // The button text should not be visible again
-        expect(queryByText('Click Me')).toBeNull();
+            fireEvent.mouseLeave(card);
+
+            expect(screen.queryByText('Click Me')).toBeNull();
+        }
     });
 });

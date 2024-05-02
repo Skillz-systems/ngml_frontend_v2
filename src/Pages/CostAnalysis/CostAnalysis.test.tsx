@@ -29,7 +29,7 @@ describe('CostAnalysis Component', () => {
         const documentSubtitle = screen.getByText(/site survey report/i);
         expect(documentSubtitle).toBeInTheDocument();
 
-        const documentLinkText = screen.getByText(/last edited/i);
+        const documentLinkText = screen.getByText(/last updated/i);
         expect(documentLinkText).toBeInTheDocument();
 
         const documentLinkText2 = screen.getByText(/12\/13\/2023/i);

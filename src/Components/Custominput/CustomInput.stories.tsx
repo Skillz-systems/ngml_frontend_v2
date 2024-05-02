@@ -9,7 +9,7 @@ const meta: Meta = {
         type: { control: 'select', options: ['text', 'password', 'date', 'number', 'select', 'textarea', 'checkbox', 'radio'] },
         label: { control: 'text' },
         value: { control: 'text' },
-        onChange: { action: 'onChange' },
+        handleChangeEvent: { action: 'onChange' },
         placeholder: { control: 'text' },
         options: { control: 'array' },
         required: { control: 'boolean' },

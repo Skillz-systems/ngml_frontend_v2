@@ -81,22 +81,22 @@ const CostAnalysis: React.FC = () => {
                     </div>
                 </div>
                 <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] border-b items-center gap-3 flex">
-                {costAnalysisCardDataTwo.map((cards, index) => (
-                    <div key={index} className="flex flex-1 min-w-[150px] max-w-[200px]">
-                        <DocumentCard
-                            type={cards.type}
-                            title={cards.title}
-                            subtitle={cards.subtitle}
-                            linkText={cards.linkText}
-                            linkText2={cards.linkText2}
-                            icon={cards.icon}
-                            // width={cards.width}
-                            height={cards.height}
-                        />
-                    </div>
-                ))}
+                    {costAnalysisCardDataTwo.map((cards, index) => (
+                        <div key={index} className="flex flex-1 min-w-[150px] max-w-[200px]">
+                            <DocumentCard
+                                type={cards.type}
+                                title={cards.title}
+                                subtitle={cards.subtitle}
+                                linkText={cards.linkText}
+                                linkText2={cards.linkText2}
+                                icon={cards.icon}
+                                // width={cards.width}
+                                height={cards.height}
+                            />
+                        </div>
+                    ))}
 
-            </div>
+                </div>
             </div>
             <Modal
                 isOpen={isModalOpen}
