@@ -78,14 +78,14 @@ border-radius: 50%;
 
 interface AuthContainerProps {
     children: React.ReactNode;
-    backgroundColor?: string;
+    backgroundcolor?: string;
     width?: string;
     height?: string;
 }
 
-const AuthContainer: React.FC<AuthContainerProps> = ({ children, backgroundColor, width, height }) => {
+const AuthContainer: React.FC<AuthContainerProps> = ({ children, backgroundcolor, width, height }) => {
     return (
-        <Container backgroundColor={backgroundColor} width={width} height={height}>
+        <Container background-color={backgroundcolor} width={width} height={height}>
             <LogoContainer>
                 <LogoImage src="assets/nnpclogo.png" alt="NGML Logo" />
             </LogoContainer>

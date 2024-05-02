@@ -27,6 +27,17 @@ import images from '../../assets/index';
  *   - `width` and `height`: Dimensions of the document card.
  */
 
+interface CardDataItem {
+    type: 'withLink' | 'withoutLink' | 'withReport';
+    title: string;
+    subtitle: string;
+    icon: React.ReactNode;
+    linkText: string;
+    linkText2: string;
+    width: number | string;
+    height: number | string;
+}
+
 const CostAnalysis: React.FC = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,6 +49,19 @@ const CostAnalysis: React.FC = () => {
     const handleCreateCustomer = () => {
 
     };
+
+    const costAnalysisCardDataTwo: CardDataItem[] = [
+        {
+            type: "withLink",
+            title: "Dangote Cement",
+            subtitle: "Site Survey Report",
+            linkText: "Last Updated",
+            linkText2: "12/13/2023",
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            width: "200px",
+            height: "100%",
+        },
+    ]
 
     return (
         <div className="w-full h-full p-4 bg-white rounded-xl flex flex-col gap-4 md:gap-6">
@@ -56,17 +80,22 @@ const CostAnalysis: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full flex flex-wrap justify-start gap-4 p-4">
-                    <DocumentCard
-                        type="withLink"
-                        title="Dangote Cement"
-                        subtitle="Site Survey Report"
-                        linkText="Last edited"
-                        linkText2="12/13/2023"
-                        icon={<img src={images.copy} alt="Copy Icon" className="w-5 h-5" />}
-                        width="200px"
-                        height="250px"
-                    />
+                <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] border-b items-center gap-3 flex">
+                    {costAnalysisCardDataTwo.map((cards, index) => (
+                        <div key={index} className="flex flex-1 min-w-[150px] max-w-[200px]">
+                            <DocumentCard
+                                type={cards.type}
+                                title={cards.title}
+                                subtitle={cards.subtitle}
+                                linkText={cards.linkText}
+                                linkText2={cards.linkText2}
+                                icon={cards.icon}
+                                // width={cards.width}
+                                height={cards.height}
+                            />
+                        </div>
+                    ))}
+
                 </div>
             </div>
             <Modal

@@ -10,6 +10,7 @@ import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 import CustomerDetail from './CustomerDetail';
 import ConnectProject from '../ConnectProject/ConnectProject';
 import CustomerManager from '../CustomerManager/CustomerManager';
+import Agreement from '../Agreement/Agreement';
 // import images from '../../assets/index';
 
 
@@ -95,6 +96,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         ddq: <DdqPage />,
         sitevisit: <SiteVisitationPage />,
         costanalysis: <CostAnalysis />,
+        agreement: <Agreement />,
         connectproject: <ConnectProject />,
         customermanager:<CustomerManager />,
         // subdetail1: <p>tyfyufuyfifyt</p>,
