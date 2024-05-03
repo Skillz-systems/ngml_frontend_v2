@@ -182,8 +182,8 @@ const BillingHistory: React.FC = () => {
 
 
     return (
-        <div className="w-full h-full">
-            <div className="w-full h-full p-8 bg-[#FFFFFF] bg-opacity-50 rounded-lg flex-col justify-start items-start gap-8 flex">
+        <div className="">
+            <div className="w-full p-8 rounded-lg flex-col justify-start items-start gap-8 flex">
                 <div className="w-full justify-between items-center flex">
                     <div className="text-center text-3xl font-semibold font-['Mulish']">Billing History</div>
                     <div className="items-center gap-4 flex">
