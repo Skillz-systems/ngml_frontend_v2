@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { CustomInput } from '../../Components/index';
 
@@ -24,7 +25,7 @@ const AddNewInvoice: React.FC<AddNewInvoiceProps> = ({ newInvoiceData, setNewInv
                     type="select"
                     label='Year'
                     value={newInvoiceData.year}
-                    handleChangeEvent={(value) => handleInputChange(value, "year")}
+                    handleChangeEvent={(value) => handleInputChange(value, 'year')}
                     placeholder="Choose Year"
                     options={yearOptions}
                 />
@@ -33,7 +34,7 @@ const AddNewInvoice: React.FC<AddNewInvoiceProps> = ({ newInvoiceData, setNewInv
                     type="select"
                     label='Month'
                     value={newInvoiceData.month}
-                    handleChangeEvent={(value) => handleInputChange(value, "month")}
+                    handleChangeEvent={(value) => handleInputChange(value, 'month')}
                     placeholder="Choose Month"
                     options={monthOptions}
                 />
@@ -42,7 +43,7 @@ const AddNewInvoice: React.FC<AddNewInvoiceProps> = ({ newInvoiceData, setNewInv
                     type="text"
                     label='Rate/Scf(NGN)'
                     value={newInvoiceData.rate}
-                    handleChangeEvent={(value) => handleInputChange(value, "rate")}
+                    handleChangeEvent={(value) => handleInputChange(value, 'rate')}
                     placeholder="Input rate"
                 />
 
