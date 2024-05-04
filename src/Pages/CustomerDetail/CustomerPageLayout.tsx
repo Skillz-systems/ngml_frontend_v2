@@ -11,6 +11,7 @@ import CustomerDetail from './CustomerDetail';
 import ConnectProject from '../ConnectProject/ConnectProject';
 import CustomerManager from '../CustomerManager/CustomerManager';
 import Agreement from '../Agreement/Agreement';
+import Dailyvolumns from '../Dailyvolumns/Dailyvolumns';
 // import images from '../../assets/index';
 
 
@@ -25,13 +26,6 @@ const AdminCustomerPageLayout: React.FC = () => {
              // content: 'numeric',
             // icon: <img src={images.business} alt="logo" className='w-4 h-4' />,
             // content: 'icon',
-        },
-        {
-            name: 'customers',
-            ref: 'customers',
-            // content: 'numeric',
-            // content: 'icon',
-            // icon: <img src={images.LeftArrow} alt="logo" />
         },
         {
             name: 'customer details',
@@ -75,9 +69,15 @@ const AdminCustomerPageLayout: React.FC = () => {
             ref: 'agreement',
             // content: 'numeric'
         },
+       
         {
             name: 'connect project',
             ref: 'connectproject',
+            // content: 'numeric'
+        },
+        {
+            name: 'Daily Volumns',
+            ref: 'dailyvolumns',
             // content: 'numeric'
         },
         {
@@ -90,7 +90,6 @@ const AdminCustomerPageLayout: React.FC = () => {
     // Define the content or pages here
     const tabContent = {
         overview: <CustomerPageDetails />,
-        customers: <div className="flex-1 w-full"><p>Customers Content Here</p></div>,
         customerdetails: <CustomerDetail />,
         eoirequest: <EoiPage />,
         ddq: <DdqPage />,
@@ -98,6 +97,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         costanalysis: <CostAnalysis />,
         agreement: <Agreement />,
         connectproject: <ConnectProject />,
+        dailyvolumns: <Dailyvolumns />,
         customermanager:<CustomerManager />,
         // subdetail1: <p>tyfyufuyfifyt</p>,
         // subdetail2: <p>tyfyufuyfifyt</p>
