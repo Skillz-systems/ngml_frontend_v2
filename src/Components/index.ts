@@ -51,6 +51,8 @@ export { default as TenderTable } from './TableComponent/TenderTable/TenderTable
 export { default as CustomerListTable } from './TableComponent/CustomerListTable/CustomerListTable';
 export { default as SuppliersListTable } from './TableComponent/SuppliersListTable/SuppliersListTable';
 export { default as SupplierPaymentTable } from './TableComponent/SupplierPaymentTable/SupplierPaymentTable';
+export { default as DailyVolumnHistoryTable } from './TableComponent/DailyVolumnHistoryTable/DailyVolumnHistoryTable';
+
 
 
 
