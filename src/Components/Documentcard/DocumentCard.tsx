@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import callmade from '/assets/png-icons/callmade.png';
 import icons from '/assets/png-icons/icons.png';
 
 /**
@@ -16,14 +15,19 @@ import icons from '/assets/png-icons/icons.png';
 
 interface DocumentCardProps {
   type: 'withLink' | 'withoutLink' | 'withReport';
-  icon: string;
+  icon: React.ReactNode;
+  reportIcon?: React.ReactNode
   title: string;
   subtitle?: string;
   linkText?: string;
   linkText2?: string;
+  reports?: string;
+  reportTitle?: string;
+  width?: number | string;
+  height?: number | string;
 }
 
-const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle, linkText, linkText2 }) => {
+const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, reportIcon, title, subtitle, linkText, linkText2, reports, reportTitle, width = '100%', height = '100%' }) => {
   const [hovered, setHovered] = useState(false);
 
   const currentDate = new Date();
@@ -32,20 +36,19 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
 
   return (
     <div
-      className={(type === 'withLink' || type === 'withReport') ? `bg-gray-100 shadow-md rounded-[20px] p-4 mb-4 md:w-80 ${hovered ? 'bg-gray-100' : ''}` : `bg-gray-100 shadow-md mb-4 rounded-[20px] p-4 md:w-80 ${hovered ? 'bg-gray-100' : ''}`}
+      className={(type === 'withLink' || type === 'withReport') ? `bg-nnpcdarkgreen-50 shadow-md rounded-[20px] p-4 mb-4 w-full h-full ${hovered ? 'bg-[#e8e9eb]' : ''}` : `bg-nnpcdarkgreen-50 shadow-md mb-4 rounded-[20px] p-2 w-full h-full ${hovered ? 'bg-gray-100' : ''}`}
       style={{
-        backgroundImage: type === 'withReport' ? `url(${icons})` : 'none',
-        backgroundSize: type === 'withReport' ? 'cover' : 'auto'
+        backgroundImage: type === 'withReport' ? `url(${icons})` : 'none', backgroundSize: type === 'withReport' ? 'cover' : 'auto',
+        width,
+        height
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img
-        src={icon}
-        alt="Icon"
-        className={`w-8 h-8 mr-2 ${(type === 'withLink' && hovered) || (type === 'withoutLink' && hovered) ? 'bg-gray-100 p-2 border-2 rounded-full' : type === 'withLink' || type === 'withoutLink' ? 'bg-green-500 p-2 rounded-full' : ''
-          }`}
-      />
+      {icon &&
+        <div className={(type==='withReport') ? 'w-16 h-16 mr-2' : `w-8 h-8 mr-2 ${(type === 'withLink' && hovered) || (type === 'withoutLink' && hovered) ? 'bg-[#e8e9eb] p-2 border-2 rounded-full' : type === 'withLink' || type === 'withoutLink' ? 'bg-green-500 p-2 rounded-full' : ''
+          }`}>{icon}</div>}
+
       {type === 'withoutLink' && hovered ? <div className="">
         <h2 className={`text-lg font-bold ${type === 'withoutLink' || type === 'withReport' ? 'mt-[90px]' : ''}`}>{title}</h2>
         {subtitle && (
@@ -60,7 +63,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
         <h2 className={`text-lg font-bold ${type === 'withoutLink' || type === 'withReport' ? 'mt-[120px]' : ''}`}>{title}</h2>
         {subtitle && (
           <p
-            className={`text-sm mb-2 text-gray-400 italic ${hovered ? 'text-xs' : ''
+            className={(type === 'withReport' && !reportTitle) ? 'text-lg mt-[10px]': `text-sm mb-2 text-gray-400 italic ${hovered ? 'text-xs' : ''
               }`}
           >
             {subtitle}
@@ -69,20 +72,20 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, title, subtitle
       </div>}
       {(type === 'withLink') && linkText && (
         <div className="flex items-center justify-between border-2 p-1 rounded-[10px]">
-          <a className="block text-sm text-gray-400">{hovered ? 'Last edited' : linkText}</a>
-          <a href="#" className="block text-gray-700 font-[600]">
+          <a className="block text-[12px] text-gray-400">{hovered ? 'Last edited' : linkText}</a>
+          <a href="#" className="block text-gray-700 text-sm font-[600]">
             {hovered ? formattedDate : linkText2}
           </a>
         </div>
       )}
       {type === 'withReport' && (
         <div className="flex items-center justify-between">
-          <a href="#" className="text-gray-500">
-            Reports
+          <a href="#" className={`${reportTitle ? 'text-xl font-bold mt-[60px]' : 'text-gray-500 mt-[-5px]'}`}>
+            {reports || reportTitle}
           </a>
           <div>
-            <div className='border-2 rounded-full p-2 bg-gray-100 hover:bg-gray-200 cursor-pointer'>
-              <img src={callmade} alt="callmade Icon" className= 'w-4 h-4'  />
+            <div className={`${reportTitle ? 'mt-[60px] border-2 rounded-full p-2 bg-gray-100 hover:bg-gray-200 cursor-pointer' : 'border-2 rounded-full p-2 bg-gray-100 hover:bg-gray-200 cursor-pointer'}`}>
+              {reportIcon && <div>{reportIcon} </div>}
             </div>
           </div>
         </div>

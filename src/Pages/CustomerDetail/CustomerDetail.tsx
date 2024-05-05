@@ -25,7 +25,7 @@ const CustomerDetail: React.FC = () => {
 
     return (
         <div className="p-[20px] rounded-[20px]" style={{background:colors.dark[50]}}>
-            <div className='border-2 border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
+            <div className='border border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
                 <div className='flex-col space-y-5'>
                     <h3 className='text-[#49526A] font-[700]'>PERSONAL DETAILS</h3>
                     <div className='border-2 flex items-center justify-between rounded-[10px] h-16'>
@@ -59,7 +59,7 @@ const CustomerDetail: React.FC = () => {
                 </div>
             </div>
             <div className='mt-6'>
-                <div className='border-2 border-nnpcdarkgreen-500 rounded-[20px] p-[20px]'>
+                <div className='border border-nnpcdarkgreen-500 rounded-[20px] p-[20px]'>
                     <div className='flex-col space-y-5'>
                         <h3 className='text-[#49526A] font-[700]'>REPRESENTATIVE DETAILS</h3>
                         <CustomInput
@@ -82,7 +82,7 @@ const CustomerDetail: React.FC = () => {
                 </div>
             </div>
             <div className='mt-6'>
-                <div className='border-2 border-nnpcdarkgreen-500 rounded-[20px] p-[20px]'>
+                <div className='border border-nnpcdarkgreen-500 rounded-[20px] p-[20px]'>
                     <div className='flex-col space-y-5'>
                         <h3 className='text-[#49526A] font-[700]'>CUSTOMER TYPE</h3>
                         <CustomInput

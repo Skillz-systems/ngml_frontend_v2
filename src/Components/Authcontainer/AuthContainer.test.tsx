@@ -26,7 +26,7 @@ describe('AuthContainer', () => {
 
     it('renders with custom background color', () => {
         const { container } = render(
-            <AuthContainer backgroundColor="red">
+            <AuthContainer backgroundcolor="red">
                 <p>Test Content</p>
             </AuthContainer>
         );

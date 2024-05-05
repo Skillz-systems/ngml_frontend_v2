@@ -1,57 +1,82 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import TabCustomer, { TabListInterface } from './TabCustomer';
 
-// Mock data for testing
-const mockTabList: TabListInterface[] = [
-    { name: 'Tab 1', ref: 'tab1', content: 'icon', icon: <span>Icon 1</span> },
-    { name: 'Tab 2', ref: 'tab2', content: 'numeric' },
+const tablist: TabListInterface[] = [
     {
-        name: 'Tab 3',
-        ref: 'tab3',
-        content: 'icon',
-        icon: <span>Icon 2</span>,
+        name: 'Overview',
+        ref: 'overview',
+    },
+    {
+        name: 'Details',
+        ref: 'details',
         sublist: [
-            { name: 'Subtab 1', ref: 'subtab1', content: 'icon', icon: <span>Subtab Icon 1</span> },
-            { name: 'Subtab 2', ref: 'subtab2', content: 'numeric' },
+            { name: 'Subdetail 1', ref: 'subdetail1' },
+            { name: 'Subdetail 2', ref: 'subdetail2' },
         ],
+    },
+    {
+        name: 'Settings',
+        ref: 'settings',
     },
 ];
 
-const mockTabContent = {
-    tab1: <div>Tab 1 Content</div>,
-    tab2: <div>Tab 2 Content</div>,
-    tab3: <div>Tab 3 Content</div>,
-    subtab1: <div>Subtab 1 Content</div>,
-    subtab2: <div>Subtab 2 Content</div>,
+const tabContent = {
+    overview: <div>Overview Content</div>,
+    details: <div>Details Content</div>,
+    subdetail1: <div>Subdetail 1 Content</div>,
+    subdetail2: <div>Subdetail 2 Content</div>,
+    settings: <div>Settings Content</div>,
 };
 
-test('renders tab customer component with tabs and content', () => {
-    const { getByText } = render(
-        <TabCustomer activeTab="tab1" setActiveTab={() => { }} tablist={mockTabList} tabContent={mockTabContent} />
-    );
+describe('TabCustomer Component', () => {
+    it('renders without crashing', () => {
+        render(
+            <TabCustomer
+                activeTab="overview"
+                setActiveTab={() => { }}
+                tablist={tablist}
+                tabContent={tabContent}
+            />
+        );
+        expect(screen.getByText('Overview Content')).toBeInTheDocument();
+    });
 
-    // Check if the component renders the tabs
-    const tab1 = getByText('Tab 1');
-    const tab2 = getByText('Tab 2');
-    const tab3 = getByText('Tab 3');
+    it('should change the active tab when a tab is clicked', () => {
+        const setActiveTab = vi.fn();
+        render(
+            <TabCustomer
+                activeTab="overview"
+                setActiveTab={setActiveTab}
+                tablist={tablist}
+                tabContent={tabContent}
+            />
+        );
 
-    expect(tab1).toBeInTheDocument();
-    expect(tab2).toBeInTheDocument();
-    expect(tab3).toBeInTheDocument();
+        const detailsTab = screen.getByText(/details/i);
+        fireEvent.click(detailsTab);
 
-    // Check if the component renders the content for active tab
-    const tab1Content = getByText('Tab 1 Content');
-    expect(tab1Content).toBeInTheDocument();
-});
+        expect(setActiveTab).toHaveBeenCalledWith('details');
+    });
 
-test('switches tab when clicked', () => {
-    const setActiveTab = vi.fn();
-    const { getByText } = render(
-        <TabCustomer activeTab="tab1" setActiveTab={setActiveTab} tablist={mockTabList} tabContent={mockTabContent} />
-    );
+    it('should change the active tab when a dropdown selection is made', () => {
+        const setActiveTab = vi.fn();
+        render(
+            <TabCustomer
+                activeTab="overview"
+                setActiveTab={setActiveTab}
+                tablist={tablist}
+                tabContent={tabContent}
+            />
+        );
 
-    const tab2 = getByText('Tab 2');
-    fireEvent.click(tab2);
+        const combobox = screen.getByRole('combobox');
+        fireEvent.mouseDown(combobox);
 
-    expect(setActiveTab).toHaveBeenCalledWith('tab2');
+        const menu = screen.getByRole('listbox');
+
+        const settingsOption = within(menu).getByText(/settings/i);
+        fireEvent.click(settingsOption);
+
+        expect(setActiveTab).toHaveBeenCalledWith('settings');
+    });
 });

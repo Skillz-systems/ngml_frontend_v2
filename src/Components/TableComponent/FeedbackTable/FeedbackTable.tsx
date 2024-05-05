@@ -7,20 +7,20 @@ import { FeedbackData } from '../../../Data';
 
 
 
-  /**
- * Interface representing the properties of a feedback entry.
- * @typeof {Object} FeedbackTableProps
- * @property {number} id - The unique identifier for the feedback entry.
- * @property {string} [companyname] - The name of the company providing feedback.
- * @property {string} [companyType] - The type of the company providing feedback.
- * @property {string[]} [selectedDates] - Optional. Dates selected related to the feedback.
- * @property {string} [status] - Optional. The current status of the feedback (e.g., Pending, Sent).
- * @property {string} [action] - Optional. Actions that can be taken on the feedback.
- * @property {string} [deadline] - Optional. Deadline associated with the feedback.
- * @property {string} [companyEmail] - Optional. Email address of the company providing feedback.
- * @property {string} [companyNumber] - Optional. Contact number of the company providing feedback.
- * @property {string} [companyAddress] - Optional. Physical address of the company providing feedback.
- */
+/**
+* Interface representing the properties of a feedback entry.
+* @typeof {Object} FeedbackTableProps
+* @property {number} id - The unique identifier for the feedback entry.
+* @property {string} [companyname] - The name of the company providing feedback.
+* @property {string} [companyType] - The type of the company providing feedback.
+* @property {string[]} [selectedDates] - Optional. Dates selected related to the feedback.
+* @property {string} [status] - Optional. The current status of the feedback (e.g., Pending, Sent).
+* @property {string} [action] - Optional. Actions that can be taken on the feedback.
+* @property {string} [deadline] - Optional. Deadline associated with the feedback.
+* @property {string} [companyEmail] - Optional. Email address of the company providing feedback.
+* @property {string} [companyNumber] - Optional. Contact number of the company providing feedback.
+* @property {string} [companyAddress] - Optional. Physical address of the company providing feedback.
+*/
 interface FeedbackTableProps {
     id: number;
     companyname?: string;
@@ -62,9 +62,9 @@ const FeedbackTable = () => {
     const status = [...new Set(rows.map(row => row.status))];
 
 
-     /**
-     * Filters the feedback entries based on the selected status.
-     */
+    /**
+    * Filters the feedback entries based on the selected status.
+    */
     const filterData = () => {
         let filtered = rows;
         if (selectedStatus !== 'All Status') {
@@ -154,11 +154,11 @@ const FeedbackTable = () => {
     return (
         <div className='mt-[20px] w-[100%] '>
 
-            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
-                <div className='italic text-[12px] text-[#828DA9]'>
+            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%] '>
+                <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex justify-end  items-center gap-[8px] relative'>
+                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]' >
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
                         <div className='text-[12px] font-[400] text-[#828DA9] '>All Forms</div>
                         <IconButton onClick={handleFilterClick}>
@@ -197,6 +197,7 @@ const FeedbackTable = () => {
                             outline: 'solid #00AF50 1px',
                         },
                         '& .MuiDataGrid-columnHeaders': {
+                            backgroundColor: '#F6FDEC',
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
                                 fontWeight: '700',

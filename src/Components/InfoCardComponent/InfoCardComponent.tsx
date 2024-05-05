@@ -40,22 +40,23 @@ const InfoCard: React.FC<InfoCardProps> = ({
   };
 
   return (
-    <div style={{
+    <div 
+    className='text-start sm:text-center'
+    style={{
       height: '100%',
       width: '100%',
       display: 'flex',
-      textAlign: 'center',
       flexDirection: 'column',
       justifyContent: 'center',
       ...style,
     }}>
-      <div style={{
+      <div 
+     
+      style={{
         backgroundColor: '#EAEEF2',
         borderTopRightRadius: '12px',
         borderTopLeftRadius: '12px',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         color: '#828DA9',
         fontSize: '20px',
         fontWeight: '600',
@@ -68,10 +69,11 @@ const InfoCard: React.FC<InfoCardProps> = ({
 
       </div>
       <Divider />
-      <div style={{
+      <div 
+          className='text-start sm:text-center'
+      style={{
         backgroundColor: '#FBFCFD',
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
         fontWeight: '700',
         borderBottomRightRadius: '12px',
@@ -85,7 +87,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
             value={selectedOption}
             onChange={handleSelectChange}
             style={{ color: colors.dark[200] }}
-            className='mt-[10px] border w-[100%] h-[40px] rounded-[32px] p-[10px] '
+            className='mt-[10px] border w-[100%] h-[40px] rounded-[32px] p-[10px] text-[14px] outline-none'
           >
             {options.map((option, index) => (
               <option key={index} value={option}>{option}</option>
