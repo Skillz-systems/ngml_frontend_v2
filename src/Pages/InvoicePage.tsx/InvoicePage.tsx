@@ -1,114 +1,142 @@
-import { DocumentCard } from '../../Components/index';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import images from '../../assets/index';
+
+/**
+ * InvoicePage Component
+ * 
+ * This component represents an invoice page that displays a document preview with pagination controls.
+ * Users can navigate through the pages and perform actions such as rejecting the invoice, linking an invoice,
+ * or closing the invoice page. The page contains details about the invoice, and an area to preview the document.
+ * 
+ * @component
+ * @example
+ * <InvoicePage />
+ * 
+ * @returns {JSX.Element} - The rendered InvoicePage component.
+ */
 
 const InvoicePage: React.FC = () => {
 
-  return (
-    <div className="w-full h-full flex-col justify-start items-start gap-4 inline-flex">
-  <div className="Body self-stretch h-96 pt-8 bg-white bg-opacity-50 rounded-lg flex-col justify-start items-start gap-8 flex">
-    <div className="TitleArea self-stretch px-8 justify-between items-center inline-flex">
-      <div className="Frame238063 justify-start items-center gap-3 flex">
-        <div className="OctoberInvoiceAdvice text-center text-slate-600 text-3xl font-semibold font-['Mulish'] leading-loose">October Invoice Advice</div>
-      </div>
-      <div className="Frame238171 justify-end items-center gap-2 flex">
-        <div className="ConfirmButton w-44 px-2 py-3 rounded-3xl border border-gray-200 justify-center items-center gap-2.5 flex">
-          <div className="RequestADelivery text-slate-600 text-base font-normal font-['Mulish'] leading-none tracking-tight">Reject Invoice Advice</div>
-        </div>
-        <div className="ConfirmButton w-24 px-2 py-3 rounded-3xl border border-gray-200 justify-center items-center gap-2.5 flex">
-          <div className="RequestADelivery text-slate-600 text-base font-normal font-['Mulish'] leading-none tracking-tight">Link Invoice</div>
-        </div>
-        <div className="Close w-16 p-2.5 rounded-3xl border border-gray-200 justify-start items-center gap-1 flex">
-          <div className="IconsPack w-4 h-4 justify-center items-center flex">
-            <div className="Icons w-4 h-4 p-px justify-center items-center inline-flex" />
-          </div>
-          <div className="Close text-center text-slate-400 text-xs font-normal font-['Mulish']">Close</div>
-        </div>
-      </div>
-    </div>
-    <div className="Frame238118 self-stretch h-96 flex-col justify-start items-start flex">
-      <div className="Frame238117 self-stretch justify-start items-start inline-flex">
-        <div className="Frame238101 grow shrink basis-0 h-8 px-5 py-2 bg-lime-200 border-b border-gray-200 justify-start items-center gap-2.5 flex">
-          <div className="Details text-slate-600 text-sm font-semibold font-['Mulish'] leading-none">DETAILS</div>
-        </div>
-        <div className="Frame238102 w-96 h-8 p-2 bg-lime-200 border-b border-gray-200 justify-center items-center gap-2.5 flex" />
-        <div className="Frame238103 w-60 h-8 p-2 bg-lime-200 border-b border-gray-200 justify-center items-center gap-2.5 flex">
-          <div className="DocumentPreview text-slate-600 text-sm font-semibold font-['Mulish'] leading-none">DOCUMENT PREVIEW</div>
-        </div>
-      </div>
-      <div className="Frame238100 self-stretch h-96 justify-start items-start inline-flex">
-        <div className="TocActions grow shrink basis-0 self-stretch p-4 bg-slate-50 border-r flex-col justify-start items-start gap-2.5 inline-flex">
-          <div className="Frame238102 self-stretch h-16 flex-col justify-start items-center gap-2.5 flex">
-            <div className="Frame237972 self-stretch p-2 rounded-lg border border-gray-300 justify-between items-center inline-flex">
-              <div className="Frame237964 p-1 bg-slate-200 rounded-sm justify-center items-start gap-2.5 flex">
-                <div className="Month text-center text-slate-600 text-xs font-semibold font-['Mulish'] uppercase leading-3">MONTH</div>
-              </div>
-              <div className="October text-center text-zinc-950 text-xs font-normal font-['Mulish'] leading-3">October</div>
-            </div>
-            <div className="Frame237970 self-stretch p-2 rounded-lg border border-gray-300 justify-between items-center inline-flex">
-              <div className="Frame237964 p-1 bg-slate-200 rounded-sm justify-center items-start gap-2.5 flex">
-                <div className="GeneratedOn text-center text-slate-600 text-xs font-semibold font-['Mulish'] uppercase leading-3">generated on</div>
-              </div>
-              <div className="Nov2023 text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">03/Nov/2023</div>
-            </div>
-          </div>
-        </div>
-        <div className="DocumentBody p-4 bg-white rounded-xl flex-col justify-start items-start gap-6 inline-flex">
-          <img className="A41 w-96 h-96 relative rounded-xl border border-gray-300" src="https://via.placeholder.com/706x1000" />
-        </div>
-        <div className="Frame238119 self-stretch flex-col justify-start items-start inline-flex">
-          <div className="Preview h-12 bg-slate-50 border-l flex-col justify-start items-center flex">
-            <div className="Frame238103 self-stretch p-2 border-b justify-between items-center inline-flex">
-              <div className="Page1Of68Showing text-slate-600 text-xs font-semibold font-['Mulish'] leading-3">Page 1 of 68 showing</div>
-              <div className="Frame238116 justify-end items-center gap-2 flex">
-                <div className="PageCounter w-8 h-8 p-2.5 rounded-3xl border border-gray-200 flex-col justify-center items-center gap-2.5 inline-flex">
-                  <div className="Icon p-1 origin-top-left rotate-180 rounded justify-center items-center gap-2.5 inline-flex">
-                    <div className="IconsPack w-4 h-4 justify-center items-center flex">
-                      <div className="Icons w-4 h-4 px-1.5 py-0.5 justify-center items-center inline-flex" />
+
+     // Hooks and State
+    const navigate = useNavigate();
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = 68;
+
+    // Page Navigation Handlers
+    /**
+     * Go to the next page if it exists.
+     */
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1)
+        }
+    };
+
+     /**
+     * Go to the previous page if it exists.
+     */
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    // Close Handler
+    /**
+     * Close the invoice page and navigate back.
+     */
+    const handleClose = () => {
+        navigate(-1)
+    };
+
+    return (
+        <div className="w-full h-full">
+            <div className="w-full h-fit pt-8 bg-[#FFFFFF] bg-opacity-50 rounded-lg">
+                <div className="px-8 justify-between items-center flex mb-6 flex-col sm:flex-row">
+                    <div className="text-center text-3xl text-[#49526A] font-semibold">October Invoice Advice</div>
+                    <div className="items-center gap-2 flex">
+                        <div className="px-2 py-1 rounded-3xl border">
+                            <div className="text-[#49526A] text-base font-normal">Reject Invoice Advice</div>
+                        </div>
+                        <div className="px-2 py-1 rounded-3xl border">
+                            <div className="text-[#49526A] text-base font-normal">Link Invoice</div>
+                        </div>
+                        <div className="p-2 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
+                            <div className="w-4 h-4 justify-center items-center flex">
+                                <img src={images.cancel} alt="close icon" width={'10px'} />
+                            </div>
+                            <div className="text-center text-[#808080] text-xs font-normal">Close</div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <div className="PageCounter w-8 h-8 p-2.5 rounded-3xl border border-gray-200 flex-col justify-center items-center gap-2.5 inline-flex">
-                  <div className="Icon p-1 origin-top-left rotate-180 rounded justify-center items-center gap-2.5 inline-flex">
-                    <div className="IconsPack w-4 h-4 justify-center items-center flex">
-                      <div className="Icons w-4 h-4 px-1.5 py-0.5 justify-center items-center inline-flex" />
+
+                <div className="w-full justify-between items-center flex bg-nnpc-50 px-5 py-2">
+                    <div className="text-[#49526A] text-sm font-semibold">DETAILS</div>
+                    <div className="text-[#49526A] text-sm font-semibold">DOCUMENT PREVIEW</div>
+                </div>
+
+                <div className="w-full h-full flex flex-col sm:flex-row">
+                    <div className="w-full p-4 border-r space-y-4">
+                        <div className="w-full p-2 rounded-lg border justify-between items-center flex">
+                            <div className="p-1 bg-[#EAEEF2] rounded-sm">
+                                <div className="text-center text-[#49526A] text-xs font-semibold">MONTH</div>
+                            </div>
+                            <div className="text-center text-[#49526A] text-xs font-normal">October</div>
+                        </div>
+                        <div className="w-full p-2 rounded-lg border justify-between items-center flex">
+                            <div className="p-1 bg-[#EAEEF2] rounded-sm">
+                                <div className="text-center text-xs font-semibold">Generated on</div>
+                            </div>
+                            <div className="text-center text-xs font-semibold">03/Nov/2023</div>
+                        </div>
                     </div>
-                  </div>
+                    <div className="w-full p-4 bg-[#FFFFFF] rounded-xl flex justify-center">
+                        <img className="w-full h-full relative rounded-xl border" src={`https://via.placeholder.com/706x1000?text=Page+${currentPage}`} />
+                    </div>
+                    <div className="flex justify-center">
+                        <div className="h-12 border-l">
+                            <div className="p-2 border-b justify-between items-center flex">
+                                <div className="text-[#49526A] text-xs font-semibold">Page {currentPage} of {totalPages} showing</div>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        className="w-8 h-8 p-2.5 rounded-3xl border flex-col justify-center items-center gap-2.5 inline-flex"
+                                        onClick={handlePreviousPage}
+                                        disabled={currentPage <= 1}
+                                    >
+                                        <div className="w-4 h-4">
+                                            <img src={images.leftarrow} alt='left arrow icon' />
+                                        </div>
+                                    </button>
+                                    <button
+                                        className="w-8 h-8 p-2.5 rounded-3xl border flex-col justify-center items-center gap-2.5 inline-flex"
+                                        onClick={handleNextPage}
+                                        disabled={currentPage >= totalPages}
+                                    >
+                                        <div className="w-4 h-4">
+                                            <img src={images.rightarrow} alt='right arrow icon' />
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="w-full md:w-60 border-l flex-col">
+                                <div className="h-full p-4 space-y-3 flex flex-row sm:flex-col">
+                                    {[1, 2, 3, 4, 5].map(page => (
+                                        <div key={page} className="h-full">
+                                            <div className="text-[#808080] text-xs font-normal">Page {page}</div>
+                                            <img className="h-full p-2.5 rounded-lg border" src={`https://via.placeholder.com/202x280?text=Page+${page}`} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div className="Pages w-60 grow shrink basis-0 bg-slate-50 border-l flex-col justify-start items-center flex">
-            <div className="Frame238102 self-stretch h-96 p-4 flex-col justify-start items-center gap-2.5 flex">
-              <div className="PagePreview self-stretch h-72 flex-col justify-start items-start gap-1 flex">
-                <div className="Page1 text-slate-400 text-xs font-normal font-['Mulish'] leading-3">Page 1</div>
-                <img className="PagePreview self-stretch h-72 p-2.5 rounded-lg border border-gray-200" src="https://via.placeholder.com/202x280" />
-              </div>
-              <div className="PagePreview self-stretch h-72 flex-col justify-start items-start gap-1 flex">
-                <div className="Page1 text-slate-400 text-xs font-normal font-['Mulish'] leading-3">Page 2</div>
-                <img className="PagePreview self-stretch h-72 p-2.5 rounded-lg border border-gray-200" src="https://via.placeholder.com/202x280" />
-              </div>
-              <div className="PagePreview self-stretch h-72 flex-col justify-start items-start gap-1 flex">
-                <div className="Page1 text-slate-400 text-xs font-normal font-['Mulish'] leading-3">Page 3</div>
-                <img className="PagePreview self-stretch h-72 p-2.5 rounded-lg border border-gray-200" src="https://via.placeholder.com/202x280" />
-              </div>
-              <div className="PagePreview self-stretch h-72 flex-col justify-start items-start gap-1 flex">
-                <div className="Page1 text-slate-400 text-xs font-normal font-['Mulish'] leading-3">Page 4</div>
-                <img className="PagePreview self-stretch h-72 p-2.5 rounded-lg border border-gray-200" src="https://via.placeholder.com/202x280" />
-              </div>
-              <div className="PagePreview self-stretch h-72 flex-col justify-start items-start gap-1 flex">
-                <div className="Page1 text-slate-400 text-xs font-normal font-['Mulish'] leading-3">Page 5</div>
-                <img className="PagePreview self-stretch h-72 p-2.5 rounded-lg border border-gray-200" src="https://via.placeholder.com/202x280" />
-              </div>
-              <div className="Frame238120 w-24 h-96 relative" />
-            </div>
-            <div className="Rectangle35 w-1.5 h-36 bg-gray-200 rounded-2xl" />
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-  );
+    );
 };
 
 export default InvoicePage;
