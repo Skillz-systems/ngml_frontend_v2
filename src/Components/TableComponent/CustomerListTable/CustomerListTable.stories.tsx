@@ -1,7 +1,7 @@
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Meta, StoryObj } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
 import CustomerListTable from './CustomerListTable';
+
 
 const meta: Meta<typeof CustomerListTable> = {
     title: 'Tables/CustomerListTable',
@@ -16,10 +16,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const DefaultView: Story = {
-    render: () => (
-        <MemoryRouter>
-            <CustomerListTable />
-        </MemoryRouter>
-    ),
+};
+
+export const WithFilteredData: Story = {
+    decorators: [
+        (Story) => {
+            return (
+                <div>
+                    <Story />
+                </div>
+            );
+        },
+    ],
 };
 

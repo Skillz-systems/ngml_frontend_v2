@@ -7,7 +7,7 @@ describe('PortalEnrollment component', () => {
   });
 
   it('should show error message when submitting with empty email', async () => {
-    const { getByText } = render(<PortalEnrollment />);
+    const { getByLabelText, getByText } = render(<PortalEnrollment />);
     const loginButton = getByText('Login');
 
     fireEvent.click(loginButton);

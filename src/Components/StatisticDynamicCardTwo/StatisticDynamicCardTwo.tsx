@@ -32,7 +32,7 @@ type CardType = 'primary' | 'secondary';
 interface StatCardProps {
   type: CardType;
   icon: JSX.Element;
-  value: number | string;
+  value: number;
   yearOptions?: number[];
   content?: string;
   subcontent?: string;
@@ -93,10 +93,10 @@ const StatisticDynamicCardTwo: React.FC<StatCardProps> = ({
         </div>
       </div>
       <div className='mt-6'>
-        <div className={`mb-[-8px] font-[400] text-[20px] ${contentColor}`}>{content}</div>
+        <div className={`mb-[-8px] font-[700] ${contentColor}`}>{content}</div>
         <div className={subcontentColor}>{subcontent}</div>
       </div>
-      <div className={`text-[32px] font-[600] mt-6 ${valueColor}`}>{value}</div>
+      <div className={`text-2xl font-bold mt-6 ${valueColor}`}>{value}</div>
     </div>
   );
 };

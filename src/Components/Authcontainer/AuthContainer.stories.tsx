@@ -8,7 +8,7 @@ const meta: Meta = {
         layout: 'centered'
     }, tags: ['autodocs'],
     argTypes: {
-        backgroundcolor: { control: 'color' },
+        backgroundColor: { control: 'color' },
         width: { control: 'text' },
         height: { control: 'text' },
         children: {control: 'text'}

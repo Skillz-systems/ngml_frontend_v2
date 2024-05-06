@@ -7,7 +7,7 @@ describe('PortalEnrollment component', () => {
     });
 
     it('should show error message when submitting with empty email', async () => {
-        const { getByText } = render(<ForgotPassword />);
+        const { getByLabelText, getByText } = render(<ForgotPassword />);
         const loginButton = getByText('Submit');
 
         fireEvent.click(loginButton);

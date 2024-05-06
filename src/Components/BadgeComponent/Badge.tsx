@@ -1,5 +1,5 @@
 import React from 'react';
-import colors from '../../Utils/colors';
+import colors, { useColor } from '../../Utils/colors';
 /**
  * Badge Component
  *
@@ -65,14 +65,14 @@ const Badge: React.FC<BadgeProps> = ({
     * @returns {React.CSSProperties} Returns the inline styles for the badge container.
     */
 
-    // const primaryColor = useColor('nnpc', 100);
+    const primaryColor = useColor('nnpc', 100);
 
     const getBadgeStyles = (): React.CSSProperties => {
         switch (type) {
             case 'primary':
-                return { backgroundColor: colors.nnpc[100], color: colors.dark[50], width, height, fontSize, borderRadius: radius, fontWeight }
+                return { backgroundColor: primaryColor, color: colors.dark[50], width, height, fontSize, borderRadius: radius, fontWeight }
             case 'secondary':
-                return { backgroundColor: colors.nnpc[50], color: colors.nnpc[100], width, height, fontSize, borderRadius: radius, fontWeight }
+                return { backgroundColor: colors.nnpc[50], color: primaryColor, width, height, fontSize, borderRadius: radius, fontWeight }
             case 'transparent':
                 return { backgroundColor: '#E2E4EB', color: colors.dark[200], width, height, fontSize, borderRadius: radius, fontWeight }
             case 'outline':

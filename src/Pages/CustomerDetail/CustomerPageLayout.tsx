@@ -2,16 +2,11 @@ import { ArrowBack } from '@mui/icons-material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
-import CostAnalysis from '../CostAnalysis/CostAnalysis';
 import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
 import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 import CustomerDetail from './CustomerDetail';
-import ConnectProject from '../ConnectProject/ConnectProject';
-import CustomerManager from '../CustomerManager/CustomerManager';
-import Agreement from '../Agreement/Agreement';
-import Dailyvolumns from '../Dailyvolumns/Dailyvolumns';
 // import images from '../../assets/index';
 
 
@@ -23,9 +18,19 @@ const AdminCustomerPageLayout: React.FC = () => {
         {
             name: 'overview',
             ref: 'overview',
-             // content: 'numeric',
             // icon: <img src={images.business} alt="logo" className='w-4 h-4' />,
             // content: 'icon',
+
+            // content: 'numeric',
+            // content: 'icon',
+            // icon: <img src={images.LeftArrow} alt="logo" />
+        },
+        {
+            name: 'customers',
+            ref: 'customers',
+            // content: 'numeric',
+            // content: 'icon',
+            // icon: <img src={images.LeftArrow} alt="logo" />
         },
         {
             name: 'customer details',
@@ -69,15 +74,9 @@ const AdminCustomerPageLayout: React.FC = () => {
             ref: 'agreement',
             // content: 'numeric'
         },
-       
         {
             name: 'connect project',
             ref: 'connectproject',
-            // content: 'numeric'
-        },
-        {
-            name: 'Daily Volumns',
-            ref: 'dailyvolumns',
             // content: 'numeric'
         },
         {
@@ -90,17 +89,12 @@ const AdminCustomerPageLayout: React.FC = () => {
     // Define the content or pages here
     const tabContent = {
         overview: <CustomerPageDetails />,
+        customers: <div className="flex-1 w-full"><p>Customers Content Here</p></div>,
         customerdetails: <CustomerDetail />,
         eoirequest: <EoiPage />,
         ddq: <DdqPage />,
         sitevisit: <SiteVisitationPage />,
-        costanalysis: <CostAnalysis />,
-        agreement: <Agreement />,
-        connectproject: <ConnectProject />,
-        dailyvolumns: <Dailyvolumns />,
-        customermanager:<CustomerManager />,
-        // subdetail1: <p>tyfyufuyfifyt</p>,
-        // subdetail2: <p>tyfyufuyfifyt</p>
+        subdetail1: <p>tyfyufuyfifyt</p>
     };
 
     return (
@@ -117,7 +111,7 @@ const AdminCustomerPageLayout: React.FC = () => {
                 backgroundColor="#F5F7F9"
                 color="#49526A"
                 borderColor=""
-                borderWidth=""
+                borderWidth="4px"
                 borderRadius=""
                 tablist={tablist}
                 tabContent={tabContent}

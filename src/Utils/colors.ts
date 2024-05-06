@@ -23,7 +23,6 @@ const colors = {
     50:'#EAEEF2',
     100: '#808080',
     200: '#49526A',
-    300: '#e8e9eb',
   },
   nnpcmediumgreen: {
     50: '#f2fbf6',
@@ -35,7 +34,6 @@ const colors = {
     600: '#2b8e5a',
     700: '#226844',
     800: '#22593d',
-    850: '#e8e9eb',
     900: '#1d4a34',
     950: '#0b281a',
   },
@@ -96,9 +94,9 @@ const colors = {
 type ColorName = keyof typeof colors;
 type ColorShade = keyof typeof colors.nnpc;
 
-// const useColor = (colorName: ColorName, colorShade: ColorShade) => {
-//   return colors[colorName][colorShade] as string;
-// };
+const useColor = (colorName: ColorName, colorShade: ColorShade) => {
+  return colors[colorName][colorShade] as string;
+};
 
 const getColorShades = (colorName: ColorName) => {
   return colors[colorName];
@@ -113,5 +111,4 @@ const getShadeNames = (colorName: ColorName) => {
 };
 
 export default colors;
-export { getColorNames, getColorShades, getShadeNames };
-
+export { getColorNames, getColorShades, getShadeNames, useColor };

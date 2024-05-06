@@ -8,7 +8,6 @@ export { default as ContentContainer } from './Contentcontainer/ContentContainer
 export { default as CustomInput } from './Custominput/CustomInput';
 export { default as DateCard } from './DateCardComponent/DateCard';
 export { default as DocumentCard } from './Documentcard/DocumentCard';
-export { default as DocumentCardTwo } from './DocumentCardTwo/DocumentCardTwo'
 export { default as FileUploadInput } from './Fileuploadinput/FileUploadInput';
 export { default as Heading } from './Heading/Heading';
 export { default as InfoCardComponent } from './InfoCardComponent/InfoCardComponent';
@@ -26,13 +25,7 @@ export { default as StatisticDynamicCardTwo } from './StatisticDynamicCardTwo/St
 export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTemplate'
 // export { default as SuppliersPage } from './SuppliersPage/SuppliersPage'
 
-
 export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
-// export { default as SupplierRegistrationLayout } from './SupplierRegistrationLayout/SupplierRegistration';
-// export { default as SupplierInformation } from './SupplierInformation/SupplierRegistration';
-// export { default as SupplierRegistrationUpload } from './SupplierRegistrationUpload/SupplierRegistrationUpload'
-// export { default as SupplierPaymentHistory } from './SupplierPaymentHistory/SupplierPaymentHistory'
-
 
 
 
@@ -49,12 +42,5 @@ export { default as ProcessingCustomerTable } from './TableComponent/ProcessingC
 export { default as SiteVistTable } from './TableComponent/SiteVistTable/SiteVistTable';
 export { default as TenderTable } from './TableComponent/TenderTable/TenderTable';
 export { default as CustomerListTable } from './TableComponent/CustomerListTable/CustomerListTable';
-export { default as SuppliersListTable } from './TableComponent/SuppliersListTable/SuppliersListTable';
-export { default as SupplierPaymentTable } from './TableComponent/SupplierPaymentTable/SupplierPaymentTable';
-export { default as DailyVolumnHistoryTable } from './TableComponent/DailyVolumnHistoryTable/DailyVolumnHistoryTable';
-
-
-
-
 
 

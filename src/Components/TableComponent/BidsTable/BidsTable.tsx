@@ -88,7 +88,7 @@ const BidsTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            width: 60,
+            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -136,7 +136,7 @@ const BidsTable = () => {
         {
             field: 'details',
             headerName: 'DETAILS',
-            flex: 1.5,
+            flex: 1,
             renderCell: (params) => (
                 <ul className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.details.map((detail: Detail, index: number) => (
@@ -167,7 +167,7 @@ const BidsTable = () => {
             renderCell: (params: GridRenderCellParams) => (
                 <div
                     onClick={() => handleOpen(params.row)}
-                    className=' text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
+                    className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
                     View
                 </div>
             ),
@@ -201,11 +201,11 @@ const BidsTable = () => {
                     )}
                 </div>
             </Modal>
-            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0  p-[18px] w-[100%] '>
-                <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
+            <div className='flex items-center justify-between border border-[#CCD0DC] border-b-0 h-[60px] p-[20px] '>
+                <div className='italic text-[12px] text-[#828DA9]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]' >
+                <div className='flex justify-end  items-center gap-[8px] relative'>
                     <TextField
                         id="search-input"
                         label="Search this list"
@@ -277,7 +277,6 @@ const BidsTable = () => {
                             outline: 'solid #00AF50 1px',
                         },
                         '& .MuiDataGrid-columnHeaders': {
-                            backgroundColor: '#F6FDEC',
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
                                 fontWeight: '700',

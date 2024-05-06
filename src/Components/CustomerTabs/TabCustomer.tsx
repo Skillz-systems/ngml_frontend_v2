@@ -1,187 +1,146 @@
-import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import  { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 
 /**
- * Interface for individual tab information.
- * @typedef {Object} TabInterface
- * @property {string} name - The name of the tab.
- * @property {string} ref - The unique identifier for the tab.
+ * Interface representing a single tab item.
  */
-
-/**
- * Interface for the list of tabs, which can contain nested tab lists.
- * @typedef {Object} TabListInterface
- * @property {string} name - The name of the tab.
- * @property {string} ref - The unique identifier for the tab.
- * @property {TabInterface[]} [children] - A list of child tabs, if any.
- * @property {TabListInterface[]} [sublist] - A list of sub-tabs, if any.
- * @property {'icon' | 'numeric'} [content] - Type of content (icon or numeric).
- * @property {ReactNode} [icon] - An optional icon to be displayed on the tab.
- */
-
-/**
- * Props for the `TabCustomer` component.
- * @typedef {Object} TabsProps
- * @property {string} activeTab - The current active tab identifier.
- * @property {(tab: string) => void} setActiveTab - Function to set the active tab.
- * @property {TabListInterface[]} tablist - The list of tabs to be displayed.
- * @property {{ [key: string]: ReactNode }} tabContent - The content associated with each tab.
- */
-
-/**
-* A component that displays a list of tabs with optional dropdown for smaller screens.
-* 
-* @param {TabsProps} props - The props for the component.
-* @returns {JSX.Element} - The rendered JSX element.
-*/
-
-
 interface TabInterface {
-  name: string;
-  ref: string;
+  name: string; // Name of the tab
+  ref: string; // Reference for the tab
 }
 
+/**
+ * Interface representing a list of tabs.
+ */
 export interface TabListInterface {
-  name: string;
-  ref: string;
-  children?: TabInterface[];
-  sublist?: TabListInterface[];
-  content?: 'icon' | 'numeric';
-  icon?: ReactNode;
+  name: string; // Name of the tab list
+  ref: string; // Reference for the tab list
+  children?: TabInterface[]; // Children tabs
+  sublist?: TabListInterface[]; // Sublist of tabs
+  content?: 'icon' | 'numeric'; // Type of content for the tab
+  icon?: ReactNode; // Icon for the tab
 }
 
+/**
+ * Props for the Tabs component.
+ */
 interface TabsProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-  tablist: TabListInterface[];
-  tabContent: { [key: string]: ReactNode };
+  activeTab: string; // Currently active tab
+  setActiveTab: (tab: string) => void; // Function to set the active tab
+  tablist: TabListInterface[]; // List of tabs
+  tabContent: { [key: string]: ReactNode }; // Content for each tab
 }
 
+/**
+ * Functional component representing a tabbed interface.
+ * @param {TabsProps} param0 Props for the Tabs component.
+ * @returns {JSX.Element} The Tabs component.
+ */
 const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabContent }) => {
-  const [, setPanelName] = useState<string>('');
+  const [panelName, setPanelName] = useState<string>('overview'); // State for the panel name
+  const [showDropdown, setShowDropdown] = useState<boolean>(false); // State for showing/hiding dropdown
 
   useEffect(() => {
-    if (tablist.length > 0) {
-      const initialTab = tablist[0];
-      setPanelName(capitalizeFirstLetter(initialTab.name));
-      setActiveTab(initialTab.ref);
-    }
-  }, [tablist, setActiveTab]);
-
+    setActiveTab(panelName);
+  }, []);
 
   /**
-  * Handle tab change by setting the active tab and panel name.
-  * 
-  * @param {TabListInterface} tab - The tab to set as active.
-  * @returns {void}
-  */
-
+   * Handles tab change.
+   * @param {TabListInterface} tab The tab to change to.
+   */
   const handleTabChange = (tab: TabListInterface): void => {
     setActiveTab(tab.ref);
     setPanelName(tab.name);
+    setShowDropdown(false);
   };
 
   /**
-  * Handle dropdown change for mobile or smaller screen views.
-  * 
-  * @param {React.ChangeEvent<HTMLSelectElement>} e - The change event from the dropdown.
-  * @returns {void}
-  */
-
-  const handleDropdownChange = (event: SelectChangeEvent<string>): void => {
-    const selectedRef = event.target.value;
-    const selectedTab = tablist
-      .flatMap((tab) => [tab, ...(tab.sublist || [])])
-      .find((tab) => tab.ref === selectedRef);
-
-    if (selectedTab) {
-      handleTabChange(selectedTab);
-    }
+   * Handles click on sublist item.
+   * @param {string} sublistRef Reference for the sublist item.
+   */
+  const handleSublistItemClick = (sublistRef: string): void => {
+    setActiveTab(sublistRef);
+    setShowDropdown(false);
   };
 
-  const capitalizeFirstLetter = (str: string): string => {
-    if (str.length === 0) return str;
-    return str.charAt(0).toUpperCase() + str.slice(1);
+  /**
+   * Toggles the dropdown visibility.
+   */
+  const toggleDropdown = (): void => {
+    setShowDropdown(!showDropdown);
   };
 
   return (
-    <div className="flex flex-col ">
-      <div className="mb-3 lg:hidden ml-2 border h-[32] rounded-[10px]">
-        <Select
-          value={activeTab}
-          onChange={handleDropdownChange}
-          displayEmpty
-          fullWidth
-          variant="outlined"
-          sx={{
-            outline: 'none',
-            '& .MuiOutlinedInput-notchedOutline': {
-              border: 'none'  
-            },
-        
-          }}
-         
+    <div className="flex flex-col mt-[-10px] md:mt-[20px]">
+      <div className="flex items-center justify-end lg:hidden mb-3">
+        <button
+          onClick={toggleDropdown}
+          className="p-2 rounded-md focus:outline-none"
         >
-          {tablist.map((tab) => [
-            <MenuItem key={tab.ref} value={tab.ref} >
-              {capitalizeFirstLetter(tab.name)}
-            </MenuItem>,
-            ...(tab.sublist || []).map((sub) => (
-              <MenuItem key={sub.ref} value={sub.ref} style={{ marginLeft: '20px' }}>
-                - - {capitalizeFirstLetter(sub.name)}
-              </MenuItem>
-            )),
-          ])}
-        </Select>
+          <svg
+            className="w-6 h-6 text-gray-500 transition-transform transform"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
       </div>
-
+      {showDropdown && (
+        <div className="lg:hidden mb-3">
+          <div className="flex flex-col space-y-2">
+            {tablist.map((tab) => (
+              <button
+                key={tab.ref}
+                className={`p-2 rounded-md focus:outline-none ${activeTab === tab.ref ? 'bg-gray-200' : ''}`}
+                onClick={() => handleTabChange(tab)}
+              >
+                <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
+                  {tab.content === 'icon' && tab.icon}
+                  {tab.content === 'numeric' && <span className="mr-1">{tablist.indexOf(tab) + 1}</span>}
+                  <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">{tab.name}</h4>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="flex flex-1">
         <div className="lg:w-1/4 flex flex-col items-start justify-start space-y-2 mr-3 ">
-          <div className="hidden lg:flex flex-col w-full space-y-2">
+          <div className="hidden lg:flex flex-col w-full space-y-4">
             {tablist.map((tab) => (
-              <div key={tab.ref}>
-                <div
-                  className={`flex justify-between items-center cursor-pointer capitalize ${tab.ref === activeTab ? 'text-primary' : 'text-neutral-600'
-                    }`}
-                  onClick={() => handleTabChange(tab)}
-                >
-                  <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
-                    {tab.content === 'icon' && tab.icon}
-                    {tab.content === 'numeric' && <span className="mr-1 text-[12px]">{tablist.indexOf(tab) + 1}</span>}
-                    <h4 className="truncate text-neutral-600 font-[500] text-[12px] mb-[2px] capitalize leading-relaxed ml-1" >
-                      {tab.name}
-                    </h4>
-                  </div>
-                  {tab.ref === activeTab && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#00AF50] transition-all ease-in-out duration-300"></span>
-                  )}
+              <div key={tab.ref} className="flex justify-between items-center gap-x-2 cursor-pointer capitalize" onClick={() => { handleTabChange(tab) }}>
+                <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
+                  {tab.content === 'icon' && tab.icon}
+                  {tab.content === 'numeric' && <span className="mr-1">{tablist.indexOf(tab) + 1}</span>}
+                  <h4 className="truncate text-neutral-600 font-[500] text-[12px] capitalize leading-relaxed ml-1">{tab.name}</h4>
                 </div>
-
-                {tab.ref === activeTab && tab.sublist && (
-                  <div className="lg:ml-4 space-y-2">
-                    {tab.sublist.map((sub) => (
-                      <div
-                        key={sub.ref}
-                        className="flex justify-between items-center mt-[10px] cursor-pointer capitalize"
-                        onClick={() => handleTabChange(sub)}
-                      >
-                        <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
-                          <h4 className="truncate text-neutral-600 font-[500] mb-[4px] text-[12px] capitalize leading-relaxed ml-1">
-                            {sub.name}
-                          </h4>
-                        </div>
-                        {sub.ref === activeTab && (
-                          <span className="h-1.5 w-1.5 rounded-full bg-[#00AF50] transition-all ease-in-out duration-300"></span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                {tab.ref === activeTab && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#00AF50] transition-all ease-in-out duration-300"></span>
                 )}
               </div>
             ))}
           </div>
+          <div className="hidden lg:block ml-4">
+            {tablist.map((tab) => (
+              <div key={tab.ref} className={`${activeTab === tab.ref ? '' : 'hidden'} lg:block lg:mt-2`}>
+                {tab.sublist?.map((sub) => (
+                  <div key={sub.ref} className="flex justify-between items-center gap-x-2 cursor-pointer capitalize" onClick={() => handleSublistItemClick(sub.ref)}>
+                    <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
+                      <h4 className="truncate text-neutral-600 font-medium text-base capitalize leading-relaxed ml-1">{sub.name}</h4>
+                    </div>
+                    {sub.ref === activeTab && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#00AF50] transition-all ease-in-out duration-300"></span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-
         <div style={{ border: '1px', width: '100%' }} className="">
           {tabContent[activeTab]}
         </div>

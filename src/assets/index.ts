@@ -24,13 +24,6 @@ import business from './images/png-icons/Business.png';
 import rightarrow from './images/png-icons/Rightarrow.png';
 import leftarrow from './images/png-icons/LeftArrow.png';
 import edit from './images/png-icons/Edit.png'
-import copy from './images/png-icons/Copy.png';
-import upload from './images/png-icons/Upload.png';
-import callmade from './images/png-icons/callmade.png';
-import messenger from './images/png-icons/messenger.png';
-import receipt from './images/png-icons/receipt.png';
-import petrol from './images/png-icons/petrol.png'
-import file from './images/png-icons/File.png'
 
 const images = {
   cancelicon,
@@ -58,14 +51,7 @@ const images = {
   business,
   rightarrow,
   leftarrow,
-  edit,
-  copy,
-  upload,
-  callmade,
-  messenger,
-  receipt,
-  petrol,
-  file
+  edit
 };
 
 export default images;

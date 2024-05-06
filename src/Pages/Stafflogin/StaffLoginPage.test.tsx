@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 import StaffLoginPage from './StaffLoginPage';
 
 test('renders password reset page with form elements', () => {
-  const { getByPlaceholderText, getByText } = render(<StaffLoginPage />);
+  const { getByPlaceholderText, getByLabelText, getByText } = render(<StaffLoginPage />);
 
   // Check if email and password inputs are rendered
   const emailInput = getByPlaceholderText('Enter your email');

@@ -2,15 +2,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Chart from './Chart';
 
-// interface DataItem {
-//     month: string;
-//     'Amount Sold': number;
-//     Delivered: number;
-//     Requests: number;
-//     Revenue: number;
-// }
+interface DataItem {
+    month: string;
+    'Amount Sold': number;
+    Delivered: number;
+    Requests: number;
+    Revenue: number;
+}
 
-const data: Record<string, unknown>[] = [
+const data: DataItem[] = [
     { month: 'Jan', 'Amount Sold': 300, Delivered: 300, Requests: 400, Revenue: 500 },
     { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },
     { month: 'Mar', 'Amount Sold': 150, Delivered: 120, Requests: 270, Revenue: 600 },
