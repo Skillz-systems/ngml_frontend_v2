@@ -36,8 +36,8 @@ const Complaints: React.FC = () => {
     * @param {string} key - The key in the state to update with the new value.
     */
     const handleInputChange = (value: any, key: any) => {
-        console.log(value)
-        setComplaintsMessage({ ...complaintsMessage, [key]: value });
+        console.log(value);
+        setComplaintsMessage((prev) => ({ ...prev, [key]: value }));
     };
 
     /**
@@ -64,7 +64,7 @@ const Complaints: React.FC = () => {
                         renderIcon={() => <div><Message style={{ fontSize: 'medium' }} /></div>}
                     />
                     <div className="px-3 py-2 rounded-2xl border flex justify-center cursor-pointer" onClick={handleClose}>
-                            <img src={images.cancel} alt='cancel icon' className='w-4 h-4' />
+                        <img src={images.cancel} alt='cancel icon' className='w-4 h-4' />
                         <div className="text-center text-xs font-normal font-['Mulish']">Close</div>
                     </div>
                 </div>
@@ -111,11 +111,11 @@ const Complaints: React.FC = () => {
                         <CustomInput
                             type="text"
                             value={complaintsMessage.message}
-                            handleChangeEvent={(value) => handleInputChange(value, "complaintsMessage")}
+                            handleChangeEvent={(value) => handleInputChange(value, "message")}
                             placeholder="Send a message"
                         />
                     </div>
-                    <div className="IconsPack w-6 h-6 justify-center items-center flex cursor-pointer">
+                    <div className="w-6 h-6 justify-center items-center flex cursor-pointer">
                         <img src={images.send} alt='sendicon' className='w-20' onClick={handleSubmit} />
                     </div>
                 </div>

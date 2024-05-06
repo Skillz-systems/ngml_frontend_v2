@@ -7,6 +7,7 @@ import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierReg
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
 import Complaints from '@/Pages/Complaints/Complaints';
+import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 
 export const AdminRoutes = [
   {
@@ -55,6 +56,12 @@ export const AdminRoutes = [
     title: 'complaints page',
     path: '/admin/records/complaints',
     component: AdminInternalLayout(Complaints),
+    exact: true
+  },
+  {
+    title: 'invoice page',
+    path: '/admin/records/invoice',
+    component: AdminInternalLayout(InvoicePage),
     exact: true
   },
 

@@ -225,7 +225,7 @@ const BillingHistory: React.FC = () => {
                     </div>
                     <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] rounded-b-[10px] items-center gap-3 flex">
                         {billingHistoryDataTwo.map((cards, index) => (
-                            <div key={index} className="flex flex-1 min-w-[150px] md:min-w-[200px] max-w-[200px]">
+                            <div key={index} className="flex flex-1 min-w-[150px] md:min-w-[200px] max-w-[200px] cursor-pointer" onClick={() => navigate('/admin/records/invoice')}>
                                 <DocumentCard
                                     type={cards.type}
                                     title={cards.title}

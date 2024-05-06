@@ -20,7 +20,7 @@ describe('Complaints Component', () => {
         );
         const inputField = screen.getByPlaceholderText('Send a message');
         fireEvent.change(inputField, { target: { value: 'Hello, World!' } });
-        expect(inputField).toHaveValue('');
+        expect(inputField).toHaveValue('Hello, World!');
     });
     test('navigates back when close is clicked', () => {
         render(
@@ -29,7 +29,7 @@ describe('Complaints Component', () => {
             </MemoryRouter>
         );
         const closeButton = screen.getByText(/Close/i).closest('div');
-        
+
         if (closeButton) {
             fireEvent.click(closeButton);
 
