@@ -57,7 +57,7 @@ const CustomerManager: React.FC = () => {
         subtitle=''
         height='330px'
         reportTitle='Complaints'
-        reportIcon={<img src={images.callmade} alt="callmade Icon3" className='w-4 h-4' />}
+        reportIcon={<img src={images.callmade} alt="callmade Icon3" className='w-4 h-4' onClick={() => navigate('/admin/records/complaints')} />}
       />
     </div>
   );

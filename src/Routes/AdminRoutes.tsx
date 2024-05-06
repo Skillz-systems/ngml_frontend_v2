@@ -6,6 +6,7 @@ import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
+import Complaints from '@/Pages/Complaints/Complaints';
 
 export const AdminRoutes = [
   {
@@ -48,6 +49,12 @@ export const AdminRoutes = [
     title: 'Billing History',
     path: '/admin/records/billinghistory',
     component: AdminInternalLayout(BillingHistory),
+    exact: true
+  },
+  {
+    title: 'complaints page',
+    path: '/admin/records/complaints',
+    component: AdminInternalLayout(Complaints),
     exact: true
   },
 
