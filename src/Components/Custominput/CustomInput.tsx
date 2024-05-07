@@ -38,14 +38,14 @@ interface CustomInputProps {
 const CustomInput: React.FC<CustomInputProps> = ({
     type,
     label,
-    value,
+    value='',
     handleChangeEvent,
     placeholder,
-    options,
+    options=[],
     error,
     required = false,
     icon,
-    styleVariant = 'default', // Default to 'default' if styleVariant is not provided
+    styleVariant = 'default',
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
@@ -61,6 +61,12 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
     const handleBlur = () => {
         setTouched(true);
+    };
+
+    const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const selectedValue = e.target.value;
+        console.log('Select changed to:', selectedValue);
+        handleChangeEvent(selectedValue);
     };
     
 
@@ -107,8 +113,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     <div className='relative'>
 
                         <select
-                            value={Array.isArray(value) ? value : ''}
-                            onChange={(e: ChangeEvent<HTMLSelectElement>) => handleChangeEvent(e.target.value)}
+                            value={value as string}
+                            onChange={handleSelectChange}
                             className={`${inputClasses} appearance-none select-none`}
                             onBlur={handleBlur} >
 

@@ -9,7 +9,7 @@ interface AddNewInvoiceProps {
 
 const AddNewInvoice: React.FC<AddNewInvoiceProps> = ({ newInvoiceData, setNewInvoiceData }) => {
 
-    const handleInputChange = (value: any, key: any) => {
+    const handleInputChange = (value: string, key: string) => {
         console.log(value)
         setNewInvoiceData({ ...newInvoiceData, [key]: value });
     };

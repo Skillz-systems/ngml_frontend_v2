@@ -19,7 +19,7 @@ const AdminCustomerList: React.FC = () => {
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     };
-    const handleInputChange = (value: any, key: any) => {
+    const handleInputChange = (value: string, key: string) => {
         console.log(value)
         setCustomerData({ ...customerData, [key]: value });
     };

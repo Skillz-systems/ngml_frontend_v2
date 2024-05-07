@@ -11,7 +11,7 @@ const SiteVisitationPage = () => {
         thirdSiteVisitDate: '',
     });
 
-    const handleInputChange = (value: any, key: any) => {
+    const handleInputChange = (value: string, key: string) => {
         console.log(value)
         setFormData({ ...formData, [key]: value });
     };
