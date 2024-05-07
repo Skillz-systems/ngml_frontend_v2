@@ -35,7 +35,7 @@ const Complaints: React.FC = () => {
     * @param {string} value - The new value from the input field.
     * @param {string} key - The key in the state to update with the new value.
     */
-    const handleInputChange = (value: any, key: any) => {
+    const handleInputChange = (value: string, key: string) => {
         console.log(value);
         setComplaintsMessage((prev) => ({ ...prev, [key]: value }));
     };

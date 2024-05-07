@@ -33,7 +33,7 @@ const ConnectProject: React.FC = () => {
     * @param {any} key - The key (state property name) to update.
     */
 
-    const handleInputChange = (value: any, key: any) => {
+    const handleInputChange = (value: string, key: string) => {
         console.log(value)
         setProjectDate({ ...projectDate, [key]: value });
     };

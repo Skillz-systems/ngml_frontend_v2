@@ -8,7 +8,7 @@ interface EditModalContentProps {
 
 const EditDdqPage: React.FC<EditModalContentProps> = ({ companyData, setCompanyData }) => {
 
-    const handleInputChange = (value: any, key: any) => {
+    const handleInputChange = (value: string, key: string) => {
         console.log(value)
         setCompanyData({ ...companyData, [key]: value });
     };

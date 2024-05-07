@@ -15,7 +15,7 @@ const PasswordResetPage: React.FC = () => {
         commonError: '',
     });
 
-    const handleChange = (key: any) => (value: any) => {
+    const handleChange = (key: string) => (value: string) => {
         console.log(value)
         setFormData({ ...formData, [key]: value });
         setErrors({ ...errors, [`${key}Error`]: '' });

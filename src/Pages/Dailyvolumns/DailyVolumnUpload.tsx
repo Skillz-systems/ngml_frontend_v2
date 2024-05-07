@@ -9,7 +9,7 @@ interface DailyVolumnUploadProps {
 
 const DailyVolumnUpload: React.FC<DailyVolumnUploadProps> = ({ DailyVolumnUploadData, setDailyVolumnUploadData }) => {
 
-    const handleInputChange = (value: any, key: any) => {
+    const handleInputChange = (value: string, key: string) => {
         console.log(value)
         setDailyVolumnUploadData({ ...DailyVolumnUploadData, [key]: value });
     };
