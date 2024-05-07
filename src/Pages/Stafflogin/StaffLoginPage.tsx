@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 
 import images from '../../assets/index';
 import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
+import { Link } from 'react-router-dom';
 
 /**
  * Functional component representing the staff login page.
@@ -95,7 +96,7 @@ const StaffLoginPage: React.FC = () => {
         <div className="min-h-screen flex flex-col bg-nnpc-700">
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
-                    <h1 className='text-[20px] font-semibold text-white'>NGML STAFF LOGIN</h1>
+                    <h1 className='text-[20px] font-semibold text-nnpcdarkgreen-700' >NGML STAFF LOGIN</h1>
                     <div className='relative'>
                         <div className='w-[100%] md:w-[350px] mx-auto space-y-6'>
                             <CustomInput
@@ -118,26 +119,28 @@ const StaffLoginPage: React.FC = () => {
                             {errors.passwordError && <p className="text-red-500 h-[1px] absolute top-[88px] text-[14px]">{errors.passwordError}</p>}
                             {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
                         </div>
-                        <div className='mt-6 w-[98%] flex items-center justify-center'>
-                            <Button
-                                type="primary"
-                                label="Login"
-                                action={handleLogin}
-                                color="#FFFFFF"
-                                fontStyle="italic"
-                                width="100%"
-                                height="40px"
-                                fontSize="16px"
-                                radius="20px"
-                            />
-                        </div>
+                        <Link to='/admin'>
+                            <div className='mt-6 w-[98%] flex items-center justify-center'>
+                                <Button
+                                    type="primary"
+                                    label="Login"
+                                    action={handleLogin}
+                                    color="#FFFFFF"
+                                    fontStyle="italic"
+                                    width="100%"
+                                    height="40px"
+                                    fontSize="16px"
+                                    radius="20px"
+                                />
+                            </div>
+                        </Link>
                     </div>
                     <div className='mt-6'>
                         <Button
                             type="transparent"
                             label="Forgot Password?"
                             fontWeight='400'
-                            color='#FFFFFF'
+                            color='#088d24'
                             fontStyle='italic'
                             textDecoration='underline'
                             action={handleForgotPassword}
@@ -149,16 +152,17 @@ const StaffLoginPage: React.FC = () => {
                 <div className='w-full md:w-[400px] absolute bottom-[4rem]'>
                     <ContentContainer type="translucent" height="40px" borderRadius={20}>
                         <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
-                            <p className='text-center text-[10px] md:text-sm text-white'>New to the Portal, Sign in Here</p>
+                            <p className='text-center text-[8px] md:text-sm text-nnpcdarkgreen-700'>New to the Portal, Sign in Here</p>
                             <Button
-                                type="outline"
+                                type="primary"
                                 label="New Sign In"
                                 width='120px'
-                                height='32px'
+                                height='30px'
                                 radius='32px'
                                 color='#FFFFFF'
-                                fontWeight='500'
+                                fontWeight='300'
                                 lineHeight='24px'
+                                fontSize='12px'
                                 action={handleNewSignIn}
                             />
                         </div>
@@ -168,7 +172,7 @@ const StaffLoginPage: React.FC = () => {
             <div className='mb-10 mr-6 ml-6'>
                 <ContentContainer type="translucent" width="100%" height="30px" borderRadius={20}>
                     <div className="w-full h-full flex justify-center items-center">
-                        <p className='text-center text-[10px] md:text-sm text-white'>This Portal is a Property of NNPC Gas Marketing Limited</p>
+                        <p className='text-center text-[8px] md:text-sm text-nnpcdarkgreen-700'>This Portal is a Property of NNPC Gas Marketing Limited</p>
                     </div>
                 </ContentContainer>
             </div>

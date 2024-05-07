@@ -68,18 +68,18 @@ const Chart = <T extends Record<string, unknown>>({
     const yearsRange = Array.from({ length: 10 }, (_, i) => currentYear - i);
 
     return (
-        <div className="bg-white rounded-lg border border-gray-100 mt-4" data-testid="chart">
+        <div className="bg-white rounded-lg border border-gray-100 mt-6" data-testid="chart">
             <div className='flex justify-between items-center space-x-3 p-4 bg-medium-100 border-b border-gray-200/20'>
 
-                <Heading as="p" size="h6" className='capitalize font-normal text-sm sm:text-xl'>
+                <Heading as="p" size="h6" className='capitalize text-gray-500 font-[500] text-sm sm:text-xl' >
                     {title}
                 </Heading>
                 <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-500 hidden lg:block">Day</span>
-                    <span className="text-sm text-gray-500 hidden lg:block">Month</span>
-                    <span className="text-sm text-gray-500 hidden lg:block">Year</span>
+                    <span className="text-sm text-gray-500 hidden lg:block font-[500]">Day</span>
+                    <span className="text-sm text-gray-500 hidden lg:block font-[500]">Month</span>
+                    <span className="text-sm text-gray-500 hidden lg:block font-[500]">Year</span>
                     <select
-                        className="rounded-full border border-gray-300 py-1 px-3 text-xs lg:text-sm font-medium text-gray-200 focus:outline-none outline-none ring-0 cursor-pointer "
+                        className="rounded-full border border-gray-300 py-1 px-3 text-xs lg:text-sm font-medium text-gray-400 focus:outline-none outline-none ring-0 cursor-pointer "
                     >
                         {months.map((month, index) => (
                             <option key={index} value={index + 1}>
@@ -88,7 +88,7 @@ const Chart = <T extends Record<string, unknown>>({
                         ))}
                     </select>
                     <select
-                        className="rounded-full border border-gray-300 py-1 px-3 text-sm font-medium text-gray-200 focus:outline-none outline-none ring-0 cursor-pointer "
+                        className="rounded-full border border-gray-300 py-1 px-3 text-sm font-medium text-gray-400 focus:outline-none outline-none ring-0 cursor-pointer "
                     >
                         {yearsRange.map((year) => (
                             <option key={year} value={year}>

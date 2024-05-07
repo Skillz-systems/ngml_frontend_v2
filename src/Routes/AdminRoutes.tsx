@@ -12,7 +12,7 @@ import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 export const AdminRoutes = [
   {
     title: 'Admin Home page',
-    path: '/admin/homepage',
+    path: '/admin',
     component: AdminInternalLayout(AdminHomePage),
     exact: true
   },

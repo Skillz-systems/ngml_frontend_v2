@@ -37,25 +37,8 @@ const ForgotPassword: React.FC = () => {
         }
     };
 
-    const handleCancellation = () => {
-        console.log('Cancellation action triggered');
-        setFormData({ email: '' });
-        setErrors({ emailError: '' });
-    };
-
     return (
         <div className="h-screen flex flex-col gradient-bg relative">
-            <div className="absolute top-20 right-20">
-                <Button
-                    icon={<img src={images.cancelicon} alt="cancel icon" />}
-                    type="icon"
-                    action={handleCancellation}
-                    iconColor="#E2E4EB"
-                    radius="100%"
-                    width="40px"
-                    height="40px"
-                />
-            </div>
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
                     <h1 className='text-[20px]  font-semibold text-white'>FORGOT PASSWORD</h1>
