@@ -3,7 +3,7 @@ import Homeicon from '../../src/assets/images/png-icons/Home.png';
 
 
 export const AdminLinks = [
-  { id: 1, name: 'Home', to: '/admin/homepage', icon: Homeicon, type: 'primary' },
+  { id: 1, name: 'Home', to: '/admin', icon: Homeicon, type: 'primary' },
   {
     id: 2,
     name: 'Manager',

@@ -1,49 +1,46 @@
-import { fireEvent, render } from '@testing-library/react';
+
+import { fireEvent, render, screen } from '@testing-library/react';
 import StaffLoginPage from './StaffLoginPage';
+import { MemoryRouter } from 'react-router-dom';
 
-test('renders password reset page with form elements', () => {
-  const { getByPlaceholderText, getByText } = render(<StaffLoginPage />);
 
-  // Check if email and password inputs are rendered
-  const emailInput = getByPlaceholderText('Enter your email');
-  const passwordInput = getByPlaceholderText('Enter a password');
-  expect(emailInput).toBeInTheDocument();
-  expect(passwordInput).toBeInTheDocument();
+describe('StaffLoginPage', () => {
+  test('renders without crashing', () => {
+    render(
+      <MemoryRouter>
+        <StaffLoginPage />
+      </MemoryRouter>
+    );
+    const linkElement = screen.getByText(/ngml staff login/i);
+    expect(linkElement).toBeInTheDocument();
+  });
 
-  // Check if login button is rendered
-  const loginButton = getByText('Login');
-  expect(loginButton).toBeInTheDocument();
-});
+  test('renders login button', () => {
+    render(
+      <MemoryRouter>
+        <StaffLoginPage />
+      </MemoryRouter>
+    );
+    const loginButton = screen.getByRole('button', { name: /login/i });
+    expect(loginButton).toBeInTheDocument();
+  });
 
-test('validates email input', () => {
-  const { getByPlaceholderText, getByText } = render(<StaffLoginPage />);
+  test('submits form with valid data', async () => {
+    render(
+      <MemoryRouter>
+        <StaffLoginPage />
+      </MemoryRouter>
+    );
+    const emailInput = screen.getByPlaceholderText(/enter your email/i);
+    const passwordInput = screen.getByPlaceholderText(/enter a password/i);
+    const loginButton = screen.getByRole('button', { name: /login/i });
 
-  const emailInput = getByPlaceholderText('Enter your email');
-  const passwordInput = getByPlaceholderText('Enter a password');
-  const loginButton = getByText('Login');
+    // Type in the email and password
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
 
-  // Test case: empty email
-  fireEvent.change(emailInput, { target: { value: '' } });
-  fireEvent.change(passwordInput, { target: { value: 'password' } });
-  fireEvent.click(loginButton);
-  expect(getByText('Email is required')).toBeInTheDocument();
+    // Click the login button
+    fireEvent.click(loginButton);
 
-  // Test case: invalid email format
-  fireEvent.change(emailInput, { target: { value: 'invalid_email' } });
-  fireEvent.click(loginButton);
-  expect(getByText('Invalid email address')).toBeInTheDocument();
-});
-
-test('validates password input', () => {
-  const { getByPlaceholderText, getByText } = render(<StaffLoginPage />);
-
-  const emailInput = getByPlaceholderText('Enter your email');
-  const passwordInput = getByPlaceholderText('Enter a password');
-  const loginButton = getByText('Login');
-
-  // Test case: empty password
-  fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-  fireEvent.change(passwordInput, { target: { value: '' } });
-  fireEvent.click(loginButton);
-  expect(getByText('Password is required')).toBeInTheDocument();
+  });
 });

@@ -182,7 +182,7 @@ const AdminHomePage = () => {
               />
             ))}
           </div>
-          <div className="flex flex-wrap gap-6 w-[100%]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[100%] mt-4">
             {dynamicCardData.map((card, index) => (
               <div key={index} className='mt-[15px]'>
                 <StatisticDynamicCard
