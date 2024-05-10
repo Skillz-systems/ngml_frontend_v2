@@ -5,6 +5,7 @@
  */
 
 import React, { useState } from 'react';
+import '../../index.css';
 
 import images from '../../assets/index';
 import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
@@ -93,10 +94,10 @@ const StaffLoginPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-nnpc-700">
+        <div className="min-h-screen flex flex-col logingradient-bg">
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
-                    <h1 className='text-[20px] font-semibold text-nnpcdarkgreen-700' >NGML STAFF LOGIN</h1>
+                    <h1 className='text-[20px] font-semibold text-white' >NGML STAFF LOGIN</h1>
                     <div className='relative'>
                         <div className='w-[100%] md:w-[350px] mx-auto space-y-6'>
                             <CustomInput
@@ -140,7 +141,7 @@ const StaffLoginPage: React.FC = () => {
                             type="transparent"
                             label="Forgot Password?"
                             fontWeight='400'
-                            color='#088d24'
+                            color='#FFFFFF'
                             fontStyle='italic'
                             textDecoration='underline'
                             action={handleForgotPassword}
@@ -152,7 +153,7 @@ const StaffLoginPage: React.FC = () => {
                 <div className='w-full md:w-[400px] absolute bottom-[4rem]'>
                     <ContentContainer type="translucent" height="40px" borderRadius={20}>
                         <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
-                            <p className='text-center text-[8px] md:text-sm text-nnpcdarkgreen-700'>New to the Portal, Sign in Here</p>
+                            <p className='text-center text-[8px] md:text-[12px] text-[#050505]'>New to the Portal, Sign in Here</p>
                             <Button
                                 type="primary"
                                 label="New Sign In"
@@ -172,7 +173,7 @@ const StaffLoginPage: React.FC = () => {
             <div className='mb-10 mr-6 ml-6'>
                 <ContentContainer type="translucent" width="100%" height="30px" borderRadius={20}>
                     <div className="w-full h-full flex justify-center items-center">
-                        <p className='text-center text-[8px] md:text-sm text-nnpcdarkgreen-700'>This Portal is a Property of NNPC Gas Marketing Limited</p>
+                        <p className='text-center text-[8px] md:text-[12px] text-white'>This Portal is a Property of NNPC Gas Marketing Limited</p>
                     </div>
                 </ContentContainer>
             </div>
