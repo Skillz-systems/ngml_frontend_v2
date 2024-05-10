@@ -94,6 +94,14 @@
     );
   }
 }
+.logingradient-bg {
+  background: linear-gradient(
+    287.65deg,
+     #10482B 2.07%, 
+     #457303 51.82%, 
+     #10482B 94.05%);
+
+}
 
 .button {
   transition: opacity 0.3s ease-in-out;
