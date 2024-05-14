@@ -28,7 +28,11 @@ export default {
         customYellow: '#FDF6E4',
         customGreen: '#AEF359',
         customWhite: '#FDFFF5'
-      }
+      },
+
+       fontFamily: {
+        mulish: ['Mulish', 'sans-serif'],
+      },
     }
   },
   plugins: []
