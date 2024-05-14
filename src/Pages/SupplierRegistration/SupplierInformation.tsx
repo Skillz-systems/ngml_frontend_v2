@@ -23,10 +23,12 @@ const SupplierInformation: React.FC = () => {
         supplierName: '',
         supplierEmail: '',
         supplierPhoneNumber: '',
-        representativeName: '',
-        representativeEmail: '',
-        customerType: '',
-        industrial: ''
+        dateOfAgreement: '',
+        agreementDuration: '',
+        agreedVolume: '',
+        costPerScf: '',
+        entryQuantity: '',
+        exitQuantity: ''
     });
 
     /**
@@ -35,13 +37,12 @@ const SupplierInformation: React.FC = () => {
      * @param {string} name - The name of the form field to update.
      * @param {string} value - The new value for the form field.
      */
-    const handleInputChange = (name: any, value: any) => {
+    const handleInputChange = (value: string, key: string) => {
         console.log(value)
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+        setFormData({ ...formData, [key]: value });
     };
+
+    const options=['2hr', '4hrs', '5hrs', '6hrs']
 
     return (
         <div>
@@ -53,7 +54,7 @@ const SupplierInformation: React.FC = () => {
                             type="text"
                             label='Supplier Registered Company Name'
                             value={formData.supplierName}
-                            handleChangeEvent={(value: any) => handleInputChange('supplierName', value)}
+                            handleChangeEvent={(value) => handleInputChange(value, 'supplierName')}
                             placeholder="Input company name"
                             styleVariant='customStyle5'
                         />
@@ -61,7 +62,7 @@ const SupplierInformation: React.FC = () => {
                             type="text"
                             label='Supplier Email '
                             value={formData.supplierEmail}
-                            handleChangeEvent={(value: any) => handleInputChange('supplierEmail', value)}
+                            handleChangeEvent={(value) => handleInputChange(value, 'supplierEmail')}
                             placeholder="Input email here"
                             styleVariant='customStyle5'
                         />
@@ -69,7 +70,7 @@ const SupplierInformation: React.FC = () => {
                             type="text"
                             label='Supplier Phone Number'
                             value={formData.supplierPhoneNumber}
-                            handleChangeEvent={(value: any) => handleInputChange('supplierPhoneNumber', value)}
+                            handleChangeEvent={(value) => handleInputChange(value, 'supplierPhoneNumber')}
                             placeholder="Input phone number here"
                             styleVariant='customStyle5'
                         />
@@ -84,8 +85,8 @@ const SupplierInformation: React.FC = () => {
                                     <CustomInput
                                         type="date"
                                         label='Date of agreement'
-                                        value={formData.representativeName}
-                                        handleChangeEvent={(value: any) => handleInputChange('representativeName', value)}
+                                        value={formData.dateOfAgreement}
+                                        handleChangeEvent={(value) => handleInputChange(value, 'dateOfAgreement')}
                                         placeholder="Enter Company Representative"
                                         styleVariant='customStyle5'
                                     />
@@ -94,10 +95,11 @@ const SupplierInformation: React.FC = () => {
                                     <CustomInput
                                         type="select"
                                         label='Agreement Duration'
-                                        value={formData.representativeEmail}
-                                        handleChangeEvent={(value: any) => handleInputChange('representativeEmail', value)}
+                                        value={formData.agreementDuration}
+                                        handleChangeEvent={(value) => handleInputChange(value, 'agreementDuration')}
                                         placeholder="Choose duration"
                                         styleVariant='customStyle5'
+                                        options={options}
                                     />
                                 </div>
                             </div>
@@ -106,8 +108,8 @@ const SupplierInformation: React.FC = () => {
                                     <CustomInput
                                         type="text"
                                         label='Agreed Volume (Scf)'
-                                        value={formData.representativeName}
-                                        handleChangeEvent={(value: any) => handleInputChange('representativeName', value)}
+                                        value={formData.agreedVolume}
+                                        handleChangeEvent={(value) => handleInputChange(value, 'agreedVolume')}
                                         placeholder="Input volume here"
                                         styleVariant='customStyle5'
                                     />
@@ -116,8 +118,8 @@ const SupplierInformation: React.FC = () => {
                                     <CustomInput
                                         type="text"
                                         label='Cost per Scf (NGN)'
-                                        value={formData.representativeEmail}
-                                        handleChangeEvent={(value: any) => handleInputChange('representativeEmail', value)}
+                                        value={formData.costPerScf}
+                                        handleChangeEvent={(value) => handleInputChange(value, 'costPerScf')}
                                         placeholder="Input cost here"
                                         styleVariant='customStyle5'
                                     />
@@ -128,8 +130,8 @@ const SupplierInformation: React.FC = () => {
                                     <CustomInput
                                         type="text"
                                         label='Entry Quantity (Scf)'
-                                        value={formData.representativeName}
-                                        handleChangeEvent={(value: any) => handleInputChange('representativeName', value)}
+                                        value={formData.entryQuantity}
+                                        handleChangeEvent={(value) => handleInputChange(value,'entryQuantity')}
                                         placeholder="Input entry quantity here"
                                         styleVariant='customStyle5'
                                     />
@@ -138,8 +140,8 @@ const SupplierInformation: React.FC = () => {
                                     <CustomInput
                                         type="text"
                                         label='Exit Quantity (Scf)'
-                                        value={formData.representativeEmail}
-                                        handleChangeEvent={(value: any) => handleInputChange('representativeEmail', value)}
+                                        value={formData.exitQuantity}
+                                        handleChangeEvent={(value) => handleInputChange(value,'exitQuantity')}
                                         placeholder="Input exit quantity here"
                                         styleVariant='customStyle5'
                                     />
