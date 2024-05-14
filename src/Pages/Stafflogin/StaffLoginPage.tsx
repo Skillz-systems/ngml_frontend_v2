@@ -7,9 +7,9 @@
 import React, { useState } from 'react';
 import '../../index.css';
 
+import { Link } from 'react-router-dom';
 import images from '../../assets/index';
 import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
-import { Link } from 'react-router-dom';
 
 /**
  * Functional component representing the staff login page.
@@ -97,7 +97,7 @@ const StaffLoginPage: React.FC = () => {
         <div className="min-h-screen flex flex-col logingradient-bg">
             <div className="flex-1 flex items-center justify-center">
                 <AuthContainer>
-                    <h1 className='text-[20px] font-semibold text-white' >NGML STAFF LOGIN</h1>
+                    <h1 className='text-[20px] font-semibold text-white font-mulish' >NGML STAFF LOGIN</h1>
                     <div className='relative'>
                         <div className='w-[100%] md:w-[350px] mx-auto space-y-6'>
                             <CustomInput
