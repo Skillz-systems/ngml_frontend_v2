@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import icons from '/assets/png-icons/icons.png';
+import images from '../../assets/index';
 
 /**
  * DocumentCard component displays a card with various types based on props.
@@ -38,7 +38,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ type, icon, reportIcon, tit
     <div
       className={(type === 'withLink' || type === 'withReport') ? `bg-nnpcdarkgreen-50 shadow-md rounded-[20px] p-4 mb-4 w-full h-full ${hovered ? 'bg-[#e8e9eb]' : ''}` : `bg-nnpcdarkgreen-50 shadow-md mb-4 rounded-[20px] p-2 w-full h-full ${hovered ? 'bg-gray-100' : ''}`}
       style={{
-        backgroundImage: type === 'withReport' ? `url(${icons})` : 'none', backgroundSize: type === 'withReport' ? 'cover' : 'auto',
+        backgroundImage: type === 'withReport' ? `url(${images.icons})` : 'none', backgroundSize: type === 'withReport' ? 'cover' : 'auto',
         width,
         height
       }}
