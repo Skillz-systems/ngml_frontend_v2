@@ -51,6 +51,7 @@ interface ButtonProps {
     textDecoration?: string;
     backgroundColor?: string
     borderColor?: string
+    className?: string; 
 }
 
 
@@ -84,6 +85,7 @@ const Button: React.FC<ButtonProps> = ({
     textDecoration,
     backgroundColor,
     borderColor,
+    className
 }: ButtonProps): React.ReactElement => {
 
     const [isHovered, setIsHovered] = useState(false);
@@ -129,7 +131,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <button
-            className={`button ${isHovered ? 'hovered' : ''}`}
+            className={`button ${isHovered ? 'hovered' : ''} ${className}`}
             onClick={action}
             disabled={disabled}
             onMouseEnter={() => setIsHovered(true)}
