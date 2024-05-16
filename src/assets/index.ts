@@ -62,6 +62,9 @@ import DataBox from './images/png-icons/DataBox.png';
 import Logo from './images/CompanyLogo.png';
 import profileicon from './images/png-icons/Profile.png';
 import Settingsicon from './images/png-icons/Settings.png';
+import cardicon from './images/png-icons/icons.png';
+import zone from './images/png-icons/Zone.png';
+import contact from './images/png-icons/contact.png';
 
 const images = {
   Cancelicon,
@@ -69,6 +72,8 @@ const images = {
   Picture,
   DataBox,
   profileicon,
+  contact,
+  cardicon,
   Settingsicon,
   Upload,
   Logo,
@@ -78,6 +83,7 @@ const images = {
   filterIcon,
   cancel,
   avatar,
+  zone,
   companylogo,
   nnpclogo,
   AltDownArrow,
