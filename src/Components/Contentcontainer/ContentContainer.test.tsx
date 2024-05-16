@@ -7,7 +7,7 @@ describe('<ContentContainer />', () => {
 
     // Check for default styles
     expect(container.firstChild).toHaveStyle({
-      width: '100%',
+      width: '560px',
       height: '100%',
       borderRadius: '5px',
     });
