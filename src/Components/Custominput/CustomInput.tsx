@@ -1,7 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import AltDownArrow from '/assets/png-icons/AltDownArrow.png';
-import Eyeclosed from '/assets/png-icons/Eyeclosed.png';
-import Eyeopen from '/assets/png-icons/Eyeopen.png';
+import images from '../../assets/index';
 
 /**
  * CustomInput Component - A customizable input component for various input types.
@@ -126,7 +124,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                             ))}
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <img src={AltDownArrow} alt='Alt down Arrow' />
+                            <img src={images.AltDownArrow} alt='Alt down Arrow' />
                         </div>
                     </div>
                 );
@@ -203,7 +201,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                             className="text-gray-500 focus:outline-none focus:text-gray-600"
                             onClick={handleTogglePassword}
                         >
-                            {showPassword ? <img src={Eyeclosed} alt='eyeclosed' /> : <img src={Eyeopen} alt='eyeopen' />}
+                            {showPassword ? <img src={images.Eyeclosed} alt='eyeclosed' /> : <img src={images.Eyeopen} alt='eyeopen' />}
                         </button>
                     </div>
                 )}

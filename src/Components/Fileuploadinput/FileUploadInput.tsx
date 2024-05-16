@@ -2,9 +2,8 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { FileType } from './FileTypes';
-import Cancelicon from '/assets/png-icons/Cancellation.png';
-import Picture from '/assets/png-icons/Picture.png';
-import Upload from '/assets/png-icons/Upload.png';
+import images from '../../assets/index';
+
 
 /**
  * FileUploadInput component for uploading files.
@@ -104,13 +103,13 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, fil
                             <div className="w-6 h-6 relative flex-col justify-start items-start flex">
                                 {file && (
                                     <div className="flex items-center">
-                                        <img src={Picture} alt='picture icon' />
+                                        <img src={images.Picture} alt='picture icon' />
                                     </div>
                                 )}
                             </div>
                         </div>
                     </div>
-                    {!file && <img src={Upload} className="w-6 h-6" alt="Upload Icon" />}
+                    {!file && <img src={images.Upload} className="w-6 h-6" alt="Upload Icon" />}
                     <div className='w-[100%] flex justify-between'>
                         <label htmlFor={inputId} className="cursor-pointer" >
                             <div className="flex-col justify-center items-start gap-1 inline-flex">
@@ -124,7 +123,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, fil
                         </label>
                         {file && (
                             <button type="button" onClick={handleCancel}>
-                                <img src={Cancelicon} alt='cancel icon' />
+                                <img src={images.Cancelicon} alt='cancel icon' />
                             </button>
                         )}
                     </div>

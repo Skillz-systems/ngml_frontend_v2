@@ -1,7 +1,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import StaffLoginPage from './StaffLoginPage';
 import { MemoryRouter } from 'react-router-dom';
+import StaffLoginPage from './StaffLoginPage';
 
 
 describe('StaffLoginPage', () => {

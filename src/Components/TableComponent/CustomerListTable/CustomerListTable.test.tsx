@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { CustomerListtData } from '@/Data'; // Make sure this path is correct
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 import CustomerListTable from './CustomerListTable';
 
 describe('CustomerListTable', () => {
@@ -16,9 +16,9 @@ describe('CustomerListTable', () => {
 
     fireEvent.change(screen.getByLabelText(/Search this list/i), { target: { value: 'test' } });
 
-    
+
     const matchingRows = CustomerListtData.filter(row => row.companyname.includes('test') || row.companyType.includes('test'));
-    expect(screen.getAllByRole('row')).toHaveLength(matchingRows.length + 1); 
+    expect(screen.getAllByRole('row')).toHaveLength(matchingRows.length + 1);
   });
 
 });

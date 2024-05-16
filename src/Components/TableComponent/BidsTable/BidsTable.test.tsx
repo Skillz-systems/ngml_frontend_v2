@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import BidsTable from './BidsTable'; 
+import { fireEvent, render, screen } from '@testing-library/react';
+import BidsTable from './BidsTable';
 
 
 describe('BidsTable Component', () => {
