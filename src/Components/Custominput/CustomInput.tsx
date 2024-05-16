@@ -71,7 +71,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
     const styleVariants = {
         default: `appearance-none block w-full px-3 py-3 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
             } rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-[12px]`, //default input
-        customStyle1: 'border border-solid border-lime-500 placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-lime-500 focus:bg-gray-100', // inputs with well rounded border radius
+        customStyle1: 'border border-solid border-lime-500 text-[12px] h-[56px] placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 pl-14 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-lime-500 focus:bg-gray-100', // inputs with well rounded border radius
         customStyle2: 'rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-[12px] border border-2 solid w-full py-2', // for inputs with gray background focused
         customStyle3: 'rounded-full placeholder-gray-300 placeholder:italic placeholder:font-[400] font-[500] pl-6 pr-6 focus:outline-none focus:border-lime-700 focus:bg-gray-100 sm:text-[12px] border border-2 solid w-full py-3', // for inputs with gray background focused, rounded radius and wider input 
         customStyle4: 'placeholder-black pl-12 focus:outline-none font-[400] focus:border-lime-200 focus:bg-white-600 border-1 solid w-full py-2', // no border input

@@ -32,7 +32,7 @@ describe('StaffLoginPage', () => {
       </MemoryRouter>
     );
     const emailInput = screen.getByPlaceholderText(/enter your email/i);
-    const passwordInput = screen.getByPlaceholderText(/enter a password/i);
+    const passwordInput = screen.getByPlaceholderText(/enter your password/i);
     const loginButton = screen.getByRole('button', { name: /login/i });
 
     // Type in the email and password
