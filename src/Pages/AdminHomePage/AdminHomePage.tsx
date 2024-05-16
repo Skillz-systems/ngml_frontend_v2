@@ -2,7 +2,7 @@
 import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined, RestaurantMenuOutlined } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
-
+import images from '../../assets/index';
 
 interface SelectOption {
   label: string;
@@ -38,25 +38,25 @@ const AdminHomePage = () => {
 
 
 
-  const cardData = [
-    {
-      title: 'Un-Verified Staff',
-      value: '2,305',
-      icon: <GolfCourseOutlined />,
+  // const cardData = [
+  //   {
+  //     title: 'Un-Verified Staff',
+  //     value: '2,305',
+  //     icon: <GolfCourseOutlined />,
 
-    },
-    {
-      title: 'Pending Requests',
-      value: '32',
-      icon: <FileDownloadDoneOutlined />,
+  //   },
+  //   {
+  //     title: 'Pending Requests',
+  //     value: '32',
+  //     icon: <FileDownloadDoneOutlined />,
 
-    },
-    {
-      title: 'Upcoming Site Visits',
-      value: '12',
-      icon: <HailOutlined />,
-    },
-  ];
+  //   },
+  //   {
+  //     title: 'Upcoming Site Visits',
+  //     value: '12',
+  //     icon: <HailOutlined />,
+  //   },
+  // ];
 
   const activities = [
     {
@@ -155,7 +155,7 @@ const AdminHomePage = () => {
       <div>
         <div className='text-[30px] text-[#49526A] font-[700]'>Welcome John,</div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4" >
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4" >
         {cardData.map((card, index) => {
           const { bgColor, iconColor } = getIconStyles(card.title);
           return (
@@ -168,7 +168,27 @@ const AdminHomePage = () => {
             />
           );
         })}
-      </div>
+      </div> */}
+      <div className='flex flex-col md:flex-row items-center gap-4 mt-6 ' >
+                    <StatisticRectangleCard
+                        title='Un-Verified Staff'
+                        icon={<img src={images.contact} alt="staff icon" />}
+                        value='2,305'
+                        iconBgColor='rounded-[5px] bg-[#005828]'
+                    />
+                    <StatisticRectangleCard
+                        title='Pending Requests'
+                        icon={<img src={images.Requesticon} alt="request icon" />}
+                        value='32'
+                        iconBgColor='bg-[#00AF50] rounded-[5px]'
+                    />
+                    <StatisticRectangleCard
+                        title='Upcoming Site Visits'
+                        icon={<img src={images.zone} alt="zone icon" />}
+                        value='12'
+                        iconBgColor='rounded-full bg-[#FFD181]'
+                    />
+                </div>
 
       <div className='mt-8 h-fit grid grid-cols-1 xl:grid-cols-7 gap-4 ' id="stat-card-chart-parent">
         <div className="xl:col-span-5 col-span-1  order-last lg:order-first xl:order-last" id="cards">
