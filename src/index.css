@@ -195,3 +195,15 @@ body {
   width: 100%;
   z-index: 1000;
 }
+
+/* .responsive-button {
+  width: 120px;
+  font-size: 12px;
+}
+
+@media (max-width: 400px) {
+  .responsive-button {
+      width: 80px; 
+      font-size: 8px;
+  }
+} */
