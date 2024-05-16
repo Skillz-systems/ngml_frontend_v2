@@ -59,7 +59,7 @@ import filterIcon from './images/png-icons/Filter.png';
 import closeIcon from './images/png-icons/Cancellation.png';
 import SearchIcon from './images/png-icons/Search.png';
 import DataBox from './images/png-icons/DataBox.png';
-import Logo from './images/images/CompanyLogo.png';
+import Logo from './images/CompanyLogo.png';
 import profileicon from './images/png-icons/Profile.png';
 import Settingsicon from './images/png-icons/Settings.png';
 

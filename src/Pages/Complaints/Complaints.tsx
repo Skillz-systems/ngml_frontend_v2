@@ -77,7 +77,7 @@ const Complaints: React.FC = () => {
                         </div>
                         <div className="text-[#49526A] text-base font-bold font-['Mulish'] leading-none">Dangote Cement Ltd.</div>
                     </div>
-                    <div className="w-44 px-4 py-3 rounded-3xl border flex justify-center">
+                    <div className="px-4 py-3 rounded-3xl border flex justify-center">
                         <div className="text-[#49526A] text-xs font-normal font-['Mulish']">Mark this issue as resolved</div>
                     </div>
                 </div>
