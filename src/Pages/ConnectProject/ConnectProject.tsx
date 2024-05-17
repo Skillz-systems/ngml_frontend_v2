@@ -110,11 +110,11 @@ const ConnectProject: React.FC = () => {
                     <div className="w-full h-full p-6 rounded-xl border space-y-6">
                         <div className="text-base font-bold font-['Mulish'] leading-none">PROJECT DATES</div>
                         <div className='flex md:flex-row flex-col justify-start gap-4'>
-                            <div className="w-full md:w-60 px-8 py-3 rounded-3xl border hover:bg-nnpcmediumgreen-850 cursor-pointer">
-                                <div className="text-base font-normal font-['Mulish'] leading-none">Select Project Strategy</div>
+                            <div className="w-full md:w-[250px] px-8 py-3 rounded-3xl border hover:bg-nnpcmediumgreen-850 cursor-pointer">
+                                <div className="text-base font-normal font-['Mulish'] text-center">Select Project Strategy</div>
                             </div>
-                            <div className="w-full md:w-60 px-8 py-3 rounded-3xl border hover:bg-nnpcmediumgreen-850 justify-center cursor-pointer">
-                                <div className="text-base font-normal font-['Mulish'] leading-none">Setup Project Milestones</div>
+                            <div className="w-full md:w-[250px] px-8 py-3 rounded-3xl border hover:bg-nnpcmediumgreen-850 justify-center cursor-pointer">
+                                <div className="text-base font-normal font-['Mulish'] text-center">Setup Project Milestones</div>
                             </div>
                         </div>
                     </div>
