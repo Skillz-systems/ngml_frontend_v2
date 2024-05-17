@@ -40,6 +40,7 @@ const CustomerManager: React.FC = () => {
         height='330px'
         reports='12/nov/2023'
         reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' />}
+        backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard
         type='withReport'
@@ -49,6 +50,7 @@ const CustomerManager: React.FC = () => {
         height='330px'
         reports='12/nov/2023'
         reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4' onClick={() => navigate('/admin/records/billinghistory')} />}
+        backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard
         type='withReport'
@@ -58,6 +60,7 @@ const CustomerManager: React.FC = () => {
         height='330px'
         reportTitle='Complaints'
         reportIcon={<img src={images.callmade} alt="callmade Icon3" className='w-4 h-4' onClick={() => navigate('/admin/records/complaints')} />}
+        backgroundColor='bg-[#EAEEF2]'
       />
     </div>
   );

@@ -18,6 +18,7 @@ import images from '../../assets/index';
  * @property {string} linkText2 - Additional link text.
  * @property {number|string} width - Width of the document card.
  * @property {number|string} height - Height of the document card.
+ * @property {string} backgroundColor - Background color of the document card.
  */
 
 /**
@@ -40,6 +41,7 @@ interface BillingHistoryData {
     linkText2: string;
     width: number | string;
     height: number | string;
+    backgroundColor: string;
 }
 
 const BillingHistory: React.FC = () => {
@@ -60,9 +62,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -70,9 +73,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -80,9 +84,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -90,9 +95,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -100,9 +106,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -110,9 +117,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -120,9 +128,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -130,9 +139,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withoutLink',
@@ -140,9 +150,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withoutLink',
@@ -150,9 +161,10 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
+            backgroundColor:'bg-[#EAEEF2]'
         },
     ]
 
@@ -234,6 +246,7 @@ const BillingHistory: React.FC = () => {
                                     linkText2={cards.linkText2}
                                     icon={cards.icon}
                                     height={cards.height}
+                                    backgroundColor={cards.backgroundColor}
                                 />
                             </div>
                         ))}
