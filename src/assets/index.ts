@@ -22,6 +22,7 @@ import copy from './images/png-icons/Copy.png';
 import { default as Customericon, default as customers } from './images/png-icons/Customers.png';
 import edit from './images/png-icons/Edit.png';
 import file from './images/png-icons/File.png';
+import files from './images/png-icons/Files.png';
 import Bidicon from './images/png-icons/Filter.png';
 import Homeicon from './images/png-icons/Home.png';
 import Invoiceicon from './images/png-icons/Invoice.png';
@@ -79,6 +80,7 @@ const images = {
   Logo,
   cancelicon,
   SearchIcon,
+  files,
   closeIcon,
   filterIcon,
   cancel,
