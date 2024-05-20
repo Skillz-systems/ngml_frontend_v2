@@ -21,7 +21,7 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
   color = 'text-gray-700',
   size,
   iconBgColor = 'bg-[#00AF50]',
-  iconSize = 'w-5 '
+  iconSize = 'w-[30px]'
 }) => {
   const [iconHovered, setIconHovered] = useState(false);
 
@@ -34,8 +34,7 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
   };
 
   return (
-    <div style={{ width: '100%', height: '100%', }}
-      className={`rounded-[12px] p-[8px]
+    <div style={{ width: '100%', height: '64px', }} className={`rounded-[12px] p-[8px] border border-[#E2E4EB]
       ${backgroundColor} ${color} ${size} shadow-sm flex items-center
       justify-between `} aria-label={title}
     >
@@ -51,7 +50,7 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
         <h3 className="text-lg font-[400] text-[#828DA9] ">{title}</h3>
       </div>
       <div >
-        <h3 className={`text-lg font-bold ${valueColor}`}>{value}</h3>
+        <h3 className={`text-lg font-bold mr-2 ${valueColor}`}>{value}</h3>
       </div>
     </div>
   );
