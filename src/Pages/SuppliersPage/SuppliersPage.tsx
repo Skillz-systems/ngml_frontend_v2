@@ -16,9 +16,9 @@ const SuppliersPage: React.FC = () => {
             case 'Active Suppliers':
                 return { bgColor: 'bg-[#D2F69E]', iconColor: 'text-white' };
             case 'Processing Suppliers':
-                return { bgColor: 'bg-[#FFD181]', iconColor: 'text-black' };
+                return { bgColor: 'bg-[#FFD181]', iconColor: 'text-black', };
             default:
-                return { bgColor: 'bg-gray-500', iconColor: 'text-white' , };
+                return { bgColor: 'bg-gray-500', iconColor: 'text-white', };
         }
     };
 
@@ -46,7 +46,7 @@ const SuppliersPage: React.FC = () => {
     ];
 
     return (
-        <div>
+        <div className=''>
             <div className=' mr-[25px]'>
                 <div className='flex flex-col md:flex-row items-center justify-between '>
                     <Heading as="h4" size="h4" color='primaryColor' className="font-semibold text-gray-600">SUPPLIERS</Heading>
@@ -55,8 +55,8 @@ const SuppliersPage: React.FC = () => {
                             type='outline'
                             label='Create PDF'
                             radius='20px'
-                            width='120px'
-                            height='30px'
+                            width='96px'
+                            height='32px'
                             action={() => { }}
                         />
                         <Link to={'/admin/records/supplierregistration'}>
@@ -64,8 +64,8 @@ const SuppliersPage: React.FC = () => {
                                 type='outline'
                                 label='New Supplier'
                                 radius='20px'
-                                width='120px'
-                                height='30px'
+                                width='96px'
+                                height='32px'
                                 action={() => { }}
 
                             />
@@ -86,30 +86,6 @@ const SuppliersPage: React.FC = () => {
                         );
                     })}
                 </div>
-                {/* <div className='flex flex-col md:flex-row items-center gap-4 mt-6 ' >
-                    <StatisticRectangleCard
-                        title='Total Customers'
-                        icon={<img src={images.customers} alt="staff icon" />}
-                        value='9'
-                        valueColor='text-nnpcmediumgreen-700'
-                        iconBgColor='rounded-[5px] bg-nnpcmediumgreen-500'
-                    />
-                    <StatisticRectangleCard
-                        title='Active Customers'
-                        icon={<img src={images.customers} alt="staff icon" />}
-                        value='9'
-                        valueColor='text-black'
-                        iconBgColor='bg-nnpc-50 rounded-[5px]'
-                    />
-                    <StatisticRectangleCard
-                        title='Processing Customers'
-                        icon={<img src={images.warning} alt="staff icon" />}
-                        value='2'
-                        valueColor='text-green-800'
-                        backgroundColor='bg-nnpc-600'
-                        iconBgColor='rounded-full bg-nnpc-700'
-                    />
-                </div> */}
             </div>
             <div className=' flex flex-col md:flex-row md:mt-[30px] gap-[16px] w-[100%] '>
                 <InfoCard
@@ -127,9 +103,7 @@ const SuppliersPage: React.FC = () => {
                     options={dropdownOptions}
                 />
 
-
             </div>
-
             <div className='w-full mt-9'>
                 <SuppliersListTable />
             </div>
