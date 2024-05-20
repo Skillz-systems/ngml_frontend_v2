@@ -58,14 +58,14 @@ const AdminCustomerList: React.FC = () => {
                         icon={<img src={images.customers} alt="staff icon" />}
                         value='554'
                         valueColor='text-nnpcmediumgreen-700'
-                        iconBgColor='rounded-[5px] bg-nnpcmediumgreen-500'
+                        iconBgColor='rounded-[10px] bg-nnpcmediumgreen-500'
                     />
                     <StatisticRectangleCard
                         title='Active Customers'
                         icon={<img src={images.customers} alt="staff icon" />}
                         value='442'
                         valueColor='text-black'
-                        iconBgColor='bg-nnpc-50 rounded-[5px]'
+                        iconBgColor='bg-nnpc-50 rounded-[10px]'
                     />
                     <StatisticRectangleCard
                         title='Processing Customers'
@@ -74,6 +74,7 @@ const AdminCustomerList: React.FC = () => {
                         valueColor='text-green-800'
                         backgroundColor='bg-nnpc-600'
                         iconBgColor='rounded-full bg-nnpc-700'
+                        iconSize='w-[25px]'
                     />
                 </div>
             </div>
