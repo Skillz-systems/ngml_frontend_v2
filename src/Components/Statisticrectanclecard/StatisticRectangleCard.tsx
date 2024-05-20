@@ -45,7 +45,7 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
           onMouseLeave={handleIconLeave}
           style={{ backgroundColor: iconHovered ? '#dddddd' : '' }}
         >
-          {icon && <div className={`${iconSize}`} style={{ fontSize: 'small', }}>{icon}</div>}
+          {icon && <div className={`${iconSize} flex justify-center`} style={{ fontSize: 'small', }}>{icon}</div>}
         </div>
         <h3 className="text-lg font-[400] text-[#828DA9] ">{title}</h3>
       </div>
