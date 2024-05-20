@@ -74,7 +74,6 @@ const AdminCustomerList: React.FC = () => {
                         valueColor='text-green-800'
                         backgroundColor='bg-nnpc-600'
                         iconBgColor='rounded-full bg-nnpc-700'
-                        iconSize='w-[25px]'
                     />
                 </div>
             </div>
