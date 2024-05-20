@@ -9,6 +9,8 @@ const colors = {
     600: '#FEF3D5',
     700: '#FAD180',
     800: '#EF643D',
+    900: '#FFEDD5',
+    950: '#FB7185',
     
 
     // 600: '#FFFADA',
@@ -25,6 +27,8 @@ const colors = {
     100: '#808080',
     200: '#49526A',
     300: '#e8e9eb',
+    400: '#9CA3AF',
+    500: '#4B5563',
   },
   nnpcmediumgreen: {
     50: '#f2fbf6',

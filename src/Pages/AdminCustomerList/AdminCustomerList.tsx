@@ -32,7 +32,7 @@ const AdminCustomerList: React.FC = () => {
         console.log('Creating customer:', customerData);
         toggleModal();
         alert('Customer successfully registered!');
-        // window.location.href = '/admin/records/newcustomer/id';
+        window.location.href = '/admin/records/customernewregistration';
         // navigate('/admin/records/newcustomer/id');
     };
 

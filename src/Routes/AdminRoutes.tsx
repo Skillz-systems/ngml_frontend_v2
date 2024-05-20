@@ -1,13 +1,14 @@
 import AdminCustomerList from '@/Pages/AdminCustomerList/AdminCustomerList';
 import AdminHomePage from '@/Pages/AdminHomePage/AdminHomePage';
-import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
-import AdminInternalLayout from '../Hoc/AdminInternalLayout';
-import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
-import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
-import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
 import Complaints from '@/Pages/Complaints/Complaints';
+import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
+import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
 import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
+import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
+import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
+import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
+import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 
 export const AdminRoutes = [
   {
@@ -26,6 +27,12 @@ export const AdminRoutes = [
     title: 'Admin Customer Page ',
     path: '/admin/records/customer/id',
     component: AdminInternalLayout(CustomerPageLayout),
+    exact: true
+  },
+  {
+    title: 'Admin Customer New Registration Page ',
+    path: '/admin/records/customernewregistration',
+    component: AdminInternalLayout(CustomerNewRegistration),
     exact: true
   },
   {
