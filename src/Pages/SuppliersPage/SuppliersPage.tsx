@@ -46,8 +46,8 @@ const SuppliersPage: React.FC = () => {
     ];
 
     return (
-        <div className=''>
-            <div className=' mr-[25px]'>
+        <div>
+            <div>
                 <div className='flex flex-col md:flex-row items-center justify-between '>
                     <Heading as="h4" size="h4" color='primaryColor' className="font-semibold text-gray-600">SUPPLIERS</Heading>
                     <div className='flex gap-[16px]'>
