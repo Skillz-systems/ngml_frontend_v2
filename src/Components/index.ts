@@ -8,7 +8,8 @@ export { default as ContentContainer } from './Contentcontainer/ContentContainer
 export { default as CustomInput } from './Custominput/CustomInput';
 export { default as DateCard } from './DateCardComponent/DateCard';
 export { default as DocumentCard } from './Documentcard/DocumentCard';
-export { default as DocumentCardTwo } from './DocumentCardTwo/DocumentCardTwo'
+export { default as DocumentCardTwo } from './DocumentCardTwo/DocumentCardTwo';
+export { default as DocumentCardThree } from './DocumentCardThree/DocumentCardThree'
 export { default as FileUploadInput } from './Fileuploadinput/FileUploadInput';
 export { default as Heading } from './Heading/Heading';
 export { default as InfoCardComponent } from './InfoCardComponent/InfoCardComponent';
