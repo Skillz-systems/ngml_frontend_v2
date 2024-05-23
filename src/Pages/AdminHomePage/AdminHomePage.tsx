@@ -99,7 +99,7 @@ const AdminHomePage = () => {
   const dynamicCardData: DynamicCardDataItem[] = [
     {
       type: 'primary',
-      title: 'Total Revenue',
+      title: 'Total Supplied Volume ',
       content: '12,129,243,990.00',
       icon: <RestaurantMenuOutlined />,
       yearOptions: [2020, 2021, 2022],
@@ -110,7 +110,7 @@ const AdminHomePage = () => {
     },
     {
       type: 'secondary',
-      title: 'Net Profit',
+      title: 'Total Consumption Volume ',
       content: '4,039,213,455.00',
       icon: <FileDownloadDoneOutlined />,
       yearOptions: [2020, 2021, 2022],
