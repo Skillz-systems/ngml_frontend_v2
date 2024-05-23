@@ -40,12 +40,12 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
     >
       <div className='flex items-center gap-2 w-[100%]'>
         <div
-          className={`${iconBgColor} p-1`}
+          className={`${iconBgColor} py-1`}
           onMouseEnter={handleIconHover}
           onMouseLeave={handleIconLeave}
           style={{ backgroundColor: iconHovered ? '#dddddd' : '' }}
         >
-          {icon && <div className={`${iconSize}`} style={{ fontSize: 'small', }}>{icon}</div>}
+          {icon && <div className={`${iconSize} flex justify-center itens-center`} style={{ fontSize: 'small', }}>{icon}</div>}
         </div>
         <h3 className="text-lg font-[400] text-[#828DA9] ">{title}</h3>
       </div>
