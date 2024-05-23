@@ -9,6 +9,7 @@ import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLay
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
+import RequestPage from '@/Pages/RequestPage/RequestPage';
 
 export const AdminRoutes = [
   {
@@ -69,6 +70,12 @@ export const AdminRoutes = [
     title: 'invoice page',
     path: '/admin/records/invoice',
     component: AdminInternalLayout(InvoicePage),
+    exact: true
+  },
+  {
+    title: 'Request page',
+    path: '/admin/records/requestpage',
+    component: AdminInternalLayout(RequestPage),
     exact: true
   },
 
