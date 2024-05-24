@@ -16,18 +16,18 @@ const SupplierOverviewPage = () => {
 
     const statisticCardData = [
         {
-            label: 'Customers',
-            value: '554',
+            label: 'Total daily Firm',
+            value: '50,000,000',
             primary: true,
         },
         {
-            label: 'Suppliers',
-            value: '9',
+            label: 'Total daily Interruptible ',
+            value: '2,000,000',
             primary: false,
         },
         {
-            label: 'Staff',
-            value: '8,307',
+            label: 'Gas Debit/Credit',
+            value: '10,000/20,000',
             primary: false,
         },
     ];

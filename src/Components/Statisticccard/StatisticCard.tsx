@@ -35,7 +35,7 @@ const StatisticCard: React.FC<StatisticCardProps> = ({
       <img className="absolute w-[100%] h-[100%] inset-0 z-0 object-cover" src={images.DataBox} alt="data box" />
 }
       <div className={`p-3 w-full rounded-t-[20px] ${labelBgColor} h-2/5 flex flex-col justify-center items-center`}>
-        <span className='text-[24px] font-[400]'>{label}</span>
+        <span className='text-[23px] font-[400]'>{label}</span>
         {labelSpan && <div className="mt-[-7px]">{labelSpan}</div>}
       </div>
       <div className={`w-full h-3/5 ${valueBgColor} rounded-b-[20px] flex justify-center items-center`}>
