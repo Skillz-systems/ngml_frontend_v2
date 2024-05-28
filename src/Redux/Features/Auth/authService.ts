@@ -35,6 +35,7 @@ export const authApi = api.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
+       transformResponse: (response: { token: string; user: AuthResponse['user'] }) => response,
     }),
     logout: builder.mutation<void, void>({
       query: () => ({

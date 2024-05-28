@@ -5,8 +5,8 @@ import rootReducer from './rootReducer';
 
 
 import {
-    persistReducer,
-    persistStore,
+  persistReducer,
+  persistStore,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -21,7 +21,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+    getDefaultMiddleware({ serializableCheck: {
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+      },}).concat(api.middleware),
 });
 
 
