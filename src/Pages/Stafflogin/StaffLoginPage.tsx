@@ -10,12 +10,18 @@ import '../../index.css';
 import { Link } from 'react-router-dom';
 import images from '../../assets/index';
 import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
+// import { useLoginMutation } from '../../Redux/Features/Auth/authService';
+// import { useAppDispatch } from '../../Redux/hooks';
+// import { setCredentials } from '../../Redux/Features/Auth/authSlice';
 
 /**
  * Functional component representing the staff login page.
  * @returns {JSX.Element} StaffLoginPage component
  */
 const StaffLoginPage: React.FC = () => {
+
+    // const [login, { isLoading, error }] = useLoginMutation();
+    // const dispatch = useAppDispatch();
     /**
      * State hook to manage form data.
      * @type {Object}
@@ -49,7 +55,7 @@ const StaffLoginPage: React.FC = () => {
     /**
      * Function to handle login action.
      */
-    const handleLogin = () => {
+    const handleLogin = async () => {
         let valid = true;
         const newErrors = { ...errors };
 
@@ -70,11 +76,21 @@ const StaffLoginPage: React.FC = () => {
 
         if (valid) {
             // Call your Login API or logic here
-            console.log('Resetting password...');
-            setFormData({ email: '', password: '' });
+
         } else {
             setErrors(newErrors);
         }
+
+
+        // try {
+        //     const response = await login(formData);
+
+        //     dispatch(setCredentials(response?.data));
+        //     // Redirect or show success message
+        // } catch (error) {
+        //     // Handle error
+        //     console.log(error)
+        // }
     };
 
     /**
@@ -88,8 +104,20 @@ const StaffLoginPage: React.FC = () => {
     /**
      * Function to handle new sign-in action.
      */
-    const handleNewSignIn = () => {
+    const handleNewSignIn = async () => {
         console.log('New Sign In clicked');
+        // try {
+        //     const response = await login(formData);
+        //     if (response?.data) {
+        //         dispatch(setCredentials(response.data));
+        //         // Redirect or show success message
+        //     }
+        // } catch (error) {
+        //     // Handle error
+        //     console.log(error);
+        // }
+        console.log('Resetting password...');
+        setFormData({ email: '', password: '' });
         // You can navigate to a new sign-in page
     };
 
@@ -123,6 +151,8 @@ const StaffLoginPage: React.FC = () => {
                             </div>
                             <Link to='/admin' className='w-[100%]'>
                                 <div className='mt-4 flex items-center justify-center'>
+
+
                                     <Button
                                         type="primary"
                                         label="Login"
@@ -151,8 +181,9 @@ const StaffLoginPage: React.FC = () => {
                 </div>
                 <div className='flex justify-center w-[100%]'>
                     <ContentContainer type="translucent" borderRadius={32} >
-                        <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
+                        <div className="h-full flex items-center justify-between mr-2 ml-2">
                             <p className='text-center text-[8px] md:text-[12px] text-[rgba(5, 5, 5, 1)]'>New to the Portal, Sign in Here</p>
+
                             <Button
                                 className="text-[8px] md:text-[12px]"
                                 type="outline"
