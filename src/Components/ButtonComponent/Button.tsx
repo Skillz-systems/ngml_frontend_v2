@@ -51,6 +51,7 @@ interface ButtonProps {
     textDecoration?: string;
     backgroundColor?: string
     borderColor?: string
+    className?: string; 
 }
 
 
@@ -84,6 +85,7 @@ const Button: React.FC<ButtonProps> = ({
     textDecoration,
     backgroundColor,
     borderColor,
+    className
 }: ButtonProps): React.ReactElement => {
 
     const [isHovered, setIsHovered] = useState(false);
@@ -104,7 +106,7 @@ const Button: React.FC<ButtonProps> = ({
             case 'icon':
                 return {  backgroundColor: isHovered ? '#00903e' : '#F9FAFB', color, width, height, borderRadius: radius,   };
             case 'outline':
-                return { border: '1px solid #DCDFE4', color: '#49526A', width, height, fontSize: isHovered ? '15px' : '12px', borderRadius: radius, fontWeight };
+                return { border: '1px solid #DCDFE4', color: '#49526A', width, height, fontSize: isHovered ? '13px' : '12px', borderRadius: radius, fontWeight };
             case 'transparent':
                 return { fontSize: isHovered ? '12.5px' : '12px', fontWeight, lineHeight};
             default:
@@ -129,7 +131,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <button
-            className={`button ${isHovered ? 'hovered' : ''}`}
+            className={`button ${isHovered ? 'hovered' : ''} ${className}`}
             onClick={action}
             disabled={disabled}
             onMouseEnter={() => setIsHovered(true)}

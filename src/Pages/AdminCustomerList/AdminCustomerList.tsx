@@ -19,7 +19,7 @@ const AdminCustomerList: React.FC = () => {
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     };
-    const handleInputChange = (value: any, key: any) => {
+    const handleInputChange = (value: string, key: string) => {
         console.log(value)
         setCustomerData({ ...customerData, [key]: value });
     };
@@ -32,7 +32,7 @@ const AdminCustomerList: React.FC = () => {
         console.log('Creating customer:', customerData);
         toggleModal();
         alert('Customer successfully registered!');
-        // window.location.href = '/admin/records/newcustomer/id';
+        window.location.href = '/admin/records/customernewregistration';
         // navigate('/admin/records/newcustomer/id');
     };
 
@@ -58,14 +58,14 @@ const AdminCustomerList: React.FC = () => {
                         icon={<img src={images.customers} alt="staff icon" />}
                         value='554'
                         valueColor='text-nnpcmediumgreen-700'
-                        iconBgColor='rounded-[5px] bg-nnpcmediumgreen-500'
+                        iconBgColor='rounded-[10px] bg-nnpcmediumgreen-500'
                     />
                     <StatisticRectangleCard
                         title='Active Customers'
                         icon={<img src={images.customers} alt="staff icon" />}
                         value='442'
                         valueColor='text-black'
-                        iconBgColor='bg-nnpc-50 rounded-[5px]'
+                        iconBgColor='bg-nnpc-50 rounded-[10px]'
                     />
                     <StatisticRectangleCard
                         title='Processing Customers'

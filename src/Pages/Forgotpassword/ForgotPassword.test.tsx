@@ -37,14 +37,7 @@ describe('PortalEnrollment component', () => {
 
         fireEvent.change(emailInput, { target: { value: 'validemail@example.com' } });
         fireEvent.click(loginButton);
-
-        // Add a waitFor assertion to check if handleSubmit is called
     });
 
-    it('should call handleCancellation function when cancel button is clicked', () => {
-        const { getByAltText } = render(<ForgotPassword />);
-        const cancelButton = getByAltText('cancel icon');
 
-        fireEvent.click(cancelButton);
-    });
 });

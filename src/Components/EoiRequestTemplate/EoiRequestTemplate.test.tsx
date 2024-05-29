@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import EoiRequestTemplate from './EoiRequestTemplate';
 
 describe('EoiRequestTemplate', () => {
- test('renders correctly and shows "Request Approval" button for new status', () => {
+  test('renders correctly and shows "Request Approval" button for new status', () => {
     render(
       <EoiRequestTemplate
         dateTime="2023-04-01 10:00 AM"
@@ -16,7 +16,7 @@ describe('EoiRequestTemplate', () => {
         statusStyle={{ backgroundColor: 'lightgreen' }}
         approverName=""
         disapprovalReason=""
-        handleClose={() => {}}
+        handleClose={() => { }}
       />
     );
 
@@ -24,5 +24,5 @@ describe('EoiRequestTemplate', () => {
 
     const requestApprovalButton = screen.getByRole('button', { name: /Request Approval/i });
     expect(requestApprovalButton).toBeInTheDocument();
- });
+  });
 });

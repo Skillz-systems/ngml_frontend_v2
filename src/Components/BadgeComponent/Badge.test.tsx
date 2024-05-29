@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Badge from './Badge'; 
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import Badge from './Badge';
 
 describe('Badge Component', () => {
   it('renders correctly with given props', () => {
@@ -16,7 +16,7 @@ describe('Badge Component', () => {
         fontWeight="bold"
       />
     );
-    
+
     const badgeElement = screen.getByText('Test Badge');
     expect(badgeElement).toBeInTheDocument();
 

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Divider } from '@mui/material';
+// import { Divider } from '@mui/material';
 import colors from '@/Utils/colors';
 
 /**
@@ -40,48 +40,48 @@ const InfoCard: React.FC<InfoCardProps> = ({
   };
 
   return (
-    <div 
-    className='text-start sm:text-center'
-    style={{
-      height: '100%',
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      ...style,
-    }}>
-      <div 
-     
+    <div
+      className='text-start sm:text-center '
       style={{
-        backgroundColor: '#EAEEF2',
-        borderTopRightRadius: '12px',
-        borderTopLeftRadius: '12px',
+        height: '100%',
+        width: '100%',
         display: 'flex',
-        color: '#828DA9',
-        fontSize: '20px',
-        fontWeight: '600',
         flexDirection: 'column',
-        gap: '8px',
-        padding: '20px',
+        justifyContent: 'center',
+        ...style,
       }}>
+      <div
+        className='border'
+        style={{
+          backgroundColor: '#EAEEF2',
+          borderTopRightRadius: '12px',
+          borderTopLeftRadius: '12px',
+          display: 'flex',
+          color: '#828DA9',
+          fontSize: '20px',
+          fontWeight: '600',
+          flexDirection: 'column',
+          gap: '8px',
+          padding: '20px',
+        }}>
         <h2>{title}</h2>
         <div className='text-[14px]'>{subtitle}</div>
 
       </div>
-      <Divider />
-      <div 
-          className='text-start sm:text-center'
-      style={{
-        backgroundColor: '#FBFCFD',
-        display: 'flex',
-        justifyContent: 'center',
-        fontWeight: '700',
-        borderBottomRightRadius: '12px',
-        borderBottomLeftRadius: '12px',
-        padding: '20px',
-        flexDirection: 'column',
-      }}>
-        <p className='text-[32px]' style={{color: colors.nnpcdarkgreen[800]}}>{number}</p>
+      {/* <Divider /> */}
+      <div
+        className='text-start sm:text-center border'
+        style={{
+          backgroundColor: '#F6F8FA',
+          display: 'flex',
+          justifyContent: 'center',
+          fontWeight: '700',
+          borderBottomRightRadius: '12px',
+          borderBottomLeftRadius: '12px',
+          padding: '20px',
+          flexDirection: 'column',
+        }}>
+        <p className='text-[32px]' style={{ color: colors.nnpcdarkgreen[800] }}>{number}</p>
         {showDropdown && options && (
           <select
             value={selectedOption}

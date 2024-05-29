@@ -1,5 +1,5 @@
-import { render, fireEvent } from '@testing-library/react';
-import Button from './Button'; 
+import { fireEvent, render } from '@testing-library/react';
+import Button from './Button';
 
 describe('Button Component', () => {
   test('renders button with label', () => {
@@ -34,6 +34,6 @@ describe('Button Component', () => {
     expect(icon).toBeInTheDocument();
   });
 
-  
+
 
 });

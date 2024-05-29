@@ -1,8 +1,8 @@
 import InfoCard from '@/Components/InfoCardComponent/InfoCardComponent';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Heading, StatisticRectangleCard, SuppliersListTable } from '../../Components/index';
-import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined } from '@mui/icons-material';
-import React from 'react';
+import images from '../../assets/index';
 
 const SuppliersPage: React.FC = () => {
 
@@ -12,13 +12,13 @@ const SuppliersPage: React.FC = () => {
     const getIconStyles = (title: string) => {
         switch (title) {
             case 'Suppliers':
-                return { bgColor: 'bg-[#005828]', iconColor: 'text-white' };
-            case 'Active Suppliers':
                 return { bgColor: 'bg-[#00AF50]', iconColor: 'text-white' };
+            case 'Active Suppliers':
+                return { bgColor: 'bg-[#D2F69E]', iconColor: 'text-white' };
             case 'Processing Suppliers':
-                return { bgColor: 'bg-[#FFD181]', iconColor: 'text-black' };
+                return { bgColor: 'bg-[#FFD181]', iconColor: 'text-black', };
             default:
-                return { bgColor: 'bg-gray-500', iconColor: 'text-white' };
+                return { bgColor: 'bg-gray-500', iconColor: 'text-white', };
         }
     };
 
@@ -26,25 +26,28 @@ const SuppliersPage: React.FC = () => {
         {
             title: 'Suppliers',
             value: '9',
-            icon: <GolfCourseOutlined />,
+            icon: <img src={images.customers} alt="staff icon" />,
+
 
         },
         {
             title: 'Active Suppliers',
             value: '9',
-            icon: <FileDownloadDoneOutlined />,
+            icon: <img src={images.customers} alt="staff icon" />,
+
 
         },
         {
             title: 'Processing Suppliers',
             value: '2',
-            icon: <HailOutlined />,
+            icon: <img src={images.warning} alt="staff icon" />,
+
         },
     ];
 
     return (
         <div>
-            <div className=' mr-[25px]'>
+            <div>
                 <div className='flex flex-col md:flex-row items-center justify-between '>
                     <Heading as="h4" size="h4" color='primaryColor' className="font-semibold text-gray-600">SUPPLIERS</Heading>
                     <div className='flex gap-[16px]'>
@@ -52,8 +55,8 @@ const SuppliersPage: React.FC = () => {
                             type='outline'
                             label='Create PDF'
                             radius='20px'
-                            width='120px'
-                            height='30px'
+                            width='96px'
+                            height='32px'
                             action={() => { }}
                         />
                         <Link to={'/admin/records/supplierregistration'}>
@@ -61,8 +64,8 @@ const SuppliersPage: React.FC = () => {
                                 type='outline'
                                 label='New Supplier'
                                 radius='20px'
-                                width='120px'
-                                height='30px'
+                                width='96px'
+                                height='32px'
                                 action={() => { }}
 
                             />
@@ -88,21 +91,19 @@ const SuppliersPage: React.FC = () => {
                 <InfoCard
                     title={'Aggregate Monthly Supply Volume'}
                     number={'472,593,854.00'}
-                    subtitle={'(Srf)'}
+                    subtitle={'(Scf)'}
                     showDropdown={true}
                     options={dropdownOptions}
                 />
                 <InfoCard
                     title={'Aggregate Daily Supply Volume'}
                     number={'793,854.00'}
-                    subtitle={'(Srf)'}
+                    subtitle={'(Scf)'}
                     showDropdown={true}
                     options={dropdownOptions}
                 />
 
-
             </div>
-
             <div className='w-full mt-9'>
                 <SuppliersListTable />
             </div>

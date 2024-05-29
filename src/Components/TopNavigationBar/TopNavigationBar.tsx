@@ -1,5 +1,5 @@
 import { GppMaybeOutlined, NotificationImportantOutlined, PowerSettingsNewOutlined } from '@mui/icons-material';
-import Logo from '../../assets/images/CompanyLogo.png';
+import images from '../../assets/index';
 import { Notification, SearchInput  } from '../../Components/index';
 
 /**
@@ -43,8 +43,7 @@ const TopNavigationBar = () => {
     return (
 
         <div className=" w-full flex items-center bg-[#FFFFFF] justify-between px-5 py-3  fixed top-0 left-0 z-50">
-            <img src={Logo} alt='nnpc logo' className='size-8 rounded-full' />
-
+            <img src={images.newLogo} alt='nnpc logo' />
             <div className='flex  gap-4 justify-end w-[100%]'>
                 <SearchInput
                     onSearch={handleSearch}

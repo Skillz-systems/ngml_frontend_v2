@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import FeedbackTable from './FeedbackTable'; 
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import FeedbackTable from './FeedbackTable';
 
 vi.mock('../../../Data', () => ({
   FeedbackData: [

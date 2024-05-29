@@ -1,8 +1,12 @@
 
-import { FileDownloadDoneOutlined, GolfCourseOutlined, HailOutlined, RestaurantMenuOutlined } from '@mui/icons-material';
+import {
+  ArrowOutwardOutlined,
+  FileDownloadDoneOutlined,
+  RestaurantMenuOutlined
+} from '@mui/icons-material';
 import React, { useState } from 'react';
 import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
-
+import images from '../../assets/index';
 
 interface SelectOption {
   label: string;
@@ -42,19 +46,19 @@ const AdminHomePage = () => {
     {
       title: 'Un-Verified Staff',
       value: '2,305',
-      icon: <GolfCourseOutlined />,
+      icon: <img src={images.contact} alt="staff icon" />,
 
     },
     {
       title: 'Pending Requests',
       value: '32',
-      icon: <FileDownloadDoneOutlined />,
+      icon: <img src={images.Requesticon} alt="request icon" />,
 
     },
     {
       title: 'Upcoming Site Visits',
       value: '12',
-      icon: <HailOutlined />,
+      icon: <img src={images.zone} alt="zone icon" />,
     },
   ];
 
@@ -95,7 +99,7 @@ const AdminHomePage = () => {
   const dynamicCardData: DynamicCardDataItem[] = [
     {
       type: 'primary',
-      title: 'Total Revenue',
+      title: 'Total Supplied Volume ',
       content: '12,129,243,990.00',
       icon: <RestaurantMenuOutlined />,
       yearOptions: [2020, 2021, 2022],
@@ -106,7 +110,7 @@ const AdminHomePage = () => {
     },
     {
       type: 'secondary',
-      title: 'Net Profit',
+      title: 'Total Consumption Volume ',
       content: '4,039,213,455.00',
       icon: <FileDownloadDoneOutlined />,
       yearOptions: [2020, 2021, 2022],
@@ -121,7 +125,7 @@ const AdminHomePage = () => {
   const getIconStyles = (title: string) => {
     switch (title) {
       case 'Un-Verified Staff':
-        return { bgColor: 'bg-[#005828]', iconColor: 'text-white' };
+        return { bgColor: 'bg-[#005828]', iconColor: 'text-white', };
       case 'Pending Requests':
         return { bgColor: 'bg-[#00AF50]', iconColor: 'text-white' };
       case 'Upcoming Site Visits':
@@ -163,14 +167,13 @@ const AdminHomePage = () => {
               key={index}
               title={card.title}
               value={card.value}
-              icon={React.cloneElement(card.icon, { className: `${iconColor} ${bgColor} rounded-[8px] w-[32px] h-[32px] p-1` })}
+              icon={React.cloneElement(card.icon, { className: `${iconColor} ${bgColor} rounded-[10px] w-[50px] h-[32px] p-2` })}
               iconBgColor=''
             />
           );
         })}
       </div>
-
-      <div className='mt-8 h-fit grid grid-cols-1 xl:grid-cols-7 gap-4 ' id="stat-card-chart-parent">
+      <div className='mt-8 h-fit grid grid-cols-1 xl:grid-cols-7 gap-6 ' id="stat-card-chart-parent">
         <div className="xl:col-span-5 col-span-1  order-last lg:order-first xl:order-last" id="cards">
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
             {statisticCardData.map((card, index) => (
@@ -182,7 +185,7 @@ const AdminHomePage = () => {
               />
             ))}
           </div>
-          <div className="flex flex-wrap gap-6 w-[100%]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[100%] mt-4">
             {dynamicCardData.map((card, index) => (
               <div key={index} className='mt-[15px]'>
                 <StatisticDynamicCard
@@ -208,10 +211,12 @@ const AdminHomePage = () => {
             />
           </div>
         </div>
-        <div className='w-[100%] bg-[#FFFFFF] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
-          <div className='h-[48px] rounded-t-lg bg-[#F6FDEC] flex items-center p-[10px]'>
+        <div className='w-[100%] bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
+          <div className='h-[48px] bg-[#F6F8FA] flex items-center p-[10px] justify-between'>
             <div className='text-[#828DA9] text-[20px] font-[400]'>Recent Activity</div>
-            <div></div>
+            <div className='border w-[32px] h-[32px] flex items-center justify-center rounded-full'>
+              <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
+            </div>
           </div>
           <div className='w-[100%] p-[10px] pt-[0px] '>
             {activities.map((activity, index) => (

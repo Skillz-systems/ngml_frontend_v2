@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, fireEvent, screen } from '@testing-library/react';
-import ProcessingCustomerTable from './ProcessingCustomerTable'; 
+import { fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import ProcessingCustomerTable from './ProcessingCustomerTable';
 
 
 vi.mock('@/Data', () => ({
@@ -25,7 +25,7 @@ describe('ProcessingCustomerTable Component', () => {
     fireEvent.change(searchInput, { target: { value: 'Company A' } });
 
     const filteredRows = screen.getAllByRole('row');
-    expect(filteredRows).toHaveLength(2); 
+    expect(filteredRows).toHaveLength(2);
     expect(filteredRows[1]).toHaveTextContent('Company A');
   });
 

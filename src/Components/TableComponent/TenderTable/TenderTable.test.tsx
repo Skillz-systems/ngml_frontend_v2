@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import TenderTable from './TenderTable'; 
+import { fireEvent, render, screen } from '@testing-library/react';
+import TenderTable from './TenderTable';
 
 
 describe('TenderTable Component', () => {

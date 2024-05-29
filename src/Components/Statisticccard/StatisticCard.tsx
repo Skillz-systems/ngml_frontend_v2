@@ -1,7 +1,5 @@
-
-
 import React from 'react';
-import DataBox from '/assets/png-icons/DataBox.png';
+import images from '../../assets/index';
 
 /**
  * A customizable statistic card component.
@@ -27,18 +25,21 @@ const StatisticCard: React.FC<StatisticCardProps> = ({
   primary = true,
   labelSpan,
 }) => {
-  const labelBgColor = primary ? 'bg-green-700 text-white' : 'bg-gray-100 text-gray-500';
-  const valueBgColor = primary ? 'bg-green-500 text-white' : 'bg-white-500 text-black-700';
+  const labelBgColor = primary ? 'bg-[#226844] text-[#FFFFFF]' : 'bg-[#EAEEF2] text-[#808080]';
+  const valueBgColor = primary ? 'bg-[#00af50] text-[#FFFFFF]' : 'bg-[#FFFFFF]';
 
   return (
-    <div className={`w-[100%] h-44 relative rounded-[20px] ${!primary ? 'shadow-xl' : ''}`}>
-      <img className="absolute w-[100%] h-[100%] inset-0 z-0 object-cover" src={DataBox} alt="data box" />
+    <div className={`w-[100%] h-56 relative rounded-[20px] border ${!primary ? 'shadow-sm' : ''}`}>
+      {primary ? 
+      <img className="absolute w-[100%] h-[100%] inset-0 z-0 object-cover" src={images.cardicon} alt="card icon" /> : 
+      <img className="absolute w-[100%] h-[100%] inset-0 z-0 object-cover" src={images.DataBox} alt="data box" />
+}
       <div className={`p-3 w-full rounded-t-[20px] ${labelBgColor} h-2/5 flex flex-col justify-center items-center`}>
-        <span className='text-[24px] font-[400]'>{label}</span>
+        <span className='text-[23px] font-[400]'>{label}</span>
         {labelSpan && <div className="mt-[-7px]">{labelSpan}</div>}
       </div>
       <div className={`w-full h-3/5 ${valueBgColor} rounded-b-[20px] flex justify-center items-center`}>
-        <h4 className='text-3xl font-medium'>{value}</h4>
+        <h4 className={primary ? 'text-3xl font-medium' : 'text-3xl font-bold'}>{value}</h4>
       </div>
     </div>
   );

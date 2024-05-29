@@ -6,6 +6,7 @@ import {
 } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import images from '@/assets';
 
 /**
  * Navigation bar item.
@@ -209,7 +210,7 @@ const NavigationBarItem: React.FC<{
 
 
   return (
-    <div
+    <div 
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -218,11 +219,10 @@ const NavigationBarItem: React.FC<{
         columnGap: '16px',
         padding: '9px',
         borderRadius: '8px',
-        cursor: 'pointer',
         backgroundColor: backgroundColor,
         width: '100%',
       }}
-      className="flex flex-col "
+      className="flex flex-col transition ease-in-out hover:cursor-pointer hover:translate-x-1 "
     >
       <Link to={item.to ?? '#'}>
         <div
@@ -237,7 +237,7 @@ const NavigationBarItem: React.FC<{
               borderRadius: isActive ? '4px' : '0',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
             }}
           >
             <span>
@@ -299,7 +299,7 @@ const NavigationBarItem: React.FC<{
                 padding: '9px',
                 borderRadius: activeSubMenuItemId === subItem.id ? '10px' : '0px',
               }}
-              className="gap-[10px]"
+              className="gap-[10px] transition ease-in-out hover:cursor-pointer hover:translate-x-1 "
             >
               <span
                 style={{
@@ -364,7 +364,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   const [userInfo] = useState({
     name: 'John Okor',
     designation: 'D. Manager',
-    avatar: '../../../public/assets/avatar.png'
+    avatar: images.avatarLogo, 
   });
 
   const effectiveSliceLength =

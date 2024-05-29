@@ -100,7 +100,7 @@ describe('CustomInput', () => {
         );
         const selectElement = screen.getByRole('combobox');
 
-        expect(selectElement).toHaveClass('border border-solid border-lime-500 placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-lime-500 focus:bg-gray-100 pl-3 appearance-none select-none');
+        expect(selectElement).toHaveClass('border border-solid border-lime-500 text-[12px] h-[56px] placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 pl-14 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-lime-500 focus:bg-gray-100');
     });
 
     it('applies custom styles to textarea', () => {

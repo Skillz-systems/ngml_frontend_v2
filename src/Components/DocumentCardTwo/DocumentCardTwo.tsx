@@ -31,7 +31,7 @@ const DocumentCardTwo: React.FC<DocumentCardTwoProps> = ({ icon, title, subtitle
             </div>
             {isHovered && (
                 <div className="flex justify-center items-center">
-                    <div className="py-1.5 px-8 bg-nnpclightgreen-600 hover:bg-[#FFFFFF] hover:text-[#808080] text-[#FFFFFF] text-xs rounded-[20px] text-center">
+                    <div className="py-1.5 px-8 bg-nnpclightgreen-600 hover:bg-[#FFFFFF] hover:text-[#808080] text-[#FFFFFF] text-xs rounded-[20px] text-center tracking-tight">
                         {buttonText}
                     </div>
                 </div>

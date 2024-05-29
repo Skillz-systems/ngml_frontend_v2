@@ -57,7 +57,7 @@ const CostAnalysis: React.FC = () => {
             subtitle: "Site Survey Report",
             linkText: "Last Updated",
             linkText2: "12/13/2023",
-            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: "200px",
             height: "100%",
         },
