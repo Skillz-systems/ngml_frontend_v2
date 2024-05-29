@@ -115,7 +115,7 @@ const SuppliersListTable = () => {
             headerName: 'SN',
             width: 60,
             renderCell: (params: GridRenderCellParams) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
+                <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
                 </div>
             ),
@@ -127,7 +127,7 @@ const SuppliersListTable = () => {
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div>
-                    <div className='text-[14px] font-[600] text-[#49526A]'>
+                    <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
                         {params.row.companyname}
                     </div>
                 </div>
@@ -139,7 +139,7 @@ const SuppliersListTable = () => {
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div
-                    className='text-[12px] font-[400] text-[#49526A]'>
+                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
                     {params.row.companyEmail}
                 </div>
             ),
@@ -150,7 +150,7 @@ const SuppliersListTable = () => {
             headerName: 'LAST SUPPLY DATE',
             flex: 1,
             renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] '>
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.lastSupply}
                 </div>
             )
@@ -180,7 +180,7 @@ const SuppliersListTable = () => {
                         classNames += 'bg-[#D2F69E] text-[#005828] ';
                         break;
                     case 'In-Active':
-                        classNames += 'border ';
+                        classNames += 'border-2 ';
                         break;
                     default:
                         classNames += 'text-[E2E4EB] ';

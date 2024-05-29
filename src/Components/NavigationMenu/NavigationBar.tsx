@@ -209,7 +209,7 @@ const NavigationBarItem: React.FC<{
 
 
   return (
-    <div 
+    <div
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -218,10 +218,11 @@ const NavigationBarItem: React.FC<{
         columnGap: '16px',
         padding: '9px',
         borderRadius: '8px',
+        cursor: 'pointer',
         backgroundColor: backgroundColor,
         width: '100%',
       }}
-      className="flex flex-col transition ease-in-out hover:cursor-pointer hover:translate-x-1 "
+      className="flex flex-col "
     >
       <Link to={item.to ?? '#'}>
         <div
@@ -236,7 +237,7 @@ const NavigationBarItem: React.FC<{
               borderRadius: isActive ? '4px' : '0',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: 'center'
             }}
           >
             <span>
@@ -298,7 +299,7 @@ const NavigationBarItem: React.FC<{
                 padding: '9px',
                 borderRadius: activeSubMenuItemId === subItem.id ? '10px' : '0px',
               }}
-              className="gap-[10px] transition ease-in-out hover:cursor-pointer hover:translate-x-1 "
+              className="gap-[10px]"
             >
               <span
                 style={{

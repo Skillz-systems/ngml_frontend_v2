@@ -205,7 +205,7 @@ const DailyVolumnTable = () => {
                         <select
                             value={selectedMonth}
                             onChange={e => setSelectedMonth(e.target.value)}
-                            className='border border-[#CCD0DC] pl-1 outline-none text-[12px] text-gray-400 font-[600] hover:border-[#00AF50] rounded-[32px] h-[32px] w-[106px]'
+                            className='border border-[#CCD0DC] outline-none text-[12px] font-[600] hover:border-[#00AF50] rounded-[32px] h-[32px] w-[106px]'
                         >
                             <option value="">Month</option>
                             <option value="Jan">January</option>
@@ -225,7 +225,7 @@ const DailyVolumnTable = () => {
                         <select
                             value={selectedYear}
                             onChange={e => setSelectedYear(e.target.value)}
-                            className='border border-[#CCD0DC] outline-none text-gray-400 pl-1 rounded-[32px] hover:border-[#00AF50] text-[12px] font-[600]  h-[32px]  w-[77px]'
+                            className='border border-[#CCD0DC] outline-none rounded-[32px] hover:border-[#00AF50] text-[12px] font-[600]  h-[32px]  w-[77px]'
                         >
                             <option value="">Year</option>
                             <option value="2022">2022</option>

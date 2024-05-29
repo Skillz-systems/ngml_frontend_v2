@@ -5,23 +5,15 @@
  */
 
 import React, { useState } from 'react';
-import '../../index.css';
 
-import { Link } from 'react-router-dom';
 import images from '../../assets/index';
 import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
-// import { useLoginMutation } from '../../Redux/Features/Auth/authService';
-// import { useAppDispatch } from '../../Redux/hooks';
-// import { setCredentials } from '../../Redux/Features/Auth/authSlice';
 
 /**
  * Functional component representing the staff login page.
  * @returns {JSX.Element} StaffLoginPage component
  */
 const StaffLoginPage: React.FC = () => {
-
-    // const [login, { isLoading, error }] = useLoginMutation();
-    // const dispatch = useAppDispatch();
     /**
      * State hook to manage form data.
      * @type {Object}
@@ -46,7 +38,7 @@ const StaffLoginPage: React.FC = () => {
      * @param {string} key - The key of the input field.
      * @returns {Function} Function to handle input change.
      */
-    const handleChange = (key: string) => (value: string) => {
+    const handleChange = (key: any) => (value: any) => {
         console.log(value);
         setFormData({ ...formData, [key]: value });
         setErrors({ ...errors, [`${key}Error`]: '' });
@@ -55,7 +47,7 @@ const StaffLoginPage: React.FC = () => {
     /**
      * Function to handle login action.
      */
-    const handleLogin = async () => {
+    const handleLogin = () => {
         let valid = true;
         const newErrors = { ...errors };
 
@@ -76,21 +68,11 @@ const StaffLoginPage: React.FC = () => {
 
         if (valid) {
             // Call your Login API or logic here
-
+            console.log('Resetting password...');
+            setFormData({ email: '', password: '' });
         } else {
             setErrors(newErrors);
         }
-
-
-        // try {
-        //     const response = await login(formData);
-
-        //     dispatch(setCredentials(response?.data));
-        //     // Redirect or show success message
-        // } catch (error) {
-        //     // Handle error
-        //     console.log(error)
-        // }
     };
 
     /**
@@ -104,95 +86,78 @@ const StaffLoginPage: React.FC = () => {
     /**
      * Function to handle new sign-in action.
      */
-    const handleNewSignIn = async () => {
+    const handleNewSignIn = () => {
         console.log('New Sign In clicked');
-        // try {
-        //     const response = await login(formData);
-        //     if (response?.data) {
-        //         dispatch(setCredentials(response.data));
-        //         // Redirect or show success message
-        //     }
-        // } catch (error) {
-        //     // Handle error
-        //     console.log(error);
-        // }
-        console.log('Resetting password...');
-        setFormData({ email: '', password: '' });
         // You can navigate to a new sign-in page
     };
 
     return (
-        <div className="min-h-screen flex flex-col logingradient-bg w-[100%] ">
-            <div className="flex-1 flex items-center justify-center flex-col mb-6 p-10">
-                <div className='w-[100%]'>
-                    <AuthContainer>
-                        <h1 className='text-[12px] md:text-[18px] font-semibold text-white ' >NGML STAFF LOGIN</h1>
-                        <div className=' w-[100%] mt-2'>
-                            <div className=' mx-auto space-y-4'>
-                                <CustomInput
-                                    type="text"
-                                    value={formData.email}
-                                    handleChangeEvent={handleChange('email')}
-                                    placeholder="Enter your email"
-                                    styleVariant='customStyle1'
-                                    icon={<img src={images.email} alt='Email Icon' />}
-                                />
-                                {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[22px] text-[14px]">{errors.emailError}</p>}
-                                <CustomInput
-                                    type="password"
-                                    value={formData.password}
-                                    handleChangeEvent={handleChange('password')}
-                                    placeholder="Enter your password"
-                                    styleVariant='customStyle1'
-                                    icon={<img src={images.password} alt='Password Icon' />}
-                                />
-                                {errors.passwordError && <p className="text-red-500 h-[1px] absolute top-[88px] text-[14px]">{errors.passwordError}</p>}
-                                {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
-                            </div>
-                            <Link to='/admin' className='w-[100%]'>
-                                <div className='mt-4 flex items-center justify-center'>
-
-
-                                    <Button
-                                        type="primary"
-                                        label="Login"
-                                        action={handleLogin}
-                                        color="#FFFFFF"
-                                        width="100%"
-                                        height="48px"
-                                        fontSize="16px"
-                                        radius="32px"
-                                    />
-                                </div>
-                            </Link>
+        <div className="min-h-screen flex flex-col bg-nnpc-700">
+            <div className="flex-1 flex items-center justify-center">
+                <AuthContainer>
+                    <h1 className='text-[20px] font-semibold text-white'>NGML STAFF LOGIN</h1>
+                    <div className='relative'>
+                        <div className='w-[100%] md:w-[350px] mx-auto space-y-6'>
+                            <CustomInput
+                                type="text"
+                                value={formData.email}
+                                handleChangeEvent={handleChange('email')}
+                                placeholder="Enter your email"
+                                styleVariant='customStyle1'
+                                icon={<img src={images.email} alt='Email Icon' />}
+                            />
+                            {errors.emailError && <p className="text-red-500 h-[1px] absolute top-[22px] text-[14px]">{errors.emailError}</p>}
+                            <CustomInput
+                                type="password"
+                                value={formData.password}
+                                handleChangeEvent={handleChange('password')}
+                                placeholder="Enter a password"
+                                styleVariant='customStyle1'
+                                icon={<img src={images.password} alt='Password Icon' />}
+                            />
+                            {errors.passwordError && <p className="text-red-500 h-[1px] absolute top-[88px] text-[14px]">{errors.passwordError}</p>}
+                            {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
                         </div>
-                        <div className='mt-6'>
+                        <div className='mt-6 w-[98%] flex items-center justify-center'>
                             <Button
-                                type="transparent"
-                                label="Forgot Password?"
-                                fontWeight='400'
-                                color='#E3EADA'
-                                fontStyle='italic'
-                                textDecoration='underline'
-                                action={handleForgotPassword}
+                                type="primary"
+                                label="Login"
+                                action={handleLogin}
+                                color="#FFFFFF"
+                                fontStyle="italic"
+                                width="100%"
+                                height="40px"
+                                fontSize="16px"
+                                radius="20px"
                             />
                         </div>
-                    </AuthContainer>
-                </div>
-                <div className='flex justify-center w-[100%]'>
-                    <ContentContainer type="translucent" borderRadius={32} >
-                        <div className="h-full flex items-center justify-between mr-2 ml-2">
-                            <p className='text-center text-[8px] md:text-[12px] text-[rgba(5, 5, 5, 1)]'>New to the Portal, Sign in Here</p>
-
+                    </div>
+                    <div className='mt-6'>
+                        <Button
+                            type="transparent"
+                            label="Forgot Password?"
+                            fontWeight='400'
+                            color='#FFFFFF'
+                            fontStyle='italic'
+                            textDecoration='underline'
+                            action={handleForgotPassword}
+                        />
+                    </div>
+                </AuthContainer>
+            </div>
+            <div className='flex justify-center relative'>
+                <div className='w-full md:w-[400px] absolute bottom-[4rem]'>
+                    <ContentContainer type="translucent" height="40px" borderRadius={20}>
+                        <div className="h-full flex justify-center items-center justify-between mr-2 ml-2">
+                            <p className='text-center text-[10px] md:text-sm text-white'>New to the Portal, Sign in Here</p>
                             <Button
-                                className="text-[8px] md:text-[12px]"
                                 type="outline"
                                 label="New Sign In"
                                 width='120px'
-                                height='30px'
+                                height='32px'
                                 radius='32px'
-                                color='#E3EADA'
-                                fontWeight='300'
+                                color='#FFFFFF'
+                                fontWeight='500'
                                 lineHeight='24px'
                                 action={handleNewSignIn}
                             />
@@ -200,10 +165,10 @@ const StaffLoginPage: React.FC = () => {
                     </ContentContainer>
                 </div>
             </div>
-            <div className=' mr-6 ml-6 mb-6'>
-                <ContentContainer type="translucent" width="100%" height="30px" borderRadius={32}>
+            <div className='mb-10 mr-6 ml-6'>
+                <ContentContainer type="translucent" width="100%" height="30px" borderRadius={20}>
                     <div className="w-full h-full flex justify-center items-center">
-                        <p className='text-center text-[8px] md:text-[10px] text-[#E3EADA]'>This Portal is a Property of NNPC Gas Marketing Limited</p>
+                        <p className='text-center text-[10px] md:text-sm text-white'>This Portal is a Property of NNPC Gas Marketing Limited</p>
                     </div>
                 </ContentContainer>
             </div>

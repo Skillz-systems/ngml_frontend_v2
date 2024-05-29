@@ -29,8 +29,8 @@ describe('StatisticCard', () => {
         );
 
         // Assert primary style is applied
-        expect(screen.getByText('Label').parentElement).toHaveClass('bg-[#226844]');
-        expect(screen.getByText('123').parentElement).toHaveClass('bg-[#00af50]');
+        expect(screen.getByText('Label').parentElement).toHaveClass('bg-green-700');
+        expect(screen.getByText('123').parentElement).toHaveClass('bg-green-500');
     });
 
     test('renders with secondary style', () => {
@@ -43,7 +43,7 @@ describe('StatisticCard', () => {
         );
 
         // Assert secondary style is applied
-        expect(screen.getByText('Label').parentElement).toHaveClass('bg-[#EAEEF2]');
-        expect(screen.getByText('123').parentElement).toHaveClass('bg-[#FFFFFF]');
+        expect(screen.getByText('Label').parentElement).toHaveClass('bg-gray-100');
+        expect(screen.getByText('123').parentElement).toHaveClass('bg-white-500');
     });
 });

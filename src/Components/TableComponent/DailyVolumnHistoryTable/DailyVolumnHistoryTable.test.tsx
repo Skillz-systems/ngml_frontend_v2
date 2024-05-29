@@ -1,5 +1,5 @@
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
 import DailyVolumnHistoryTable from './DailyVolumnHistoryTable';
 
 vi.mock('@/Data', () => ({
@@ -11,13 +11,13 @@ vi.mock('@/Data', () => ({
 describe('DailyVolumnHistoryTable', () => {
   it('renders without crashing', () => {
     render(<DailyVolumnHistoryTable />);
-    expect(screen.getByText('SERIES NAME')).toBeInTheDocument();
+    expect(screen.getByText('SERIES NAME')).toBeInTheDocument(); 
   });
 
   it('displays the correct number of entries', () => {
     render(<DailyVolumnHistoryTable />);
     const rows = screen.getAllByRole('row');
-    expect(rows.length).toBe(2);
+    expect(rows.length).toBe(2); 
   });
 
   it('allows month and year selection', () => {

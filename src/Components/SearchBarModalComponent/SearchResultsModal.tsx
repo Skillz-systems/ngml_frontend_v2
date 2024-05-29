@@ -1,5 +1,5 @@
 import React from 'react';
-import images from '../../assets/index';
+import filterIcon from '../../../public/assets/png-icons/Filter.png';
 
 
 
@@ -75,7 +75,7 @@ const SearchResultsModal: React.FC<SearchResultsModalProps> = ({ searchResults, 
                         <div style={{ marginBottom: '30px', marginTop: '30px', color: '#828DA9', fontSize: '20px', lineHeight: '20px', fontWeight: '700' }}>Showing {searchResults.length} of {searchResults.length}</div>
                         <div style={{ border: '1px solid #CCD0DC', height: '40px', width: '200px', borderRadius: '32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 16px' }}>
                             <div style={{ color: '#828DA9', fontSize: '14px', fontWeight: '600', lineHeight: '14px' }}>13 Nov -12 Oct</div>
-                            <img src={images.filterIcon} alt='Filter Icon' />
+                            <img src={filterIcon} alt='Filter Icon' />
                         </div>
                     </header>
                     {searchResults.map((result, index) => (

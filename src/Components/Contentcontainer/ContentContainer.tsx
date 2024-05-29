@@ -41,9 +41,9 @@ interface CardProps {
 
 const ContentContainer: React.FC<CardProps> = ({
   type = 'solid',
-  width = '560px',
+  width = '100%',
   height = '100%',
-  borderWidth = 0,
+  borderWidth = 3,
   borderColor = 'green',
   borderRadius = 5,
   children,
@@ -55,13 +55,13 @@ const ContentContainer: React.FC<CardProps> = ({
       borderRadius,
       borderWidth,
       borderColor,
-      padding: '14px',
+      padding: '10px',
       boxSizing: 'border-box',
     };
 
     switch (type) {
       case 'translucent':
-        styles = { ...styles, backgroundColor: 'rgba(255, 255, 255, 0.2)' };
+        styles = { ...styles, backgroundColor: 'rgba(255, 255, 255, 0.5)', border: '1px solid #ccc' };
         break;
       case 'white':
         styles = { ...styles, backgroundColor: '#fff', border: '1px solid #ddd' };

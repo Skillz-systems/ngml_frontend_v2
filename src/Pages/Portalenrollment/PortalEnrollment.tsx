@@ -11,7 +11,7 @@ const PortalEnrollment: React.FC = () => {
         emailError: '',
     });
 
-    const handleChange = (key: string) => (value: string) => {
+    const handleChange = (key: any) => (value: any) => {
         setFormData({ ...formData, [key]: value });
         setErrors({ ...errors, [`${key}Error`]: '' });
     };

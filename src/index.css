@@ -71,25 +71,6 @@
   --nnpc-gray-500: #050505;
 }
 
-@font-face {
-  font-family: "Mulish";
-  src: url("./assets/fonts/Mulish-VariableFont_wght.ttf") format("truetype");
-  font-weight: 200 1000;
-  font-display: swap;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Mulish-Italic";
-  src: url("./assets/fonts/Mulish-VariableFont_wght.ttf") format("truetype");
-  font-weight: 200 1000;
-  font-display: swap;
-  font-style: normal;
-}
-
-body {
-  font-family: "Mulish", sans-serif;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -112,14 +93,6 @@ body {
       #d2f69e 108.92%
     );
   }
-}
-.logingradient-bg {
-  background: linear-gradient(
-    287.65deg,
-    #10482b 2.07%,
-    #457303 51.82%,
-    #10482b 94.05%
-  );
 }
 
 .button {
@@ -189,22 +162,10 @@ body {
   margin-left: -260px;
 }
 
+
 .fixed-topbar {
   position: fixed;
   top: 0;
-  width: 100%;
-  z-index: 1000;
+  width: 100%; 
+  z-index: 1000; 
 }
-
-
-/* .responsive-button {
-  width: 120px;
-  font-size: 12px;
-}
-
-@media (max-width: 400px) {
-  .responsive-button {
-      width: 80px; 
-      font-size: 8px;
-  }
-} */

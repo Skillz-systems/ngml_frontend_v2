@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CSSProperties } from 'react';
 import SearchResultsModal from './SearchResultsModal';
-import images from '../../assets/index';
+import closeIcon from '../../../public/assets/png-icons/Cancellation.png';
 
 
 interface SearchResult {
@@ -123,7 +123,7 @@ const SearchResultComponent: React.FC = () => {
                 />
                 {searchQuery && (
                     <img
-                        src={images.closeIcon}
+                        src={closeIcon}
                         alt='Close'
                         onClick={handleClearSearch}
                         style={cancelIconStyle}

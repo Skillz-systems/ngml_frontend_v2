@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { dummyData, SearchResult } from './dummyData';
-import images from '../../assets/index';
+import SearchIcon from '/assets/png-icons/Search.png';
 
 /**
  * SearchInput component for displaying a search input field.
@@ -61,7 +61,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ className, onSearch }) => {
             {isFocused ? '' 
             : 
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={handleSearch}>
-                <img src={images.SearchIcon} alt="Search Logo" className='w-4' />
+                <img src={SearchIcon} alt="Search Logo" className='w-4' />
             </div>}
             {isFocused && query && (
                 <div className="absolute top-full left-0 w-full bg-white shadow p-2 rounded-b-[20px]">
