@@ -1,7 +1,7 @@
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
-import NavigationBar from './NavigationBar';
+import NavigationBar from './NavigationBar'; 
 
 const mockToggleNavigationBar = vi.fn();
 
@@ -18,8 +18,8 @@ describe('NavigationBar Component', () => {
         <NavigationBar Navigationlinks={mockNavigationLinks} isNavigationBarVisible={true} toggleNavigationBar={mockToggleNavigationBar} />
       </Router>
     );
-
-    const navigationItems = screen.getAllByRole('link');
+    
+    const navigationItems = screen.getAllByRole('link'); 
     expect(navigationItems.length).toBe(mockNavigationLinks.length);
   });
 

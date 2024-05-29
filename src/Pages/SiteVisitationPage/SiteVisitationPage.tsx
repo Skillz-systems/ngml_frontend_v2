@@ -11,9 +11,12 @@ const SiteVisitationPage = () => {
         thirdSiteVisitDate: '',
     });
 
-    const handleInputChange = (value: string, key: string) => {
+    const handleInputChange = (name: any, value: any) => {
         console.log(value)
-        setFormData({ ...formData, [key]: value });
+        setFormData((prevState: any) => ({
+            ...prevState,
+            [name]: value
+        }));
     };
 
     return (
@@ -25,7 +28,7 @@ const SiteVisitationPage = () => {
                         type="date"
                         label='1st Site Visit Date'
                         value={formData.firstSiteVisitDate}
-                        handleChangeEvent={(value) => handleInputChange(value, 'firstSiteVisitDate')}
+                        handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
                         placeholder="Select First Date"
                         styleVariant='customStyle3'
                     />
@@ -35,7 +38,7 @@ const SiteVisitationPage = () => {
                         type="date"
                         label='2nd Site Visit Date'
                         value={formData.secondSiteVisitDate}
-                        handleChangeEvent={(value) => handleInputChange(value, 'secondSiteVisitDate')}
+                        handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
                         placeholder="Select First Date"
                         styleVariant='customStyle3'
                     />
@@ -45,7 +48,7 @@ const SiteVisitationPage = () => {
                         type="date"
                         label='3rd Site Visit Date'
                         value={formData.thirdSiteVisitDate}
-                        handleChangeEvent={(value) => handleInputChange(value, 'thirdSiteVisitDate')}
+                        handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
                         placeholder="Select First Date"
                         styleVariant='customStyle3'
                     />

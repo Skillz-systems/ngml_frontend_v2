@@ -9,7 +9,7 @@ jobs:
       - checkout
       # install dependencies
       - setup_remote_docker:
-          version: default
+          version: 20.10.12
           docker_layer_caching: true
       - run:
           name: Run npm

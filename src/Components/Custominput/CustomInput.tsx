@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
-import images from '../../assets/index';
+import AltDownArrow from '/assets/png-icons/AltDownArrow.png';
+import Eyeclosed from '/assets/png-icons/Eyeclosed.png';
+import Eyeopen from '/assets/png-icons/Eyeopen.png';
 
 /**
  * CustomInput Component - A customizable input component for various input types.
@@ -36,14 +38,14 @@ interface CustomInputProps {
 const CustomInput: React.FC<CustomInputProps> = ({
     type,
     label,
-    value='',
+    value,
     handleChangeEvent,
     placeholder,
-    options=[],
+    options,
     error,
     required = false,
     icon,
-    styleVariant = 'default',
+    styleVariant = 'default', // Default to 'default' if styleVariant is not provided
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
@@ -60,18 +62,12 @@ const CustomInput: React.FC<CustomInputProps> = ({
     const handleBlur = () => {
         setTouched(true);
     };
-
-    const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        const selectedValue = e.target.value;
-        console.log('Select changed to:', selectedValue);
-        handleChangeEvent(selectedValue);
-    };
     
 
     const styleVariants = {
         default: `appearance-none block w-full px-3 py-3 border ${error ? 'border-red-500' : 'border-b border-solid border-2 border-gray-300'
             } rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-[12px]`, //default input
-        customStyle1: 'border border-solid border-lime-500 text-[12px] h-[56px] placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 pl-14 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-lime-500 focus:bg-gray-100', // inputs with well rounded border radius
+        customStyle1: 'border border-solid border-lime-500 placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 pl-12 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-lime-500 focus:bg-gray-100', // inputs with well rounded border radius
         customStyle2: 'rounded-[13px] placeholder-gray-400 placeholder:italic placeholder:font-[400] font-[500] pl-12 focus:outline-none focus:ring-gray-700 focus:bg-gray-200 sm:text-[12px] border border-2 solid w-full py-2', // for inputs with gray background focused
         customStyle3: 'rounded-full placeholder-gray-300 placeholder:italic placeholder:font-[400] font-[500] pl-6 pr-6 focus:outline-none focus:border-lime-700 focus:bg-gray-100 sm:text-[12px] border border-2 solid w-full py-3', // for inputs with gray background focused, rounded radius and wider input 
         customStyle4: 'placeholder-black pl-12 focus:outline-none font-[400] focus:border-lime-200 focus:bg-white-600 border-1 solid w-full py-2', // no border input
@@ -111,8 +107,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     <div className='relative'>
 
                         <select
-                            value={value as string}
-                            onChange={handleSelectChange}
+                            value={Array.isArray(value) ? value : ''}
+                            onChange={(e: ChangeEvent<HTMLSelectElement>) => handleChangeEvent(e.target.value)}
                             className={`${inputClasses} appearance-none select-none`}
                             onBlur={handleBlur} >
 
@@ -124,7 +120,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                             ))}
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <img src={images.AltDownArrow} alt='Alt down Arrow' />
+                            <img src={AltDownArrow} alt='Alt down Arrow' />
                         </div>
                     </div>
                 );
@@ -201,7 +197,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                             className="text-gray-500 focus:outline-none focus:text-gray-600"
                             onClick={handleTogglePassword}
                         >
-                            {showPassword ? <img src={images.Eyeclosed} alt='eyeclosed' /> : <img src={images.Eyeopen} alt='eyeopen' />}
+                            {showPassword ? <img src={Eyeclosed} alt='eyeclosed' /> : <img src={Eyeopen} alt='eyeopen' />}
                         </button>
                     </div>
                 )}

@@ -18,7 +18,6 @@ import images from '../../assets/index';
  * @property {string} linkText2 - Additional link text.
  * @property {number|string} width - Width of the document card.
  * @property {number|string} height - Height of the document card.
- * @property {string} backgroundColor - Background color of the document card.
  */
 
 /**
@@ -41,7 +40,6 @@ interface BillingHistoryData {
     linkText2: string;
     width: number | string;
     height: number | string;
-    backgroundColor: string;
 }
 
 const BillingHistory: React.FC = () => {
@@ -62,10 +60,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -73,10 +70,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -84,10 +80,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -95,10 +90,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -106,10 +100,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -117,10 +110,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -128,10 +120,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -139,10 +130,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withoutLink',
@@ -150,10 +140,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
         {
             type: 'withoutLink',
@@ -161,10 +150,9 @@ const BillingHistory: React.FC = () => {
             subtitle: 'Invoice Advice',
             linkText: 'Invoice',
             linkText2: 'LINKED',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+            icon: <img src={images.copy} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
         },
     ]
 
@@ -194,10 +182,10 @@ const BillingHistory: React.FC = () => {
 
 
     return (
-        <div className="">
-            <div className="w-full p-8 rounded-lg flex-col justify-start items-start gap-8 flex">
+        <div className="w-full h-full">
+            <div className="w-full h-full p-8 bg-[#FFFFFF] bg-opacity-50 rounded-lg flex-col justify-start items-start gap-8 flex">
                 <div className="w-full justify-between items-center flex">
-                    <div className="text-center  text-[#49526A] text-3xl font-semibold font-['Mulish']">Billing History</div>
+                    <div className="text-center text-3xl font-semibold font-['Mulish']">Billing History</div>
                     <div className="items-center gap-4 flex">
                         <div className="w-44 p-3 rounded-3xl border justify-center flex cursor-pointer" onClick={handleAddNewInvoice}>
                             <div className="text-base font-normal font-['Mulish'] leading-none">New Invoice Advice</div>
@@ -237,7 +225,7 @@ const BillingHistory: React.FC = () => {
                     </div>
                     <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] rounded-b-[10px] items-center gap-3 flex">
                         {billingHistoryDataTwo.map((cards, index) => (
-                            <div key={index} className="flex flex-1 min-w-[150px] md:min-w-[200px] max-w-[200px] cursor-pointer" onClick={() => navigate('/admin/records/invoice')}>
+                            <div key={index} className="flex flex-1 min-w-[150px] md:min-w-[200px] max-w-[200px]">
                                 <DocumentCard
                                     type={cards.type}
                                     title={cards.title}
@@ -246,7 +234,6 @@ const BillingHistory: React.FC = () => {
                                     linkText2={cards.linkText2}
                                     icon={cards.icon}
                                     height={cards.height}
-                                    backgroundColor={cards.backgroundColor}
                                 />
                             </div>
                         ))}

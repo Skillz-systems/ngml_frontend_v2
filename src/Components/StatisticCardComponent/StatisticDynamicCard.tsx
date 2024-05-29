@@ -112,7 +112,7 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
 
 
     return (
-        <div  style={cardStyle} className='w-[100%] h-fit p-8 rounded-[16px] shadow'>
+        <div className="card " style={cardStyle}>
             <div className='flex justify-between'>
                 <div>
                     {icon && <div className="card-icon">{icon}</div>}
@@ -125,7 +125,6 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                 }}>
                     <div>
                         <select
-                        className='outline-none'
                             aria-label="Sort by year"
                             onChange={(e) => handleSortChange(e, 'year')}
                             style={{
@@ -168,7 +167,6 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                     width: '100%',
                 }}>
                     <select
-                    className='outline-none'
                         aria-label="Sort by value"
                         onChange={(e) => handleSortChange(e, 'value')}
                         style={{
@@ -192,7 +190,6 @@ const StatisticDynamicCard: React.FC<CardProps> = ({
                         right: '10px',
                         top: '50%',
                         transform: 'translateY(-50%)',
-                       
                     }}>
                         {dropdownIcon}
                     </div>

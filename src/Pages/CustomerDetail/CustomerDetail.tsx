@@ -15,9 +15,12 @@ const CustomerDetail: React.FC = () => {
         industrial: ''
     });
 
-    const handleInputChange = (value: string, key: string) => {
+    const handleInputChange = (name: any, value: any) => {
         console.log(value)
-        setFormData({ ...formData, [key]: value });
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     };
 
     return (
@@ -33,7 +36,7 @@ const CustomerDetail: React.FC = () => {
                         type="text"
                         label='Company Registered Name'
                         value={formData.companyName}
-                        handleChangeEvent={(value) => handleInputChange(value, 'companyName')}
+                        handleChangeEvent={(value: any) => handleInputChange('companyName', value)}
                         placeholder="Enter Company Registered Name"
                         styleVariant='customStyle5'
                     />
@@ -41,7 +44,7 @@ const CustomerDetail: React.FC = () => {
                         type="text"
                         label='Company Email Address'
                         value={formData.companyEmail}
-                        handleChangeEvent={(value) => handleInputChange(value, 'companyEmail')}
+                        handleChangeEvent={(value: any) => handleInputChange('companyEmail', value)}
                         placeholder="Enter Company Email Address"
                         styleVariant='customStyle5'
                     />
@@ -49,7 +52,7 @@ const CustomerDetail: React.FC = () => {
                         type="text"
                         label='Company Phone Number'
                         value={formData.companyPhoneNumber}
-                        handleChangeEvent={(value) => handleInputChange(value, 'companyPhoneNumber')}
+                        handleChangeEvent={(value: any) => handleInputChange('companyPhoneNumber', value)}
                         placeholder="Company Phone Number"
                         styleVariant='customStyle5'
                     />
@@ -63,7 +66,7 @@ const CustomerDetail: React.FC = () => {
                             type="text"
                             label='Company Representative'
                             value={formData.representativeName}
-                            handleChangeEvent={(value) => handleInputChange(value, 'representativeName')}
+                            handleChangeEvent={(value: any) => handleInputChange('representativeName', value)}
                             placeholder="Enter Company Representative"
                             styleVariant='customStyle5'
                         />
@@ -71,7 +74,7 @@ const CustomerDetail: React.FC = () => {
                             type="text"
                             label='Representative Email'
                             value={formData.representativeEmail}
-                            handleChangeEvent={(value) => handleInputChange(value, 'representativeEmail')}
+                            handleChangeEvent={(value: any) => handleInputChange('representativeEmail', value)}
                             placeholder="Enter Representative Email"
                             styleVariant='customStyle5'
                         />
@@ -85,14 +88,14 @@ const CustomerDetail: React.FC = () => {
                         <CustomInput
                             type="text"
                             value={formData.customerType}
-                            handleChangeEvent={(value) => handleInputChange(value, 'customerType')}
+                            handleChangeEvent={(value: any) => handleInputChange('customerType', value)}
                             placeholder="Ujv Partner"
                             styleVariant='customStyle5'
                         />
                         <CustomInput
                             type="text"
                             value={formData.industrial}
-                            handleChangeEvent={(value) => handleInputChange(value, 'industrial')}
+                            handleChangeEvent={(value: any) => handleInputChange('industrial', value)}
                             placeholder="Industrial"
                             styleVariant='customStyle5'
                         />

@@ -20,4 +20,5 @@ describe('DdqPage component', () => {
         expect(updatedPageNumberElement).toBeInTheDocument();
     });
 
+    // Add more test cases as needed
 });

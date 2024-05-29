@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../ButtonComponent/Button';
-import images from '../../assets/index';
+import cancelIcon from '../../../public/assets/png-icons/Cancellation.png'
 
 /**
  * Props interface for the NotificationContents component
@@ -38,7 +38,7 @@ const NotificationContents: React.FC<NotificationProps> = ({ notifications, head
                     color="#49526A"
                     fontWeight="400"
                     lineHeight="24px"
-                    icon={<div><img src={images.cancelIcon} alt="send Icon" /></div>}
+                    icon={<div><img src={cancelIcon} alt="send Icon" /></div>}
                     columnGap="10px"
                     action={onClose}
                 />

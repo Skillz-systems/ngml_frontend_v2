@@ -1,9 +1,9 @@
-import StaffLoginPage from '@/Pages/Stafflogin/StaffLoginPage';
+import ForgotPassword from '@/Pages/Forgotpassword/ForgotPassword';
 
 export const AuthRoutes = [
     {
-        title: 'stafflogin',
+        title: 'forgotpassword',
         path: '/',
-        component: StaffLoginPage
+        component: ForgotPassword
     },
 ]

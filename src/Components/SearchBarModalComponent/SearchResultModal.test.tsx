@@ -1,7 +1,7 @@
-import '@testing-library/jest-dom';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
-import SearchResultsModal from './SearchResultsModal';
+import '@testing-library/jest-dom';
+import SearchResultsModal from './SearchResultsModal'; 
 
 
 describe('SearchResultsModal', () => {
@@ -18,7 +18,7 @@ describe('SearchResultsModal', () => {
       { userName: 'Jane Rose', userId: 2, indexedDate: '2021-01-02', status: 'Approved', dateLabel: 'Date', idLabel: 'ID' },
     ];
     render(<SearchResultsModal searchResults={searchResults} onClose={mockOnClose} />);
-    const resultItems = screen.getAllByRole('article');
+    const resultItems = screen.getAllByRole('article'); 
     expect(resultItems).toHaveLength(searchResults.length);
   });
 
