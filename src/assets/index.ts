@@ -6,7 +6,6 @@ import homeicons from './images/HomeIcons.png';
 import password from './images/Password.png';
 import polygon from './images/Polygon.png';
 import profile from './images/Profile.png';
-import avatar from './images/avatar.png';
 import biqrcode from './images/bi_qr-code.png';
 import cancel from './images/cancel.png';
 import emailicons from './images/emailIcons.png';
@@ -66,6 +65,8 @@ import Settingsicon from './images/png-icons/Settings.png';
 import cardicon from './images/png-icons/icons.png';
 import zone from './images/png-icons/Zone.png';
 import contact from './images/png-icons/contact.png';
+import newLogo from './images/png-icons/NEWLOGO.png';
+import avatarLogo from './images/png-icons/avatar.png'
 
 const images = {
   Cancelicon,
@@ -84,7 +85,6 @@ const images = {
   closeIcon,
   filterIcon,
   cancel,
-  avatar,
   zone,
   companylogo,
   nnpclogo,
@@ -137,7 +137,9 @@ const images = {
   Reporticon,
   Settingicon,
   Suppliericon,
-  Sitevisiteicon
+  Sitevisiteicon,
+  newLogo,
+  avatarLogo
 };
 
 export default images;

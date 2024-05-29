@@ -6,6 +6,7 @@ import {
 } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import images from '@/assets';
 
 /**
  * Navigation bar item.
@@ -363,7 +364,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   const [userInfo] = useState({
     name: 'John Okor',
     designation: 'D. Manager',
-    avatar: '../../../public/assets/avatar.png'
+    avatar: images.avatarLogo, 
   });
 
   const effectiveSliceLength =
