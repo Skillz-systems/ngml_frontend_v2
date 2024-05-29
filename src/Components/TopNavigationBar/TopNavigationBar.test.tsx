@@ -8,5 +8,4 @@ describe('TopNavigationBar', () => {
     const logoImage = screen.getByAltText('nnpc logo');
     expect(logoImage).toBeInTheDocument();
   });
-
 });
