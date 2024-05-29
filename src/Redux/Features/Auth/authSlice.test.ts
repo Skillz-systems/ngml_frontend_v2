@@ -43,3 +43,4 @@ describe('authSlice tests', () => {
       id: '1', email: 'user@example.com', name: 'John Doe'
     });
   });
+});
