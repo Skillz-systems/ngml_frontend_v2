@@ -43,14 +43,4 @@ describe('authSlice tests', () => {
       id: '1', email: 'user@example.com', name: 'John Doe'
     });
   });
-
-//   it('should select the token', () => {
-//     const actual = selectToken(store.getState());
-//     expect(actual).toBeNull(); // Expect null for initial state
-//     store.dispatch(setCredentials({
-//       token: 'dummy-token',
-//       user: { id: '1', email: 'user@example.com', name: 'John Doe' }
-//     }));
-//     expect(selectToken(store.getState())).toEqual('dummy-token');
-//   });
 });
