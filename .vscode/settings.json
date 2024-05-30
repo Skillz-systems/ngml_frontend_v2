@@ -35,5 +35,6 @@
   "cSpell.words": ["nnpc"],
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+  },
+  "circleci.persistedProjectSelection": []
 }

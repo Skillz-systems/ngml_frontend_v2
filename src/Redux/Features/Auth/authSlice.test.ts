@@ -6,7 +6,7 @@ const initialState = {
   user: null,
 };
 
-
+//this is justt for testing
 describe('authSlice tests', () => {
   it('should handle initial state', () => {
     expect(authReducer(undefined, { type: 'unknown' })).toEqual({
