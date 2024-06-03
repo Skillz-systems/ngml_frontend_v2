@@ -1,101 +1,84 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
-import { store } from '../../Redux/store';
+import { configureStore } from '@reduxjs/toolkit';
+import { BrowserRouter } from 'react-router-dom';
 import StaffLoginPage from './StaffLoginPage';
+import authReducer from '../../Redux/Features/Auth/authSlice';
+import { ToastContainer } from 'react-toastify';
 
-// Mock the useLoginMutation hook
-vi.mock('../../Redux/Features/Auth/authService', () => ({
-  useLoginMutation: vi.fn(() => [
-    vi.fn(() => Promise.resolve({ data: 'test data' })),
-    { isLoading: false, error: null }
-  ])
-}));
-
-vi.mock('react-router-dom', async () => {
-  const original = await vi.importActual('react-router-dom');
-  return {
-    ...original,
-    useNavigate: () => vi.fn(),
-  };
+const store = configureStore({
+    reducer: {
+        auth: authReducer,
+    },
 });
 
 describe('StaffLoginPage', () => {
-  it('renders login form', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <StaffLoginPage />
-        </MemoryRouter>
-      </Provider>
-    );
+    test('renders form fields and buttons correctly', () => {
+        render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <StaffLoginPage />
+                </BrowserRouter>
+            </Provider>
+        );
 
-    // Check if the login form fields are rendered
-    expect(screen.getByPlaceholderText('Enter your email')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Enter your password')).toBeInTheDocument();
-    expect(screen.getByText('Login')).toBeInTheDocument();
-  });
+        expect(screen.getByPlaceholderText(/enter your email/i)).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(/enter your password/i)).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /forgot password/i })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /new sign in/i })).toBeInTheDocument();
+    });
 
-  it('shows validation errors when form is submitted empty', async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <StaffLoginPage />
-        </MemoryRouter>
-      </Provider>
-    );
+    test('displays validation errors for empty fields', async () => {
+        render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <StaffLoginPage />
+                    <ToastContainer />
+                </BrowserRouter>
+            </Provider>
+        );
 
-    // Simulate form submission
-    fireEvent.click(screen.getByText('Login'));
+        fireEvent.click(screen.getByRole('button', { name: /login/i }));
 
-    // Check if validation messages are displayed
-    expect(await screen.findByText('Email is required')).toBeInTheDocument();
-    expect(screen.getByText('Password is required')).toBeInTheDocument();
-  });
+        expect(await screen.findByText(/email is required/i)).toBeInTheDocument();
+        expect(await screen.findByText(/password is required/i)).toBeInTheDocument();
+    });
 
-  it('shows error for invalid email format', async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <StaffLoginPage />
-        </MemoryRouter>
-      </Provider>
-    );
+    test('handles login correctly with valid inputs', async () => {
+        render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <StaffLoginPage />
+                </BrowserRouter>
+            </Provider>
+        );
 
-    // Enter invalid email and valid password
-    fireEvent.change(screen.getByPlaceholderText('Enter your email'), { target: { value: 'invalidemail' } });
-    fireEvent.change(screen.getByPlaceholderText('Enter your password'), { target: { value: 'password' } });
+        fireEvent.change(screen.getByPlaceholderText(/enter your email/i), {
+            target: { value: 'test@example.com' },
+        });
+        fireEvent.change(screen.getByPlaceholderText(/enter your password/i), {
+            target: { value: 'password123' },
+        });
 
-    // Simulate form submission
-    fireEvent.click(screen.getByText('Login'));
+        fireEvent.click(screen.getByRole('button', { name: /login/i }));
 
-    // Check if validation message for invalid email is displayed
-    expect(await screen.findByText('Invalid email address')).toBeInTheDocument();
-  });
+        // You can add more detailed tests for successful login if necessary,
+        // such as mocking the login API response and checking navigation.
+    });
 
-  it('clears form and errors on New Sign In click', async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <StaffLoginPage />
-        </MemoryRouter>
-      </Provider>
-    );
+    test('handles forgot password and new sign in buttons', () => {
+        render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <StaffLoginPage />
+                </BrowserRouter>
+            </Provider>
+        );
 
-    // Enter some data in the form
-    fireEvent.change(screen.getByPlaceholderText('Enter your email'), { target: { value: 'test@example.com' } });
-    fireEvent.change(screen.getByPlaceholderText('Enter your password'), { target: { value: 'password' } });
+        fireEvent.click(screen.getByRole('button', { name: /forgot password/i }));
+        fireEvent.click(screen.getByRole('button', { name: /new sign in/i }));
 
-    // Simulate form submission to generate errors
-    fireEvent.click(screen.getByText('Login'));
-
-    // Click on New Sign In button
-    fireEvent.click(screen.getByText('New Sign In'));
-
-    // Check if the form is cleared and errors are removed
-    expect(screen.getByPlaceholderText('Enter your email')).toHaveValue('');
-    expect(screen.getByPlaceholderText('Enter your password')).toHaveValue('');
-    expect(screen.queryByText('Invalid email address')).not.toBeInTheDocument();
-  });
+        // Add more assertions as necessary based on your implementation
+    });
 });

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
 import { useLoginMutation } from '../../Redux/Features/Auth/authService';
 import { setCredentials } from '../../Redux/Features/Auth/authSlice';
@@ -8,7 +10,7 @@ import images from '../../assets/index';
 import '../../index.css';
 
 const StaffLoginPage: React.FC = () => {
-    const [login, { isLoading }] = useLoginMutation();
+    const [login, { isLoading, error }] = useLoginMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -20,8 +22,13 @@ const StaffLoginPage: React.FC = () => {
     const [errors, setErrors] = useState({
         emailError: '',
         passwordError: '',
-        commonError: '',
     });
+
+    useEffect(() => {
+        if (error) {
+            toast.error('Incorrect Email or Password. Please Try Again Later');
+        }
+    }, [error]);
 
     const handleChange = (key: string) => (value: string) => {
         setFormData({ ...formData, [key]: value });
@@ -45,17 +52,14 @@ const StaffLoginPage: React.FC = () => {
             valid = false;
         }
 
+        setErrors(newErrors);
+
         if (valid) {
-            try {
-                const response = await login(formData).unwrap();
+            const response = await login(formData).unwrap();
+            if (response) {
                 dispatch(setCredentials(response));
-                // Redirect to the admin page upon successful login
                 navigate('/admin');
-            } catch (err) {
-                setErrors({ ...newErrors, commonError: 'Incorrect Email or Password. Pls Try Again Later' });
             }
-        } else {
-            setErrors(newErrors);
         }
     };
 
@@ -70,6 +74,7 @@ const StaffLoginPage: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col logingradient-bg w-[100%]">
+            <ToastContainer />
             <div className="flex-1 flex items-center justify-center flex-col mb-6 p-10">
                 <div className='w-[100%]'>
                     <AuthContainer>
@@ -94,7 +99,6 @@ const StaffLoginPage: React.FC = () => {
                                     icon={<img src={images.password} alt='Password Icon' />}
                                 />
                                 {errors.passwordError && <p className="text-red-500 h-[1px] absolute top-[198px] text-[14px]">{errors.passwordError}</p>}
-                                {errors.commonError && <p className="text-red-500">{errors.commonError}</p>}
                             </div>
                             <div className='mt-4 flex items-center justify-center'>
                                 <Button
