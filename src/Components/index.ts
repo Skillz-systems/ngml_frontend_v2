@@ -53,6 +53,8 @@ export { default as CustomerListTable } from './TableComponent/CustomerListTable
 export { default as SuppliersListTable } from './TableComponent/SuppliersListTable/SuppliersListTable';
 export { default as SupplierPaymentTable } from './TableComponent/SupplierPaymentTable/SupplierPaymentTable';
 export { default as DailyVolumnHistoryTable } from './TableComponent/DailyVolumnHistoryTable/DailyVolumnHistoryTable';
+export { default as SupplierDashboardTable } from './TableComponent/SupplierDashboardTable/SupplierDashboardTable';
+
 
 
 
