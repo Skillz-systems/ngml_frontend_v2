@@ -1,43 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { DailyVolumnHistoryData } from '@/Data';
+import { SupplierDashboardData } from '@/Data';
+import { MoreHorizOutlined } from '@mui/icons-material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import { Print, SystemUpdateAlt } from '@mui/icons-material';
 
 
-/**
- * Represents the historical data table for daily volume entries.
- * This component displays a filtered list of daily volume entries based on selected month and year.
- * It utilizes Material-UI's DataGrid for displaying data and includes sorting and filtering capabilities.
- *
- *
- * @typedef {Object} DailyVolumnProps
- * @property {number} id - Unique identifier for the daily volume entry.
- * @property {string[]} [selectedDates] - Optional array of dates selected for the entry.
- * @property {string} [status] - Optional status of the daily volume entry.
- * @property {string} [deadline] - Optional deadline for the entry submission.
- * @property {string} [companyEmail] - Optional email address of the company.
- * @property {string} [companyNumber] - Optional contact number of the company.
- * @property {string} [companyAddress] - Optional physical address of the company.
- * @property {string} [datesent] - Optional date when the entry was sent.
- */
-
-interface DailyVolumnProps {
+interface SupplierDashboardProps {
     id: number;
     selectedDates?: string[];
     status?: string;
     deadline?: string;
-    companyEmail?: string;
-    companyNumber?: string;
-    companyAddress?: string;
     datesent?: string;
 }
 
-const rows = DailyVolumnHistoryData
+const rows = SupplierDashboardData
 
 
-const DailyVolumnHistoryTable = () => {
-    const [filteredRows, setFilteredRows] = useState<DailyVolumnProps[]>(rows);
+const SupplierDashboardTable = () => {
+    const [filteredRows, setFilteredRows] = useState<SupplierDashboardProps[]>(rows);
     const [selectedMonth, setSelectedMonth] = useState<string>('');
     const [selectedYear, setSelectedYear] = useState<string>('');
 
@@ -53,7 +33,7 @@ const DailyVolumnHistoryTable = () => {
      * Filters the data based on selected month and year upon changing any of those.
      */
     const filterData = () => {
-        const filtered = DailyVolumnHistoryData.filter(row => {
+        const filtered = SupplierDashboardData.filter(row => {
             const dateParts = row.datesent.split('/');
             const rowMonth = dateParts[1];
             const rowYear = dateParts[2];
@@ -78,31 +58,32 @@ const DailyVolumnHistoryTable = () => {
             ),
 
         },
-
-        {
-            field: 'seriesname',
-            headerName: 'SERIES NAME',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div
-                    className='text-[12px] font-[400] text-[#49526A] leading-3'>
-                    {params.row.seriesname}
-                </div>
-            ),
-        },
         {
             field: 'date',
             headerName: 'DATE',
-            flex: 1,
+            flex: 2,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.datesent}
                 </div>
             )
         },
+
+        {
+            field: 'firm',
+            headerName: 'FIRM',
+            flex: 1.5,
+            renderCell: (params: GridRenderCellParams) => (
+                <div
+                    className='text-[12px] font-[400] text-[#49526A] leading-3'>
+                    {params.row.firm}
+                </div>
+            ),
+        },
+      
         {
             field: 'rate',
-            headerName: 'RATE (NGN)',
+            headerName: 'INTERRUPTIBLE (Scf)',
             flex: 1,
             renderCell: (params) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
@@ -111,27 +92,18 @@ const DailyVolumnHistoryTable = () => {
             )
         },
         {
-            field: 'value',
-            headerName: 'VALUE (MILLION CUBIC FEET)',
+            field: 'action',
+            headerName: '',
             flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.value}
+            renderCell: (params: GridRenderCellParams) => (
+                <div
+                    onClick={() => (params.row)}
+                    className='text-[12px] ml-6 text-[#828DA9] flex items-center justify-end cursor-pointer'>
+                    <MoreHorizOutlined/>
                 </div>
-            )
+            ),
         },
-
-        {
-            field: 'amount',
-            headerName: 'AMOUNT',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.amount}
-                </div>
-            )
-        },
-
+       
     ]
 
     return (
@@ -140,15 +112,7 @@ const DailyVolumnHistoryTable = () => {
                 <div className='flex items-center italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex items-center justify-between h-[60px] gap-5 ' >
-                    <div className='flex gap-5'>
-                        <div className='w-[32px] h-[32px] border border-[#CCD0DC] flex items-center justify-center rounded-[20px]'>
-                            <SystemUpdateAlt style={{ color: '#49526A', fontSize: '16px' }} />
-                        </div>
-                        <div className='w-[32px] h-[32px] border border-[#CCD0DC] flex items-center justify-center rounded-[20px]'>
-                            <Print style={{ color: '#49526A' , fontSize: '16px'}} />
-                        </div>
-                    </div>
+                <div className='flex items-center h-[60px] gap-5 ' >
                     <div className='flex gap-[10px]'>
                         <select
                             value={selectedMonth}
@@ -222,6 +186,6 @@ const DailyVolumnHistoryTable = () => {
     );
 }
 
-export default DailyVolumnHistoryTable
+export default SupplierDashboardTable
 
 

@@ -1,4 +1,4 @@
-import { BidsTable, Chart, StatisticCard, StatisticDynamicCardTwo } from '../../Components/index';
+import { Chart, StatisticCard, StatisticDynamicCardTwo, SupplierDashboardTable } from '../../Components/index';
 import images from '../../assets/index';
 
 
@@ -80,7 +80,7 @@ const SupplierOverviewPage = () => {
                     />
                 </div>
             </div>
-            <BidsTable />
+            <SupplierDashboardTable />
         </div>
     );
 }

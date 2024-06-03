@@ -205,7 +205,7 @@ const DailyVolumnTable = () => {
                         <select
                             value={selectedMonth}
                             onChange={e => setSelectedMonth(e.target.value)}
-                            className='border border-[#CCD0DC] pl-1 outline-none text-[12px] text-gray-400 font-[600] hover:border-[#00AF50] rounded-[32px] h-[32px] w-[106px]'
+                            className='border border-[#CCD0DC] pl-1 outline-none text-[12px] text-gray-400 font-[600] hover:border-[#00AF50] rounded-[32px] h-[32px] w-[100px]'
                         >
                             <option value="">Month</option>
                             <option value="Jan">January</option>

@@ -141,15 +141,15 @@ const BidsTable = () => {
                 <ul className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.details.map((detail: Detail, index: number) => (
                         <div key={index} className='text-[12px] font-[600] text-[#828DA9] flex flex-col gap-[10px] '>
-                            <div className='flex gap-[14px] flex items-center'>
+                            <div className=' gap-[14px] flex items-center'>
                                 <div>TYPE</div>
                                 <div className='bg-[#D2F69E] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.type}</div>
                             </div>
-                            <div className='flex gap-[10px] flex items-center'>
+                            <div className=' gap-[10px] flex items-center'>
                                 <div>TYPE2</div>
                                 <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.type2}</div>
                             </div>
-                            <div className='flex gap-[14px] flex items-center'>
+                            <div className=' gap-[14px] flex items-center'>
                                 <div>DEPT</div>
                                 <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.dept}</div>
                             </div>
