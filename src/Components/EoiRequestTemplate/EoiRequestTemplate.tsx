@@ -104,15 +104,15 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
                 <div className='flex justify-between w-[100%]'>
                     <div className='text-[#828DA9] text-[14px] font-[500] w-[50%] flex justify-between'>
                         <div>
-                            <div>Company Name</div>
-                            <div>Company Email</div>
-                            <div>Company Number</div>
+                            <div className='font-[800]'>Company Name</div>
+                            <div className='font-[800]'>Company Email</div>
+                            <div className='font-[800]' >Company Number</div>
 
                         </div>
                         <div>
-                            <div>{companyName}</div>
-                            <div>{companyEmail}</div>
-                            <div>{companyNumber}</div>
+                            <div className='font-[600]'>{companyName}</div>
+                            <div className='font-[600]'>{companyEmail}</div>
+                            <div className='font-[600]'>{companyNumber}</div>
                         </div>
 
                     </div>
