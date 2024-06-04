@@ -10,7 +10,7 @@ import images from '../../assets/index';
 import '../../index.css';
 
 const StaffLoginPage: React.FC = () => {
-    const [login, { isLoading, error }] = useLoginMutation();
+    const [login, { isLoading, error, data }] = useLoginMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -23,12 +23,14 @@ const StaffLoginPage: React.FC = () => {
         emailError: '',
         passwordError: '',
     });
-
     useEffect(() => {
         if (error) {
-            toast.error('Incorrect Email or Password. Please Try Again Later');
+          toast.error("Incorrect Email or Password"); 
+        } else if (data) {
+          dispatch(setCredentials(data));
+          navigate('/admin');
         }
-    }, [error]);
+      }, [error, data]);
 
     const handleChange = (key: string) => (value: string) => {
         setFormData({ ...formData, [key]: value });
@@ -53,16 +55,14 @@ const StaffLoginPage: React.FC = () => {
         }
     
         setErrors(newErrors);
-    
         if (valid) {
-          try {
-            const response = await login(formData).unwrap();
-            dispatch(setCredentials(response));
-            navigate('/admin');
-          } catch (error) {
-            console.error('Login error:', error);
+            try {
+              const response = await login(formData).unwrap();
+              console.log('Login successful, data:', response);
+            } catch (error) {
+              console.error('Login error:', error);
+            }
           }
-        }
       };
     const handleForgotPassword = () => {
         console.log('Forgot Password clicked');
