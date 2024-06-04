@@ -38,31 +38,32 @@ const StaffLoginPage: React.FC = () => {
     const handleLogin = async () => {
         let valid = true;
         const newErrors = { ...errors };
-
+    
         if (!formData.email) {
-            newErrors.emailError = 'Email is required';
-            valid = false;
+          newErrors.emailError = 'Email is required';
+          valid = false;
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            newErrors.emailError = 'Invalid email address';
-            valid = false;
+          newErrors.emailError = 'Invalid email address';
+          valid = false;
         }
-
+    
         if (!formData.password) {
-            newErrors.passwordError = 'Password is required';
-            valid = false;
+          newErrors.passwordError = 'Password is required';
+          valid = false;
         }
-
+    
         setErrors(newErrors);
-
+    
         if (valid) {
+          try {
             const response = await login(formData).unwrap();
-            if (response) {
-                dispatch(setCredentials(response));
-                navigate('/admin');
-            }
+            dispatch(setCredentials(response));
+            navigate('/admin');
+          } catch (error) {
+            console.error('Login error:', error);
+          }
         }
-    };
-
+      };
     const handleForgotPassword = () => {
         console.log('Forgot Password clicked');
     };
