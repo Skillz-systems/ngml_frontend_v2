@@ -10,7 +10,7 @@ import images from '../../assets/index';
 import '../../index.css';
 
 const StaffLoginPage: React.FC = () => {
-    const [login, { isLoading, error, data }] = useLoginMutation();
+    const [login, { isLoading, error, data, isError, isSuccess }] = useLoginMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -23,47 +23,55 @@ const StaffLoginPage: React.FC = () => {
         emailError: '',
         passwordError: '',
     });
+
+
     useEffect(() => {
-        if (error) {
-          toast.error("Incorrect Email or Password"); 
-        } else if (data) {
-          dispatch(setCredentials(data));
-          navigate('/admin');
+        if (isSuccess && data) {
+            dispatch(setCredentials(data));
+            navigate('/admin');
+            toast.success('Login successful');
+        } else if (isError) {
+            toast.error('invalid credentials');
+            console.error('Login error:', error);
         }
-      }, [error, data]);
+    }, [isSuccess, isError, data, error, dispatch, navigate]);
+
 
     const handleChange = (key: string) => (value: string) => {
         setFormData({ ...formData, [key]: value });
         setErrors({ ...errors, [`${key}Error`]: '' });
     };
 
-    const handleLogin = async () => {
+
+    const validateForm = () => {
         let valid = true;
         const newErrors = { ...errors };
-    
+
         if (!formData.email) {
-          newErrors.emailError = 'Email is required';
-          valid = false;
+            newErrors.emailError = 'Email is required';
+            valid = false;
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-          newErrors.emailError = 'Invalid email address';
-          valid = false;
+            newErrors.emailError = 'Invalid email address';
+            valid = false;
         }
-    
+
         if (!formData.password) {
-          newErrors.passwordError = 'Password is required';
-          valid = false;
+            newErrors.passwordError = 'Password is required';
+            valid = false;
         }
-    
         setErrors(newErrors);
-        if (valid) {
+        return valid;
+    };
+
+    const handleLogin = async () => {
+        if (validateForm()) {
             try {
-              const response = await login(formData).unwrap();
-              console.log('Login successful, data:', response);
-            } catch (error) {
-              console.error('Login error:', error);
+                await login(formData).unwrap();
+            } catch (err) {
+                // Error is handled in the useEffect
             }
-          }
-      };
+        }
+    };
     const handleForgotPassword = () => {
         console.log('Forgot Password clicked');
     };
@@ -76,7 +84,7 @@ const StaffLoginPage: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col logingradient-bg w-[100%]">
             <ToastContainer />
-            <div className="flex-1 flex items-center justify-center flex-col mb-6 p-10">
+            <div className="flex flex-col items-center justify-center flex-1 p-10 mb-6">
                 <div className='w-[100%]'>
                     <AuthContainer>
                         <h1 className='text-[12px] md:text-[18px] font-semibold text-white'>NGML STAFF LOGIN</h1>
@@ -101,10 +109,10 @@ const StaffLoginPage: React.FC = () => {
                                 />
                                 {errors.passwordError && <p className="text-red-500 h-[1px] absolute top-[198px] text-[14px]">{errors.passwordError}</p>}
                             </div>
-                            <div className='mt-4 flex items-center justify-center'>
+                            <div className='flex items-center justify-center mt-4'>
                                 <Button
                                     type="primary"
-                                    label={isLoading ? "Logging in..." : "Login"}
+                                    label={isLoading ? 'Logging in...' : 'Login'}
                                     action={handleLogin}
                                     color="#FFFFFF"
                                     width="100%"
@@ -130,7 +138,7 @@ const StaffLoginPage: React.FC = () => {
                 </div>
                 <div className='flex justify-center w-[100%]'>
                     <ContentContainer type="translucent" borderRadius={32}>
-                        <div className="h-full flex items-center justify-between mr-2 ml-2">
+                        <div className="flex items-center justify-between h-full ml-2 mr-2">
                             <p className='text-center text-[8px] md:text-[12px] text-[rgba(5, 5, 5, 1)]'>New to the Portal, Sign in Here</p>
                             <Button
                                 className="text-[8px] md:text-[12px]"
@@ -148,9 +156,9 @@ const StaffLoginPage: React.FC = () => {
                     </ContentContainer>
                 </div>
             </div>
-            <div className='mr-6 ml-6 mb-6'>
+            <div className='mb-6 ml-6 mr-6'>
                 <ContentContainer type="translucent" width="100%" height="30px" borderRadius={32}>
-                    <div className="w-full h-full flex justify-center items-center">
+                    <div className="flex items-center justify-center w-full h-full">
                         <p className='text-center text-[8px] md:text-[10px] text-[#E3EADA]'>This Portal is a Property of NNPC Gas Marketing Limited</p>
                     </div>
                 </ContentContainer>
