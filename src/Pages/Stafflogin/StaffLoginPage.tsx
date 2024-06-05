@@ -30,6 +30,7 @@ const StaffLoginPage: React.FC = () => {
             dispatch(setCredentials(data));
             navigate('/admin');
             toast.success('Login successful');
+            console.log('login successful')
         } else if (isError) {
             toast.error('invalid credentials');
             console.error('Login error:', error);
