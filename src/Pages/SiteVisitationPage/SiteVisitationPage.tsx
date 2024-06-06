@@ -7,8 +7,8 @@ import { useState } from 'react';
 const SiteVisitationPage = () => {
     const [formData, setFormData] = useState({
         firstSiteVisitDate: '',
-        secondSiteVisitDate: '',
-        thirdSiteVisitDate: '',
+        // secondSiteVisitDate: '',
+        // thirdSiteVisitDate: '',
     });
 
     const handleInputChange = (value: string, key: string) => {
@@ -30,7 +30,7 @@ const SiteVisitationPage = () => {
                         styleVariant='customStyle3'
                     />
                 </div>
-                <div className='mt-[20px]'>
+                {/* <div className='mt-[20px]'>
                     <CustomInput
                         type="date"
                         label='2nd Site Visit Date'
@@ -49,7 +49,7 @@ const SiteVisitationPage = () => {
                         placeholder="Select First Date"
                         styleVariant='customStyle3'
                     />
-                </div>
+                </div> */}
 
 
 
