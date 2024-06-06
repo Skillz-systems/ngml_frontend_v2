@@ -10,6 +10,7 @@ import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierReg
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 import RequestPage from '@/Pages/RequestPage/RequestPage';
+import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
 
 export const AdminRoutes = [
   {
@@ -64,6 +65,12 @@ export const AdminRoutes = [
     title: 'complaints page',
     path: '/admin/records/complaints',
     component: AdminInternalLayout(Complaints),
+    exact: true
+  },
+  {
+    title: 'Daily Volumns page',
+    path: '/admin/records/dailyvolumns',
+    component: AdminInternalLayout(Dailyvolumns),
     exact: true
   },
   {

@@ -39,7 +39,7 @@ const CustomerManager: React.FC = () => {
         subtitle='Last Updated'
         height='330px'
         reports='12/nov/2023'
-        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' />}
+        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' onClick={() => navigate('/admin/records/dailyvolumns')} />}
         backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard

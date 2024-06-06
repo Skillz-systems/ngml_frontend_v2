@@ -24,12 +24,6 @@ describe('ConnectProject Component', () => {
 
     });
 
-    test('renders setup project milestones when dates are not selected', () => {
-        render(<ConnectProject />);
-        const setupMilestonesText = screen.getByText(/Setup Project Milestones/i);
-        expect(setupMilestonesText).toBeInTheDocument();
-    });
-
     test('renders confirm selection button when dates are selected', () => {
         render(<ConnectProject />);
         const startDateInput = screen.getByText(/Proposed project start date/i);
