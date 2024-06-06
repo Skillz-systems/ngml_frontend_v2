@@ -77,7 +77,7 @@ const ConnectProject: React.FC = () => {
             <div className="w-full h-full p-4 bg-white rounded-xl flex-col justify-start items-start gap-6 flex">
                 <div className="w-full p-2 rounded-xl border justify-between items-center flex">
                     <div className="text-[#808080] text-base font-bold font-['Mulish'] ml-4">First Gas Date</div>
-                    <div className="p-1 bg-nnpc-50 rounded-3xl w-36 mr-4">
+                    <div className="p-1 bg-nnpc-50 rounded-3xl w-40 mr-4">
                         <CustomInput
                             type="date"
                             label=''
