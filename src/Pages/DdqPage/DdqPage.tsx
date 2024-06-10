@@ -107,7 +107,7 @@ const DdqPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="p-4 mt-6 w-full space-y-6 flex-col items-center gap-4">
+                    {/* <div className="p-4 mt-6 w-full space-y-6 flex-col items-center gap-4">
                         <div className="p-2 rounded-lg border justify-between items-center flex">
                             <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
                                 <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Filling status</div>
@@ -138,7 +138,7 @@ const DdqPage: React.FC = () => {
                             </div>
                             <div className="text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">13 Days</div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <Modal
                     isOpen={isModalOpen}
