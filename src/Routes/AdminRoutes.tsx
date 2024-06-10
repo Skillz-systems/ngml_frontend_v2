@@ -11,6 +11,7 @@ import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 import RequestPage from '@/Pages/RequestPage/RequestPage';
 import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
+import CustomerManager from '@/Pages/CustomerManager/CustomerManager';
 
 export const AdminRoutes = [
   {
@@ -83,6 +84,12 @@ export const AdminRoutes = [
     title: 'Request page',
     path: '/admin/records/requestpage',
     component: AdminInternalLayout(RequestPage),
+    exact: true
+  },
+  {
+    title: 'customer page',
+    path: '/admin/records/customer/id',
+    component: AdminInternalLayout(CustomerManager),
     exact: true
   },
 

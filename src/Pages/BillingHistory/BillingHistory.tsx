@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, DocumentCard, Modal } from '../../Components/index';
 import AddNewInvoice from './AddNewInvoice';
 
 import images from '../../assets/index';
+import { ArrowBack } from '@mui/icons-material';
 
 
 /**
@@ -195,6 +196,11 @@ const BillingHistory: React.FC = () => {
 
     return (
         <div className="">
+             <Link to={'/admin/records/customer/id'}>
+                <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
+                    <ArrowBack color="success" style={{ fontSize: 'medium' }} />
+                </div>
+            </Link>
             <div className="w-full p-8 rounded-lg flex-col justify-start items-start gap-8 flex">
                 <div className="w-full justify-between items-center flex">
                     <div className="text-center  text-[#49526A] text-3xl font-semibold font-['Mulish']">Billing History</div>
@@ -235,7 +241,7 @@ const BillingHistory: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] rounded-b-[10px] items-center gap-3 flex">
+                    <div className="flex-wrap w-full p-3 bg-[#FFFFFF] rounded-b-[10px] items-center gap-3 flex">
                         {billingHistoryDataTwo.map((cards, index) => (
                             <div key={index} className="flex flex-1 min-w-[150px] md:min-w-[200px] max-w-[200px] cursor-pointer" onClick={() => navigate('/admin/records/invoice')}>
                                 <DocumentCard
