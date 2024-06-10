@@ -4,18 +4,18 @@ import React from 'react';
 
 
 interface WithRoleProps {
-  children: React.ReactNode;
-  roles: UserRole[];
-}
-
-const WithRole = ({ children, roles }: WithRoleProps) => {
-  const { user } = useAuth();
-
-  if (!user || !roles.includes(user.role)) {
-    return <div>Access Denied</div>;
+    roles: UserRole[];
+    children: React.ReactNode;
   }
-
-  return <>{children}</>;
-};
-
-export default WithRole;
+  
+  const WithRole: React.FC<WithRoleProps> = ({ roles, children }) => {
+    const { user } = useAuth();
+  
+    if (!user || !roles.includes(user.role)) {
+      return <div>Access Denied</div>;
+    }
+  
+    return <>{children}</>;
+  };
+  
+  export default WithRole;
