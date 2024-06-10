@@ -11,7 +11,6 @@ import CustomerDetail from './CustomerDetail';
 import ConnectProject from '../ConnectProject/ConnectProject';
 import CustomerManager from '../CustomerManager/CustomerManager';
 import Agreement from '../Agreement/Agreement';
-import Dailyvolumns from '../Dailyvolumns/Dailyvolumns';
 // import images from '../../assets/index';
 
 
@@ -76,11 +75,6 @@ const AdminCustomerPageLayout: React.FC = () => {
             // content: 'numeric'
         },
         {
-            name: 'Daily Volumns',
-            ref: 'dailyvolumns',
-            // content: 'numeric'
-        },
-        {
             name: 'customer manager',
             ref: 'customermanager',
             // content: 'numeric'
@@ -97,7 +91,6 @@ const AdminCustomerPageLayout: React.FC = () => {
         costanalysis: <CostAnalysis />,
         agreement: <Agreement />,
         connectproject: <ConnectProject />,
-        dailyvolumns: <Dailyvolumns />,
         customermanager:<CustomerManager />,
         // subdetail1: <p>tyfyufuyfifyt</p>,
         // subdetail2: <p>tyfyufuyfifyt</p>
