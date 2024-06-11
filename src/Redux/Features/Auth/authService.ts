@@ -15,11 +15,14 @@ type RegisterRequest= {
 }
 
 type AuthResponse = {
-  token: string;
+  jwt: string;
   user: {
     id: string;
     email: string;
     name: string;
+    email_verified_at?: string | null;
+    created_at?: string;
+    updated_at?: string | null;
   };
 }
 type ErrorResponse = {
@@ -37,6 +40,7 @@ export const authApi = api.injectEndpoints({
       }),
 
       transformResponse: (response: AuthResponse | ErrorResponse) => {
+        console.log(response)
         if ('error' in response) {
           throw new Error(response.error);
         }
@@ -53,7 +57,7 @@ export const authApi = api.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
-       transformResponse: (response: { token: string; user: AuthResponse['user'] }) => response,
+       transformResponse: (response: { jwt: string; user: AuthResponse['user'] }) => response,
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
