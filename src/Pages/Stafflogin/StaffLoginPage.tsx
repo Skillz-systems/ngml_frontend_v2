@@ -14,6 +14,7 @@ const StaffLoginPage: React.FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const currentUser = useAppSelector(selectCurrentUser);
+    const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
 
     const [formData, setFormData] = useState({
         email: '',
@@ -28,6 +29,10 @@ const StaffLoginPage: React.FC = () => {
     useEffect(() => {
         if (isSuccess && data) {
             dispatch(setCredentials(data));
+            setShowWelcomeMessage(true);
+            setTimeout(() => {
+                setShowWelcomeMessage(false);
+            }, 10000);
             navigate('/admin');
             toast.success('Login successful');
             console.log('login successful');
@@ -85,7 +90,7 @@ const StaffLoginPage: React.FC = () => {
         <div className="min-h-screen flex flex-col logingradient-bg w-[100%]">
             <ToastContainer />
             <div className="flex justify-start p-4">
-                {!currentUser || isSuccess && (
+                {showWelcomeMessage || !currentUser || isSuccess && (
                     <p className="text-white text-md mt-20 sm:mt-0">
                         Welcome, {currentUser.name}
                     </p>
