@@ -86,7 +86,7 @@ const StaffLoginPage: React.FC = () => {
             <ToastContainer />
             <div className="flex justify-start p-4">
                 {!currentUser || isSuccess && (
-                    <p className="text-white text-sm">
+                    <p className="text-white text-md mt-20 sm:mt-0">
                         Welcome, {currentUser.name}
                     </p>
                 )}
