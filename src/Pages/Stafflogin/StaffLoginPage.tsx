@@ -4,8 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContainer, Button, ContentContainer, CustomInput } from '../../Components/index';
 import { useLoginMutation } from '../../Redux/Features/Auth/authService';
-import { setCredentials, selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
-import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
+import { setCredentials } from '../../Redux/Features/Auth/authSlice';
+import { useAppDispatch } from '../../Redux/hooks';
 import images from '../../assets/index';
 import '../../index.css';
 
@@ -13,8 +13,6 @@ const StaffLoginPage: React.FC = () => {
     const [login, { isLoading, error, data, isError, isSuccess }] = useLoginMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const currentUser = useAppSelector(selectCurrentUser);
-    const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
 
     const [formData, setFormData] = useState({
         email: '',
@@ -29,10 +27,6 @@ const StaffLoginPage: React.FC = () => {
     useEffect(() => {
         if (isSuccess && data) {
             dispatch(setCredentials(data));
-            setShowWelcomeMessage(true);
-            setTimeout(() => {
-                setShowWelcomeMessage(false);
-            }, 10000);
             navigate('/admin');
             toast.success('Login successful');
             console.log('login successful');
@@ -89,13 +83,6 @@ const StaffLoginPage: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col logingradient-bg w-[100%]">
             <ToastContainer />
-            <div className="flex justify-start p-4">
-                {showWelcomeMessage || !currentUser || isSuccess && (
-                    <p className="text-white text-md mt-20 sm:mt-0">
-                        Welcome, {currentUser.name}
-                    </p>
-                )}
-            </div>
             <div className="flex flex-col items-center justify-center flex-1 p-10 mb-6">
                 <div className='w-[100%]'>
                     <AuthContainer>
