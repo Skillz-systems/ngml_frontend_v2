@@ -2,16 +2,19 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
 interface AuthState {
-  token: string | null;
+  jwt: string | null;
   user: {
     id: string;
     email: string;
     name: string;
+    email_verified_at?: string | null;
+    created_at?: string;
+    updated_at?: string | null;
   } | null;
 }
 
 const initialState: AuthState = {
-  token: null,
+  jwt: null,
   user: null,
 };
 
@@ -21,13 +24,13 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (
       state,
-      action: PayloadAction<{ token: string; user: AuthState['user'] }>
+      action: PayloadAction<{ jwt: string; user: AuthState['user'] }>
     ) => {
-      state.token = action.payload.token;
+      state.jwt = action.payload.jwt;
       state.user = action.payload.user;
     },
     logout: (state) => {
-      state.token = null;
+      state.jwt = null;
       state.user = null;
     },
   },
@@ -36,6 +39,6 @@ const authSlice = createSlice({
 export const { setCredentials, logout } = authSlice.actions;
 
 export const selectCurrentUser = (state: RootState) => state.auth.user;
-export const selectToken = (state: RootState) => state.auth.token;
+export const selectToken = (state: RootState) => state.auth.jwt;
 
 export default authSlice.reducer;
