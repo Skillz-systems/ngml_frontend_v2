@@ -3,11 +3,11 @@ import { CustomInput } from '../../Components/index';
 
 /**
  * ConnectProject component for handling project date selection and other project-related operations.
- * 
+ *
  * @component
  * @example
  * <ConnectProject />
- * 
+ *
  * @returns {React.FC} The ConnectProject component.
  */
 
@@ -15,7 +15,7 @@ const ConnectProject: React.FC = () => {
 
     /**
     * State for storing the project start and end dates.
-    * 
+    *
     * @type {Object}
     * @property {string} startdate - The proposed project start date.
     * @property {string} enddate - The proposed project end date.
@@ -28,14 +28,14 @@ const ConnectProject: React.FC = () => {
 
     /**
     * State for storing the first gas date.
-    * 
+    *
     * @type {string}
     */
     const [firstGasDate, setFirstGasDate] = useState('');
 
     /**
     * Handles input changes for the date fields.
-    * 
+    *
     * @param {any} value - The value to set for the specified key.
     * @param {any} key - The key (state property name) to update.
     */
@@ -47,7 +47,7 @@ const ConnectProject: React.FC = () => {
 
     /**
     * Handles input change for the first gas date.
-    * 
+    *
     * @param {string} value - The value to set for the first gas date.
     */
     const handleFirstGasDateChange = (value: string) => {
@@ -56,7 +56,7 @@ const ConnectProject: React.FC = () => {
     };
 
     /**
-     * Placeholder function to create a customer. 
+     * Placeholder function to create a customer.
      * (Functionality to be implemented.)
      */
 
@@ -66,18 +66,18 @@ const ConnectProject: React.FC = () => {
 
     /**
      * Checks if both project start and end dates are selected.
-     * 
+     *
      * @type {boolean}
      */
 
     // const areDatesSelected = projectDate.startdate && projectDate.enddate;
 
     return (
-        <div className="w-full h-full flex-col justify-start items-start gap-2 inline-flex">
-            <div className="w-full h-full p-4 bg-white rounded-xl flex-col justify-start items-start gap-6 flex">
-                <div className="w-full p-2 rounded-xl border justify-between items-center flex">
+        <div className="inline-flex flex-col items-start justify-start w-full h-full gap-2">
+            <div className="flex flex-col items-start justify-start w-full h-full gap-6 p-4 bg-white rounded-xl">
+                <div className="flex items-center justify-between w-full p-2 border rounded-xl">
                     <div className="text-[#808080] text-base font-bold font-['Mulish'] ml-4">First Gas Date</div>
-                    <div className="p-1 rounded-3xl w-40 mr-4">
+                    <div className="w-40 p-1 mr-4 rounded-3xl">
                         <CustomInput
                             type="date"
                             label=''
@@ -88,12 +88,12 @@ const ConnectProject: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div className="h-full w-full p-6 rounded-xl border space-y-6">
+                <div className="w-full h-full p-6 space-y-6 border rounded-xl">
                     <div className="text-base font-bold font-['Mulish'] leading-none">PROJECT DATES</div>
                     <div className="">
                         <CustomInput
                             type="date"
-                            label='Proposed project start date'
+                            label='Project Start Date'
                             value={projectDate.startdate}
                             handleChangeEvent={(value) => handleInputChange(value, 'startdate')}
                             placeholder="Select start date"
@@ -102,7 +102,7 @@ const ConnectProject: React.FC = () => {
                     <div className="">
                         <CustomInput
                             type="date"
-                            label='Proposed project end date'
+                            label='Project End Date'
                             value={projectDate.enddate}
                             handleChangeEvent={(value) => handleInputChange(value, 'enddate')}
                             placeholder="Select end date"
@@ -131,9 +131,9 @@ const ConnectProject: React.FC = () => {
                     </div> */}
                 </div>
                 {/* {areDatesSelected && (
-                    <div className="w-full h-full p-6 rounded-xl border space-y-6">
+                    <div className="w-full h-full p-6 space-y-6 border rounded-xl">
                         <div className="text-base font-bold font-['Mulish'] leading-none">PROJECT DATES</div>
-                        <div className='flex md:flex-row flex-col justify-start gap-4'>
+                        <div className='flex flex-col justify-start gap-4 md:flex-row'>
                             <div className="w-full md:w-[250px] px-8 py-3 rounded-3xl border hover:bg-nnpcmediumgreen-850 cursor-pointer">
                                 <div className="text-base font-normal font-['Mulish'] text-center">Select Project Strategy</div>
                             </div>

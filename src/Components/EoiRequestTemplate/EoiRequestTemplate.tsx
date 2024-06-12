@@ -64,8 +64,8 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
                             fontWeight='400'
                             radius='32px'
                             color='#828DA9'
-                            
-                        
+
+
                         />
                         <div >Reason: {disapprovalReason}</div>
                         <div >Disapproved on: {dateTime}</div>
@@ -80,10 +80,10 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
 
 
     return (
-        <div className="  h-[100%] w-[100%] rounded-[6px]" style={{background:colors.dark[50]}}>
+        <div className="  h-[100%] w-[100%] rounded-[6px]" style={{ background: colors.dark[50] }}>
             <Box>
                 <div className='items-center h-[100%] p-[10px]'>
-                <Heading as="h6" size="h6" color='primaryColor' className="font-[2px] text-dark-400">EOI REQUEST</Heading>
+                    <Heading as="h6" size="h6" color='primaryColor' className="font-[2px] text-dark-400">EOI REQUEST:</Heading>
 
                     {/* <div className='text-[20px] text-[#49526A] font-[700]'>EOI REQUEST</div> */}
                 </div>
