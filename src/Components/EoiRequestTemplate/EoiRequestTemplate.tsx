@@ -83,7 +83,7 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
         <div className="  h-[100%] w-[100%] rounded-[6px]" style={{ background: colors.dark[50] }}>
             <Box>
                 <div className='items-center h-[100%] p-[10px]'>
-                    <Heading as="h6" size="h6" color='primaryColor' className="font-[2px] text-dark-400">EOI REQUEST:</Heading>
+                    <Heading as="h6" size="h6" color='primaryColor' className="font-[2px] text-dark-400">EOI REQUEST</Heading>
 
                     {/* <div className='text-[20px] text-[#49526A] font-[700]'>EOI REQUEST</div> */}
                 </div>
@@ -104,9 +104,9 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
                 <div className='flex justify-between w-[100%]'>
                     <div className='text-[#828DA9] text-[14px] font-[500] w-[50%] flex justify-between'>
                         <div>
-                            <div className='font-[800]'>Company Name</div>
-                            <div className='font-[800]'>Company Email</div>
-                            <div className='font-[800]' >Company Number</div>
+                            <div className='font-[800]'>Company Name :</div>
+                            <div className='font-[800]'>Company Email :</div>
+                            <div className='font-[800]' >Company Number :</div>
 
                         </div>
                         <div>
