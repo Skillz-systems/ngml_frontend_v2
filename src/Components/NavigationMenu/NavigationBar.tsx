@@ -61,6 +61,13 @@ interface IUserType {
  * @returns {ReactElement} React component representing a user type.
  */
 
+const capitalizeName = (name: string) => {
+  return name
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+};
+
 const UserType: React.FC<{
   userInfo: IUserType;
   handleToggleNavigationBar: () => void;
@@ -119,10 +126,11 @@ const UserType: React.FC<{
                   color: '#050505',
                   fontSize: '12px',
                   fontWeight: '600',
-                  lineHeight: '12px'
+                  lineHeight: '12px',
+                  marginLeft: '8px'
                 }}
               >
-                {userInfo.name}
+                {capitalizeName(userInfo.name)}
               </div>
               <div
                 style={{

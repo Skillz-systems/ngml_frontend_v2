@@ -7,6 +7,8 @@ import {
 import React, { useState } from 'react';
 import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
+import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
+import { useAppSelector } from '../../Redux/hooks';
 
 interface SelectOption {
   label: string;
@@ -24,9 +26,14 @@ interface DynamicCardDataItem {
 
 const AdminHomePage = () => {
   const [, setSortDetails] = useState({ sortType: '', value: '' });
+  const currentUser = useAppSelector(selectCurrentUser);
 
   const handleSortChange = (sortType: 'year' | 'value', value: string) => {
     setSortDetails({ sortType, value });
+  };
+
+  const getFirstName = (fullName: string) => {
+    return fullName.split(' ')[0];
   };
 
 
@@ -157,7 +164,11 @@ const AdminHomePage = () => {
   return (
     <div className="h-fit w-full" >
       <div>
-        <div className='text-[30px] text-[#49526A] font-[700]'>Welcome John,</div>
+        <div className='text-[30px] text-[#49526A] font-[700]'>Welcome {currentUser && (
+        <span className="text-[30px] text-[#49526A] font-[700] capitalize">
+                        {getFirstName(currentUser.name)}
+                    </span>
+                )}</div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4" >
         {cardData.map((card, index) => {
