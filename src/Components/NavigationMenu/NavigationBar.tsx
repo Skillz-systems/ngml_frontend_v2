@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import images from '@/assets';
 import {
   DensityMedium,
   KeyboardArrowDown,
@@ -6,7 +7,8 @@ import {
 } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import images from '@/assets';
+import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
+import { useAppSelector } from '../../Redux/hooks';
 
 /**
  * Navigation bar item.
@@ -210,7 +212,7 @@ const NavigationBarItem: React.FC<{
 
 
   return (
-    <div 
+    <div
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -355,17 +357,25 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
 }) => {
   const [activeItemId, setActiveItemId] = useState<number | null>(null);
+  const currentUser = useAppSelector(selectCurrentUser);
 
   const handleItemClick = (id: number) => {
     setActiveItemId(id);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [userInfo] = useState({
-    name: 'John Okor',
-    designation: 'D. Manager',
-    avatar: images.avatarLogo, 
-  });
+  const userInfo = currentUser
+    ? {
+      name: currentUser.name,
+      designation: 'D. Manager',
+      avatar: images.avatarLogo,
+    }
+    : {
+      name: 'Guest',
+      designation: 'Guest User',
+      avatar: images.avatarLogo,
+    };
+
 
   const effectiveSliceLength =
     sliceLength > 0 ? sliceLength : Navigationlinks.length;
