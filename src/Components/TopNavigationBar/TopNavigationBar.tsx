@@ -1,6 +1,10 @@
 import { GppMaybeOutlined, NotificationImportantOutlined, PowerSettingsNewOutlined } from '@mui/icons-material';
 import images from '../../assets/index';
 import { Notification, SearchInput  } from '../../Components/index';
+import { useLogoutMutation } from '../../Redux/Features/Auth/authService';
+import { useAppDispatch } from '../../Redux/hooks';
+import { logout } from '../../Redux/Features/Auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Represents the top navigation bar of the application.
@@ -10,6 +14,10 @@ import { Notification, SearchInput  } from '../../Components/index';
  * Each notification type is displayed using the `Notification` component with specific data.
  */
 const TopNavigationBar = () => {
+
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const [logoutMutation] = useLogoutMutation();
 
     const messageNotifications = [
         { title: 'New Message', date: '2024-03-29', content: 'Message content 1' },
@@ -39,6 +47,16 @@ const TopNavigationBar = () => {
         console.log('User searched for:', query);
     };
 
+    const handleLogout = async () => {
+        try {
+            await logoutMutation().unwrap();
+            dispatch(logout());
+            navigate('/login');
+        } catch (err) {
+            console.error('Failed to logout:', err);
+        }
+    };
+
 
     return (
 
@@ -64,8 +82,9 @@ const TopNavigationBar = () => {
                     />
                     <Notification
                         // count={reminderNotifications.length}
-                        // headerTitle="Reminders"
+                        headerTitle="Logout"
                         // notifications={reminderNotifications}
+                        onClick={handleLogout}
                         renderIcon={() => <div><PowerSettingsNewOutlined style={{ fontSize: 'medium' }} /></div>}
                     />
                 </div>
