@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CustomInput, Heading } from '@/Components'
-import colors from '@/Utils/colors'
+import { CustomInput, Heading } from '@/Components';
+import colors from '@/Utils/colors';
 import { useState } from 'react';
 
 
@@ -23,7 +23,7 @@ const SiteVisitationPage = () => {
                 <div className='mt-[20px]'>
                     <CustomInput
                         type="date"
-                        label='1st Site Visit Date'
+                        label='Site Visit Date'
                         value={formData.firstSiteVisitDate}
                         handleChangeEvent={(value) => handleInputChange(value, 'firstSiteVisitDate')}
                         placeholder="Select First Date"
