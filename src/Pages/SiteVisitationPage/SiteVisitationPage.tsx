@@ -19,7 +19,7 @@ const SiteVisitationPage = () => {
     return (
         <div className="p-[20px] rounded-[20px] w-[100%] h-fit " style={{ background: colors.dark[50] }}>
             <div className='border-2 border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
-                <Heading as="h4" size="h6" color='primaryColor' className="font-[2px] text-dark-100">PICK DATES FOR SITE VISITES</Heading>
+                <Heading as="h4" size="h6" color='primaryColor' className="font-[2px] text-dark-100">PICK DATE FOR SITE VISIT</Heading>
                 <div className='mt-[20px]'>
                     <CustomInput
                         type="date"
