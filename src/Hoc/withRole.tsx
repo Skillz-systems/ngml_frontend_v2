@@ -1,5 +1,5 @@
 import { useAuth } from '@/AuthContext';
-import { UserRole } from '@/file';
+import { UserRole } from '@/type';
 import React from 'react';
 
 
