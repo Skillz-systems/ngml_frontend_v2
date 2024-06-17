@@ -6,7 +6,7 @@ const createRoleMiddleware = (role: UserRole): Middleware<unknown, RootState> =>
   return storeAPI => next => action => {
     const state = storeAPI.getState();
     
-    // Check if state.user exists before accessing its role
+    // Checks if state.user exists before accessing it's role
     if (state && state.user && state.user.role === role) {
       console.log(`Action for ${role}:`, action);
     }
