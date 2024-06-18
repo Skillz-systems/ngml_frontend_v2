@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import colors from '@/Utils/colors';
 import React, { useState } from 'react';
 import { CustomInput } from '../../Components/index';
 import images from '../../assets/index';
-import colors from '@/Utils/colors';
 
 const CustomerDetail: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -21,12 +21,12 @@ const CustomerDetail: React.FC = () => {
     };
 
     return (
-        <div className="p-[20px] rounded-[20px]" style={{background:colors.dark[50]}}>
+        <div className="p-[20px] rounded-[20px]" style={{ background: colors.dark[50] }}>
             <div className='border border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
                 <div className='flex-col space-y-5'>
                     <h3 className='text-[#49526A] font-[700]'>PERSONAL DETAILS</h3>
                     <div className='border-2 flex items-center justify-between rounded-[10px] h-16'>
-                        <div className='ml-4'><img src={images.avatar} alt="logo" /></div>
+                        <div className='ml-4'><img src={images.avatarLogo} alt="logo" /></div>
                         <div className='mr-4'><h2>COMPANY LOGO</h2></div>
                     </div>
                     <CustomInput

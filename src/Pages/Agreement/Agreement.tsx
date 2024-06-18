@@ -1,5 +1,5 @@
-import { DocumentCard, DocumentCardTwo } from '../../Components/index';
-
+import React, { useState } from 'react';
+import { DocumentCard, DocumentCardTwo, Button, FileUploadInput, Modal } from '../../Components/index';
 import images from '../../assets/index';
 
 interface CardDataItem {
@@ -71,11 +71,25 @@ const documentCardDataTwo: CardDataItem[] = [
 
 const Agreement: React.FC = () => {
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    };
+
+    const handleCreateCustomer = () => {
+
+    };
+
     return (
         <div className='p-4 bg-[#FFFFFF] rounded-[10px]'>
             <div className="w-full h-full border flex-col rounded-[10px]">
-                <div className="w-full px-3 py-2.5 bg-white border-b rounded-t-[10px]">
+                <div className="w-full px-3 py-2.5 bg-white border-b rounded-t-[10px] flex justify-between items-center">
                     <div className="text-xl font-bold font-['Mulish']">AGREEMENT TEMPLATES</div>
+                    <div className="flex items-center border px-3 py-2 rounded-3xl hover:bg-gray-100" onClick={toggleModal}>
+                            <img src={images.upload} alt="Upload" className="w-4 h-4 md:w-5 md:h-5" />
+                            <span className="text-sm md:text-base ml-2 cursor-pointer">Upload Agreement</span>
+                        </div>
                 </div>
                 <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] items-center gap-3">
                     {documentCardData.map((card, index) => (
@@ -113,6 +127,49 @@ const Agreement: React.FC = () => {
                     ))}
                 </div>
             </div>
+            <Modal
+                isOpen={isModalOpen}
+                onClose={toggleModal}
+                size='medium'
+                title='CAPEX Sheet Upload'
+                subTitle=''
+                buttons={[
+                    <div className='flex gap-2 mb-[-10px]'>
+                        <div className='w-[120px]'>
+                            <Button
+                                type="outline"
+                                label="Cancel"
+                                action={toggleModal}
+                                color="#FFFFFF"
+                                fontStyle="italic"
+                                width="100%"
+                                height="40px"
+                                fontSize="16px"
+                                radius="20px"
+                            />
+                        </div>
+                        <div className='w-[260px]'>
+                            <Button
+                                type="secondary"
+                                label="Confirm"
+                                action={handleCreateCustomer}
+                                color="#FFFFFF"
+                                fontStyle="italic"
+                                width="100%"
+                                height="40px"
+                                fontSize="16px"
+                                radius="20px"
+                            />
+                        </div>
+                    </div>
+                ]}
+            >
+                <FileUploadInput
+                    title=''
+                    maxSizeMB={25}
+                    fileDescription="Only .xlxs file accepted"
+                />
+            </Modal>
         </div>
     );
 };
