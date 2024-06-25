@@ -1,40 +1,6 @@
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import  { FC, ReactNode, useEffect, useState } from 'react';
-
-/**
- * Interface for individual tab information.
- * @typedef {Object} TabInterface
- * @property {string} name - The name of the tab.
- * @property {string} ref - The unique identifier for the tab.
- */
-
-/**
- * Interface for the list of tabs, which can contain nested tab lists.
- * @typedef {Object} TabListInterface
- * @property {string} name - The name of the tab.
- * @property {string} ref - The unique identifier for the tab.
- * @property {TabInterface[]} [children] - A list of child tabs, if any.
- * @property {TabListInterface[]} [sublist] - A list of sub-tabs, if any.
- * @property {'icon' | 'numeric'} [content] - Type of content (icon or numeric).
- * @property {ReactNode} [icon] - An optional icon to be displayed on the tab.
- */
-
-/**
- * Props for the `TabCustomer` component.
- * @typedef {Object} TabsProps
- * @property {string} activeTab - The current active tab identifier.
- * @property {(tab: string) => void} setActiveTab - Function to set the active tab.
- * @property {TabListInterface[]} tablist - The list of tabs to be displayed.
- * @property {{ [key: string]: ReactNode }} tabContent - The content associated with each tab.
- */
-
-/**
-* A component that displays a list of tabs with optional dropdown for smaller screens.
-* 
-* @param {TabsProps} props - The props for the component.
-* @returns {JSX.Element} - The rendered JSX element.
-*/
-
+import { FC, ReactNode, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface TabInterface {
   name: string;
@@ -57,36 +23,70 @@ interface TabsProps {
   tabContent: { [key: string]: ReactNode };
 }
 
+/**
+ * TabCustomer component allows the user to navigate between different tabs
+ * and view corresponding content. It supports tab navigation through both
+ * click and dropdown selection.
+ * 
+ * @component
+ * @example
+ * const tablist = [
+ *   { name: 'Overview', ref: 'overview' },
+ *   { name: 'Details', ref: 'details', sublist: [{ name: 'Subdetail 1', ref: 'subdetail1' }] },
+ *   { name: 'Settings', ref: 'settings' }
+ * ];
+ * const tabContent = {
+ *   overview: <div>Overview Content</div>,
+ *   details: <div>Details Content</div>,
+ *   subdetail1: <div>Subdetail 1 Content</div>,
+ *   settings: <div>Settings Content</div>
+ * };
+ * 
+ * <TabCustomer
+ *   activeTab="overview"
+ *   setActiveTab={setActiveTab}
+ *   tablist={tablist}
+ *   tabContent={tabContent}
+ * />
+ * 
+ * @param {TabsProps} props - Props passed to the component
+ * @param {string} props.activeTab - The currently active tab's reference
+ * @param {function} props.setActiveTab - Function to set the active tab
+ * @param {TabListInterface[]} props.tablist - List of tabs to display
+ * @param {Object.<string, ReactNode>} props.tabContent - Mapping of tab references to their content
+ * @returns {JSX.Element} The TabCustomer component
+ */
+
 const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabContent }) => {
-  const [, setPanelName] = useState<string>('');
+  const [panelName, setPanelName] = useState<string>('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (tablist.length > 0) {
+    if (tablist.length > 0 && !activeTab) {
       const initialTab = tablist[0];
       setPanelName(capitalizeFirstLetter(initialTab.name));
       setActiveTab(initialTab.ref);
+      navigate(`/admin/records/customer/${initialTab.ref}`);
     }
-  }, [tablist, setActiveTab]);
-
+  }, [tablist, activeTab, setActiveTab, navigate]);
 
   /**
-  * Handle tab change by setting the active tab and panel name.
+  * Handles tab change when a tab is clicked.
   * 
-  * @param {TabListInterface} tab - The tab to set as active.
-  * @returns {void}
+  * @param {TabListInterface} tab - The tab to switch to
   */
 
   const handleTabChange = (tab: TabListInterface): void => {
     setActiveTab(tab.ref);
     setPanelName(tab.name);
+    navigate(`/admin/records/customer/${tab.ref}`);
   };
 
   /**
-  * Handle dropdown change for mobile or smaller screen views.
-  * 
-  * @param {React.ChangeEvent<HTMLSelectElement>} e - The change event from the dropdown.
-  * @returns {void}
-  */
+   * Handles dropdown selection change.
+   * 
+   * @param {SelectChangeEvent<string>} event - The event triggered by dropdown change
+   */
 
   const handleDropdownChange = (event: SelectChangeEvent<string>): void => {
     const selectedRef = event.target.value;
@@ -99,13 +99,20 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
     }
   };
 
+  /**
+   * Capitalizes the first letter of a string.
+   * 
+   * @param {string} str - The string to capitalize
+   * @returns {string} The capitalized string
+   */
+
   const capitalizeFirstLetter = (str: string): string => {
     if (str.length === 0) return str;
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
       <div className="mb-3 lg:hidden ml-2 border h-[32] rounded-[10px]">
         <Select
           value={activeTab}
@@ -116,14 +123,12 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
           sx={{
             outline: 'none',
             '& .MuiOutlinedInput-notchedOutline': {
-              border: 'none'  
+              border: 'none'
             },
-        
           }}
-         
         >
           {tablist.map((tab) => [
-            <MenuItem key={tab.ref} value={tab.ref} >
+            <MenuItem key={tab.ref} value={tab.ref}>
               {capitalizeFirstLetter(tab.name)}
             </MenuItem>,
             ...(tab.sublist || []).map((sub) => (
@@ -136,19 +141,18 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
       </div>
 
       <div className="flex flex-1">
-        <div className="lg:w-1/4 flex flex-col items-start justify-start space-y-2 mr-3 ">
+        <div className="lg:w-1/4 flex flex-col items-start justify-start space-y-2 mr-3">
           <div className="hidden lg:flex flex-col w-full space-y-2">
             {tablist.map((tab) => (
               <div key={tab.ref}>
                 <div
-                  className={`flex justify-between items-center cursor-pointer capitalize ${tab.ref === activeTab ? 'text-primary' : 'text-neutral-600'
-                    }`}
+                  className={`flex justify-between items-center cursor-pointer capitalize ${tab.ref === activeTab ? 'text-primary' : 'text-neutral-600'}`}
                   onClick={() => handleTabChange(tab)}
                 >
                   <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
                     {tab.content === 'icon' && tab.icon}
                     {tab.content === 'numeric' && <span className="mr-1 text-[12px]">{tablist.indexOf(tab) + 1}</span>}
-                    <h4 className="truncate text-neutral-600 font-[500] text-[12px] mb-[2px] capitalize leading-relaxed ml-1" >
+                    <h4 className="truncate text-neutral-600 font-[500] text-[12px] mb-[2px] capitalize leading-relaxed ml-1">
                       {tab.name}
                     </h4>
                   </div>

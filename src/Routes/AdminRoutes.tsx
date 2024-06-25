@@ -3,15 +3,15 @@ import AdminHomePage from '@/Pages/AdminHomePage/AdminHomePage';
 import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
 import Complaints from '@/Pages/Complaints/Complaints';
 import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
+import CustomerManager from '@/Pages/CustomerManager/CustomerManager';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
+import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
 import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
+import RequestPage from '@/Pages/RequestPage/RequestPage';
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
-import RequestPage from '@/Pages/RequestPage/RequestPage';
-import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
-import CustomerManager from '@/Pages/CustomerManager/CustomerManager';
 
 export const AdminRoutes = [
   {
@@ -28,7 +28,7 @@ export const AdminRoutes = [
   },
   {
     title: 'Admin Customer Page ',
-    path: '/admin/records/customer/id',
+    path: '/admin/records/customer/:tabId',
     component: AdminInternalLayout(CustomerPageLayout),
     exact: true
   },
@@ -88,10 +88,8 @@ export const AdminRoutes = [
   },
   {
     title: 'customer page',
-    path: '/admin/records/customer/id',
+    path: '/admin/records/customer/:tabId',
     component: AdminInternalLayout(CustomerManager),
     exact: true
   },
-
-]
-
+];

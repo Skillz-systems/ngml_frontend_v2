@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom'; // Import MemoryRouter
 import TabCustomer, { TabListInterface } from './TabCustomer';
 
 const tablist: TabListInterface[] = [
@@ -31,12 +32,14 @@ const tabContent = {
 describe('TabCustomer Component', () => {
     it('renders without crashing', () => {
         render(
-            <TabCustomer
-                activeTab="overview"
-                setActiveTab={() => { }}
-                tablist={tablist}
-                tabContent={tabContent}
-            />
+            <MemoryRouter>
+                <TabCustomer
+                    activeTab="overview"
+                    setActiveTab={() => { }}
+                    tablist={tablist}
+                    tabContent={tabContent}
+                />
+            </MemoryRouter>
         );
         expect(screen.getByText('Overview Content')).toBeInTheDocument();
     });
@@ -44,12 +47,14 @@ describe('TabCustomer Component', () => {
     it('should change the active tab when a tab is clicked', () => {
         const setActiveTab = vi.fn();
         render(
-            <TabCustomer
-                activeTab="overview"
-                setActiveTab={setActiveTab}
-                tablist={tablist}
-                tabContent={tabContent}
-            />
+            <MemoryRouter>
+                <TabCustomer
+                    activeTab="overview"
+                    setActiveTab={setActiveTab}
+                    tablist={tablist}
+                    tabContent={tabContent}
+                />
+            </MemoryRouter>
         );
 
         const detailsTab = screen.getByText(/details/i);
@@ -61,12 +66,14 @@ describe('TabCustomer Component', () => {
     it('should change the active tab when a dropdown selection is made', () => {
         const setActiveTab = vi.fn();
         render(
-            <TabCustomer
-                activeTab="overview"
-                setActiveTab={setActiveTab}
-                tablist={tablist}
-                tabContent={tabContent}
-            />
+            <MemoryRouter>
+                <TabCustomer
+                    activeTab="overview"
+                    setActiveTab={setActiveTab}
+                    tablist={tablist}
+                    tabContent={tabContent}
+                />
+            </MemoryRouter>
         );
 
         const combobox = screen.getByRole('combobox');

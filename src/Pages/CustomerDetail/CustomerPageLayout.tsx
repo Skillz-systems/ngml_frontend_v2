@@ -2,16 +2,29 @@ import { ArrowBack } from '@mui/icons-material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
+import Agreement from '../Agreement/Agreement';
+import ConnectProject from '../ConnectProject/ConnectProject';
 import CostAnalysis from '../CostAnalysis/CostAnalysis';
 import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
+import CustomerManager from '../CustomerManager/CustomerManager';
 import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 import CustomerDetail from './CustomerDetail';
-import ConnectProject from '../ConnectProject/ConnectProject';
-import CustomerManager from '../CustomerManager/CustomerManager';
-import Agreement from '../Agreement/Agreement';
 // import images from '../../assets/index';
+
+/**
+ * AdminCustomerPageLayout component renders the layout for the admin customer page
+ * with navigation tabs and corresponding content.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <AdminCustomerPageLayout />
+ * )
+ * 
+ * @returns {JSX.Element} The AdminCustomerPageLayout component
+ */
 
 
 
@@ -22,7 +35,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         {
             name: 'overview',
             ref: 'overview',
-             // content: 'numeric',
+            // content: 'numeric',
             // icon: <img src={images.business} alt="logo" className='w-4 h-4' />,
             // content: 'icon',
         },
@@ -68,7 +81,7 @@ const AdminCustomerPageLayout: React.FC = () => {
             ref: 'agreement',
             // content: 'numeric'
         },
-       
+
         {
             name: 'connect project',
             ref: 'connectproject',
@@ -91,7 +104,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         costanalysis: <CostAnalysis />,
         agreement: <Agreement />,
         connectproject: <ConnectProject />,
-        customermanager:<CustomerManager />,
+        customermanager: <CustomerManager />,
         // subdetail1: <p>tyfyufuyfifyt</p>,
         // subdetail2: <p>tyfyufuyfifyt</p>
     };
