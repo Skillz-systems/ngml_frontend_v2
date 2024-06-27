@@ -1,12 +1,7 @@
 import AdminCustomerList from '@/Pages/AdminCustomerList/AdminCustomerList';
 import AdminHomePage from '@/Pages/AdminHomePage/AdminHomePage';
-import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
-import Complaints from '@/Pages/Complaints/Complaints';
 import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
-import CustomerManager from '@/Pages/CustomerManager/CustomerManager';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
-import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
-import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 import RequestPage from '@/Pages/RequestPage/RequestPage';
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
@@ -28,7 +23,7 @@ export const AdminRoutes = [
   },
   {
     title: 'Admin Customer Page ',
-    path: '/admin/records/customer/:tabId',
+    path: '/admin/records/customer/:customerId/:projectId/:tabId', // Update this path
     component: AdminInternalLayout(CustomerPageLayout),
     exact: true
   },
@@ -57,39 +52,40 @@ export const AdminRoutes = [
     exact: true
   },
   {
-    title: 'Billing History',
-    path: '/admin/records/billinghistory',
-    component: AdminInternalLayout(BillingHistory),
-    exact: true
-  },
-  {
-    title: 'complaints page',
-    path: '/admin/records/complaints',
-    component: AdminInternalLayout(Complaints),
-    exact: true
-  },
-  {
-    title: 'Daily Volumns page',
-    path: '/admin/records/dailyvolumns',
-    component: AdminInternalLayout(Dailyvolumns),
-    exact: true
-  },
-  {
-    title: 'invoice page',
-    path: '/admin/records/invoice',
-    component: AdminInternalLayout(InvoicePage),
-    exact: true
-  },
-  {
     title: 'Request page',
     path: '/admin/records/requestpage',
     component: AdminInternalLayout(RequestPage),
     exact: true
   },
-  {
-    title: 'customer page',
-    path: '/admin/records/customer/:tabId',
-    component: AdminInternalLayout(CustomerManager),
-    exact: true
-  },
+  // {
+  //   title: 'Billing History',
+  //   path: '/admin/records/billinghistory',
+  //   component: AdminInternalLayout(BillingHistory),
+  //   exact: true
+  // },
+  // {
+  //   title: 'complaints page',
+  //   path: '/admin/records/complaints',
+  //   component: AdminInternalLayout(Complaints),
+  //   exact: true
+  // },
+  // {
+  //   title: 'Daily Volumns page',
+  //   path: '/admin/records/dailyvolumns',
+  //   component: AdminInternalLayout(Dailyvolumns),
+  //   exact: true
+  // },
+  // {
+  //   title: 'invoice page',
+  //   path: '/admin/records/invoice',
+  //   component: AdminInternalLayout(InvoicePage),
+  //   exact: true
+  // },
+  // {
+  //   title: 'customer page',
+  //   path: '/admin/records/customer/:tabId', // Ensure this path is updated
+  //   component: AdminInternalLayout(CustomerManager),
+  //   exact: true
+  // },
 ];
+

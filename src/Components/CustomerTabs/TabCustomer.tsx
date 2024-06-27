@@ -1,6 +1,6 @@
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { FC, ReactNode, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface TabInterface {
   name: string;
@@ -23,70 +23,25 @@ interface TabsProps {
   tabContent: { [key: string]: ReactNode };
 }
 
-/**
- * TabCustomer component allows the user to navigate between different tabs
- * and view corresponding content. It supports tab navigation through both
- * click and dropdown selection.
- * 
- * @component
- * @example
- * const tablist = [
- *   { name: 'Overview', ref: 'overview' },
- *   { name: 'Details', ref: 'details', sublist: [{ name: 'Subdetail 1', ref: 'subdetail1' }] },
- *   { name: 'Settings', ref: 'settings' }
- * ];
- * const tabContent = {
- *   overview: <div>Overview Content</div>,
- *   details: <div>Details Content</div>,
- *   subdetail1: <div>Subdetail 1 Content</div>,
- *   settings: <div>Settings Content</div>
- * };
- * 
- * <TabCustomer
- *   activeTab="overview"
- *   setActiveTab={setActiveTab}
- *   tablist={tablist}
- *   tabContent={tabContent}
- * />
- * 
- * @param {TabsProps} props - Props passed to the component
- * @param {string} props.activeTab - The currently active tab's reference
- * @param {function} props.setActiveTab - Function to set the active tab
- * @param {TabListInterface[]} props.tablist - List of tabs to display
- * @param {Object.<string, ReactNode>} props.tabContent - Mapping of tab references to their content
- * @returns {JSX.Element} The TabCustomer component
- */
-
 const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabContent }) => {
   const [panelName, setPanelName] = useState<string>('');
   const navigate = useNavigate();
+  const { customerId, projectId, subPageId } = useParams<{ customerId: string; projectId: string; subPageId?: string }>();
 
   useEffect(() => {
     if (tablist.length > 0 && !activeTab) {
       const initialTab = tablist[0];
       setPanelName(capitalizeFirstLetter(initialTab.name));
       setActiveTab(initialTab.ref);
-      navigate(`/admin/records/customer/${initialTab.ref}`);
+      navigate(`/admin/records/customer/${customerId}/${projectId}/${initialTab.ref}${subPageId ? `/${subPageId}` : ''}`);
     }
-  }, [tablist, activeTab, setActiveTab, navigate]);
-
-  /**
-  * Handles tab change when a tab is clicked.
-  * 
-  * @param {TabListInterface} tab - The tab to switch to
-  */
+  }, [tablist, activeTab, setActiveTab, navigate, customerId, projectId, subPageId]);
 
   const handleTabChange = (tab: TabListInterface): void => {
     setActiveTab(tab.ref);
     setPanelName(tab.name);
-    navigate(`/admin/records/customer/${tab.ref}`);
+    navigate(`/admin/records/customer/${customerId}/${projectId}/${tab.ref}${subPageId ? `/${subPageId}` : ''}`);
   };
-
-  /**
-   * Handles dropdown selection change.
-   * 
-   * @param {SelectChangeEvent<string>} event - The event triggered by dropdown change
-   */
 
   const handleDropdownChange = (event: SelectChangeEvent<string>): void => {
     const selectedRef = event.target.value;
@@ -98,13 +53,6 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
       handleTabChange(selectedTab);
     }
   };
-
-  /**
-   * Capitalizes the first letter of a string.
-   * 
-   * @param {string} str - The string to capitalize
-   * @returns {string} The capitalized string
-   */
 
   const capitalizeFirstLetter = (str: string): string => {
     if (str.length === 0) return str;

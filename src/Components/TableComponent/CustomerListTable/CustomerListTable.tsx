@@ -213,7 +213,7 @@ const CustomerListTable = () => {
             headerName: 'ACTION',
             flex: 1,
             renderCell: () => (
-                <NavigateButton to="/admin/records/customer/id" />
+                <NavigateButton to="/admin/records/customer/:customerId/:projectId/:tabId" />
             ),
         },
     ]
