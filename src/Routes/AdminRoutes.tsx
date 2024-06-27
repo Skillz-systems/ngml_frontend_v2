@@ -27,7 +27,7 @@ export const AdminRoutes = [
   },
   {
     title: 'Admin Customer Page ',
-    path: '/admin/records/customer/:customerId/:projectId/:tabId?', // Update this path
+    path: '/admin/records/customer/:customerId/:projectId/:tabId?',
     component: AdminInternalLayout(CustomerPageLayout),
     exact: true
   },
