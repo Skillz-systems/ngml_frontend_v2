@@ -7,6 +7,10 @@ import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLay
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
+import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
+import Complaints from '@/Pages/Complaints/Complaints';
+import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
+import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 
 export const AdminRoutes = [
   {
@@ -23,7 +27,7 @@ export const AdminRoutes = [
   },
   {
     title: 'Admin Customer Page ',
-    path: '/admin/records/customer/:customerId/:projectId/:tabId', // Update this path
+    path: '/admin/records/customer/:customerId/:projectId/:tabId?', // Update this path
     component: AdminInternalLayout(CustomerPageLayout),
     exact: true
   },
@@ -57,30 +61,30 @@ export const AdminRoutes = [
     component: AdminInternalLayout(RequestPage),
     exact: true
   },
-  // {
-  //   title: 'Billing History',
-  //   path: '/admin/records/billinghistory',
-  //   component: AdminInternalLayout(BillingHistory),
-  //   exact: true
-  // },
-  // {
-  //   title: 'complaints page',
-  //   path: '/admin/records/complaints',
-  //   component: AdminInternalLayout(Complaints),
-  //   exact: true
-  // },
-  // {
-  //   title: 'Daily Volumns page',
-  //   path: '/admin/records/dailyvolumns',
-  //   component: AdminInternalLayout(Dailyvolumns),
-  //   exact: true
-  // },
-  // {
-  //   title: 'invoice page',
-  //   path: '/admin/records/invoice',
-  //   component: AdminInternalLayout(InvoicePage),
-  //   exact: true
-  // },
+  {
+    title: 'Billing History',
+    path: '/admin/records/billinghistory',
+    component: AdminInternalLayout(BillingHistory),
+    exact: true
+  },
+  {
+    title: 'complaints page',
+    path: '/admin/records/complaints',
+    component: AdminInternalLayout(Complaints),
+    exact: true
+  },
+  {
+    title: 'Daily Volumns page',
+    path: '/admin/records/dailyvolumns',
+    component: AdminInternalLayout(Dailyvolumns),
+    exact: true
+  },
+  {
+    title: 'invoice page',
+    path: '/admin/records/invoice',
+    component: AdminInternalLayout(InvoicePage),
+    exact: true
+  },
   // {
   //   title: 'customer page',
   //   path: '/admin/records/customer/:tabId', // Ensure this path is updated

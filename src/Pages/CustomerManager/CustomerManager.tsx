@@ -1,6 +1,6 @@
 import { DocumentCard } from '../../Components/index';
 import images from '../../assets/index';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * DocumentCardProps describes the props for the DocumentCard component.
@@ -28,8 +28,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const CustomerManager: React.FC = () => {
 
-  const navigate = useNavigate();
-  const { customerId, projectId } = useParams<{ customerId: string; projectId: string }>();
+    const navigate = useNavigate();
 
   return (
     <div className="bg-white flex-row md:flex gap-4 items-center p-4 rounded-lg">
@@ -40,8 +39,7 @@ const CustomerManager: React.FC = () => {
         subtitle='Last Updated'
         height='330px'
         reports='12/nov/2023'
-        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' 
-        onClick={() => navigate(`/admin/records/customer/${customerId}/${projectId}/customermanager/dailyvolumes`)} />}
+        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' onClick={() => navigate('/admin/records/dailyvolumns')} />}
         backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard
@@ -51,8 +49,7 @@ const CustomerManager: React.FC = () => {
         subtitle='Last Updated'
         height='330px'
         reports='12/nov/2023'
-        reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4' 
-        onClick={() => navigate(`/admin/records/customer/${customerId}/${projectId}/customermanager/billings`)} />}
+        reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4' onClick={() => navigate('/admin/records/billinghistory')} />}
         backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard
@@ -62,8 +59,7 @@ const CustomerManager: React.FC = () => {
         subtitle=''
         height='330px'
         reportTitle='Complaints'
-        reportIcon={<img src={images.callmade} alt="callmade Icon3" className='w-4 h-4' 
-        onClick={() => navigate(`/admin/records/customer/${customerId}/${projectId}/customermanager/complaints`)} />}
+        reportIcon={<img src={images.callmade} alt="callmade Icon3" className='w-4 h-4' onClick={() => navigate('/admin/records/complaints')} />}
         backgroundColor='bg-[#EAEEF2]'
       />
     </div>

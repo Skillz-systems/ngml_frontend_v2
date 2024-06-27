@@ -26,21 +26,25 @@ interface TabsProps {
 const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabContent }) => {
   const [panelName, setPanelName] = useState<string>('');
   const navigate = useNavigate();
-  const { customerId, projectId, subPageId } = useParams<{ customerId: string; projectId: string; subPageId?: string }>();
+  const { customerId, projectId, tabId } = useParams<{ customerId: string; projectId: string; tabId?: string }>();
 
   useEffect(() => {
     if (tablist.length > 0 && !activeTab) {
-      const initialTab = tablist[0];
+      const initialTab = tablist.find(tab => tab.ref === tabId) || tablist[0];
       setPanelName(capitalizeFirstLetter(initialTab.name));
       setActiveTab(initialTab.ref);
-      navigate(`/admin/records/customer/${customerId}/${projectId}/${initialTab.ref}${subPageId ? `/${subPageId}` : ''}`);
     }
-  }, [tablist, activeTab, setActiveTab, navigate, customerId, projectId, subPageId]);
+  }, [tablist, activeTab, setActiveTab, tabId]);
+
+  useEffect(() => {
+    if (activeTab) {
+      navigate(`/admin/records/customer/${customerId}/${projectId}/${activeTab}`);
+    }
+  }, [activeTab, navigate, customerId, projectId]);
 
   const handleTabChange = (tab: TabListInterface): void => {
     setActiveTab(tab.ref);
     setPanelName(tab.name);
-    navigate(`/admin/records/customer/${customerId}/${projectId}/${tab.ref}${subPageId ? `/${subPageId}` : ''}`);
   };
 
   const handleDropdownChange = (event: SelectChangeEvent<string>): void => {
