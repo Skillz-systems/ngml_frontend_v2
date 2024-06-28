@@ -1,16 +1,16 @@
 import AdminCustomerList from '@/Pages/AdminCustomerList/AdminCustomerList';
 import AdminHomePage from '@/Pages/AdminHomePage/AdminHomePage';
+import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
+import Complaints from '@/Pages/Complaints/Complaints';
 import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
+import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
+import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 import RequestPage from '@/Pages/RequestPage/RequestPage';
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
-import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
-import Complaints from '@/Pages/Complaints/Complaints';
-import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
-import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 
 export const AdminRoutes = [
   {
@@ -27,7 +27,7 @@ export const AdminRoutes = [
   },
   {
     title: 'Admin Customer Page ',
-    path: '/admin/records/customer/:customerId/:projectId/:tabId?',
+    path: '/admin/records/customer/:customerId/:projectId/:tabId',
     component: AdminInternalLayout(CustomerPageLayout),
     exact: true
   },
