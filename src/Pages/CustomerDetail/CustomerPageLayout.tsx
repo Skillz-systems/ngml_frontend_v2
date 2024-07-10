@@ -22,7 +22,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         {
             name: 'overview',
             ref: 'overview',
-             // content: 'numeric',
+            // content: 'numeric',
             // icon: <img src={images.business} alt="logo" className='w-4 h-4' />,
             // content: 'icon',
         },
@@ -68,7 +68,7 @@ const AdminCustomerPageLayout: React.FC = () => {
             ref: 'agreement',
             // content: 'numeric'
         },
-       
+
         {
             name: 'connect project',
             ref: 'connectproject',
@@ -91,14 +91,14 @@ const AdminCustomerPageLayout: React.FC = () => {
         costanalysis: <CostAnalysis />,
         agreement: <Agreement />,
         connectproject: <ConnectProject />,
-        customermanager:<CustomerManager />,
+        customermanager: <CustomerManager />,
         // subdetail1: <p>tyfyufuyfifyt</p>,
         // subdetail2: <p>tyfyufuyfifyt</p>
     };
 
     return (
         <div className='flex justify-end gap-[6px]'>
-            <Link to={'/admin/records/customer'}>
+            <Link to={'/admin/records/customer/location'}>
                 <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
                     <ArrowBack color="success" style={{ fontSize: 'medium' }} />
                 </div>
