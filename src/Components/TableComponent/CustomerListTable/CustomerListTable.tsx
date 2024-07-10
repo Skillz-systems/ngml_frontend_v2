@@ -216,7 +216,8 @@ const CustomerListTable = () => {
                 const customerId = params.row.customerID;
                 const projectId = params.row.sn; // Adjust this based on your data structure
                 return (
-                    <NavigateButton to={`/admin/records/customer/location/${customerId}/${projectId}/overview`} />
+                    <NavigateButton to={`/admin/records/customer/location`} />
+                    // <NavigateButton to={`/admin/records/customer/location/${customerId}/${projectId}/overview`} />
                 );
             },
         },

@@ -13,6 +13,8 @@ import RequestPage from '@/Pages/RequestPage/RequestPage';
 import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
 import CustomerManager from '@/Pages/CustomerManager/CustomerManager';
 import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
+import CustomerPageDetails from '@/Pages/CustomerLayout/CustomerPageDetails';
+import AdminCustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
 
 export const AdminRoutes = [
   {
@@ -102,7 +104,7 @@ export const AdminRoutes = [
   {
     title: 'customer page',
     path: '/admin/records/customer/id',
-    component: AdminInternalLayout(CustomerManager),
+    component: AdminInternalLayout(AdminCustomerPageLayout),
     exact: true
   },
   
