@@ -24,25 +24,22 @@ const StaffLoginPage: React.FC = () => {
         passwordError: '',
     });
 
-
     useEffect(() => {
         if (isSuccess && data) {
             dispatch(setCredentials(data));
             navigate('/admin');
             toast.success('Login successful');
-            console.log('login successful')
+            console.log('login successful');
         } else if (isError) {
-            toast.error('invalid credentials');
+            toast.error('Invalid credentials');
             console.error('Login error:', error);
         }
     }, [isSuccess, isError, data, error, dispatch, navigate]);
-
 
     const handleChange = (key: string) => (value: string) => {
         setFormData({ ...formData, [key]: value });
         setErrors({ ...errors, [`${key}Error`]: '' });
     };
-
 
     const validateForm = () => {
         let valid = true;
@@ -73,6 +70,7 @@ const StaffLoginPage: React.FC = () => {
             }
         }
     };
+
     const handleForgotPassword = () => {
         console.log('Forgot Password clicked');
     };

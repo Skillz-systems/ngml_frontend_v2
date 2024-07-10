@@ -212,9 +212,13 @@ const CustomerListTable = () => {
             field: 'action',
             headerName: 'ACTION',
             flex: 1,
-            renderCell: () => (
-                <NavigateButton to="/admin/records/customer/location" />
-            ),
+            renderCell: (params: GridRenderCellParams) => {
+                const customerId = params.row.customerID;
+                const projectId = params.row.sn; // Adjust this based on your data structure
+                return (
+                    <NavigateButton to={`/admin/records/customer/location/${customerId}/${projectId}/overview`} />
+                );
+            },
         },
     ]
 

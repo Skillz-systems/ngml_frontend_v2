@@ -29,7 +29,7 @@ export const AdminRoutes = [
   },
   {
     title: 'Admin Customer Page ',
-    path: '/admin/records/customer/id',
+    path: '/admin/records/customer/:customerId/:projectId/:tabId',
     component: AdminInternalLayout(CustomerPageLayout),
     exact: true
   },
@@ -55,6 +55,12 @@ export const AdminRoutes = [
     title: 'Admin Supplier Registration',
     path: '/admin/records/supplier/id',
     component: AdminInternalLayout(SupplierOverviewLayout),
+    exact: true
+  },
+  {
+    title: 'Request page',
+    path: '/admin/records/requestpage',
+    component: AdminInternalLayout(RequestPage),
     exact: true
   },
   {
@@ -102,4 +108,11 @@ export const AdminRoutes = [
   
 
 ]
+  // {
+  //   title: 'customer page',
+  //   path: '/admin/records/customer/:tabId', // Ensure this path is updated
+  //   component: AdminInternalLayout(CustomerManager),
+  //   exact: true
+  // },
+
 
