@@ -51,7 +51,7 @@ export const AdminRoutes = [
   },
   {
     title: 'Admin Supplier Registration',
-    path: '/admin/records/supplier/id',
+    path: '/admin/records/supplier/:supplierId/:projectId/:tabId',
     component: AdminInternalLayout(SupplierOverviewLayout),
     exact: true
   },
