@@ -97,7 +97,7 @@ export const AdminRoutes = [
   },
   {
     title: 'customer Location',
-    path: '/admin/records/customer/location',
+    path: '/admin/records/customer/:customerId',
     component: AdminInternalLayout(CustomerLocation),
     exact: true
   },
