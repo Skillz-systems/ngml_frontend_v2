@@ -26,7 +26,7 @@ interface TabsProps {
 const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabContent }) => {
   const [panelName, setPanelName] = useState<string>('');
   const navigate = useNavigate();
-  const { customerId, projectId, tabId } = useParams<{ customerId: string; projectId: string; tabId?: string }>();
+  const { customerId, supplierId, projectId, tabId } = useParams<{ customerId: string; supplierId?: string; projectId: string; tabId?: string }>();
 
   useEffect(() => {
     if (tablist.length > 0 && !activeTab) {
@@ -38,9 +38,13 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
 
   useEffect(() => {
     if (activeTab) {
-      navigate(`/admin/records/customer/${customerId}/${projectId}/${activeTab}`);
+      if (customerId) {
+        navigate(`/admin/records/customer/${customerId}/${projectId}/${activeTab}`);
+      } else if (supplierId) {
+        navigate(`/admin/records/supplier/${supplierId}/${projectId}/${activeTab}`);
+      }
     }
-  }, [activeTab, navigate, customerId, projectId]);
+  }, [activeTab, navigate, customerId, supplierId, projectId]);
 
   const handleTabChange = (tab: TabListInterface): void => {
     setActiveTab(tab.ref);

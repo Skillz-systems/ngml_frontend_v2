@@ -198,9 +198,13 @@ const SuppliersListTable = () => {
             field: 'action',
             headerName: 'ACTION',
             flex: 1,
-            renderCell: () => (  
-                 <NavigateButton to="/admin/records/supplier/id" />   
-            ),
+            renderCell: (params: GridRenderCellParams) => {
+                const supplierId = params.row.sn;
+                const projectId = params.row.sn;
+                return (
+                    <NavigateButton to={`/admin/records/supplier/${supplierId}/${projectId}/overview`} />
+                );
+            },
         },
     ]
 
