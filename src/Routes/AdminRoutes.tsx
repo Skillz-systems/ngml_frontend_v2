@@ -11,9 +11,9 @@ import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
 import RequestPage from '@/Pages/RequestPage/RequestPage';
 import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
-import CustomerManager from '@/Pages/CustomerManager/CustomerManager';
+// import CustomerManager from '@/Pages/CustomerManager/CustomerManager';
 import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
-import CustomerPageDetails from '@/Pages/CustomerLayout/CustomerPageDetails';
+// import CustomerPageDetails from '@/Pages/CustomerLayout/CustomerPageDetails';
 import AdminCustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
 
 export const AdminRoutes = [
@@ -103,18 +103,13 @@ export const AdminRoutes = [
   },
   {
     title: 'customer page',
-    path: '/admin/records/customer/id',
+    path: '/admin/records/customer/:tabId',
     component: AdminInternalLayout(AdminCustomerPageLayout),
     exact: true
   },
   
 
 ]
-  // {
-  //   title: 'customer page',
-  //   path: '/admin/records/customer/:tabId', // Ensure this path is updated
-  //   component: AdminInternalLayout(CustomerManager),
-  //   exact: true
-  // },
+  
 
 

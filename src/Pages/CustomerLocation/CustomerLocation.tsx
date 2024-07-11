@@ -1,6 +1,6 @@
 import { Heading, StatisticCard } from '@/Components';
 import { CompanyAddressData } from '@/Data';
-import colors from '@/Utils/colors';
+// import colors from '@/Utils/colors';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const CustomerLocation: React.FC = () => {
     const navigate = useNavigate();
 
     const handleLocationClick = (id: number) => {
-        navigate(`/admin/records/customer/id`);
+        navigate(`/admin/records/customer/:tabId`);
     };
 
     return (
