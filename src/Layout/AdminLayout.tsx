@@ -40,7 +40,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ Component, ...otherProps }) =
             toggleNavigationBar={toggleNavigationBar}
           />
         </div>
-        <main className='bg-[#F5F7F9] p-[32px] mt-[20px] rounded-[8px] mr-[10px] w-[100%] h-[100%] overflow-y-auto'>
+        <main className='bg-[#F5F7F9] md:p-[32px] p-4 mt-[20px] rounded-[8px] mr-[10px] w-[100%] h-[100%] overflow-y-auto'>
           <Component {...otherProps} />
         </main>
       </div>

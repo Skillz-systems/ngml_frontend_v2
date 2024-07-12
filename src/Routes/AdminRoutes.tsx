@@ -4,13 +4,17 @@ import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
 import Complaints from '@/Pages/Complaints/Complaints';
 import CustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
-import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
 import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
-import RequestPage from '@/Pages/RequestPage/RequestPage';
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import AdminInternalLayout from '../Hoc/AdminInternalLayout';
+import RequestPage from '@/Pages/RequestPage/RequestPage';
+import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
+// import CustomerManager from '@/Pages/CustomerManager/CustomerManager';
+import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
+// import CustomerPageDetails from '@/Pages/CustomerLayout/CustomerPageDetails';
+import AdminCustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
 
 export const AdminRoutes = [
   {
@@ -85,11 +89,27 @@ export const AdminRoutes = [
     component: AdminInternalLayout(InvoicePage),
     exact: true
   },
-  // {
-  //   title: 'customer page',
-  //   path: '/admin/records/customer/:tabId', // Ensure this path is updated
-  //   component: AdminInternalLayout(CustomerManager),
-  //   exact: true
-  // },
-];
+  {
+    title: 'Request page',
+    path: '/admin/records/requestpage',
+    component: AdminInternalLayout(RequestPage),
+    exact: true
+  },
+  {
+    title: 'customer Location',
+    path: '/admin/records/customer/:customerId',
+    component: AdminInternalLayout(CustomerLocation),
+    exact: true
+  },
+  {
+    title: 'customer page',
+    path: '/admin/records/customer/:tabId',
+    component: AdminInternalLayout(AdminCustomerPageLayout),
+    exact: true
+  },
+  
+
+]
+  
+
 

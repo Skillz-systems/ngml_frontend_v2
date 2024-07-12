@@ -3265,3 +3265,36 @@ export const SupplierDashboardData = [
     },
 
 ]
+
+
+export const CompanyAddressData = [
+    {
+        id: 1,
+        name: 'Dangote Cement Factory',
+        address: 'Obajana, Kogi State, Nigeria',
+        primary: false,
+
+      },
+      {
+        id: 2,
+        name: 'Dangote Sugar Refinery',
+        address: 'Apapa, Lagos State, Nigeria',
+        primary: false,
+
+      },
+      {
+        id: 3,
+        name: 'Dangote Fertilizer Plant',
+        address: 'Lekki Free Trade Zone, Nigeria',
+        primary: false,
+
+      },
+      {
+        id: 4,
+        name: 'Dangote Cement Factory',
+        address: 'Obajana, Kogi State, Nigeria',
+        primary: false,
+
+      },
+      
+]

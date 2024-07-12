@@ -40,7 +40,7 @@ const AdminCustomerPageLayout: React.FC = () => {
 
   return (
     <div className='flex justify-end gap-[6px]'>
-      <Link to={'/admin/records/customer'}>
+      <Link to={'/admin/records/customer/:customerId'}>
         <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
           <ArrowBack color="success" style={{ fontSize: 'medium' }} />
         </div>

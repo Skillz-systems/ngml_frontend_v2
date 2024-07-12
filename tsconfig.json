@@ -32,7 +32,7 @@
 		/* Testing*/
 		"types": ["vitest/globals"]
 	},
-	"include": ["src/**/*", ".eslintrc.js"],
+	"include": ["src/**/*", ".eslintrc.js", "../type.ts"],
 	"exclude": ["node_modules", "build", "dist"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

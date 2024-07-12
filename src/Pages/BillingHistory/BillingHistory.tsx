@@ -196,7 +196,7 @@ const BillingHistory: React.FC = () => {
 
     return (
         <div className="">
-             <Link to={'/admin/records/customer/id'}>
+             <Link to={'/admin/records/customer/:tabId'}>
                 <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
                     <ArrowBack color="success" style={{ fontSize: 'medium' }} />
                 </div>
