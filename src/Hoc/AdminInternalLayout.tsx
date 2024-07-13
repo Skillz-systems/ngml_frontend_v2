@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import AdminLayout from '@/Layout/AdminLayout'
+
+import AdminLayout from '@/Layout/AdminLayout';
+import ProtectedRoute from './ProtectedRoute';
 
 /**
  * this is an HOC that renders the Admin Layout components of the application
@@ -11,8 +12,12 @@ import AdminLayout from '@/Layout/AdminLayout'
 
 const AdminInternalLayout = (Component: any) => (passThroughProps: any) => (
   <>
-    <AdminLayout {...passThroughProps} Component={Component} />
+    <ProtectedRoute
+      component={() => (
+        <AdminLayout {...passThroughProps} Component={Component} />
+      )}
+    />
   </>
-)
+);
 
-export default AdminInternalLayout
+export default AdminInternalLayout;

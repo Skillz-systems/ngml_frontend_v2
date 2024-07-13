@@ -1,5 +1,5 @@
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 interface TabInterface {
@@ -23,15 +23,26 @@ interface TabsProps {
   tabContent: { [key: string]: ReactNode };
 }
 
-const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabContent }) => {
-  const [panelName, setPanelName] = useState<string>('');
+const TabCustomer: FC<TabsProps> = ({
+  activeTab,
+  setActiveTab,
+  tablist,
+  tabContent,
+}) => {
+  // const [panelName, setPanelName] = useState<string>('');
+  // console.log(panelName);
   const navigate = useNavigate();
-  const { customerId, supplierId, projectId, tabId } = useParams<{ customerId: string; supplierId?: string; projectId: string; tabId?: string }>();
+  const { customerId, supplierId, projectId, tabId } = useParams<{
+    customerId: string;
+    supplierId?: string;
+    projectId: string;
+    tabId?: string;
+  }>();
 
   useEffect(() => {
     if (tablist.length > 0 && !activeTab) {
-      const initialTab = tablist.find(tab => tab.ref === tabId) || tablist[0];
-      setPanelName(capitalizeFirstLetter(initialTab.name));
+      const initialTab = tablist.find((tab) => tab.ref === tabId) || tablist[0];
+      // setPanelName(capitalizeFirstLetter(initialTab.name));
       setActiveTab(initialTab.ref);
     }
   }, [tablist, activeTab, setActiveTab, tabId]);
@@ -39,16 +50,20 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
   useEffect(() => {
     if (activeTab) {
       if (customerId) {
-        navigate(`/admin/records/customer/${customerId}/${projectId}/${activeTab}`);
+        navigate(
+          `/admin/records/customer/${customerId}/${projectId}/${activeTab}`,
+        );
       } else if (supplierId) {
-        navigate(`/admin/records/supplier/${supplierId}/${projectId}/${activeTab}`);
+        navigate(
+          `/admin/records/supplier/${supplierId}/${projectId}/${activeTab}`,
+        );
       }
     }
   }, [activeTab, navigate, customerId, supplierId, projectId]);
 
   const handleTabChange = (tab: TabListInterface): void => {
     setActiveTab(tab.ref);
-    setPanelName(tab.name);
+    // setPanelName(tab.name);
   };
 
   const handleDropdownChange = (event: SelectChangeEvent<string>): void => {
@@ -79,7 +94,7 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
           sx={{
             outline: 'none',
             '& .MuiOutlinedInput-notchedOutline': {
-              border: 'none'
+              border: 'none',
             },
           }}
         >
@@ -88,7 +103,11 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
               {capitalizeFirstLetter(tab.name)}
             </MenuItem>,
             ...(tab.sublist || []).map((sub) => (
-              <MenuItem key={sub.ref} value={sub.ref} style={{ marginLeft: '20px' }}>
+              <MenuItem
+                key={sub.ref}
+                value={sub.ref}
+                style={{ marginLeft: '20px' }}
+              >
                 - - {capitalizeFirstLetter(sub.name)}
               </MenuItem>
             )),
@@ -107,7 +126,11 @@ const TabCustomer: FC<TabsProps> = ({ activeTab, setActiveTab, tablist, tabConte
                 >
                   <div className="flex truncate text-neutral-600 font-medium text-base capitalize justify-start">
                     {tab.content === 'icon' && tab.icon}
-                    {tab.content === 'numeric' && <span className="mr-1 text-[12px]">{tablist.indexOf(tab) + 1}</span>}
+                    {tab.content === 'numeric' && (
+                      <span className="mr-1 text-[12px]">
+                        {tablist.indexOf(tab) + 1}
+                      </span>
+                    )}
                     <h4 className="truncate text-neutral-600 font-[500] text-[12px] mb-[2px] capitalize leading-relaxed ml-1">
                       {tab.name}
                     </h4>
