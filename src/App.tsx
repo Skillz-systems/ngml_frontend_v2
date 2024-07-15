@@ -6,6 +6,7 @@ import Unauthorized from './Unauthorized';
 import NotFound from './NotFound';
 
 
+
 function App(): JSX.Element {
 
   const authRoutes = routes.AuthRoutes.map(({ path, component: Component }) => (
