@@ -2,6 +2,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PrivateAdminRoute, routes } from './Routes/Index';
+import Unauthorized from './Unauthorized';
+import NotFound from './NotFound';
+
 
 function App(): JSX.Element {
 
@@ -15,7 +18,7 @@ function App(): JSX.Element {
         key={path}
         path={path}
         element={
-          <PrivateAdminRoute key={path} >
+          <PrivateAdminRoute key={path}>
             <Component />
           </PrivateAdminRoute>
         }
@@ -29,7 +32,7 @@ function App(): JSX.Element {
         key={path}
         path={path}
         element={
-          <PrivateAdminRoute key={path} >
+          <PrivateAdminRoute key={path}>
             <Component />
           </PrivateAdminRoute>
         }
@@ -43,7 +46,7 @@ function App(): JSX.Element {
         key={path}
         path={path}
         element={
-          <PrivateAdminRoute key={path} >
+          <PrivateAdminRoute key={path}>
             <Component />
           </PrivateAdminRoute>
         }
@@ -57,7 +60,7 @@ function App(): JSX.Element {
         key={path}
         path={path}
         element={
-          <PrivateAdminRoute key={path} >
+          <PrivateAdminRoute key={path}>
             <Component />
           </PrivateAdminRoute>
         }
@@ -75,6 +78,8 @@ function App(): JSX.Element {
           {ClientRoutes}
           {StaffRoutes}
           {SupplierRoutes}
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
