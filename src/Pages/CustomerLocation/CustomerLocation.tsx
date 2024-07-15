@@ -1,4 +1,4 @@
-import { Heading, StatisticCard } from '@/Components';
+import { Heading, LocationCard } from '@/Components';
 import { CompanyAddressData } from '@/Data';
 import { ArrowBack } from '@mui/icons-material';
 // import colors from '@/Utils/colors';
@@ -23,14 +23,14 @@ const CustomerLocation: React.FC = () => {
         <Heading color='primaryColor' className="font-bold text-gray-600 text-[23px]">COMPANY LOCATIONS</Heading>
       </div>
       <div className='h-fit w-[100%] rounded-[20px] px-6 ' >
-        <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+        <div className=" grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
           {CompanyAddressData.map((card, index) => (
             <div
               key={index}
               onClick={() => handleLocationClick(card.id)}
               className="cursor-pointer hover:shadow-lg rounded-[20px] transition-shadow duration-600 ease-in-out"
             >
-              <StatisticCard
+              <LocationCard
                 label={card.name}
                 value={card.address}
                 primary={card.primary}

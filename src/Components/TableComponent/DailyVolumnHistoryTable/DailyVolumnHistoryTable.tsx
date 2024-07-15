@@ -42,10 +42,10 @@ const DailyVolumnHistoryTable = () => {
     const [selectedYear, setSelectedYear] = useState<string>('');
 
 
-    
+
     useEffect(() => {
         filterData();
-    }, [ selectedMonth, selectedYear]);
+    }, [selectedMonth, selectedYear]);
 
 
 
@@ -146,7 +146,7 @@ const DailyVolumnHistoryTable = () => {
                             <SystemUpdateAlt style={{ color: '#49526A', fontSize: '16px' }} />
                         </div>
                         <div className='w-[32px] h-[32px] border border-[#CCD0DC] flex items-center justify-center rounded-[20px]'>
-                            <Print style={{ color: '#49526A' , fontSize: '16px'}} />
+                            <Print style={{ color: '#49526A', fontSize: '16px' }} />
                         </div>
                     </div>
                     <div className='flex gap-[10px]'>
@@ -203,7 +203,7 @@ const DailyVolumnHistoryTable = () => {
                         width: '100%',
                         background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
-                            outline: 'solid #00AF50 1px',
+                            outline: 'none',
                         },
                         '& .MuiDataGrid-columnHeaders': {
                             backgroundColor: '#F6FDEC',
