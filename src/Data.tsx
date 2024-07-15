@@ -3296,5 +3296,19 @@ export const CompanyAddressData = [
         primary: false,
 
       },
+      {
+        id: 5,
+        name: 'Dangote Fertilizer Plant',
+        address: 'Lekki Free Trade Zone, Nigeria',
+        primary: false,
+
+      },
+      {
+        id: 6,
+        name: 'Dangote Cement Factory',
+        address: 'Obajana, Kogi State, Nigeria',
+        primary: false,
+
+      },
       
 ]
