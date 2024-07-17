@@ -23,14 +23,15 @@ export { default as Notification } from './NotificationComponent/Notification';
 export { default as SearchResultComponent } from './SearchBarModalComponent/SearchResultComponent';
 export { default as SearchInput } from './Searchinput/SearchInput';
 export { default as StatisticDynamicCard } from './StatisticCardComponent/StatisticDynamicCard';
-export { default as StatisticDynamicCardTwo } from './StatisticDynamicCardTwo/StatisticDynamicCardTwo';
+// export { default as StatisticDynamicCardTwo } from './StatisticDynamicCardTwo/StatisticDynamicCardTwo';
 export { default as StatisticCard } from './Statisticccard/StatisticCard';
 export { default as StatisticRectangleCard } from './Statisticrectanclecard/StatisticRectangleCard';
-export { default as TabLayout } from './CustomerTabs/TabLayout';
-export { default as TabCustomer } from './CustomerTabs/TabCustomer';
+// export { default as TabLayout } from './CustomerTabs/TabLayout';
+// export { default as TabCustomer } from './CustomerTabs/TabCustomer';
 export { default as StatisticDynamicCardTwo } from './StatisticDynamicCardTwo/StatisticDynamicCardTwo';
-export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTemplate';
+// export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTemplate';
 export { default as LocationCard } from './LocationCard/LocationCard';
+export { default as DateCardDetails } from './DateCardDetails/DateCardDetails'
 
 
 // export { default as SuppliersPage } from './SuppliersPage/SuppliersPage'

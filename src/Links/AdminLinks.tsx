@@ -28,8 +28,8 @@ export const AdminLinks = [
       { id: 2, name: 'Customers', to: '/admin/records/customer', icon: images.Customericon, type: 'primary' },
       { id: 3, name: 'Request', to: '/admin/records/requestpage', icon: images.Requesticon, type: 'primary' },
       { id: 4, name: 'Site Visits', to: '/admin/records/sitevisit', icon: images.Sitevisiteicon, type: 'primary' },
-      { id: 5, name: 'Connect Projects', to: '', icon: images.Invoiceicon, type: 'primary' },
-      { id: 6, name: 'Bids', to: '', icon: images.Bidicon, type: 'primary' }
+      { id: 5, name: 'Connect Projects', to: '/admin/records/connectprojectpage', icon: images.Invoiceicon, type: 'primary' },
+      { id: 6, name: 'Bids', to: '/admin/records/bidspage', icon: images.Bidicon, type: 'primary' }
 
 
     ]

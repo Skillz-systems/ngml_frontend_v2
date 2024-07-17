@@ -4,14 +4,14 @@ import { DateCardDetails, SiteVistTable, Heading, Button, Notification } from '.
 import images from '../../assets/index';
 import { CalendarTodayOutlined } from '@mui/icons-material';
 
-const SiteVisitePage: React.FC = () => {
+const ConnectProjectPage: React.FC = () => {
     const [selectedCard, setSelectedCard] = useState<number | null>(0);
 
     const dateCards = [
-        { type: 'withoutCompany' as const, day: '19', month: 'Dec', year: '2023', icon1: <img src={images.Businessicon} alt="icon1" />, icon2: <img src={images.zone} alt="icon2" />, company: 'Dangote Cement LTD', distance: '1 Alfred Riwane Rd, Ikoyi 106104, Lagos' },
-        { type: 'withoutCompany' as const, day: '09', month: 'Dec', year: '2023', icon1: <img src={images.Businessicon} alt="icon2" />, icon2: <img src={images.zone} alt="icon3" />, company: 'Dangote Cement LTD', distance: '1 Alfred Riwane Rd, Ikoyi 106104, Lagos' },
-        { type: 'withoutCompany' as const, day: '11', month: 'Dec', year: '2023', icon1: <img src={images.Businessicon} alt="icon3" />, icon2: <img src={images.zone} alt="icon4" />, company: 'Dangote Cement LTD', distance: '1 Alfred Riwane Rd, Ikoyi 106104, Lagos' },
-        { type: 'withoutCompany' as const, day: '13', month: 'Dec', year: '2023', icon1: <img src={images.Businessicon} alt="icon4" />, icon2: <img src={images.zone} alt="icon5" />, company: 'Dangote Cement LTD', distance: '1 Alfred Riwane Rd, Ikoyi 106104, Lagos' }
+        { type: 'withCompany' as const, day: '19', month: 'Dec', year: '2023', to: 'to', dateRange: '01/Dec/2024', icon1: <img src={images.Businessicon} alt="icon1" />, icon2: <img src={images.petrol} alt="icon2" />, company: 'Dangote Cement LTD', distance: '112 KM', text: 'Contract Awarded to', contractor: 'Julius Berger Nigeria LTD' },
+        { type: 'withCompany' as const, day: '09', month: 'Dec', year: '2023', to: 'to', dateRange: '01/Dec/2024', icon1: <img src={images.Businessicon} alt="icon1" />, icon2: <img src={images.petrol} alt="icon2" />, company: 'Dangote Cement LTD', distance: '112 KM', text: 'Contract Awarded to', contractor: 'Julius Berger Nigeria LTD' },
+        { type: 'withCompany' as const, day: '11', month: 'Dec', year: '2023', to: 'to', dateRange: '01/Dec/2024', icon1: <img src={images.Businessicon} alt="icon1" />, icon2: <img src={images.petrol} alt="icon2" />, company: 'Dangote Cement LTD', distance: '112 KM', text: 'Contract Awarded to', contractor: 'Julius Berger Nigeria LTD' },
+        { type: 'withCompany' as const, day: '13', month: 'Dec', year: '2023', to: 'to', dateRange: '01/Dec/2024', icon1: <img src={images.Businessicon} alt="icon1" />, icon2: <img src={images.petrol} alt="icon2" />, company: 'Dangote Cement LTD', distance: '112 KM', text: 'Contract Awarded to', contractor: 'Julius Berger Nigeria LTD' }
     ];
 
     const handleCardClick = (index: number) => {
@@ -20,9 +20,9 @@ const SiteVisitePage: React.FC = () => {
 
     return (
         <div>
-            <Heading as="h4" size="h4" color='primaryColor' className="font-bold text-gray-600">SITE VISITS</Heading>
+            <Heading as="h4" size="h4" color='primaryColor' className="font-bold text-gray-600">CONNECT PROJECTS</Heading>
             <div className='flex flex-col md:flex-row items-center justify-between mt-6 '>
-                    <Heading as="h6" size="h6" color='primaryColor' className="font-semibold text-gray-600">Upcoming Site Visits</Heading>
+                    <Heading as="h6" size="h6" color='primaryColor' className="font-semibold text-gray-600">Upcoming Projects</Heading>
                     <div className='flex gap-[16px]'>
                     <Notification
                     count={4}
@@ -57,4 +57,4 @@ const SiteVisitePage: React.FC = () => {
     );
 };
 
-export default SiteVisitePage;
+export default ConnectProjectPage;
