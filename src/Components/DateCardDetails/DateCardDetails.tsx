@@ -2,7 +2,7 @@ import React from 'react';
 
 interface DateCardDetailsProps {
     type: 'withCompany' | 'withoutCompany';
-    day?: number | string ;
+    day?: number | string;
     to?: string;
     month?: string;
     year?: string;
@@ -16,6 +16,7 @@ interface DateCardDetailsProps {
     width?: number | string;
     height?: number | string;
     backgroundColor?: string;
+    textColor?: string;
 }
 
 const DateCardDetails: React.FC<DateCardDetailsProps> = ({
@@ -33,18 +34,19 @@ const DateCardDetails: React.FC<DateCardDetailsProps> = ({
     icon2,
     width = '100%',
     height = '100%',
-    backgroundColor = ''
+    backgroundColor = '',
+    textColor
 }) => {
     return (
-        <div className={`w-full border-2 p-4 rounded-[20px] ${backgroundColor}`} style={{ width, height }}>
+        <div className={`w-full border border-1 p-4 rounded-[20px] ${backgroundColor}`} style={{ width, height }}>
             {type === 'withCompany' ? (
                 <div className='space-y-6'>
                     <div className='w-full'>
-                        <div className='text-[40px] font-bold text-[#004010]'>{day}</div>
-                        <div className='mt-[-12px] font-bold text-[20px] text-[#226844]'>{month} {year}</div>
+                        <div className='text-[50px] font-bold text-[#226844]'>{day}</div>
+                        <div className='mt-[-15px] font-bold text-[25px] text-[#226844]'>{month} {year}</div>
                         <div className='flex gap-2'>
                             <div className='mt-1'>{to}</div>
-                            <span className='border-2 rounded-[20px] px-2 border-[#00af50]'>{dateRange}</span>
+                            <span className='border border-1 rounded-[20px] px-2 border-[#226844]'>{dateRange}</span>
                         </div>
                     </div>
 
@@ -64,10 +66,10 @@ const DateCardDetails: React.FC<DateCardDetailsProps> = ({
                     </div>
                 </div>
             ) : (
-                <div className='space-y-[125px]'>
+                <div className='space-y-[100px]'>
                     <div className='w-full '>
-                        <div className='text-[40px] font-bold'>{day}</div>
-                        <div className='mt-[-12px] font-bold text-[20px]'>{month} {year}</div>
+                        <div className={`text-[50px] font-bold ${textColor}`}>{day}</div>
+                        <div className={`mt-[-12px] font-bold text-[25px] ${textColor}`}>{month} {year}</div>
                     </div>
 
                     <div className='space-y-2'>

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, CustomInput, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const AdminCustomerList: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,15 +14,34 @@ const AdminCustomerList: React.FC = () => {
         phoneNumber: ''
     });
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
+    const toggleModal = (open: boolean) => {
+        setIsModalOpen(open);
+        const searchParams = new URLSearchParams(location.search);
+
+        if (open) {
+            searchParams.set('createCustomer', 'true');
+        } else {
+            searchParams.delete('createCustomer');
+        }
+
+        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
     };
+
     const handleInputChange = (value: string, key: string) => {
-        console.log(value)
         setCustomerData({ ...customerData, [key]: value });
     };
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const createCustomer = searchParams.get('createCustomer');
+
+        if (createCustomer === 'true') {
+            setIsModalOpen(true);
+        }
+    }, [location.search]);
 
     const handleCreateCustomer = () => {
         if (customerData.name.trim() === '' || customerData.email.trim() === '') {
@@ -30,10 +49,9 @@ const AdminCustomerList: React.FC = () => {
             return;
         }
         console.log('Creating customer:', customerData);
-        toggleModal();
+        toggleModal(false);
         alert('Customer successfully registered!');
         window.location.href = '/admin/records/customernewregistration';
-        // navigate('/admin/records/newcustomer/id');
     };
 
     const options = ['Option 1', 'Option 2', 'Option 3'];
@@ -49,7 +67,7 @@ const AdminCustomerList: React.FC = () => {
                         radius='20px'
                         width='150px'
                         height='30px'
-                        action={toggleModal}
+                        action={() => toggleModal(true)}
                     />
                 </div>
                 <div className='flex flex-col md:flex-row items-center gap-4 mt-6 ' >
@@ -79,7 +97,7 @@ const AdminCustomerList: React.FC = () => {
             </div>
             <Modal
                 isOpen={isModalOpen}
-                onClose={toggleModal}
+                onClose={() => toggleModal(false)}
                 size='medium'
                 title='Create New Customer'
                 subTitle='Only Use this Method if the Customer is an already Existing Customer of the NGML'
@@ -89,7 +107,7 @@ const AdminCustomerList: React.FC = () => {
                             <Button
                                 type="outline"
                                 label="Cancel"
-                                action={toggleModal}
+                                action={() => toggleModal(false)}
                                 color="#FFFFFF"
                                 fontStyle="italic"
                                 width="100%"

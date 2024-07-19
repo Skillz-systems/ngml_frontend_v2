@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, DocumentCard, Modal } from '../../Components/index';
 import images from '../../assets/index';
 import EditDdqPage from './EditDdqPage';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const DdqPage: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -31,6 +32,8 @@ const DdqPage: React.FC = () => {
         jointVenture: ''
     });
 
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const totalPages = 5;
 
@@ -48,18 +51,36 @@ const DdqPage: React.FC = () => {
         goToPage(currentPage + 1);
     };
 
-    const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
+    const toggleModal = (open: boolean) => {
+        setIsModalOpen(open);
+        const searchParams = new URLSearchParams(location.search);
+
+        if (open) {
+            searchParams.set('editDdq', 'true');
+        } else {
+            searchParams.delete('editDdq');
+        }
+
+        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
     };
 
     const handleEditButtonClick = () => {
-        setIsModalOpen(!isModalOpen);
+        toggleModal(true);
     };
 
     const handlesaveAndContinue = () => {
         console.log('Creating company data:', companyData);
-        toggleModal();
+        toggleModal(false);
     };
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const editDdq = searchParams.get('editDdq');
+
+        if (editDdq === 'true') {
+            setIsModalOpen(true);
+        }
+    }, [location.search]);
 
     return (
         <div className='bg-[#FFFFFF] p-4 rounded-xl'>
@@ -142,7 +163,7 @@ const DdqPage: React.FC = () => {
                 </div>
                 <Modal
                     isOpen={isModalOpen}
-                    onClose={handleEditButtonClick}
+                    onClose={() => toggleModal(false)}
                     title="OWNERSHIP AND MANAGEMENT"
                     buttons={[
                         <div className='flex gap-2 mb-[-10px]'>
@@ -150,7 +171,7 @@ const DdqPage: React.FC = () => {
                                 <Button
                                     type="outline"
                                     label="Save and Close"
-                                    action={toggleModal}
+                                    action={() => toggleModal(false)}
                                     color="#FFFFFF"
                                     fontStyle="italic"
                                     width="100%"

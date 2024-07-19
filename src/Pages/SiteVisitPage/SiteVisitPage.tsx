@@ -46,6 +46,7 @@ const SiteVisitePage: React.FC = () => {
                         <DateCardDetails
                             {...card}
                             backgroundColor={selectedCard === index ? 'bg-[#D2F69E]' : ''}
+                            textColor={selectedCard === index ? 'text-[#226844]' : ''}
                         />
                     </div>
                 ))}

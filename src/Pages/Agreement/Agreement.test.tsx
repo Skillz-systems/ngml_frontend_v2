@@ -1,16 +1,25 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Agreement from './Agreement';
 
 describe('Agreement Component', () => {
+    const renderComponent = () => {
+        render(
+            <MemoryRouter>
+                <Agreement />
+            </MemoryRouter>
+        );
+    };
+
     it('renders the Agreement component without crashing', () => {
-        render(<Agreement />);
+        renderComponent();
 
         const heading = screen.getByText('AGREEMENT TEMPLATES');
         expect(heading).toBeInTheDocument();
     });
 
     it('displays the correct number of DocumentCardTwo elements', () => {
-        render(<Agreement />);
+        renderComponent();
 
         const titles = ['GSPA', 'Supplement', 'Addendum', 'Side', 'Approval'];
         titles.forEach((title) => {
@@ -23,14 +32,14 @@ describe('Agreement Component', () => {
     });
 
     it('displays the correct number of DocumentCard elements', () => {
-        render(<Agreement />);
+        renderComponent();
 
         const card = screen.getByText('Dangote Cement');
         expect(card).toBeInTheDocument();
     });
 
     it('renders content in DocumentCardTwo elements', () => {
-        render(<Agreement />);
+        renderComponent();
 
         const firstCardTitle = screen.getByText('GSPA');
 

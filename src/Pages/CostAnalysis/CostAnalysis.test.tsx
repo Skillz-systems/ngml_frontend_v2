@@ -1,16 +1,21 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import CostAnalysis from './CostAnalysis';
 
 describe('CostAnalysis Component', () => {
+    const renderWithRouter = (component: React.ReactElement) => {
+        return render(<Router>{component}</Router>);
+    };
+
     test('renders the main container and document section', () => {
-        render(<CostAnalysis />);
+        renderWithRouter(<CostAnalysis />);
 
         const documentSection = screen.getByText(/documents/i);
         expect(documentSection).toBeInTheDocument();
     });
 
     test('renders upload and create buttons', () => {
-        render(<CostAnalysis />);
+        renderWithRouter(<CostAnalysis />);
 
         const uploadButton = screen.getByText(/upload capex/i);
         expect(uploadButton).toBeInTheDocument();
@@ -20,7 +25,7 @@ describe('CostAnalysis Component', () => {
     });
 
     test('renders a DocumentCard with the correct content', () => {
-        render(<CostAnalysis />);
+        renderWithRouter(<CostAnalysis />);
 
         // Check for the document card with the expected content
         const documentTitle = screen.getByText(/dangote cement/i);

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CalendarTodayOutlined, FilterOutlined } from '@mui/icons-material';
-import React, { useState } from 'react';
-import { BidsTable, Button, Heading, Notification, StatisticRectangleCard } from '../../Components/index';
+import { FilterOutlined } from '@mui/icons-material';
+import React from 'react';
+import { BidsTable, Heading, Notification, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
 
 const BidPage: React.FC = () => {
