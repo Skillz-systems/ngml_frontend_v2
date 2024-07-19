@@ -3,6 +3,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PrivateAdminRoute, routes } from './Routes/Index';
 
+
+
 function App(): JSX.Element {
 
   const authRoutes = routes.AuthRoutes.map(({ path, component: Component }) => (
@@ -15,7 +17,7 @@ function App(): JSX.Element {
         key={path}
         path={path}
         element={
-          <PrivateAdminRoute key={path} >
+          <PrivateAdminRoute key={path}>
             <Component />
           </PrivateAdminRoute>
         }
@@ -29,7 +31,7 @@ function App(): JSX.Element {
         key={path}
         path={path}
         element={
-          <PrivateAdminRoute key={path} >
+          <PrivateAdminRoute key={path}>
             <Component />
           </PrivateAdminRoute>
         }
@@ -43,7 +45,7 @@ function App(): JSX.Element {
         key={path}
         path={path}
         element={
-          <PrivateAdminRoute key={path} >
+          <PrivateAdminRoute key={path}>
             <Component />
           </PrivateAdminRoute>
         }
@@ -57,7 +59,7 @@ function App(): JSX.Element {
         key={path}
         path={path}
         element={
-          <PrivateAdminRoute key={path} >
+          <PrivateAdminRoute key={path}>
             <Component />
           </PrivateAdminRoute>
         }
@@ -75,6 +77,7 @@ function App(): JSX.Element {
           {ClientRoutes}
           {StaffRoutes}
           {SupplierRoutes}
+    
         </Routes>
       </BrowserRouter>
     </div>
