@@ -83,7 +83,7 @@ const CustomerLocation: React.FC = () => {
             <div className='w-[260px]'>
               <Button
                 type="secondary"
-                label="Confirm"
+                label="Save"
                 action={handleCreatelocation}
                 color="#FFFFFF"
                 fontStyle="italic"
