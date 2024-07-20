@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import type { RootState } from './store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: '/api',
+  baseUrl: import.meta.env.VITE_API_BASE_URL ?? 'https://api.ngml.skillzserver.com',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.jwt;
     if (token) {
