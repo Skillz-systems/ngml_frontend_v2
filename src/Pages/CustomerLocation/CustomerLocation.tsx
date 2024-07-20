@@ -1,9 +1,9 @@
-import { Button, CustomInput, Heading, LocationCard, Modal } from '@/Components';
+import { Button, Heading, LocationCard, Modal } from '@/Components';
 import { CompanyAddressData } from '@/Data';
 import { ArrowBack } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AddNewLocation from '../AddNewLocation/AddNewLocation';
+import AddNewLocationModal from './AddNewLocationModal';
 
 const CustomerLocation: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -95,7 +95,7 @@ const CustomerLocation: React.FC = () => {
           </div>
         ]}
       >
-        <AddNewLocation
+        <AddNewLocationModal
           companyData={companyData}
           setCompanyData={setCompanyData}
         />
