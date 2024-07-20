@@ -30,7 +30,7 @@ const AdminHomePage = () => {
   const currentUser = useAppSelector(selectCurrentUser);
   const userId = Number(currentUser?.id)
 
-  const { data, error, isLoading, isError, isSuccess } = useTasksQuery({ userId });
+  const { data, error, isError, isSuccess } = useTasksQuery({ userId });
 
   const handleSortChange = (sortType: 'year' | 'value', value: string) => {
     setSortDetails({ sortType, value });
