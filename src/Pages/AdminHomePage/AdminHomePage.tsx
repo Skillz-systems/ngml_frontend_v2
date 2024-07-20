@@ -1,4 +1,5 @@
 
+import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
   ArrowOutwardOutlined,
   FileDownloadDoneOutlined,
@@ -6,9 +7,9 @@ import {
 } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
-import images from '../../assets/index';
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
+import images from '../../assets/index';
 
 interface SelectOption {
   label: string;
@@ -27,6 +28,9 @@ interface DynamicCardDataItem {
 const AdminHomePage = () => {
   const [, setSortDetails] = useState({ sortType: '', value: '' });
   const currentUser = useAppSelector(selectCurrentUser);
+  const userId = Number(currentUser?.id)
+
+  const { data, error, isLoading, isError, isSuccess } = useTasksQuery({ userId });
 
   const handleSortChange = (sortType: 'year' | 'value', value: string) => {
     setSortDetails({ sortType, value });
@@ -160,6 +164,21 @@ const AdminHomePage = () => {
     },
   ];
 
+  if (isError) {
+    console.log('error', error)
+    console.log('error', isError)
+  }
+
+  if (isSuccess) {
+    console.log('tasks', data)
+  }
+
+
+
+  // console.log('tasks', error)
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="h-fit w-full" >

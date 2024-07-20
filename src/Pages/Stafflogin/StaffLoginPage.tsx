@@ -23,6 +23,7 @@ const StaffLoginPage: React.FC = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    scope: 'user'
   });
 
   const [errors, setErrors] = useState({
@@ -36,9 +37,6 @@ const StaffLoginPage: React.FC = () => {
       navigate('/admin');
       toast.success('Login successful');
       console.log('login successful');
-    } else if (isError) {
-      toast.error('Invalid credentials');
-      console.error('Login error:', error);
     }
   }, [isSuccess, isError, data, error, dispatch, navigate]);
 
@@ -83,7 +81,7 @@ const StaffLoginPage: React.FC = () => {
 
   const handleNewSignIn = () => {
     console.log('New Sign In clicked');
-    setFormData({ email: '', password: '' });
+    setFormData({ email: '', password: '', scope: 'user' });
   };
 
   return (

@@ -5,6 +5,7 @@ import { api } from '../../api';
 type LoginRequest = {
   email: string;
   password: string;
+  scope:string;
 };
 
 type RegisterRequest = {
@@ -33,14 +34,14 @@ export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (credentials: LoginRequest) => ({
-        url: "/users/api/login",
-        method: "POST",
+        url: '/users/api/login',
+        method: 'POST',
         body: credentials,
       }),
 
       transformResponse: (response: AuthResponse | ErrorResponse) => {
         console.log(response);
-        if ("error" in response) {
+        if ('error' in response) {
           throw new Error(response.error);
         }
         return response;
@@ -53,19 +54,19 @@ export const authApi = api.injectEndpoints({
     }),
     register: builder.mutation<AuthResponse, RegisterRequest>({
       query: (credentials: RegisterRequest) => ({
-        url: "/users/api/register",
-        method: "POST",
+        url: '/users/api/register',
+        method: 'POST',
         body: credentials,
       }),
       transformResponse: (response: {
         jwt: string;
-        user: AuthResponse["user"];
+        user: AuthResponse['user'];
       }) => response,
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
-        url: "/users/api/logout",
-        method: "POST",
+        url: '/users/api/logout',
+        method: 'POST',
       }),
     }),
   }),
