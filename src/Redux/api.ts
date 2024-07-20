@@ -85,10 +85,11 @@ import {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
 import { toast } from 'react-toastify';
+import { getBaseUrl } from '../Utils/apiConfig';
 import type { RootState } from './store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: '/api',
+  baseUrl: getBaseUrl(),
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.jwt;
     if (token) {
