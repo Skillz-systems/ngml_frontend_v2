@@ -39,7 +39,7 @@ const CustomerLocation: React.FC = () => {
           <Heading color='primaryColor' className="font-bold text-gray-600 text-[23px]">COMPANY LOCATIONS</Heading>
         </div>
         <div onClick={toggleModal} >
-          <button className='border mr-7 bg-[#53B052] text-white hover:bg-[#265929] text-[16px] text-gray-600 h-[44px] w-[180px] rounded-[6px]'>Add New Location</button>
+          <button className='border mr-7 bg-[#53B052] text-white hover:bg-[#265929] text-[16px] h-[44px] w-[180px] rounded-[6px]'>Add New Location</button>
         </div>
       </div>
       <div className='h-fit w-[100%] rounded-[20px] px-6 ' >
