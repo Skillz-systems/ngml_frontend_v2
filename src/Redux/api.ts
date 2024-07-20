@@ -100,7 +100,7 @@ const baseQuery = fetchBaseQuery({
     }
     return headers;
   },
-  credentials: 'include',
+  credentials: import.meta.env.DEV ?'include':'omit',
 });
 
 const baseQueryWithReauth = async (
