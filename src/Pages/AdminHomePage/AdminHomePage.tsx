@@ -175,10 +175,6 @@ const AdminHomePage = () => {
 
 
 
-  // console.log('tasks', error)
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="h-fit w-full" >
