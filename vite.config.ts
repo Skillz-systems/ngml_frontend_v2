@@ -13,26 +13,65 @@ import { defineConfig } from 'vite';
  * The configuration includes plugins for React, test settings, and resolve aliases.
  */
 
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: resolve(__dirname, './src/TestSetup.ts'),
-    css: true,
-  },
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
+// export default defineConfig({
+//   plugins: [react()],
+//   test: {
+//     globals: true,
+//     environment: 'jsdom',
+//     setupFiles: resolve(__dirname, './src/TestSetup.ts'),
+//     css: true,
+//   },
+//   resolve: {
+//     alias: {
+//       '@': resolve(__dirname, 'src'),
+//     },
+//   },
+//   server: {
+//     proxy: {
+//       '/api': {
+//         target: 'https://api.ngml.skillzserver.com',
+//         changeOrigin: true,
+//         rewrite: (path) => path.replace(/^\/api/, '')
+//       }
+//     }
+//   }
+// });
+
+
+
+
+// import { defineConfig } from 'vite';
+// import react from '@vitejs/plugin-react';
+
+export default defineConfig(({ command }) => {
+  const baseConfig = {
+    plugins: [react()],
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: resolve(__dirname, './src/TestSetup.ts'),
+      css: true,
     },
-  },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://api.ngml.skillzserver.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
+      },
+    },
+  };
+
+  if (command === 'serve') {
+    return {
+      ...baseConfig,
+      server: {
+        proxy: {
+          '/api': {
+            target: 'https://api.ngml.skillzserver.com',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, '')
+          }
+        }
       }
-    }
+    };
   }
+  return baseConfig;
 });
