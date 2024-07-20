@@ -15,6 +15,9 @@ import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
 import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
 // import CustomerPageDetails from '@/Pages/CustomerLayout/CustomerPageDetails';
 import AdminCustomerPageLayout from '@/Pages/CustomerDetail/CustomerPageLayout';
+import SiteVisitPage from '@/Pages/SiteVisitPage/SiteVisitPage';
+import ConnectProjectPage from '@/Pages/ConnectProjectPage/ConnectProjectPage';
+import BidPage from '@/Pages/BidPage/BidPage';
 
 export const AdminRoutes = [
   {
@@ -105,6 +108,24 @@ export const AdminRoutes = [
     title: 'customer page',
     path: '/admin/records/customer/:tabId',
     component: AdminInternalLayout(AdminCustomerPageLayout),
+    exact: true
+  },
+  {
+    title: 'Site Visit Page',
+    path: '/admin/records/sitevisit',
+    component: AdminInternalLayout(SiteVisitPage),
+    exact: true
+  },
+  {
+    title: 'Connect Project Page',
+    path: '/admin/records/connectprojectpage',
+    component: AdminInternalLayout(ConnectProjectPage),
+    exact: true
+  },
+  {
+    title: 'Bids Page',
+    path: '/admin/records/bidspage',
+    component: AdminInternalLayout(BidPage),
     exact: true
   },
   
