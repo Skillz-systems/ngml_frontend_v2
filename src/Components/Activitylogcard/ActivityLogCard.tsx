@@ -6,7 +6,7 @@ import React from 'react';
  * @param {object} props - The props for the ActivityLogCard component.
  * @param {string} props.title - The title of the activity log.
  * @param {string} props.text - The text content of the activity log.
- * @param {Date} props.dateTime - The date and time of the activity log.
+ * @param {Date} [props.dateTime] - The date and time of the activity log (optional).
  * @param {React.ReactNode} [props.button] - JSX element for an optional button (optional).
  * @returns {JSX.Element} - The JSX element representing the ActivityLogCard component.
  */
@@ -14,31 +14,38 @@ import React from 'react';
 interface ActivityLogCardProps {
   title?: string;
   text?: string;
-  // dateTime: Date;
+  dateTime?: Date;
   button?: React.ReactNode;
 }
 
-const ActivityLogCard: React.FC<ActivityLogCardProps> = ({ 
+const ActivityLogCard: React.FC<ActivityLogCardProps> = ({
   title,
-   text, 
-  //  dateTime,
-    button }) => {
-
-  // const formattedDateTime = format(dateTime, 'dd MMM; hh:mma').toUpperCase();
+  text,
+  dateTime,
+  button
+}) => {
+  const formattedDateTime = dateTime ? format(dateTime, 'dd MMM; hh:mma').toUpperCase() : null;
 
   return (
     <div className='w-[100%] h-[100%] mt-[10px] cursor-pointer'>
-      <div className={`bg-white w-[100%] h-[100%]  border border-[#E2E4EB] rounded-[8px] ${button ? 'p-12 mb-4 relative' : 'p-2 mb-4 relative'} `} >
-        <div className="flex justify-between mb-[3px]" >
-          {button ?
+      <div className={`bg-white w-[100%] h-[100%] border border-[#E2E4EB] rounded-[8px] ${button ? 'p-12 mb-4 relative' : 'p-2 mb-4 relative'}`}>
+        <div className="flex justify-between mb-[3px]">
+          {button ? (
             <div className="bg-customGreen text-gray-800 font-[400] mt-[-35px] ml-[-30px] rounded px-2 py-1">{text}</div>
-            :
-            <div className="bg-[#81da05] text-[#49526A] text-[12px] p-[3px] rounded-[6px] font-[700]">{text}</div>}
-          {/* {button ? <div className="text-[#828DA9] text-[13px] mt-[-40px] mr-[-40px]">{formattedDateTime}</div> */}
-            {/* : <div className="text-[#828DA9] text-[10px] font-[500]">{formattedDateTime}</div>} */}
+          ) : (
+            <div className="bg-[#81da05] text-[#49526A] text-[12px] p-[3px] rounded-[6px] font-[700]">{text}</div>
+          )}
+          {formattedDateTime && (
+            <div className={button ? "text-[#828DA9] text-[13px] mt-[-40px] mr-[-40px]" : "text-[#828DA9] text-[10px] font-[500]"}>
+              {formattedDateTime}
+            </div>
+          )}
         </div>
-        {button ? <div className="text-gray-800 mt-[-10px] ml-[-30px] ">{title}</div>
-          : <div className="text-[#49526A] text-[14px] font-[500]">{title}</div>}
+        {button ? (
+          <div className="text-gray-800 mt-[-10px] ml-[-30px]">{title}</div>
+        ) : (
+          <div className="text-[#49526A] text-[14px] font-[500]">{title}</div>
+        )}
         {button && (
           <div className="absolute bottom-2 right-2">
             {button}
