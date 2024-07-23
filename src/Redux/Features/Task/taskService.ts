@@ -2,6 +2,7 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
 
 type Task = {
+  description: string | undefined;
   id: number;
   user_id: number;
   title: string;

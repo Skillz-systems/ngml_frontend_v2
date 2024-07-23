@@ -10,7 +10,8 @@ import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynam
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
-import { aC } from 'vitest/dist/reporters-1evA5lom';
+// import { aC } from 'vitest/dist/reporters-1evA5lom';
+
 
 interface SelectOption {
   label: string;
@@ -25,6 +26,7 @@ interface DynamicCardDataItem {
   yearOptions: Array<number>;
   valueOptions: Array<SelectOption>;
 }
+
 
 const AdminHomePage = () => {
   const [, setSortDetails] = useState({ sortType: '', value: '' });
@@ -221,7 +223,8 @@ const AdminHomePage = () => {
                   <ActivityLogCard
                     key={index}
                     title={activity.title}
-                    text={activity.description}
+                    text={activity.text}
+                    start_time={activity.start_time}
                   />
                 );
               })}
