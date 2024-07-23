@@ -59,7 +59,7 @@ const ActivityLogCardContainerWithButton: React.FC<ActivityLogCardContainerProps
                         key={index}
                         title={activity.title}
                         text={activity.text}
-                        dateTime={activity.dateTime}
+                        start_time={activity.dateTime}
                         button={<button className="bg-green-600 hover:bg-gray-100 text-white font-bold py-1 px-8 rounded-[30px]">View Request</button>}
                     />
                 ))}

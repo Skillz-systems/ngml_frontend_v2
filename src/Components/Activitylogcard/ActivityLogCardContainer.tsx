@@ -59,7 +59,7 @@ const ActivityLogCardContainer: React.FC<ActivityLogCardContainerProps> = ({ siz
                         key={index}
                         title={activity.title}
                         text={activity.text}
-                        dateTime={activity.dateTime}
+                        start_time={activity.dateTime}
                     />
                 ))}
             </div>
