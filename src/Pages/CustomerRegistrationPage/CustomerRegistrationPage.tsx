@@ -8,37 +8,31 @@ import {
   ContentContainer,
   CustomInput,
 } from '../../Components/index';
-import { useLoginMutation } from '../../Redux/Features/Auth/authService';
-import { setCredentials } from '../../Redux/Features/Auth/authSlice';
-import { useAppDispatch } from '../../Redux/hooks';
+import { useRegisterMutation } from '../../Redux/Features/Auth/authService';
 import images from '../../assets/index';
 import '../../index.css';
 
 const CustomerRegistrationPage: React.FC = () => {
-  const [login, { isLoading, error, data, isError, isSuccess }] =
-    useLoginMutation();
-  const dispatch = useAppDispatch();
+  const [register, { isLoading, error, data, isError, isSuccess }] = useRegisterMutation();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    businessName: '',
     email: '',
-    password: '',
-    scope: 'user'
   });
 
   const [errors, setErrors] = useState({
+    businessNameError: '',
     emailError: '',
-    passwordError: '',
   });
 
   useEffect(() => {
     if (isSuccess && data) {
-      dispatch(setCredentials(data));
-      navigate('/admin');
-      toast.success('Login successful');
-      console.log('login successful');
+      navigate('/otp-verification');  // Navigate to the OTP verification page
+      toast.success('Registration successful. OTP has been sent to your email.');
+      console.log('Registration successful. OTP sent.');
     }
-  }, [isSuccess, isError, data, error, dispatch, navigate]);
+  }, [isSuccess, isError, data, error, navigate]);
 
   const handleChange = (key: string) => (value: string) => {
     setFormData({ ...formData, [key]: value });
@@ -49,6 +43,11 @@ const CustomerRegistrationPage: React.FC = () => {
     let valid = true;
     const newErrors = { ...errors };
 
+    if (!formData.businessName) {
+      newErrors.businessNameError = 'Business name is required';
+      valid = false;
+    }
+
     if (!formData.email) {
       newErrors.emailError = 'Email is required';
       valid = false;
@@ -57,31 +56,18 @@ const CustomerRegistrationPage: React.FC = () => {
       valid = false;
     }
 
-    if (!formData.password) {
-      newErrors.passwordError = 'Password is required';
-      valid = false;
-    }
     setErrors(newErrors);
     return valid;
   };
 
-  const handleLogin = async () => {
-    if (validateForm()) {
-      try {
-        await login(formData).unwrap();
-      } catch (err) {
-        // Error is handled in the useEffect
-      }
-    }
-  };
-
-  const handleForgotPassword = () => {
-    console.log('Forgot Password clicked');
-  };
-
-  const handleNewSignIn = () => {
-    console.log('New Sign In clicked');
-    setFormData({ email: '', password: '', scope: 'user' });
+  const handleRegister = async () => {
+    // if (validateForm()) {
+    //   try {
+    //     await register(formData).unwrap();
+    //   } catch (err) {
+    //     // Error is handled in the useEffect
+    //   }
+    // }
   };
 
   return (
@@ -97,28 +83,28 @@ const CustomerRegistrationPage: React.FC = () => {
               <div className="mx-auto space-y-4">
                 <CustomInput
                   type="text"
-                  value={formData.email}
-                  handleChangeEvent={handleChange('email')}
+                  value={formData.businessName}
+                  handleChangeEvent={handleChange('businessName')}
                   placeholder="Enter the business name here"
                   styleVariant="customStyle1"
                   icon={<img src={images.Businessicon} alt="business Icon" />}
                 />
-                {errors.emailError && (
-                  <p className="text-red-500 h-[1px] absolute top-[126px] text-[14px]">
-                    {errors.emailError}
+                {errors.businessNameError && (
+                  <p className="text-red-500 text-[14px]">
+                    {errors.businessNameError}
                   </p>
                 )}
                 <CustomInput
                   type="text"
-                  value={formData.password}
-                  handleChangeEvent={handleChange('password')}
+                  value={formData.email}
+                  handleChangeEvent={handleChange('email')}
                   placeholder="Enter the business email here"
                   styleVariant="customStyle1"
                   icon={<img src={images.email} alt="email Icon" />}
                 />
-                {errors.passwordError && (
-                  <p className="text-red-500 h-[1px] absolute top-[198px] text-[14px]">
-                    {errors.passwordError}
+                {errors.emailError && (
+                  <p className="text-red-500 text-[14px]">
+                    {errors.emailError}
                   </p>
                 )}
               </div>
@@ -126,8 +112,8 @@ const CustomerRegistrationPage: React.FC = () => {
               <div className="flex items-center justify-center mt-12">
                 <Button
                   type="primary"
-                  label={isLoading ? 'Logging in...' : 'Register'}
-                  action={handleLogin}
+                  label={isLoading ? 'Registering...' : 'Register'}
+                  action={handleRegister}
                   color="#FFFFFF"
                   width="100%"
                   height="48px"
