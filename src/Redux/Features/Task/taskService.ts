@@ -12,6 +12,7 @@ type Task = {
 }
 
 type TaskResponse = {
+  map(arg0: (activity: any, index: number) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
   data: Task[] | [];
 }
 
