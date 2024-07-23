@@ -222,6 +222,7 @@ const AdminHomePage = () => {
                 return (
                   <ActivityLogCard
                     key={index}
+                    route={activity.route}
                     title={activity.title}
                     text={activity.text}
                     start_time={activity.start_time}
