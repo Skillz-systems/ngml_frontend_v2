@@ -3,6 +3,7 @@ import TopNavigationBar from '@/Components/TopNavigationBar/TopNavigationBar';
 import React, { useState, type ComponentType } from 'react';
 import NavigationBar from '../Components/NavigationMenu/NavigationBar';
 import { Navigationlinks } from '../Links/Navigationlinks';
+import { ClientLinks } from '@/Links/ClientLinks';
 
 interface ClientLayoutProps {
   Component: ComponentType<unknown>;
@@ -31,7 +32,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ Component, ...otherProps })
       <div className='flex bg-[#EAEEF2] pt-[70px] w-[100%] h-[100vh]'>
         <div className='hidden sm:block'>
           <NavigationBar
-            Navigationlinks={Navigationlinks}
+            Navigationlinks={ClientLinks}
             isNavigationBarVisible={isNavigationBarVisible}
             toggleNavigationBar={toggleNavigationBar}
           />

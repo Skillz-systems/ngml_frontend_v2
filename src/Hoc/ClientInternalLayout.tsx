@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ClientLayout from '../Layout/ClientLayout'
+import ClientLayout from '../Layout/ClientLayout';
+import ProtectedRoute from './ProtectedRoute';
 
 /**
  * this is an HOC that renders the Client Layout components of the application
@@ -11,7 +12,11 @@ import ClientLayout from '../Layout/ClientLayout'
 
 const ClientInternalLayout = (Component: any) => (passThroughProps: any) => (
   <>
-    <ClientLayout {...passThroughProps} Component={Component} />
+    <ProtectedRoute
+      component={() => (
+        <ClientLayout {...passThroughProps} Component={Component} />
+      )}
+    />
   </>
 )
 
