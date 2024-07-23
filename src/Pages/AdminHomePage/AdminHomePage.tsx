@@ -10,6 +10,8 @@ import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynam
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
+// import { aC } from 'vitest/dist/reporters-1evA5lom';
+
 
 interface SelectOption {
   label: string;
@@ -25,12 +27,15 @@ interface DynamicCardDataItem {
   valueOptions: Array<SelectOption>;
 }
 
+
 const AdminHomePage = () => {
   const [, setSortDetails] = useState({ sortType: '', value: '' });
   const currentUser = useAppSelector(selectCurrentUser);
   const userId = Number(currentUser?.id)
 
   const { data, error, isError, isSuccess } = useTasksQuery({ userId });
+
+  console.log(data, "data___")
 
   const handleSortChange = (sortType: 'year' | 'value', value: string) => {
     setSortDetails({ sortType, value });
@@ -71,39 +76,6 @@ const AdminHomePage = () => {
       value: '12',
       icon: <img src={images.zone} alt="zone icon" />,
     },
-  ];
-
-  const activities = [
-    {
-      title: 'New User Registration',
-      text: 'John Doe registered for an account.',
-      dateTime: new Date(2024, 3, 1, 10, 30)
-    },
-    {
-      title: 'System Update',
-      text: 'System updated to version 2.1.0 successfully.',
-      dateTime: new Date(2024, 3, 1, 9, 15)
-    },
-    {
-      title: 'Password Change',
-      text: 'Alice Smith changed her password.',
-      dateTime: new Date(2024, 3, 1, 8, 45)
-    },
-    {
-      title: 'New Support Ticket',
-      text: 'A new support ticket was submitted by Bob Johnson.',
-      dateTime: new Date(2024, 3, 1, 11, 5)
-    },
-    {
-      title: 'Product Update',
-      text: 'Product XYZ has been updated to version 1.2.',
-      dateTime: new Date(2024, 3, 1, 12, 30)
-    },
-    {
-      title: 'Meeting Scheduled',
-      text: 'A team meeting has been scheduled for April 2nd, 2024.',
-      dateTime: new Date(2024, 3, 1, 13, 0)
-    }
   ];
 
 
@@ -237,22 +209,26 @@ const AdminHomePage = () => {
             />
           </div>
         </div>
-        <div className='w-[100%] bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
+        <div className='w-[100%] h-[1057px] bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
           <div className='h-[48px] bg-[#F6F8FA] flex items-center p-[10px] justify-between'>
-            <div className='text-[#828DA9] text-[20px] font-[400]'>Recent Activity</div>
+            <div className='text-[#828DA9] text-[20px] font-[400]'>Available Tasks</div>
             <div className='border w-[32px] h-[32px] flex items-center justify-center rounded-full'>
               <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
             </div>
           </div>
-          <div className='w-[100%] p-[10px] pt-[0px] '>
-            {activities.map((activity, index) => (
-              <ActivityLogCard
-                key={index}
-                title={activity.title}
-                text={activity.text}
-                dateTime={activity.dateTime}
-              />
-            ))}
+          <div className='h-[1000px] overflow-y-auto'>
+            <div className='w-[100%] p-[10px] pt-[0px] '>
+              {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
+                return (
+                  <ActivityLogCard
+                    key={index}
+                    title={activity.title}
+                    text={activity.text}
+                    start_time={activity.start_time}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ jobs:
       - run:
           name: ssh login
           command: |
-            rsync -va -e 'ssh -p 7822 -o StrictHostKeyChecking=no'  --delete   dist/ .htaccess  skillz@185.160.67.60:nnpc/frontend
+            rsync -va -e 'ssh -p 7822 -o StrictHostKeyChecking=no'  --delete   dist/ .htaccess  skillz@103.72.76.68:nnpc/frontend
 
 workflows:
   version: 2
