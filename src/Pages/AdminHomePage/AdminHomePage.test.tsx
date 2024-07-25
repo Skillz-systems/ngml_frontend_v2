@@ -14,7 +14,7 @@ describe('AdminHomePage', () => {
 
         expect(screen.getByText('Un-Verified Staff')).toBeInTheDocument();
 
-        expect(screen.getByText('New User Registration')).toBeInTheDocument();
+        expect(screen.getByText('Upcoming Site Visits')).toBeInTheDocument();
     });
 
 

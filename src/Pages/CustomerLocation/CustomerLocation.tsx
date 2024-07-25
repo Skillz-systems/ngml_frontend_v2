@@ -58,7 +58,6 @@ const CustomerLocation: React.FC = () => {
             </div>
           ))}
         </div>
-
       </div>
       <Modal
         isOpen={isModalOpen}
