@@ -1,7 +1,6 @@
-import SamplePage from '@/Pages/AdminHomePage/AdminHomePage';
 
+import CustomerRegistrationPage from '@/Pages/Customer/CustomerRegistrationPage/CustomerRegistrationPage';
 import ClientInternalLayout from '../Hoc/ClientInternalLayout';
-import CustomerRegistrationPage from '@/Pages/CustomerRegistrationPage/CustomerRegistrationPage';
 
 export const ClientRoutes = [
   // {

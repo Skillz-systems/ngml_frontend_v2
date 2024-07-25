@@ -7,10 +7,10 @@ import {
   Button,
   ContentContainer,
   CustomInput,
-} from '../../Components/index';
-import { useRegisterMutation } from '../../Redux/Features/Auth/authService';
-import images from '../../assets/index';
-import '../../index.css';
+} from '../../../Components/index';
+import { useRegisterMutation } from '../../../Redux/Features/Auth/authService';
+import images from '../../../assets/index';
+import '../../../index.css';
 
 const CustomerRegistrationPage: React.FC = () => {
   const [register, { isLoading, error, data, isError, isSuccess }] = useRegisterMutation();
