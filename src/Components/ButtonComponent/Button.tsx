@@ -29,7 +29,7 @@ import React, { useState } from 'react';
 
 
 interface ButtonProps {
-    type: 'primary' | 'secondary' | 'tertiary' | 'icon' | 'outline' | 'transparent';
+    type: 'primary' | 'secondary' | 'tertiary' | 'icon' | 'outline' | 'transparent' | 'newest';
     label?: string;
     color?: string; 
     fontStyle?: string;
@@ -97,6 +97,8 @@ const Button: React.FC<ButtonProps> = ({
      */
     const getButtonStyles = (): React.CSSProperties => {
         switch (type) {
+            case 'newest':
+                return { backgroundColor: isHovered ? '#E3EADA' : '#00AF50', color: isHovered ? '#414242' : '#E3EADA', width, height, fontSize, borderRadius: radius, fontWeight, lineHeight,  };  
             case 'primary':
                 return { backgroundColor: isHovered ? '#00903e' : '#00AF50', color: '#FFFFFF', width, height, fontSize, borderRadius: radius, fontWeight, lineHeight,  };
             case 'secondary':
