@@ -75,7 +75,7 @@ const CustomerOtpPage: React.FC = () => {
                             BUSINESS LOGIN
                         </h1>
                         <div className="w-[100%] mt-2">
-                            <div className="space-y-4">
+                            <div className="">
                                 <CustomInput
                                     type="text"
                                     value={formData.otp}
