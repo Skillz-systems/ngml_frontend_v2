@@ -67,6 +67,20 @@ function App(): JSX.Element {
     )
   );
 
+  const CustomerRoutes = routes.CustomerRoutes.map(
+    ({ path, component: Component }) => (
+      <Route
+        key={path}
+        path={path}
+        element={
+          <PrivateAdminRoute key={path}>
+            <Component />
+          </PrivateAdminRoute>
+        }
+      />
+    )
+  );
+
   return (
     <div className="App">
       <ToastContainer />
@@ -77,6 +91,7 @@ function App(): JSX.Element {
           {ClientRoutes}
           {StaffRoutes}
           {SupplierRoutes}
+          {CustomerRoutes}
     
         </Routes>
       </BrowserRouter>
