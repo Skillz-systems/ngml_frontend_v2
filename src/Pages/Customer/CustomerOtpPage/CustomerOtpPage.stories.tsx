@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom'; 
 import { configureStore } from '@reduxjs/toolkit';
-import CustomerLoginPage from './CustomerLoginPage';
+import CustomerOtpPage from './CustomerOtpPage';
 
 const mockReducer = (state = {}) => state;
 
@@ -13,8 +13,8 @@ const store = configureStore({
 });
 
 const meta: Meta = {
-    title: 'Pages/CustomerLoginPage',
-    component: CustomerLoginPage,
+    title: 'Pages/CustomerOtpPage',
+    component: CustomerOtpPage,
     parameters: {
     }, 
     tags: ['autodocs'],
