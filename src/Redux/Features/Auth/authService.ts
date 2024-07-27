@@ -11,7 +11,7 @@ type LoginRequest = {
 type RegisterRequest = {
   name: string;
   email: string;
-  password: string;
+  password?: string;
 };
 
 type AuthResponse = {

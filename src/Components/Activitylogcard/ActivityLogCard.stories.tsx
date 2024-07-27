@@ -10,7 +10,7 @@ const meta: Meta = {
   argTypes: {
     title: { control: 'text' },
     text: { control: 'text' },
-    dateTime: { control: 'date' },
+    start_time: { control: 'date' },
     button: { control: 'text' },
   },
 
@@ -20,20 +20,20 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story={
-args: {
+export const Default: Story = {
+  args: {
     title: 'EOI REQUEST',
     text: 'Johnson Alaba has updated the site survey findings for GET Technologies Limited.',
-    dateTime: new Date('2024-02-12T12:00:00'),
-},
+    start_time: new Date('2024-02-12T12:00:00'),
+  },
 };
 
-export const Custom: Story={
-args: {
-    
+export const Custom: Story = {
+  args: {
+
     title: 'EOI REQUEST',
     text: 'Johnson Alaba has updated the site survey findings for GET Technologies Limited.',
-    dateTime: new Date('2024-02-12T12:00:00'),
+    start_time: new Date('2024-02-12T12:00:00'),
     button: <button className="bg-green-600 hover:bg-gray-100 text-white font-bold py-1 px-8 rounded-[30px]">View Request</button>
-},
+  },
 };

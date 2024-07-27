@@ -17,12 +17,12 @@ const CustomerRegistrationPage: React.FC = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    businessName: '',
+    name: '',
     email: '',
   });
 
   const [errors, setErrors] = useState({
-    businessNameError: '',
+    nameError: '',
     emailError: '',
   });
 
@@ -43,8 +43,8 @@ const CustomerRegistrationPage: React.FC = () => {
     let valid = true;
     const newErrors = { ...errors };
 
-    if (!formData.businessName) {
-      newErrors.businessNameError = 'Business name is required';
+    if (!formData.name) {
+      newErrors.nameError = 'Business name is required';
       valid = false;
     }
 
@@ -61,13 +61,13 @@ const CustomerRegistrationPage: React.FC = () => {
   };
 
   const handleRegister = async () => {
-    // if (validateForm()) {
-    //   try {
-    //     await register(formData).unwrap();
-    //   } catch (err) {
-    //     // Error is handled in the useEffect
-    //   }
-    // }
+    if (validateForm()) {
+      try {
+        await register(formData).unwrap();
+      } catch (err) {
+        // Error is handled in the useEffect
+      }
+    }
   };
 
   return (
@@ -83,15 +83,15 @@ const CustomerRegistrationPage: React.FC = () => {
               <div className="mx-auto space-y-4">
                 <CustomInput
                   type="text"
-                  value={formData.businessName}
+                  value={formData.name}
                   handleChangeEvent={handleChange('businessName')}
                   placeholder="Enter the business name here"
                   styleVariant="customStyle1"
                   icon={<img src={images.Businessicon} alt="business Icon" />}
                 />
-                {errors.businessNameError && (
+                {errors.nameError && (
                   <p className="text-red-500 text-[14px]">
-                    {errors.businessNameError}
+                    {errors.nameError}
                   </p>
                 )}
                 <CustomInput
