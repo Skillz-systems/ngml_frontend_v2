@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ClientLayout from '../Layout/ClientLayout';
+import CustomerLayout from '@/Layout/CustomerLayout';
 import ProtectedRoute from './ProtectedRoute';
 
 /**
@@ -10,14 +10,14 @@ import ProtectedRoute from './ProtectedRoute';
  * @return {HTMLElement}
  */
 
-const ClientInternalLayout = (Component: any) => (passThroughProps: any) => (
+const CustomerInternalLayout = (Component: any) => (passThroughProps: any) => (
   <>
     <ProtectedRoute
       component={() => (
-        <ClientLayout {...passThroughProps} Component={Component} />
+        <CustomerLayout {...passThroughProps} Component={Component} />
       )}
     />
   </>
 )
 
-export default ClientInternalLayout
+export default CustomerInternalLayout

@@ -1,12 +1,18 @@
-import SamplePage from '@/Pages/AdminHomePage/AdminHomePage';
 
+import CustomerRegistrationPage from '@/Pages/Customer/CustomerRegistrationPage/CustomerRegistrationPage';
 import ClientInternalLayout from '../Hoc/ClientInternalLayout';
 
 export const ClientRoutes = [
+  // {
+  //   title: 'Sample',
+  //   path: '/client/samplePage',
+  //   component: ClientInternalLayout(SamplePage),
+  //   exact: true
+  // }
   {
-    title: 'Sample',
-    path: '/client/samplePage',
-    component: ClientInternalLayout(SamplePage),
+    title: 'Customer Registration Page',
+    path: '/client/customerregistrationpage',
+    component: ClientInternalLayout(CustomerRegistrationPage),
     exact: true
   }
 ]
