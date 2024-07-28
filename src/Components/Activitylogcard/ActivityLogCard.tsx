@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 
 interface ActivityLogCardProps {
   title?: string;
+  route?: string ;
   text?: string;
   start_time?: Date;
   button?: React.ReactNode;
@@ -21,6 +22,7 @@ interface ActivityLogCardProps {
 
 const ActivityLogCard: React.FC<ActivityLogCardProps> = ({
   title,
+  route ='https://ngml.skillzserver.com/admin/records/customer/',
   text,
   start_time,
   button
@@ -33,7 +35,7 @@ const ActivityLogCard: React.FC<ActivityLogCardProps> = ({
   };
 
   return (
-    <Link to={'https://ngml.skillzserver.com/admin/records/customer/'}>
+    <Link to={route}>
       <div className='w-[100%] h-[100%] mt-[10px] cursor-pointer'>
         <div className={`bg-white w-[100%] h-[100%] border border-[#E2E4EB] rounded-[8px] ${button ? 'p-12 mb-4 relative' : 'p-2 mb-4 relative'}`}>
           <div className="flex justify-between mb-[3px]">

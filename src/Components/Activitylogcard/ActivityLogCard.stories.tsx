@@ -25,7 +25,8 @@ export const Default: Story = {
     title: 'EOI REQUEST',
     text: 'Johnson Alaba has updated the site survey findings for GET Technologies Limited.',
     start_time: new Date('2024-02-12T12:00:00'),
-  },
+},
+
 };
 
 export const Custom: Story = {
