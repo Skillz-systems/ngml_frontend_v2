@@ -10,6 +10,16 @@ export const AuthRoutes = [
         title: 'stafflogin',
         path: '/',
         component: StaffLoginPage
+    },  
+    {
+        title: 'notFound',
+        path: '*',
+        component: NotFound
+    },  
+    {
+        title: 'unauthorized',
+        path: '/unauthorized',
+        component: Unauthorized
     },
     {
         title: 'customer registration page',
@@ -17,25 +27,13 @@ export const AuthRoutes = [
         component: CustomerRegistrationPage
     },
     {
-        title: 'notFound',
-        path: '*',
-        component: NotFound
-    },
-    {
-        title: 'unauthorized',
-        path: '/unauthorized',
-        component: Unauthorized
+        title: 'customerotpPage',
+        path: '/customer/otp',
+        component: CustomerOtpPage
     },
     {
         title: 'customerLoginPage',
         path: '/customer/login',
         component: CustomerLoginPage
     },
-
-    {
-        title: 'customerotpPage',
-        path: '/customer/otp',
-        component: CustomerOtpPage
-    },
-    
 ]

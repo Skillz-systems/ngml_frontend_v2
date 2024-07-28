@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -109,19 +109,23 @@ const CustomerRegistrationPage: React.FC = () => {
                 )}
               </div>
               <div className='text-center italic'>A login OTP will be sent to your email for verification</div>
-              <div className="flex items-center justify-center mt-12">
-                <Button
-                  type="primary"
-                  label={isLoading ? 'Registering...' : 'Register'}
-                  action={handleRegister}
-                  color="#FFFFFF"
-                  width="100%"
-                  height="48px"
-                  fontSize="16px"
-                  radius="32px"
-                  disabled={isLoading}
-                />
-              </div>
+
+              <Link to='/customer/otp'>
+                <div className="flex items-center justify-center mt-12">
+                  <Button
+                    type="primary"
+                    label={isLoading ? 'Registering...' : 'Register'}
+                    action={handleRegister}
+                    color="#FFFFFF"
+                    width="100%"
+                    height="48px"
+                    fontSize="16px"
+                    radius="32px"
+                    disabled={isLoading}
+                  />
+                </div>
+              </Link>
+
             </div>
           </AuthContainer>
         </div>

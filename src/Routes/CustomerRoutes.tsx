@@ -1,4 +1,5 @@
 import CustomerInternalLayout from "@/Hoc/CustomerInternalLayout";
+import CustomerBusinessManagerPageLayout from "@/Pages/Customer/CustomerBusinessManagerPageLayout/CustomerBusinessManagerPageLayout";
 import CustomerHomePage from "@/Pages/Customer/CustomerHomePage/CustomerHomePage";
 
 
@@ -12,7 +13,7 @@ export const CustomerRoutes = [
    {
       title: 'customer business manager page',
       path: '/customer/businessmanager',
-      component: CustomerInternalLayout(CustomerHomePage),
+      component: CustomerInternalLayout(CustomerBusinessManagerPageLayout),
       exact: true
    },
 ]

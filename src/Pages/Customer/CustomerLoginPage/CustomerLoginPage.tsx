@@ -3,7 +3,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLoginMutation } from '@/Redux/Features/Auth/authService';
@@ -92,18 +92,20 @@ const CustomerLoginPage: React.FC = () => {
                                 )}
                                 <p className="text-[#E3EADA] text-center italic text-sm">An OTP will be sent to this email for verification</p>
                             </div>
-                            <div className="flex items-center justify-center mt-24">
-                                <Button
-                                    type="newest"
-                                    label={isLoading ? 'Sending OTP...' : 'Proceed'}
-                                    action={handleSendOtp}
-                                    width="100%"
-                                    height="48px"
-                                    fontSize="16px"
-                                    radius="32px"
-                                    disabled={isLoading}
-                                />
-                            </div>
+                            <Link to='/customer'>
+                                <div className="flex items-center justify-center mt-24">
+                                    <Button
+                                        type="newest"
+                                        label={isLoading ? 'Sending OTP...' : 'Proceed'}
+                                        action={handleSendOtp}
+                                        width="100%"
+                                        height="48px"
+                                        fontSize="16px"
+                                        radius="32px"
+                                        disabled={isLoading}
+                                    />
+                                </div>
+                            </Link>
                         </div>
                     </AuthContainer>
                 </div>
