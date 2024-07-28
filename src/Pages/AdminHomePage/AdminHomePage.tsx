@@ -1,4 +1,5 @@
 
+import { Loader } from '@/Components/Loader/Loader';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
   ArrowOutwardOutlined,
@@ -33,9 +34,9 @@ const AdminHomePage = () => {
   const currentUser = useAppSelector(selectCurrentUser);
   const userId = Number(currentUser?.id)
 
-  const { data, error, isError, isSuccess } = useTasksQuery({ userId });
+  const { data, error, isError, isSuccess, isLoading } = useTasksQuery({ userId });
 
-  console.log(data, "data___")
+  console.log(data, 'data___')
 
   const handleSortChange = (sortType: 'year' | 'value', value: string) => {
     setSortDetails({ sortType, value });
@@ -145,7 +146,7 @@ const AdminHomePage = () => {
     console.log('tasks', data)
   }
 
-  
+
   return (
     <div className="h-fit w-full" >
       <div>
@@ -207,19 +208,24 @@ const AdminHomePage = () => {
             />
           </div>
         </div>
-        <div className='w-[100%] h-[1057px] bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
+        <div className='w-full h-full bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
           <div className='h-[48px] bg-[#F6F8FA] flex items-center p-[10px] justify-between'>
             <div className='text-[#828DA9] text-[20px] font-[400]'>Available Tasks</div>
-            <div className='border w-[32px] h-[32px] flex items-center justify-center rounded-full'>
+            <div className='border size-[32px] flex items-center justify-center rounded-full'>
               <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
             </div>
           </div>
           <div className='h-[1000px] overflow-y-auto'>
             <div className='w-[100%] p-[10px] pt-[0px] '>
+              {isLoading &&
+                <Loader className="text-nnpc-100 size-10 " />
+              }
+
               {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
                 return (
                   <ActivityLogCard
                     key={index}
+                    route={activity.route}
                     title={activity.title}
                     text={activity.text}
                     start_time={activity.start_time}

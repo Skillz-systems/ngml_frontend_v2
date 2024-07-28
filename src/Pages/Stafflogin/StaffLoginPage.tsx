@@ -36,7 +36,7 @@ const StaffLoginPage: React.FC = () => {
       dispatch(setCredentials(data));
       navigate('/admin');
       toast.success('Login successful');
-      console.log('login successful');
+
     }
   }, [isSuccess, isError, data, error, dispatch, navigate]);
 

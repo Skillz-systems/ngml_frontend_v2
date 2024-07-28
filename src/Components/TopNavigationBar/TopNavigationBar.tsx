@@ -1,6 +1,10 @@
 import { GppMaybeOutlined, NotificationImportantOutlined, PowerSettingsNewOutlined } from '@mui/icons-material';
 import images from '../../assets/index';
-import { Notification, SearchInput  } from '../../Components/index';
+import { Notification, SearchInput } from '../../Components/index';
+
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../../Redux/Features/Auth/authSlice';
 
 /**
  * Represents the top navigation bar of the application.
@@ -10,6 +14,14 @@ import { Notification, SearchInput  } from '../../Components/index';
  * Each notification type is displayed using the `Notification` component with specific data.
  */
 const TopNavigationBar = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        navigate('/');
+        dispatch(logout());
+    };
 
     const messageNotifications = [
         { title: 'New Message', date: '2024-03-29', content: 'Message content 1' },
@@ -62,12 +74,15 @@ const TopNavigationBar = () => {
                         notifications={alertNotifications}
                         renderIcon={() => <div><NotificationImportantOutlined style={{ fontSize: 'medium' }} /></div>}
                     />
-                    <Notification
-                        // count={reminderNotifications.length}
-                        // headerTitle="Reminders"
-                        // notifications={reminderNotifications}
-                        renderIcon={() => <div><PowerSettingsNewOutlined style={{ fontSize: 'medium' }} /></div>}
-                    />
+                    <button type='button' onClick={handleLogout}>
+                        <span className='sr-only'>logout</span>
+                        <Notification
+                            // count={reminderNotifications.length}
+                            // headerTitle="Reminders"
+                            // notifications={reminderNotifications}
+                            renderIcon={() => <div><PowerSettingsNewOutlined style={{ fontSize: 'medium' }} /></div>}
+                        />
+                    </button>
                 </div>
             </div>
         </div>
