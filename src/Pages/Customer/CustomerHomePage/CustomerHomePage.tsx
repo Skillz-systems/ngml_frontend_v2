@@ -1,5 +1,4 @@
 
-import { Loader } from '@/Components/Loader/Loader';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
   ArrowOutwardOutlined,
@@ -7,10 +6,9 @@ import {
   RestaurantMenuOutlined
 } from '@mui/icons-material';
 import React, { useState } from 'react';
-import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
-import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
-import { useAppSelector } from '../../Redux/hooks';
-import images from '../../assets/index';
+import { selectCurrentUser } from '../../../Redux/Features/Auth/authSlice';
+import { useAppSelector } from '../../../Redux/hooks';
+import { ActivityLogCard, Chart, StatisticDynamicCard } from '@/Components';
 // import { aC } from 'vitest/dist/reporters-1evA5lom';
 
 
@@ -29,14 +27,14 @@ interface DynamicCardDataItem {
 }
 
 
-const AdminHomePage = () => {
+const CustomerHomePage = () => {
   const [, setSortDetails] = useState({ sortType: '', value: '' });
   const currentUser = useAppSelector(selectCurrentUser);
   const userId = Number(currentUser?.id)
 
-  const { data, error, isError, isSuccess, isLoading } = useTasksQuery({ userId });
+  const { data, error, isError, isSuccess } = useTasksQuery({ userId });
 
-  console.log(data, 'data___')
+  console.log(data, "data___")
 
   const handleSortChange = (sortType: 'year' | 'value', value: string) => {
     setSortDetails({ sortType, value });
@@ -57,27 +55,6 @@ const AdminHomePage = () => {
 
   const chartColors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
 
-
-
-  const cardData = [
-    {
-      title: 'Un-Verified Staff',
-      value: '2,305',
-      icon: <img src={images.contact} alt="staff icon" />,
-
-    },
-    {
-      title: 'Pending Requests',
-      value: '32',
-      icon: <img src={images.Requesticon} alt="request icon" />,
-
-    },
-    {
-      title: 'Upcoming Site Visits',
-      value: '12',
-      icon: <img src={images.zone} alt="zone icon" />,
-    },
-  ];
 
 
   const dynamicCardData: DynamicCardDataItem[] = [
@@ -106,37 +83,6 @@ const AdminHomePage = () => {
   ];
 
 
-  const getIconStyles = (title: string) => {
-    switch (title) {
-      case 'Un-Verified Staff':
-        return { bgColor: 'bg-[#005828]', iconColor: 'text-white', };
-      case 'Pending Requests':
-        return { bgColor: 'bg-[#00AF50]', iconColor: 'text-white' };
-      case 'Upcoming Site Visits':
-        return { bgColor: 'bg-[#FFD181]', iconColor: 'text-black' };
-      default:
-        return { bgColor: 'bg-gray-500', iconColor: 'text-white' };
-    }
-  };
-
-  const statisticCardData = [
-    {
-      label: 'Customers',
-      value: '554',
-      primary: true,
-    },
-    {
-      label: 'Suppliers',
-      value: '9',
-      primary: false,
-    },
-    {
-      label: 'Staff',
-      value: '8,307',
-      primary: false,
-    },
-  ];
-
   if (isError) {
     console.log('error', error)
     console.log('error', isError)
@@ -145,6 +91,8 @@ const AdminHomePage = () => {
   if (isSuccess) {
     console.log('tasks', data)
   }
+
+
 
 
   return (
@@ -156,35 +104,11 @@ const AdminHomePage = () => {
           </span>
         )}</div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4" >
-        {cardData.map((card, index) => {
-          const { bgColor, iconColor } = getIconStyles(card.title);
-          return (
-            <StatisticRectangleCard
-              key={index}
-              title={card.title}
-              value={card.value}
-              icon={React.cloneElement(card.icon, { className: `${iconColor} ${bgColor} rounded-[10px] w-[50px] h-[32px] p-2` })}
-              iconBgColor=''
-            />
-          );
-        })}
-      </div>
       <div className='mt-8 h-fit grid grid-cols-1 xl:grid-cols-7 gap-6 ' id="stat-card-chart-parent">
         <div className="xl:col-span-5 col-span-1  order-last lg:order-first xl:order-last" id="cards">
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
-            {statisticCardData.map((card, index) => (
-              <StatisticCard
-                key={index}
-                label={card.label}
-                value={card.value}
-                primary={card.primary}
-              />
-            ))}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[100%] mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[100%] ">
             {dynamicCardData.map((card, index) => (
-              <div key={index} className='mt-[15px]'>
+              <div key={index}>
                 <StatisticDynamicCard
                   type={card.type}
                   title={card.title}
@@ -208,24 +132,19 @@ const AdminHomePage = () => {
             />
           </div>
         </div>
-        <div className='w-full h-full bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
+        <div className='w-[100%] h-[800px] bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
           <div className='h-[48px] bg-[#F6F8FA] flex items-center p-[10px] justify-between'>
-            <div className='text-[#828DA9] text-[20px] font-[400]'>Available Tasks</div>
-            <div className='border size-[32px] flex items-center justify-center rounded-full'>
+            <div className='text-[#828DA9] text-[20px] font-[400]'>Tasks Notification</div>
+            <div className='border w-[32px] h-[32px] flex items-center justify-center rounded-full'>
               <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
             </div>
           </div>
           <div className='h-[1000px] overflow-y-auto'>
             <div className='w-[100%] p-[10px] pt-[0px] '>
-              {isLoading &&
-                <Loader className="text-nnpc-100 size-10 " />
-              }
-
               {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
                 return (
                   <ActivityLogCard
                     key={index}
-                    route={activity.route}
                     title={activity.title}
                     text={activity.text}
                     start_time={activity.start_time}
@@ -236,24 +155,8 @@ const AdminHomePage = () => {
           </div>
         </div>
       </div>
-
-      <div>
-        <div className='mt-[28px]'>
-          <Chart
-            data={dataNNPC}
-            chartType="line"
-            yAxisLabel="NNPC"
-            xAxisDataKey="month"
-            colors={chartColors}
-            title='Customer Consumption Chart'
-          />
-        </div>
-      </div>
-      <div className='w-[100%] mt-[28px]'>
-        <DailyVolumnTable />
-      </div>
     </div>
   );
 }
 
-export default AdminHomePage;
+export default CustomerHomePage;
