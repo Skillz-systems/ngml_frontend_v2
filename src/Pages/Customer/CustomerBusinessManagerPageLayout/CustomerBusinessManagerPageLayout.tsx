@@ -2,12 +2,12 @@ import { ArrowBack } from '@mui/icons-material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TabLayout } from '../../../Components/index';
-import EoiPage from '@/Pages/EoiPage/EoiPage';
 import DdqPage from '@/Pages/DdqPage/DdqPage';
-import SiteVisitationPage from '@/Pages/SiteVisitationPage/SiteVisitationPage';
 import Agreement from '@/Pages/Agreement/Agreement';
-import ConnectProject from '@/Pages/ConnectProject/ConnectProject';
 import CustomerManager from '@/Pages/CustomerManager/CustomerManager';
+import CustomerEOIPage from '../CustomerEOIPage/CustomerEOIPage';
+import CustomerSiteVisitPage from '../CustomerSiteVisitPage/CustomerSiteVisitPage';
+import CustomerConnectProject from '../CustomerConnectProject/CustomerConnectProject';
 
 
 const CustomerBusinessManagerPageLayout: React.FC = () => {
@@ -23,11 +23,11 @@ const CustomerBusinessManagerPageLayout: React.FC = () => {
 
   const tabContent = {
     manager: <CustomerManager />,
-    eoirequest: <EoiPage />,
+    eoirequest: <CustomerEOIPage />,
     ddq: <DdqPage />,
-    sitevisit: <SiteVisitationPage />,
+    sitevisit: <CustomerSiteVisitPage />,
     agreement: <Agreement />,
-    connectproject: <ConnectProject />,
+    connectproject: <CustomerConnectProject />,
   };
 
   return (
@@ -41,7 +41,6 @@ const CustomerBusinessManagerPageLayout: React.FC = () => {
         title="Business Manager"
         width=""
         height=""
-        // backgroundColor="#F5F7F9"
         color="#49526A"
         borderColor=""
         borderWidth=""

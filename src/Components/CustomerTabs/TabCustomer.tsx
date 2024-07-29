@@ -115,9 +115,9 @@ const TabCustomer: FC<TabsProps> = ({
         </Select>
       </div>
 
-      <div className="flex flex-1">
+      <div className="flex flex-1" >
         <div className="lg:w-1/4 flex flex-col items-start justify-start space-y-2 mr-3">
-          <div className="hidden lg:flex flex-col w-full space-y-2">
+          <div className="hidden lg:flex flex-col w-full space-y-3" >
             {tablist.map((tab) => (
               <div key={tab.ref}>
                 <div
