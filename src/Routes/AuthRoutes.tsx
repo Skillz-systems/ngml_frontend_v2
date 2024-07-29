@@ -2,6 +2,8 @@ import NotFound from '@/NotFound';
 import CustomerLoginPage from '@/Pages/Customer/CustomerLoginPage/CustomerLoginPage';
 import CustomerOtpPage from '@/Pages/Customer/CustomerOtpPage/CustomerOtpPage';
 import CustomerRegistrationPage from '@/Pages/Customer/CustomerRegistrationPage/CustomerRegistrationPage';
+import ForgotPassword from '@/Pages/Customer/ForgotPassword/ForgotPassword';
+import ResetPassword from '@/Pages/Customer/ResetPassword/ResetPassword';
 import StaffLoginPage from '@/Pages/Stafflogin/StaffLoginPage';
 import Unauthorized from '@/Unauthorized';
 
@@ -40,12 +42,12 @@ export const AuthRoutes = [
     {
         title: 'forgotpassword',
         path: '/',
-        component: ForgotPasswordPage
+        component: ForgotPassword
     },
     {
         title: 'resetpassword',
         path: '/reset-password',
-        component: ResetPasswordPage
+        component: ResetPassword
     },
     
 ]
