@@ -35,7 +35,7 @@ const ForgotPassword: React.FC = () => {
 
   const handleForgotPassword = () => {
     if (validateForm()) {
-      navigate(`/reset-password?email=${encodeURIComponent(email)}`);  // Pass email via URL parameter
+      navigate(`/customer/reset-password?email=${encodeURIComponent(email)}`);
       toast.success('Reset link has been sent to your email.');
     }
   };

@@ -8,11 +8,11 @@ import StaffLoginPage from '@/Pages/Stafflogin/StaffLoginPage';
 import Unauthorized from '@/Unauthorized';
 
 export const AuthRoutes = [
-    // {
-    //     title: 'stafflogin',
-    //     path: '/',
-    //     component: StaffLoginPage
-    // },
+    {
+        title: 'stafflogin',
+        path: '/',
+        component: StaffLoginPage
+    },
     {
         title: 'customer registration page',
         path: '/customer/register',
@@ -41,12 +41,12 @@ export const AuthRoutes = [
     },
     {
         title: 'forgotpassword',
-        path: '/',
+        path: '/customer/forgotpassword',
         component: ForgotPassword
     },
     {
         title: 'resetpassword',
-        path: '/reset-password',
+        path: '/customer/reset-password',
         component: ResetPassword
     },
     
