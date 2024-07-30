@@ -1,5 +1,4 @@
-import { Button, EoiRequestTemplate } from '@/Components';
-import images from '@/assets';
+import { EoiRequestTemplate } from '@/Components';
 import { useState } from 'react';
 
 const CustomerEOIPage = () => {

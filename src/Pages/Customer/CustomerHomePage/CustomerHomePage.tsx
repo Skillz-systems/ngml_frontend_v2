@@ -5,7 +5,7 @@ import {
   FileDownloadDoneOutlined,
   RestaurantMenuOutlined
 } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React from 'react';
 import { selectCurrentUser } from '../../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../../Redux/hooks';
 import { ActivityLogCard, Chart, StatisticDynamicCard } from '@/Components';
@@ -28,7 +28,7 @@ interface DynamicCardDataItem {
 
 
 const CustomerHomePage = () => {
-  const [, setSortDetails] = useState({ sortType: '', value: '' });
+
   const currentUser = useAppSelector(selectCurrentUser);
   const userId = Number(currentUser?.id)
 
