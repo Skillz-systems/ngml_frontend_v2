@@ -8,7 +8,7 @@ const Unauthorized: React.FC = () => {
             <p className="text-[16px] md:text-xl text-gray-600 text-center">You do not have permission to view this page.</p>
             <Link to={'/'}>
                 <div className='mt-5'>
-                    <button className='border bg-[#53B052] text-white hover:bg-[#265929] text-[16px] text-gray-600 h-[44px] w-[180px] rounded-[6px]'>Back To Login Page</button>
+                    <button className='border bg-[#53B052] text-white hover:bg-[#265929] text-[16px] h-[44px] w-[180px] rounded-[6px]'>Back To Login Page</button>
                 </div>
             </Link>
         </div>

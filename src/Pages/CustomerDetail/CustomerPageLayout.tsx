@@ -2,15 +2,15 @@ import { ArrowBack } from '@mui/icons-material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
+import Agreement from '../Agreement/Agreement';
+import ConnectProject from '../ConnectProject/ConnectProject';
 import CostAnalysis from '../CostAnalysis/CostAnalysis';
 import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
+import CustomerManager from '../CustomerManager/CustomerManager';
 import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 import CustomerDetail from './CustomerDetail';
-import ConnectProject from '../ConnectProject/ConnectProject';
-import CustomerManager from '../CustomerManager/CustomerManager';
-import Agreement from '../Agreement/Agreement';
 
 const AdminCustomerPageLayout: React.FC = () => {
 
