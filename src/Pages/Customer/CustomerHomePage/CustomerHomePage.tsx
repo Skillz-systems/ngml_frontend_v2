@@ -5,7 +5,7 @@ import {
   FileDownloadDoneOutlined,
   RestaurantMenuOutlined
 } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React from 'react';
 import { selectCurrentUser } from '../../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../../Redux/hooks';
 import { ActivityLogCard, Chart, StatisticDynamicCard } from '@/Components';
@@ -19,16 +19,16 @@ interface SelectOption {
 
 interface DynamicCardDataItem {
   type: 'primary' | 'secondary';
-  title: string;
-  content: React.ReactNode;
-  icon: React.ReactNode;
-  yearOptions: Array<number>;
-  valueOptions: Array<SelectOption>;
+  title?: string;
+  content?: React.ReactNode;
+  icon?: React.ReactNode;
+  yearOptions?: Array<number>;
+  valueOptions?: Array<SelectOption>;
 }
 
 
 const CustomerHomePage = () => {
-  const [, setSortDetails] = useState({ sortType: '', value: '' });
+
   const currentUser = useAppSelector(selectCurrentUser);
   const userId = Number(currentUser?.id)
 
@@ -36,13 +36,6 @@ const CustomerHomePage = () => {
 
   console.log(data, "data___")
 
-  const handleSortChange = (sortType: 'year' | 'value', value: string) => {
-    setSortDetails({ sortType, value });
-  };
-
-  const getFirstName = (fullName: string) => {
-    return fullName.split(' ')[0];
-  };
 
 
   const dataNNPC = [
@@ -60,25 +53,17 @@ const CustomerHomePage = () => {
   const dynamicCardData: DynamicCardDataItem[] = [
     {
       type: 'primary',
-      title: 'Total Supplied Volume ',
-      content: '12,129,243,990.00',
+      title: 'All Time',
+      content: '0',
       icon: <RestaurantMenuOutlined />,
-      yearOptions: [2020, 2021, 2022],
-      valueOptions: [
-        { label: 'Revenue', value: 'revenue' },
-        { label: 'Profit', value: 'profit' },
-      ],
+      
     },
     {
       type: 'secondary',
-      title: 'Total Consumption Volume ',
-      content: '4,039,213,455.00',
+      title: 'Today ',
+      content: '0',
       icon: <FileDownloadDoneOutlined />,
-      yearOptions: [2020, 2021, 2022],
-      valueOptions: [
-        { label: 'Profit', value: 'profit' },
-        { label: 'Revenue', value: 'revenue' },
-      ],
+
     },
   ];
 
@@ -98,11 +83,12 @@ const CustomerHomePage = () => {
   return (
     <div className="h-fit w-full" >
       <div>
-        <div className='text-[30px] text-[#49526A] font-[700]'>Welcome {currentUser && (
+      <div className='text-[30px] text-[#49526A] font-[700]'>Home</div>
+        {/* <div className='text-[30px] text-[#49526A] font-[700]'>Welcome {currentUser && (
           <span className="text-[30px] text-[#49526A] font-[700] capitalize">
             {getFirstName(currentUser.name)}
           </span>
-        )}</div>
+        )}</div> */}
       </div>
       <div className='mt-8 h-fit grid grid-cols-1 xl:grid-cols-7 gap-6 ' id="stat-card-chart-parent">
         <div className="xl:col-span-5 col-span-1  order-last lg:order-first xl:order-last" id="cards">
@@ -114,9 +100,6 @@ const CustomerHomePage = () => {
                   title={card.title}
                   content={card.content}
                   icon={card.icon}
-                  onSortChange={handleSortChange}
-                  yearOptions={card.yearOptions}
-                  valueOptions={card.valueOptions}
                 />
               </div>
             ))}

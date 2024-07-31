@@ -125,7 +125,7 @@ const TabLayout: React.FC<TabLayoutProps> = ({
         <div className="flex-1 ml-[6px] rounded-xl" style={containerStyle}>
             <div className="w-full h-8 mb-[30px] justify-between items-center inline-flex flex-wrap" >
                 <div className="justify-start items-center gap-3 flex flex-grow">
-                    <div className="text-center text-[#49526A] font-semibold font-Mulish leading-loose ml-3 md:ml-0 text-2xl md:text-3xl lg:text-3xl" >{title}</div>
+                    <div className="text-center text-[#49526A] font-semibold font-Mulish leading-loose ml-3 md:ml-0 text-2xl md:text-3xl lg:text-3xl">{title}</div>
                 </div>
                 {showButtons && (
                     <div className="justify-end items-center gap-4 flex">
