@@ -8,7 +8,7 @@ const NotFound: React.FC = () => {
             <p className="text-[16px] md:text-xl text-gray-600 text-center">Sorry, the page you are looking for does not exist.</p>
             <Link to={'./admin'}>
                 <div className='mt-5'>
-                    <button className='border bg-[#53B052] text-white hover:bg-[#265929] text-[16px] text-gray-600 h-[44px] w-[180px] rounded-[6px]'>Back To Home Page</button>
+                    <button className='border bg-[#53B052] hover:bg-[#265929] text-[16px] text-white h-[44px] w-[180px] rounded-[6px]'>Back To Home Page</button>
                 </div>
             </Link>
         </div>
