@@ -1,43 +1,45 @@
 import React from 'react';
 
 /**
- * Properties for the StatisticDynamicCard component.
- * @typedef {Object} CardProps
- * @property {'primary' | 'secondary'} [type] - The type of card, either 'primary' or 'secondary'.
- * @property {string} [title] - The title text to display in the card.
- * @property {React.ReactNode} [content] - The main content to display in the card.
- * @property {React.ReactNode} [icon] - An optional icon to display in the card header.
- * @property {React.ReactNode} [dropdownIcon] - An optional icon to display in the dropdown.
- * @property {function('year' | 'value', string): void} [onSortChange] - Callback function called when the sort option changes.
- * @property {Array<number>} [yearOptions] - Array of year options for the year dropdown.
- * @property {Array<SelectOption>} [valueOptions] - Array of value options for the value dropdown.
+ * Props for the StatisticDynamicCard component.
+ * @typeof CardProps
+ * @type {object}
+ * @property {'primary' | 'secondary'} [type] - The type of the card, affecting its styling.
+ * @property {string} [title] - The title of the card.
+ * @property {React.ReactNode} [content] - The main content of the card.
+ * @property {React.ReactNode} [icon] - An optional icon to display on the card.
+ * @property {React.ReactNode} [dropdownIcon] - An icon to display in dropdown selectors.
+ * @property {Function} [onSortChange] - Callback function to handle sort changes.
+ * @property {Array<number>} [yearOptions] - Array of available years for sorting.
+ * @property {Array<SelectOption>} [valueOptions] - Array of options for value-based sorting.
  */
+interface CardProps {
+    type?: 'primary' | 'secondary';
+    title?: string;
+    content?: React.ReactNode;
+    icon?: React.ReactNode;
+    dropdownIcon?: React.ReactNode;
+    onSortChange?: (sortType: 'year' | 'value', value: string) => void;
+    yearOptions?: Array<number>;
+    valueOptions?: Array<SelectOption>;
+}
 
 /**
- * An option for the select dropdown.
- * @typedef {Object} SelectOption
- * @property {string} label - The display label for the option.
- * @property {string} value - The value for the option.
+ * Defines the shape of the selection option for dropdowns.
+ * @typeof SelectOption
+ * @type {object}
+ * @property {string} label - The display text of the option.
+ * @property {string} value - The value of the option.
  */
+interface SelectOption {
+    label: string;
+    value: string;
+}
 
 /**
- * A component that renders a dynamic statistic card with optional sorting capabilities.
- * 
- * @param {CardProps} props - The properties for the component.
- * @returns {JSX.Element} The rendered component.
- * 
- * @example
- * // Example usage of StatisticDynamicCard
- * <StatisticDynamicCard
- *   type="primary"
- *   title="Revenue"
- *   content="$5000"
- *   icon={<SomeIcon />}
- *   dropdownIcon={<DropdownIcon />}
- *   onSortChange={(sortType, value) => console.log(sortType, value)}
- *   yearOptions={[2021, 2022, 2023]}
- *   valueOptions={[{ label: 'High', value: 'high' }, { label: 'Low', value: 'low' }]}
- * />
+ * A dynamic card component for displaying statistical information with customizable sorting options.
+ * @param {CardProps} props - The properties passed to the component.
+ * @returns {React.FC} A functional React component.
  */
 const StatisticDynamicCard: React.FC<CardProps> = ({
     type = 'primary',
