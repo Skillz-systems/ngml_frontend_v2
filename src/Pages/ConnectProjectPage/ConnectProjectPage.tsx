@@ -22,24 +22,24 @@ const ConnectProjectPage: React.FC = () => {
         <div>
             <Heading as="h4" size="h4" color='primaryColor' className="font-bold text-gray-600">CONNECT PROJECTS</Heading>
             <div className='flex flex-col md:flex-row items-center justify-between mt-6 '>
-                    <Heading as="h6" size="h6" color='primaryColor' className="font-semibold text-gray-600">Upcoming Projects</Heading>
-                    <div className='flex gap-[16px]'>
+                <Heading as="h6" size="h6" color='primaryColor' className="font-semibold text-gray-600">Upcoming Projects</Heading>
+                <div className='flex gap-[16px]'>
                     <Notification
-                    count={4}
+                        count={4}
                         headerTitle="Messages"
                         renderIcon={() => <div><CalendarTodayOutlined style={{ fontSize: 'medium' }} /></div>}
                     />
-                            <Button
-                                type='outline'
-                                label='See All'
-                                radius='20px'
-                                width='96px'
-                                height='32px'
-                                action={() => { }}
+                    <Button
+                        type='outline'
+                        label='See All'
+                        radius='20px'
+                        width='96px'
+                        height='32px'
+                        action={() => { }}
 
-                            />
-                    </div>
+                    />
                 </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                 {dateCards.map((card, index) => (
                     <div key={index} onClick={() => handleCardClick(index)}>
