@@ -9,6 +9,7 @@ import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
 import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
 import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
+import OperationPage from '@/Pages/ManagerAdmin/OperationPage/OperationPage';
 import RequestPage from '@/Pages/RequestPage/RequestPage';
 import SiteVisitPage from '@/Pages/SiteVisitPage/SiteVisitPage';
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
@@ -24,6 +25,11 @@ export const admin = [
         path: '',
         element: <AdminHomePage />,
         index: true
+
+    },
+    {
+        path: '/admin/manager/operation',
+        element: <OperationPage />,
 
     },
     {
