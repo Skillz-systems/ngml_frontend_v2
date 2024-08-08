@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Button, CustomInput, DailyFrequencyTable, FileUploadInput, Heading, Modal } from '../../../Components/index';
 import images from '../../../assets/index';
 
@@ -19,20 +18,8 @@ const OperationPage: React.FC = () => {
         year: '',
     });
 
-    const navigate = useNavigate();
-    const location = useLocation();
-
     const toggleVolumeModal = (open: boolean) => {
         setIsVolumeModalOpen(open);
-        const searchParams = new URLSearchParams(location.search);
-
-        if (open) {
-            searchParams.set('createCustomer', 'true');
-        } else {
-            searchParams.delete('createCustomer');
-        }
-
-        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
     };
 
     const toggleUploadModal = (open: boolean) => {
@@ -47,15 +34,6 @@ const OperationPage: React.FC = () => {
         setVolumeUpload({ ...VolumeUpload, [key]: value });
     };
 
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const createCustomer = searchParams.get('createCustomer');
-
-        if (createCustomer === 'true') {
-            setIsVolumeModalOpen(true);
-        }
-    }, [location.search]);
-
     const handleCreateCustomer = () => {
         if (VolumeData.customer.trim() === '' || VolumeData.date.trim() === '') {
             alert('Please fill in all required fields.');
@@ -64,10 +42,11 @@ const OperationPage: React.FC = () => {
         console.log('Creating customer:', VolumeData);
         toggleVolumeModal(false);
         alert('Customer successfully registered!');
-        window.location.href = '/admin/records/customernewregistration';
     };
 
-    const options = ['Option 1', 'Option 2', 'Option 3'];
+    const options = ['Dangote Cement', 'BUA Cement', 'Fidelity Bank', 'Julius Berger', 'Nigerian Railway', 'Oando', 'Shell Nigeria', 'United Bank'];
+    const options1 = ['Dangote Cement', 'BUA Cement', 'Fidelity Bank', 'Julius Berger', 'Nigerian Railway', 'Oando', 'Shell Nigeria', 'United Bank'];
+    const options2 = ['Daily Data Sheet', 'Gas Certificate'];
 
     return (
         <div className="">
@@ -206,7 +185,7 @@ const OperationPage: React.FC = () => {
                     value={VolumeUpload.customerUpload}
                     handleChangeEvent={(value) => handleUploadInputChange(value, 'customerUpload')}
                     placeholder="Choose Customer"
-                    options={options}
+                    options={options1}
                 />
                 <CustomInput
                     type="select"
@@ -214,7 +193,7 @@ const OperationPage: React.FC = () => {
                     value={VolumeUpload.dataType}
                     handleChangeEvent={(value) => handleUploadInputChange(value, 'dataType')}
                     placeholder="Choose Date Type"
-                    options={options}
+                    options={options2}
                 />
                 <CustomInput
                     type="date"

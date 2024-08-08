@@ -1,9 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Modal } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
 import { DailyFrequencyData } from '../../../Data';
-import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
+import { Button, CustomInput, Modal } from '../../../Components/index';
 
 interface DailyFrequencyProps {
     id: number;
@@ -17,39 +15,41 @@ interface DailyFrequencyProps {
     companyNumber?: string;
     companyAddress?: string;
     datesent?: string;
+    frequency?: string;
+    value?: string;
+    rate?: string;
+    amount?: string;
 }
 
-const rows = DailyFrequencyData
+const rows = DailyFrequencyData;
 
-
-const DailyFrequencyTable = () => {
-    const [searchText] = useState<string>('');
+const DailyFrequencyTable: React.FC = () => {
     const [filteredRows, setFilteredRows] = useState<DailyFrequencyProps[]>(rows);
-    const [open, setOpen] = useState(false);
+    const [isVolumeModalOpen, setIsVolumeModalOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState<DailyFrequencyProps | null>(null);
     const [selectedMonth, setSelectedMonth] = useState<string>('');
     const [selectedYear, setSelectedYear] = useState<string>('');
 
     useEffect(() => {
         filterData();
-    }, [searchText, selectedMonth, selectedYear]);
+    }, [selectedMonth, selectedYear]);
 
     const handleOpen = (row: DailyFrequencyProps) => {
         setSelectedRow(row);
-        setOpen(true);
+        setIsVolumeModalOpen(true);
     };
 
-    const handleClose = () => setOpen(false);
-
+    const handleClose = () => {
+        setIsVolumeModalOpen(false);
+        setSelectedRow(null);
+    };
 
     const filterData = () => {
-        const lowercasedSearch = searchText.toLowerCase();
         const filtered = DailyFrequencyData.filter(row => {
-            const dateParts = row.datesent.split('/');
-            const rowMonth = dateParts[1];
-            const rowYear = dateParts[2];
+            const dateParts = row.datesent?.split('/');
+            const rowMonth = dateParts ? dateParts[1] : '';
+            const rowYear = dateParts ? dateParts[2] : '';
             return (
-                (row.companyname.toLowerCase().includes(lowercasedSearch) || row.companyType.toLowerCase().includes(lowercasedSearch)) &&
                 (selectedMonth ? rowMonth === selectedMonth : true) &&
                 (selectedYear ? rowYear === selectedYear : true)
             );
@@ -58,89 +58,15 @@ const DailyFrequencyTable = () => {
         setFilteredRows(filtered);
     };
 
-
-
-
-
     const columns: GridColDef[] = [
-        {
-            field: 'sn',
-            headerName: 'SN',
-            width: 60,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className='text-xs font-[600] text-[#49526A] leading-3'>
-                    {params.row.sn}
-                </div>
-            ),
-
-        },
-        {
-            field: 'name',
-            headerName: 'COMPANY NAME',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className='flex flex-col gap-[4px]'>
-                    <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
-                        {params.row.companyname}
-                    </div>
-                    <div
-                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
-                        {params.row.companyType}
-                    </div>
-                </div>
-            ),
-        },
-        {
-            field: 'frequency',
-            headerName: 'FREQUENCY',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div
-                    className='text-[12px] font-[600] text-[#49526A] leading-3'>
-                    {params.row.frequency}
-                </div>
-            ),
-        },
-        {
-            field: 'date',
-            headerName: 'DATE',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.datesent}
-                </div>
-            )
-        },
-        {
-            field: 'value',
-            headerName: 'VALUE (MILLION CUBIC FEET)',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.value}
-                </div>
-            )
-        },
-        {
-            field: 'rate',
-            headerName: 'RATE (NGN)',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.rate}
-                </div>
-            )
-        },
-        {
-            field: 'amount',
-            headerName: 'AMOUNT',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.amount}
-                </div>
-            )
-        },
+        { field: 'sn', headerName: 'SN', width: 60 },
+        { field: 'companyname', headerName: 'COMPANY NAME', flex: 1 },
+        { field: 'companyType', headerName: 'TYPE', flex: 1 },
+        { field: 'frequency', headerName: 'FREQUENCY', flex: 1 },
+        { field: 'datesent', headerName: 'DATE', flex: 1 },
+        { field: 'value', headerName: 'VALUE (MILLION CUBIC FEET)', flex: 1 },
+        { field: 'rate', headerName: 'RATE (NGN)', flex: 1 },
+        { field: 'amount', headerName: 'AMOUNT', flex: 1 },
         {
             field: 'action',
             headerName: 'ACTION',
@@ -153,40 +79,97 @@ const DailyFrequencyTable = () => {
                 </div>
             ),
         },
-    ]
-
-
-
+    ];
 
     return (
-        <div className=' mt-[20px] w-[100%] '>
+        <div className='mt-[20px] w-[100%]'>
             <Modal
-                open={open}
+                isOpen={isVolumeModalOpen}
                 onClose={handleClose}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
+                size='medium'
+                title='Daily Volume Record'
+                buttons={[
+                    <div className='flex gap-2 mb-[-10px]' key="buttons">
+                        <div className='w-[120px]'>
+                            <Button
+                                type="outline"
+                                label="Cancel"
+                                action={handleClose}
+                                color="#FFFFFF"
+                                fontStyle="italic"
+                                width="100%"
+                                height="40px"
+                                fontSize="16px"
+                                radius="20px"
+                            />
+                        </div>
+                        <div className='w-[260px]'>
+                            <Button
+                                type="secondary"
+                                label="Confirm"
+                                action={() => alert('Data saved!')}
+                                color="#FFFFFF"
+                                fontStyle="italic"
+                                width="100%"
+                                height="40px"
+                                fontSize="16px"
+                                radius="20px"
+                            />
+                        </div>
+                    </div>
+                ]}
             >
-                <div >
-                    {selectedRow && (
-                        <SelectedDateModal
-                            handleClose={handleClose}
-                            dateTime={'09th, Nov, 2023; 09:23:44Am'}
-                            status={selectedRow.status || 'Default Status'}
-                            companyName={selectedRow.companyname || 'Provide Company Name'}
-                            companyEmail={selectedRow.companyEmail || 'Provide an email address'}
-                            companyNumber={selectedRow.companyNumber || 'Provide a number'}
-                            availableDates={selectedRow.selectedDates || ['No Dates Available']}
-                            companyAddress={selectedRow.companyAddress || 'Provide an Address'}
-                            statusHeading={''}
+                {selectedRow && (
+                    <>
+                        <CustomInput
+                            required
+                            type="text"
+                            label='Company Name'
+                            value={selectedRow.companyname || ''}
+                            handleChangeEvent={() => {}}
+                            placeholder="Company Name"
                         />
-                    )}
-                </div>
+                        <CustomInput
+                            required
+                            type="text"
+                            label='Date'
+                            value={selectedRow.datesent || ''}
+                            handleChangeEvent={() => {}}
+                            placeholder="Date"
+                        />
+                        <CustomInput
+                            required
+                            type="text"
+                            label='Volume (Scf)'
+                            value={selectedRow.value || ''}
+                            handleChangeEvent={() => {}}
+                            placeholder="Volume"
+                        />
+                        <CustomInput
+                            required
+                            type="text"
+                            label='Rate (NGN)'
+                            value={selectedRow.rate || ''}
+                            handleChangeEvent={() => {}}
+                            placeholder="Rate"
+                        />
+                        <CustomInput
+                            required
+                            type="text"
+                            label='Amount'
+                            value={selectedRow.amount || ''}
+                            handleChangeEvent={() => {}}
+                            placeholder="Amount"
+                        />
+                    </>
+                )}
             </Modal>
-            <div className='flex flex-col md:flex-row justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%] '>
+
+            <div className='flex flex-col md:flex-row justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%]'>
                 <div className='flex items-center italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex items-center justify-between h-[60px] ' >
+                <div className='flex items-center justify-between h-[60px]'>
                     <div className='flex gap-[10px]'>
                         <select
                             value={selectedMonth}
@@ -211,7 +194,7 @@ const DailyFrequencyTable = () => {
                         <select
                             value={selectedYear}
                             onChange={e => setSelectedYear(e.target.value)}
-                            className='border border-[#CCD0DC] outline-none rounded-[32px] hover:border-[#00AF50] text-[12px] font-[600]  h-[32px]  w-[77px]'
+                            className='border border-[#CCD0DC] outline-none rounded-[32px] hover:border-[#00AF50] text-[12px] font-[600] h-[32px] w-[77px]'
                         >
                             <option value="">Year</option>
                             <option value="2022">2022</option>
@@ -236,7 +219,6 @@ const DailyFrequencyTable = () => {
                             paginationModel: { page: 0, pageSize: 13 },
                         },
                     }}
-
                     pageSizeOptions={[5, 10]}
                     sx={{
                         width: '100%',
@@ -250,7 +232,6 @@ const DailyFrequencyTable = () => {
                                 color: '#050505',
                                 fontWeight: '700',
                                 fontSize: '12px',
-
                             },
                         },
                     }}
@@ -258,8 +239,6 @@ const DailyFrequencyTable = () => {
             </div>
         </div>
     );
-}
+};
 
-export default DailyFrequencyTable
-
-
+export default DailyFrequencyTable;
