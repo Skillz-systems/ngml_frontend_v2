@@ -48,6 +48,7 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
       >
         <div className='flex items-center gap-2 w-[100%]'>
           <div
+            data-testid="icon-container"
             className={`${iconBgColor} py-1`}
             onMouseEnter={handleIconHover}
             onMouseLeave={handleIconLeave}
