@@ -19,7 +19,7 @@ const BidPage: React.FC = () => {
                     />
                 </div>
             </div>
-            <div className='flex flex-col md:flex-row items-center gap-4 mt-6 ' >
+            <div className='flex flex-col md:flex-row items-center gap-4 mt-6 cursor-pointer'>
                 <StatisticRectangleCard
                     title='Open Tenders'
                     icon={<img src={images.filterIcon} alt="filters icon" />}
@@ -33,6 +33,7 @@ const BidPage: React.FC = () => {
                     value='125'
                     valueColor='text-black'
                     iconBgColor='bg-nnpc-50 rounded-[10px]'
+                    
                 />
             </div>
             <div className='w-full mt-10'>

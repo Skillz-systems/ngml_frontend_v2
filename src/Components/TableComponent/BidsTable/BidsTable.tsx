@@ -98,10 +98,10 @@ const BidsTable = () => {
         setFilteredRows(filtered);
     };
 
-    const handleOpen = (row: BidsTableProps) => {
-        setSelectedRow(row);
-        setOpen(true);
-    };
+    // const handleOpen = (row: BidsTableProps) => {
+    //     setSelectedRow(row);
+    //     setOpen(true);
+    // };
 
     const handleClose = () => setOpen(false);
 
