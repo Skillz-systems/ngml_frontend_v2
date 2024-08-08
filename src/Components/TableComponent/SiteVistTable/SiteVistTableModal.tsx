@@ -3,14 +3,14 @@ import { Box } from '@mui/material';
 import Button from '../../ButtonComponent/Button';
 
 interface SelectedDateModalprops {
-  dateTime: string;
-  status: string;
-  companyName: string;
-  companyEmail: string;
-  companyNumber: string;
-  availableDates: string[];
-  companyAddress: string;
-  statusHeading: string;
+  dateTime?: string;
+  status?: string;
+  companyName?: string;
+  companyEmail?: string;
+  companyNumber?: string;
+  availableDates?: string[];
+  companyAddress?: string;
+  statusHeading?: string;
   handleClose: () => void;
   statusStyle?: React.CSSProperties;
 }
