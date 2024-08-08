@@ -9,7 +9,7 @@ export const AdminLinks = [
     icon: images.Businessicon,
     type: 'secondary',
     subMenu: [
-      { id: 1, name: 'Operations', to: '', icon: images.designation, type: 'primary' },
+      { id: 1, name: 'Operations', to: '/admin/manager/operation', icon: images.designation, type: 'primary' },
       { id: 2, name: 'Contracts', to: '', icon: images.staff, type: 'primary' },
       { id: 3, name: 'Legal', to: '', icon: images.edit, type: 'primary' },
       { id: 4, name: 'Accounts', to: '', icon: images.accounticon, type: 'primary' },
