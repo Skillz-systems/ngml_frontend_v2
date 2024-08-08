@@ -66,7 +66,7 @@ const BidsTable = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [filteredRows, setFilteredRows] = useState<BidsTableProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<BidsTableProps | null>(null);
+    const [selectedRow] = useState<BidsTableProps | null>(null);
     const [selectedDetailType, setSelectedDetailType] = useState<string>('All Types');
     const [selectedDetailDept, setSelectedDetailDept] = useState<string>('All Departments');
 
