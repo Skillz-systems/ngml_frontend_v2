@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import OperationPage from './OperationPage';
 import { MemoryRouter } from 'react-router-dom';
+import OperationPage from './OperationPage';
 
 
 const meta: Meta = {
@@ -27,7 +27,7 @@ export const Default: Story = {
 export const WithVolume: Story = {
     render: () => (
         <MemoryRouter>
-            <OperationPage/>
+            <OperationPage />
         </MemoryRouter>
     ),
 };

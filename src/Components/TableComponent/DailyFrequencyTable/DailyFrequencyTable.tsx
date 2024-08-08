@@ -106,7 +106,7 @@ const DailyFrequencyTable: React.FC = () => {
                         <div className='w-[260px]'>
                             <Button
                                 type="secondary"
-                                label="Confirm"
+                                label="Modify"
                                 action={() => alert('Data saved!')}
                                 color="#FFFFFF"
                                 fontStyle="italic"
