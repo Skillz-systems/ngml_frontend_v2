@@ -180,6 +180,7 @@ const OperationPage: React.FC = () => {
                 ]}
             >
                 <CustomInput
+                    required
                     type="select"
                     label='Customer'
                     value={VolumeUpload.customerUpload}
@@ -188,6 +189,7 @@ const OperationPage: React.FC = () => {
                     options={options1}
                 />
                 <CustomInput
+                    required
                     type="select"
                     label='Date Type'
                     value={VolumeUpload.dataType}
@@ -196,6 +198,7 @@ const OperationPage: React.FC = () => {
                     options={options2}
                 />
                 <CustomInput
+                    required
                     type="date"
                     label='Year'
                     value={VolumeUpload.year}
