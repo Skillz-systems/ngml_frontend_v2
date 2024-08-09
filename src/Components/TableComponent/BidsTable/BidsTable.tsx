@@ -1,10 +1,20 @@
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import { TenderTitleData } from '@/Data';
-import { FilterList, SearchOutlined } from '@mui/icons-material';
-import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
+import { SearchOutlined } from '@mui/icons-material';
+import { InputAdornment, Modal, TextField, MenuItem, Select, FormControl, SelectChangeEvent } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
+interface NavigateButtonProps {
+    to: string;
+}
+
 
 /**
  * Represents the properties of a single bid in the bids table.
@@ -19,29 +29,31 @@ import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
  * @property {string} [companyEmail] - Optional email address of the company.
  * @property {string} [companyNumber] - Optional contact number of the company.
  * @property {string} [companyAddress] - Optional physical address of the company.
+ * @property {string} tenderTitle - The title of the tender.
+ * @property {Detail[]} details - Array of details associated with the bid.
+ * @property {string} [datesubmitted] - Date the bid was submitted.
  */
 interface BidsTableProps {
     id: number;
     companyname: string;
     companyType: string;
-    selectedDates?: string[];
-    status: string;
-    action: string;
-    deadline?: string;
     companyEmail?: string;
     companyNumber?: string;
     companyAddress?: string;
-
+    tenderTitle: string;
+    details: Detail[];
+    datesubmitted?: string;
+    action: string;
+    deadline?: string;
 }
 
 /**
  * Represents additional details for a bid.
- * @typedef {Object} Detail
+ * @typeof {Object} Detail
  * @property {string} type - The type of detail.
  * @property {string} type2 - An additional type of detail.
  * @property {string} dept - The department associated with the detail.
  */
-
 interface Detail {
     type: string;
     type2: string;
@@ -50,39 +62,72 @@ interface Detail {
 
 const rows = TenderTitleData as unknown as BidsTableProps[];
 
-
-
-
 const BidsTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows] = useState<BidsTableProps[]>(rows);
+    const [filteredRows, setFilteredRows] = useState<BidsTableProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<BidsTableProps | null>(null);
-    const [, setSelectedAgreement] = useState<string>('All Contracts');
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [selectedRow] = useState<BidsTableProps | null>(null);
+    const [selectedDetailType, setSelectedDetailType] = useState<string>('All Types');
+    const [selectedDetailDept, setSelectedDetailDept] = useState<string>('All Departments');
 
-    /**
-     * Handles the action of clicking the filter button. Toggles the visibility of the dropdown and resets the selected agreement filter.
-     */
-    const handleFilterClick = () => {
-        setDropdownOpen(!dropdownOpen);
-        setSelectedAgreement('All Contracts');
+    useEffect(() => {
+        filterRows();
+    }, [searchText, selectedDetailType, selectedDetailDept]);
+
+    const filterRows = () => {
+        let filtered = rows;
+
+        if (searchText) {
+            filtered = filtered.filter(row =>
+                row.companyname.toLowerCase().includes(searchText.toLowerCase())
+            );
+        }
+
+        if (selectedDetailType !== 'All Types') {
+            filtered = filtered.filter(row =>
+                row.details.some(detail => detail.type === selectedDetailType)
+            );
+        }
+
+        if (selectedDetailDept !== 'All Departments') {
+            filtered = filtered.filter(row =>
+                row.details.some(detail => detail.dept === selectedDetailDept)
+            );
+        }
+
+        setFilteredRows(filtered);
     };
 
-
-    const handleOpen = (row: BidsTableProps) => {
-        setSelectedRow(row);
-        setOpen(true);
-    };
+    // const handleOpen = (row: BidsTableProps) => {
+    //     setSelectedRow(row);
+    //     setOpen(true);
+    // };
 
     const handleClose = () => setOpen(false);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
-        setSearchText(value);
+        setSearchText(event.target.value);
+    };
+
+    const handleDetailTypeChange = (event: SelectChangeEvent<string>) => {
+        setSelectedDetailType(event.target.value);
+    };
+
+    const handleDetailDeptChange = (event: SelectChangeEvent<string>) => {
+        setSelectedDetailDept(event.target.value);
     };
 
 
+    const NavigateButton: React.FC<NavigateButtonProps> = ({ to }) => {
+        const navigate = useNavigate();
+        return (
+            <div
+                onClick={() => navigate(to)}
+                className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
+                View
+            </div>
+        );
+    };
 
     const columns: GridColDef[] = [
         {
@@ -94,7 +139,6 @@ const BidsTable = () => {
                     {params.row.sn}
                 </div>
             ),
-
         },
         {
             field: 'name',
@@ -105,8 +149,7 @@ const BidsTable = () => {
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
                         {params.row.companyname}
                     </div>
-                    <div
-                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
+                    <div className='text-[10px] font-[400] text-[#828DA9] leading-3'>
                         {params.row.companyType}
                     </div>
                 </div>
@@ -115,10 +158,9 @@ const BidsTable = () => {
         {
             field: 'tenderTitle',
             headerName: 'TITLE OF TENDER',
-            flex: 1,
+            flex: 3,
             renderCell: (params: GridRenderCellParams) => (
-                <div
-                    className='text-[14px] font-[700] text-[#49526A] leading-3'>
+                <div className='text-[14px] font-[700] text-[#49526A] leading-3'>
                     {params.row.tenderTitle}
                 </div>
             ),
@@ -128,10 +170,10 @@ const BidsTable = () => {
             headerName: 'DATE SUBMITTED',
             flex: 1,
             renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 ml-4'>
                     {params.row.datesubmitted}
                 </div>
-            )
+            ),
         },
         {
             field: 'details',
@@ -141,71 +183,63 @@ const BidsTable = () => {
                 <ul className='text-[12px] font-[700] text-[#49526A] leading-3 '>
                     {params.row.details.map((detail: Detail, index: number) => (
                         <div key={index} className='text-[12px] font-[600] text-[#828DA9] flex flex-col gap-[10px] '>
-                            <div className=' gap-[14px] flex items-center'>
+                            <div className='gap-[14px] flex items-center'>
                                 <div>TYPE</div>
                                 <div className='bg-[#D2F69E] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.type}</div>
                             </div>
-                            <div className=' gap-[10px] flex items-center'>
+                            <div className='gap-[10px] flex items-center'>
                                 <div>TYPE2</div>
                                 <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.type2}</div>
                             </div>
-                            <div className=' gap-[14px] flex items-center'>
+                            <div className='gap-[14px] flex items-center'>
                                 <div>DEPT</div>
                                 <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.dept}</div>
                             </div>
                         </div>
                     ))}
                 </ul>
-            )
+            ),
         },
-
-
         {
             field: 'action',
             headerName: 'ACTION',
             flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div
-                    onClick={() => handleOpen(params.row)}
-                    className=' text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
-                    View
-                </div>
-            ),
+            renderCell: () => {
+                return (
+                    <NavigateButton to={`/admin/records/bidspage`} />
+                );
+            },
         },
-    ]
-
-
-
+    ];
 
     return (
-        <div className='mt-[20px] w-[100%] '>
+        <div className='mt-[20px] w-[100%]'>
             <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
             >
-                <div >
+                <div>
                     {selectedRow && (
                         <SelectedDateModal
                             handleClose={handleClose}
                             dateTime={'09th, Nov, 2023; 09:23:44Am'}
-                            status={selectedRow.status || 'Default Status'}
+                            status={selectedRow.tenderTitle || 'Default Status'}
                             companyName={selectedRow.companyname || 'Provide Company Name'}
                             companyEmail={selectedRow.companyEmail || 'Provide an email address'}
                             companyNumber={selectedRow.companyNumber || 'Provide a number'}
-                            availableDates={selectedRow.selectedDates || ['No Dates Available']}
                             companyAddress={selectedRow.companyAddress || 'Provide an Address'}
-                            statusHeading={selectedRow.status}
+                            statusHeading={selectedRow.tenderTitle}
                         />
                     )}
                 </div>
             </Modal>
-            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0  p-[18px] w-[100%] '>
+            <div className='flex flex-col md:flex-row items-center justify-between rounded-t-lg border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%]'>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
-                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]' >
+                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]'>
                     <TextField
                         id="search-input"
                         label="Search this list"
@@ -239,7 +273,7 @@ const BidsTable = () => {
                             },
                             '& .MuiInputLabel-root': {
                                 color: 'gray',
-                                fontSize: '10px',
+                                fontSize: '12px',
                                 fontStyle: 'italic',
                                 '&.Mui-focused': {
                                     color: 'green',
@@ -247,16 +281,65 @@ const BidsTable = () => {
                             },
                         }}
                     />
-                    <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
-                        <div className='text-[12px] font-[400] text-[#828DA9] '>All Bids</div>
-                        <IconButton onClick={handleFilterClick}>
-                            <FilterList />
-                        </IconButton>
-
-                    </div>
+                    <FormControl variant="outlined" size="small" sx={{ minWidth: 150 }}>
+                        <Select
+                            value={selectedDetailType}
+                            onChange={handleDetailTypeChange}
+                            sx={{
+                                borderRadius: '32px',
+                                height: '35px',
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: '#CCD0DC',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: '#00AF50',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#00AF50',
+                                    },
+                                },
+                                '& .MuiMenuItem-root': {
+                                    fontSize: '12px',
+                                },
+                            }}
+                        >
+                            <MenuItem value="All Types" sx={{ fontSize: '12px' }}>All Types</MenuItem>
+                            <MenuItem value="Open Tender" sx={{ fontSize: '12px' }}>Open Tender</MenuItem>
+                            <MenuItem value="Closed Tender" sx={{ fontSize: '12px' }}>Closed Tender</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <FormControl variant="outlined" size="small" sx={{ minWidth: 150 }}>
+                        <Select
+                            value={selectedDetailDept}
+                            onChange={handleDetailDeptChange}
+                            sx={{
+                                borderRadius: '32px',
+                                height: '35px',
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: '#CCD0DC',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: '#00AF50',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#00AF50',
+                                    },
+                                },
+                                '& .MuiMenuItem-root': {
+                                    fontSize: '12px',
+                                },
+                            }}
+                        >
+                            <MenuItem value="All Departments" sx={{ fontSize: '12px' }}>All Departments</MenuItem>
+                            <MenuItem value="COBD" sx={{ fontSize: '12px' }}>COBD</MenuItem>
+                            <MenuItem value="ADMIN" sx={{ fontSize: '12px' }}>ADMIN</MenuItem>
+                            <MenuItem value="HR" sx={{ fontSize: '12px' }}>HR</MenuItem>
+                        </Select>
+                    </FormControl>
                 </div>
             </div>
-
             <div>
                 <DataGrid
                     className="pointer-cursor-datagrid"
@@ -269,19 +352,18 @@ const BidsTable = () => {
                             paginationModel: { page: 0, pageSize: 13 },
                         },
                     }}
-
                     sx={{
                         width: '100%',
                         background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
-                            outline: 'none',                        },
+                            outline: 'none',
+                        },
                         '& .MuiDataGrid-columnHeaders': {
                             backgroundColor: '#F6FDEC',
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
                                 fontWeight: '700',
                                 fontSize: '12px',
-
                             },
                         },
                     }}
@@ -289,8 +371,8 @@ const BidsTable = () => {
             </div>
         </div>
     );
-}
+};
 
-export default BidsTable
+export default BidsTable;
 
 
