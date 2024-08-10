@@ -15,6 +15,7 @@ import SiteVisitPage from '@/Pages/SiteVisitPage/SiteVisitPage';
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
+import TenderPage from '@/Pages/TenderPage/TenderPage';
 
 
 
@@ -118,6 +119,11 @@ export const admin = [
     {
         path: '/admin/records/bidspage',
         element: <BidPage />,
+
+    },
+    {
+        path: '/admin/records/bidspage/opentender',
+        element: <TenderPage />,
 
     },
 

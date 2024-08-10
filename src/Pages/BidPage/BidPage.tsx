@@ -26,6 +26,7 @@ const BidPage: React.FC = () => {
                     value='72'
                     valueColor='text-nnpcmediumgreen-700'
                     iconBgColor='rounded-[10px] bg-nnpcmediumgreen-500'
+                    to='/admin/records/bidspage/opentender'
                 />
                 <StatisticRectangleCard
                     title='Submitted Bids'

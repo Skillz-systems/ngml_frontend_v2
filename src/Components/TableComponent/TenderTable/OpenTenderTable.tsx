@@ -1,6 +1,6 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
-import { TenderTitleData } from '@/Data';
+import { OPenTenderTitleData } from '@/Data';
 import { SearchOutlined } from '@mui/icons-material';
 import { InputAdornment, Modal, TextField, MenuItem, Select, FormControl, SelectChangeEvent } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
@@ -10,11 +10,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-
 interface NavigateButtonProps {
     to: string;
 }
-
 
 /**
  * Represents the properties of a single bid in the bids table.
@@ -33,7 +31,7 @@ interface NavigateButtonProps {
  * @property {Detail[]} details - Array of details associated with the bid.
  * @property {string} [datesubmitted] - Date the bid was submitted.
  */
-interface BidsTableProps {
+interface OpenTenderTableProps {
     id: number;
     companyname: string;
     companyType: string;
@@ -43,6 +41,7 @@ interface BidsTableProps {
     tenderTitle: string;
     details: Detail[];
     datesubmitted?: string;
+    department: string; 
     action: string;
     deadline?: string;
 }
@@ -57,16 +56,15 @@ interface BidsTableProps {
 interface Detail {
     type: string;
     type2: string;
-    dept: string;
 }
 
-const rows = TenderTitleData as unknown as BidsTableProps[];
+const rows = OPenTenderTitleData as unknown as OpenTenderTableProps[];
 
-const BidsTable = () => {
+const OpenTenderTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<BidsTableProps[]>(rows);
+    const [filteredRows, setFilteredRows] = useState<OpenTenderTableProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow] = useState<BidsTableProps | null>(null);
+    const [selectedRow] = useState<OpenTenderTableProps | null>(null);
     const [selectedDetailType, setSelectedDetailType] = useState<string>('All Types');
     const [selectedDetailDept, setSelectedDetailDept] = useState<string>('All Departments');
 
@@ -79,7 +77,7 @@ const BidsTable = () => {
 
         if (searchText) {
             filtered = filtered.filter(row =>
-                row.companyname.toLowerCase().includes(searchText.toLowerCase())
+                row.tenderTitle.toLowerCase().includes(searchText.toLowerCase())
             );
         }
 
@@ -91,12 +89,14 @@ const BidsTable = () => {
 
         if (selectedDetailDept !== 'All Departments') {
             filtered = filtered.filter(row =>
-                row.details.some(detail => detail.dept === selectedDetailDept)
+                row.department === selectedDetailDept
             );
         }
 
         setFilteredRows(filtered);
     };
+
+
 
 
     const handleClose = () => setOpen(false);
@@ -137,16 +137,23 @@ const BidsTable = () => {
             ),
         },
         {
-            field: 'name',
-            headerName: 'COMPANY NAME',
+            field: 'datesubmitted',
+            headerName: 'DATE SUBMITTED',
+            flex: 1,
+            renderCell: (params) => (
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3 ml-4'>
+                    {params.row.datesubmitted}
+                </div>
+            ),
+        },
+        {
+            field: 'department',
+            headerName: 'DEPARTMENT',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='flex flex-col gap-[4px]'>
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
-                        {params.row.companyname}
-                    </div>
-                    <div className='text-[10px] font-[400] text-[#828DA9] leading-3'>
-                        {params.row.companyType}
+                        {params.row.department}
                     </div>
                 </div>
             ),
@@ -161,16 +168,7 @@ const BidsTable = () => {
                 </div>
             ),
         },
-        {
-            field: 'datesubmitted',
-            headerName: 'DATE SUBMITTED',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3 ml-4'>
-                    {params.row.datesubmitted}
-                </div>
-            ),
-        },
+       
         {
             field: 'details',
             headerName: 'DETAILS',
@@ -186,10 +184,6 @@ const BidsTable = () => {
                             <div className='gap-[10px] flex items-center'>
                                 <div>TYPE2</div>
                                 <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.type2}</div>
-                            </div>
-                            <div className='gap-[14px] flex items-center'>
-                                <div>DEPT</div>
-                                <div className='bg-[#EAEEF2] text-[12px] font-[700] text-[#050505] h-[24px] flex items-center justify-center p-[8px] rounded-[24px]'>{detail.dept}</div>
                             </div>
                         </div>
                     ))}
@@ -369,6 +363,6 @@ const BidsTable = () => {
     );
 };
 
-export default BidsTable;
+export default OpenTenderTable;
 
 
