@@ -63,6 +63,9 @@ export { default as SupplierDashboardTable } from './TableComponent/SupplierDash
 export { default as SupplierPaymentTable } from './TableComponent/SupplierPaymentTable/SupplierPaymentTable';
 export { default as SuppliersListTable } from './TableComponent/SuppliersListTable/SuppliersListTable';
 export { default as TenderTable } from './TableComponent/TenderTable/TenderTable';
+export { default as OpenTenderTable } from './TableComponent/TenderTable/OpenTenderTable';
+
+
 
 
 
