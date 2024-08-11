@@ -19,8 +19,8 @@ const ConnectProject: React.FC = () => {
     });
     const [firstGasDate, setFirstGasDate] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isNewModalOpen, setIsNewModalOpen] = useState(false); // New state for the additional modal
-    const [selectedDate, setSelectedDate] = useState(''); // State for selected date in modal
+    const [isNewModalOpen, setIsNewModalOpen] = useState(false); 
+    const [selectedDate, setSelectedDate] = useState(''); 
 
     const handleInputChange = (value: string, key: string) => {
         setProjectDate({ ...projectDate, [key]: value });
