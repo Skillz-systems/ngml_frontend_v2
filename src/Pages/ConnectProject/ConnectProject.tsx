@@ -61,8 +61,8 @@ const ConnectProject: React.FC = () => {
                 </div>
                 <div className="flex p-2 py-4 items-center justify-between w-full border rounded-xl">
                     <div className="text-[#808080] text-base font-600 font-['Mulish'] ml-4">First Gas Date</div>
-                    <div className="mr-2 bg-[#D2F69E] px-4 py-1 rounded-[20px]">
-                        <div className='text-[#53B052] text-[14px] font-700'>{firstGasDate || 'Add a date'}</div>
+                    <div className="mr-2 bg-[#D2F69E] px-2 py-1 rounded-[20px]">
+                        <div className='text-[#266425] text-[12px] font-[700]'>{firstGasDate || 'Add a date'}</div>
                     </div>
                 </div>
                 <div className="w-full h-full p-5 space-y-6 border rounded-xl">
@@ -143,14 +143,14 @@ const ConnectProject: React.FC = () => {
                 buttons={[
                     <Button
                         key="cancel"
-                        type="secondary"
+                        type="outline"
                         label="Cancel"
                         action={handleClose}
                         color="#FFFFFF"
                         width="100px"
                         height="40px"
                         fontSize="16px"
-                        radius="8px"
+                        radius="20px"
                     />,
                     <Button
                         key="confirm"
@@ -164,8 +164,8 @@ const ConnectProject: React.FC = () => {
                         width="100px"
                         height="40px"
                         fontSize="16px"
-                        radius="8px"
-                    />,
+                        radius="20px"
+                        />,
                 ]}
             >
                 <input
@@ -183,14 +183,14 @@ const ConnectProject: React.FC = () => {
                 buttons={[
                     <Button
                         key="cancel"
-                        type="secondary"
+                        type="outline"
                         label="Cancel"
                         action={handleCloseNewModal}
                         color="#FFFFFF"
                         width="150px"
                         height="40px"
                         fontSize="12px"
-                        radius="8px"
+                        radius="20px"
                     />,
                     <Button
                         key="saveContinue"
@@ -201,7 +201,7 @@ const ConnectProject: React.FC = () => {
                         width="150px"
                         height="40px"
                         fontSize="12px"
-                        radius="8px"
+                        radius="20px"
                     />,
                 ]}
             >
