@@ -68,7 +68,7 @@ const ConnectProject: React.FC = () => {
                     </div>
                 </div>
                 <div className="w-full h-full p-5 space-y-6 border rounded-xl">
-                    <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT MILESTONES </div>
+                    <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT MILESTONES</div>
                     <div className="">
                         <CustomInput
                             type="date"
