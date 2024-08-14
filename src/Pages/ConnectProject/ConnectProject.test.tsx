@@ -4,7 +4,7 @@ import ConnectProject from './ConnectProject';
 describe('ConnectProject Component', () => {
     test('renders without crashing', () => {
         render(<ConnectProject />);
-        const projectDatesText = screen.getByText(/PROJECT/i);
+        const projectDatesText = screen.getByText(/PROJECTS/i);
         expect(projectDatesText).toBeInTheDocument();
     });
 
