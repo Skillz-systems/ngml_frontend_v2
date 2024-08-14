@@ -19,8 +19,8 @@ const ConnectProject: React.FC = () => {
     });
     const [firstGasDate, setFirstGasDate] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isNewModalOpen, setIsNewModalOpen] = useState(false); 
-    const [selectedDate, setSelectedDate] = useState(''); 
+    const [isNewModalOpen, setIsNewModalOpen] = useState(false);
+    const [selectedDate, setSelectedDate] = useState('');
 
     const handleInputChange = (value: string, key: string) => {
         setProjectDate({ ...projectDate, [key]: value });
@@ -49,7 +49,9 @@ const ConnectProject: React.FC = () => {
                             onClick={() => setIsModalOpen(true)}
                             className="p-3 rounded-3xl border justify-center flex cursor-pointer"
                         >
-                            <div className="text-[14px] leading-none">Adjust First Gas Date</div>
+                            <div className="text-[14px] leading-none">
+                                {firstGasDate ? 'Adjust First Gas Date' : 'Set First Gas Date'}
+                            </div>
                         </div>
                         <div className="p-2 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
                             <div className="w-4 h-4 justify-center items-center flex">
@@ -66,7 +68,7 @@ const ConnectProject: React.FC = () => {
                     </div>
                 </div>
                 <div className="w-full h-full p-5 space-y-6 border rounded-xl">
-                    <div className="text-base font-bold font-['Mulish'] leading-none">PROJECT DATES</div>
+                    <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT MILESTONES</div>
                     <div className="">
                         <CustomInput
                             type="date"
@@ -109,11 +111,11 @@ const ConnectProject: React.FC = () => {
                 </div>
                 {areDatesSelected && (
                     <div className="w-full h-full p-6 space-y-6 border rounded-xl">
-                        <div className="text-base font-bold font-['Mulish'] leading-none">PROJECT DATES</div>
+                        <div className="text-base font-bold font-['Mulish'] leading-none">PROJECTS</div>
                         <div className='flex flex-col justify-start gap-4 md:flex-row'>
                             <Button
                                 type="secondary"
-                                label="Select Project Strategy"
+                                label="Tendering Process"
                                 action={handleCreateCustomer}
                                 color="#FFFFFF"
                                 height="40px"
@@ -123,7 +125,7 @@ const ConnectProject: React.FC = () => {
                             />
                             <Button
                                 type="primary"
-                                label="Setup Project Milestones"
+                                label="Main Project Activities"
                                 action={handleCreateCustomer}
                                 color="#FFFFFF"
                                 height="40px"
@@ -165,7 +167,7 @@ const ConnectProject: React.FC = () => {
                         height="40px"
                         fontSize="16px"
                         radius="20px"
-                        />,
+                    />,
                 ]}
             >
                 <input

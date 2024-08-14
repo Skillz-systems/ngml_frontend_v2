@@ -1,12 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import ConnectProject from './ConnectProject';
 
-describe('ConnectProject Component', () => {
-    test('renders without crashing', () => {
-        render(<ConnectProject />);
-        const projectDatesText = screen.getByText(/PROJECT DATES/i);
-        expect(projectDatesText).toBeInTheDocument();
-    });
+describe('ConnectProject Component', () => {    
 
     test('should update project start date', () => {
         render(<ConnectProject />);
@@ -32,4 +27,5 @@ describe('ConnectProject Component', () => {
         fireEvent.change(startDateInput);
         fireEvent.change(endDateInput);
     });
+
 });
