@@ -1,15 +1,57 @@
 import logo from '@/assets/images/png-icons/Done.png';
 import { FC, ReactNode } from 'react';
 
+/**
+ * Props for the ActionModal component.
+ * @interface
+ */
 interface ActionModalProps {
+    /**
+     * Whether the modal is open or closed.
+     * @type {boolean}
+     */
     isOpen: boolean;
+
+    /**
+     * Function to close the modal.
+     * @type {() => void}
+     */
     onClose: () => void;
+
+    /**
+     * Size of the modal.
+     * @type {'small' | 'medium' | 'large'}
+     * @default 'medium'
+     */
     size?: 'small' | 'medium' | 'large';
+
+    /**
+     * Title of the modal.
+     * @type {string}
+     */
     title: string;
+
+    /**
+     * Optional subtitle of the modal.
+     * @type {string}
+     * @default undefined
+     */
     subTitle?: string;
+
+    /**
+     * Optional button to display at the bottom of the modal.
+     * @type {ReactNode}
+     * @default undefined
+     */
     button?: ReactNode;
 }
 
+/**
+ * A modal component for displaying action-related messages.
+ * @component
+ * @param {ActionModalProps} props - The props for the ActionModal component.
+ * @returns {JSX.Element} The ActionModal component.
+ */
 const ActionModal: FC<ActionModalProps> = ({
     isOpen,
     size = 'medium',
@@ -17,6 +59,11 @@ const ActionModal: FC<ActionModalProps> = ({
     subTitle,
     button,
 }) => {
+    /**
+     * Determines the size class for the modal based on the provided size prop.
+     * @function
+     * @returns {string} The size class for the modal.
+     */
     const getSizeClass = () => {
         switch (size) {
             case 'small':
