@@ -218,12 +218,12 @@ const ExampleComponent = () => {
             <ActionModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
-                title="Action Required"
-                subTitle="Please confirm your action."
+                title="Your Changes Have Been Saved"
+                subTitle="You can come later to finish it."
                 button={
                     <button
                         onClick={handleCloseModal} // Define what happens when the button is clicked
-                        className="bg-green-900 text-white px-10 py-2 rounded-[20px]"
+                        className="bg-green-900 text-white px-10 py-1 rounded-[20px]"
                     >
                         Confirm
                     </button>

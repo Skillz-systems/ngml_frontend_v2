@@ -1,4 +1,4 @@
-import logo from '@/assets/images/png-icons/Done.png'; // Ensure this path is correct
+import logo from '@/assets/images/png-icons/Done.png';
 import { FC, ReactNode } from 'react';
 
 interface ActionModalProps {
@@ -36,29 +36,29 @@ const ActionModal: FC<ActionModalProps> = ({
                         <div className="absolute inset-0 bg-black opacity-20"></div>
                         <div className="relative z-50 w-full max-h-screen overflow-visible">
                             <div
-                                className={`relative z-50 mx-auto bg-white shadow-lg rounded-[20px] ${getSizeClass()} pt-16`}
+                                className={`space-y-10 relative z-50 mx-auto bg-white shadow-lg rounded-[20px] ${getSizeClass()} pt-16`}
                                 role="dialog"
                                 aria-modal="true"
                                 aria-labelledby="modal-headline"
                             >
                                 {/* Done Image Container */}
                                 <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-60">
-                                    <div className="w-28 h-28 rounded-full bg-green-200 flex items-center justify-center shadow-md">
-                                        <div className="w-24 h-24 rounded-full bg-green-500 flex items-center justify-center shadow-md">
-                                            <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-md">
+                                    <div className="w-[130px] h-[130px] rounded-full bg-[rgba(210,246,158,0.2)] flex items-center justify-center">
+                                        <div className="w-[105px] h-[105px] rounded-full bg-[rgba(210,246,158,0.5)] flex items-center justify-center">
+                                            <div className="w-[80px] h-[80px] rounded-full bg-[#D2F69E] flex items-center justify-center">
                                                 <img src={logo} alt="done logo" className="w-12 h-12" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="p-6 pt-10">
-                                    <div className="overflow-y-auto max-h-96">
-                                        <h2 id="modal-headline" className="text-lg font-semibold text-center mt-4">
+                                <div className="">
+                                    <div className="overflow-y-auto max-h-96 px-10">
+                                        <h1 id="modal-headline" className="text-xl text-center font-bold">
                                             {title}
-                                        </h2>
+                                        </h1>
                                         {subTitle && (
-                                            <h3 className="text-sm text-gray-300 text-center">
+                                            <h3 className="text-sm text-[#9CA3AF] text-center">
                                                 {subTitle}
                                             </h3>
                                         )}
@@ -67,7 +67,7 @@ const ActionModal: FC<ActionModalProps> = ({
                                 <div className="relative">
                                     <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 bg-white w-4 h-4 -rotate-45"></div>
                                 </div>
-                                <div className="bg-green-500 px-20 py-4 rounded-b-[20px]">
+                                <div className="bg-green-500 px-20 py-10 rounded-b-[20px]">
                                     <div className="flex justify-center">
                                         {button}
                                     </div>
