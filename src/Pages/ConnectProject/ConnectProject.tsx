@@ -44,6 +44,7 @@ const ConnectProject: React.FC = () => {
 
     const handleTenderingProcessComplete = () => {
         setIsTenderingComplete(true);
+        setIsNewModalOpen(true);
     };
 
 
