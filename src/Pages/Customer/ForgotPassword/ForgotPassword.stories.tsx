@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import ForgotPassword from './ForgotPassword';
 
 const meta: Meta = {
-    title: 'Pages/ForgotPassword',
+    title: 'Pages/Customer/ForgotPasswordPage',
     component: ForgotPassword,
     parameters: {
     }, tags: ['autodocs'],
