@@ -208,3 +208,8 @@ body {
       font-size: 8px;
   }
 } */
+
+
+.custom-radio input[type="radio"] {
+  accent-color: #28a745; 
+}
