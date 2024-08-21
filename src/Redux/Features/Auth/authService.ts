@@ -1,95 +1,76 @@
+
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
 
-interface Customer {
-  id: number;
-  task_id: number;
-  company_name: string;
+type LoginRequest = {
   email: string;
-  phone_number: string;
-  created_by_user_id: number;
-  status: boolean;
-  created_at: string;
-  updated_at: string;
-}
+  password: string;
+  scope:string;
+};
 
+type RegisterRequest = {
+  name: string;
+  email: string;
+  password?: string;
+};
+
+type AuthResponse = {
+  jwt: string;
+  user: {
+    id: string;
+    email: string;
+    name: string;
+    email_verified_at?: string | null;
+    created_at?: string;
+    updated_at?: string | null;
+    role?: string;
+  };
+};
 type ErrorResponse = {
   error: string;
 };
 
-export const customersApi = api.injectEndpoints({
+export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getCustomers: builder.query<Customer[], void>({
-      query: () => '/customers',
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
-    }),
-    addCustomer: builder.mutation<Customer, Omit<Customer, 'id'>>({
-      query: (customer) => ({
-        url: '/customers',
+    login: builder.mutation<AuthResponse, LoginRequest>({
+      query: (credentials: LoginRequest) => ({
+        url: '/users/api/login',
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: customer,
+        body: credentials,
       }),
-      transformResponse: (response: Customer | ErrorResponse) => {
+
+      transformResponse: (response: AuthResponse | ErrorResponse) => {
+        console.log(response);
         if ('error' in response) {
           throw new Error(response.error);
         }
         return response;
       },
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+        const errorResponse: ErrorResponse =
+          baseQueryReturnValue.data as ErrorResponse;
         return errorResponse;
       },
     }),
-    updateCustomer: builder.mutation<Customer, Partial<Customer> & { id: number }>({
-      query: ({ id, ...updates }) => ({
-        url: `/customers/${id}`,
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: updates,
+    register: builder.mutation<AuthResponse, RegisterRequest>({
+      query: (credentials: RegisterRequest) => ({
+        url: '/users/api/register',
+        method: 'POST',
+        body: credentials,
       }),
-      transformResponse: (response: Customer | ErrorResponse) => {
-        if ('error' in response) {
-          throw new Error(response.error);
-        }
-        return response;
-      },
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
+      transformResponse: (response: {
+        jwt: string;
+        user: AuthResponse['user'];
+      }) => response,
     }),
-    deleteCustomer: builder.mutation<{ success: boolean; id: number }, number>({
-      query: (id) => ({
-        url: `/customers/${id}`,
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: '/users/api/logout',
+        method: 'POST',
       }),
-      transformResponse: (response: { success: boolean; id: number } | ErrorResponse) => {
-        if ('error' in response) {
-          throw new Error(response.error);
-        }
-        // Ensure both 'success' and 'id' are returned
-        if ('success' in response && 'id' in response) {
-          return response;
-        }
-        throw new Error('Invalid response format');
-      },
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
     }),
   }),
-  overrideExisting: false,
 });
 
-export const {
-  useGetCustomersQuery,
-  useAddCustomerMutation,
-  useUpdateCustomerMutation,
-  useDeleteCustomerMutation,
-} = customersApi;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation } =
+  authApi;
