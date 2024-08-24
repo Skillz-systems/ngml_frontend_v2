@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import { Button, Heading, LocationCard, Modal } from '@/Components';
 import { ArrowBack } from '@mui/icons-material';
@@ -8,22 +7,22 @@ import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/Customer';
 import AddNewLocationModal from './AddNewLocationModal';
 
 const CustomerLocation: React.FC = () => {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { customerId } = useParams<{ customerId: string }>();
-
-  const [companyData, setCompanyData] = useState({
-        companyaddress: '',
-      });
-
+  const navigate = useNavigate();
 
   const { data: customer, error, isLoading } = useGetCustomerByIdQuery(Number(customerId));
+
+  console.log(customerId, 'ggggggggg');
+  
+
+  const [companyData, setCompanyData] = useState({
+    companyaddress: '',
+  });
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
-  const navigate = useNavigate();
 
   const handleLocationClick = (locationId?: number) => {
     navigate(`/admin/records/customer/${customerId}/${locationId}/details`);
@@ -45,7 +44,7 @@ const CustomerLocation: React.FC = () => {
             </div>
           </Link>
           <Heading color='primaryColor' className="font-bold text-gray-600 text-[23px]">
-            {customer?.company_name.toUpperCase()} LOCATIONS
+            {customer?.data?.company_name.toUpperCase()}
           </Heading>
         </div>
         <div onClick={toggleModal} >
@@ -56,7 +55,7 @@ const CustomerLocation: React.FC = () => {
       </div>
       <div className='h-fit w-[100%] rounded-[20px] px-6'>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
-          {customer?.sites.map((site) => (
+          {customer?.data?.sites.map((site) => (
             <div
               key={site.id}
               onClick={() => handleLocationClick(site.id)}
@@ -65,7 +64,7 @@ const CustomerLocation: React.FC = () => {
               <LocationCard
                 label={site.site_name}
                 value={site.site_address}
-                primary={site.status}
+                primary={false}
               />
             </div>
           ))}
@@ -109,7 +108,7 @@ const CustomerLocation: React.FC = () => {
         ]}
       >
         <AddNewLocationModal
-         companyData={companyData}
+          companyData={companyData}
           setCompanyData={setCompanyData}
         />
       </Modal>
@@ -118,10 +117,6 @@ const CustomerLocation: React.FC = () => {
 };
 
 export default CustomerLocation;
-
-
-
-
 
 
 

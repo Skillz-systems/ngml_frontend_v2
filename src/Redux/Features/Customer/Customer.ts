@@ -1,7 +1,8 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
 
-type Customer = {
+
+export interface DataObj {
   id: number;
   task_id: number;
   company_name: string;
@@ -11,25 +12,31 @@ type Customer = {
   status: boolean;
   created_at: string;
   updated_at: string;
-  sites: [
-    {
-      id: number;
-      task_id: number;
-      site_address: string;
-      ngml_zone_id: number;
-      site_name: string;
-      phone_number: string;
-      email: string;
-      site_contact_person_name: string;
-      site_contact_person_email: string;
-      site_contact_person_phone_number: string;
-      site_existing_status: boolean;
-      status: boolean;
-      created_at: string;
-      updated_at: string;
-    },
-  ];
-};
+  sites: Array<{
+    id: number;
+    task_id: number;
+    site_address: string;
+    ngml_zone_id: number;
+    site_name: string;
+    phone_number: string;
+    email: string;
+    site_contact_person_name: string;
+    site_contact_person_email: string;
+    site_contact_person_phone_number: string;
+    site_existing_status: boolean;
+    status: boolean;
+    created_at: string;
+    updated_at: string;
+  }>;
+}
+
+export interface Customer {
+  data: DataObj[];
+}
+
+export interface GetCustomer {
+  data: DataObj;
+}
 
 type ErrorResponse = {
   error: string;
@@ -37,14 +44,14 @@ type ErrorResponse = {
 
 export const customersApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getCustomers: builder.query<Customer[], void>({
+    getCustomers: builder.query<Customer, void>({
       query: () => '/customer/api/customers',
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
         return errorResponse;
       },
     }),
-    getCustomerById: builder.query<Customer, number>({
+    getCustomerById: builder.query<GetCustomer, number>({
       query: (id) => `/customer/api/customers/${id}`,
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;

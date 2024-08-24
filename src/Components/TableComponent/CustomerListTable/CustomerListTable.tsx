@@ -4,47 +4,32 @@ import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useGetCustomersQuery } from '@/Redux/Features/Customer/Customer';
+import { DataObj, useGetCustomersQuery } from '@/Redux/Features/Customer/Customer';
 
-
-type Customer = {
-    id: number;
-    task_id: number;
-    company_name: string;
-    email: string;
-    phone_number: string;
-    created_by_user_id: number;
-    status: boolean;
-    created_at: string;
-    updated_at: string;
-    sites: [
-        {
-            id: number;
-            task_id: number;
-            site_address: string;
-            ngml_zone_id: number;
-            site_name: string;
-            phone_number: string;
-            email: string;
-            site_contact_person_name: string;
-            site_contact_person_email: string;
-            site_contact_person_phone_number: string;
-            site_existing_status: boolean;
-            status: boolean;
-            created_at: string;
-            updated_at: string;
-        },
-    ];
-};
 
 const CustomerListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<Customer[]>([]);
+    const [filteredRows, setFilteredRows] = useState<DataObj[]>([]);
     const [selectedStatus, setSelectedStatus] = useState<string>('All Statuses');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
 
-    const { data: customers = [], error, isLoading } = useGetCustomersQuery();
+    const { data: { data: customers = [] } = {}, error, isLoading } = useGetCustomersQuery();
+
+
+    console.log(customers, 'kkkkkkkk');
+
+    const filterData = () => {
+        const lowercasedSearch = searchText.toLowerCase();
+        let filtered = customers?.filter((row: { company_name: string; }) =>
+            row.company_name.toLowerCase().includes(lowercasedSearch)
+        );
+        if (selectedStatus !== 'All Statuses') {
+            const isActive = selectedStatus === 'Active';
+            filtered = filtered.filter((row: { status: boolean; }) => row.status === isActive);
+        }
+        setFilteredRows(filtered);
+    };
 
 
     useEffect(() => {
@@ -65,24 +50,14 @@ const CustomerListTable = () => {
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading customer data.</div>;
 
-    const uniqueStatuses = [...new Set(customers.map(row => row.status ? 'Active' : 'In-Active'))];
+    const uniqueStatuses = [...new Set(customers?.map((row: { status: any; }) => row.status ? 'true' : 'false'))];
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
     };
 
-    const filterData = () => {
-        const lowercasedSearch = searchText.toLowerCase();
-        let filtered = customers.filter(row =>
-            row.company_name.toLowerCase().includes(lowercasedSearch)
-        );
-        if (selectedStatus !== 'All Statuses') {
-            const isActive = selectedStatus === 'Active';
-            filtered = filtered.filter(row => row.status === isActive);
-        }
-        setFilteredRows(filtered);
-    };
+  
 
     const NavigateButton = ({ to }: { to: string }) => {
         const navigate = useNavigate();
@@ -124,24 +99,24 @@ const CustomerListTable = () => {
             flex: 2,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='flex flex-col gap-[4px]'>
-                    <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
+                    <div className='text-[14px] font-[500] text-[#49526A] leading-3'>
                         {params.row.email}
                     </div>
                 </div>
             ),
         },
-        // {
-        //     field: 'phone_number',
-        //     headerName: 'PHONE NUMBER',
-        //     flex: 1,
-        //     renderCell: (params: GridRenderCellParams) => (
-        //         <div className='flex flex-col gap-[4px]'>
-        //             <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
-        //                 {params.row.phone_number}
-        //             </div>
-        //         </div>
-        //     ),
-        // },
+        {
+            field: 'phone_number',
+            headerName: 'PHONE NUMBER',
+            flex: 1,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className='flex flex-col gap-[4px]'>
+                    <div className='text-[14px] font-[500] text-[#49526A] leading-3'>
+                        {params.row.phone_number}
+                    </div>
+                </div>
+            ),
+        },
         {
             field: 'status',
             headerName: 'STATUS',
@@ -181,7 +156,7 @@ const CustomerListTable = () => {
         <div className='mt-[20px] w-[100%]'>
             <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%]'>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
-                    Showing {filteredRows.length} of {customers.length} customers
+                    Showing {filteredRows.length} of {customers?.length} customers
                 </div>
                 <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]'>
                     <TextField
@@ -277,6 +252,5 @@ const CustomerListTable = () => {
 };
 
 export default CustomerListTable;
-
 
 
