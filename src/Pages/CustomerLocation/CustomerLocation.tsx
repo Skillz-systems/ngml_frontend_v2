@@ -100,7 +100,7 @@ const CustomerLocation: React.FC = () => {
                 fontStyle="italic"
                 width="100%"
                 height="40px"
-                fontSize="16px"
+                fontSize="14px"
                 radius="20px"
               />
             </div>
