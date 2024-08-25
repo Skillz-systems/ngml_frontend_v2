@@ -1,23 +1,22 @@
 
 import { useEffect, useState } from 'react';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams, GridPaginationModel } from '@mui/x-data-grid';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { DataObj, useGetCustomersQuery } from '@/Redux/Features/Customer/Customer';
-
 
 const CustomerListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [filteredRows, setFilteredRows] = useState<DataObj[]>([]);
     const [selectedStatus, setSelectedStatus] = useState<string>('All Statuses');
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
+    const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+        page: 0,
+        pageSize: 13,
+    });
 
     const { data: { data: customers = [] } = {}, error, isLoading } = useGetCustomersQuery();
-
-
-    console.log(customers, 'kkkkkkkk');
 
     const filterData = () => {
         const lowercasedSearch = searchText.toLowerCase();
@@ -31,20 +30,21 @@ const CustomerListTable = () => {
         setFilteredRows(filtered);
     };
 
-
     useEffect(() => {
         setFilteredRows(customers);
     }, [customers]);
-
 
     useEffect(() => {
         filterData();
     }, [searchText, selectedStatus, customers]);
 
-
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedStatus('All Statuses');
+    };
+
+    const handlePaginationChange = (model: GridPaginationModel) => {
+        setPaginationModel(model);
     };
 
     if (isLoading) return <div>Loading...</div>;
@@ -56,8 +56,6 @@ const CustomerListTable = () => {
         const value = event.target.value;
         setSearchText(value);
     };
-
-  
 
     const NavigateButton = ({ to }: { to: string }) => {
         const navigate = useNavigate();
@@ -152,11 +150,14 @@ const CustomerListTable = () => {
         },
     ];
 
+    const startRow = paginationModel.page * paginationModel.pageSize + 1;
+    const endRow = Math.min((paginationModel.page + 1) * paginationModel.pageSize, filteredRows.length);
+
     return (
         <div className='mt-[20px] w-[100%]'>
             <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%]'>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
-                    Showing {filteredRows.length} of {customers?.length} customers
+                    {`Showing ${startRow}-${endRow} of ${filteredRows.length} customers`}
                 </div>
                 <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]'>
                     <TextField
@@ -225,6 +226,8 @@ const CustomerListTable = () => {
                     columns={columns}
                     rowHeight={48}
                     autoHeight
+                    paginationModel={paginationModel}
+                    onPaginationModelChange={handlePaginationChange}
                     initialState={{
                         pagination: {
                             paginationModel: { page: 0, pageSize: 13 },
@@ -252,5 +255,6 @@ const CustomerListTable = () => {
 };
 
 export default CustomerListTable;
+
 
 

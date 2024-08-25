@@ -1,6 +1,7 @@
+
 import { ArrowBack } from '@mui/icons-material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
 import Agreement from '../Agreement/Agreement';
 import ConnectProject from '../ConnectProject/ConnectProject';
@@ -11,8 +12,15 @@ import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 import CustomerDetail from './CustomerDetail';
+import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/Customer';
 
 const AdminCustomerPageLayout: React.FC = () => {
+  const { customerId } = useParams<{ customerId: string }>();
+  
+  const { data: customer, error, isLoading } = useGetCustomerByIdQuery(Number(customerId));
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading customer data.</div>;
 
   const tablist = [
     { name: 'overview', ref: 'overview' },
@@ -40,13 +48,13 @@ const AdminCustomerPageLayout: React.FC = () => {
 
   return (
     <div className='flex justify-end gap-[6px]'>
-      <Link to={'/admin/records/customer/:customerId'}>
+      <Link to={`/admin/records/customer/${customerId}`}>
         <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
           <ArrowBack color="success" style={{ fontSize: 'medium' }} />
         </div>
       </Link>
       <TabLayout
-        title="Dangote Cement"
+        title={customer?.data?.company_name.toUpperCase() || 'Customer Details'}
         width=""
         height=""
         backgroundColor="#F5F7F9"
