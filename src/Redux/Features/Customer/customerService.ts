@@ -42,6 +42,17 @@ type ErrorResponse = {
   error: string;
 };
 
+
+export interface FormField {
+  id: number;
+  name?: string;
+  text?: string;
+  elementType: string;
+  placeholder?: string;
+  key?: string;
+}
+
+
 export const customersApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getCustomers: builder.query<Customer, void>({

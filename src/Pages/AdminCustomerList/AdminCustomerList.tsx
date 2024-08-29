@@ -1,21 +1,36 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from 'react';
+import images from '@/assets';
+import { CREATE_NEW_CUSTOMER_FORM_ID, FormField, useGetFormByIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, CustomInput, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
-import images from '../../assets/index';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 const AdminCustomerList: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [customerData, setCustomerData] = useState({
-        name: '',
-        email: '',
-        location: '',
-        type: '',
-        phoneNumber: ''
-    });
+    const [customerForm, setCustomerForm] = useState<FormField[]>([]);
+    const [customerData, setCustomerData] = useState<Record<string, string>>({});
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    const { data, isSuccess, isLoading } = useGetFormByIdQuery(CREATE_NEW_CUSTOMER_FORM_ID);
+    const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation()
+    useEffect(() => {
+        if (isSuccess && data) {
+            const parsedForm = JSON.parse(data.data.json_form);
+            const updatedFields = parsedForm.filter((field: FormField) => field.id !== 0);
+            setCustomerForm(updatedFields);
+            const initialData = updatedFields.reduce((acc: Record<string, string>, field: FormField) => {
+                if (field.key) {
+                    acc[field.key] = '';
+                }
+                return acc;
+            }, {});
+            setCustomerData(initialData);
+
+        }
+
+
+    }, [data, isSuccess])
 
     const toggleModal = (open: boolean) => {
         setIsModalOpen(open);
@@ -31,45 +46,45 @@ const AdminCustomerList: React.FC = () => {
     };
 
     const handleInputChange = (value: string, key: string) => {
-        setCustomerData({ ...customerData, [key]: value });
+        setCustomerData(prevData => ({ ...prevData, [key]: value }));
     };
 
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const createCustomer = searchParams.get('createCustomer');
+    const handleCreateCustomer = async () => {
+        console.log('customerForm:', customerForm)
+        console.log('customerData:', customerData);
 
-        if (createCustomer === 'true') {
-            setIsModalOpen(true);
-        }
-    }, [location.search]);
 
-    const handleCreateCustomer = () => {
-        if (customerData.name.trim() === '' || customerData.email.trim() === '') {
-            alert('Please fill in all required fields.');
-            return;
-        }
-        console.log('Creating customer:', customerData);
-        toggleModal(false);
-        alert('Customer successfully registered!');
-        window.location.href = '/admin/records/customernewregistration';
+        const formFieldAnswers = customerForm.map((field) => ({
+            field_id: field.id,
+            answer: customerData[field.key as keyof typeof customerData]
+        }));
+
+        const buildFormSubmission = {
+            form_builder_id: data?.data.id,
+            form_field_answers: JSON.stringify(formFieldAnswers),
+        };
+        await submitForm(buildFormSubmission).unwrap();
+
+        if (submitSuccess) toggleModal(false);
     };
-
-    const options = ['Option 1', 'Option 2', 'Option 3'];
 
     return (
         <div className="">
-            <div className=' mr-[25px]'>
+            <div className='mr-[25px]'>
                 <div className='flex flex-col md:flex-row items-center justify-between'>
                     <Heading as="h4" size="h4" color='primaryColor' className="font-semibold text-gray-600">CUSTOMERS</Heading>
-                    <Button
-                        type='outline'
-                        label='Add Customer'
-                        radius='20px'
-                        width='150px'
-                        height='30px'
-                        action={() => toggleModal(true)}
-                    />
+                    {isSuccess &&
+                        <Button
+                            type='outline'
+                            label='Add Customer'
+                            radius='20px'
+                            width='150px'
+                            height='30px'
+                            action={() => toggleModal(true)}
+                        />
+                    }
                 </div>
+
                 <div className='flex flex-col md:flex-row items-center gap-4 mt-6 ' >
                     <StatisticRectangleCard
                         title='Total Customers'
@@ -95,6 +110,7 @@ const AdminCustomerList: React.FC = () => {
                     />
                 </div>
             </div>
+
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => toggleModal(false)}
@@ -102,7 +118,7 @@ const AdminCustomerList: React.FC = () => {
                 title='Create New Customer'
                 subTitle='Only Use this Method if the Customer is an already Existing Customer of the NGML'
                 buttons={[
-                    <div className='flex gap-2 mb-[-10px]'>
+                    <div key="modal-buttons" className='flex gap-2 mb-[-10px]'>
                         <div className='w-[120px]'>
                             <Button
                                 type="outline"
@@ -119,7 +135,7 @@ const AdminCustomerList: React.FC = () => {
                         <div className='w-[260px]'>
                             <Button
                                 type="secondary"
-                                label="Create Customer"
+                                label={submitLoading ? 'Creating...' : 'Create customer'}
                                 action={handleCreateCustomer}
                                 color="#FFFFFF"
                                 fontStyle="italic"
@@ -132,45 +148,24 @@ const AdminCustomerList: React.FC = () => {
                     </div>
                 ]}
             >
-                <CustomInput
-                    required
-                    type="text"
-                    label='Name of Customer'
-                    value={customerData.name}
-                    handleChangeEvent={(value) => handleInputChange(value, 'name')}
-                    placeholder="Enter Name of Customer"
-                />
-                <CustomInput
-                    required
-                    type="text"
-                    label='Email'
-                    value={customerData.email}
-                    handleChangeEvent={(value) => handleInputChange(value, 'email')}
-                    placeholder="Enter email"
-                />
-                <CustomInput
-                    type="select"
-                    label='Customer Location'
-                    value={customerData.location}
-                    handleChangeEvent={(value) => handleInputChange(value, 'location')}
-                    placeholder="Choose Type"
-                    options={options}
-                />
-                <CustomInput
-                    type="select"
-                    label='Customer Type'
-                    value={customerData.type}
-                    handleChangeEvent={(value) => handleInputChange(value, 'type')}
-                    placeholder="Choose Type"
-                    options={options}
-                />
-                <CustomInput
-                    type="text"
-                    label='Customer Phone Number'
-                    value={customerData.phoneNumber}
-                    handleChangeEvent={(value) => handleInputChange(value, 'phoneNumber')}
-                    placeholder="Enter Phone Number"
-                />
+                {isLoading ? (
+                    <p>Loading form fields...</p>
+                ) : customerForm.length > 0 ? (
+                    customerForm.map((form) => (
+                        <Fragment key={form.id}>
+                            <CustomInput
+                                required
+                                type={form?.elementType}
+                                label={form.name}
+                                value={customerData[form.key as keyof typeof customerData] || ''}
+                                handleChangeEvent={(value) => handleInputChange(value, form.key as keyof typeof customerData)}
+                                placeholder={form.placeholder}
+                            />
+                        </Fragment>
+                    ))
+                ) : (
+                    <p>No form fields available.</p>
+                )}
             </Modal>
             <div className='w-full mt-10'>
                 <CustomerListTable />

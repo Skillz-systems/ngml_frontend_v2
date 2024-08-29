@@ -1,10 +1,10 @@
 
-import { useEffect, useState } from 'react';
-import { DataGrid, GridColDef, GridRenderCellParams, GridPaginationModel } from '@mui/x-data-grid';
-import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { DataObj, useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams } from '@mui/x-data-grid';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DataObj, useGetCustomersQuery } from '@/Redux/Features/Customer/Customer';
 
 const CustomerListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
