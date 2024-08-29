@@ -1,103 +1,63 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { CustomerListtData } from '@/Data';
-import { FilterList, SearchOutlined } from '@mui/icons-material';
-import { IconButton, InputAdornment, TextField } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+
 import { useEffect, useState } from 'react';
+import { DataGrid, GridColDef, GridRenderCellParams, GridPaginationModel } from '@mui/x-data-grid';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { FilterList, SearchOutlined } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-
-
-
-interface NavigateButtonProps {
-    to: string; // This specifies that `to` must be a string.
-}
-
-/**
- * Defines the structure for Agreement properties used in the AgreementTable.
- * 
- * @interface
- * @property {number} id - Unique identifier for the agreement.
- * @property {string} companyname - Name of the company associated with the agreement.
- * @property {string} companyType - Type of the company (e.g., LLC, Inc., etc.).
- * @property {string[]} selectedDates - Optional. Dates selected for the agreement.
- * @property {string} status - Current status of the agreement (e.g., Signed, Unsigned).
- * @property {string} action - Action available for the agreement (e.g., View, Edit).
- * @property {string} deadline - Optional. Deadline for the agreement.
- * @property {string} companyEmail - Optional. Email address of the company.
- * @property {string} companyNumber - Optional. Contact number of the company.
- * @property {string} companyAddress - Optional. Physical address of the company.
- */
-
-interface CustomerListTableProps {
-    id: number;
-    companyname: string;
-    companyType: string;
-    selectedDates?: string[];
-    status: string;
-    action: string;
-    deadline?: string;
-    companyEmail?: string;
-    companyNumber?: string;
-    companyAddress?: string;
-
-}
-
-const rows = CustomerListtData
-
-
-
+import { DataObj, useGetCustomersQuery } from '@/Redux/Features/Customer/Customer';
 
 const CustomerListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<CustomerListTableProps[]>(rows);
+    const [filteredRows, setFilteredRows] = useState<DataObj[]>([]);
     const [selectedStatus, setSelectedStatus] = useState<string>('All Statuses');
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+        page: 0,
+        pageSize: 13,
+    });
 
-    /**
-     * useEffect hook to filter data whenever searchText or selectedAgreement changes.
-     */
+    const { data: { data: customers = [] } = {}, error, isLoading } = useGetCustomersQuery();
+
+    const filterData = () => {
+        const lowercasedSearch = searchText.toLowerCase();
+        let filtered = customers?.filter((row: { company_name: string; }) =>
+            row.company_name.toLowerCase().includes(lowercasedSearch)
+        );
+        if (selectedStatus !== 'All Statuses') {
+            const isActive = selectedStatus === 'Active';
+            filtered = filtered.filter((row: { status: boolean; }) => row.status === isActive);
+        }
+        setFilteredRows(filtered);
+    };
+
+    useEffect(() => {
+        setFilteredRows(customers);
+    }, [customers]);
+
     useEffect(() => {
         filterData();
-    }, [searchText, selectedStatus]);
+    }, [searchText, selectedStatus, customers]);
 
-    /**
-     * Toggles the dropdown menu for the agreement filter.
-     */
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedStatus('All Statuses');
     };
 
-    const uniqueStatuses = [...new Set(rows.map(row => row.status))];
+    const handlePaginationChange = (model: GridPaginationModel) => {
+        setPaginationModel(model);
+    };
 
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading customer data.</div>;
 
-    /**
-     * Handles changes to the search input field and updates the searchText state.
-     * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
-     */
+    const uniqueStatuses = [...new Set(customers?.map((row: { status: any; }) => row.status ? 'true' : 'false'))];
+
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
     };
 
-
-    /**
-    * Filters the rows based on the search text and selected agreement type.
-    * @param {string} search - The current text in the search input field.
-    */
-    const filterData = () => {
-        const lowercasedSearch = searchText.toLowerCase();
-        let filtered = rows.filter(row =>
-            row.companyname.toLowerCase().includes(lowercasedSearch) ||
-            row.companyType.toLowerCase().includes(lowercasedSearch)
-        );
-        if (selectedStatus !== 'All Statuses') {
-            filtered = filtered.filter(row => row.status === selectedStatus);
-        }
-        setFilteredRows(filtered);
-    };
-
-    const NavigateButton: React.FC<NavigateButtonProps> = ({ to }) => {
+    const NavigateButton = ({ to }: { to: string }) => {
         const navigate = useNavigate();
         return (
             <div
@@ -108,76 +68,52 @@ const CustomerListTable = () => {
         );
     };
 
-
-
     const columns: GridColDef[] = [
         {
-            field: 'sn',
-            headerName: 'SN',
-            width: 60,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className='text-xs font-[600] text-[#49526A] leading-3'>
-                    {params.row.sn}
-                </div>
-            ),
-
-        },
-        {
-            field: 'name',
-            headerName: 'COMPANY NAME',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className='flex flex-col gap-[4px]'>
-                    <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
-                        {params.row.companyname}
-                    </div>
-                    <div
-                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
-                        {params.row.companyType}
-                    </div>
-                </div>
-            ),
-        },
-        {
-            field: 'customerID',
+            field: 'id',
             headerName: 'CUSTOMER ID',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div
-                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
-                    {params.row.customerID}
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3'>
+                    {params.row.id}
                 </div>
             ),
         },
         {
-            field: 'totalConsumed',
-            headerName: 'TOTAL CONSUMED SCF',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
-                    {params.row.totalConsumed}
+            field: 'company_name',
+            headerName: 'COMPANY NAME',
+            flex: 2,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className='flex flex-col gap-[4px]'>
+                    <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
+                        {params.row.company_name}
+                    </div>
                 </div>
-            )
+            ),
         },
         {
-            field: 'datesent',
-            headerName: 'DATE SENT',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
-                    {params.row.datesent}
+            field: 'email',
+            headerName: 'EMAIL',
+            flex: 2,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className='flex flex-col gap-[4px]'>
+                    <div className='text-[14px] font-[500] text-[#49526A] leading-3'>
+                        {params.row.email}
+                    </div>
                 </div>
-            )
+            ),
         },
         {
-            field: 'lastInvoice',
-            headerName: 'LAST INVOICE ADVICE',
+            field: 'phone_number',
+            headerName: 'PHONE NUMBER',
             flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3 '>
-                    {params.row.lastInvoice}
+            renderCell: (params: GridRenderCellParams) => (
+                <div className='flex flex-col gap-[4px]'>
+                    <div className='text-[14px] font-[500] text-[#49526A] leading-3'>
+                        {params.row.phone_number}
+                    </div>
                 </div>
-            )
+            ),
         },
         {
             field: 'status',
@@ -187,53 +123,43 @@ const CustomerListTable = () => {
                 let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
 
                 switch (params.row.status) {
-                    case 'Processing':
-                        classNames += 'bg-[#FFD181] text-[#050505] ';
+                    case true:
+                        classNames += 'bg-[#D2F69E] text-[#005828]';
                         break;
-                    case 'Active':
-                        classNames += 'bg-[#D2F69E] text-[#005828] ';
-                        break;
-                    case 'In-Active':
-                        classNames += 'border-2 ';
+                    case false:
+                        classNames += 'bg-[#FFD181] text-[#050505]';
                         break;
                     default:
-                        classNames += 'text-[E2E4EB] ';
+                        classNames += 'text-[#E2E4EB]';
                 }
 
                 return (
                     <div className={classNames}>
-                        {params.row.status}
+                        {params.row.status ? 'Active' : 'In-Active'}
                     </div>
                 );
             }
         },
-
         {
             field: 'action',
             headerName: 'ACTION',
             flex: 1,
-            renderCell: () => {
-                // const customerId = params.row.customerID;
-                // const projectId = params.row.sn;
-                return (
-                    <NavigateButton to={`/admin/records/customer/:customerId`} />
-                    // <NavigateButton to={`/admin/records/customer/location/${customerId}/${projectId}/overview`} />
-                );
-            },
+            renderCell: (params: GridRenderCellParams) => (
+                <NavigateButton to={`/admin/records/customer/${params.row.id}`} />
+            ),
         },
-    ]
+    ];
 
-
-
+    const startRow = paginationModel.page * paginationModel.pageSize + 1;
+    const endRow = Math.min((paginationModel.page + 1) * paginationModel.pageSize, filteredRows.length);
 
     return (
-        <div className='mt-[20px] w-[100%] '>
-
-            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%] '>
+        <div className='mt-[20px] w-[100%]'>
+            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%]'>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
-                    Showing {filteredRows.length} of {rows.length} site visits
+                    {`Showing ${startRow}-${endRow} of ${filteredRows.length} customers`}
                 </div>
-                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]' >
+                <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]'>
                     <TextField
                         id="search-input"
                         label="Search this list"
@@ -274,10 +200,9 @@ const CustomerListTable = () => {
                                 },
                             },
                         }}
-
                     />
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
-                        <div className='text-[12px] font-[400] text-[#828DA9] '>All Customer</div>
+                        <div className='text-[12px] font-[400] text-[#828DA9]'>All Customer</div>
                         <IconButton onClick={handleFilterClick}>
                             <FilterList />
                         </IconButton>
@@ -301,12 +226,13 @@ const CustomerListTable = () => {
                     columns={columns}
                     rowHeight={48}
                     autoHeight
+                    paginationModel={paginationModel}
+                    onPaginationModelChange={handlePaginationChange}
                     initialState={{
                         pagination: {
                             paginationModel: { page: 0, pageSize: 13 },
                         },
                     }}
-
                     sx={{
                         width: '100%',
                         background: '#FFFFFF',
@@ -319,7 +245,6 @@ const CustomerListTable = () => {
                                 color: '#050505',
                                 fontWeight: '700',
                                 fontSize: '12px',
-
                             },
                         },
                     }}
@@ -327,8 +252,9 @@ const CustomerListTable = () => {
             </div>
         </div>
     );
-}
+};
 
-export default CustomerListTable
+export default CustomerListTable;
+
 
 

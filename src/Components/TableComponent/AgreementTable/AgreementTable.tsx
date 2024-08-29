@@ -1,27 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { AgreementData } from '@/Data';
 import { FilterList, SearchOutlined } from '@mui/icons-material';
 import { IconButton, InputAdornment, Modal, TextField } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams, GridPaginationModel } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
-
-
-/**
- * Defines the structure for Agreement properties used in the AgreementTable.
- * 
- * @interface
- * @property {number} id - Unique identifier for the agreement.
- * @property {string} companyname - Name of the company associated with the agreement.
- * @property {string} companyType - Type of the company (e.g., LLC, Inc., etc.).
- * @property {string[]} selectedDates - Optional. Dates selected for the agreement.
- * @property {string} status - Current status of the agreement (e.g., Signed, Unsigned).
- * @property {string} action - Action available for the agreement (e.g., View, Edit).
- * @property {string} deadline - Optional. Deadline for the agreement.
- * @property {string} companyEmail - Optional. Email address of the company.
- * @property {string} companyNumber - Optional. Contact number of the company.
- * @property {string} companyAddress - Optional. Physical address of the company.
- */
 
 interface AgreementTableProps {
     id: number;
@@ -34,13 +16,9 @@ interface AgreementTableProps {
     companyEmail?: string;
     companyNumber?: string;
     companyAddress?: string;
-
 }
 
-const rows = AgreementData
-
-
-
+const rows = AgreementData;
 
 const AgreementTable = () => {
     const [searchText, setSearchText] = useState<string>('');
@@ -49,17 +27,15 @@ const AgreementTable = () => {
     const [selectedRow, setSelectedRow] = useState<AgreementTableProps | null>(null);
     const [selectedAgreement, setSelectedAgreement] = useState<string>('All Contracts');
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+        page: 0,
+        pageSize: 13,
+    });
 
-    /**
-     * useEffect hook to filter data whenever searchText or selectedAgreement changes.
-     */
     useEffect(() => {
         filterData(searchText);
     }, [searchText, selectedAgreement]);
 
-    /**
-     * Toggles the dropdown menu for the agreement filter.
-     */
     const handleFilterClick = () => {
         setDropdownOpen(!dropdownOpen);
         setSelectedAgreement('All Contracts');
@@ -67,10 +43,6 @@ const AgreementTable = () => {
 
     const agreementNames = [...new Set(rows.map(row => row.agreementType))];
 
-    /**
-     * Opens a modal to show detailed information for the selected row.
-     * @param {AgreementTableProps} row - The selected row's data.
-     */
     const handleOpen = (row: AgreementTableProps) => {
         setSelectedRow(row);
         setOpen(true);
@@ -78,20 +50,11 @@ const AgreementTable = () => {
 
     const handleClose = () => setOpen(false);
 
-    /**
-     * Handles changes to the search input field and updates the searchText state.
-     * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
-     */
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchText(value);
     };
 
-
-    /**
-    * Filters the rows based on the search text and selected agreement type.
-    * @param {string} search - The current text in the search input field.
-    */
     const filterData = (search: string) => {
         const lowercasedSearch = search.toLowerCase();
         let filtered = rows.filter((row) =>
@@ -104,13 +67,6 @@ const AgreementTable = () => {
         setFilteredRows(filtered);
     };
 
-
-
-    /**
-    * Returns a style object based on the agreement's status.
-    * @param {string} status - The status of the agreement.
-    * @returns {React.CSSProperties} The style object for the status.
-    */
     const getStatusStyle = (status: string) => {
         switch (status) {
             case 'Signed':
@@ -122,8 +78,6 @@ const AgreementTable = () => {
         }
     };
 
-
-
     const columns: GridColDef[] = [
         {
             field: 'sn',
@@ -134,7 +88,6 @@ const AgreementTable = () => {
                     {params.row.sn}
                 </div>
             ),
-
         },
         {
             field: 'name',
@@ -145,8 +98,7 @@ const AgreementTable = () => {
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
                         {params.row.companyname}
                     </div>
-                    <div
-                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
+                    <div className='text-[10px] font-[400] text-[#828DA9] leading-3'>
                         {params.row.companyType}
                     </div>
                 </div>
@@ -157,8 +109,7 @@ const AgreementTable = () => {
             headerName: 'AGREEMENT NAME',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div
-                    className='text-[12px] font-[700] text-[#49526A] leading-3'>
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3'>
                     {params.row.agreementType}
                 </div>
             ),
@@ -198,8 +149,6 @@ const AgreementTable = () => {
                 );
             }
         },
-
-
         {
             field: 'action',
             headerName: 'ACTION',
@@ -212,10 +161,14 @@ const AgreementTable = () => {
                 </div>
             ),
         },
-    ]
+    ];
 
+    const handlePaginationChange = (model: GridPaginationModel) => {
+        setPaginationModel(model);
+    };
 
-
+    const startRow = paginationModel.page * paginationModel.pageSize + 1;
+    const endRow = Math.min((paginationModel.page + 1) * paginationModel.pageSize, filteredRows.length);
 
     return (
         <div className='mt-[20px] w-[100%] '>
@@ -238,14 +191,13 @@ const AgreementTable = () => {
                             companyAddress={selectedRow.companyAddress || 'Provide an Address'}
                             statusHeading={selectedRow.status}
                             statusStyle={getStatusStyle(selectedRow.status)}
-
                         />
                     )}
                 </div>
             </Modal>
             <div className='flex flex-col md:flex-row items-center justify-between border border-[#CCD0DC] border-b-0 p-[20px] w-[100%]'>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
-                    Showing {filteredRows.length} of {rows.length} site visits
+                    {`Showing ${startRow}-${endRow} of ${filteredRows.length} site visits`}
                 </div>
                 <div className='flex flex-col md:flex-row justify-end gap-[8px] relative w-[100%]'>
                     <TextField
@@ -288,7 +240,6 @@ const AgreementTable = () => {
                                 },
                             },
                         }}
-
                     />
                     <div className='flex items-center gap-[10px] rounded-[32px] h-[32px] w-[149px] justify-center border border-[#CCD0DC] flex-row'>
                         <div className='text-[12px] font-[400] text-[#828DA9] '>Filter</div>
@@ -315,12 +266,13 @@ const AgreementTable = () => {
                     columns={columns}
                     rowHeight={48}
                     autoHeight
+                    paginationModel={paginationModel}
+                    onPaginationModelChange={handlePaginationChange}
                     initialState={{
                         pagination: {
                             paginationModel: { page: 0, pageSize: 13 },
                         },
                     }}
-
                     sx={{
                         width: '100%',
                         background: '#FFFFFF',
@@ -333,7 +285,6 @@ const AgreementTable = () => {
                                 color: '#050505',
                                 fontWeight: '700',
                                 fontSize: '12px',
-
                             },
                         },
                     }}
@@ -341,8 +292,6 @@ const AgreementTable = () => {
             </div>
         </div>
     );
-}
+};
 
-export default AgreementTable
-
-
+export default AgreementTable;

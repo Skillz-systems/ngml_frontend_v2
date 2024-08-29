@@ -37,8 +37,8 @@ const LocationCard: React.FC<LocationCardProps> = ({
       <div className={`p-3 w-full rounded-t-[20px] ${labelBgColor} h-2/5 flex flex-col justify-center items-center`}>
         <span className='md:text-2xl text-[16px] text-gray-700 text-center font-bold'>{label}</span>
       </div>
-      <div className={`w-full h-3/5 ${valueBgColor} rounded-b-[20px] flex justify-center items-center`}>
-        <h4 className={primary ? 'md:text-[16px] text-[14px] font-medium' : 'md:text-[16px] text-[14px] font-500'}>{value}</h4>
+      <div className={`w-full h-3/5 ${valueBgColor} text-center rounded-b-[20px] flex justify-center items-center`}>
+        <h4 className={primary ? 'md:text-[16px] text-[14px] font-medium' : 'md:text-[16px] text-[14px] font-500 '}>{value}</h4>
       </div>
     </div>
   );
