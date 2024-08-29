@@ -20,7 +20,13 @@ const ConnectProject: React.FC = () => {
     const [firstGasDate, setFirstGasDate] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isNewModalOpen, setIsNewModalOpen] = useState(false);
+    const [isTenderingVisible, setIsTenderingVisible] = useState(false);
     const [selectedDate, setSelectedDate] = useState('');
+    const [isTenderingComplete, setIsTenderingComplete] = useState(false);
+    const [isStrategyVisible, setIsStrategyVisible] = useState(false);
+    const [selectedStrategy, setSelectedStrategy] = useState('');
+
+
 
     const handleInputChange = (value: string, key: string) => {
         setProjectDate({ ...projectDate, [key]: value });
@@ -37,6 +43,20 @@ const ConnectProject: React.FC = () => {
     const handleCloseNewModal = () => {
         setIsNewModalOpen(false);
     };
+
+    const handleTenderingProcessComplete = () => {
+        setIsTenderingComplete(true);
+        setIsNewModalOpen(true);
+    };
+
+    const toggleStrategyVisibility = () => {
+        setIsStrategyVisible(!isStrategyVisible);
+    };
+
+    const handleStrategyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedStrategy(event.target.value);
+    };
+
 
     const areDatesSelected = projectDate.startdate && projectDate.enddate;
 
@@ -68,7 +88,7 @@ const ConnectProject: React.FC = () => {
                     </div>
                 </div>
                 <div className="w-full h-full p-5 space-y-6 border rounded-xl">
-                    <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT MILESTONES</div>
+                    <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT DATES</div>
                     <div className="">
                         <CustomInput
                             type="date"
@@ -108,36 +128,112 @@ const ConnectProject: React.FC = () => {
                             </div>
                         )}
                     </div>
+
                 </div>
                 {areDatesSelected && (
                     <div className="w-full h-full p-6 space-y-6 border rounded-xl">
-                        <div className="text-base font-bold font-['Mulish'] leading-none">PROJECTS</div>
+                        <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT MILESTONE</div>
                         <div className='flex flex-col justify-start gap-4 md:flex-row'>
                             <Button
-                                type="secondary"
+                                type="tertiary"
                                 label="Tendering Process"
-                                action={handleCreateCustomer}
-                                color="#FFFFFF"
+                                action={() => setIsTenderingVisible(!isTenderingVisible)}
                                 height="40px"
                                 fontSize="16px"
                                 radius="20px"
                                 className='p-4'
                             />
                             <Button
-                                type="primary"
+                                type="tertiary"
                                 label="Main Project Activities"
                                 action={handleCreateCustomer}
-                                color="#FFFFFF"
                                 height="40px"
                                 fontSize="16px"
                                 radius="20px"
                                 className='p-4'
+                                disabled={!isTenderingComplete}
 
                             />
                         </div>
                     </div>
                 )}
+
+                {isTenderingVisible && (
+                    <div className="w-full h-full p-5 space-y-6 border rounded-xl">
+                        {/* <div className="text-base font-bold font-['Mulish'] leading-none">SELECT MILESTONE OPTION</div> */}
+                        <div className='flex flex-row gap-4 mt-4'>
+                            <Button
+                                type="secondary"
+                                label="Select Project Strategy"
+                                action={toggleStrategyVisibility}
+                                color="#FFFFFF"
+                                height="40px"
+                                fontSize="16px"
+                                radius="20px"
+                                className='p-4'
+                            />
+                            <Button
+                                type="secondary"
+                                label="Setup Project Milestones"
+                                action={handleTenderingProcessComplete}
+                                color="#FFFFFF"
+                                height="40px"
+                                fontSize="16px"
+                                radius="20px"
+                                className='p-4'
+                            />
+                        </div>
+                        {isStrategyVisible && ( 
+                            <div className="mt-4">
+                                <div className="space-y-2">
+                                    <div className="custom-radio">
+                                        <input
+                                            type="radio"
+                                            id="openTendering"
+                                            name="projectStrategy"
+                                            value="Open Tendering"
+                                            checked={selectedStrategy === "Open Tendering"}
+                                            onChange={handleStrategyChange}
+                                            className="mr-2"
+                                        />
+                                        <label htmlFor="openTendering" className="text-sm text-gray-700">Open Tendering</label>
+                                    </div>
+                                    <div className="custom-radio">
+                                        <input
+                                            type="radio"
+                                            id="selectiveTendering"
+                                            name="projectStrategy"
+                                            value="Selective Tendering"
+                                            checked={selectedStrategy === "Selective Tendering"}
+                                            onChange={handleStrategyChange}
+                                            className="mr-2"
+                                        />
+                                        <label htmlFor="selectiveTendering" className="text-sm text-gray-700">Selective Tendering</label>
+                                    </div>
+                                    <div className="custom-radio">
+                                        <input
+                                            type="radio"
+                                            id="singleSourcing"
+                                            name="projectStrategy"
+                                            value="Single Sourcing"
+                                            checked={selectedStrategy === "Single Sourcing"}
+                                            onChange={handleStrategyChange}
+                                            className="mr-2"
+                                        />
+                                        <label htmlFor="singleSourcing" className="text-sm text-gray-700">Single Sourcing</label>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                    </div>
+                )}
+
+
+
+
             </div>
+
             <Modal
                 isOpen={isModalOpen}
                 onClose={handleClose}
