@@ -2,16 +2,16 @@
 
 'use client'
 
+import images from '@/assets';
+import { AuthContainer, Button, ContentContainer, CustomInput } from '@/Components';
+import { useLoginMutation } from '@/Redux/Features/Auth/authService';
+import { setCredentials } from '@/Redux/Features/Auth/authSlice';
+import { useAppDispatch } from '@/Redux/hooks';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useLoginMutation } from '@/Redux/Features/Auth/authService';
-import { useAppDispatch } from '@/Redux/hooks';
-import { setCredentials } from '@/Redux/Features/Auth/authSlice';
-import { Button, CustomInput, ContentContainer, AuthContainer } from '@/Components';
 import '../../../index.css';
-import images from '@/assets';
 
 
 const CustomerLoginPage: React.FC = () => {
@@ -63,6 +63,7 @@ const CustomerLoginPage: React.FC = () => {
             try {
                 await login(formData).unwrap();
             } catch (err) {
+                console.log(err)
             }
         }
     };
