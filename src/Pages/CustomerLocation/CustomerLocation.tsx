@@ -1,9 +1,9 @@
 
-import React, { useState } from 'react';
 import { Button, Heading, LocationCard, Modal } from '@/Components';
+import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
 import { ArrowBack } from '@mui/icons-material';
+import React, { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/Customer';
 import AddNewLocationModal from './AddNewLocationModal';
 
 const CustomerLocation: React.FC = () => {
@@ -14,7 +14,7 @@ const CustomerLocation: React.FC = () => {
   const { data: customer, error, isLoading } = useGetCustomerByIdQuery(Number(customerId));
 
   console.log(customerId, 'ggggggggg');
-  
+
 
   const [companyData, setCompanyData] = useState({
     companyaddress: '',

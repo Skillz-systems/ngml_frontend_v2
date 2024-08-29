@@ -1,4 +1,5 @@
 
+import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
 import { ArrowBack } from '@mui/icons-material';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -12,11 +13,10 @@ import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
 import CustomerDetail from './CustomerDetail';
-import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/Customer';
 
 const AdminCustomerPageLayout: React.FC = () => {
   const { customerId } = useParams<{ customerId: string }>();
-  
+
   const { data: customer, error, isLoading } = useGetCustomerByIdQuery(Number(customerId));
 
   if (isLoading) return <div>Loading...</div>;
