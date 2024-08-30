@@ -9,15 +9,6 @@ type ErrorResponse = {
 };
 
 
-// export interface FormField {
-//   id: number;
-//   name?: string;
-//   text?: string;
-//   elementType: string;
-//   placeholder?: string;
-//   key?: string;
-// }
-
 export interface FormField {
   id: number;
   name?: string;
@@ -55,6 +46,55 @@ export interface FormSubmission {
   data_id?: number;
 }
 
+
+
+export interface FormFieldAnswerTwo {
+  id: number;
+  form_builder_id: string;
+  form_field_answers: string | null;
+  automator_task_id: string;
+  process_flow_history_id: string | null;
+  entity: string;
+  entity_id: string;
+  entity_site_id: string | null;
+  user_id: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface FormBuilderDataTwo {
+  id: number;
+  name: string;
+  json_form: string;
+  process_flow_id: string | null;
+  process_flow_step_id: string | null;
+  tag_id: string;
+  form_data: FormFieldAnswerTwo[];
+}
+
+interface Task {
+  id: number;
+  form_builder_id: string;
+  form_field_answers: string | null;
+  automator_task_id: string;
+  process_flow_history_id: string | null;
+  entity: string;
+  entity_id: string;
+  entity_site_id: string | null;
+  user_id: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ApiResponseTwo {
+  data: FormBuilderDataTwo;
+  status: string;
+  task?: Task;
+}
+
+
 export const CREATE_NEW_CUSTOMER_FORM_ID = 6;
 export const CREATE_NEW_CUSTOMER_SITE_FORM_ID=5;
 
@@ -63,6 +103,7 @@ export const formBuilderApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getForms: builder.query<FormBuilderApiResponse, void>({
       query: () => '/formbuilder/api/forms',
+      providesTags: ['Forms'],
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
         return errorResponse;
@@ -70,6 +111,15 @@ export const formBuilderApi = api.injectEndpoints({
     }),
     getFormById: builder.query<FormBuilderApiResponse, number>({
       query: (id) => `/formbuilder/api/forms/${id}`,
+       providesTags: ['Forms'],
+      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+        return errorResponse;
+      },
+    }),
+     getFormByEntityId: builder.query<ApiResponseTwo, string>({
+      query: (url) => `/formbuilder/api/forms/view/${url}`,
+       providesTags: ['Forms'],
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
         return errorResponse;
@@ -82,6 +132,7 @@ export const formBuilderApi = api.injectEndpoints({
         headers: { 'Content-Type': 'application/json' },
         body: customer,
       }),
+     invalidatesTags: ['Forms', 'Customers', 'Tasks'],
       transformResponse: (response: FormSubmission | ErrorResponse) => {
         if ('error' in response) {
           throw new Error(response.error);
@@ -97,6 +148,7 @@ export const formBuilderApi = api.injectEndpoints({
   overrideExisting: false,
 }); 
 export const {
+  useGetFormByEntityIdQuery,
   useGetFormsQuery,
   useGetFormByIdQuery,
   useSubmitFormMutation
