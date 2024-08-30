@@ -1,5 +1,5 @@
 import images from '@/assets';
-import { CREATE_NEW_CUSTOMER_FORM_ID, FormField, useGetFormByIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { FormField, useGetFormByEntityIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, CustomInput, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
@@ -12,11 +12,25 @@ const AdminCustomerList: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { data, isSuccess, isLoading } = useGetFormByIdQuery(CREATE_NEW_CUSTOMER_FORM_ID);
+    const { data, isSuccess, isLoading } = useGetFormByEntityIdQuery('6/0/0');
     const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation()
     useEffect(() => {
         if (isSuccess && data) {
-            const parsedForm = JSON.parse(data.data.json_form);
+            console.log(data.data.json_form)
+
+            // const cleanedJsonString = data.data.json_form.replace(/[\n\r]/g, '').trim();
+            // const parsedForm = JSON.parse(cleanedJsonString);
+            // const parsedForm = JSON.parse(data.data.json_form);
+
+            let parsedForm;
+            try {
+                parsedForm = JSON.parse(data.data.json_form);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                console.log('Problematic JSON string:', data.data.json_form);
+                parsedForm = []; // or some default value
+            }
+            console.log(parsedForm)
             const updatedFields = parsedForm.filter((field: FormField) => field.id !== 0);
             setCustomerForm(updatedFields);
             const initialData = updatedFields.reduce((acc: Record<string, string>, field: FormField) => {
