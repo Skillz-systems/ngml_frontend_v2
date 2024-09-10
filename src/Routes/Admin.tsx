@@ -17,10 +17,10 @@ import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierReg
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import TenderPage from '@/Pages/TenderPage/TenderPage';
 
+import { RouteObject } from 'react-router-dom';
 
 
-
-export const admin = [
+export const admin: RouteObject[] = [
     {
 
         path: '',
@@ -129,3 +129,18 @@ export const admin = [
 
 
 ]
+
+export const getRouteLists = (): { [key: string]: string } => {
+    return admin.reduce((acc, route) => {
+        if (route.path) {
+            const label = route.path.replace(/^\//, '').replace(/\//g, ' ') || 'home';
+            acc[label] = route.path;
+        }
+        return acc;
+    }, {} as { [key: string]: string });
+};
+
+
+// export const getRouteNames = (): string[] => {
+//     return admin.map(route => route.path || '');
+// };
