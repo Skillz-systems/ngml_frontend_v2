@@ -65,15 +65,29 @@ const CustomerLocation: React.FC = () => {
   };
 
   const handleCreateLocation = async () => {
-    console.log('customerForm:', form)
-    console.log('customerData:', formRecords);
+    // console.log('customerForm:', form)
+    // console.log('customerData:', formRecords);
 
-    const formFieldAnswers = form.map((field) => ({
-      field_id: field.id,
-      answer: formRecords[field.key as keyof typeof formRecords]
+    // const formFieldAnswers = form.map((field) => ({
+    //   field_id: field.id,
+    //   answer: formRecords[field.key as keyof typeof formRecords]
+    // }));
+
+    const formFieldAnswers = form.map(field => ({
+      id: field.id,
+      elementType: field.elementType,
+      name: field.name || field.key,
+      placeholder: field.placeholder,
+      key: field.key,
+      value: formRecords[field.key as keyof typeof formRecords]
     }));
 
     const buildFormSubmission = {
+      name: formData?.data?.name,
+      process_flow_id: formData?.data?.process_flow_id,
+      process_flow_step_id: formData?.data?.process_flow_step_id,
+      tag_id: formData?.data?.tag_id,
+
       form_builder_id: formData?.data.id,
       form_field_answers: JSON.stringify(formFieldAnswers),
       data_id: formData?.task?.id

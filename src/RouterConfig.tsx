@@ -2,6 +2,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import NotFound from './NotFound';
+import ProcessFlowGenerator from './Pages/ProcessFlowGroup/ProcessFlowGenerator';
 import Root from './Pages/Root';
 import StaffLoginPage from './Pages/Stafflogin/StaffLoginPage';
 import { admin } from './Routes/Admin';
@@ -21,6 +22,10 @@ const RouterConfig = () => {
         {
             path: '/',
             element: <StaffLoginPage />
+        },
+        {
+            path: '/processflowgenerator',
+            element: <ProcessFlowGenerator />
         },
         {
 
