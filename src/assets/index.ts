@@ -59,6 +59,7 @@ import petrol from './images/png-icons/petrol.png';
 import receipt from './images/png-icons/receipt.png';
 import send from './images/png-icons/send.png';
 import uploadSvg from './images/svg-icons/Uploadngml.svg';
+import paper from './images/svg-icons/paper.svg';
 const images = {
   Cancelicon,
   cancelIcon,
@@ -131,7 +132,8 @@ const images = {
   Sitevisiteicon,
   newLogo,
   avatarLogo,
-  uploadSvg
+  uploadSvg,
+  paper
 };
 
 export default images;

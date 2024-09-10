@@ -16,7 +16,8 @@ const AdminCustomerList: React.FC = () => {
     const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation()
     useEffect(() => {
         if (isSuccess && data) {
-            console.log(data.data.json_form)
+            console.log('data.data.json_form', data.data.json_form)
+            console.log('data.data.json_form', data.data)
 
             // const cleanedJsonString = data.data.json_form.replace(/[\n\r]/g, '').trim();
             // const parsedForm = JSON.parse(cleanedJsonString);
@@ -39,7 +40,9 @@ const AdminCustomerList: React.FC = () => {
                 }
                 return acc;
             }, {});
+
             setCustomerData(initialData);
+
 
         }
 
@@ -64,17 +67,24 @@ const AdminCustomerList: React.FC = () => {
     };
 
     const handleCreateCustomer = async () => {
-        console.log('customerForm:', customerForm)
-        console.log('customerData:', customerData);
+        // console.log('customerForm:', customerForm)
+        // console.log('customerData:', customerData);
 
-
-        const formFieldAnswers = customerForm.map((field) => ({
-            field_id: field.id,
-            answer: customerData[field.key as keyof typeof customerData]
+        const formFieldAnswers = customerForm.map(field => ({
+            id: field.id,
+            elementType: field.elementType,
+            name: field.name || field.key,
+            placeholder: field.placeholder,
+            key: field.key,
+            value: customerData[field.key as keyof typeof customerData]
         }));
 
         const buildFormSubmission = {
             form_builder_id: data?.data.id,
+            name: data?.data.name,
+            process_flow_id: data?.data?.process_flow_id,
+            process_flow_step_id: data?.data?.process_flow_step_id,
+            tag_id: data?.data?.tag_id,
             form_field_answers: JSON.stringify(formFieldAnswers),
         };
         await submitForm(buildFormSubmission).unwrap();
