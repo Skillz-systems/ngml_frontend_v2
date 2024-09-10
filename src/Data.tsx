@@ -3658,3 +3658,16 @@ export const OPenTenderTitleData = [
     },
 
 ]
+
+
+export type FormProps = {
+    id: string;
+    name: string;
+    description: string;
+    status: string;
+  };
+  
+  export type FetchFormsResponse = {
+    data: FormProps[];
+  };
+  

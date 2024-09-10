@@ -1,9 +1,8 @@
 import { Middleware } from '@reduxjs/toolkit';
-import { RootState } from './store';
 import { UserRole } from './types';
 
 
-const createRoleMiddleware = (role: UserRole): Middleware<unknown, RootState> => {
+const createRoleMiddleware = (role: UserRole): Middleware<unknown, any> => {
   return storeAPI => next => action => {
     const state = storeAPI.getState();
     

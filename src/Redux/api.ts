@@ -7,12 +7,11 @@ import {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
 import { toast } from 'react-toastify';
-import type { RootState } from './store';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.ngml.skillzserver.com',
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.jwt;
+    const token = (getState() as any).auth.jwt;
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
