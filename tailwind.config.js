@@ -22,7 +22,12 @@ export default {
         nnpcdarkgreen: colors.nnpcdarkgreen,
         nnpclightgreen: colors.nnpclightgreen,
         nnpcred: colors.nnpcred,
-        nnpcyellow: colors.nnpcyellow
+        nnpcyellow: colors.nnpcyellow,
+        'dark-green': '#005828',
+        'light-green': '#03A62F',
+        'color-dark-red': '#D6236A',
+        oxblood: '#7F1D1D',
+        'color-bright-red': '#ED0027',
       },
       backgroundColor: {
         customYellow: '#FDF6E4',
@@ -32,6 +37,15 @@ export default {
 
        fontFamily: {
         mulish: ['Mulish', 'sans-serif'],
+      },
+      keyframes: {
+        fade: {
+          '0%, 100%': { opacity: 0.25 },
+          '50%': { opacity: 1 },
+        },
+      },
+      animation: {
+        fade: 'fade 2s ease-in-out infinite',
       },
     }
   },

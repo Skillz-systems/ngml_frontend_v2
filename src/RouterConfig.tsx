@@ -7,6 +7,8 @@ import StaffLoginPage from './Pages/Stafflogin/StaffLoginPage';
 import { admin } from './Routes/Admin';
 import { customer } from './Routes/Customer';
 import Unauthorized from './Unauthorized';
+import FormBuilderDashboard from './Pages/FormBuilder/FormBuilderDashboard';
+import FormBuilder from './Pages/FormBuilder/FormBuilder';
 
 const RouterConfig = () => {
 
@@ -31,6 +33,19 @@ const RouterConfig = () => {
             path: '/customer',
             children: customer
 
+        },
+        {
+            path:'/formbuilder',
+            element:<FormBuilderDashboard />
+        },
+        {
+            path:'formbuilder/create-form/:id',
+            element:<FormBuilder />
+
+        },
+        {
+            path:'/',
+            element:<FormBuilderDashboard />
         },
         {
             path: '*',
