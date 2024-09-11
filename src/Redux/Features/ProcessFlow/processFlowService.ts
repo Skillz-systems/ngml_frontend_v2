@@ -10,31 +10,31 @@ type ErrorResponse = {
 
 
 export interface ProcessFlow {
-    id: number|null;
-    name: string;
-    start_step_id: number|null;
-    frequency: string;
-    status: boolean;
-    frequency_for: string;
-    day: null;
-    week: null;
-    steps: ProcessFlowStep[];
+  id: number | null;
+  name: string;
+  start_step_id: number | null;
+  frequency: string;
+  status: boolean;
+  frequency_for: string;
+  day: null;
+  week: null;
+  steps: ProcessFlowStep[];
 }
 
 export interface ProcessFlowStep {
-    id: number;
-    name: string;
-    step_route: string;
-    assignee_user_route: string;
-    next_user_designation: string;
-    next_user_department: string;
-    next_user_unit: string;
-    process_flow_id: null;
-    next_user_location: null;
-    step_type: string;
-    user_type: string;
-    next_step_id: number | null;
-    status: boolean;
+  id: number;
+  name: string;
+  step_route: string;
+  assignee_user_route: string;
+  next_user_designation: string;
+  next_user_department: string;
+  next_user_unit: string;
+  process_flow_id: null;
+  next_user_location: null;
+  step_type: string;
+  user_type: string;
+  next_step_id: number | null;
+  status: boolean;
 }
 
 
@@ -54,14 +54,14 @@ export const processFlowApi = api.injectEndpoints({
         return errorResponse;
       },
     }),
-     submitProcessFlow: builder.mutation<ProcessFlow,ProcessFlow>({
+    submitProcessFlow: builder.mutation<ProcessFlow, ProcessFlow>({
       query: (customer) => ({
         url: '/processflow/api/processflows',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: customer,
       }),
-     invalidatesTags: ['Forms', 'Customers', 'Tasks'],
+      invalidatesTags: ['Forms', 'Customers', 'Tasks'],
       transformResponse: (response: ProcessFlow | ErrorResponse) => {
         if ('error' in response) {
           throw new Error(response.error);
@@ -75,8 +75,8 @@ export const processFlowApi = api.injectEndpoints({
     }),
   }),
   overrideExisting: false,
-}); 
+});
 export const {
- useSubmitProcessFlowMutation,
- useGetProcessFlowsQuery
+  useSubmitProcessFlowMutation,
+  useGetProcessFlowsQuery
 } = processFlowApi;
