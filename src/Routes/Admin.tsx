@@ -4,6 +4,7 @@ import BidPage from '@/Pages/BidPage/BidPage';
 import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
 import Complaints from '@/Pages/Complaints/Complaints';
 import ConnectProjectPage from '@/Pages/ConnectProjectPage/ConnectProjectPage';
+import CustomerDdqViewEditPage from '@/Pages/Customer/CustomerDdqViewEditPage/CustomerDdqViewEditPage';
 import { default as AdminCustomerPageLayout, default as CustomerPageLayout } from '@/Pages/CustomerDetail/CustomerPageLayout';
 import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
@@ -24,7 +25,7 @@ export const admin: RouteObject[] = [
     {
 
         path: '',
-        element: <AdminHomePage />,
+        element: <CustomerDdqViewEditPage />,
         index: true
 
     },
