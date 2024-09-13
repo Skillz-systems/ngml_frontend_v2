@@ -38,13 +38,13 @@ const CustomerDdqViewEditPage = () => {
                     <div className="text-center text-[#828da9] text-xs font-normal font-['Mulish']">Close</div>
                 </div>
             </div>
-            <div className="">
+            <div className="mt-6">
                 <div className="w-full h-8 px-5 py-2 bg-[#d2f69e] border-b border-[#e2e4eb] justify-between items-center gap-2.5 flex">
                     <div className="TableOfContent text-[#49526a] text-sm font-semibold font-['Mulish']">TABLE OF CONTENT</div>
                     <div className="Questioniare text-center text-[#49526a] text-sm font-semibold font-['Mulish']">QUESTIONIARE</div>
                     <div className="Status text-[#49526a] text-sm font-semibold font-['Mulish']">STATUS</div>
                 </div>
-                <div className="w-full flex justify-between gap-20">
+                <div className="w-full flex justify-between gap-20 mt-6">
                     <div className="space-y-2 ml-5">
                         <div>01 Section A: General</div>
                         <div className='ml-6'>
@@ -80,75 +80,83 @@ const CustomerDdqViewEditPage = () => {
                     <div className='flex w-full'>
                         <div className='w-full'>
                             <div className="p-[20px] rounded-[20px]" style={{ background: colors.dark[50] }}>
-                                <div className='border-2 border-dashed rounded-[20px] p-[20px] bg-dark-50'>
+                                <div className='' >OWNERSHIP AND MANAGEMENT</div>
+                                <div className='border-2 border-dashed rounded-[20px] p-[20px] bg-dark-50 mt-4'>
                                     <div className='flex-col space-y-5'>
-                                        <h3 className='text-[#49526A] font-[700]'>PERSONAL DETAILS</h3>
+                                        <h3 className='text-[#49526A] font-[700]'>COMPANY DETAILS</h3>
                                         <CustomInput
+                                            required
                                             type="text"
-                                            label='Supplier Registered Company Name'
+                                            label='Company Name'
                                             value={formData.supplierName}
                                             handleChangeEvent={(value) => handleInputChange(value, 'supplierName')}
-                                            placeholder="Input company name"
+                                            placeholder="Company name"
                                             styleVariant='customStyle5'
                                         />
                                         <CustomInput
+                                            required
                                             type="text"
-                                            label='Supplier Email '
+                                            label='RC Number '
                                             value={formData.supplierEmail}
                                             handleChangeEvent={(value) => handleInputChange(value, 'supplierEmail')}
-                                            placeholder="Input email here"
+                                            placeholder="Input Rc number here"
                                             styleVariant='customStyle5'
                                         />
                                         <CustomInput
+                                            required
                                             type="text"
-                                            label='Supplier Phone Number'
+                                            label='Nature of Business'
                                             value={formData.supplierPhoneNumber}
                                             handleChangeEvent={(value) => handleInputChange(value, 'supplierPhoneNumber')}
-                                            placeholder="Input phone number here"
+                                            placeholder="Input nature of business here"
                                             styleVariant='customStyle5'
                                         />
                                         <div className='flex flex-col md:flex-row gap-[10px]'>
                                             <div className='flex-1'>
                                                 <CustomInput
-                                                    type="date"
-                                                    label='Date of agreement'
+                                                    required
+                                                    type="text"
+                                                    label='Company Telephone Number'
                                                     value={formData.dateOfAgreement}
                                                     handleChangeEvent={(value) => handleInputChange(value, 'dateOfAgreement')}
-                                                    placeholder="Enter Company Representative"
+                                                    placeholder="Enter Company Telephone number"
                                                     styleVariant='customStyle5'
                                                 />
                                             </div>
                                             <div className='flex-1'>
                                                 <CustomInput
-                                                    type="select"
-                                                    label='Agreement Duration'
+                                                    required
+                                                    type="text"
+                                                    label='Company Mobile Number'
                                                     value={formData.agreementDuration}
                                                     handleChangeEvent={(value) => handleInputChange(value, 'agreementDuration')}
-                                                    placeholder="Choose duration"
+                                                    placeholder="Enter company Mobile number"
                                                     styleVariant='customStyle5'
                                                     options={options}
                                                 />
                                             </div>
                                         </div>
                                         <CustomInput
+                                            required
                                             type="text"
-                                            label='Supplier Registered Company Name'
+                                            label='Email'
                                             value={formData.supplierName}
                                             handleChangeEvent={(value) => handleInputChange(value, 'supplierName')}
-                                            placeholder="Input company name"
+                                            placeholder="Input email"
                                             styleVariant='customStyle5'
                                         />
                                         <CustomInput
                                             type="text"
-                                            label='Supplier Email '
+                                            label='Website '
                                             value={formData.supplierEmail}
                                             handleChangeEvent={(value) => handleInputChange(value, 'supplierEmail')}
-                                            placeholder="Input email here"
+                                            placeholder="Input website here"
                                             styleVariant='customStyle5'
                                         />
                                         <CustomInput
+                                            required
                                             type="text"
-                                            label='Supplier Phone Number'
+                                            label='Company Address'
                                             value={formData.supplierPhoneNumber}
                                             handleChangeEvent={(value) => handleInputChange(value, 'supplierPhoneNumber')}
                                             placeholder="Input phone number here"
@@ -156,46 +164,48 @@ const CustomerDdqViewEditPage = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className='border-2 border-dashed rounded-[20px] p-[20px] bg-dark-50'>
+                                <div className='border-2 border-dashed rounded-[20px] p-[20px] bg-dark-50 mt-4'>
                                     <div className='flex-col space-y-5'>
-                                        <h3 className='text-[#49526A] font-[700]'>PERSONAL DETAILS</h3>
+                                        <h3 className='text-[#49526A] font-[700]'>CONTACT PERSON</h3>
                                         <CustomInput
+                                            required
                                             type="text"
-                                            label='Supplier Registered Company Name'
+                                            label='Contact Name'
                                             value={formData.supplierName}
                                             handleChangeEvent={(value) => handleInputChange(value, 'supplierName')}
-                                            placeholder="Input company name"
+                                            placeholder="Input contact name"
                                             styleVariant='customStyle5'
                                         />
                                         <div className='flex flex-col md:flex-row gap-[10px]'>
                                             <div className='flex-1'>
                                                 <CustomInput
-                                                    type="date"
-                                                    label='Date of agreement'
+                                                    required
+                                                    type="text"
+                                                    label='Contact Telephone Number'
                                                     value={formData.dateOfAgreement}
                                                     handleChangeEvent={(value) => handleInputChange(value, 'dateOfAgreement')}
-                                                    placeholder="Enter Company Representative"
+                                                    placeholder="Enter Contact Telephone"
                                                     styleVariant='customStyle5'
                                                 />
                                             </div>
                                             <div className='flex-1'>
                                                 <CustomInput
-                                                    type="select"
-                                                    label='Agreement Duration'
+                                                    required
+                                                    type="text"
+                                                    label='Contact Email Address'
                                                     value={formData.agreementDuration}
                                                     handleChangeEvent={(value) => handleInputChange(value, 'agreementDuration')}
-                                                    placeholder="Choose duration"
+                                                    placeholder="Enter contact email"
                                                     styleVariant='customStyle5'
-                                                    options={options}
                                                 />
                                             </div>
                                         </div>
                                         <CustomInput
                                             type="text"
-                                            label='Supplier Registered Company Name'
+                                            label='Contact Address'
                                             value={formData.supplierName}
                                             handleChangeEvent={(value) => handleInputChange(value, 'supplierName')}
-                                            placeholder="Input company name"
+                                            placeholder="Input contact aaddress"
                                             styleVariant='customStyle5'
                                         />
                                     </div>
@@ -203,25 +213,28 @@ const CustomerDdqViewEditPage = () => {
                                 <div className='mt-6'>
                                     <div className='border-dashed border-2 border rounded-[20px] p-[20px]'>
                                         <div className='flex-col space-y-5'>
-                                            <h3 className='text-[#49526A] font-[700]'>AGREEMENT DETAILS</h3>
+                                            <h3 className='text-[#49526A] font-[700]'>SENIOR MANAGEMENT/OFFICER</h3>
                                             <div className='flex flex-col md:flex-row gap-[10px]'>
                                                 <div className='flex-1'>
                                                     <CustomInput
-                                                        type="date"
-                                                        label='Date of agreement'
+                                                        required
+                                                        type="select"
+                                                        label='Title'
                                                         value={formData.dateOfAgreement}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'dateOfAgreement')}
-                                                        placeholder="Enter Company Representative"
+                                                        placeholder="Mr"
                                                         styleVariant='customStyle5'
+                                                        options={options}
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
                                                     <CustomInput
-                                                        type="select"
-                                                        label='Agreement Duration'
+                                                        required
+                                                        type="text"
+                                                        label='First Name'
                                                         value={formData.agreementDuration}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'agreementDuration')}
-                                                        placeholder="Choose duration"
+                                                        placeholder="Enter first name"
                                                         styleVariant='customStyle5'
                                                         options={options}
                                                     />
@@ -231,20 +244,22 @@ const CustomerDdqViewEditPage = () => {
                                                 <div className='flex-1'>
                                                     <CustomInput
                                                         type="text"
-                                                        label='Agreed Volume (Scf)'
+                                                        label='Other name'
                                                         value={formData.agreedVolume}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'agreedVolume')}
-                                                        placeholder="Input volume here"
+                                                        placeholder="other names"
                                                         styleVariant='customStyle5'
+                                                        options={options}
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
                                                     <CustomInput
+                                                        required
                                                         type="text"
-                                                        label='Cost per Scf (NGN)'
+                                                        label='Last Name'
                                                         value={formData.costPerScf}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'costPerScf')}
-                                                        placeholder="Input cost here"
+                                                        placeholder="Input last name here"
                                                         styleVariant='customStyle5'
                                                     />
                                                 </div>
@@ -252,21 +267,23 @@ const CustomerDdqViewEditPage = () => {
                                             <div className='flex flex-col md:flex-row gap-[10px]'>
                                                 <div className='flex-1'>
                                                     <CustomInput
+                                                    required
                                                         type="text"
-                                                        label='Entry Quantity (Scf)'
+                                                        label='Phone Number'
                                                         value={formData.entryQuantity}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'entryQuantity')}
-                                                        placeholder="Input entry quantity here"
+                                                        placeholder="Input phone number here"
                                                         styleVariant='customStyle5'
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
                                                     <CustomInput
+                                                    required
                                                         type="text"
-                                                        label='Exit Quantity (Scf)'
+                                                        label='Company Position'
                                                         value={formData.exitQuantity}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'exitQuantity')}
-                                                        placeholder="Input exit quantity here"
+                                                        placeholder="Input company position"
                                                         styleVariant='customStyle5'
                                                     />
                                                 </div>
@@ -277,25 +294,28 @@ const CustomerDdqViewEditPage = () => {
                                 <div className='mt-6'>
                                     <div className='border-dashed border-2 border rounded-[20px] p-[20px]'>
                                         <div className='flex-col space-y-5'>
-                                            <h3 className='text-[#49526A] font-[700]'>AGREEMENT DETAILS</h3>
+                                            <h3 className='text-[#49526A] font-[700]'>SENIOR MANAGEMENT/OFFICER</h3>
                                             <div className='flex flex-col md:flex-row gap-[10px]'>
                                                 <div className='flex-1'>
                                                     <CustomInput
-                                                        type="date"
-                                                        label='Date of agreement'
+                                                        required
+                                                        type="select"
+                                                        label='Title'
                                                         value={formData.dateOfAgreement}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'dateOfAgreement')}
-                                                        placeholder="Enter Company Representative"
+                                                        placeholder="Mr"
                                                         styleVariant='customStyle5'
+                                                        options={options}
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
                                                     <CustomInput
-                                                        type="select"
-                                                        label='Agreement Duration'
+                                                        required
+                                                        type="text"
+                                                        label='First Name'
                                                         value={formData.agreementDuration}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'agreementDuration')}
-                                                        placeholder="Choose duration"
+                                                        placeholder="Enter first name"
                                                         styleVariant='customStyle5'
                                                         options={options}
                                                     />
@@ -305,20 +325,22 @@ const CustomerDdqViewEditPage = () => {
                                                 <div className='flex-1'>
                                                     <CustomInput
                                                         type="text"
-                                                        label='Agreed Volume (Scf)'
+                                                        label='Other name'
                                                         value={formData.agreedVolume}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'agreedVolume')}
-                                                        placeholder="Input volume here"
+                                                        placeholder="other names"
                                                         styleVariant='customStyle5'
+                                                        options={options}
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
                                                     <CustomInput
+                                                        required
                                                         type="text"
-                                                        label='Cost per Scf (NGN)'
+                                                        label='Last Name'
                                                         value={formData.costPerScf}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'costPerScf')}
-                                                        placeholder="Input cost here"
+                                                        placeholder="Input last name here"
                                                         styleVariant='customStyle5'
                                                     />
                                                 </div>
@@ -326,36 +348,37 @@ const CustomerDdqViewEditPage = () => {
                                             <div className='flex flex-col md:flex-row gap-[10px]'>
                                                 <div className='flex-1'>
                                                     <CustomInput
+                                                    required
                                                         type="text"
-                                                        label='Entry Quantity (Scf)'
+                                                        label='Phone Number'
                                                         value={formData.entryQuantity}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'entryQuantity')}
-                                                        placeholder="Input entry quantity here"
+                                                        placeholder="Input phone number here"
                                                         styleVariant='customStyle5'
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
                                                     <CustomInput
+                                                    required
                                                         type="text"
-                                                        label='Exit Quantity (Scf)'
+                                                        label='Company Position'
                                                         value={formData.exitQuantity}
                                                         handleChangeEvent={(value) => handleInputChange(value, 'exitQuantity')}
-                                                        placeholder="Input exit quantity here"
+                                                        placeholder="Input company position"
                                                         styleVariant='customStyle5'
                                                     />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='border-2 border-dashed rounded-[20px] p-[20px] bg-dark-50'>
+                                    <div className='border-2 border-dashed rounded-[20px] p-[20px] bg-dark-50 mt-4'>
                                         <div className='flex-col space-y-5'>
-                                            <h3 className='text-[#49526A] font-[700]'>PERSONAL DETAILS</h3>
+                                            <h3 className='text-[#49526A] font-[700]'>Joint Venture</h3>
                                             <CustomInput
                                                 type="textarea"
-                                                label='Supplier Registered Company Name'
+                                                label=''
                                                 value={formData.supplierName}
                                                 handleChangeEvent={(value) => handleInputChange(value, 'supplierName')}
-                                                placeholder="Input company name"
                                                 styleVariant='customStyle5'
                                             />
                                         </div>
