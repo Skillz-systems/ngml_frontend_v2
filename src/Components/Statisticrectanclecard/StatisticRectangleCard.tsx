@@ -18,14 +18,14 @@ interface StatisticRectangleCardProps {
 const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
   icon = null,
   title,
-  value = '32',
+  value ,
   valueColor = 'text-gray-700',
   backgroundColor = 'bg-white',
   color = 'text-gray-700',
   size,
   iconBgColor = 'bg-[#00AF50]',
   iconSize = 'w-[30px]',
-   to = ''
+  to = ''
 }) => {
   const [iconHovered, setIconHovered] = useState(false);
 
@@ -41,9 +41,9 @@ const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
     <Link to={to} style={{ textDecoration: 'none', width: '100%' }}>
       <div
         style={{ width: '100%', height: '64px' }}
-        className={`rounded-[12px] p-[8px] border border-[#E2E4EB]
+        className={`rounded-[12px] p-[8px] border border-[#E2E4EB] cursor-pointer
         ${backgroundColor} ${color} ${size} shadow-sm flex items-center
-        justify-between `}
+        justify-between transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md hover:bg-[#F5F7F9]`}
         aria-label={title}
       >
         <div className='flex items-center gap-2 w-[100%]'>

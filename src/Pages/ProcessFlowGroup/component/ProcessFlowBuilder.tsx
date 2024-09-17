@@ -2,13 +2,18 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import images from '@/assets';
+// import images from '@/assets';
 import { Heading } from '@/Components';
 import { getRouteLists } from '@/Routes/Admin';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { useNavigate } from 'react-router-dom';
 import { Frequency, FrequencyFor, ProcessFlow, ProcessFlowStep, StepType, UserType } from './types';
+import { MdOutlineLibraryAdd } from 'react-icons/md';
+import { CiSaveDown2 } from "react-icons/ci";
+import { VscSend } from "react-icons/vsc";
+
+
 
 const ItemTypes = {
     PROCESS_FLOW: 'processFlow',
@@ -222,7 +227,7 @@ const EditableContent = ({
                         name={key}
                         value={value as string}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                        className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
                     />
                 </>
             );
@@ -237,7 +242,7 @@ const EditableContent = ({
                         name={key}
                         value={value || ''}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 p-2.5 "
+                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-nnpc-200 focus:nnpc-300 p-2.5 "
                     >
                         <option value="">Select a route</option>
                         {Object.entries(routeOptions).map(([label, path]) => (
@@ -260,7 +265,7 @@ const EditableContent = ({
                         name={key}
                         value={value as string}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 p-2.5 "
+                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-nnpc-200 focus:border-nnpc-300 p-2.5 "
                     >
                         {options.map((option) => (
                             <option key={option.toString()} value={option.toString()}>
@@ -281,14 +286,14 @@ const EditableContent = ({
                     name={key}
                     value={value as string}
                     onChange={handleInputChange}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-nnpc-200 focus:ring focus:ring-nnpc-300 focus:ring-opacity-50"
                 />
             </>
         );
     };
 
     return (
-        <div className="bg-white p-4 rounded-lg  mb-4">
+        <div className="bg-white p-4 rounded-lg  mb-4" >
             <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold">
                     {isStep ? `Step ${stepIndex}: ${item.name}` : item.name}
@@ -296,14 +301,14 @@ const EditableContent = ({
                 <div>
                     <button type='button'
                         onClick={() => setIsEditing(!isEditing)}
-                        className="px-2 py-1 bg-sky-400 text-white rounded hover:bg-sky-600 mr-2"
+                        className="px-4 py-1 text-[14px] bg-nnpc-200 text-white rounded hover:bg-nnpc-300 mr-2"
                     >
                         {isEditing ? 'Cancel' : 'Edit'}
                     </button>
                     <button
                         type='button'
                         onClick={onDelete}
-                        className="px-2 py-1 bg-nnpc-800/70 text-white rounded hover:bg-nnpc-800"
+                        className="px-4 py-1 text-[14px] bg-nnpc-800/70 text-white rounded hover:bg-nnpc-800"
                     >
                         Delete
                     </button>
@@ -497,44 +502,46 @@ const ProcessFlowBuilder = () => {
     };
 
     return (
-        <div className="flex flex-col h-full">
-            <div className="w-full bg-nnpc-50/40 flex-shrink-0 p-4 flex justify-between items-center rounded-xl mb-4">
-                <img src={images.newLogo} alt='nnpc logo' className='cursor-pointer' onClick={() => navigate('/admin')} />
+        <div className="flex flex-col h-full w-[100%]">
+            <div className="w-full flex-shrink-0 p-4 flex justify-between items-center rounded-xl mb-4" >
+                {/* <img src={images.newLogo} alt='nnpc logo' className='cursor-pointer' onClick={() => navigate('/admin')} /> */}
                 <Heading size="h6" className='text-nnpcmediumgreen-950 text-center'>Process Flow Builder</Heading>
-
-                <div className='space-x-2 space-y-2'>
+                <div className='gap-3 flex'>
                     <button
                         type='button'
                         onClick={handleCreateNewFlow}
-                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 duration-300 ease-out transition-all"
+                        className="px-4 py-2 text-[14px] rounded-md border flex items-center justify-center gap-1 bg-white font-[500] border-nnpc-200 text-nnpc-300 hover:text-white  hover:bg-nnpc-300 duration-300 ease-out transition-all"
                     >
-                        Create New Process Flow
+                        <MdOutlineLibraryAdd />
+                        Create
                     </button>
                     <button
                         type='button'
                         onClick={handleSaveProcessFlow}
-                        className="px-4 py-2 bg-nnpc-800 text-white  rounded hover:bg-nnpc-800/50 duration-300 ease-out transition-all"
+                        className="px-4 py-2 text-[14px] border flex items-center justify-center gap-1 bg-white font-[500] border-nnpc-200 text-nnpc-300 hover:text-white rounded-md hover:bg-nnpc-300 duration-300 ease-out transition-all"
                     >
-                        Save Process Flow
+                        <CiSaveDown2 />
+                        Save
                     </button>
                     <button
                         type='button'
                         onClick={handleSubmitToBackend}
-                        className="px-4 py-2 bg-nnpc-200 text-white rounded hover:bg-nnpc-300 duration-300 ease-out transition-all"
+                        className="px-4 py-2 text-[14px] border flex items-center justify-center gap-1 bg-nnpc-200 font-[500] text-[white] hover:text-white rounded-md hover:bg-nnpc-300 duration-300 ease-out transition-all"
                     >
-                        Submit Process Flow
+                        <VscSend />
+                        Submit
                     </button>
                 </div>
             </div>
 
             <div className="flex flex-1 overflow-hidden">
-                <div className="w-1/4 bg-nnpc-50/50 p-4 overflow-y-auto rounded-xl mr-4 h-fit">
-                    <h2 className="text-xl font-bold mb-4">FLow Items</h2>
+                <div className="w-1/4 bg-[#F5F7F9] p-4 overflow-y-auto rounded-xl mr-4 h-fit">
+                    <h2 className="text-xl font-bold mb-2">FLow Items</h2>
                     {!selectedFlow && <DraggableItem type={ItemTypes.PROCESS_FLOW} name="Process Flow" />}
                     <DraggableItem type={ItemTypes.PROCESS_FLOW_STEP} name="Process Flow Step" />
 
                     {/* Scrollable list of saved process flows */}
-                    <h3 className="text-lg font-semibold mt-4">Saved Process Flows</h3>
+                    <h3 className="text-[16px] font-semibold mt-4">Saved Process Flows</h3>
                     <div className="overflow-y-auto max-h-40">
                         {processFlows.map(flow => (
                             <div
@@ -548,7 +555,7 @@ const ProcessFlowBuilder = () => {
                     </div>
                 </div>
 
-                <div ref={drop} className="w-3/4 bg-nnpc-50/50 p-4 overflow-y-scroll rounded-xl h-[30rem]">
+                <div ref={drop} className="w-3/4 bg-[#F5F7F9] p-4 overflow-y-scroll rounded-xl h-[30rem]">
                     {selectedFlow && (
                         <>
                             <h3 className="text-lg font-semibold mb-2">Process Flow</h3>

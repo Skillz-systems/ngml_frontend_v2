@@ -9,7 +9,6 @@ const ProcessFlowGenerator = () => {
     return (
         <ProcessFlowLayout>
             <DndProvider backend={HTML5Backend}>
-
                 <ProcessFlowBuilder />
             </DndProvider>
         </ProcessFlowLayout>

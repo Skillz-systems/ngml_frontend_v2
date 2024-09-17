@@ -22,7 +22,7 @@ const DraggableField = ({ name }: { name: string }) => {
   const style = {
     transform: CSS.Translate.toString(transform),
     zIndex: isDragging ? 1000 : "auto",
-    width: "122px",
+    width: "110px",
   };
 
   let layoutTitle: string;
