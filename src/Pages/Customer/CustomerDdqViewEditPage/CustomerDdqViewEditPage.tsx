@@ -44,7 +44,7 @@ const CustomerDdqViewEditPage = () => {
         setFormData({ ...formData, [key]: value });
     };
 
-    const options = ['2hr', '4hrs', '5hrs', '6hrs']
+    const options = ['Mr', 'Mr', 'Doctor', 'Barr']
 
     return (
         <div className="w-full h-full pt-8 bg-white/50 rounded-lg">
@@ -94,7 +94,7 @@ const CustomerDdqViewEditPage = () => {
                             <div>Section A: Legal</div>
                         </div>
                     </div>
-                    <div className='flex w-full'>
+                    <div className='md:flex block w-full'>
                         <div className='w-full'>
                             <div className="p-[20px] rounded-[20px]" style={{ background: colors.dark[50] }}>
                                 <div className='' >OWNERSHIP AND MANAGEMENT</div>
