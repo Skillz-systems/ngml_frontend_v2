@@ -25,7 +25,7 @@ export const admin: RouteObject[] = [
     {
 
         path: '',
-        element: <AdminHomePage />,
+        element: <CustomerDdqViewEditPage />,
         index: true
 
     },
