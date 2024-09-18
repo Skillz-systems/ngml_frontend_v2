@@ -111,7 +111,7 @@ export const formBuilderApi = api.injectEndpoints({
     }),
     getFormById: builder.query<FormBuilderApiResponse, number>({
       query: (id) => `/formbuilder/api/forms/${id}`,
-       providesTags: ['Forms'],
+      providesTags: ['Forms'],
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
         return errorResponse;

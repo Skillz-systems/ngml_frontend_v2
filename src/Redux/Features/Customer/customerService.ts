@@ -57,6 +57,7 @@ export const customersApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getCustomers: builder.query<Customer, void>({
       query: () => '/customer/api/customers',
+       providesTags: ['Customers'],
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
         return errorResponse;
@@ -76,6 +77,7 @@ export const customersApi = api.injectEndpoints({
         headers: { 'Content-Type': 'application/json' },
         body: customer,
       }),
+      invalidatesTags: ['Forms', 'Customers', 'Tasks'],
       transformResponse: (response: Customer | ErrorResponse) => {
         if ('error' in response) {
           throw new Error(response.error);
