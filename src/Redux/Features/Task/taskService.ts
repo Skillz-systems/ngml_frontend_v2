@@ -32,6 +32,7 @@ export const notificationApi = api.injectEndpoints({
         url: `/notification/api/tasks/${userId}`,
         method: 'GET',
       }),
+       providesTags: ['Tasks'],
       transformResponse: (response: TaskResponse | ErrorResponse) => {
         if ('error' in response) {
           throw new Error(response.error);
