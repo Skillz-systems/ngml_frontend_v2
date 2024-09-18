@@ -149,6 +149,44 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
 
+
+
+export interface Site {
+  id: number;
+  task_id: string;
+  site_address: string;
+  ngml_zone_id: string;
+  site_name: string;
+  phone_number: string;
+  email: string;
+  site_contact_person_name: string;
+  site_contact_person_email: string;
+  site_contact_person_phone_number: string;
+  site_existing_status: boolean;
+  status: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CustomerSite {
+  id: number;
+  task_id: string;
+  company_name: string;
+  email: string;
+  phone_number: string;
+  created_by_user_id: string;
+  status: boolean;
+  created_at: string;
+  updated_at: string;
+  sites: Site[];  
+}
+
+export interface CustomerWithSite {
+  data: CustomerSite;  
+}
+
+
+
 // New interface for individual customer data
 export interface CustomerData {
   id: number;
@@ -199,7 +237,7 @@ export const customersApi = api.injectEndpoints({
         return errorResponse;
       },
     }),
-    getCustomerById: builder.query<SingleCustomerResponse, number>({
+    getCustomerById: builder.query<CustomerWithSite, number>({
       query: (id) => `/customer/api/customers/${id}`,
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
