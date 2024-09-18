@@ -38,7 +38,7 @@ export const AdminLinks = [
   { id: 5, name: 'Communications', to: '', icon: images.Communicationicon, type: 'primary' },
   { id: 6, name: 'Profile', to: '', icon: images.Profilenameicon, type: 'primary' },
   { id: 7, name: 'Settings', to: '', icon: images.Settingicon, type: 'primary' },
-  { id: 7, name: 'Process Flows', to: '/processflowgenerator', icon: images.Settingicon, type: 'primary' },
+  { id: 8, name: 'Process Flows', to: '/processflowgenerator', icon: images.Settingicon, type: 'primary' },
 
 ];
 
