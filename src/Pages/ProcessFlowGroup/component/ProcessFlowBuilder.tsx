@@ -7,11 +7,11 @@ import { Heading } from '@/Components';
 import { getRouteLists } from '@/Routes/Admin';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { CiSaveDown2 } from 'react-icons/ci';
+import { MdOutlineLibraryAdd } from 'react-icons/md';
+import { VscSend } from 'react-icons/vsc';
 import { useNavigate } from 'react-router-dom';
 import { Frequency, FrequencyFor, ProcessFlow, ProcessFlowStep, StepType, UserType } from './types';
-import { MdOutlineLibraryAdd } from 'react-icons/md';
-import { CiSaveDown2 } from "react-icons/ci";
-import { VscSend } from "react-icons/vsc";
 
 
 
@@ -26,9 +26,9 @@ const stepTypeOptions: StepType[] = ['create', 'delete', 'update', 'approve_auto
 const userTypeOptions: UserType[] = ['user', 'supplier', 'customer', 'contractor'];
 const booleanOptions = [true, false];
 
-const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-const weekOptions = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-const designationOptions = ['Manager', 'Developer', 'Analyst', 'Designer'];
+const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'none'];
+const weekOptions = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'none'];
+const designationOptions = ['Manager', 'Officer', 'ED'];
 const unitOptions = ['Unit A', 'Unit B', 'Unit C'];
 const departmentOptions = ['HR', 'Engineering', 'Finance', 'Sales'];
 
@@ -220,7 +220,7 @@ const EditableContent = ({
         if (key === 'name') {
             return (
                 <>
-                    <label htmlFor={key} className='sr-only'>{key}</label>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
                     <input
                         id={key}
                         type="text"
@@ -236,7 +236,7 @@ const EditableContent = ({
         if (key === 'step_route' || key === 'assignee_user_route') {
             return (
                 <>
-                    <label htmlFor={key} className='sr-only'>{key}</label>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
                     <select
                         id={key}
                         name={key}
@@ -259,7 +259,7 @@ const EditableContent = ({
         if (options) {
             return (
                 <>
-                    <label htmlFor={key} className='sr-only'>{key}</label>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
                     <select
                         id={key}
                         name={key}
@@ -279,7 +279,7 @@ const EditableContent = ({
 
         return (
             <>
-                <label htmlFor={key} className='sr-only'>{key}</label>
+                <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
                 <input
                     id={key}
                     type="text"
@@ -316,9 +316,22 @@ const EditableContent = ({
             </div>
             {isEditing && (
                 <>
+
+                    {/* {Object.entries(editedItem)
+                        .filter(([key]) => !hiddenKeys.includes(key))  // Filter out hidden keys
+                        .map(([key, value]) => (
+                            <div key={key} className="mb-2">
+                                <label className="block text-sm font-medium text-gray-700 capitalize">
+                                    {key.replace(/_/g, ' ')}
+                                </label>
+                                {renderField(key, value)}
+                            </div>
+                        ))} */}
+
+
                     {Object.entries(editedItem).map(([key, value]) => (
                         <div key={key} className="mb-2">
-                            <label className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
+                            {/* <label className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label> */}
                             {renderField(key, value)}
                         </div>
                     ))}
@@ -330,8 +343,9 @@ const EditableContent = ({
                         Save
                     </button>
                 </>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 };
 
@@ -386,8 +400,8 @@ const ProcessFlowBuilder = () => {
                     frequency: 'none',
                     status: true,
                     frequency_for: 'none',
-                    day: null,
-                    week: null,
+                    day: 'none',
+                    week: 'none',
                 };
                 setSelectedFlow(newProcessFlow);
                 setSteps([]);

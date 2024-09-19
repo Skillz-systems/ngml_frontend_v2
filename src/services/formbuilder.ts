@@ -1,10 +1,10 @@
-import { FetchFormsResponse } from "@/Data";
+import { FetchFormsResponse } from '@/Data';
 
 export async function fetchForms(): Promise<FetchFormsResponse> {
   try {
-      const response = await fetch(`https://api.ngml.skillzserver.com/formbuilder/api/forms`, {
+      const response = await fetch('https://api.ngml.skillzserver.com/formbuilder/api/forms', {
         headers: {
-          Authorization: "Bearer 231|ewCBKQ1j3dNTTYU1imOnIR3FLMvOPtRECcvvANIy04d89335"
+          Authorization: 'Bearer 231|ewCBKQ1j3dNTTYU1imOnIR3FLMvOPtRECcvvANIy04d89335'
         }
       });
   
@@ -16,7 +16,7 @@ export async function fetchForms(): Promise<FetchFormsResponse> {
       return data as FetchFormsResponse;
     } catch (error) {
       console.error('Error fetching data:', error);
-      throw error; // Re-throw error so that it can be handled by the calling function
+      throw error; 
     }
   }
   

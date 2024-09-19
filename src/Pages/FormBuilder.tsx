@@ -1,18 +1,18 @@
-import { MdOutlinePublish, MdPreview } from "react-icons/md";
-import { HiSaveAs } from "react-icons/hi";
-import { DndContext, DragOverlay } from "@dnd-kit/core";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addElement, replaceElement } from "../slices/dropElementSlice";
-import { useQuestionContext } from "../context/QuestionContext.js";
-import { toast } from "react-toastify";
-import axios from "axios"
-import { Button } from "@/Components/FormBuilderComponents/ButtonComponent.js";
-import DropArea from "@/Components/FormBuilderComponents/DropArea.js";
-import DraggableField from "@/Components/FormBuilderComponents/DraggableField.js";
-import PreviewDialogBtn from "@/Components/FormBuilderComponents/PreviewDialogBtn.js";
-import { Link } from "react-router-dom";
-import { ArrowBack } from "@mui/icons-material";
+import { Button } from '@/Components/FormBuilderComponents/ButtonComponent.js';
+import DraggableField from '@/Components/FormBuilderComponents/DraggableField.js';
+import DropArea from '@/Components/FormBuilderComponents/DropArea.js';
+import PreviewDialogBtn from '@/Components/FormBuilderComponents/PreviewDialogBtn.js';
+import { DndContext, DragOverlay } from '@dnd-kit/core';
+import { ArrowBack } from '@mui/icons-material';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { HiSaveAs } from 'react-icons/hi';
+import { MdOutlinePublish, MdPreview } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useQuestionContext } from '../context/QuestionContext.js';
+import { addElement, replaceElement } from '../slices/dropElementSlice';
 
 type ElementType = { itemName: string; itemPosition: number };
 
@@ -24,10 +24,10 @@ const FormBuilder = () => {
   const [isOverDropArea, setIsOverDropArea] = useState<boolean>(false);
 
   const dispatch = useDispatch();
-  
+
   const elements = useSelector((state: any) => state.elements as ElementType[]);
 
-  const [title, setTitle] = useState("Title")
+  const [title, setTitle] = useState('Title')
 
   const handleDragStart = (event: any) => {
     setActiveId(event.active.id);
@@ -65,10 +65,10 @@ const FormBuilder = () => {
     setIsOverDropArea(isOver);
   };
 
-  console.log("QUESTIONS:", questions)
+  console.log('QUESTIONS:', questions)
 
   useEffect(() => {
-    const formDetails = localStorage.getItem("currentForm")
+    const formDetails = localStorage.getItem('currentForm')
     const formDetailsData = formDetails ? JSON.parse(formDetails) : {};
 
 
@@ -77,7 +77,7 @@ const FormBuilder = () => {
 
   const handlePublish = async () => {
 
-    const formDetails = localStorage.getItem("currentForm")
+    const formDetails = localStorage.getItem('currentForm')
     const formDetailsData = formDetails ? JSON.parse(formDetails) : {};
 
     const formData = {
@@ -94,11 +94,11 @@ const FormBuilder = () => {
       // Make the POST request
       const response = await axios.post('https://api.ngml.skillzserver.com/formbuilder/api/forms/create', formData, {
         headers: {
-          Authorization: "Bearer 231|ewCBKQ1j3dNTTYU1imOnIR3FLMvOPtRECcvvANIy04d89335"
+          Authorization: 'Bearer 231|ewCBKQ1j3dNTTYU1imOnIR3FLMvOPtRECcvvANIy04d89335'
         }
       });
 
-      toast.success("Form created successfully!");
+      toast.success('Form created successfully!');
 
       // Handle the success response
       console.log('Success:', response.data);
@@ -122,21 +122,21 @@ const FormBuilder = () => {
         <div className="flex flex-col">
           <nav className="flex flex-row items-center justify-between p-4 border-b border-gray-400 h-[13vh] md:p-5 md:gap-4">
             <h1 className="text-2xl font-bold w-[68%]">
-              Form:{" "}
+              Form:{' '}
               <span className="font-normal text-gray-600">{title}</span>
             </h1>
             <div className="flex flex-row items-center justify-between gap-1 w-[32%]">
               <Button
-                variant={"outline"}
-                title={"Preview the form"}
+                variant={'outline'}
+                title={'Preview the form'}
                 className="w-[32%] gap-2 font-bold text-sm tracking-wide"
               >
                 <MdPreview className="text-lg" />
                 <PreviewDialogBtn />
               </Button>
               <Button
-                variant={"outline"}
-                title={"Save and edit later"}
+                variant={'outline'}
+                title={'Save and edit later'}
                 className="w-[32%] gap-2 font-bold text-sm tracking-wide"
               >
                 <HiSaveAs className="text-lg" />
@@ -191,7 +191,7 @@ const FormBuilder = () => {
           </DragOverlay>
         </div>
       </DndContext>
-      </div>
+    </div>
 
   );
 };

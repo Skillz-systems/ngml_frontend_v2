@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
-import { BsFileEarmarkPlus } from "react-icons/bs";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Link, useNavigate } from "react-router-dom";
-import { fetchForms } from "../services/formbuilder";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/Components/FormBuilderComponents/DialogComponent";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/Components/FormBuilderComponents/FormComponent";
-import { Input } from "@/Components/FormBuilderComponents/InputComponent";
-import { Button } from "@/Components/FormBuilderComponents/ButtonComponent";
-import SelectComponent from "@/Components/FormBuilderComponents/SelectComponent";
-import { Textarea } from "@/Components/FormBuilderComponents/TextAreaComponent";
-import FormCard from "@/Components/FormBuilderComponents/FormCard";
-import { FormProps } from '../Data'
-import { ArrowBack } from "@mui/icons-material";
+import { Button } from '@/Components/FormBuilderComponents/ButtonComponent';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/Components/FormBuilderComponents/DialogComponent';
+import FormCard from '@/Components/FormBuilderComponents/FormCard';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/Components/FormBuilderComponents/FormComponent';
+import { Input } from '@/Components/FormBuilderComponents/InputComponent';
+import SelectComponent from '@/Components/FormBuilderComponents/SelectComponent';
+import { Textarea } from '@/Components/FormBuilderComponents/TextAreaComponent';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowBack } from '@mui/icons-material';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { BsFileEarmarkPlus } from 'react-icons/bs';
+import { Link, useNavigate } from 'react-router-dom';
+import { z } from 'zod';
+import { FormProps } from '../Data';
+import { fetchForms } from '../services/formbuilder';
 
 const FormBuilderDashboard = () => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -47,35 +47,35 @@ const FormBuilderDashboard = () => {
 
   const formSchema = z.object({
     name: z.string().min(2, {
-      message: "Form name must be at least 2 characters.",
+      message: 'Form name must be at least 2 characters.',
     }),
     description: z.string().min(5, {
-      message: "Form description must be at least 5 characters",
+      message: 'Form description must be at least 5 characters',
     }),
     processFlowId: z.string().nonempty({
-      message: "Process Flow Id cannot be empty",
+      message: 'Process Flow Id cannot be empty',
     }),
     tag: z.string().nonempty({
-      message: "Tag cannot be empty",
+      message: 'Tag cannot be empty',
     }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      processFlowId: "",
-      tag: "",
+      name: '',
+      description: '',
+      processFlowId: '',
+      tag: '',
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
 
-    localStorage.setItem("currentForm", JSON.stringify(values))
+    localStorage.setItem('currentForm', JSON.stringify(values))
 
-    navigate("/create-form/new")
+    // navigate('/create-form/new')
     setIsDialogOpen(false);
   }
 
@@ -189,8 +189,8 @@ const FormBuilderDashboard = () => {
                             <FormControl>
                               <SelectComponent
                                 field={field}
-                                placeholder={"Select a process flow id"}
-                                options={["1t2y4ud73n", "2k3m5n8p0q"]}
+                                placeholder={'Select a process flow id'}
+                                options={['1t2y4ud73n', '2k3m5n8p0q']}
                               />
                             </FormControl>
                             <FormMessage className="text-color-bright-red" />
@@ -206,8 +206,8 @@ const FormBuilderDashboard = () => {
                             <FormControl>
                               <SelectComponent
                                 field={field}
-                                placeholder={"Select a tag"}
-                                options={["tag 1", "tag 2"]}
+                                placeholder={'Select a tag'}
+                                options={['tag 1', 'tag 2']}
                               />
                             </FormControl>
                             <FormMessage className="text-color-bright-red" />
@@ -227,8 +227,8 @@ const FormBuilderDashboard = () => {
               <FormCard
                 key={form.id}
                 formName={form.name}
-                formStatus={"Draft"}
-                dateCreated={"1 day ago"}
+                formStatus={'Draft'}
+                dateCreated={'1 day ago'}
                 formDescription={`
                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -237,52 +237,6 @@ const FormBuilderDashboard = () => {
                 formId={0}
               />
             ))}
-
-
-            {/* <FormCard
-            formName={"Enrollment Form"}
-            formStatus={"Draft"}
-            dateCreated={"1 day ago"}
-            formDescription={`
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.`}
-            formId={1}
-          />
-          <FormCard
-            formName={"Staff Form"}
-            formStatus={"Draft"}
-            dateCreated={"5 days ago"}
-            formDescription={`
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat.`}
-            formId={2}
-          />
-          <FormCard
-            formName={"Registration Form"}
-            formStatus={"Published"}
-            dateCreated={"10 days ago"}
-            formDescription={`
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.`}
-            formId={3}
-          />
-          <FormCard
-            formName={"Export Form"}
-            formStatus={"Published"}
-            dateCreated={"15 days ago"}
-            formDescription={`
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.`}
-            formId={4}
-          /> */}
           </div>
         </div>
       </div>
