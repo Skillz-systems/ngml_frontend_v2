@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import { useDroppable } from "@dnd-kit/core";
-import { useDispatch, useSelector } from "react-redux";
-import { removeElement } from "@/slices/dropElementSlice";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { removeElement } from '@/slices/dropElementSlice';
+import { useDroppable } from '@dnd-kit/core';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   CheckboxField,
   DateField,
@@ -15,23 +16,35 @@ import {
   TextareaField,
   TimeField,
   TitleField
-} from "./DropElements";
+} from './DropElements';
+
+// type ElementType = { itemName: string; itemPosition: number };
 
 type ElementType = { itemName: string; itemPosition: number };
 
+interface DropAreaProps {
+  onDrop: (event: any) => void;
+  handleReplaceMode: (index: number) => void;
+  replaceIndex: number | null;
+  replaceMode: boolean;
+  handleDropArea: (isOver: boolean) => void;
+  elements: ElementType[];
+}
+
+
 export type ElementName =
-  | "title"
-  | "subtitle"
-  | "separator"
-  | "spacer"
-  | "text"
-  | "textarea"
-  | "number"
-  | "dropdown"
-  | "checkbox"
-  | "radiobox"
-  | "date"
-  | "time";
+  | 'title'
+  | 'subtitle'
+  | 'separator'
+  | 'spacer'
+  | 'text'
+  | 'textarea'
+  | 'number'
+  | 'dropdown'
+  | 'checkbox'
+  | 'radiobox'
+  | 'date'
+  | 'time';
 
 type FieldItemType = {
   [key in ElementName]: React.FC<{
@@ -58,7 +71,7 @@ const FieldItem: FieldItemType = {
   time: TimeField,
 };
 
-const DropArea = ({
+const DropArea: React.FC<DropAreaProps> = ({
   onDrop,
   handleReplaceMode,
   replaceIndex,
@@ -72,7 +85,7 @@ const DropArea = ({
   handleDropArea: (isOver: boolean) => void;
 }) => {
   const { isOver, setNodeRef } = useDroppable({
-    id: "drop-area",
+    id: 'drop-area',
   });
 
 
@@ -97,10 +110,10 @@ const DropArea = ({
     <div
       ref={setNodeRef}
       className={`flex flex-col space-y-4 w-full h-full px-4 py-6 bg-[#eceef3]  border-gray-400 rounded-lg overflow-y-auto
-        ${isOver ? "border-4" : "border"}
+        ${isOver ? 'border-4' : 'border'}
         ${elements?.length
-          ? "items-start justify-start"
-          : "items-center justify-center"
+          ? 'items-start justify-start'
+          : 'items-center justify-center'
         }
       `}
       onDragOver={(e) => e.preventDefault()}
