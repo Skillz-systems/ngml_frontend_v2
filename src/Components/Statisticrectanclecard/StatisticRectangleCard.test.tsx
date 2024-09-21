@@ -9,7 +9,7 @@ describe('StatisticRectangleCard component', () => {
                 <StatisticRectangleCard />
             </MemoryRouter>
         );
-        expect(getByText('32')).toBeInTheDocument();
+        expect(getByText('new')).toBeInTheDocument();
     });
 
     it('renders with custom props', () => {

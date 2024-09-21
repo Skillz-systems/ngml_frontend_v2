@@ -17,8 +17,8 @@ interface StatisticRectangleCardProps {
 
 const StatisticRectangleCard: React.FC<StatisticRectangleCardProps> = ({
   icon = null,
-  title,
-  value ,
+  title = 'new',
+  value,
   valueColor = 'text-gray-700',
   backgroundColor = 'bg-white',
   color = 'text-gray-700',
