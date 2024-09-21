@@ -8,6 +8,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { toast } from 'react-toastify';
 
+
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.ngml.skillzserver.com',
   prepareHeaders: (headers, { getState }) => {
@@ -65,6 +66,9 @@ const baseQueryWithReauth = async (
 
 export const api = createApi({
   baseQuery: baseQueryWithReauth,
+  refetchOnMountOrArgChange: true,
+  keepUnusedDataFor: 30,
+  refetchOnFocus: true,
   endpoints: () => ({}),
   tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms'],
 });

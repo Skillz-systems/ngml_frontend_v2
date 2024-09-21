@@ -169,3 +169,126 @@ const SupplierInformation: React.FC = () => {
 };
 
 export default SupplierInformation;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { Fragment, useEffect, useState } from 'react';
+// import { useGetFormByEntityIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+// import { Button, CustomInput, Heading } from '../../Components/index';
+// import { FormField } from '@/Redux/Features/FormBuilder/formBuilderService';
+// import colors from '@/Utils/colors';
+
+// const SUPPLIER_FORM_ID = '7/0/0'; 
+
+// const SupplierInformation: React.FC = () => {
+//     const [supplierForm, setSupplierForm] = useState<FormField[]>([]);
+//     const [supplierData, setSupplierData] = useState<Record<string, string>>({});
+
+//     const { data, isSuccess, isLoading } = useGetFormByEntityIdQuery(SUPPLIER_FORM_ID);
+//     const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
+
+//     useEffect(() => {
+//         if (isSuccess && data) {
+//             let parsedForm;
+//             try {
+//                 parsedForm = JSON.parse(data.data.json_form);
+//             } catch (error) {
+//                 console.error('Error parsing JSON:', error);
+//                 parsedForm = [];
+//             }
+//             const updatedFields = parsedForm.filter((field: FormField) => field.id !== 0);
+//             setSupplierForm(updatedFields);
+//             const initialData = updatedFields.reduce((acc: Record<string, string>, field: FormField) => {
+//                 if (field.key) {
+//                     acc[field.key] = '';
+//                 }
+//                 return acc;
+//             }, {});
+//             setSupplierData(initialData);
+//         }
+//     }, [data, isSuccess]);
+
+//     const handleInputChange = (value: string, key: string) => {
+//         setSupplierData(prevData => ({ ...prevData, [key]: value }));
+//     };
+
+//     const handleSubmit = async () => {
+//         const formFieldAnswers = supplierForm.map(field => ({
+//             id: field.id,
+//             elementType: field.elementType,
+//             name: field.name || field.key,
+//             placeholder: field.placeholder,
+//             key: field.key,
+//             value: supplierData[field.key as keyof typeof supplierData]
+//         }));
+
+//         const buildFormSubmission = {
+//             form_builder_id: data?.data.id,
+//             name: data?.data.name,
+//             process_flow_id: data?.data?.process_flow_id,
+//             process_flow_step_id: data?.data?.process_flow_step_id,
+//             tag_id: data?.data?.tag_id,
+//             form_field_answers: JSON.stringify(formFieldAnswers),
+//         };
+//         await submitForm(buildFormSubmission).unwrap();
+
+//     };
+
+//     return (
+//         <div className="p-[20px] rounded-[20px]" style={{ background: colors.dark[50] }}>
+//             <div className='border-2 border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
+//                 <Heading as="h4" size="h4" color='primaryColor' className="font-semibold text-gray-600 mb-5">SUPPLIER INFORMATION</Heading>
+//                 {isLoading ? (
+//                     <p>Loading form fields...</p>
+//                 ) : supplierForm.length > 0 ? (
+//                     supplierForm.map((form) => (
+//                         <Fragment key={form.id}>
+//                             <CustomInput
+//                                 required
+//                                 type={form?.elementType}
+//                                 label={form.name}
+//                                 value={supplierData[form.key as keyof typeof supplierData] || ''}
+//                                 handleChangeEvent={(value) => handleInputChange(value, form.key as keyof typeof supplierData)}
+//                                 placeholder={form.placeholder}
+//                             />
+//                         </Fragment>
+//                     ))
+//                 ) : (
+//                     <p>No form fields available.</p>
+//                 )}
+//             </div>
+//             <div className="mt-[14px] mb-[20px] flex justify-end">
+//                 <Button
+//                     type='primary'
+//                     label={submitLoading ? 'Submitting...' : 'Submit'}
+//                     fontSize='12px'
+//                     width='117px'
+//                     height='32px'
+//                     radius='32px'
+//                     action={handleSubmit}
+//                 />
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default SupplierInformation;
+
+
+
+
+
+

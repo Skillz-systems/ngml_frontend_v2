@@ -8,14 +8,20 @@ import { default as AdminCustomerPageLayout, default as CustomerPageLayout } fro
 import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
 import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
+import FormBuilder from '@/Pages/FormBuilder';
+import FormBuilderDashboard from '@/Pages/FormBuilderDashboard';
 import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 import OperationPage from '@/Pages/Manager/OperationPage/OperationPage';
+import ProcessFlowGenerator from '@/Pages/ProcessFlowGroup/ProcessFlowGenerator';
 import RequestPage from '@/Pages/RequestPage/RequestPage';
+import RouteBuilder from '@/Pages/RouteBuilder/RouteBuilder';
+import SettingsPage from '@/Pages/SettingsPage/SettingsPage';
 import SiteVisitPage from '@/Pages/SiteVisitPage/SiteVisitPage';
 import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLayout';
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import TenderPage from '@/Pages/TenderPage/TenderPage';
+import { QuestionProvider } from '@/context/QuestionContext';
 
 import { RouteObject } from 'react-router-dom';
 
@@ -125,6 +131,36 @@ export const admin: RouteObject[] = [
         path: '/admin/records/bidspage/opentender',
         element: <TenderPage />,
 
+    },
+    {
+        path: '/admin/settings',
+        element: <SettingsPage />,
+      
+      },
+
+      {
+        path: '/admin/settings/formbuilder',
+        element: (
+            <QuestionProvider>
+                <FormBuilderDashboard />
+            </QuestionProvider>
+        ),
+    },
+    {
+        path: '/admin/settings/formbuilder/:formbuilderId',
+        element: (
+            <QuestionProvider>
+                <FormBuilder />
+            </QuestionProvider>
+        ),
+    },
+    {
+        path: '/admin/settings/processflow',
+        element: <ProcessFlowGenerator />
+    },
+    {
+        path: '/admin/settings/routebuilder',
+        element: <RouteBuilder />
     },
 
 
