@@ -37,9 +37,9 @@ export const AdminLinks = [
   { id: 4, name: 'Reports', to: '', icon: images.Reporticon, type: 'primary' },
   { id: 5, name: 'Communications', to: '', icon: images.Communicationicon, type: 'primary' },
   { id: 6, name: 'Profile', to: '', icon: images.Profilenameicon, type: 'primary' },
+
   { id: 7, name: 'Settings', to: '/admin/settings', icon: images.Settingicon, type: 'primary' },
   // { id: 7, name: 'Process Flows', to: '', icon: images.Settingicon, type: 'primary' },
-
 ];
 
 
