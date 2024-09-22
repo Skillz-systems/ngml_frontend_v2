@@ -1,4 +1,4 @@
-import { StatisticRectangleCard } from "@/Components";
+import { StatisticRectangleCard } from '@/Components';
 
 const SettingsPage = () => {
     const cardData = [
@@ -14,12 +14,16 @@ const SettingsPage = () => {
             title: 'Route Builder',
             link: '/admin/settings/routebuilder',
         },
+        {
+            title: 'Assign Tasks',
+            link: '/admin/settings/assigntasks',
+        },
     ];
 
     return (
         <div>
             <div className='text-[30px] text-[#49526A] font-[700]'>Builders:</div>
-            <div className="flex flex-col mt-6 gap-4 w-[100%] md:w-[50%]" >
+            <div className=" mt-6 gap-4 grid grid-cols-2" >
                 {cardData.map((card, index) => (
                     <StatisticRectangleCard
                         key={index}

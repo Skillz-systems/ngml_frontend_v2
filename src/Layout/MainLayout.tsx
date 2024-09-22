@@ -1,5 +1,6 @@
 import { AdminLinks } from '@/Links/AdminLinks';
 import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { NavigationBar, TopNavigationBar } from '../Components/index';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
@@ -14,6 +15,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         <>
             <div className='w-full h-full fixed'>
                 <TopNavigationBar />
+                <ToastContainer />
                 <div className='flex bg-[#EAEEF2] pt-[70px] w-[100%] h-[100vh]'>
                     <div className='hidden sm:block'>
                         <NavigationBar

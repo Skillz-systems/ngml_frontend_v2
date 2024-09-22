@@ -1,6 +1,7 @@
 import TopNavigationBar from '@/Components/TopNavigationBar/TopNavigationBar';
 import { CustomerLinks } from '@/Links/CustomerLinks';
 import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import NavigationBar from '../Components/NavigationMenu/NavigationBar';
 
 const SecondaryLayout = ({ children }: { children: React.ReactNode }) => {
@@ -14,6 +15,7 @@ const SecondaryLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className='w-full h-full fixed'>
             <TopNavigationBar />
+            <ToastContainer />
             <div className='flex bg-[#CFE9A1] pt-[70px] w-[100%] h-[100vh]'>
                 <div className='hidden sm:block'>
                     <NavigationBar
