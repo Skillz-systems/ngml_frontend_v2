@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, DocumentCard, Modal } from '../../Components/index';
 import images from '../../assets/index';
+import CustomerDdqViewEditPage from '../Customer/CustomerDdqViewEditPage/CustomerDdqViewEditPage';
 import EditDdqPage from './EditDdqPage';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 const DdqPage: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -11,12 +14,15 @@ const DdqPage: React.FC = () => {
         companyName: '',
         rcNumber: '',
         natureOfBusiness: '',
-        companyphone: '',
         companyTelephoneNumber: '',
         companyMobileNumber: '',
         email: '',
         website: '',
-        companyaddress: '',
+        companyAddress: '',
+        contactName: '',
+        contactTelephone: '',
+        contactEmail: '',
+        contactAddress: '',
         title: '',
         firstName: '',
         otherName: '',
@@ -32,10 +38,43 @@ const DdqPage: React.FC = () => {
         jointVenture: ''
     });
 
+    const [showDdq, setShowDdq] = useState(false)
+
     const navigate = useNavigate();
     const location = useLocation();
 
     const totalPages = 5;
+
+    const generatePdf = async () => {
+        const doc = new jsPDF('p', 'mm', 'a4');
+        const element = document.getElementById('ddq-content');
+
+        if (element) {
+            const canvas = await html2canvas(element);
+            const imgData = canvas.toDataURL('image/png');
+
+            const imgWidth = 190;
+            const pageHeight = 297;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+            let heightLeft = imgHeight;
+            let position = 10;
+
+            doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            // Add additional pages if content exceeds one page
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                doc.addPage();
+                doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            doc.save(`${companyData.companyName}_DDQ.pdf`);
+        }
+        setShowDdq(true);
+    };
 
     const goToPage = (page: number) => {
         if (page >= 1 && page <= totalPages) {
@@ -95,7 +134,7 @@ const DdqPage: React.FC = () => {
                     </div>
                 </div>
                 <div className="bg-dark-50 justify-between items-start flex flex-col sm:flex-row">
-                    <div className="w-full p-4 bg-dark-50 flex-col justify-start items-center border-r">
+                    <div className="w-full p-4 bg-dark-50 flex-col justify-start items-center border-r cursor-pointer" onClick={generatePdf}>
                         <DocumentCard
                             type="withoutLink"
                             title="Dangote Cement LTD"
@@ -128,38 +167,6 @@ const DdqPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="p-4 mt-6 w-full space-y-6 flex-col items-center gap-4">
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Filling status</div>
-                            </div>
-                            <div className="text-center text-xs font-normal font-['Mulish'] leading-3">72%</div>
-                        </div>
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">uploads</div>
-                            </div>
-                            <div className="text-center text-xs font-semibold font-['Mulish'] leading-3">6/12 Uploads</div>
-                        </div>
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Fields</div>
-                            </div>
-                            <div className="text-center text-xs font-normal font-['Mulish'] leading-3">22/41 Fields</div>
-                        </div>
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Date Started</div>
-                            </div>
-                            <div className="text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">12/Nov/2023</div>
-                        </div>
-                        <div className="p-2 bg-nnpc-600 rounded-lg border border-dark-100 justify-between items-center flex">
-                            <div className="p-1 bg-nnpcred-300 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-white text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">days left</div>
-                            </div>
-                            <div className="text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">13 Days</div>
-                        </div>
-                    </div> */}
                 </div>
                 <Modal
                     isOpen={isModalOpen}
@@ -200,6 +207,11 @@ const DdqPage: React.FC = () => {
                         setCompanyData={setCompanyData} />
                 </Modal>
             </div>
+            {showDdq &&
+                <div id="ddq-content">
+                    <CustomerDdqViewEditPage companyData={companyData} />
+                </div>
+            }
         </div>
     );
 };

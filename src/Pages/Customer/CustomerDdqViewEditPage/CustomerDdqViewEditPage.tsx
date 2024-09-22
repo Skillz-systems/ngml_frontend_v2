@@ -1,37 +1,38 @@
 import colors from '@/Utils/colors';
-import { useState } from 'react';
 import { Button, CustomInput } from '../../../Components/index';
 import images from '../../../assets/index';
 
-const CustomerDdqViewEditPage = () => {
+interface CompanyDetailsProps {
+    companyData: {
+        companyName: string;
+        rcNumber: string;
+        natureOfBusiness: string;
+        companyTelephoneNumber: string;
+        companyMobileNumber: string;
+        email: string;
+        website: string;
+        companyAddress: string;
+        contactName: string;
+        contactTelephone: string;
+        contactEmail: string;
+        contactAddress: string;
+        title: string;
+        firstName: string;
+        otherName: string;
+        lastName: string;
+        phoneNumber: string;
+        companyPosition: string;
+        titlePlus: string;
+        firstNamePlus: string;
+        otherNamePlus: string;
+        lastNamePlus: string;
+        phoneNumberPlus: string;
+        companyPositionPlus: string;
+        jointVenture: string;
+    }
+}
 
-    const [formData, setFormData] = useState({
-        companyName: '',
-        rcnumber: '',
-        natureofbusiness: '',
-        companytelephone: '',
-        companymobile: '',
-        email: '',
-        website: '',
-        companyaddress: '',
-        contactname: '',
-        contacttelephone: '',
-        contactemail: '',
-        contactaddress: '',
-        title: '',
-        firstname: '',
-        othername: '',
-        lastname: '',
-        phonenumber: '',
-        companyposition: '',
-        title2: '',
-        firstname2: '',
-        othername2: '',
-        lastname2: '',
-        phonenumber2: '',
-        companyposition2: '',
-        jointventure: ''
-    });
+const CustomerDdqViewEditPage: React.FC<CompanyDetailsProps> = ({ companyData }) => {
 
     /**
      * Handles input changes by updating the form state.
@@ -39,12 +40,10 @@ const CustomerDdqViewEditPage = () => {
      * @param {string} name - The name of the form field to update.
      * @param {string} value - The new value for the form field.
      */
+
     const handleInputChange = (value: string, key: string) => {
         console.log(value)
-        setFormData({ ...formData, [key]: value });
     };
-
-    const options = ['Mr', 'Mr', 'Doctor', 'Barr']
 
     return (
         <div className="w-full h-full pt-8 bg-white/50 rounded-lg">
@@ -105,28 +104,31 @@ const CustomerDdqViewEditPage = () => {
                                             required
                                             type="text"
                                             label='Company Name'
-                                            value={formData.companyName}
-                                            handleChangeEvent={(value) => handleInputChange(value, 'companyName')}
+                                            value={companyData.companyName}
+                                            handleChangeEvent={(value) => handleInputChange(value, "companyName")}
                                             placeholder="Company name"
                                             styleVariant='customStyle5'
+                                            readOnly
                                         />
                                         <CustomInput
                                             required
                                             type="text"
                                             label='RC Number '
-                                            value={formData.rcnumber}
-                                            handleChangeEvent={(value) => handleInputChange(value, 'rcnumber')}
+                                            value={companyData.rcNumber}
+                                            handleChangeEvent={(value) => handleInputChange(value, "rcNumber")}
                                             placeholder="Input Rc number here"
                                             styleVariant='customStyle5'
+                                            readOnly
                                         />
                                         <CustomInput
                                             required
                                             type="text"
                                             label='Nature of Business'
-                                            value={formData.natureofbusiness}
-                                            handleChangeEvent={(value) => handleInputChange(value, 'natureofbusiness')}
+                                            value={companyData.natureOfBusiness}
+                                            handleChangeEvent={(value) => handleInputChange(value, "natureOfBusiness")}
                                             placeholder="Input nature of business here"
                                             styleVariant='customStyle5'
+                                            readOnly
                                         />
                                         <div className='flex flex-col md:flex-row gap-[10px]'>
                                             <div className='flex-1'>
@@ -134,10 +136,11 @@ const CustomerDdqViewEditPage = () => {
                                                     required
                                                     type="text"
                                                     label='Company Telephone Number'
-                                                    value={formData.companytelephone}
-                                                    handleChangeEvent={(value) => handleInputChange(value, 'companytelephone')}
+                                                    value={companyData.companyTelephoneNumber}
+                                                    handleChangeEvent={(value) => handleInputChange(value, "companyTelephoneNumber")}
                                                     placeholder="Enter Company Telephone number"
                                                     styleVariant='customStyle5'
+                                                    readOnly
                                                 />
                                             </div>
                                             <div className='flex-1'>
@@ -145,11 +148,11 @@ const CustomerDdqViewEditPage = () => {
                                                     required
                                                     type="text"
                                                     label='Company Mobile Number'
-                                                    value={formData.companymobile}
-                                                    handleChangeEvent={(value) => handleInputChange(value, 'companymobile')}
+                                                    value={companyData.companyMobileNumber}
+                                                    handleChangeEvent={(value) => handleInputChange(value, "companyMobileNumber")}
                                                     placeholder="Enter company Mobile number"
                                                     styleVariant='customStyle5'
-                                                    options={options}
+                                                    readOnly
                                                 />
                                             </div>
                                         </div>
@@ -157,27 +160,30 @@ const CustomerDdqViewEditPage = () => {
                                             required
                                             type="text"
                                             label='Email'
-                                            value={formData.email}
-                                            handleChangeEvent={(value) => handleInputChange(value, 'email')}
+                                            value={companyData.email}
+                                            handleChangeEvent={(value) => handleInputChange(value, "email")}
                                             placeholder="Input email"
                                             styleVariant='customStyle5'
+                                            readOnly
                                         />
                                         <CustomInput
                                             type="text"
                                             label='Website '
-                                            value={formData.website}
-                                            handleChangeEvent={(value) => handleInputChange(value, 'website')}
+                                            value={companyData.website}
+                                            handleChangeEvent={(value) => handleInputChange(value, "website")}
                                             placeholder="Input website here"
                                             styleVariant='customStyle5'
+                                            readOnly
                                         />
                                         <CustomInput
                                             required
                                             type="text"
                                             label='Company Address'
-                                            value={formData.companyaddress}
-                                            handleChangeEvent={(value) => handleInputChange(value, 'companyaddress')}
+                                            value={companyData.companyAddress}
+                                            handleChangeEvent={(value) => handleInputChange(value, "companyAddress")}
                                             placeholder="Input phone number here"
                                             styleVariant='customStyle5'
+                                            readOnly
                                         />
                                     </div>
                                 </div>
@@ -188,10 +194,11 @@ const CustomerDdqViewEditPage = () => {
                                             required
                                             type="text"
                                             label='Contact Name'
-                                            value={formData.contactname}
-                                            handleChangeEvent={(value) => handleInputChange(value, 'contactname')}
+                                            value={companyData.contactName}
+                                            handleChangeEvent={(value) => handleInputChange(value, "contactName")}
                                             placeholder="Input contact name"
                                             styleVariant='customStyle5'
+                                            readOnly
                                         />
                                         <div className='flex flex-col md:flex-row gap-[10px]'>
                                             <div className='flex-1'>
@@ -199,10 +206,11 @@ const CustomerDdqViewEditPage = () => {
                                                     required
                                                     type="text"
                                                     label='Contact Telephone Number'
-                                                    value={formData.contacttelephone}
-                                                    handleChangeEvent={(value) => handleInputChange(value, 'contacttelephone')}
+                                                    value={companyData.contactTelephone}
+                                                    handleChangeEvent={(value) => handleInputChange(value, "contactTelephone")}
                                                     placeholder="Enter Contact Telephone"
                                                     styleVariant='customStyle5'
+                                                    readOnly
                                                 />
                                             </div>
                                             <div className='flex-1'>
@@ -210,20 +218,22 @@ const CustomerDdqViewEditPage = () => {
                                                     required
                                                     type="text"
                                                     label='Contact Email Address'
-                                                    value={formData.contactemail}
-                                                    handleChangeEvent={(value) => handleInputChange(value, 'contactemail')}
+                                                    value={companyData.contactEmail}
+                                                    handleChangeEvent={(value) => handleInputChange(value, "contactEmail")}
                                                     placeholder="Enter contact email"
                                                     styleVariant='customStyle5'
+                                                    readOnly
                                                 />
                                             </div>
                                         </div>
                                         <CustomInput
                                             type="text"
                                             label='Contact Address'
-                                            value={formData.contactaddress}
-                                            handleChangeEvent={(value) => handleInputChange(value, 'contactaddress')}
+                                            value={companyData.contactAddress}
+                                            handleChangeEvent={(value) => handleInputChange(value, "contactAddress")}
                                             placeholder="Input contact aaddress"
                                             styleVariant='customStyle5'
+                                            readOnly
                                         />
                                     </div>
                                 </div>
@@ -237,11 +247,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="select"
                                                         label='Title'
-                                                        value={formData.title}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'title')}
+                                                        value={companyData.title}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "title")}
                                                         placeholder="Mr"
                                                         styleVariant='customStyle5'
-                                                        options={options}
+                                                        readOnly
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
@@ -249,11 +259,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="text"
                                                         label='First Name'
-                                                        value={formData.firstname}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'firstname')}
+                                                        value={companyData.firstName}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "firstName")}
                                                         placeholder="Enter first name"
                                                         styleVariant='customStyle5'
-                                                        options={options}
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -262,11 +272,11 @@ const CustomerDdqViewEditPage = () => {
                                                     <CustomInput
                                                         type="text"
                                                         label='Other name'
-                                                        value={formData.othername}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'othername')}
+                                                        value={companyData.otherName}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "otherName")}
                                                         placeholder="other names"
                                                         styleVariant='customStyle5'
-                                                        options={options}
+                                                        readOnly
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
@@ -274,10 +284,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="text"
                                                         label='Last Name'
-                                                        value={formData.lastname}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'lastname')}
+                                                        value={companyData.lastName}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "lastName")}
                                                         placeholder="Input last name here"
                                                         styleVariant='customStyle5'
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -287,10 +298,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="text"
                                                         label='Phone Number'
-                                                        value={formData.phonenumber}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'phonenumber')}
+                                                        value={companyData.phoneNumber}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "phoneNumber")}
                                                         placeholder="Input phone number here"
                                                         styleVariant='customStyle5'
+                                                        readOnly
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
@@ -298,10 +310,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="text"
                                                         label='Company Position'
-                                                        value={formData.companyposition}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'companyposition')}
+                                                        value={companyData.companyPosition}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "companyPosition")}
                                                         placeholder="Input company position"
                                                         styleVariant='customStyle5'
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -318,11 +331,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="select"
                                                         label='Title'
-                                                        value={formData.title2}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'title2')}
+                                                        value={companyData.titlePlus}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "titlePlus")}
                                                         placeholder="Mr"
                                                         styleVariant='customStyle5'
-                                                        options={options}
+                                                        readOnly
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
@@ -330,11 +343,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="text"
                                                         label='First Name'
-                                                        value={formData.firstname2}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'firstname2')}
+                                                        value={companyData.firstNamePlus}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "firstNamePlus")}
                                                         placeholder="Enter first name"
                                                         styleVariant='customStyle5'
-                                                        options={options}
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -343,11 +356,11 @@ const CustomerDdqViewEditPage = () => {
                                                     <CustomInput
                                                         type="text"
                                                         label='Other name'
-                                                        value={formData.othername2}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'othername2')}
+                                                        value={companyData.otherNamePlus}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "otherNamePlus")}
                                                         placeholder="other names"
                                                         styleVariant='customStyle5'
-                                                        options={options}
+                                                        readOnly
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
@@ -355,10 +368,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="text"
                                                         label='Last Name'
-                                                        value={formData.lastname2}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'lastname2')}
+                                                        value={companyData.lastNamePlus}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "lastNamePlus")}
                                                         placeholder="Input last name here"
                                                         styleVariant='customStyle5'
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -368,10 +382,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="text"
                                                         label='Phone Number'
-                                                        value={formData.phonenumber2}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'phonenumber2')}
+                                                        value={companyData.phoneNumberPlus}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "phoneNumberPlus")}
                                                         placeholder="Input phone number here"
                                                         styleVariant='customStyle5'
+                                                        readOnly
                                                     />
                                                 </div>
                                                 <div className='flex-1'>
@@ -379,10 +394,11 @@ const CustomerDdqViewEditPage = () => {
                                                         required
                                                         type="text"
                                                         label='Company Position'
-                                                        value={formData.companyposition2}
-                                                        handleChangeEvent={(value) => handleInputChange(value, 'companyposition2')}
+                                                        value={companyData.companyPositionPlus}
+                                                        handleChangeEvent={(value) => handleInputChange(value, "companyPositionPlus")}
                                                         placeholder="Input company position"
                                                         styleVariant='customStyle5'
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -394,9 +410,10 @@ const CustomerDdqViewEditPage = () => {
                                             <CustomInput
                                                 type="textarea"
                                                 label=''
-                                                value={formData.jointventure}
-                                                handleChangeEvent={(value) => handleInputChange(value, 'jointventure')}
+                                                value={companyData.jointVenture}
+                                                handleChangeEvent={(value) => handleInputChange(value, "jointVenture")}
                                                 styleVariant='customStyle5'
+                                                readOnly
                                             />
                                         </div>
                                     </div>
@@ -474,6 +491,38 @@ const CustomerDdqViewEditPage = () => {
                                         <div className="w-[100px] h-[400px] relative" />
                                     </div>
                                 </div>
+                                {/* <div className="p-4 mt-6 w-full space-y-6 flex-col items-center gap-4">
+                                    <div className="p-2 rounded-lg border justify-between items-center flex">
+                                        <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
+                                            <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Filling status</div>
+                                        </div>
+                                        <div className="text-center text-xs font-normal font-['Mulish'] leading-3">72%</div>
+                                    </div>
+                                    <div className="p-2 rounded-lg border justify-between items-center flex">
+                                        <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
+                                            <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">uploads</div>
+                                        </div>
+                                        <div className="text-center text-xs font-semibold font-['Mulish'] leading-3">6/12 Uploads</div>
+                                    </div>
+                                    <div className="p-2 rounded-lg border justify-between items-center flex">
+                                        <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
+                                            <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Fields</div>
+                                        </div>
+                                        <div className="text-center text-xs font-normal font-['Mulish'] leading-3">22/41 Fields</div>
+                                    </div>
+                                    <div className="p-2 rounded-lg border justify-between items-center flex">
+                                        <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
+                                            <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Date Started</div>
+                                        </div>
+                                        <div className="text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">12/Nov/2023</div>
+                                    </div>
+                                    <div className="p-2 bg-nnpc-600 rounded-lg border border-dark-100 justify-between items-center flex">
+                                        <div className="p-1 bg-nnpcred-300 rounded-sm justify-center items-start gap-2.5 flex">
+                                            <div className="text-center text-white text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">days left</div>
+                                        </div>
+                                        <div className="text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">13 Days</div>
+                                    </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
