@@ -21,11 +21,12 @@ export interface FormField {
 export interface FormBuilderData {
   id: number;
   name: string;
-  json_form: string; 
+  json_form: string;
   process_flow_id?: string;
   process_flow_step_id?: string;
   tag_id?: string;
-  form_data: string[]; 
+  form_data: string[];
+  description?: string;
 }
 
 export interface FormBuilderApiResponse {
@@ -96,11 +97,25 @@ export interface ApiResponseTwo {
 
 
 export const CREATE_NEW_CUSTOMER_FORM_ID = 6;
-export const CREATE_NEW_CUSTOMER_SITE_FORM_ID=5;
+export const CREATE_NEW_CUSTOMER_SITE_FORM_ID = 5;
 
 
 export const formBuilderApi = api.injectEndpoints({
   endpoints: (builder) => ({
+
+    createForm: builder.mutation<FormBuilderApiResponse, Partial<FormBuilderData>>({
+      query: (formData) => ({
+        url: '/formbuilder/api/forms/create',
+        method: 'POST',
+        body: formData,
+      }),
+      invalidatesTags: ['Forms'],
+      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+        return errorResponse;
+      },
+    }),
+
     getForms: builder.query<FormBuilderApiResponse, void>({
       query: () => '/formbuilder/api/forms',
       providesTags: ['Forms'],
@@ -117,22 +132,23 @@ export const formBuilderApi = api.injectEndpoints({
         return errorResponse;
       },
     }),
-     getFormByEntityId: builder.query<ApiResponseTwo, string>({
+    getFormByEntityId: builder.query<ApiResponseTwo, string>({
       query: (url) => `/formbuilder/api/forms/view/${url}`,
-       providesTags: ['Forms'],
+      providesTags: ['Forms'],
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
         return errorResponse;
       },
     }),
-     submitForm: builder.mutation<FormSubmission,FormSubmission>({
+
+    submitForm: builder.mutation<FormSubmission, FormSubmission>({
       query: (customer) => ({
         url: '/formbuilder/api/form-data/create',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: customer,
       }),
-     invalidatesTags: ['Forms', 'Customers', 'Tasks'],
+      invalidatesTags: ['Forms', 'Customers', 'Tasks'],
       transformResponse: (response: FormSubmission | ErrorResponse) => {
         if ('error' in response) {
           throw new Error(response.error);
@@ -144,12 +160,56 @@ export const formBuilderApi = api.injectEndpoints({
         return errorResponse;
       },
     }),
+
+    saveForm: builder.mutation<FormBuilderApiResponse, Partial<FormBuilderData>>({
+      query: (formData) => ({
+        url: '/formbuilder/api/forms/save',
+        method: 'PUT',
+        body: formData,
+      }),
+      invalidatesTags: ['Forms'],
+      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+        return errorResponse;
+      },
+    }),
+
   }),
   overrideExisting: false,
-}); 
+});
+
+
+
+
+
+
 export const {
+  useCreateFormMutation,
   useGetFormByEntityIdQuery,
   useGetFormsQuery,
   useGetFormByIdQuery,
-  useSubmitFormMutation
+  useSubmitFormMutation,
+  useSaveFormMutation
 } = formBuilderApi;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

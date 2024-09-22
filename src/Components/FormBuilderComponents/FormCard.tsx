@@ -27,11 +27,10 @@ const FormCard = ({
           <span className="text-sm text-gray-600">{dateCreated}</span>
         </div>
         <div
-          className={`flex items-center justify-center w-max px-2.5 py-0.5 text-xs text-white font-semibold rounded-md ${
-            formStatus.toLowerCase() === "draft"
+          className={`flex items-center justify-center w-max px-2.5 py-0.5 text-xs text-white font-semibold rounded-md ${formStatus.toLowerCase() === "draft"
               ? "bg-color-bright-red"
               : "bg-light-green"
-          }`}
+            }`}
         >
           {formStatus}
         </div>
