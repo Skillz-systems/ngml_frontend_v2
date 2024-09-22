@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BaseQueryExtraOptions } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import {
   BaseQueryApi,
@@ -59,7 +60,7 @@ const baseQueryWithReauth = async (
     return result;
   } catch (error) {
     console.error('Unexpected error in baseQueryWithReauth:', error);
-    toast.error('An unexpected error occurred. Please try again later.');
+    // toast.error('An unexpected error occurred. Please try again later.');
     return { error: { status: 'CUSTOM_ERROR', error: 'Unexpected error occurred' } };
   }
 };
@@ -70,5 +71,5 @@ export const api = createApi({
   keepUnusedDataFor: 30,
   refetchOnFocus: true,
   endpoints: () => ({}),
-  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms'],
+  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms','ProcessFlow','FormBuilder','Routes','Users','AssignTasks' ],
 });

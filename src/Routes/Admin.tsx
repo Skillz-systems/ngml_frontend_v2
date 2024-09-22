@@ -1,5 +1,6 @@
 import AdminCustomerList from '@/Pages/AdminCustomerList/AdminCustomerList';
 import AdminHomePage from '@/Pages/AdminHomePage/AdminHomePage';
+import AssignTask from '@/Pages/AssignTask/AssignTask';
 import BidPage from '@/Pages/BidPage/BidPage';
 import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
 import Complaints from '@/Pages/Complaints/Complaints';
@@ -135,10 +136,10 @@ export const admin: RouteObject[] = [
     {
         path: '/admin/settings',
         element: <SettingsPage />,
-      
-      },
 
-      {
+    },
+
+    {
         path: '/admin/settings/formbuilder',
         element: (
             <QuestionProvider>
@@ -161,6 +162,10 @@ export const admin: RouteObject[] = [
     {
         path: '/admin/settings/routebuilder',
         element: <RouteBuilder />
+    },
+    {
+        path: '/admin/settings/assigntasks',
+        element: <AssignTask />
     },
 
 

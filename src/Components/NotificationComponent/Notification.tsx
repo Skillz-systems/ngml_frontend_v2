@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import NotificationContents from './NotificationContents';
 import { Modal } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+import NotificationContents from './NotificationContents';
 
 
 /**
