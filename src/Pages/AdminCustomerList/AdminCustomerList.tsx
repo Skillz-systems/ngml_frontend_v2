@@ -32,6 +32,7 @@ const AdminCustomerList: React.FC = () => {
                 parsedForm = []; // or some default value
             }
             console.log(parsedForm)
+             
             const updatedFields = parsedForm.filter((field: FormField) => field.id !== 0);
             setCustomerForm(updatedFields);
             const initialData = updatedFields.reduce((acc: Record<string, string>, field: FormField) => {
@@ -188,7 +189,7 @@ const AdminCustomerList: React.FC = () => {
                         </Fragment>
                     ))
                 ) : (
-                    <p>No form fields available.</p>
+                    <p>No form fields available\.</p>
                 )}
             </Modal>
             <div className='w-full mt-10'>

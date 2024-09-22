@@ -26,7 +26,7 @@ export const Navigationlinks = [
     ]
   },
   { id: 5, name: 'Profile', to: '/client/customerprofilepage', icon: images.profileicon, type: 'primary' },
-  { id: 5, name: 'Sample ', to: '/client/samplePage', icon: images.profileicon, type: 'primary' },
+  { id: 6, name: 'Sample ', to: '/client/samplePage', icon: images.profileicon, type: 'primary' },
 
 ];
 

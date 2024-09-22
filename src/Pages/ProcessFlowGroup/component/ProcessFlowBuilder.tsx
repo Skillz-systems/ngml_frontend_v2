@@ -2,13 +2,19 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import images from '@/assets';
 import { Heading } from '@/Components';
-import { getRouteLists } from '@/Routes/Admin';
+import { useCreateProcessFlowMutation, useGetProcessFlowsQuery } from '@/Redux/Features/ProcessFlow/processFlowService';
+import { useGetRoutesQuery } from '@/Redux/Features/RouteBuilder/routeService';
+import { resetProcessFlowIds, setDefaultUserProperties } from '@/Utils/resetProcessFlowIds';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { useNavigate } from 'react-router-dom';
+import { CiSaveDown2 } from 'react-icons/ci';
+import { MdOutlineLibraryAdd } from 'react-icons/md';
+import { VscSend } from 'react-icons/vsc';
+import { toast } from 'react-toastify';
 import { Frequency, FrequencyFor, ProcessFlow, ProcessFlowStep, StepType, UserType } from './types';
+
+
 
 const ItemTypes = {
     PROCESS_FLOW: 'processFlow',
@@ -21,9 +27,9 @@ const stepTypeOptions: StepType[] = ['create', 'delete', 'update', 'approve_auto
 const userTypeOptions: UserType[] = ['user', 'supplier', 'customer', 'contractor'];
 const booleanOptions = [true, false];
 
-const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-const weekOptions = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-const designationOptions = ['Manager', 'Developer', 'Analyst', 'Designer'];
+const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'none'];
+const weekOptions = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'none'];
+const designationOptions = ['Manager', 'Officer', 'ED'];
 const unitOptions = ['Unit A', 'Unit B', 'Unit C'];
 const departmentOptions = ['HR', 'Engineering', 'Finance', 'Sales'];
 
@@ -125,59 +131,7 @@ const DraggableStep = ({ step, index, moveStep, updateStep, deleteStep }: { step
     );
 }
 
-// const DraggableStep = ({ step, index, moveStep, updateStep, deleteStep }: { step: any, index: any, moveStep: any, updateStep: any, deleteStep: any }) => {
-//     const ref = React.useRef(null);
-//     const [{ handlerId }, drop] = useDrop({
-//         accept: ItemTypes.PROCESS_FLOW_STEP,
-//         collect(monitor) {
-//             return {
-//                 handlerId: monitor.getHandlerId(),
-//             };
-//         },
-//         hover(item: { type: string; id: number; index: number }) {
 
-//             if (!ref.current) {
-//                 return;
-//             }
-//             const dragIndex = item.index;
-//             const hoverIndex = index;
-
-//             if (dragIndex === hoverIndex) {
-//                 return;
-//             }
-
-//             moveStep(dragIndex, hoverIndex);
-//             item.index = hoverIndex;
-//         },
-//     });
-
-//     const [{ isDragging }, drag] = useDrag({
-//         type: ItemTypes.PROCESS_FLOW_STEP,
-//         item: () => {
-//             return { id: step.id, index, isExistingStep: true };
-//         },
-//         collect: (monitor) => ({
-//             isDragging: monitor.isDragging(),
-//         }),
-//     });
-
-//     const opacity = isDragging ? 0.4 : 1;
-//     drag(drop(ref));
-
-//     return (
-//         <div ref={ref} style={{ opacity }} data-handler-id={handlerId}>
-//             <EditableContent
-//                 item={step}
-//                 onUpdate={updateStep}
-//                 onDelete={() => deleteStep(step.id)}
-//                 isStep={true}
-//                 stepIndex={index + 1}
-//             />
-//         </div>
-//     );
-// }
-
-//end  added
 const EditableContent = ({
     item,
     onUpdate,
@@ -196,8 +150,14 @@ const EditableContent = ({
 }) => {
     const [editedItem, setEditedItem] = useState(item);
     const [isEditing, setIsEditing] = useState(false);
+    // const [generatedRoutes, setGeneratedRoutes] = useState([])
 
-    const routeOptions = getRouteLists();
+    // const routeOptions = getRouteLists();
+    const { data: routes } = useGetRoutesQuery();
+
+    // if (generatedSuccess) {
+    //     setGeneratedRoutes(routes?.data)
+    // }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -210,39 +170,72 @@ const EditableContent = ({
     };
 
     const renderField = (key: string, value: any) => {
+
+
+
         if (key === 'id' || key === 'created_at' || key === 'updated_at' || key === 'steps' || key === 'process_flow_id' || key === 'start_step_id' || key === 'next_step_id') return null;
 
-        if (key === 'name') {
+        if (key === 'name' || key === 'start_user_designation' || key === 'start_user_department' || key === 'start_user_unit' || key === 'next_user_location') {
             return (
                 <>
-                    <label htmlFor={key} className='sr-only'>{key}</label>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
                     <input
                         id={key}
                         type="text"
                         name={key}
                         value={value as string}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                        className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
                     />
                 </>
             );
         }
 
+        // if (key === 'step_route' || key === 'assignee_user_route') {
+        //     return (
+        //         <>
+        //             <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
+        //             <select
+        //                 id={key}
+        //                 name={key}
+        //                 value={value || ''}
+        //                 onChange={handleInputChange}
+        //                 className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-nnpc-200 focus:nnpc-300 p-2.5 "
+        //             >
+        //                 <option value="">Select a route</option>
+
+
+
+
+        //                 {Object.entries(routeOptions).map(([label, path]) => (
+        //                     <option key={path} value={path}>
+        //                         {label.replace(/_/g, ' ')}
+        //                     </option>
+        //                 ))}
+        //             </select>
+        //         </>
+        //     );
+        // }
+
+
+
         if (key === 'step_route' || key === 'assignee_user_route') {
             return (
                 <>
-                    <label htmlFor={key} className='sr-only'>{key}</label>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">
+                        {key.replace(/_/g, ' ')}
+                    </label>
                     <select
                         id={key}
                         name={key}
                         value={value || ''}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 p-2.5 "
+                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:nnpc-300 p-2.5"
                     >
                         <option value="">Select a route</option>
-                        {Object.entries(routeOptions).map(([label, path]) => (
-                            <option key={path} value={path}>
-                                {label.replace(/_/g, ' ')}
+                        {routes?.data && routes?.data?.map((route) => (
+                            <option key={route.id} value={route.link}>
+                                {route.name}
                             </option>
                         ))}
                     </select>
@@ -254,13 +247,13 @@ const EditableContent = ({
         if (options) {
             return (
                 <>
-                    <label htmlFor={key} className='sr-only'>{key}</label>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
                     <select
                         id={key}
                         name={key}
                         value={value as string}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 p-2.5 "
+                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-nnpc-200 focus:border-nnpc-300 p-2.5 "
                     >
                         {options.map((option) => (
                             <option key={option.toString()} value={option.toString()}>
@@ -274,21 +267,21 @@ const EditableContent = ({
 
         return (
             <>
-                <label htmlFor={key} className='sr-only'>{key}</label>
+                <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
                 <input
                     id={key}
                     type="text"
                     name={key}
                     value={value as string}
                     onChange={handleInputChange}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-nnpc-200 focus:ring focus:ring-nnpc-300 focus:ring-opacity-50"
                 />
             </>
         );
     };
 
     return (
-        <div className="bg-white p-4 rounded-lg  mb-4">
+        <div className="bg-white p-4 rounded-lg  mb-4" >
             <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold">
                     {isStep ? `Step ${stepIndex}: ${item.name}` : item.name}
@@ -296,14 +289,14 @@ const EditableContent = ({
                 <div>
                     <button type='button'
                         onClick={() => setIsEditing(!isEditing)}
-                        className="px-2 py-1 bg-sky-400 text-white rounded hover:bg-sky-600 mr-2"
+                        className="px-4 py-1 text-[14px] bg-nnpc-200 text-white rounded hover:bg-nnpc-300 mr-2"
                     >
                         {isEditing ? 'Cancel' : 'Edit'}
                     </button>
                     <button
                         type='button'
                         onClick={onDelete}
-                        className="px-2 py-1 bg-nnpc-800/70 text-white rounded hover:bg-nnpc-800"
+                        className="px-4 py-1 text-[14px] bg-nnpc-800/70 text-white rounded hover:bg-nnpc-800"
                     >
                         Delete
                     </button>
@@ -311,9 +304,22 @@ const EditableContent = ({
             </div>
             {isEditing && (
                 <>
+
+                    {/* {Object.entries(editedItem)
+                        .filter(([key]) => !hiddenKeys.includes(key))  // Filter out hidden keys
+                        .map(([key, value]) => (
+                            <div key={key} className="mb-2">
+                                <label className="block text-sm font-medium text-gray-700 capitalize">
+                                    {key.replace(/_/g, ' ')}
+                                </label>
+                                {renderField(key, value)}
+                            </div>
+                        ))} */}
+
+
                     {Object.entries(editedItem).map(([key, value]) => (
                         <div key={key} className="mb-2">
-                            <label className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
+                            {/* <label className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label> */}
                             {renderField(key, value)}
                         </div>
                     ))}
@@ -325,8 +331,9 @@ const EditableContent = ({
                         Save
                     </button>
                 </>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 };
 
@@ -334,7 +341,12 @@ const ProcessFlowBuilder = () => {
     const [processFlows, setProcessFlows] = useState<ProcessFlow[]>([]);
     const [selectedFlow, setSelectedFlow] = useState<ProcessFlow | null>(null);
     const [steps, setSteps] = useState<ProcessFlowStep[]>([]);
-    const navigate = useNavigate();
+
+    const [submit, { isSuccess: created }] =
+        useCreateProcessFlowMutation();
+
+
+    // const navigate = useNavigate();
     // const [submitProcessFlow, { isLoading, isSuccess }] = useSubmitProcessFlowMutation();
     useEffect(() => {
         const savedFlows = localStorage.getItem('processFlows');
@@ -378,11 +390,14 @@ const ProcessFlowBuilder = () => {
                     id: Date.now(),
                     name: item.name,
                     start_step_id: null,
+                    start_user_unit: null,
+                    start_user_department: null,
+                    start_user_designation: null,
                     frequency: 'none',
                     status: true,
                     frequency_for: 'none',
-                    day: null,
-                    week: null,
+                    day: 'none',
+                    week: 'none',
                 };
                 setSelectedFlow(newProcessFlow);
                 setSteps([]);
@@ -441,6 +456,7 @@ const ProcessFlowBuilder = () => {
         }
     };
 
+
     const handleDeleteStep = (stepId: number) => {
         setSteps(prevSteps => {
             const stepIndex = prevSteps.findIndex(step => step.id === stepId);
@@ -466,9 +482,9 @@ const ProcessFlowBuilder = () => {
             }
             setProcessFlows(updatedFlows);
             localStorage.setItem('processFlows', JSON.stringify(updatedFlows));
-            alert('Process Flow saved successfully!');
+            toast.info('Process Flow saved successfully!');
         } else {
-            alert('No Process Flow to save!');
+            toast.info('No Process Flow to save!');
         }
     };
 
@@ -482,59 +498,112 @@ const ProcessFlowBuilder = () => {
         setSteps([]);
     };
 
+
+
+    const { data: backendProcessflows } = useGetProcessFlowsQuery();
+
+
+    // const handleSubmitToBackend = async () => {
+
+
+    //     if (selectedFlow) {
+    //         const formatedProcessFlow = resetProcessFlowIds(selectedFlow)
+    //         const setDefaultProcessflowStep = setDefaultUserProperties(formatedProcessFlow)
+
+    //         console.log('selectedFlow', selectedFlow)
+    //         console.log('setDefaultProcessflowStep', setDefaultProcessflowStep)
+    //         console.log(formatedProcessFlow)
+
+
+
+
+    //         try {
+    //             await submit(setDefaultProcessflowStep).unwrap()
+    //             if (isSuccess) {
+    //                 toast.success('processflow created');
+    //             }
+
+    //         } catch (error) {
+    //             // toast.error(error?.message || 'Error creating the process flow');
+    //             console.log(error);
+    //         }
+
+
+
+    //     }
+    // };
+
     const handleSubmitToBackend = async () => {
         if (selectedFlow) {
+            // Clone the selectedFlow and include steps explicitly if not already included
+            const formattedProcessFlow = {
+                ...selectedFlow,
+                steps: steps.map(step => ({
+                    ...step,
+                    // Ensure all necessary step fields are included here
+                }))
+            };
+
+            const processedFlow = resetProcessFlowIds(formattedProcessFlow);
+            const finalProcessFlow = setDefaultUserProperties(processedFlow);
+
+            console.log('Submitting Process Flow:', finalProcessFlow);
+
             try {
-                alert('form submitted');
-                // const formattedData = resetProcessFlowIds(selectedFlow);
-                // await submitProcessFlow(formattedData).unwrap();
-                // console.log(formattedData)
+                const response = await submit(finalProcessFlow).unwrap();
+                toast.success('Process flow created successfully!');
+                console.log('Submission Response:', response);
             } catch (error) {
-                // console.error('Error submitting the process flow:', error);
-                // alert('Error occurred while submitting the process flow.');
+                console.error('Error submitting the process flow:', error);
+                // toast.error('Error creating the process flow');
             }
+        } else {
+            toast.info('No Process Flow selected for submission');
         }
     };
 
-    return (
-        <div className="flex flex-col h-full">
-            <div className="w-full bg-nnpc-50/40 flex-shrink-0 p-4 flex justify-between items-center rounded-xl mb-4">
-                <img src={images.newLogo} alt='nnpc logo' className='cursor-pointer' onClick={() => navigate('/admin')} />
-                <Heading size="h6" className='text-nnpcmediumgreen-950 text-center'>Process Flow Builder</Heading>
 
-                <div className='space-x-2 space-y-2'>
+    return (
+        <div className="flex flex-col h-full w-[100%]">
+            <div className="w-full flex-shrink-0 p-4 flex justify-between items-center rounded-xl mb-4" >
+                {/* <img src={images.newLogo} alt='nnpc logo' className='cursor-pointer' onClick={() => navigate('/admin')} /> */}
+                <Heading size="h6" className='text-nnpcmediumgreen-950 text-center'>Process Flow Builder</Heading>
+                <div className='gap-3 flex'>
                     <button
                         type='button'
                         onClick={handleCreateNewFlow}
-                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 duration-300 ease-out transition-all"
+                        className="px-4 py-2 text-[14px] rounded-md border flex items-center justify-center gap-1 bg-white font-[500] border-nnpc-200 text-nnpc-300 hover:text-white  hover:bg-nnpc-300 duration-300 ease-out transition-all"
                     >
-                        Create New Process Flow
+                        <MdOutlineLibraryAdd />
+                        Create
                     </button>
                     <button
                         type='button'
                         onClick={handleSaveProcessFlow}
-                        className="px-4 py-2 bg-nnpc-800 text-white  rounded hover:bg-nnpc-800/50 duration-300 ease-out transition-all"
+                        className="px-4 py-2 text-[14px] border flex items-center justify-center gap-1 bg-white font-[500] border-nnpc-200 text-nnpc-300 hover:text-white rounded-md hover:bg-nnpc-300 duration-300 ease-out transition-all"
                     >
-                        Save Process Flow
+                        <CiSaveDown2 />
+                        Save
                     </button>
                     <button
                         type='button'
                         onClick={handleSubmitToBackend}
-                        className="px-4 py-2 bg-nnpc-200 text-white rounded hover:bg-nnpc-300 duration-300 ease-out transition-all"
+                        className="px-4 py-2 text-[14px] border flex items-center justify-center gap-1 bg-nnpc-200 font-[500] text-[white] hover:text-white rounded-md hover:bg-nnpc-300 duration-300 ease-out transition-all"
                     >
-                        Submit Process Flow
+                        <VscSend />
+                        {created ? 'creating' : 'submit'}
                     </button>
                 </div>
             </div>
 
             <div className="flex flex-1 overflow-hidden">
-                <div className="w-1/4 bg-nnpc-50/50 p-4 overflow-y-auto rounded-xl mr-4 h-fit">
-                    <h2 className="text-xl font-bold mb-4">FLow Items</h2>
+                <div className="w-1/4 bg-[#F5F7F9] p-4 overflow-y-auto rounded-xl mr-4 h-fit">
+                    <h2 className="text-xl font-bold mb-2">FLow Items</h2>
                     {!selectedFlow && <DraggableItem type={ItemTypes.PROCESS_FLOW} name="Process Flow" />}
                     <DraggableItem type={ItemTypes.PROCESS_FLOW_STEP} name="Process Flow Step" />
 
                     {/* Scrollable list of saved process flows */}
-                    <h3 className="text-lg font-semibold mt-4">Saved Process Flows</h3>
+                    <h3 className="text-[16px] font-semibold mt-4">Saved Process Flows</h3>
                     <div className="overflow-y-auto max-h-40">
                         {processFlows.map(flow => (
                             <div
@@ -546,9 +615,24 @@ const ProcessFlowBuilder = () => {
                             </div>
                         ))}
                     </div>
+
+                    <h3 className="text-[16px] font-semibold mt-4">Created Process flow</h3>
+                    <div className="overflow-y-auto max-h-40">
+                        {backendProcessflows?.data && backendProcessflows?.data?.map((flow: any) => (
+                            <div
+                                key={flow.id}
+                                className="cursor-pointer p-2 mt-2 bg-sky-200 rounded"
+                                onClick={() => handleSelectFlow(flow)}
+                            >
+                                {flow.name}
+                            </div>
+                        ))}
+                    </div>
+
+
                 </div>
 
-                <div ref={drop} className="w-3/4 bg-nnpc-50/50 p-4 overflow-y-scroll rounded-xl h-[30rem]">
+                <div ref={drop} className="w-3/4 bg-[#F5F7F9] p-4 overflow-y-scroll rounded-xl h-[30rem]">
                     {selectedFlow && (
                         <>
                             <h3 className="text-lg font-semibold mb-2">Process Flow</h3>

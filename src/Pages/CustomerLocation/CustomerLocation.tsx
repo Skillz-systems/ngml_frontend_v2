@@ -82,6 +82,8 @@ const CustomerLocation: React.FC = () => {
       value: formRecords[field.key as keyof typeof formRecords]
     }));
 
+    console.log('formFieldAnswers', formFieldAnswers)
+
     const buildFormSubmission = {
       name: formData?.data?.name,
       process_flow_id: formData?.data?.process_flow_id,
@@ -92,6 +94,7 @@ const CustomerLocation: React.FC = () => {
       form_field_answers: JSON.stringify(formFieldAnswers),
       data_id: formData?.task?.id
     };
+    console.log('buildFormSubmission', buildFormSubmission)
     await submitForm(buildFormSubmission).unwrap();
   };
 

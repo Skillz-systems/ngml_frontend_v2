@@ -68,6 +68,7 @@ export const authApi = api.injectEndpoints({
         url: '/users/api/logout',
         method: 'POST',
       }),
+        invalidatesTags: ['Forms', 'Customers', 'Tasks'],
     }),
   }),
 });
