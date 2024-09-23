@@ -147,7 +147,7 @@ export const admin: RouteObject[] = [
         ),
     },
     {
-        path: '/admin/settings/formbuilder/:formbuilderId',
+        path: '/admin/settings/formbuilder/:formId',
         element: (
             <QuestionProvider>
                 <FormBuilder />

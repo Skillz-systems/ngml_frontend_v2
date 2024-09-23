@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 import { BsFileEarmarkPlus } from 'react-icons/bs';
 import { useForm } from 'react-hook-form';
@@ -20,6 +20,8 @@ const FormBuilderDashboard: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const { data, error, isLoading } = useGetFormsQuery();
   const [localForms, setLocalForms] = useState<FormBuilderData[]>([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const storedForms = localStorage.getItem('localForms');
@@ -75,6 +77,13 @@ const FormBuilderDashboard: React.FC = () => {
     toast.success('Form created successfully!');
     setIsDialogOpen(false);
     form.reset();
+
+    navigate(`/admin/settings/formbuilder/${newForm.id}`);
+
+  };
+
+  const handleFormSelect = (formId: number) => {
+    navigate(`/admin/settings/formbuilder/${formId}`);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -199,14 +208,19 @@ const FormBuilderDashboard: React.FC = () => {
         </Dialog>
 
         {formData.map((form: FormBuilderData) => (
-          <FormCard
+          <div
             key={form.id}
-            formName={form.name}
-            formStatus="Draft"
-            dateCreated={new Date().toLocaleDateString()}
-            formDescription={form.description || 'No description'}
-            formId={form.id}
-          />
+            onClick={() => handleFormSelect(form.id)}
+            className="cursor-pointer"
+          >
+            <FormCard
+              formName={form.name}
+              formStatus="Draft"
+              dateCreated={new Date().toLocaleDateString()}
+              formDescription={form.description || 'No description'}
+              formId={form.id}
+            />
+          </div>
         ))}
       </div>
     </div>

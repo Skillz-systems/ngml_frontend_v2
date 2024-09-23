@@ -36,6 +36,7 @@ const FormBuilder: React.FC = () => {
 
   useEffect(() => {
     if (formData) {
+      setTitle(formData.data.name);
       const parsedJsonForm = JSON.parse(formData.data.json_form);
       setElements(parsedJsonForm.map((item: any, index: number) => ({
         itemName: item.elementType,
@@ -43,6 +44,7 @@ const FormBuilder: React.FC = () => {
       })));
     }
   }, [formData]);
+
 
   const handleDragStart = (event: any) => {
     setActiveId(event.active.id);
@@ -84,7 +86,7 @@ const FormBuilder: React.FC = () => {
     }
 
     const formSubmission = {
-      id: formId,
+      id: Number(formId),
       name: title,
       json_form: JSON.stringify(elements.map(element => ({
         elementType: element.itemName,
