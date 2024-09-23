@@ -5,7 +5,7 @@ import { Button } from '@/Components/FormBuilderComponents/ButtonComponent';
 import DraggableField from '@/Components/FormBuilderComponents/DraggableField';
 import DropArea from '@/Components/FormBuilderComponents/DropArea';
 import PreviewDialogBtn from '@/Components/FormBuilderComponents/PreviewDialogBtn';
-import { useGetFormByIdQuery, useSaveFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { useGetFormByIdQuery, useCreateFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { DndContext, DragOverlay } from '@dnd-kit/core';
 import { HiSaveAs } from 'react-icons/hi';
 import { MdOutlinePublish, MdPreview } from 'react-icons/md';
@@ -25,7 +25,7 @@ const FormBuilder: React.FC = () => {
   const [formId, setFormId] = useState<number | null>(null);
 
   const { data: formData, isLoading, error } = useGetFormByIdQuery(formId!, { skip: !formId });
-  const [saveForm] = useSaveFormMutation();
+  const [createForm] = useCreateFormMutation();
 
   useEffect(() => {
     const formDetails = localStorage.getItem('currentForm');
@@ -93,7 +93,7 @@ const FormBuilder: React.FC = () => {
     };
 
     try {
-      await saveForm(formSubmission).unwrap();
+      await createForm(formSubmission).unwrap();
       toast.success('Form saved successfully!');
     } catch (error) {
       toast.error('Error saving form');

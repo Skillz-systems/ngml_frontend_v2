@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 import { BsFileEarmarkPlus } from 'react-icons/bs';
@@ -13,13 +13,20 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/Components/FormBuilderComponents/InputComponent';
 import SelectComponent from '@/Components/FormBuilderComponents/SelectComponent';
 import { Textarea } from '@/Components/FormBuilderComponents/TextAreaComponent';
-import { useGetFormsQuery, useCreateFormMutation, FormBuilderData } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { useGetFormsQuery, FormBuilderData } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { toast } from 'react-toastify';
 
 const FormBuilderDashboard: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const { data, error, isLoading } = useGetFormsQuery();
-  const [createForm] = useCreateFormMutation();
+  const [localForms, setLocalForms] = useState<FormBuilderData[]>([]);
+
+  useEffect(() => {
+    const storedForms = localStorage.getItem('localForms');
+    if (storedForms) {
+      setLocalForms(JSON.parse(storedForms));
+    }
+  }, []);
 
   const formSchema = z.object({
     name: z.string().min(2, {
@@ -44,24 +51,36 @@ const FormBuilderDashboard: React.FC = () => {
     },
   });
 
-  const onSubmit = async (values: FormValues) => {
-    try {
-      await createForm({
-        ...values,
-        json_form: JSON.stringify([]),
-      }).unwrap();
-      toast.success('Form created successfully!');
-    } catch (error) {
-      toast.error('Error creating form');
+  const generateLocalId = (): number => {
+    const existingIds = [...(Array.isArray(data?.data) ? data.data : []), ...localForms].map(form => form.id);
+    let newId = Math.floor(Math.random() * 1000000);
+    while (existingIds.includes(newId)) {
+      newId = Math.floor(Math.random() * 1000000);
     }
+    return newId;
+  };
+
+  const onSubmit = (values: FormValues) => {
+    const newForm: FormBuilderData = {
+      id: generateLocalId(),
+      ...values,
+      json_form: JSON.stringify([]),
+      form_data: [],
+    };
+
+    const updatedForms = [...localForms, newForm];
+    setLocalForms(updatedForms);
+    localStorage.setItem('localForms', JSON.stringify(updatedForms));
+
+    toast.success('Form created successfully!');
     setIsDialogOpen(false);
+    form.reset();
   };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {JSON.stringify(error)}</div>;
 
-
-  const formData = Array.isArray(data?.data) ? data.data : [];
+  const formData = [...(Array.isArray(data?.data) ? data.data : []), ...localForms];
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -82,22 +101,7 @@ const FormBuilderDashboard: React.FC = () => {
             <h2 className="text-3xl font-bold">{formData.length}</h2>
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="bg-dark-green text-white p-4 text-center">
-            <p className="text-lg font-semibold">Total Forms</p>
-          </div>
-          <div className="bg-light-green text-white p-6 text-center">
-            <h2 className="text-3xl font-bold">{formData.length}</h2>
-          </div>
-        </div>
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="bg-dark-green text-white p-4 text-center">
-            <p className="text-lg font-semibold">Total Forms</p>
-          </div>
-          <div className="bg-light-green text-white p-6 text-center">
-            <h2 className="text-3xl font-bold">{formData.length}</h2>
-          </div>
-        </div>
+        {/* ... other stat cards ... */}
       </div>
 
       <h2 className="text-2xl font-bold mb-6">Your Forms</h2>
