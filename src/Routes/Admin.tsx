@@ -9,8 +9,6 @@ import { default as AdminCustomerPageLayout, default as CustomerPageLayout } fro
 import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
 import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
-import FormBuilder from '@/Pages/FormBuilder';
-import FormBuilderDashboard from '@/Pages/FormBuilderDashboard';
 import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 import OperationPage from '@/Pages/Manager/OperationPage/OperationPage';
 import ProcessFlowGenerator from '@/Pages/ProcessFlowGroup/ProcessFlowGenerator';
@@ -22,8 +20,9 @@ import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLay
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import TenderPage from '@/Pages/TenderPage/TenderPage';
-import { QuestionProvider } from '@/context/QuestionContext';
 
+import FormBuilderDashboardGenerator from '@/Pages/FormBuilderGroup/FormBuilderDashboardGenerator';
+import FormBuilderGenerator from '@/Pages/FormBuilderGroup/FormBuilderGenerator';
 import { RouteObject } from 'react-router-dom';
 
 
@@ -142,17 +141,15 @@ export const admin: RouteObject[] = [
     {
         path: '/admin/settings/formbuilder',
         element: (
-            <QuestionProvider>
-                <FormBuilderDashboard />
-            </QuestionProvider>
+            <FormBuilderDashboardGenerator />
+
         ),
     },
     {
         path: '/admin/settings/formbuilder/:formbuilderId',
         element: (
-            <QuestionProvider>
-                <FormBuilder />
-            </QuestionProvider>
+            <FormBuilderGenerator />
+
         ),
     },
     {
