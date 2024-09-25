@@ -11,6 +11,7 @@ import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNew
 import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
 import FormBuilder from '@/Pages/FormBuilder';
 import FormBuilderDashboard from '@/Pages/FormBuilderDashboard';
+import HeadofUnits from '@/Pages/HeadofUnits/HeadofUnits';
 import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 import OperationPage from '@/Pages/Manager/OperationPage/OperationPage';
 import ProcessFlowGenerator from '@/Pages/ProcessFlowGroup/ProcessFlowGenerator';
@@ -22,6 +23,7 @@ import SupplierOverviewLayout from '@/Pages/SupplierOverview/SupplierOverviewLay
 import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierRegistrationLayout';
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import TenderPage from '@/Pages/TenderPage/TenderPage';
+import UserSettings from '@/Pages/UserSettingsGroup/UserSettings';
 import { QuestionProvider } from '@/context/QuestionContext';
 
 import { RouteObject } from 'react-router-dom';
@@ -167,7 +169,14 @@ export const admin: RouteObject[] = [
         path: '/admin/settings/assigntasks',
         element: <AssignTask />
     },
-
+    {
+        path: '/admin/settings/usersettings',
+        element: <UserSettings />
+    },
+    {
+        path: '/admin/settings/hou',
+        element: <HeadofUnits />
+    },
 
 ]
 

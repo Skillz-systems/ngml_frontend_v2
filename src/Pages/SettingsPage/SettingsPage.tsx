@@ -18,6 +18,14 @@ const SettingsPage = () => {
             title: 'Assign Tasks',
             link: '/admin/settings/assigntasks',
         },
+        {
+            title: 'User Settings',
+            link: '/admin/settings/usersettings',
+        },
+        {
+            title: 'Head of Units',
+            link: '/admin/settings/hou',
+        },
     ];
 
     return (
