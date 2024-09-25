@@ -4,6 +4,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import NotFound from './NotFound';
 // import ProcessFlowGenerator from './Pages/ProcessFlowGroup/ProcessFlowGenerator';
 import Root from './Pages/Root';
+import SSOLogin from './Pages/SSO/SSOLogin';
+import SSOUpdateUser from './Pages/SSO/SSOUpdateUser';
 import StaffLoginPage from './Pages/Stafflogin/StaffLoginPage';
 import { admin } from './Routes/Admin';
 import { customer } from './Routes/Customer';
@@ -22,6 +24,14 @@ const RouterConfig = () => {
         {
             path: '/',
             element: <StaffLoginPage />
+        },
+        {
+            path: '/sso',
+            element: <SSOLogin />
+        },
+        {
+            path: '/sso/redirect',
+            element: <SSOUpdateUser />
         },
 
         {
