@@ -64,7 +64,7 @@ const Unit = () => {
                         label="Create Unit"
                         action={() => setIsModalOpen(true)}
                         icon={<VscSend className="mr-2" />}
-                        className="px-4 py-2 text-sm rounded-lg"
+                        className="px-4 py-2 text-sm rounded-full"
                     />
                 </div>
 
@@ -84,7 +84,7 @@ const Unit = () => {
                                         // action={() => handleDeleteRoute(route?.id)}
                                         action={() => route?.id !== undefined ? handleDeleteRoute(route.id) : undefined}
                                         icon={<FaTrashCan />}
-                                        className="px-3 py-1 text-sm rounded-lg space-x-2"
+                                        className="px-3 py-1 text-sm rounded-full space-x-2"
                                         disabled={deletingRouteId === route.id}
                                     />
                                 </div>
@@ -103,9 +103,10 @@ const Unit = () => {
                         <div key="modal-buttons" className='flex gap-2 mb-[-10px]'>
                             <div className='w-[120px]'>
                                 <Button
+                                    action={() => setIsModalOpen(false)}
+                                    className='rounded-full'
                                     type="outline"
                                     label="Cancel"
-                                    action={() => setIsModalOpen(false)}
                                     color="#FFFFFF"
                                     width="100%"
                                     height="40px"
@@ -115,6 +116,7 @@ const Unit = () => {
                             </div>
                             <div className='w-[260px]'>
                                 <Button
+                                    className='rounded-full'
                                     type="secondary"
                                     label={creating ? 'Creating...' : 'Create Unit'}
                                     action={handleCreateRoute}

@@ -190,7 +190,3 @@ export const getRouteLists = (): { [key: string]: string } => {
     }, {} as { [key: string]: string });
 };
 
-
-// export const getRouteNames = (): string[] => {
-//     return admin.map(route => route.path || '');
-// };
