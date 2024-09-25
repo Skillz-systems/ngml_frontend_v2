@@ -65,7 +65,7 @@ const LocationGroup = () => {
                         label="Create locations"
                         action={() => setIsModalOpen(true)}
                         icon={<VscSend className="mr-2" />}
-                        className="px-4 py-2 text-sm rounded-lg"
+                        className="px-4 py-2 text-sm rounded-full"
                     />
                 </div>
 
@@ -85,7 +85,7 @@ const LocationGroup = () => {
                                         // action={() => handleDeleteRoute(route?.id)}
                                         action={() => route?.id !== undefined ? handleDeleteRoute(route.id) : undefined}
                                         icon={<FaTrashCan />}
-                                        className="px-3 py-1 text-sm rounded-lg space-x-2"
+                                        className="px-3 py-1 text-sm rounded-full space-x-2"
                                         disabled={deletingRouteId === route.id}
                                     />
                                 </div>
@@ -112,6 +112,7 @@ const LocationGroup = () => {
                                     height="40px"
                                     fontSize="16px"
                                     radius="20px"
+                                    className='rounded-full'
                                 />
                             </div>
                             <div className='w-[260px]'>
@@ -125,6 +126,7 @@ const LocationGroup = () => {
                                     fontSize="16px"
                                     radius="20px"
                                     disabled={creating}
+                                    className='rounded-full'
                                 />
                             </div>
                         </div>
