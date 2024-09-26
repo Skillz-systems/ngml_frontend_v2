@@ -1,18 +1,17 @@
 
 
 import { Button, Heading, Modal } from '@/Components';
-import { useCreateDepartmentMutation, useDeleteDepartmentMutation, useGetDepartmentsQuery } from '@/Redux/Features/UserSettings/departmentService';
+import { useCreateDesignationMutation, useDeleteDesignationMutation, useGetDesignationsQuery } from '@/Redux/Features/UserSettings/designationService';
 import { useState } from 'react';
 import { FaTrashCan } from 'react-icons/fa6';
 import { VscSend } from 'react-icons/vsc';
 import { toast } from 'react-toastify';
 
-const DepartmentGroup = () => {
+const DesignationGroup = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
-        name: '',
+        role: '',
         description: '',
-        status: '1'
     });
     const [deletingItemId, setDeletingItemId] = useState<number | null>(null);
 
@@ -20,29 +19,29 @@ const DepartmentGroup = () => {
         setFormData({ ...formData, [key]: event.target.value });
     };
 
-    const { data, isLoading, isError } = useGetDepartmentsQuery();
-    const [createDepartment, { isLoading: creating }] = useCreateDepartmentMutation();
-    const [deleteDepartment] = useDeleteDepartmentMutation();
+    const { data, isLoading, isError } = useGetDesignationsQuery();
+    const [create, { isLoading: creating }] = useCreateDesignationMutation();
+    const [deleteDesignation] = useDeleteDesignationMutation();
 
     const handleCreate = async () => {
         try {
-            await createDepartment(formData).unwrap();
+            await create(formData).unwrap();
             setIsModalOpen(false);
-            setFormData({ name: '', description: '', status: '1' });
-            toast.success('Department created successfully');
+            setFormData({ role: '', description: '' });
+            toast.success('Designation created successfully');
         } catch (error) {
             console.error('Failed to create :', error);
         }
     };
 
     // Handles deletion of a route
-    const handleDeleteRoute = async (id: number) => {
+    const handleDelete = async (id: number) => {
         setDeletingItemId(id);
         try {
-            await deleteDepartment(id).unwrap();
-            toast.success('Department deleted successfully');
+            await deleteDesignation(id).unwrap();
+            toast.success('designation deleted successfully');
         } catch (error) {
-            console.error('Failed to delete department:', error);
+            console.error('Failed to delete location:', error);
         } finally {
             setDeletingItemId(null);
         }
@@ -52,10 +51,10 @@ const DepartmentGroup = () => {
         <div className="">
             <div className="flex flex-col h-full w-full bg-gray-100 p-6 rounded-xl mt-4">
                 <div className="flex justify-between items-center mb-6">
-                    <Heading size="h4" className="text-nnpcmediumgreen-950">Departments</Heading>
+                    <Heading size="h4" className="text-nnpcmediumgreen-950">Designations</Heading>
                     <Button
                         type="secondary"
-                        label="Create Department"
+                        label="Create Designation"
                         action={() => setIsModalOpen(true)}
                         icon={<VscSend className="mr-2" />}
                         className="px-4 py-2 text-sm rounded-full"
@@ -63,8 +62,8 @@ const DepartmentGroup = () => {
                 </div>
 
                 <div className="bg-white rounded-xl p-6">
-                    {isLoading && <p className="text-gray-600"> Loading departments...</p>}
-                    {isError && <p className="text-red-500">Error loading departments</p>}
+                    {isLoading && <p className="text-gray-600"> Loading designations...</p>}
+                    {isError && <p className="text-red-500">Error loading designation</p>}
                     {Array.isArray(data?.data) && (
                         <div className="space-y-2">
                             {data.data.map((item) => (
@@ -72,11 +71,11 @@ const DepartmentGroup = () => {
                                     key={item.id}
                                     className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300"
                                 >
-                                    <span className="capitalize font-medium text-gray-800">{item.name}</span>
+                                    <span className="capitalize font-medium text-gray-800">{item.role}</span>
                                     <Button
                                         type="tertiary"
                                         label={deletingItemId === item.id ? 'Deleting...' : 'Delete'}
-                                        action={() => item?.id !== undefined ? handleDeleteRoute(item.id) : undefined}
+                                        action={() => item?.id !== undefined ? handleDelete(item.id) : undefined}
                                         icon={<FaTrashCan />}
                                         className="px-3 py-1 text-sm rounded-full space-x-2"
                                         disabled={deletingItemId === item.id}
@@ -91,8 +90,8 @@ const DepartmentGroup = () => {
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     size='medium'
-                    title='Create Departments'
-                    subTitle='Add departments to be used in user settings'
+                    title='Create Locations'
+                    subTitle='Add locations to be used in user settings'
                     buttons={[
                         <div key="modal-buttons" className='flex gap-2 mb-[-10px]'>
                             <div className='w-[120px]'>
@@ -111,7 +110,7 @@ const DepartmentGroup = () => {
                             <div className='w-[260px]'>
                                 <Button
                                     type="secondary"
-                                    label={creating ? 'Creating...' : 'Create Department'}
+                                    label={creating ? 'Creating...' : 'Create Designation'}
                                     action={handleCreate}
                                     color="#FFFFFF"
                                     width="100%"
@@ -128,13 +127,13 @@ const DepartmentGroup = () => {
                     <div className="space-y-2">
 
                         <div className=''>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 capitalize"> Name</label>
+                            <label htmlFor="role" className="block text-sm font-medium text-gray-700 capitalize">Role</label>
                             <input
-                                id="name"
+                                id="role"
                                 type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange('name')}
+                                name="role"
+                                value={formData.role}
+                                onChange={handleChange('role')}
                                 className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
                             />
                         </div>
@@ -156,4 +155,4 @@ const DepartmentGroup = () => {
     );
 };
 
-export default DepartmentGroup;
+export default DesignationGroup;

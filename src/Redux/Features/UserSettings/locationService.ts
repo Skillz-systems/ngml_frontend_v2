@@ -3,9 +3,9 @@ import { api } from '../../api';
 
 export interface Location {
   id?: number;                     
-  name: string;                    
-  description: string;              
-  status?: string;                 
+  location: string;                    
+  zone: string;    
+  state: string;                         
   created_at?: string;              
   updated_at?: string;              
 }

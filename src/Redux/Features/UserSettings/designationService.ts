@@ -3,9 +3,8 @@ import { api } from '../../api';
 
 export interface Designation {
   id?: number;                     
-  name: string;                    
-  description: string;              
-  status?: string;                 
+ role: string;                    
+  description: string;                    
   created_at?: string;              
   updated_at?: string;              
 }

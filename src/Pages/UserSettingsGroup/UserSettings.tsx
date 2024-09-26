@@ -1,7 +1,7 @@
 import { ArrowBack } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import DepartmentGroup from './DepartmentGroup'
-import Designation from './Designation'
+import Designation from './DesignationGroup'
 import LocationGroup from './LocationGroup'
 import Unit from './Unit'
 
