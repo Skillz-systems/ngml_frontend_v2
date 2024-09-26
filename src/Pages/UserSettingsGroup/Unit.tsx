@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button, Heading, Modal } from '@/Components';
-import { useCreateRouteMutation, useDeleteRouteMutation, useGetRoutesQuery } from '@/Redux/Features/RouteBuilder/routeService';
-import { getRouteLists } from '@/Routes/Admin';
+
+import { useCreateUnitMutation, useDeleteUnitMutation, useGetUnitsQuery } from '@/Redux/Features/UserSettings/unitService';
+
+import { useGetDepartmentsQuery } from '@/Redux/Features/UserSettings/departmentService';
+
+
 
 import { useState } from 'react';
 import { FaTrashCan } from 'react-icons/fa6';
@@ -11,45 +15,53 @@ import { toast } from 'react-toastify';
 
 const Unit = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [routeName, setRouteName] = useState('');
-    const [routeLink, setRouteLink] = useState('');
-    const [deletingRouteId, setDeletingRouteId] = useState<number | null>(null);
+    const [formData, setFormData] = useState({
+        name: '',
+        description: '',
+        departmentId: ''
+    });
+    const [deletingUnitId, setDeletingUnitId] = useState<number | null>(null);
 
-    const { data: routes, isLoading, isError } = useGetRoutesQuery();
-    const [createRoute, { isLoading: creating }] = useCreateRouteMutation();
-    const [deleteRoute] = useDeleteRouteMutation();
+    const handleChange = (key: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const target = event.target;
 
-    const routeOptions = getRouteLists();
+        if (target instanceof HTMLInputElement && (target.type === 'checkbox' || target.type === 'radio')) {
+            setFormData({ ...formData, [key]: target.checked });
+        } else {
+            setFormData({ ...formData, [key]: target.value });
+        }
+    };
+
+    const { data, isLoading, isError } = useGetUnitsQuery();
+    const { data: departmentlist } = useGetDepartmentsQuery();
+    const [createUnit, { isLoading: creating }] = useCreateUnitMutation();
+    const [deleteUnit] = useDeleteUnitMutation();
+
 
     // Handles creation of a new route
-    const handleCreateRoute = async () => {
+    const handleCreate = async () => {
         try {
-            await createRoute({
-                name: routeName,
-                link: `https://api.ngml.skillzserver.com${routeLink}`,
-                status: 1
-            }).unwrap();
+            await createUnit(formData).unwrap();
             setIsModalOpen(false);
-            setRouteName('');
-            setRouteLink('');
-            toast.success('Route created successfully');
+            toast.success('Unit created successfully');
+            setFormData({ name: '', description: '', departmentId: '' });
         } catch (error) {
             console.error('Failed to create route:', error);
-            toast.error('Failed to create route');
+            // toast.error('Failed to create route');
         }
     };
 
     // Handles deletion of a route
-    const handleDeleteRoute = async (id: number) => {
-        setDeletingRouteId(id);
+    const handleDelete = async (id: number) => {
+        setDeletingUnitId(id);
         try {
-            await deleteRoute(id).unwrap();
-            toast.success('Route deleted successfully');
+            alert(id)
+            await deleteUnit(id).unwrap();
+            toast.success('unit deleted successfully');
         } catch (error) {
-            console.error('Failed to delete route:', error);
-            toast.error('Failed to delete route');
+            console.error('Failed to delete unit:', error);
         } finally {
-            setDeletingRouteId(null);
+            setDeletingUnitId(null);
         }
     };
 
@@ -72,20 +84,21 @@ const Unit = () => {
                     {/* <h2 className="text-2xl font-bold mb-4 text-nnpcmediumgreen-950">Existing</h2> */}
                     {isLoading && <p className="text-gray-600">Loading units...</p>}
                     {isError && <p className="text-red-500">Error loading unts</p>}
-                    {routes?.data && (
+                    {Array.isArray(data?.data) && (
                         <div className="space-y-2">
-                            {routes.data.map((route) => (
-                                <div key={route.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
-                                    <span className="capitalize font-medium text-gray-800">{route.name}</span>
-                                    {/* <span className="text-gray-600 truncate max-w-md">{route.link}</span> */}
+                            {data.data.map((item) => (
+                                <div
+                                    key={item.id}
+                                    className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                >
+                                    <span className="capitalize font-medium text-gray-800">{item.name}</span>
                                     <Button
                                         type="tertiary"
-                                        label={deletingRouteId === route.id ? 'Deleting...' : 'Delete'}
-                                        // action={() => handleDeleteRoute(route?.id)}
-                                        action={() => route?.id !== undefined ? handleDeleteRoute(route.id) : undefined}
+                                        label={deletingUnitId === item.id ? 'Deleting...' : 'Delete'}
+                                        action={() => item?.id !== undefined ? handleDelete(item.id) : undefined}
                                         icon={<FaTrashCan />}
                                         className="px-3 py-1 text-sm rounded-full space-x-2"
-                                        disabled={deletingRouteId === route.id}
+                                        disabled={deletingUnitId === item.id}
                                     />
                                 </div>
                             ))}
@@ -119,7 +132,7 @@ const Unit = () => {
                                     className='rounded-full'
                                     type="secondary"
                                     label={creating ? 'Creating...' : 'Create Unit'}
-                                    action={handleCreateRoute}
+                                    action={handleCreate}
                                     color="#FFFFFF"
                                     width="100%"
                                     height="40px"
@@ -131,31 +144,52 @@ const Unit = () => {
                         </div>
                     ]}
                 >
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 capitalize">Unit Name</label>
-                        <input
-                            id="name"
-                            type="text"
-                            name="name"
-                            value={routeName}
-                            onChange={(e) => setRouteName(e.target.value)}
-                            className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
-                        />
-                        <label htmlFor="link" className="block text-sm font-medium text-gray-700 capitalize">Route</label>
-                        <select
-                            id="link"
-                            name="link"
-                            value={routeLink}
-                            onChange={(e) => setRouteLink(e.target.value)}
-                            className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
-                        >
-                            <option value="">Select a route</option>
-                            {Object.entries(routeOptions).map(([label, path]) => (
-                                <option key={path} value={path}>
-                                    {label.replace(/_/g, ' ')}
-                                </option>
-                            ))}
-                        </select>
+                    <div className="space-y-2">
+
+                        <div className=''>
+                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 capitalize"> Name</label>
+                            <input
+                                id="name"
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange('name')}
+                                className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="description" className="block text-sm font-medium text-gray-700 capitalize">Description</label>
+                            <input
+                                id="description"
+                                type="text"
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange('description')}
+                                className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
+                            />
+                        </div>
+
+                        <div>
+
+                            <label htmlFor="departmentId" className="block text-sm font-medium text-gray-700 capitalize">Department</label>
+                            <select
+                                id="departmentId"
+                                name="departmentId"
+                                value={formData.departmentId}
+                                onChange={handleChange('departmentId')}
+                                className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
+                            >
+
+
+                                <option>Select a department</option>
+
+                                {Array.isArray(departmentlist?.data) && departmentlist.data.map((department) => (
+                                    <option key={department.id} value={department.id}>
+                                        {department.name.replace(/_/g, ' ')}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
                 </Modal>
             </div>

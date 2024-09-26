@@ -1,5 +1,6 @@
 import { ArrowBack } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
+import DepartmentGroup from './DepartmentGroup'
 import Designation from './Designation'
 import LocationGroup from './LocationGroup'
 import Unit from './Unit'
@@ -17,6 +18,7 @@ const UserSettings = () => {
                 <Unit />
                 <LocationGroup />
                 <Designation />
+                <DepartmentGroup />
             </div>
         </div>
     )
