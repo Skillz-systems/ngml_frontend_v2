@@ -4,6 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import NotFound from './NotFound';
 // import ProcessFlowGenerator from './Pages/ProcessFlowGroup/ProcessFlowGenerator';
 import Root from './Pages/Root';
+import SSOCallback from './Pages/SSO/SSOCallback';
 import SSOLogin from './Pages/SSO/SSOLogin';
 import SSOUpdateUser from './Pages/SSO/SSOUpdateUser';
 import StaffLoginPage from './Pages/Stafflogin/StaffLoginPage';
@@ -28,6 +29,10 @@ const RouterConfig = () => {
         {
             path: '/sso',
             element: <SSOLogin />
+        },
+        {
+            path: '/callback',
+            element: <SSOCallback />
         },
         {
             path: '/sso/redirect',

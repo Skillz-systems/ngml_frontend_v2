@@ -12,7 +12,7 @@ export interface Department {
 
 
 export interface DepartmentData {
-  data: Department[] | Department;  
+  data: Department[] | Department ;  
 }
 
 

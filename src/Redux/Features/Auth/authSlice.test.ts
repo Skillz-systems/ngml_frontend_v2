@@ -4,14 +4,14 @@ import { RootState } from '../../store';
 import authReducer, { logout, selectCurrentUser, setCredentials } from './authSlice';
 
 const initialState = {
-  jwt: null,
+  access_token: null,
   user: null,
 };
 
 describe('authSlice tests', () => {
   it('should handle initial state', () => {
     expect(authReducer(undefined, { type: 'unknown' })).toEqual({
-      jwt: null,
+      access_token: null,
       user: null,
     });
   });
@@ -20,11 +20,11 @@ describe('authSlice tests', () => {
     const actual = authReducer(
       initialState,
       setCredentials({
-        jwt: 'dummy-token',
+        access_token: 'dummy-token',
         user: { id: '1', email: 'user@example.com', name: 'John Doe' },
       })
     );
-    expect(actual.jwt).toEqual('dummy-token');
+    expect(actual.access_token).toEqual('dummy-token');
     expect(actual.user).toEqual({
       id: '1',
       email: 'user@example.com',
@@ -35,12 +35,12 @@ describe('authSlice tests', () => {
   it('should handle logout', () => {
     const actual = authReducer(
       {
-        jwt: 'dummy-token',
+        access_token: 'dummy-token',
         user: { id: '1', email: 'user@example.com', name: 'John Doe' },
       },
       logout()
     );
-    expect(actual.jwt).toBeNull();
+    expect(actual.access_token).toBeNull();
     expect(actual.user).toBeNull();
   });
   const store = configureStore({
@@ -54,7 +54,7 @@ describe('authSlice tests', () => {
 
     store.dispatch(
       setCredentials({
-        jwt: 'dummy-token',
+        access_token: 'dummy-token',
         user: { id: '1', email: 'user@example.com', name: 'John Doe' },
       })
     );
