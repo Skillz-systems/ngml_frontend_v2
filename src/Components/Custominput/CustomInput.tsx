@@ -181,7 +181,8 @@ interface CustomInputProps {
     error?: string;
     required?: boolean;
     icon?: React.ReactNode;
-    styleVariant?: 'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4' | 'customStyle5'
+    styleVariant?: 'default' | 'customStyle1' | 'customStyle2' | 'customStyle3' | 'customStyle4' | 'customStyle5';
+    readOnly?: boolean;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -196,6 +197,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
     required = false,
     icon,
     styleVariant = 'default',
+    readOnly
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
@@ -228,6 +230,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
         placeholder,
         className: inputClasses,
         name,
+        readOnly
     };
 
     const renderInput = () => {

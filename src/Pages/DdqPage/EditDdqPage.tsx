@@ -85,6 +85,52 @@ const EditDdqPage: React.FC<EditModalContentProps> = ({ companyData, setCompanyD
                     placeholder="Input Company Address Here"
                 />
             </div>
+            <div className='border-2 border-dashed rounded-[20px] p-[20px] bg-dark-50 mt-4'>
+                                    <div className='flex-col space-y-5'>
+                                        <h3 className='text-[#49526A] font-[700]'>CONTACT PERSON</h3>
+                                        <CustomInput
+                                            required
+                                            type="text"
+                                            label='Contact Name'
+                                            value={companyData.contactName}
+                                            handleChangeEvent={(value) => handleInputChange(value, "contactName")}
+                                            placeholder="Input contact name"
+                                            styleVariant='customStyle5'
+                                        />
+                                        <div className='flex flex-col md:flex-row gap-[10px]'>
+                                            <div className='flex-1'>
+                                                <CustomInput
+                                                    required
+                                                    type="text"
+                                                    label='Contact Telephone Number'
+                                                    value={companyData.contactTelephone}
+                                                    handleChangeEvent={(value) => handleInputChange(value, "contactTelephone")}
+                                                    placeholder="Enter Contact Telephone"
+                                                    styleVariant='customStyle5'
+                                                />
+                                            </div>
+                                            <div className='flex-1'>
+                                                <CustomInput
+                                                    required
+                                                    type="text"
+                                                    label='Contact Email Address'
+                                                    value={companyData.contactEmail}
+                                                    handleChangeEvent={(value) => handleInputChange(value, "contactEmail")}
+                                                    placeholder="Enter contact email"
+                                                    styleVariant='customStyle5'
+                                                />
+                                            </div>
+                                        </div>
+                                        <CustomInput
+                                            type="text"
+                                            label='Contact Address'
+                                            value={companyData.contactAddress}
+                                            handleChangeEvent={(value) => handleInputChange(value, "contactAddress")}
+                                            placeholder="Input contact aaddress"
+                                            styleVariant='customStyle5'
+                                        />
+                                    </div>
+                                </div>
             <div className='border-2 p-4 border-dashed border-dark-200 rounded-[10px] mt-4 space-y-4'>
                 <h3>SENIOR MANAGEMENT OFFICERS</h3>
                 <div className='grid grid-cols-2 gap-2'>
