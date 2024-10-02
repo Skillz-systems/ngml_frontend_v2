@@ -2,11 +2,11 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
 
 export interface HeadOfUnit {
-  id?: number;
-  name: string;
-  email: string;
-  department: string;
-  status?: number;
+  id: number;
+  user_id:string,
+  location_id:string;
+  unit_id:string;
+  status:string;
 }
 
 export interface HeadsOfUnitData {
@@ -17,6 +17,12 @@ export interface HeadOfUnitSingleData {
   data: HeadOfUnit;
 }
 
+export interface HeadOfUnitCreateInterface{
+  user_id:string,
+  location_id:string;
+  unit_id:string;
+  status:string;
+}
 type ErrorResponse = {
   success: boolean;
   message: string;
@@ -25,7 +31,7 @@ type ErrorResponse = {
 export const headOfUnitApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getHeadsOfUnit: builder.query<HeadsOfUnitData, void>({
-      query: () => '/admin/api/heads-of-unit',
+      query: () => '/users/api/v1/headofunit',
       providesTags: ['HeadsOfUnit'],
       transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
@@ -33,9 +39,9 @@ export const headOfUnitApi = api.injectEndpoints({
       },
     }),
 
-    createHeadOfUnit: builder.mutation<HeadOfUnitSingleData, HeadOfUnit>({
+    createHeadOfUnit: builder.mutation<HeadOfUnitSingleData, HeadOfUnitCreateInterface>({
       query: (headOfUnit) => ({
-        url: '/admin/api/heads-of-unit/create',
+        url: '/users/api/v1/headofunit/create',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: headOfUnit,
@@ -53,54 +59,11 @@ export const headOfUnitApi = api.injectEndpoints({
       },
     }),
 
-    updateHeadOfUnit: builder.mutation<HeadOfUnitSingleData, HeadOfUnit>({
-      query: (headOfUnit) => ({
-        url: `/admin/api/heads-of-unit/update/${headOfUnit.id}`,
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: headOfUnit,
-      }),
-      invalidatesTags: ['HeadsOfUnit'],
-      transformResponse: (response: HeadOfUnitSingleData | ErrorResponse) => {
-        if ('message' in response) {
-          throw new Error(response.message);
-        }
-        return response;
-      },
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
-    }),
-
-    deleteHeadOfUnit: builder.mutation<{ success: boolean; id: number }, number>({
-      query: (id) => ({
-        url: `/admin/api/heads-of-unit/delete/${id}`,
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-      }),
-      invalidatesTags: ['HeadsOfUnit'],
-      transformResponse: (response: { success: boolean; id: number } | ErrorResponse) => {
-        if ('message' in response) {
-          throw new Error(response.message);
-        }
-        if ('success' in response && 'id' in response) {
-          return response;
-        }
-        throw new Error('Invalid response format');
-      },
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
-    }),
   }),
   overrideExisting: false,
 });
 
 export const {
   useCreateHeadOfUnitMutation,
-  useGetHeadsOfUnitQuery,
-  useUpdateHeadOfUnitMutation,
-  useDeleteHeadOfUnitMutation,
+  useGetHeadsOfUnitQuery
 } = headOfUnitApi;
