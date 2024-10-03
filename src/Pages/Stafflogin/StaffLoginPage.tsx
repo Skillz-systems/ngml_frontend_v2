@@ -9,15 +9,14 @@ import {
   CustomInput,
 } from '../../Components/index';
 import { useLoginMutation } from '../../Redux/Features/Auth/authService';
-import { setCredentials } from '../../Redux/Features/Auth/authSlice';
-import { useAppDispatch } from '../../Redux/hooks';
+// import { useAppDispatch } from '../../Redux/hooks';
 import images from '../../assets/index';
 import '../../index.css';
 
 const StaffLoginPage: React.FC = () => {
   const [login, { isLoading, error, data, isError, isSuccess }] =
     useLoginMutation();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -33,12 +32,12 @@ const StaffLoginPage: React.FC = () => {
 
   useEffect(() => {
     if (isSuccess && data) {
-      dispatch(setCredentials(data));
+      // dispatch(setCredentials(data));
       navigate('/admin');
       toast.success('Login successful');
 
     }
-  }, [isSuccess, isError, data, error, dispatch, navigate]);
+  }, [isSuccess, isError, data, error, navigate]);
 
   const handleChange = (key: string) => (value: string) => {
     setFormData({ ...formData, [key]: value });

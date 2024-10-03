@@ -3,20 +3,20 @@
 
 'use client'
 
+import { useLoginMutation } from '@/Redux/Features/Auth/authService';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useLoginMutation } from '@/Redux/Features/Auth/authService';
-import { useAppDispatch } from '@/Redux/hooks';
-import { setCredentials } from '@/Redux/Features/Auth/authSlice';
-import { Button, CustomInput, ContentContainer, AuthContainer } from '@/Components';
-import '../../../index.css';
+// import { useAppDispatch } from '@/Redux/hooks';
+// import { setCredentials } from '@/Redux/Features/Auth/authSlice';
 import images from '@/assets'; // Ensure this path is correct and the image exists
+import { AuthContainer, Button, ContentContainer, CustomInput } from '@/Components';
+import '../../../index.css';
 
 const CustomerOtpPage: React.FC = () => {
     const [login, { isLoading, data, isSuccess }] = useLoginMutation();
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -32,11 +32,11 @@ const CustomerOtpPage: React.FC = () => {
 
     useEffect(() => {
         if (isSuccess && data) {
-            dispatch(setCredentials(data));
+            // dispatch(setCredentials(data));
             navigate('/optPage');
             toast.success('OTP Sent');
         }
-    }, [isSuccess, data, dispatch, navigate]);
+    }, [isSuccess, data, navigate]);
 
     const handleChange = (key: string) => (value: string) => {
         setFormData({ ...formData, [key]: value });
@@ -61,6 +61,7 @@ const CustomerOtpPage: React.FC = () => {
             try {
                 await login(formData).unwrap();
             } catch (err) {
+                console.log(err)
             }
         }
     };
