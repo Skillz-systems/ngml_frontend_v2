@@ -2,6 +2,7 @@ import { useCallbackMutation } from '@/Redux/Features/Auth/ssoAuthService';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import { Button } from '@/Components';
 import { setCredentials } from '@/Redux/Features/Auth/authSlice';
 import { useAppDispatch } from '@/Redux/hooks';
 import { ToastContainer } from 'react-toastify';
@@ -10,7 +11,7 @@ import { ToastContainer } from 'react-toastify';
 interface User {
     email: string;
     name: string;
-    status: string;
+    status: number | string;
     updated_at: string;
     created_at: string;
     id: number;
@@ -47,26 +48,31 @@ const SSOCallback = () => {
             const response = await sendCode({ code }).unwrap() as RegistrationResponse;
             if (isSuccess) {
                 console.log('response', response)
+                alert('Successs')
             }
             dispatch(setCredentials(response));
-            if (response.user.status === '0') {
+            if (response.user.status == 0) {
+                // alert('0')
 
-                // dispatch(setCredentials(data));
                 console.log(0);
                 // navigate('/sso/redirect');
                 return
                 // navigate('/sso/redirect');
             }
 
-            if (response.user.status === '1') {
+            if (response.user.status == 1) {
+
+                // alert('1')
                 console.log(1)
                 navigate('/admin');
             }
-            if (response.user.status === '2') {
+            if (response.user.status == 2) {
+                // alert('2')
                 console.log(2)
                 navigate('/sso/redirect');
             }
         } catch (err) {
+            // alert('err')
             console.error('SSO Callback error:', err);
         }
     };
@@ -74,24 +80,54 @@ const SSOCallback = () => {
 
 
     if (isLoading) {
-        return <div>Processing login...</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center flex-col logingradient-bg w-[100%]">
+                <ToastContainer />
+
+                <div className="animate-pulse text-white text-xl">
+
+                    Processing ....
+                </div>
+            </div>
+        )
     }
 
     if (error) {
         return (
-            <div>
-                <h2>Authentication Error</h2>
-                <p>{error}</p>
-                <button onClick={() => navigate('/sso')}>Return to Login</button>
+
+            <div className="min-h-screen flex flex-col items-center justify-center logingradient-bg w-[100%]">
+                <ToastContainer />
+
+                <div className="text-white text-xl">
+
+                    Completing authentication...
+                    <h2>Authentication Error</h2>
+                    <p>{error}</p>
+
+                    <Button
+                        type="primary"
+                        label='Return to Login'
+                        action={() => navigate('/sso')}
+                        color="#FFFFFF"
+                        width="100%"
+                        height="48px"
+                        fontSize="16px"
+                        radius="32px"
+                    />
+                </div>
             </div>
+
         );
     }
 
     return <div>
 
-        <div className="min-h-screen flex flex-col logingradient-bg w-[100%]">
+        <div className="min-h-screen flex flex-col items-center justify-center logingradient-bg w-[100%]">
             <ToastContainer />
-            Completing authentication...
+
+            <div className="animate-pulse text-white text-xl">
+                Completing authentication...
+            </div>
         </div>
     </div>
 };

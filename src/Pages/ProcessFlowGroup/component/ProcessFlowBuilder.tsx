@@ -29,9 +29,9 @@ const booleanOptions = [true, false];
 
 const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'none'];
 const weekOptions = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'none'];
-const designationOptions = ['Manager', 'Officer', 'ED'];
-const unitOptions = ['Unit A', 'Unit B', 'Unit C'];
-const departmentOptions = ['HR', 'Engineering', 'Finance', 'Sales'];
+const designationOptions = ['Manager', 'Officer', 'ED', 'none'];
+const unitOptions = ['EOI', 'Legal', 'none'];
+const departmentOptions = ['COBD', 'Sales', 'none', 'EOI', 'legal'];
 
 const getOptionsForField = (fieldName: string) => {
     switch (fieldName) {

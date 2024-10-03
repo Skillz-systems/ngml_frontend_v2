@@ -6,6 +6,7 @@ export interface Route {
   id?: number;
   name: string;
   link: string;
+  dynamic_content?:string;
   status?: number;
 }
 

@@ -2,7 +2,7 @@
 
 import { Button, Heading, Modal } from '@/Components';
 import { useCreateRouteMutation, useDeleteRouteMutation, useGetRoutesQuery } from '@/Redux/Features/RouteBuilder/routeService';
-import { getRouteLists } from '@/Routes/Admin';
+// import { getRouteLists } from '@/Routes/Admin';
 import { ArrowBack } from '@mui/icons-material';
 
 import { useState } from 'react';
@@ -15,25 +15,34 @@ const RouteBuilder = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [routeName, setRouteName] = useState('');
     const [routeLink, setRouteLink] = useState('');
+    const [dynamicContent, setDynamicContent] = useState('');
     const [deletingRouteId, setDeletingRouteId] = useState<number | null>(null);
 
     const { data: routes, isLoading, isError } = useGetRoutesQuery();
     const [createRoute, { isLoading: creating }] = useCreateRouteMutation();
     const [deleteRoute] = useDeleteRouteMutation();
 
-    const routeOptions = getRouteLists();
+    // const routeOptions = getRouteLists();
 
     // Handles creation of a new route
+
+    // const handleDynamicContent =()=>{
+    //     const jsonContent = dynamicContent.split(',');
+    //     return jsonContent;
+    // }
     const handleCreateRoute = async () => {
         try {
             await createRoute({
                 name: routeName,
-                link: `https://api.ngml.skillzserver.com${routeLink}`,
-                status: 1
+                link: `https://ngml.skillzserver.com/${routeLink}`,
+                status: 1,
+                dynamic_content: dynamicContent
             }).unwrap();
             setIsModalOpen(false);
             setRouteName('');
             setRouteLink('');
+            setDynamicContent('');
+
             toast.success('Route created successfully');
         } catch (error) {
             console.error('Failed to create route:', error);
@@ -49,11 +58,13 @@ const RouteBuilder = () => {
             toast.success('Route deleted successfully');
         } catch (error) {
             console.error('Failed to delete route:', error);
-            toast.error('Failed to delete route');
+            // toast.error('Failed to delete route');
         } finally {
             setDeletingRouteId(null);
         }
     };
+
+
 
     return (
         <div className="">
@@ -137,6 +148,8 @@ const RouteBuilder = () => {
                     ]}
                 >
                     <div>
+
+                        {/* {http://localhost:5173/admin/records/customer?createCustomer=true} */}
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700 capitalize">Route Name</label>
                         <input
                             id="name"
@@ -146,7 +159,28 @@ const RouteBuilder = () => {
                             onChange={(e) => setRouteName(e.target.value)}
                             className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
                         />
-                        <label htmlFor="link" className="block text-sm font-medium text-gray-700 capitalize">Route</label>
+
+                        <label htmlFor="link" className="block text-sm font-medium text-gray-700 capitalize">Route </label>
+                        <input
+                            id="link"
+                            type="text"
+                            name="link"
+                            value={routeLink}
+                            onChange={(e) => setRouteLink(e.target.value)}
+                            className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
+                        />
+
+                        <label htmlFor="dynamic_content" className="block text-sm font-medium text-gray-700 capitalize">Dynamic Content </label>
+                        <input
+                            id="dynamic_content"
+                            type="text"
+                            name="dynamic_content"
+                            value={dynamicContent}
+                            onChange={(e) => setDynamicContent(e.target.value)}
+                            className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
+                        />
+
+                        {/* <label htmlFor="link" className="block text-sm font-medium text-gray-700 capitalize">Route</label>
                         <select
                             id="link"
                             name="link"
@@ -160,7 +194,7 @@ const RouteBuilder = () => {
                                     {label.replace(/_/g, ' ')}
                                 </option>
                             ))}
-                        </select>
+                        </select> */}
                     </div>
                 </Modal>
             </div>
