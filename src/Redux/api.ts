@@ -45,15 +45,16 @@ const baseQueryWithReauth = async (
           window.location.href = '/unauthorized';
           break;
         case 404:
-          toast.error('Resource not found.');
+          // toast.error('Resource not found.');
           break;
         case 500:
-          toast.error('Server error occurred.');
+          // toast.error('Server error occurred.');
           break;
         default:
-          toast.error(
-            `An error occurred: ${error.status ? error.status : 'Unknown error'}`,
-          );
+
+          // toast.error(
+          //   `An error occurred: ${error.status ? error.status : 'Unknown error'}`,
+          // );
       }
     }
 

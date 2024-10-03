@@ -41,11 +41,11 @@ const HeadofUnits: React.FC = () => {
         return staff.data.data.filter(user => !assignedUserIds.includes(user.id?.toString() || ''));
     }, [staff, heads]);
 
-    const availableUnits = useMemo(() => {
-        if (!Array.isArray(units?.data) || !Array.isArray(heads?.data)) return [];
-        const assignedUnitIds = heads.data.map(head => head.unit_id);
-        return units.data.filter(unit => !assignedUnitIds.includes(unit.id?.toString() || ''));
-    }, [units, heads]);
+    // const availableUnits = useMemo(() => {
+    //     if (!Array.isArray(units?.data) || !Array.isArray(heads?.data)) return [];
+    //     const assignedUnitIds = heads.data.map(head => head.unit_id);
+    //     return units.data.filter(unit => !assignedUnitIds.includes(unit.id?.toString() || ''));
+    // }, [units, heads]);
 
     const handleCreate = async () => {
         try {
@@ -100,7 +100,7 @@ const HeadofUnits: React.FC = () => {
                     <Heading size="h4" className="text-nnpcmediumgreen-950">Unit Heads</Heading>
                     <Button
                         type="secondary"
-                        label="Assign unit Heads"
+                        label="Assign unit heads"
                         action={() => setIsModalOpen(true)}
                         icon={<VscSend className="mr-2" />}
                         className="px-4 py-2 text-sm rounded-full"
@@ -117,20 +117,20 @@ const HeadofUnits: React.FC = () => {
                                 const staffMember = staff.data.data.find((item: User) => item.id?.toString() === head.user_id);
                                 return (
                                     <div key={head.id} className="flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
-                                        <div className='flex items-center space-x-2'>
+                                        <div className='flex flex-col items-start space-y-1'>
 
                                             <h3 className="font-semibold text-lg text-gray-800">Name:
                                                 {' '}{staffMember?.name}</h3>
-                                            <p className="text-gray-600">Email: {' '} {staffMember?.email}</p>
+                                            {/* <p className="text-gray-600">Email: {' '} {staffMember?.email}</p> */}
 
-                                            <p className="text-gray-500">Unit: {getUnitName(head.unit_id)}</p>
-                                            <p className="text-gray-500 ">Location: {getLocationName(head.location_id)}</p>
+                                            <p className="text-gray-500"> <span className='font-semibold text-lg text-gray-800'>Unit:</span> {getUnitName(head.unit_id)}</p>
+                                            <p className="text-gray-500 "> <span className='font-semibold text-lg text-gray-800'>Location:</span>  {getLocationName(head.location_id)}</p>
 
                                         </div>
                                         <div className="flex space-x-2">
                                             <Button
                                                 type="transparent"
-                                                label={deletingUnitId === head.id ? 'removing...' : 'remove'}
+                                                label={deletingUnitId === head.id ? 'removing...' : ''}
                                                 action={() => handleDelete(head.id)}
                                                 icon={<FaTrashCan />}
                                                 className="px-3 py-1 text-sm rounded-full space-x-2 "
@@ -248,7 +248,13 @@ const HeadofUnits: React.FC = () => {
                                 className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
                             >
                                 <option value="">Select unit</option>
-                                {availableUnits.map((unit) => (
+                                {/* {availableUnits.map((unit) => (
+                                    <option key={unit.id} value={unit.id}>
+                                        {unit.name.replace(/_/g, ' ')}
+                                    </option>
+                                ))} */}
+
+                                {Array.isArray(units?.data) && units?.data.map((unit) => (
                                     <option key={unit.id} value={unit.id}>
                                         {unit.name.replace(/_/g, ' ')}
                                     </option>

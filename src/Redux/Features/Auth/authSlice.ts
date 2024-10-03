@@ -5,7 +5,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface User {
     email: string;
     name?: string;
-    status?: string;
+    status?: number | string;
     updated_at?: string;
     created_at?: string;
     id: number;
