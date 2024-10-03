@@ -4,10 +4,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface User {
     email: string;
-    name: string;
-    status: string;
-    updated_at: string;
-    created_at: string;
+    name?: string;
+    status?: string;
+    updated_at?: string;
+    created_at?: string;
     id: number;
   
 }
@@ -34,7 +34,6 @@ export interface RegistrationResponse {
 const initialState: RegistrationResponse = {
   access_token: null,
   user: null,
-  // message:null
 
 };
 

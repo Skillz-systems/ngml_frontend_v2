@@ -21,12 +21,12 @@ describe('authSlice tests', () => {
       initialState,
       setCredentials({
         access_token: 'dummy-token',
-        user: { id: '1', email: 'user@example.com', name: 'John Doe' },
+        user: { id: 1, email: 'user@example.com', name: 'John Doe' },
       })
     );
     expect(actual.access_token).toEqual('dummy-token');
     expect(actual.user).toEqual({
-      id: '1',
+      id: 1,
       email: 'user@example.com',
       name: 'John Doe',
     });
@@ -36,7 +36,7 @@ describe('authSlice tests', () => {
     const actual = authReducer(
       {
         access_token: 'dummy-token',
-        user: { id: '1', email: 'user@example.com', name: 'John Doe' },
+        user: { id: 1, email: 'user@example.com', name: 'John Doe' },
       },
       logout()
     );
@@ -55,11 +55,11 @@ describe('authSlice tests', () => {
     store.dispatch(
       setCredentials({
         access_token: 'dummy-token',
-        user: { id: '1', email: 'user@example.com', name: 'John Doe' },
+        user: { id: 1, email: 'user@example.com', name: 'John Doe' },
       })
     );
     expect(selectCurrentUser(store.getState() as RootState)).toEqual({
-      id: '1',
+      id: 1,
       email: 'user@example.com',
       name: 'John Doe',
     });

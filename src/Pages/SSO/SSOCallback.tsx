@@ -53,8 +53,8 @@ const SSOCallback = () => {
 
                 // dispatch(setCredentials(data));
                 console.log(0);
-                navigate('/sso/redirect');
-                // return
+                // navigate('/sso/redirect');
+                return
                 // navigate('/sso/redirect');
             }
 

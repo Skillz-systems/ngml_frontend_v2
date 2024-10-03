@@ -96,15 +96,13 @@ const SSOUpdateUser: React.FC = () => {
                 unit_id: formData.unit,
                 department_id: formData.department,
                 designation_id: formData.designation,
-                user_id: user.user.id
+                user_id: user.id
 
             }).unwrap();
-            // Add your API call here
-            // await updateUserInfo(formData);
             toast.success('User information updated successfully');
             navigate('/admin');
         } catch (error) {
-            toast.error('Failed to update user information');
+            // toast.error('Failed to update user information');
             console.error('Update failed:', error);
         }
     };

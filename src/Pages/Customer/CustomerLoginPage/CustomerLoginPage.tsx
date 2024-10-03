@@ -5,8 +5,7 @@
 import images from '@/assets';
 import { AuthContainer, Button, ContentContainer, CustomInput } from '@/Components';
 import { useLoginMutation } from '@/Redux/Features/Auth/authService';
-import { setCredentials } from '@/Redux/Features/Auth/authSlice';
-import { useAppDispatch } from '@/Redux/hooks';
+// import { useAppDispatch } from '@/Redux/hooks';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,7 +15,7 @@ import '../../../index.css';
 
 const CustomerLoginPage: React.FC = () => {
     const [login, { isLoading, data, isSuccess }] = useLoginMutation();
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -31,11 +30,11 @@ const CustomerLoginPage: React.FC = () => {
 
     useEffect(() => {
         if (isSuccess && data) {
-            dispatch(setCredentials(data));
+            // dispatch(setCredentials(data));
             navigate('/optPage');
             toast.success('OTP Sent');
         }
-    }, [isSuccess, data, dispatch, navigate]);
+    }, [isSuccess, data, navigate]);
 
     const handleChange = (key: string) => (value: string) => {
         setFormData({ ...formData, [key]: value });

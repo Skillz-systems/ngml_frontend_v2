@@ -17,13 +17,13 @@ interface SSSORegistrationResponse {
     user: SSOUser;
 }
 
-// interface FormData {
-//     location_id: string;
-//     designation_id: string;
-//     unit_id: string;
-//     department_id: string;
-//     user_id:string;
-// }
+interface FormData {
+    location_id: string;
+    designation_id: string;
+    unit_id: string;
+    department_id: string;
+    user_id:string;
+}
 
 export const ssoAuthApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -32,7 +32,7 @@ export const ssoAuthApi = api.injectEndpoints({
             providesTags: ['SSO_init'],
         }),
 
-        userInfo: builder.mutation<SSSORegistrationResponse, SSSORegistrationResponse>({
+        userInfo: builder.mutation<FormData, FormData>({
             query: (data) => ({
                 url: '/users/api/v1/initialize_user_basic_info',
                 method: 'POST',
@@ -41,7 +41,7 @@ export const ssoAuthApi = api.injectEndpoints({
             }),
         }),
 
-        callback: builder.mutation<any, any>({
+        callback: builder.mutation<SSSORegistrationResponse, any>({
             query: (data) => ({
                 url: '/users/api/auth/callback',
                 method: 'POST',

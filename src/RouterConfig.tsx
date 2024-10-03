@@ -7,7 +7,7 @@ import Root from './Pages/Root';
 import SSOCallback from './Pages/SSO/SSOCallback';
 import SSOLogin from './Pages/SSO/SSOLogin';
 import SSOUpdateUser from './Pages/SSO/SSOUpdateUser';
-import StaffLoginPage from './Pages/Stafflogin/StaffLoginPage';
+// import StaffLoginPage from './Pages/Stafflogin/StaffLoginPage';
 import { admin } from './Routes/Admin';
 import { customer } from './Routes/Customer';
 import Unauthorized from './Unauthorized';
@@ -24,7 +24,7 @@ const RouterConfig = () => {
         },
         {
             path: '/',
-            element: <StaffLoginPage />
+            element: <SSOLogin />
         },
         {
             path: '/sso',
