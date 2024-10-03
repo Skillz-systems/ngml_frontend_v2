@@ -144,6 +144,17 @@ export const formBuilderApi = api.injectEndpoints({
         return errorResponse;
       },
     }),
+    deleteForm: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `/formbuilder/api/forms/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Forms'], 
+      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+        return errorResponse;
+      },
+    }),
   }),
   overrideExisting: false,
 }); 
@@ -151,5 +162,6 @@ export const {
   useGetFormByEntityIdQuery,
   useGetFormsQuery,
   useGetFormByIdQuery,
-  useSubmitFormMutation
+  useSubmitFormMutation,
+  useDeleteFormMutation,
 } = formBuilderApi;
