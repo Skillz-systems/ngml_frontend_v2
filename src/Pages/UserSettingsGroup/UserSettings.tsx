@@ -1,12 +1,12 @@
 // import { useParams } from 'react-router-dom';
 // import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
-import { ArrowBack } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
-import DepartmentGroup from './DepartmentGroup';
-import Designation from './DesignationGroup';
-import LocationGroup from './LocationGroup';
-import Unit from './Unit';
+import { ArrowBack } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
+import DepartmentGroup from './DepartmentGroup'
+import Designation from './DesignationGroup'
+import LocationGroup from './LocationGroup'
+import Unit from './Unit'
 
 /**
  * UserSettings component displays a settings page where users can navigate through different tabs,
@@ -29,22 +29,22 @@ const UserSettings = () => {
     // const { customerId } = useParams<{ customerId: string }>();
 
     // const { data: customer, error, isLoading } = useGetCustomerByIdQuery(Number(customerId));
-
+  
     // if (isLoading) return <div>Loading...</div>;
     // if (error) return <div>Error loading customer data.</div>;
-
+  
     const tablist = [
-        { name: 'unit', ref: 'unit' },
-        { name: 'location', ref: 'location' },
-        { name: 'designation', ref: 'designation' },
-        { name: 'department group', ref: 'departmentgroup' },
+      { name: 'unit', ref: 'unit' },
+      { name: 'location', ref: 'location' },
+      { name: 'designation', ref: 'designation' },
+      { name: 'department group', ref: 'departmentgroup' },
     ];
-
+  
     const tabContent = {
-        unit: <Unit />,
-        location: <LocationGroup />,
-        designation: <Designation />,
-        departmentgroup: <DepartmentGroup />,
+      unit: <Unit />,
+      location: <LocationGroup />,
+      designation: <Designation />,
+      departmentgroup: <DepartmentGroup />,
     };
     return (
         <div className="">
@@ -60,21 +60,21 @@ const UserSettings = () => {
                 <Designation />
                 <DepartmentGroup />
             </div> */}
-            <div className='flex justify-end gap-[6px]'>
-                <TabLayout
-                    title=""
-                    width=""
-                    height=""
-                    backgroundColor="#F5F7F9"
-                    color="#49526A"
-                    borderColor=""
-                    borderWidth=""
-                    borderRadius=""
-                    tablist={tablist}
-                    tabContent={tabContent}
-                    showButtons={false}
-                />
-            </div>
+             <div className='flex justify-end gap-[6px]'>
+      <TabLayout
+        title=""
+        width=""
+        height=""
+        backgroundColor="#F5F7F9"
+        color="#49526A"
+        borderColor=""
+        borderWidth=""
+        borderRadius=""
+        tablist={tablist}
+        tabContent={tabContent}
+        showButtons={false}
+      />
+    </div>
         </div>
     )
 }
