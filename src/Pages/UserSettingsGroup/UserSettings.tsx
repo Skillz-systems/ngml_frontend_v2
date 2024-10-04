@@ -8,6 +8,22 @@ import Designation from './DesignationGroup';
 import LocationGroup from './LocationGroup';
 import Unit from './Unit';
 
+/**
+ * UserSettings component displays a settings page where users can navigate through different tabs,
+ * such as Unit, Location, Designation, and Department Group.
+ * 
+ * The component renders a back button to return to the admin settings page and includes a tab layout
+ * for the different settings groups. Each tab's content is rendered dynamically based on the selected tab.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered user settings component.
+ *
+ * @example
+ * // To render the UserSettings component:
+ * <UserSettings />
+ *
+ */
+
 const UserSettings = () => {
 
     // const { customerId } = useParams<{ customerId: string }>();
