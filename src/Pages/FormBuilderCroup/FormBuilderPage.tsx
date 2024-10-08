@@ -161,19 +161,39 @@ const EditableFormElement = ({
         setIsEditing(false);
     };
 
+    // useEffect(() => {
+    //     if (element.type === 'location' && locations?.data) {
+    //         const locationOptions = locations?.data?.map((location: { location: string; id: { toString: () => any; }; }) => ({
+    //             label: location.location.replace(/_/g, ' '),
+    //             value: location.id.toString(),
+    //         }));
+    //         setEditedElement((prev) => ({
+    //             ...prev,
+    //             inputs: prev.inputs.map((input) => ({
+    //                 ...input,
+    //                 options: locationOptions,
+    //             })),
+    //         }));
+    //     }
+    // }, [element.type, locations]);
+
     useEffect(() => {
         if (element.type === 'location' && locations?.data) {
-            const locationOptions = locations?.data.map((location) => ({
-                label: location.location.replace(/_/g, ' '),
-                value: location.id.toString(),
-            }));
-            setEditedElement((prev) => ({
-                ...prev,
-                inputs: prev.inputs.map((input) => ({
-                    ...input,
-                    options: locationOptions,
-                })),
-            }));
+            // Check if locations.data is an array
+            if (Array.isArray(locations.data)) {
+                const locationOptions = locations.data.map((location) => ({
+                    label: location.location.replace(/_/g, ' '),
+                    value: location.id?.toString() ?? '',
+                }));
+
+                setEditedElement((prev) => ({
+                    ...prev,
+                    inputs: prev.inputs.map((input) => ({
+                        ...input,
+                        options: locationOptions,
+                    })),
+                }));
+            }
         }
     }, [element.type, locations]);
 
