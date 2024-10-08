@@ -68,7 +68,6 @@ const TaskAssign: React.FC = () => {
             </div> */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {
-
                         sampleTasks?.map((task: any) => (
                             <div key={task.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
                                 <h3 className="text-lg font-semibold mb-2">{task.name}</h3>
