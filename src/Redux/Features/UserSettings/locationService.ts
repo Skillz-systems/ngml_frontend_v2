@@ -12,7 +12,7 @@ export interface Location {
 
 
 export interface LocationData {
-  data: Location[] | Location;  
+  data: Location[] | Location ;  
 }
 
 
