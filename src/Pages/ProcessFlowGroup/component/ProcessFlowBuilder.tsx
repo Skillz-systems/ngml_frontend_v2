@@ -5,7 +5,11 @@
 import { Heading } from '@/Components';
 import { useCreateProcessFlowMutation, useGetProcessFlowsQuery } from '@/Redux/Features/ProcessFlow/processFlowService';
 import { useGetRoutesQuery } from '@/Redux/Features/RouteBuilder/routeService';
-import { resetProcessFlowIds, setDefaultUserProperties } from '@/Utils/resetProcessFlowIds';
+import { useGetDepartmentsQuery } from '@/Redux/Features/UserSettings/departmentService';
+import { useGetDesignationsQuery } from '@/Redux/Features/UserSettings/designationService';
+import { useGetLocationsQuery } from '@/Redux/Features/UserSettings/locationService';
+import { useGetUnitsQuery } from '@/Redux/Features/UserSettings/unitService';
+import { resetProcessFlowIds } from '@/Utils/resetProcessFlowIds';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { CiSaveDown2 } from 'react-icons/ci';
@@ -27,11 +31,11 @@ const stepTypeOptions: StepType[] = ['create', 'delete', 'update', 'approve_auto
 const userTypeOptions: UserType[] = ['user', 'supplier', 'customer', 'contractor'];
 const booleanOptions = [true, false];
 
-const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'none'];
+const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'None'];
 const weekOptions = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'none'];
-const designationOptions = ['Manager', 'Officer', 'ED', 'none'];
-const unitOptions = ['EOI', 'Legal', 'none'];
-const departmentOptions = ['COBD', 'Sales', 'none', 'EOI', 'legal'];
+// const designationOptions = ['Manager', 'Officer', 'ED', 'none'];
+// const unitOptions = ['EOI', 'Legal', 'none'];
+// const departmentOptions = ['COBD', 'Sales', 'none', 'EOI', 'legal'];
 
 const getOptionsForField = (fieldName: string) => {
     switch (fieldName) {
@@ -49,12 +53,12 @@ const getOptionsForField = (fieldName: string) => {
             return dayOptions;
         case 'week':
             return weekOptions;
-        case 'next_user_designation':
-            return designationOptions;
-        case 'next_user_unit':
-            return unitOptions;
-        case 'next_user_department':
-            return departmentOptions;
+        // case 'next_user_designation':
+        //     return designationOptions;
+        // case 'next_user_unit':
+        //     return unitOptions;
+        // case 'next_user_department':
+        //     return departmentOptions;
         default:
             return null;
     }
@@ -154,6 +158,10 @@ const EditableContent = ({
 
     // const routeOptions = getRouteLists();
     const { data: routes } = useGetRoutesQuery();
+    const { data: departments } = useGetDepartmentsQuery();
+    const { data: locations } = useGetLocationsQuery();
+    const { data: units } = useGetUnitsQuery();
+    const { data: designations } = useGetDesignationsQuery();
 
     // if (generatedSuccess) {
     //     setGeneratedRoutes(routes?.data)
@@ -175,7 +183,7 @@ const EditableContent = ({
 
         if (key === 'id' || key === 'created_at' || key === 'updated_at' || key === 'steps' || key === 'process_flow_id' || key === 'start_step_id' || key === 'next_step_id') return null;
 
-        if (key === 'name' || key === 'start_user_designation' || key === 'start_user_department' || key === 'start_user_unit' || key === 'next_user_location') {
+        if (key === 'name') {
             return (
                 <>
                     <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
@@ -190,33 +198,101 @@ const EditableContent = ({
                 </>
             );
         }
+        if (key === 'start_user_designation' || key === 'next_user_designation') {
+            return (
+                <>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">
+                        {key.replace(/_/g, ' ')}
+                    </label>
+                    <select
+                        id={key}
+                        name={key}
+                        value={value || ''}
+                        onChange={handleInputChange}
+                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:nnpc-300 p-2.5"
+                    >
+                        <option value="">Select a designation</option>
+                        {Array.isArray(designations?.data) && designations?.data?.map((designation) => (
+                            <option key={designation.id} value={designation.id}>
+                                {designation.role}
+                            </option>
+                        ))}
+                    </select>
+                </>
+            );
+        }
 
-        // if (key === 'step_route' || key === 'assignee_user_route') {
-        //     return (
-        //         <>
-        //             <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key.replace(/_/g, ' ')}</label>
-        //             <select
-        //                 id={key}
-        //                 name={key}
-        //                 value={value || ''}
-        //                 onChange={handleInputChange}
-        //                 className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-nnpc-200 focus:nnpc-300 p-2.5 "
-        //             >
-        //                 <option value="">Select a route</option>
+        if (key === 'start_user_department' || key === 'next_user_department') {
+            return (
+                <>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">
+                        {key.replace(/_/g, ' ')}
+                    </label>
+                    <select
+                        id={key}
+                        name={key}
+                        value={value || ''}
+                        onChange={handleInputChange}
+                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:nnpc-300 p-2.5"
+                    >
+                        <option value="">Select a department</option>
+                        {Array.isArray(departments?.data) && departments?.data?.map((department) => (
+                            <option key={department.id} value={department.id}>
+                                {department.name}
+                            </option>
+                        ))}
+                    </select>
+                </>
+            );
+        }
 
+        if (key === 'next_user_location') {
+            return (
+                <>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">
+                        {key.replace(/_/g, ' ')}
+                    </label>
+                    <select
+                        id={key}
+                        name={key}
+                        value={value || ''}
+                        onChange={handleInputChange}
+                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:nnpc-300 p-2.5"
+                    >
+                        <option value="">Select a department</option>
+                        {Array.isArray(locations?.data) && locations?.data?.map((location) => (
+                            <option key={location.id} value={location.id}>
+                                {location.location}
+                            </option>
+                        ))}
+                    </select>
+                </>
+            );
+        }
 
-
-
-        //                 {Object.entries(routeOptions).map(([label, path]) => (
-        //                     <option key={path} value={path}>
-        //                         {label.replace(/_/g, ' ')}
-        //                     </option>
-        //                 ))}
-        //             </select>
-        //         </>
-        //     );
-        // }
-
+        if (key === 'start_user_unit' || key === 'next_user_unit') {
+            return (
+                <>
+                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">
+                        {key.replace(/_/g, ' ')}
+                    </label>
+                    <select
+                        id={key}
+                        name={key}
+                        value={value || ''}
+                        onChange={handleInputChange}
+                        className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:nnpc-300 p-2.5"
+                    >
+                        <option value="">Select a department</option>
+                        {Array.isArray(units?.data) && units?.data?.map((unit) => (
+                            <option key={unit.id} value={unit.id}>
+                                {unit.name}
+                            </option>
+                        ))}
+                    </select>
+                </>
+            );
+        }
 
 
         if (key === 'step_route' || key === 'assignee_user_route') {
@@ -305,17 +381,6 @@ const EditableContent = ({
             {isEditing && (
                 <>
 
-                    {/* {Object.entries(editedItem)
-                        .filter(([key]) => !hiddenKeys.includes(key))  // Filter out hidden keys
-                        .map(([key, value]) => (
-                            <div key={key} className="mb-2">
-                                <label className="block text-sm font-medium text-gray-700 capitalize">
-                                    {key.replace(/_/g, ' ')}
-                                </label>
-                                {renderField(key, value)}
-                            </div>
-                        ))} */}
-
 
                     {Object.entries(editedItem).map(([key, value]) => (
                         <div key={key} className="mb-2">
@@ -342,7 +407,7 @@ const ProcessFlowBuilder = () => {
     const [selectedFlow, setSelectedFlow] = useState<ProcessFlow | null>(null);
     const [steps, setSteps] = useState<ProcessFlowStep[]>([]);
 
-    const [submit, { isSuccess: created }] =
+    const [submit, { isLoading: submitLoading }] =
         useCreateProcessFlowMutation();
 
 
@@ -482,6 +547,7 @@ const ProcessFlowBuilder = () => {
             }
             setProcessFlows(updatedFlows);
             localStorage.setItem('processFlows', JSON.stringify(updatedFlows));
+            handleCreateNewFlow()
             toast.info('Process Flow saved successfully!');
         } else {
             toast.info('No Process Flow to save!');
@@ -503,35 +569,7 @@ const ProcessFlowBuilder = () => {
     const { data: backendProcessflows } = useGetProcessFlowsQuery();
 
 
-    // const handleSubmitToBackend = async () => {
 
-
-    //     if (selectedFlow) {
-    //         const formatedProcessFlow = resetProcessFlowIds(selectedFlow)
-    //         const setDefaultProcessflowStep = setDefaultUserProperties(formatedProcessFlow)
-
-    //         console.log('selectedFlow', selectedFlow)
-    //         console.log('setDefaultProcessflowStep', setDefaultProcessflowStep)
-    //         console.log(formatedProcessFlow)
-
-
-
-
-    //         try {
-    //             await submit(setDefaultProcessflowStep).unwrap()
-    //             if (isSuccess) {
-    //                 toast.success('processflow created');
-    //             }
-
-    //         } catch (error) {
-    //             // toast.error(error?.message || 'Error creating the process flow');
-    //             console.log(error);
-    //         }
-
-
-
-    //     }
-    // };
 
     const handleSubmitToBackend = async () => {
         if (selectedFlow) {
@@ -545,13 +583,14 @@ const ProcessFlowBuilder = () => {
             };
 
             const processedFlow = resetProcessFlowIds(formattedProcessFlow);
-            const finalProcessFlow = setDefaultUserProperties(processedFlow);
+            // const finalProcessFlow = setDefaultUserProperties(processedFlow);
 
-            console.log('Submitting Process Flow:', finalProcessFlow);
+            console.log('Submitting Process Flow:', processedFlow);
 
             try {
-                const response = await submit(finalProcessFlow).unwrap();
+                const response = await submit(processedFlow).unwrap();
                 toast.success('Process flow created successfully!');
+                handleCreateNewFlow()
                 console.log('Submission Response:', response);
             } catch (error) {
                 console.error('Error submitting the process flow:', error);
@@ -575,7 +614,7 @@ const ProcessFlowBuilder = () => {
                         className="px-4 py-2 text-[14px] rounded-md border flex items-center justify-center gap-1 bg-white font-[500] border-nnpc-200 text-nnpc-300 hover:text-white  hover:bg-nnpc-300 duration-300 ease-out transition-all"
                     >
                         <MdOutlineLibraryAdd />
-                        Create
+                        Reset
                     </button>
                     <button
                         type='button'
@@ -591,7 +630,7 @@ const ProcessFlowBuilder = () => {
                         className="px-4 py-2 text-[14px] border flex items-center justify-center gap-1 bg-nnpc-200 font-[500] text-[white] hover:text-white rounded-md hover:bg-nnpc-300 duration-300 ease-out transition-all"
                     >
                         <VscSend />
-                        {created ? 'creating' : 'submit'}
+                        {submitLoading ? 'Creating' : 'Create'}
                     </button>
                 </div>
             </div>
