@@ -27,7 +27,6 @@ type ErrorResponse = {
     message: string;
 };
 
-
 export const sampleTasks: Task[] = [
   { id: 1, name: 'Implement login page', description: 'Create a responsive login page with form validation', status: 'To Do' },
   { id: 2, name: 'Design database schema', description: 'Design the database schema for the user management system', status: 'In Progress' },
@@ -47,7 +46,7 @@ export const sampleUsers: User[] = [
 export const taskAssignApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getTasks: builder.query<TasksData, void>({
-            query: () => '/tasks',
+            query: () => '/automator/api/unassignedtasks',
             providesTags: ['Tasks'],
             transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
                 const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
@@ -56,7 +55,7 @@ export const taskAssignApi = api.injectEndpoints({
         }),
 
         getUsers: builder.query<UsersData, void>({
-            query: () => '/users',
+            query: () => '/users/api/users',
             providesTags: ['Users'],
             transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
                 const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
@@ -66,9 +65,9 @@ export const taskAssignApi = api.injectEndpoints({
 
         assignTask: builder.mutation<{ success: boolean; message: string }, { taskId: number; userId: number }>({
             query: ({ taskId, userId }) => ({
-                url: `/tasks/${taskId}/assign`,
+                url: '/automator/api/assign-task-to-user',
                 method: 'POST',
-                body: { userId },
+                body: { task_Id: taskId, user_Id: userId }, // Mapping camelCase to snake_case
             }),
             invalidatesTags: ['AssignTasks'],
             transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
