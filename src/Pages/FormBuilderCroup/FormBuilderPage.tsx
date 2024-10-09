@@ -35,6 +35,7 @@ interface FormInterface {
     name?: string;
     description?: string;
     process_flow_id: string | number | undefined;
+    process_flow_step_id: string | number | undefined;
     tag_id?: string;
     json_form?: string;
     json_data: [];
@@ -429,6 +430,7 @@ const FormBuilder = () => {
         process_flow_id: '',
         tag_id: '',
         json_form: '',
+        process_flow_step_id: '',
         json_data: [],
     });
     const { data: backendProcessflows } = useGetProcessFlowsQuery();
@@ -486,6 +488,7 @@ const FormBuilder = () => {
             tag_id: '',
             json_form: '',
             json_data: [],
+            process_flow_step_id: ''
         });
         setFormElements([]);
     };
@@ -495,6 +498,7 @@ const FormBuilder = () => {
             name: form.name,
             description: form.description,
             process_flow_id: form.process_flow_id,
+            process_flow_step_id: form.process_flow_step_id,
             tag_id: form.tag_id,
             json_form: JSON.stringify(formElements),
             // json_form: formElements,
@@ -502,7 +506,7 @@ const FormBuilder = () => {
         };
         console.log(newForm);
 
-        if (form?.name?.trim() === '' || form?.description?.trim() === '' || form?.process_flow_id === '' || form?.tag_id?.trim() === '') {
+        if (form?.name?.trim() === '' || form?.description?.trim() === '' || form?.process_flow_id === '' || form?.tag_id?.trim() === '' || form?.process_flow_step_id === '') {
             toast.error('All field are required');
 
             return;
@@ -511,7 +515,7 @@ const FormBuilder = () => {
 
         try {
             await createForm(newForm).unwrap();
-            // console.log(newForm)
+            console.log(newForm)
             toast.success('form created successfully!');
         } catch (error) {
             console.error('Error submitting the process flow:', error);
@@ -614,17 +618,47 @@ const FormBuilder = () => {
                                 value={form.process_flow_id}
                                 onChange={handleFormChange('process_flow_id')}
                                 className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
-          ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
-          placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-          disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
+        ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
+        placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
+        disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
                             >
                                 <option className="text-gray-500">Select a processflow</option>
-                                {Array.isArray(backendProcessflows?.data) &&
+                                {backendProcessflows?.data && Array.isArray(backendProcessflows.data) &&
                                     backendProcessflows.data.map((flow) => (
                                         <option key={flow.id} value={Number(flow.id)}>
                                             {flow.name.replace(/_/g, ' ')}
                                         </option>
                                     ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="process_flow_step_id" className="sr-only">
+                                ProcessFlow Step
+                            </label>
+                            <select
+                                id="process_flow_step_id"
+                                name="process_flow_step_id"
+                                value={form.process_flow_step_id}
+                                onChange={handleFormChange('process_flow_step_id')}
+                                className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
+        ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
+        placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
+        disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
+                                disabled={!form.process_flow_id}
+                            >
+                                <option className="text-gray-500">Select a processflow step</option>
+                                {backendProcessflows?.data && Array.isArray(backendProcessflows.data) && form.process_flow_id && (
+                                    (() => {
+                                        const selectedFlow = backendProcessflows.data.find(
+                                            flow => Number(flow.id) === Number(form.process_flow_id)
+                                        );
+                                        return selectedFlow?.steps?.map((step) => (
+                                            <option key={step.id} value={Number(step.id)}>
+                                                {step.name.replace(/_/g, ' ')}
+                                            </option>
+                                        ));
+                                    })()
+                                )}
                             </select>
                         </div>
                         <div>

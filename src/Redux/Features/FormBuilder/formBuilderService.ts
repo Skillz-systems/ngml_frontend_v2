@@ -23,8 +23,8 @@ export interface FormBuilderData {
   id?: number;
   name?: string;
   json_form: string;
-   process_flow_id: string | number | undefined;
-  process_flow_step_id?: string;
+  process_flow_id: string | number | undefined;
+  process_flow_step_id: string | number | undefined;
   tag_id?: string;
   form_data: string[]|[];
   description?: string;
