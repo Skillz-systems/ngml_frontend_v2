@@ -10,13 +10,23 @@ type ErrorResponse = {
 };
 
 
+// export interface FormField {
+//   id: number;
+//   name?: string;
+//   text?: string;
+//   elementType: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio';
+//   placeholder?: string;
+//   key?: string;
+// }
+
 export interface FormField {
   id: number;
   name?: string;
-  text?: string;
-  elementType: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio';
+  label?: string;
+  type: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio'|'location'|'email'|'tel'|'hidden';
   placeholder?: string;
-  key?: string;
+  options?:[];
+  required?:boolean;
 }
 
 export interface FormBuilderData {

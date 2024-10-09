@@ -1,5 +1,5 @@
 import images from '@/assets';
-import { FormField, useGetFormByEntityIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { FormField, useGetFormByIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, CustomInput, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
@@ -12,12 +12,11 @@ const AdminCustomerList: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { data, isSuccess, isLoading } = useGetFormByEntityIdQuery('6/0/0');
+    const { data, isSuccess, isLoading } = useGetFormByIdQuery(26);
     const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation()
     useEffect(() => {
         if (isSuccess && data) {
             console.log('data.data.json_form', data.data.json_form)
-            console.log('data.data.json_form', data.data)
 
             // const cleanedJsonString = data.data.json_form.replace(/[\n\r]/g, '').trim();
             // const parsedForm = JSON.parse(cleanedJsonString);
@@ -32,12 +31,13 @@ const AdminCustomerList: React.FC = () => {
                 parsedForm = []; // or some default value
             }
             console.log(parsedForm)
+            setCustomerForm(parsedForm)
 
-            const updatedFields = parsedForm.filter((field: FormField) => field.id !== 0);
-            setCustomerForm(updatedFields);
-            const initialData = updatedFields.reduce((acc: Record<string, string>, field: FormField) => {
-                if (field.key) {
-                    acc[field.key] = '';
+            // const updatedFields = parsedForm.filter((field: FormField) => field.id !== 0);
+            // setCustomerForm(updatedFields);
+            const initialData = parsedForm.reduce((acc: Record<string, string>, field: FormField) => {
+                if (field.name) {
+                    acc[field.name] = '';
                 }
                 return acc;
             }, {});
@@ -73,11 +73,11 @@ const AdminCustomerList: React.FC = () => {
 
         const formFieldAnswers = customerForm.map(field => ({
             id: field.id,
-            elementType: field.elementType,
-            name: field.name || field.key,
+            elementType: field.type,
+            name: field.name || field.id,
             placeholder: field.placeholder,
-            key: field.key,
-            value: customerData[field.key as keyof typeof customerData]
+            key: field.name,
+            value: customerData[field.name as keyof typeof customerData]
         }));
 
         const buildFormSubmission = {
@@ -88,6 +88,7 @@ const AdminCustomerList: React.FC = () => {
             tag_id: data?.data?.tag_id,
             form_field_answers: JSON.stringify(formFieldAnswers),
         };
+        console.log(buildFormSubmission)
         await submitForm(buildFormSubmission).unwrap();
 
         if (submitSuccess) toggleModal(false);
@@ -179,12 +180,14 @@ const AdminCustomerList: React.FC = () => {
                     customerForm.map((form) => (
                         <Fragment key={form.id}>
                             <CustomInput
-                                required
-                                type={form?.elementType}
+                                required={form?.required}
+                                type={form?.type}
                                 label={form.name}
-                                value={customerData[form.key as keyof typeof customerData] || ''}
-                                handleChangeEvent={(value) => handleInputChange(value, form.key as keyof typeof customerData)}
+
+                                value={customerData[form.name as keyof typeof customerData] || ''}
+                                handleChangeEvent={(value) => handleInputChange(value, form.name as keyof typeof customerData)}
                                 placeholder={form.placeholder}
+                                options={form.options}
                             />
                         </Fragment>
                     ))
