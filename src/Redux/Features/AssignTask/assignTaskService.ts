@@ -55,8 +55,8 @@ export const taskAssignApi = api.injectEndpoints({
             },
         }),
  
-        getUsers: builder.query<UsersData, void>({
-            query: () => '/users/api/users',
+        getUsers: builder.query<UsersData, number>({
+            query: (id) => `/automator/api/task-assignable-users/${id}`,
             providesTags: ['Users'],
             transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
                 const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;

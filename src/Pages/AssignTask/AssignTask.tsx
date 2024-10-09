@@ -11,7 +11,10 @@ const TaskAssign: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const { data: tasks, isLoading: tasksLoading } = useGetTasksQuery();
-    const { data: users, isLoading: usersLoading } = useGetUsersQuery();
+    const { data: users, isLoading: usersLoading } = useGetUsersQuery(Number(selectedTask?.id),
+        {
+            skip: !selectedTask,
+        });
     const [assignTask, { isLoading: assigningTask }] = useAssignTaskMutation();
 
     const handleAssignTask = async (userId: number) => {
