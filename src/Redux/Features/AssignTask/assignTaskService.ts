@@ -1,32 +1,33 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
-
+ 
 export interface Task {
     id: number;
     name: string;
     description: string;
     status: string;
 }
-
+ 
 export interface User {
     id: number;
     name: string;
     email: string;
 }
-
+ 
 export interface TasksData {
     data: Task[];
 }
-
+ 
 export interface UsersData {
     data: User[];
 }
-
+ 
 type ErrorResponse = {
     success: boolean;
     message: string;
 };
-
+ 
+ 
 export const sampleTasks: Task[] = [
   { id: 1, name: 'Implement login page', description: 'Create a responsive login page with form validation', status: 'To Do' },
   { id: 2, name: 'Design database schema', description: 'Design the database schema for the user management system', status: 'In Progress' },
@@ -34,7 +35,7 @@ export const sampleTasks: Task[] = [
   { id: 4, name: 'Optimize image loading', description: 'Implement lazy loading for images to improve performance', status: 'To Do' },
   { id: 5, name: 'Set up CI/CD pipeline', description: 'Configure Jenkins for continuous integration and deployment', status: 'In Progress' },
 ];
-
+ 
 export const sampleUsers: User[] = [
   { id: 1, name: 'John Doe', email: 'john.doe@example.com' },
   { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com' },
@@ -42,7 +43,7 @@ export const sampleUsers: User[] = [
   { id: 4, name: 'Alice Brown', email: 'alice.brown@example.com' },
   { id: 5, name: 'Charlie Davis', email: 'charlie.davis@example.com' },
 ];
-
+ 
 export const taskAssignApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getTasks: builder.query<TasksData, void>({
@@ -53,7 +54,7 @@ export const taskAssignApi = api.injectEndpoints({
                 return errorResponse;
             },
         }),
-
+ 
         getUsers: builder.query<UsersData, void>({
             query: () => '/users/api/users',
             providesTags: ['Users'],
@@ -62,12 +63,12 @@ export const taskAssignApi = api.injectEndpoints({
                 return errorResponse;
             },
         }),
-
+ 
         assignTask: builder.mutation<{ success: boolean; message: string }, { taskId: number; userId: number }>({
             query: ({ taskId, userId }) => ({
                 url: '/automator/api/assign-task-to-user',
                 method: 'POST',
-                body: { task_Id: taskId, user_Id: userId }, // Mapping camelCase to snake_case
+                body: { task_Id: taskId, user_Id: userId },
             }),
             invalidatesTags: ['AssignTasks'],
             transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
@@ -76,10 +77,10 @@ export const taskAssignApi = api.injectEndpoints({
             },
         }),
     }),
-
+ 
     overrideExisting: false,
 });
-
+ 
 export const {
     useGetTasksQuery,
     useGetUsersQuery,
