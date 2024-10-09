@@ -384,14 +384,14 @@ const ConnectProject: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isNewModalOpen, setIsNewModalOpen] = useState(false);
     const [isTenderingVisible, setIsTenderingVisible] = useState(false);
-    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedDate] = useState('');
     const [isTenderingComplete, setIsTenderingComplete] = useState(false);
     const [isStrategyVisible, setIsStrategyVisible] = useState(false);
     const [selectedStrategy, setSelectedStrategy] = useState('');
 
     const [formFields, setFormFields] = useState<FormField[]>([]);
     const [formData, setFormData] = useState<Record<string, string>>({});
-    const [dataForm, setdataForm] = useState<Record<string, string>>({});
+    const [dataForm] = useState<Record<string, string>>({});
 
 
     const { data, isSuccess, isLoading } = useGetFormByEntityIdQuery('connectProjectPage');
