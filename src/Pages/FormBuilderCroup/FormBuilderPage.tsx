@@ -58,14 +58,38 @@ interface FormElement {
     | 'designation'
     | 'date';
     label: string;
-    inputs: {
-        id: number;
-        name: string;
-        placeholder?: string;
-        required: boolean;
-        options?: FormElementOption[];
-    }[];
+    name: string;
+    placeholder?: string;
+    required: boolean;
+    options?: FormElementOption[];
 }
+
+// interface FormElement {
+//     id: number;
+//     type:
+//     | 'text'
+//     | 'email'
+//     | 'password'
+//     | 'number'
+//     | 'tel'
+//     | 'select'
+//     | 'checkbox'
+//     | 'textarea'
+//     | 'radio'
+//     | 'file'
+//     | 'hidden'
+//     | 'location'
+//     | 'designation'
+//     | 'date';
+//     label: string;
+//     inputs: {
+//         id: number;
+//         name: string;
+//         placeholder?: string;
+//         required: boolean;
+//         options?: FormElementOption[];
+//     }[];
+// }
 
 const formElementTypes = [
     { type: 'text', label: 'Text' },
@@ -147,12 +171,10 @@ const EditableFormElement = ({
     const [editedElement, setEditedElement] = useState<FormElement>(element);
     const { data: locations } = useGetLocationsQuery();
 
-    const handleInputChange = (inputId: number, field: string, value: any) => {
+    const handleInputChange = (field: string, value: any) => {
         setEditedElement({
             ...editedElement,
-            inputs: editedElement.inputs.map((input) =>
-                input.id === inputId ? { ...input, [field]: value } : input
-            ),
+            [field]: value,
         });
     };
 
@@ -161,25 +183,8 @@ const EditableFormElement = ({
         setIsEditing(false);
     };
 
-    // useEffect(() => {
-    //     if (element.type === 'location' && locations?.data) {
-    //         const locationOptions = locations?.data?.map((location: { location: string; id: { toString: () => any; }; }) => ({
-    //             label: location.location.replace(/_/g, ' '),
-    //             value: location.id.toString(),
-    //         }));
-    //         setEditedElement((prev) => ({
-    //             ...prev,
-    //             inputs: prev.inputs.map((input) => ({
-    //                 ...input,
-    //                 options: locationOptions,
-    //             })),
-    //         }));
-    //     }
-    // }, [element.type, locations]);
-
     useEffect(() => {
         if (element.type === 'location' && locations?.data) {
-            // Check if locations.data is an array
             if (Array.isArray(locations.data)) {
                 const locationOptions = locations.data.map((location) => ({
                     label: location.location.replace(/_/g, ' '),
@@ -188,10 +193,7 @@ const EditableFormElement = ({
 
                 setEditedElement((prev) => ({
                     ...prev,
-                    inputs: prev.inputs.map((input) => ({
-                        ...input,
-                        options: locationOptions,
-                    })),
+                    options: locationOptions,
                 }));
             }
         }
@@ -232,225 +234,170 @@ const EditableFormElement = ({
                             type="text"
                             value={editedElement.label}
                             onChange={(e) =>
-                                setEditedElement({ ...editedElement, label: e.target.value })
+                                handleInputChange('label', e.target.value)
                             }
-                            className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm 
-          ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
-          placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-          disabled:cursor-not-allowed disabled:opacity-50"
+                            className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green disabled:cursor-not-allowed disabled:opacity-50"
                         />
                     </div>
 
-                    {editedElement.inputs.map((input) => (
-                        <div key={input.id} className="border-t pt-4">
-                            <div className="space-y-1">
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Input Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={input.name}
-                                        onChange={(e) =>
-                                            handleInputChange(input.id, 'name', e.target.value)
-                                        }
-                                        className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm 
-          ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
-          placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-          disabled:cursor-not-allowed disabled:opacity-50"
-                                    />
-                                </div>
+                    <div>
+                        <label className="block text-sm font-medium mb-1">
+                            Input Name
+                        </label>
+                        <input
+                            type="text"
+                            value={editedElement.name}
+                            onChange={(e) =>
+                                handleInputChange('name', e.target.value)
+                            }
+                            className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green disabled:cursor-not-allowed disabled:opacity-50"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium mb-1">
+                            Element Placeholder
+                        </label>
+                        <input
+                            type="text"
+                            value={editedElement.placeholder}
+                            onChange={(e) =>
+                                handleInputChange('placeholder', e.target.value)
+                            }
+                            className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green disabled:cursor-not-allowed disabled:opacity-50"
+                        />
+                    </div>
 
-                                {/* Only show type selection for regular input elements */}
-                                {element.type === 'text' ||
-                                    element.type === 'email' ||
-                                    element.type === 'password' ||
-                                    element.type === 'number' ||
-                                    element.type === 'file' ||
-                                    element.type === 'hidden' ||
-                                    element.type === 'date' ||
-                                    element.type === 'tel' ? (
-                                    <div>
-                                        <label
-                                            htmlFor="elements"
-                                            className="block text-sm font-medium mb-1"
-                                        >
-                                            Input Type
-                                        </label>
-                                        <select
-                                            id="elements"
-                                            value={element.type}
-                                            onChange={(e) =>
-                                                onUpdate({
-                                                    ...editedElement,
-                                                    type: e.target.value as any,
-                                                })
-                                            }
-                                            className="w-full p-2 border rounded"
-                                        >
-                                            <option value="text">Text</option>
-                                            <option value="date">Date</option>
-                                            <option value="email">Email</option>
-                                            <option value="password">Password</option>
-                                            <option value="number">Number</option>
-                                            <option value="tel">Tel</option>
-                                            <option value="file">File</option>
-                                            <option value="hidden">Hidden</option>
-                                        </select>
-                                    </div>
-                                ) : null}
 
-                                {/* Options management for select and radio elements */}
-                                {(element.type === 'select' || element.type === 'radio') && (
-                                    <div>
-                                        <label className="block text-sm font-medium mb-1">
-                                            Options
-                                        </label>
-                                        <div className="space-y-2">
-                                            {input.options?.map((option, index) => (
-                                                <div key={index} className="flex space-x-2">
-                                                    <input
-                                                        type="text"
-                                                        value={option.label}
-                                                        onChange={(e) => {
-                                                            const newOptions = [...(input.options || [])];
-                                                            newOptions[index] = {
-                                                                ...newOptions[index],
-                                                                label: e.target.value,
-                                                            };
-                                                            handleInputChange(
-                                                                input.id,
-                                                                'options',
-                                                                newOptions
-                                                            );
-                                                        }}
-                                                        placeholder="Label"
-                                                        className="w-1/2 p-2 border rounded"
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        value={option.value}
-                                                        onChange={(e) => {
-                                                            const newOptions = [...(input.options || [])];
-                                                            newOptions[index] = {
-                                                                ...newOptions[index],
-                                                                value: e.target.value,
-                                                            };
-                                                            handleInputChange(
-                                                                input.id,
-                                                                'options',
-                                                                newOptions
-                                                            );
-                                                        }}
-                                                        placeholder="Value"
-                                                        className="w-1/2 p-2 border rounded"
-                                                    />
-                                                    <button
-                                                        onClick={() => {
-                                                            const newOptions =
-                                                                input.options?.filter((_, i) => i !== index) ||
-                                                                [];
-                                                            handleInputChange(
-                                                                input.id,
-                                                                'options',
-                                                                newOptions
-                                                            );
-                                                        }}
-                                                        className="p-2 text-nnpc-800 hover:bg-red-100 rounded "
-                                                    >
-                                                        <span className="sr-only">Delete</span>
-                                                        <FaTimes />
-                                                    </button>
-                                                </div>
-                                            ))}
-                                            <button
-                                                onClick={() => {
-                                                    const newOptions = [
-                                                        ...(input.options || []),
-                                                        { label: '', value: '' },
-                                                    ];
-                                                    handleInputChange(input.id, 'options', newOptions);
-                                                }}
-                                                className="ml-auto w-fit px-2 py-1.5 bg-nnpcmediumgreen-950  text-white rounded hover:bg-nnpcmediumgreen-800 text-sm"
-                                            >
-                                                Add Option
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
+                    {/* Only show type selection for regular input elements */}
+                    {(editedElement.type === 'text' ||
+                        editedElement.type === 'email' ||
+                        editedElement.type === 'password' ||
+                        editedElement.type === 'number' ||
+                        editedElement.type === 'file' ||
+                        editedElement.type === 'hidden' ||
+                        editedElement.type === 'date' ||
+                        editedElement.type === 'tel') && (
+                            <div>
+                                <label
+                                    htmlFor="elements"
+                                    className="block text-sm font-medium mb-1"
+                                >
+                                    Input Type
+                                </label>
+                                <select
+                                    id="elements"
+                                    value={editedElement.type}
+                                    onChange={(e) =>
+                                        handleInputChange('type', e.target.value)
+                                    }
+                                    className="w-full p-2 border rounded"
+                                >
+                                    <option value="text">Text</option>
+                                    <option value="date">Date</option>
+                                    <option value="email">Email</option>
+                                    <option value="password">Password</option>
+                                    <option value="number">Number</option>
+                                    <option value="tel">Tel</option>
+                                    <option value="file">File</option>
+                                    <option value="hidden">Hidden</option>
+                                </select>
+                            </div>
+                        )}
 
-                                {element.type === 'location' && (
-                                    <div>
-                                        <div>
-                                            <label
-                                                htmlFor="location_id"
-                                                className="block text-sm font-medium text-gray-700 capitalize"
-                                            >
-                                                Location
-                                            </label>
-                                            <select
-                                                id="location_id"
-                                                name="location_id"
-                                                className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm 
-          ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
-          placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-          disabled:cursor-not-allowed disabled:opacity-50"
-                                            >
-                                                <option>Select a location</option>
-                                                {Array.isArray(locations?.data) &&
-                                                    locations.data.map((location) => (
-                                                        <option key={location.id} value={location.id}>
-                                                            {location.location.replace(/_/g, ' ')}
-                                                        </option>
-                                                    ))}
-                                            </select>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {(element.type === 'text' || element.type === 'textarea') && (
-                                    <div>
-                                        <label className="block text-sm font-medium mb-1">
-                                            Placeholder
-                                        </label>
+                    {/* Options management for select and radio elements */}
+                    {(editedElement.type === 'select' || editedElement.type === 'radio') && (
+                        <div>
+                            <label className="block text-sm font-medium mb-1">
+                                Options
+                            </label>
+                            <div className="space-y-2">
+                                {editedElement.options?.map((option, index) => (
+                                    <div key={index} className="flex space-x-2">
                                         <input
                                             type="text"
-                                            value={input.placeholder || ''}
-                                            onChange={(e) =>
-                                                handleInputChange(
-                                                    input.id,
-                                                    'placeholder',
-                                                    e.target.value
-                                                )
-                                            }
-                                            className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm 
-          ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
-          placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-          disabled:cursor-not-allowed disabled:opacity-50"
+                                            value={option.label}
+                                            onChange={(e) => {
+                                                const newOptions = [...(editedElement.options || [])];
+                                                newOptions[index] = {
+                                                    ...newOptions[index],
+                                                    label: e.target.value,
+                                                };
+                                                handleInputChange('options', newOptions);
+                                            }}
+                                            placeholder="Label"
+                                            className="w-1/2 p-2 border rounded"
                                         />
-                                    </div>
-                                )}
-
-                                <div>
-                                    <label className="flex items-center">
                                         <input
-                                            type="checkbox"
-                                            checked={input.required}
-                                            onChange={(e) =>
-                                                handleInputChange(
-                                                    input.id,
-                                                    'required',
-                                                    e.target.checked
-                                                )
-                                            }
-                                            className=" checked:text-green-900 mr-3 text-green-900 "
+                                            type="text"
+                                            value={option.value}
+                                            onChange={(e) => {
+                                                const newOptions = [...(editedElement.options || [])];
+                                                newOptions[index] = {
+                                                    ...newOptions[index],
+                                                    value: e.target.value,
+                                                };
+                                                handleInputChange('options', newOptions);
+                                            }}
+                                            placeholder="Value"
+                                            className="w-1/2 p-2 border rounded"
                                         />
-                                        Required
-                                    </label>
-                                </div>
+                                        <button
+                                            onClick={() => {
+                                                const newOptions = editedElement.options?.filter((_, i) => i !== index) || [];
+                                                handleInputChange('options', newOptions);
+                                            }}
+                                            className="p-2 text-nnpc-800 hover:bg-red-100 rounded"
+                                        >
+                                            <span className="sr-only">Delete</span>
+                                            <FaTimes />
+                                        </button>
+                                    </div>
+                                ))}
+                                <button
+                                    onClick={() => {
+                                        const newOptions = [
+                                            ...(editedElement.options || []),
+                                            { label: '', value: '' },
+                                        ];
+                                        handleInputChange('options', newOptions);
+                                    }}
+                                    className="ml-auto w-fit px-2 py-1.5 bg-nnpcmediumgreen-950 text-white rounded hover:bg-nnpcmediumgreen-800 text-sm"
+                                >
+                                    Add Option
+                                </button>
                             </div>
                         </div>
-                    ))}
+                    )}
+
+                    {(editedElement.type === 'text' || editedElement.type === 'textarea') && (
+                        <div>
+                            <label className="block text-sm font-medium mb-1">
+                                Placeholder
+                            </label>
+                            <input
+                                type="text"
+                                value={editedElement.placeholder || ''}
+                                onChange={(e) =>
+                                    handleInputChange('placeholder', e.target.value)
+                                }
+                                className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green disabled:cursor-not-allowed disabled:opacity-50"
+                            />
+                        </div>
+                    )}
+
+                    <div>
+                        <label className="flex items-center">
+                            <input
+                                type="checkbox"
+                                checked={editedElement.required}
+                                onChange={(e) =>
+                                    handleInputChange('required', e.target.checked)
+                                }
+                                className="checked:text-green-900 mr-3 text-green-900"
+                            />
+                            Required
+                        </label>
+                    </div>
 
                     <button
                         onClick={handleSave}
@@ -461,26 +408,21 @@ const EditableFormElement = ({
                 </div>
             ) : (
                 <div>
-                    {editedElement.inputs.map((input) => (
-                        <div key={input.id} className="">
-                            <label className="block text-sm font-medium">{input.name}</label>
-                            {/* {renderInput(input)} */}
-                        </div>
-                    ))}
-                    <div className="text-sm text-gray-500 ">
+                    <div className="">
+                        <label className="block text-sm font-medium">{editedElement.name}</label>
+                    </div>
+                    <div className="text-sm text-gray-500">
                         <p>Element Type: {element.type}</p>
-                        {/* <p>Number of Inputs: {element.inputs.length}</p> */}
                     </div>
                 </div>
             )}
         </div>
     );
 };
-
 const FormBuilder = () => {
     const [formElements, setFormElements] = useState<FormElement[]>([]);
 
-    const [createForm] = useCreateFormMutation();
+    const [createForm, { isLoading }] = useCreateFormMutation();
     const [form, setForm] = useState<FormInterface>({
         name: '',
         description: '',
@@ -511,17 +453,13 @@ const FormBuilder = () => {
             id: Date.now(),
             type: item.type as FormElement['type'],
             label: item.label,
-            inputs: [
-                {
-                    id: Date.now(),
-                    name: `${item.type}_${Date.now()}`,
-                    required: false,
-                    options:
-                        item.type === 'select' || item.type === 'radio'
-                            ? [{ label: 'Option 1', value: 'option1' }]
-                            : undefined,
-                },
-            ],
+            name: `${item.type}_${Date.now()}`,
+            placeholder: `${item.label}_${Date.now()}`,
+            required: false,
+            options:
+                item.type === 'select' || item.type === 'radio'
+                    ? [{ label: 'Option 1', value: 'option1' }]
+                    : undefined,
         };
         setFormElements((prevElements) => [...prevElements, newElement]);
     };
@@ -559,6 +497,7 @@ const FormBuilder = () => {
             process_flow_id: form.process_flow_id,
             tag_id: form.tag_id,
             json_form: JSON.stringify(formElements),
+            // json_form: formElements,
             json_data: [],
         };
         console.log(newForm);
@@ -572,6 +511,7 @@ const FormBuilder = () => {
 
         try {
             await createForm(newForm).unwrap();
+            // console.log(newForm)
             toast.success('form created successfully!');
         } catch (error) {
             console.error('Error submitting the process flow:', error);
@@ -609,10 +549,11 @@ const FormBuilder = () => {
                     </button>
                     <button
                         onClick={handleSaveForm}
-                        className="w-fit px-2 py-1.5 duration-200 ease-in transition-all bg-green-900 text-white rounded hover:bg-green-800 flex items-center text-sm"
+                        disabled={isLoading}
+                        className="w-fit px-2 py-1.5 duration-200 ease-in transition-all bg-green-900 text-white rounded hover:bg-green-800 flex items-center text-sm disabled:cursor-not-allowed disabled:opacity-70"
                     >
                         <span className="sr-only">Create form</span>
-                        <FaSave className="mr-2" /> Create Form
+                        <FaSave className="mr-2" /> {isLoading ? 'Creating...' : 'Create Form'}
                     </button>
                 </div>
             </div>
