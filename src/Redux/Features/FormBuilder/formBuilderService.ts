@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
@@ -19,16 +20,25 @@ export interface FormField {
 }
 
 export interface FormBuilderData {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
   json_form: string;
-  process_flow_id?: string;
+   process_flow_id: string | number | undefined;
   process_flow_step_id?: string;
   tag_id?: string;
-  form_data: string[];
+  form_data: string[]|[];
   description?: string;
 }
 
+
+// interface FormInterface {
+//     name?: string;
+//     description?: string;
+//     process_flow_id: string | number | undefined;
+//     tag_id?: string;
+//     json_form?: string;
+//     json_data: [];
+// }
 export interface FormBuilderApiResponse {
   data: FormBuilderData;
   status?: string;
@@ -110,27 +120,35 @@ export const formBuilderApi = api.injectEndpoints({
         body: formData,
       }),
       invalidatesTags: ['Forms'],
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
+      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+      //   return errorResponse;
+      // },
     }),
 
     getForms: builder.query<FormBuilderApiResponse, void>({
       query: () => '/formbuilder/api/forms',
       providesTags: ['Forms'],
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
+      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+      //   return errorResponse;
+      // },
+    }),
+     getTags: builder.query<any, void>({
+      query: () => '/formbuilder/api/tag',
+      providesTags: ['Tags'],
+      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+      //   return errorResponse;
+      // },
     }),
     getFormById: builder.query<FormBuilderApiResponse, number>({
       query: (id) => `/formbuilder/api/forms/${id}`,
       providesTags: ['Forms'],
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
+      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+      //   return errorResponse;
+      // },
     }),
     getFormByEntityId: builder.query<ApiResponseTwo, string>({
       query: (url) => `/formbuilder/api/forms/view/${url}`,
@@ -184,6 +202,7 @@ export const formBuilderApi = api.injectEndpoints({
 
 
 export const {
+  useGetTagsQuery,
   useCreateFormMutation,
   useGetFormByEntityIdQuery,
   useGetFormsQuery,
