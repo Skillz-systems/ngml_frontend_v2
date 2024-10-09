@@ -14,6 +14,7 @@ const AdminCustomerList: React.FC = () => {
 
     const { data, isSuccess, isLoading } = useGetFormByEntityIdQuery('6/0/0');
     const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation()
+    
     useEffect(() => {
         if (isSuccess && data) {
             console.log('data.data.json_form', data.data.json_form)

@@ -123,7 +123,7 @@ const CustomerLocation: React.FC = () => {
           fontStyle="italic"
           width="200px"
           height="35px"
-          fontSize="16px"
+          fontSize="14px"
           radius="20px"
         />
         {/* <div onClick={toggleModal} >
