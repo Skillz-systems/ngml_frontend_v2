@@ -1,5 +1,5 @@
 import images from '@/assets';
-import { FormField, useGetFormByEntityIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { FormField, useGetFormByIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, CustomInput, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
@@ -12,9 +12,9 @@ const AdminCustomerList: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { data, isSuccess, isLoading } = useGetFormByEntityIdQuery('6/0/0');
+    const { data, isSuccess, isLoading } = useGetFormByIdQuery(26);
     const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation()
-    
+
     useEffect(() => {
         if (isSuccess && data) {
             console.log('data.data.json_form', data.data.json_form)
@@ -36,14 +36,14 @@ const AdminCustomerList: React.FC = () => {
 
             const updatedFields = parsedForm.filter((field: FormField) => field.id !== 0);
             setCustomerForm(updatedFields);
-            const initialData = updatedFields.reduce((acc: Record<string, string>, field: FormField) => {
-                if (field.key) {
-                    acc[field.key] = '';
-                }
-                return acc;
-            }, {});
+            // const initialData = updatedFields.reduce((acc: Record<string, string>, field: FormField) => {
+            //     if (field.key) {
+            //         acc[field.key] = '';
+            //     }
+            //     return acc;
+            // }, {});
 
-            setCustomerData(initialData);
+            // setCustomerData(initialData);
 
 
         }
@@ -74,7 +74,7 @@ const AdminCustomerList: React.FC = () => {
 
         const formFieldAnswers = customerForm.map(field => ({
             id: field.id,
-            elementType: field.elementType,
+            elementType: field.type,
             name: field.name || field.key,
             placeholder: field.placeholder,
             key: field.key,
@@ -181,7 +181,8 @@ const AdminCustomerList: React.FC = () => {
                         <Fragment key={form.id}>
                             <CustomInput
                                 required
-                                type={form?.elementType}
+                                type={form?.type}
+                                options={form?.options}
                                 label={form.name}
                                 value={customerData[form.key as keyof typeof customerData] || ''}
                                 handleChangeEvent={(value) => handleInputChange(value, form.key as keyof typeof customerData)}

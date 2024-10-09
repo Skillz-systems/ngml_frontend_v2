@@ -171,7 +171,7 @@ interface OptionType {
 }
 
 interface CustomInputProps {
-    type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio';
+    type: 'text' | 'password' | 'date' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'location' | 'email' | 'hidden';
     name?: string;
     label?: string;
     value?: string | number | boolean | readonly string[];
@@ -233,6 +233,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
     const renderInput = () => {
         switch (type) {
             case 'text':
+            case 'email':
+            case 'hidden':
             case 'date':
             case 'number':
                 return <input type={type} {...commonInputProps} />;
@@ -254,6 +256,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     </div>
                 );
             case 'select':
+            case 'location':
                 return (
                     <div className="relative">
                         <select {...commonInputProps} className={`${inputClasses} appearance-none select-none`}>

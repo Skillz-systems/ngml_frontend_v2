@@ -14,9 +14,10 @@ export interface FormField {
   id: number;
   name?: string;
   text?: string;
-  elementType: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio';
+  type: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio';
   placeholder?: string;
   key?: string;
+  options?: [];
 }
 
 export interface FormBuilderData {
