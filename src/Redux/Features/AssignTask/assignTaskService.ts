@@ -52,7 +52,7 @@ export const taskAssignApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getTasks: builder.query<TasksData, void>({
             query: () => '/automator/api/unassignedtasks',
-            providesTags: ['Tasks'],
+            providesTags: ['AssignTasks'],
             transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
                 const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
                 return errorResponse;

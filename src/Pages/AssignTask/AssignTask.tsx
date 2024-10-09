@@ -47,7 +47,7 @@ const TaskAssign: React.FC = () => {
                     ) : (
                         tasks?.data.map((task) => (
                             <div key={task.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
-                                <h3 className="text-lg font-semibold mb-2">Entity: {task.entity}</h3>
+                                <h3 className="text-lg font-semibold mb-2">Task Type: {task.entity}</h3>
                                 <p className="text-gray-600 mb-4">Status: {task.task_status === "0" ? "Pending" : "Completed"}</p>
                                 <Button
                                     type="secondary"
