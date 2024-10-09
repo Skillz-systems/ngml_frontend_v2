@@ -3,9 +3,13 @@ import { api } from '../../api';
  
 export interface Task {
     id: number;
-    name: string;
-    description: string;
-    status: string;
+    processflow_step: string | null;
+    processflow: string | null;
+    task_status: string;
+    assignment_status: string;
+    processflow_history: string | null;
+    entity: string;
+    entity_site_id: string;
 }
  
 export interface User {
@@ -28,13 +32,13 @@ type ErrorResponse = {
 };
  
  
-export const sampleTasks: Task[] = [
-  { id: 1, name: 'Implement login page', description: 'Create a responsive login page with form validation', status: 'To Do' },
-  { id: 2, name: 'Design database schema', description: 'Design the database schema for the user management system', status: 'In Progress' },
-  { id: 3, name: 'Write API documentation', description: 'Document all API endpoints using Swagger', status: 'To Do' },
-  { id: 4, name: 'Optimize image loading', description: 'Implement lazy loading for images to improve performance', status: 'To Do' },
-  { id: 5, name: 'Set up CI/CD pipeline', description: 'Configure Jenkins for continuous integration and deployment', status: 'In Progress' },
-];
+// export const sampleTasks: Task[] = [
+//   { id: 1, name: 'Implement login page', description: 'Create a responsive login page with form validation', status: 'To Do' },
+//   { id: 2, name: 'Design database schema', description: 'Design the database schema for the user management system', status: 'In Progress' },
+//   { id: 3, name: 'Write API documentation', description: 'Document all API endpoints using Swagger', status: 'To Do' },
+//   { id: 4, name: 'Optimize image loading', description: 'Implement lazy loading for images to improve performance', status: 'To Do' },
+//   { id: 5, name: 'Set up CI/CD pipeline', description: 'Configure Jenkins for continuous integration and deployment', status: 'In Progress' },
+// ];
  
 export const sampleUsers: User[] = [
   { id: 1, name: 'John Doe', email: 'john.doe@example.com' },

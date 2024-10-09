@@ -45,11 +45,10 @@ const TaskAssign: React.FC = () => {
                     {tasksLoading ? (
                         <p className="col-span-full text-center">Loading tasks...</p>
                     ) : (
-                        tasks?.data.map((task: Task) => (
+                        tasks?.data.map((task) => (
                             <div key={task.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
-                                <h3 className="text-lg font-semibold mb-2">{task.name}</h3>
-                                <p className="text-gray-600 mb-4">{task.description}</p>
-                                <p className="text-sm text-gray-500 mb-4">Status: {task.status}</p>
+                                <h3 className="text-lg font-semibold mb-2">Entity: {task.entity}</h3>
+                                <p className="text-gray-600 mb-4">Status: {task.task_status === "0" ? "Pending" : "Completed"}</p>
                                 <Button
                                     type="secondary"
                                     label="Assign Task"
@@ -74,7 +73,7 @@ const TaskAssign: React.FC = () => {
                     onClose={() => setIsModalOpen(false)}
                     size="large"
                     title="Assign Task"
-                    subTitle={`Assign "${selectedTask?.name}" to a user`}
+                    subTitle={`Assign "${selectedTask?.entity}" to a user`}
                     buttons={[
                         <div key="modal-buttons" className='flex gap-2 mb-[-10px]'>
                             <div className='w-[120px]'>
