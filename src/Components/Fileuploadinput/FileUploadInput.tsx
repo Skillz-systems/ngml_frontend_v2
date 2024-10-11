@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { FileType } from './FileTypes';
 import images from '../../assets/index';
+import { FileType } from './FileTypes';
 
 
 /**
@@ -82,7 +82,7 @@ const FileUploadInput: React.FC<FileUploadInputProps> = ({ maxSizeMB, title, fil
 
     return (
         <div
-            className={classNames('border-[2px] border-slate-300 border-dashed rounded-2xl p-4 px-8', {
+            className={classNames('border-[2px] border-slate-300 border-dashed rounded-2xl p-4 px-8 my-2.5', {
                 'dragging-over': dragging,
                 'border-green-800': uploaded
             })}
