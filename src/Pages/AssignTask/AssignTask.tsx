@@ -6,7 +6,7 @@ import { FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const TaskAssign: React.FC = () => {
+const AssignTask: React.FC = () => {
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -122,4 +122,4 @@ const TaskAssign: React.FC = () => {
     );
 };
 
-export default TaskAssign;
+export default AssignTask;
