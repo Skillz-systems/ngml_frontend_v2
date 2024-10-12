@@ -178,6 +178,12 @@ export const formBuilderApi = api.injectEndpoints({
     
     }),
 
+     getFormByName: builder.query<FormBuilderApiResponse, string>({
+      query: (name) => `/formbuilder/api/forms/view/${name}`,
+      providesTags: ['Forms'],
+    
+    }),
+
     submitForm: builder.mutation<FormSubmission, FormSubmission>({
       query: (formData) => ({
         url: '/formbuilder/api/form-data/create',
@@ -210,6 +216,7 @@ export const {
   useGetTagsQuery,
   useCreateFormMutation,
   useGetFormByEntityIdQuery,
+  useGetFormByNameQuery,
   useGetFormsQuery,
   useGetFormByIdQuery,
   useSubmitFormMutation,

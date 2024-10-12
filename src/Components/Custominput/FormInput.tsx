@@ -139,7 +139,7 @@ const FormInput: React.FC<FormInputProps> = ({
                         className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm 
           ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
           placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-          disabled:cursor-not-allowed disabled:opacity-50 invalid:border-red-500"
+          disabled:cursor-not-allowed disabled:opacity-50 "
                         placeholder={placeholder}
                         required={required}
                     />
@@ -153,7 +153,7 @@ const FormInput: React.FC<FormInputProps> = ({
                         className="flex h-14 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm 
           ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
           placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-          disabled:cursor-not-allowed disabled:opacity-50 invalid:border-red-500"
+          disabled:cursor-not-allowed disabled:opacity-50 "
                         placeholder={placeholder}
                         required={required}
                     />
@@ -168,7 +168,7 @@ const FormInput: React.FC<FormInputProps> = ({
                         className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm 
           ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
           placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-          disabled:cursor-not-allowed disabled:opacity-50 invalid:border-red-500"
+          disabled:cursor-not-allowed disabled:opacity-50 "
                         required={required}
                     >
                         <option value="" disabled>{placeholder || 'Select an option'}</option>
