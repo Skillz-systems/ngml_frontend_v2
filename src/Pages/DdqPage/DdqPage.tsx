@@ -1,39 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import { Button, DocumentCard, Modal } from '../../Components/index';
+import React, { useState, useEffect, Fragment } from 'react';
+import { Button, CustomInput, DocumentCard, Modal } from '../../Components/index';
 import images from '../../assets/index';
-import EditDdqPage from './EditDdqPage';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { FormField, useGetFormByIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 
 const DdqPage: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [companyData, setCompanyData] = useState({
-        companyName: '',
-        rcNumber: '',
-        natureOfBusiness: '',
-        companyphone: '',
-        companyTelephoneNumber: '',
-        companyMobileNumber: '',
-        email: '',
-        website: '',
-        companyaddress: '',
-        title: '',
-        firstName: '',
-        otherName: '',
-        lastName: '',
-        phoneNumber: '',
-        companyPosition: '',
-        titlePlus: '',
-        firstNamePlus: '',
-        otherNamePlus: '',
-        lastNamePlus: '',
-        phoneNumberPlus: '',
-        companyPositionPlus: '',
-        jointVenture: ''
-    });
+    const [customerForm, setCustomerForm] = useState<FormField[]>([]);
+    const [customerData, setCustomerData] = useState<Record<string, string>>({});
+
 
     const navigate = useNavigate();
     const location = useLocation();
+
+
+    const { data, isSuccess, isLoading } = useGetFormByIdQuery(26);
+    const [submitForm, { isSuccess: submitSuccess }] = useSubmitFormMutation()
+
+
+    useEffect(() => {
+        if (isSuccess && data) {
+            console.log('data.data.json_form', data.data.json_form)
+
+
+            let parsedForm;
+            try {
+                parsedForm = JSON.parse(data.data.json_form);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                console.log('Problematic JSON string:', data.data.json_form);
+                parsedForm = [];
+            }
+            console.log(parsedForm)
+            setCustomerForm(parsedForm)
+
+
+            const initialData = parsedForm.reduce((acc: Record<string, string>, field: FormField) => {
+                if (field.name) {
+                    acc[field.name] = '';
+                }
+                return acc;
+            }, {});
+
+            setCustomerData(initialData);
+            setIsModalOpen(false)
+
+        }
+
+
+    }, [data, isSuccess])
+
+
+    const handlesaveAndContinue = async () => {
+
+
+        const formFieldAnswers = customerForm.map(field => ({
+            id: field.id,
+            elementType: field.type,
+            name: field.name || field.id,
+            placeholder: field.placeholder,
+            key: field.name,
+            value: customerData[field.name as keyof typeof customerData]
+        }));
+
+        const buildFormSubmission = {
+            form_builder_id: data?.data.id,
+            name: data?.data.name,
+            process_flow_id: data?.data?.process_flow_id,
+            process_flow_step_id: data?.data?.process_flow_step_id,
+            tag_id: data?.data?.tag_id,
+            form_field_answers: JSON.stringify(formFieldAnswers),
+        };
+        console.log(buildFormSubmission)
+        await submitForm(buildFormSubmission).unwrap();
+
+        if (submitSuccess)
+            toggleModal(false);
+    };
+
 
     const totalPages = 5;
 
@@ -68,9 +113,8 @@ const DdqPage: React.FC = () => {
         toggleModal(true);
     };
 
-    const handlesaveAndContinue = () => {
-        console.log('Creating company data:', companyData);
-        toggleModal(false);
+    const handleInputChange = (value: string, key: string) => {
+        setCustomerData(prevData => ({ ...prevData, [key]: value }));
     };
 
     useEffect(() => {
@@ -128,38 +172,6 @@ const DdqPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="p-4 mt-6 w-full space-y-6 flex-col items-center gap-4">
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Filling status</div>
-                            </div>
-                            <div className="text-center text-xs font-normal font-['Mulish'] leading-3">72%</div>
-                        </div>
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">uploads</div>
-                            </div>
-                            <div className="text-center text-xs font-semibold font-['Mulish'] leading-3">6/12 Uploads</div>
-                        </div>
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Fields</div>
-                            </div>
-                            <div className="text-center text-xs font-normal font-['Mulish'] leading-3">22/41 Fields</div>
-                        </div>
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Date Started</div>
-                            </div>
-                            <div className="text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">12/Nov/2023</div>
-                        </div>
-                        <div className="p-2 bg-nnpc-600 rounded-lg border border-dark-100 justify-between items-center flex">
-                            <div className="p-1 bg-nnpcred-300 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-white text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">days left</div>
-                            </div>
-                            <div className="text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">13 Days</div>
-                        </div>
-                    </div> */}
                 </div>
                 <Modal
                     isOpen={isModalOpen}
@@ -196,8 +208,25 @@ const DdqPage: React.FC = () => {
                         </div>
                     ]}
                 >
-                    <EditDdqPage companyData={companyData}
-                        setCompanyData={setCompanyData} />
+                    {isLoading ? (
+                        <p>Loading form fields...</p>
+                    ) : customerForm.length > 0 ? (
+                        customerForm.map((form) => (
+                            <Fragment key={form.id}>
+                                <CustomInput
+                                    required={form?.required}
+                                    type={form?.type}
+                                    label={form.name}
+                                    value={customerData[form.name as keyof typeof customerData] || ''}
+                                    handleChangeEvent={(value) => handleInputChange(value, form.name as keyof typeof customerData)}
+                                    placeholder={form.placeholder}
+                                    options={form.options}
+                                />
+                            </Fragment>
+                        ))
+                    ) : (
+                        <p>No form fields available\.</p>
+                    )}
                 </Modal>
             </div>
         </div>
