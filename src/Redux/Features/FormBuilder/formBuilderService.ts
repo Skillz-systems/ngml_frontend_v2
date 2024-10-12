@@ -1,22 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+
 import { api } from '../../api';
 
 
 
-type ErrorResponse = {
-  error: string;
-};
 
+interface Option {
+    label: string;
+    value: string;
+}
 
 export interface FormField {
   id: number;
   name?: string;
-  text?: string;
-  elementType: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio';
+  label?: string;
+  type: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'location' | 'email' | 'tel' | 'hidden' | 'file';
   placeholder?: string;
-  key?: string;
+  options?: Option[];
+  required?: boolean;
+  value?: string;
 }
 
 export interface FormBuilderData {
@@ -26,19 +29,50 @@ export interface FormBuilderData {
   process_flow_id: string | number | undefined;
   process_flow_step_id: string | number | undefined;
   tag_id?: string;
-  form_data: string[]|[];
+  form_data: string[] | [];
   description?: string;
 }
 
-
-// interface FormInterface {
-//     name?: string;
-//     description?: string;
-//     process_flow_id: string | number | undefined;
-//     tag_id?: string;
-//     json_form?: string;
-//     json_data: [];
+// export interface FormSubmission {
+//   form_builder_id?: string |undefined;
+//   form_field_answers: string;
+//   data_id?: number;
+//   files?: File[]; // Add this line to support file uploads
 // }
+
+export interface FormSubmission {
+  form_builder_id?: string | undefined;
+  form_field_answers: string;
+  data_id?: number;
+  process_flow_id?: string | number | undefined;
+  process_flow_step_id?: string | number | undefined;
+  tag_id?: string;
+}
+
+
+
+
+// export interface FormField {
+//   id: number;
+//   name?: string;
+//   label?: string;
+//   type: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio'|'location'|'email'|'tel'|'hidden'|'file';
+//   placeholder?: string;
+//   options?:[];
+//   required?:boolean;
+// }
+
+// export interface FormBuilderData {
+//   id?: number;
+//   name?: string;
+//   json_form: string;
+//   process_flow_id: string | number | undefined;
+//   process_flow_step_id: string | number | undefined;
+//   tag_id?: string;
+//   form_data: string[]|[];
+//   description?: string;
+// }
+
 export interface FormBuilderApiResponse {
   data: FormBuilderData;
   status?: string;
@@ -51,11 +85,11 @@ export interface FormFieldAnswer {
   answer: string;
 }
 
-export interface FormSubmission {
-  form_builder_id?: number;
-  form_field_answers: string;
-  data_id?: number;
-}
+// export interface FormSubmission {
+//   form_builder_id?: number;
+//   form_field_answers: string;
+//   data_id?: number;
+// }
 
 
 
@@ -120,63 +154,43 @@ export const formBuilderApi = api.injectEndpoints({
         body: formData,
       }),
       invalidatesTags: ['Forms'],
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+    
     }),
 
     getForms: builder.query<FormBuilderApiResponse, void>({
       query: () => '/formbuilder/api/forms',
       providesTags: ['Forms'],
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+     
     }),
      getTags: builder.query<any, void>({
       query: () => '/formbuilder/api/tag',
       providesTags: ['Tags'],
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+   
     }),
     getFormById: builder.query<FormBuilderApiResponse, number>({
       query: (id) => `/formbuilder/api/forms/${id}`,
       providesTags: ['Forms'],
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+     
     }),
     getFormByEntityId: builder.query<ApiResponseTwo, string>({
       query: (url) => `/formbuilder/api/forms/view/${url}`,
       providesTags: ['Forms'],
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
+    
+    }),
+
+     getFormByName: builder.query<FormBuilderApiResponse, string>({
+      query: (name) => `/formbuilder/api/forms/view/${name}`,
+      providesTags: ['Forms'],
+    
     }),
 
     submitForm: builder.mutation<FormSubmission, FormSubmission>({
-      query: (customer) => ({
+      query: (formData) => ({
         url: '/formbuilder/api/form-data/create',
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: customer,
+        body: formData,
       }),
       invalidatesTags: ['Forms', 'Customers', 'Tasks'],
-      transformResponse: (response: FormSubmission | ErrorResponse) => {
-        if ('error' in response) {
-          throw new Error(response.error);
-        }
-        return response;
-      },
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
     }),
 
     saveForm: builder.mutation<FormBuilderApiResponse, Partial<FormBuilderData>>({
@@ -186,10 +200,7 @@ export const formBuilderApi = api.injectEndpoints({
         body: formData,
       }),
       invalidatesTags: ['Forms'],
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
+
     }),
 
   }),
@@ -205,6 +216,7 @@ export const {
   useGetTagsQuery,
   useCreateFormMutation,
   useGetFormByEntityIdQuery,
+  useGetFormByNameQuery,
   useGetFormsQuery,
   useGetFormByIdQuery,
   useSubmitFormMutation,

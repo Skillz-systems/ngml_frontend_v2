@@ -1,56 +1,36 @@
-import { Button, CustomInput, Heading, LocationCard, Modal } from '@/Components';
+import { Button, Heading, LocationCard, Modal } from '@/Components';
+import FormInput from '@/Components/Custominput/FormInput';
+import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
-import { FormField, useGetFormByEntityIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { convertFileToBase64 } from '@/Utils/base64Converter';
+import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 import { ArrowBack } from '@mui/icons-material';
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
+
+type CustomerData = {
+  [key: string]: string | File | null;
+};
+
+
 const CustomerLocation: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { customerId } = useParams<{ customerId: string }>();
-  const [form, setForm] = useState<FormField[]>([]);
-  const [formRecords, setFormRecords] = useState<Record<string, string>>({});
+
+  const [customerForm, setCustomerForm] = useState<FormField[]>([]);
+  const [customerData, setCustomerData] = useState<CustomerData>({});
+  const [formError, setFormError] = useState<string>('');
+
+
   const navigate = useNavigate();
 
-  const { data: customer, error, isLoading } = useGetCustomerByIdQuery(Number(customerId));
-  const { data: formData, isSuccess: formSuccess, isLoading: formLoading } = useGetFormByEntityIdQuery('5/customer/1');
+  const { data: customerLocation, error, isLoading } = useGetCustomerByIdQuery(Number(customerId));
+  // const { data: formData, isSuccess: formSuccess, isLoading: formLoading } = useGetFormByEntityIdQuery('CreateNewCustomerSite/customer/1');
+  const { data: formData, isSuccess: formSuccess, isLoading: formLoading } = useGetFormByNameQuery('CreateNewCustomerSite/0/0');
   const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation();
 
-  useEffect(() => {
-    if (formSuccess && formData) {
-      console.log(formData.data.json_form)
-
-      let parsedForm;
-      try {
-        parsedForm = JSON.parse(formData.data.json_form);
-      } catch (error) {
-        console.error('Error parsing JSON:', error);
-        console.log('Problematic JSON string:', formData.data.json_form);
-        parsedForm = [];
-      }
-      console.log(parsedForm)
-      const updatedFields = parsedForm.filter((field: FormField) => field.elementType === 'text');
-      setForm(updatedFields);
-      resetFormValues(updatedFields);
-    }
-  }, [formSuccess, formData])
-
-  useEffect(() => {
-    if (submitSuccess) {
-      setIsModalOpen(false);
-      resetFormValues(form);
-    }
-  }, [submitSuccess, form]);
-
-  const resetFormValues = (fields: FormField[]) => {
-    const initialData = fields.reduce((acc: Record<string, string>, field: FormField) => {
-      if (field.key) {
-        acc[field.key] = '';
-      }
-      return acc;
-    }, {});
-    setFormRecords(initialData);
-  };
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -60,43 +40,125 @@ const CustomerLocation: React.FC = () => {
     navigate(`/admin/records/customer/${customerId}/${locationId}/details`);
   };
 
-  const handleInputChange = (value: string, key: string) => {
-    setFormRecords(prevData => ({ ...prevData, [key]: value }));
+  useEffect(() => {
+    if (formSuccess && formData) {
+      let parsedForm;
+      try {
+        parsedForm = JSON.parse(formData.data.json_form);
+        setCustomerForm(parsedForm);
+
+        const initialData = parsedForm.reduce((acc: CustomerData, field: FormField) => {
+          if (field.name) {
+            acc[field.name] = '';
+            if (field.type === 'file') {
+              acc[`${field.name}`] = null;
+            }
+          }
+          return acc;
+        }, {});
+
+        setCustomerData(initialData);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+        setCustomerForm([]);
+      }
+    }
+  }, [formData, formSuccess]);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      const allFilled = areRequiredFieldsFilled(customerForm, customerData);
+      if (!allFilled) return;
+
+    }
+  }, [customerData, isModalOpen, customerForm]);
+
+
+  const handleChange = (field: string, value: string | File | null) => {
+    if (value instanceof File) {
+      setCustomerData(prev => ({
+        ...prev,
+        [field]: value,
+      }));
+    } else {
+      setCustomerData(prev => ({ ...prev, [field]: value || '' }));
+    }
   };
 
   const handleCreateLocation = async () => {
-    // console.log('customerForm:', form)
-    // console.log('customerData:', formRecords);
+    if (!areRequiredFieldsFilled(customerForm, customerData)) {
+      setFormError('Please fill all required fields.');
+      return;
+    }
 
-    // const formFieldAnswers = form.map((field) => ({
-    //   field_id: field.id,
-    //   answer: formRecords[field.key as keyof typeof formRecords]
-    // }));
+    try {
+      setFormError('');
 
-    const formFieldAnswers = form.map(field => ({
-      id: field.id,
-      elementType: field.elementType,
-      name: field.name || field.key,
-      placeholder: field.placeholder,
-      key: field.key,
-      value: formRecords[field.key as keyof typeof formRecords]
-    }));
+      const formFieldAnswers = await Promise.all(
+        customerForm.map(async (field) => {
+          const value = customerData[field.name as keyof typeof customerData];
 
-    console.log('formFieldAnswers', formFieldAnswers)
+          if (field.type === 'file' && value instanceof File) {
+            try {
+              console.log(`Attempting to convert file: ${field.name}`, value);
+              const base64File = await convertFileToBase64(value);
+              console.log(`Base64 for ${field.name} (first 100 chars):`, base64File.substring(0, 100));
+              return {
+                id: field.id,
+                elementType: field.type,
+                name: field.name || field.id.toString(),
+                placeholder: field.placeholder || '',
+                key: field.name || '',
+                value: base64File
+              };
+            } catch (error) {
+              console.error(`Error converting ${field.name} to Base64:`, error);
+              return null;
+            }
+          } else {
+            return {
+              id: field.id,
+              elementType: field.type,
+              name: field.name || field.id.toString(),
+              placeholder: field.placeholder || '',
+              key: field.name || '',
+              value: value || ''
+            };
+          }
+        })
+      );
 
-    const buildFormSubmission = {
-      name: formData?.data?.name,
-      process_flow_id: formData?.data?.process_flow_id,
-      process_flow_step_id: formData?.data?.process_flow_step_id,
-      tag_id: formData?.data?.tag_id,
+      const validFormFieldAnswers = formFieldAnswers.filter(answer => answer !== null);
+      const fieldsWithCustomerId = [...validFormFieldAnswers, { elementType: 'text', name: 'customer_id', key: 'customer_id', value: customerId?.toString() as string, id: customerId }]
 
-      form_builder_id: formData?.data.id,
-      form_field_answers: JSON.stringify(formFieldAnswers),
-      data_id: formData?.task?.id
-    };
-    console.log('buildFormSubmission', buildFormSubmission)
-    await submitForm(buildFormSubmission).unwrap();
+      // validFormFieldAnswers.push({ elementType: 'text', name: 'customer_id', key: 'customer_id', value: customerId?.toString() as string, id: customerId })
+
+
+      console.log('Form Field fieldsWithCustomerId:', fieldsWithCustomerId);
+      console.log('Form Field Answers:', validFormFieldAnswers);
+
+      const payload = {
+        form_builder_id: formData?.data?.id?.toString() || '',
+        name: formData?.data?.name || '',
+        process_flow_id: formData?.data?.process_flow_id?.toString() || '',
+        process_flow_step_id: formData?.data?.process_flow_step_id?.toString() || '',
+        tag_id: formData?.data?.tag_id || '',
+        form_field_answers: JSON.stringify(fieldsWithCustomerId),
+      };
+
+      console.log('Payload:', payload);
+
+      await submitForm(payload).unwrap();
+
+      if (submitSuccess) toggleModal();
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormError('An error occurred while submitting the form. Please try again.');
+    }
   };
+
+
 
   if (isLoading || formLoading || submitLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading customer data.</div>;
@@ -111,7 +173,7 @@ const CustomerLocation: React.FC = () => {
             </div>
           </Link>
           <Heading color='primaryColor' className="font-bold text-gray-600 text-[23px]">
-            {customer?.data?.company_name.toUpperCase()}
+            {customerLocation?.data?.company_name.toUpperCase()}
           </Heading>
         </div>
 
@@ -126,15 +188,10 @@ const CustomerLocation: React.FC = () => {
           fontSize="16px"
           radius="20px"
         />
-        {/* <div onClick={toggleModal} >
-          <button className='border mr-7 bg-[#53B052] text-white hover:bg-[#265929] text-[16px] h-[44px] w-[180px] rounded-[6px]'>
-            Add New Location
-          </button>
-        </div> */}
       </div>
       <div className='h-fit w-[100%] rounded-[20px] px-6'>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
-          {customer?.data?.sites.map((site) => (
+          {customerLocation?.data?.sites.map((site) => (
             <div
               key={site.id}
               onClick={() => handleLocationClick(site.id)}
@@ -152,7 +209,7 @@ const CustomerLocation: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={toggleModal}
-        size='medium'
+        size='large'
         title='Add New Location Address'
         subTitle=''
         buttons={[
@@ -173,7 +230,7 @@ const CustomerLocation: React.FC = () => {
             <div className='w-[260px]'>
               <Button
                 type="secondary"
-                label="Save"
+                label={submitLoading ? 'Adding....' : 'Add Location'}
                 action={handleCreateLocation}
                 color="#FFFFFF"
                 fontStyle="italic"
@@ -181,227 +238,52 @@ const CustomerLocation: React.FC = () => {
                 height="40px"
                 fontSize="14px"
                 radius="20px"
+
+                disabled={submitLoading || !areRequiredFieldsFilled(customerForm, customerData)}
               />
             </div>
           </div>
         ]}
       >
+        {formError && <p className="text-red-500 mb-4">{formError}</p>}
+
+        {/* <div className="grid grid-cols-1 gap-2"> */}
+
+
         {isLoading ? (
           <p>Loading form fields...</p>
-        ) : form.length > 0 ? (
-          form.map((item) => (
-            <Fragment key={item.id}>
-              <CustomInput
-                required
-                type={item?.elementType}
-                label={item.name}
-                value={formRecords[item.key as keyof typeof formRecords] || ''}
-                handleChangeEvent={(value) => handleInputChange(value, item.key as keyof typeof formRecords)}
-                placeholder={item.placeholder}
+        ) : customerForm.length > 0 ? (
+          customerForm.map((form) => (
+            <Fragment key={form.id}>
+              <FormInput
+                type={form?.type}
+                label={form.label ?? form.name}
+                value={
+                  form.type === 'file'
+                    ? (customerData[form.name as keyof typeof customerData] as string || '')
+                    : (customerData[form.name as keyof typeof customerData] as string || '')
+                }
+                required={form?.required}
+                onChange={(value) => handleChange(form?.name as string, value)}
+                placeholder={form.placeholder}
+                options={form.options?.map(opt =>
+                  typeof opt === 'string'
+                    ? { label: opt, value: opt }
+                    : opt
+                )}
+                maxSizeMB={10}
+                allowedFileTypes={[FileType.PDF, FileType.JPEG]}
               />
             </Fragment>
           ))
         ) : (
           <p>No form fields available.</p>
         )}
+
+        {/* </div> */}
       </Modal>
     </div>
   );
 };
 
 export default CustomerLocation;
-
-
-
-
-// import { Button, CustomInput, Heading, LocationCard, Modal } from '@/Components';
-// import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
-// import { FormField, useGetFormByEntityIdQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
-// import { ArrowBack } from '@mui/icons-material';
-// import React, { Fragment, useEffect, useState } from 'react';
-// import { Link, useNavigate, useParams } from 'react-router-dom';
-
-// const CustomerLocation: React.FC = () => {
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const { customerId } = useParams<{ customerId: string }>();
-//   const [form, setForm] = useState<FormField[]>([]);
-//   const [formRecords, setFormRecords] = useState<Record<string, string>>({});
-//   const navigate = useNavigate();
-
-//   const { data: customer, error, isLoading } = useGetCustomerByIdQuery(Number(customerId));
-//   const { data: formData, isSuccess: formSuccess, isLoading: formLoading } = useGetFormByEntityIdQuery('5/customer/1');
-//   const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation();
-
-//   useEffect(() => {
-//     if (formSuccess && formData) {
-//       console.log(formData.data.json_form)
-
-//       // const cleanedJsonString = data.data.json_form.replace(/[\n\r]/g, '').trim();
-//       // const parsedForm = JSON.parse(cleanedJsonString);
-//       // const parsedForm = JSON.parse(data.data.json_form);
-
-//       let parsedForm;
-//       try {
-//         parsedForm = JSON.parse(formData.data.json_form);
-//       } catch (error) {
-//         console.error('Error parsing JSON:', error);
-//         console.log('Problematic JSON string:', formData.data.json_form);
-//         parsedForm = [];
-//       }
-//       console.log(parsedForm)
-//       const updatedFields = parsedForm.filter((field: FormField) => field.elementType === 'text');
-//       setForm(updatedFields);
-//       // console.log(form)
-//       const initialData = updatedFields.reduce((acc: Record<string, string>, field: FormField) => {
-//         if (field.key) {
-//           acc[field.key] = '';
-//         }
-//         return acc;
-//       }, {});
-//       setFormRecords(initialData);
-
-//     }
-
-
-//   }, [formSuccess, formData])
-
-
-//   const toggleModal = () => {
-//     setIsModalOpen(!isModalOpen);
-//   };
-
-//   const handleLocationClick = (locationId?: number) => {
-//     navigate(`/admin/records/customer/${customerId}/${locationId}/details`);
-//   };
-
-
-
-//   const handleInputChange = (value: string, key: string) => {
-//     setFormRecords(prevData => ({ ...prevData, [key]: value }));
-//   };
-
-
-//   const handleCreateLocation = async () => {
-//     console.log('customerForm:', form)
-//     console.log('customerData:', formRecords);
-
-
-//     const formFieldAnswers = form.map((field) => ({
-//       field_id: field.id,
-//       answer: formRecords[field.key as keyof typeof formRecords]
-//     }));
-
-//     const buildFormSubmission = {
-//       form_builder_id: formData?.data.id,
-//       form_field_answers: JSON.stringify(formFieldAnswers),
-//       data_id: formData?.task?.id
-//     };
-//     await submitForm(buildFormSubmission).unwrap();
-
-//     if (submitSuccess) setIsModalOpen(false);
-//   };
-
-//   if (isLoading || formLoading || submitLoading) return <div>Loading...</div>;
-//   if (error) return <div>Error loading customer data.</div>;
-
-//   return (
-//     <div className='mt-6'>
-//       <div className='flex justify-between items-center'>
-//         <div className='flex gap-4'>
-//           <Link to={'/admin/records/customer'}>
-//             <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
-//               <ArrowBack color="success" style={{ fontSize: 'medium' }} />
-//             </div>
-//           </Link>
-//           <Heading color='primaryColor' className="font-bold text-gray-600 text-[23px]">
-//             {customer?.data?.company_name.toUpperCase()}
-//           </Heading>
-//         </div>
-//         <div onClick={toggleModal} >
-//           <button className='border mr-7 bg-[#53B052] text-white hover:bg-[#265929] text-[16px] h-[44px] w-[180px] rounded-[6px]'>
-//             Add New Location
-//           </button>
-//         </div>
-//       </div>
-//       <div className='h-fit w-[100%] rounded-[20px] px-6'>
-//         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
-//           {customer?.data?.sites.map((site) => (
-//             <div
-//               key={site.id}
-//               onClick={() => handleLocationClick(site.id)}
-//               className="cursor-pointer hover:shadow-lg rounded-[20px] transition-shadow duration-600 ease-in-out"
-//             >
-//               <LocationCard
-//                 label={site.site_name}
-//                 value={site.site_address}
-//                 primary={false}
-//               />
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//       <Modal
-//         isOpen={isModalOpen}
-//         onClose={toggleModal}
-//         size='medium'
-//         title='Add New Location Address'
-//         subTitle=''
-//         buttons={[
-//           <div className='flex gap-2 mb-[-10px]' key="modal-buttons">
-//             <div className='w-[120px]'>
-//               <Button
-//                 type="outline"
-//                 label="Cancel"
-//                 action={toggleModal}
-//                 color="#FFFFFF"
-//                 fontStyle="italic"
-//                 width="100%"
-//                 height="40px"
-//                 fontSize="16px"
-//                 radius="20px"
-//               />
-//             </div>
-//             <div className='w-[260px]'>
-//               <Button
-//                 type="secondary"
-//                 label="Save"
-//                 action={handleCreateLocation}
-//                 color="#FFFFFF"
-//                 fontStyle="italic"
-//                 width="100%"
-//                 height="40px"
-//                 fontSize="14px"
-//                 radius="20px"
-//               />
-//             </div>
-//           </div>
-//         ]}
-//       >
-//         {isLoading ? (
-//           <p>Loading form fields...</p>
-//         ) : form.length > 0 ? (
-//           form.map((item) => (
-//             <Fragment key={item.id}>
-//               <CustomInput
-//                 required
-//                 type={item?.elementType}
-//                 label={item.name}
-//                 value={formRecords[item.key as keyof typeof formRecords] || ''}
-//                 handleChangeEvent={(value) => handleInputChange(value, item.key as keyof typeof formRecords)}
-//                 placeholder={item.placeholder}
-//               />
-//             </Fragment>
-//           ))
-//         ) : (
-//           <p>No form fields available.</p>
-//         )}
-//       </Modal>
-//     </div>
-//   );
-// };
-
-// export default CustomerLocation;
-
-
-
-
