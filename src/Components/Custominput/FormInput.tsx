@@ -2,6 +2,8 @@
 import classNames from 'classnames';
 import React, { ChangeEvent, DragEvent, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import images from '../../assets/index';
+
 interface Option {
     label: string;
     value: string;
@@ -36,6 +38,12 @@ const FormInput: React.FC<FormInputProps> = ({
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         onChange(e.target.value);
+    };
+
+    const handleCancel = () => {
+        setFile(null);
+        setError('');
+        setDragging(false);
     };
 
     const handleFileChange = (file: File | null) => {
@@ -85,7 +93,7 @@ const FormInput: React.FC<FormInputProps> = ({
     const inputId = `file-upload-${uuidv4()}`;
     const renderFileInput = () => (
         <div
-            className={classNames('border-2 border-dashed border-gray-300 rounded-md p-4', {
+            className={classNames('border-2 border-dashed border-slate-300 rounded-md p-6 ', {
                 'bg-gray-100': dragging,
             })}
             onDragEnter={handleDragEnter}
@@ -101,24 +109,37 @@ const FormInput: React.FC<FormInputProps> = ({
                 required={required}
                 accept={allowedFileTypes.join(',')}
             />
-            <label
-                htmlFor={`${label}${inputId}`}
-                className="cursor-pointer flex flex-col items-center"
-            >
-                <span className="text-blue-500">Choose a file</span>
-                <span className="text-sm text-gray-500">or drag and drop</span>
-            </label>
+
+            <div className='border-2 border-dashed border-slate-300 rounded-md bg-[#F3F4F6] p-6 mt-1'>
+                <label
+                    htmlFor={`${label}${inputId}`}
+                    className="cursor-pointer flex gap-2"
+                >
+                    <img src={images.Upload} className="w-6 h-6" alt="Upload Icon" />
+                    <h3 className='text-gray-400 font-semi-bold '>Drag and drop or <span className='text-green-500'>browse</span>
+                    </h3>
+                </label>
+            </div>
+            {file && (
+                <button type="button" onClick={handleCancel}>
+                    <img src={images.Cancelicon} alt='cancel icon' />
+                </button>
+            )}
             {file && (
                 <div className="mt-2">
-                    <p className="text-sm">{file.name}</p>
-                    <p className="text-xs text-gray-500">{`${(file.size / 1024 / 1024).toFixed(2)} MB`}</p>
+                    <p className="text-[12px] text-gray-400">{file.name}</p>
+                    <p className="text-[12px] text-gray-400">{`${(file.size / 1024 / 1024).toFixed(2)} MB`}</p>
                 </div>
             )}
             {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
-            <p className="mt-2 text-xs text-gray-500">
-                {`Maximum file size: ${maxSizeMB}MB`}
-                {allowedFileTypes.length > 0 && ` | Allowed types: ${allowedFileTypes.join(', ')}`}
-            </p>
+            <div className='mt-1'>
+                <p className='text-[12px] text-gray-400'>
+                    {allowedFileTypes.length > 0 && `Upload the original document: ${allowedFileTypes.join(', ')}`}
+                </p>
+                <p className="text-[12px] text-gray-400">
+                    {`Maximum file size: ${maxSizeMB}MB`}
+                </p>
+            </div>
         </div>
     );
 
