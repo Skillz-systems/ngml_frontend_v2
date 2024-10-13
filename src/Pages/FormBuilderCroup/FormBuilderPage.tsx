@@ -12,10 +12,9 @@ import { FaFile, FaPencilAlt, FaSave, FaTimes, FaTrash } from 'react-icons/fa';
 import { FiEyeOff } from 'react-icons/fi';
 import { IoMdCheckbox } from 'react-icons/io';
 import {
-    MdAlternateEmail,
-    MdOutlineLocationOn,
+    MdAlternateEmail, MdCloudSync, MdOutlineLocationOn,
     MdPassword,
-    MdTextFields,
+    MdTextFields
 } from 'react-icons/md';
 import { RiListRadio } from 'react-icons/ri';
 import { RxDropdownMenu } from 'react-icons/rx';
@@ -57,40 +56,16 @@ interface FormElement {
     | 'hidden'
     | 'location'
     | 'designation'
-    | 'date';
+    | 'date'
+    | 'dynamic';
     label: string;
     name: string;
     placeholder?: string;
     required: boolean;
     options?: FormElementOption[];
+    url?: string;
 }
 
-// interface FormElement {
-//     id: number;
-//     type:
-//     | 'text'
-//     | 'email'
-//     | 'password'
-//     | 'number'
-//     | 'tel'
-//     | 'select'
-//     | 'checkbox'
-//     | 'textarea'
-//     | 'radio'
-//     | 'file'
-//     | 'hidden'
-//     | 'location'
-//     | 'designation'
-//     | 'date';
-//     label: string;
-//     inputs: {
-//         id: number;
-//         name: string;
-//         placeholder?: string;
-//         required: boolean;
-//         options?: FormElementOption[];
-//     }[];
-// }
 
 const formElementTypes = [
     { type: 'text', label: 'Text' },
@@ -104,6 +79,7 @@ const formElementTypes = [
     { type: 'radio', label: 'Radio Group' },
     { type: 'location', label: 'Location' },
     { type: 'email', label: 'Email' },
+    { type: 'dynamic', label: 'Dynamic' },
 ];
 
 const DraggableFormElement = ({
@@ -153,6 +129,9 @@ const DraggableFormElement = ({
             {label === 'Hidden' && <FiEyeOff className="text-green-800 size-5" />}
             {label === 'Location' && (
                 <MdOutlineLocationOn className="text-green-800 size-5" />
+            )}
+            {label === 'Dynamic' && (
+                <MdCloudSync className="text-green-800 size-5" />
             )}
             {label}
         </div>
@@ -370,7 +349,7 @@ const EditableFormElement = ({
                         </div>
                     )}
 
-                    {(editedElement.type === 'text' || editedElement.type === 'textarea') && (
+                    {/* {(editedElement.type === 'text' || editedElement.type === 'textarea') && (
                         <div>
                             <label className="block text-sm font-medium mb-1">
                                 Placeholder
@@ -380,6 +359,23 @@ const EditableFormElement = ({
                                 value={editedElement.placeholder || ''}
                                 onChange={(e) =>
                                     handleInputChange('placeholder', e.target.value)
+                                }
+                                className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green disabled:cursor-not-allowed disabled:opacity-50"
+                            />
+                        </div>
+                    )} */}
+
+                    {(editedElement.type === 'dynamic') && (
+                        <div>
+                            <label className="block text-sm font-medium mb-1">
+                                Url
+                            </label>
+                            <input
+                                type="text"
+                                value={editedElement.url || ''}
+                                placeholder='Example:   /users/api/v1/locations'
+                                onChange={(e) =>
+                                    handleInputChange('url', e.target.value)
                                 }
                                 className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green disabled:cursor-not-allowed disabled:opacity-50"
                             />
@@ -455,6 +451,7 @@ const FormBuilder = () => {
             id: Date.now(),
             type: item.type as FormElement['type'],
             label: item.label,
+            // url: item.label,
             name: `${item.type}_${Date.now()}`,
             placeholder: `${item.label}_${Date.now()}`,
             required: false,
@@ -504,7 +501,7 @@ const FormBuilder = () => {
             // json_form: formElements,
             json_data: [],
         };
-        console.log(newForm);
+        // console.log(formElements);
 
         if (form?.name?.trim() === '' || form?.description?.trim() === '' || form?.process_flow_id === '' || form?.tag_id?.trim() === '' || form?.process_flow_step_id === '') {
             toast.error('All field are required');
@@ -515,7 +512,7 @@ const FormBuilder = () => {
 
         try {
             await createForm(newForm).unwrap();
-            console.log(newForm)
+            // console.log(newForm)
             toast.success('form created successfully!');
         } catch (error) {
             console.error('Error submitting the process flow:', error);

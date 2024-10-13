@@ -72,6 +72,6 @@ export const api = createApi({
   keepUnusedDataFor: 30,
   refetchOnFocus: true,
   endpoints: () => ({}),
-  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms','ProcessFlow','FormBuilder','Routes','Users','AssignTasks','HeadsOfUnit' , 'UsersSettings','Units', 'Designations', 'Departments','Locations', 'Staff','SSO_init', 'SSO_callback', 'Tags' ],
+  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms','ProcessFlow','FormBuilder','Routes','Users','AssignTasks','HeadsOfUnit' , 'UsersSettings','Units', 'Designations', 'Departments','Locations', 'Staff','SSO_init', 'SSO_callback', 'Tags', 'DynamicContent' ],
 });
 

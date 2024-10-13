@@ -25,7 +25,9 @@ const AdminCustomerList: React.FC = () => {
     const location = useLocation();
 
     // const { data, isSuccess, isLoading } = useGetFormByIdQuery(1);
-    const { data, isSuccess, isLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
+    // const { data, isSuccess, isLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery('test/0/0');
+    // const { data: dataFetch } = useGetDynamicFetchQuery('url')
     const { data: customers } = useGetCustomersQuery();
     const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation();
 
@@ -245,6 +247,7 @@ const AdminCustomerList: React.FC = () => {
                     customerForm.map((form) => (
                         <Fragment key={form.id}>
                             <FormInput
+                                url={form?.url}
                                 type={form?.type}
                                 label={form.label ?? form.name}
                                 value={

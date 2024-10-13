@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { useGetDynamicFetchQuery } from '@/Redux/Features/FormBuilder/formBuilderService';
 import classNames from 'classnames';
 import React, { ChangeEvent, DragEvent, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,7 +12,7 @@ interface Option {
 }
 
 interface FormInputProps {
-    type: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'location' | 'email' | 'tel' | 'hidden' | 'file';
+    type: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'location' | 'email' | 'tel' | 'hidden' | 'file' | 'dynamic';
     label?: string;
     value?: string;
     onChange: (value: string | File | null) => void;
@@ -19,6 +21,7 @@ interface FormInputProps {
     placeholder?: string;
     maxSizeMB?: number;
     allowedFileTypes?: string[];
+    url?: string;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -31,6 +34,7 @@ const FormInput: React.FC<FormInputProps> = ({
     placeholder,
     maxSizeMB = 5,
     allowedFileTypes = [],
+    url
 }) => {
     const [error, setError] = useState<string>('');
     const [dragging, setDragging] = useState<boolean>(false);
@@ -45,6 +49,11 @@ const FormInput: React.FC<FormInputProps> = ({
         setError('');
         setDragging(false);
     };
+
+    // const { data: dataFetch } = useGetDynamicFetchQuery(url ?? '')
+    const { data: urlData, isLoading: urlDataLoading, isError: urlDataError } = useGetDynamicFetchQuery(url ?? '', {
+        skip: type !== 'dynamic' || !url
+    });
 
     const handleFileChange = (file: File | null) => {
         if (file) {
@@ -189,13 +198,35 @@ const FormInput: React.FC<FormInputProps> = ({
                         className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm 
           ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
           placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-          disabled:cursor-not-allowed disabled:opacity-50 "
+          disabled:cursor-not-allowed disabled:opacity-50"
                         required={required}
                     >
                         <option value="" disabled>{placeholder || 'Select an option'}</option>
                         {options.map((option) => (
                             <option key={option.value} value={option.value}>
                                 {option.label}
+                            </option>
+                        ))}
+                    </select>
+                );
+
+            case 'dynamic':
+                return (
+                    <select
+                        value={value}
+                        onChange={handleInputChange}
+                        className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm 
+            ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
+            placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
+            disabled:cursor-not-allowed disabled:opacity-50"
+                        required={required}
+                        disabled={urlDataLoading}
+                    >
+                        <option value="" disabled>{urlDataLoading ? 'Loading...' : (placeholder || 'Select an option')}</option>
+                        {urlDataError && <option value="" disabled>Error loading options</option>}
+                        {Array.isArray(urlData?.data) && urlData?.data.map((option: any) => (
+                            <option key={option.id} value={option.id}>
+                                {option.location ?? option.name}
                             </option>
                         ))}
                     </select>
