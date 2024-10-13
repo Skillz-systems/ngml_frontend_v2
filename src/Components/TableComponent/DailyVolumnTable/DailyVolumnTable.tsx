@@ -66,11 +66,11 @@ const DailyVolumnTable = () => {
     const filterData = () => {
         const lowercasedSearch = searchText.toLowerCase();
         const filtered = DailyFrequencyData.filter(row => {
-            const dateParts = row.datesent.split('/');
+            const dateParts = row?.datesent.split('/');
             const rowMonth = dateParts[1];
             const rowYear = dateParts[2];
             return (
-                (row.companyname.toLowerCase().includes(lowercasedSearch) || row.companyType.toLowerCase().includes(lowercasedSearch)) &&
+                (row?.companyname?.toLowerCase().includes(lowercasedSearch) || row?.companyType.toLowerCase().includes(lowercasedSearch)) &&
                 (selectedMonth ? rowMonth === selectedMonth : true) &&
                 (selectedYear ? rowYear === selectedYear : true)
             );
