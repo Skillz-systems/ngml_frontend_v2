@@ -478,7 +478,6 @@ const ConnectProject: React.FC = () => {
             tag_id: data?.data?.tag_id,
             form_field_answers: JSON.stringify(formFieldAnswers),
         };
-        await submitForm(buildFormSubmission).unwrap();
 
         if (submitSuccess) setIsModalOpen(false);
     };
