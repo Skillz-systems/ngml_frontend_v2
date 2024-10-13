@@ -15,11 +15,12 @@ export interface FormField {
   id: number;
   name?: string;
   label?: string;
-  type: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'location' | 'email' | 'tel' | 'hidden' | 'file';
+  type: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'location' | 'email' | 'tel' | 'hidden' | 'file' | 'dynamic';
   placeholder?: string;
   options?: Option[];
   required?: boolean;
   value?: string;
+  url?:string;
 }
 
 export interface FormBuilderData {
@@ -162,6 +163,11 @@ export const formBuilderApi = api.injectEndpoints({
       providesTags: ['Forms'],
      
     }),
+    getDynamicFetch: builder.query<any, any>({
+      query: (url) => `/${url}`,
+      providesTags: ['DynamicContent'],
+     
+    }),
      getTags: builder.query<any, void>({
       query: () => '/formbuilder/api/tag',
       providesTags: ['Tags'],
@@ -190,7 +196,7 @@ export const formBuilderApi = api.injectEndpoints({
         method: 'POST',
         body: formData,
       }),
-      invalidatesTags: ['Forms', 'Customers', 'Tasks'],
+      invalidatesTags: ['Forms', 'Customers', 'Tasks', 'DynamicContent'],
     }),
 
     saveForm: builder.mutation<FormBuilderApiResponse, Partial<FormBuilderData>>({
@@ -213,6 +219,7 @@ export const formBuilderApi = api.injectEndpoints({
 
 
 export const {
+  useGetDynamicFetchQuery,
   useGetTagsQuery,
   useCreateFormMutation,
   useGetFormByEntityIdQuery,
