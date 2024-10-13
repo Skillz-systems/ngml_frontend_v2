@@ -336,16 +336,16 @@ const CustomerListTable = () => {
     };
 
     const columns: GridColDef[] = [
-        {
-            field: 'id',
-            headerName: 'CUSTOMER ID',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className='text-[12px] font-[700] text-[#49526A] leading-3'>
-                    {params.row.id}
-                </div>
-            ),
-        },
+        // {
+        //     field: 'id',
+        //     headerName: 'CUSTOMER ID',
+        //     flex: 1,
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <div className='text-[12px] font-[700] text-[#49526A] leading-3'>
+        //             {params.row.id}
+        //         </div>
+        //     ),
+        // },
         {
             field: 'company_name',
             headerName: 'COMPANY NAME',
@@ -402,7 +402,7 @@ const CustomerListTable = () => {
 
                 return (
                     <div className={classNames}>
-                        {params.row.status ? 'Active' : 'In-Active'}
+                        {params.row.status ? 'Active' : 'Inactive'}
                     </div>
                 );
             }

@@ -3,6 +3,7 @@
 import images from '@/assets';
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
+import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
@@ -25,6 +26,7 @@ const AdminCustomerList: React.FC = () => {
 
     // const { data, isSuccess, isLoading } = useGetFormByIdQuery(1);
     const { data, isSuccess, isLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
+    const { data: customers } = useGetCustomersQuery();
     const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation();
 
     useEffect(() => {
@@ -174,21 +176,23 @@ const AdminCustomerList: React.FC = () => {
                     <StatisticRectangleCard
                         title='Total Customers'
                         icon={<img src={images.customers} alt="staff icon" />}
-                        value='554'
+                        value={JSON.stringify(customers?.data.length) ?? ''}
                         valueColor='text-nnpcmediumgreen-700'
                         iconBgColor='rounded-[10px] bg-nnpcmediumgreen-500'
                     />
                     <StatisticRectangleCard
                         title='Active Customers'
                         icon={<img src={images.customers} alt="staff icon" />}
-                        value='442'
+                        // value={JSON.stringify(customers?.data.length) ?? ''}
+                        value={'0'}
                         valueColor='text-black'
                         iconBgColor='bg-nnpc-50 rounded-[10px]'
                     />
                     <StatisticRectangleCard
                         title='Processing Customers'
                         icon={<img src={images.warning} alt="staff icon" />}
-                        value='112'
+                        // value='112'
+                        value={JSON.stringify(customers?.data.length) ?? ''}
                         valueColor='text-green-800'
                         backgroundColor='bg-nnpc-600'
                         iconBgColor='rounded-full bg-nnpc-700'
