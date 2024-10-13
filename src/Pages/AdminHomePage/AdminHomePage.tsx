@@ -1,5 +1,4 @@
 
-import { Loader } from '@/Components/Loader/Loader';
 import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
@@ -244,25 +243,34 @@ const AdminHomePage = () => {
               <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
             </div>
           </div>
-          <div className='h-[400px] overflow-y-auto'>
-            <div className='w-[100%] p-[10px] pt-[0px] '>
-              {isLoading &&
-                <Loader className="text-nnpc-100 size-10 " />
-              }
+          {/* <div className='h-[400px] overflow-y-auto'> */}
+          <div className='w-[100%] p-[10px] pt-[0px] '>
+            {isLoading &&
+              // <div style={{ backgroundImage: images.ngmlPortrait }} className='w-full h-full flex justify-center items-center'></div>
+              <img src={images.ngmlPortrait} className='w-full h-full' alt="loader" />
+              // <Loader className="text-nnpc-100 size-10 " />
+              // <div
+              //   className=" bg-cover bg-center bg-no-repeat"
+              //   style={{ backgroundImage: `url(${images.ngmlPortrait})` }}
+              // ></div>
+            }
 
-              {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
-                return (
+            {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
+              return (
+                <div className='h-[300px] overflow-y-auto' key={index}>
+
                   <ActivityLogCard
-                    key={index}
+                    // key={index}
                     route={activity.route}
                     title={activity.title}
                     text={activity.text}
                     start_time={activity.start_time}
                   />
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
+          {/* </div> */}
         </div>
       </div>
 
