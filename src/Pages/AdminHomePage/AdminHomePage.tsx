@@ -1,46 +1,46 @@
 
 import { Loader } from '@/Components/Loader/Loader';
+import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
   ArrowOutwardOutlined,
-  FileDownloadDoneOutlined,
-  RestaurantMenuOutlined
 } from '@mui/icons-material';
-import React, { useState } from 'react';
-import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticDynamicCard, StatisticRectangleCard } from '../../Components/index';
+import React from 'react';
+import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticRectangleCard } from '../../Components/index';
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
 // import { aC } from 'vitest/dist/reporters-1evA5lom';
 
 
-interface SelectOption {
-  label: string;
-  value: string;
-}
+// interface SelectOption {
+//   label: string;
+//   value: string;
+// }
 
-interface DynamicCardDataItem {
-  type: 'primary' | 'secondary';
-  title: string;
-  content: React.ReactNode;
-  icon: React.ReactNode;
-  yearOptions: Array<number>;
-  valueOptions: Array<SelectOption>;
-}
+// interface DynamicCardDataItem {
+//   type: 'primary' | 'secondary';
+//   title: string;
+//   content: React.ReactNode;
+//   icon: React.ReactNode;
+//   yearOptions: Array<number>;
+//   valueOptions: Array<SelectOption>;
+// }
 
 
 const AdminHomePage = () => {
-  const [, setSortDetails] = useState({ sortType: '', value: '' });
+  // const [, setSortDetails] = useState({ sortType: '', value: '' });
   const currentUser = useAppSelector(selectCurrentUser);
   const userId = Number(currentUser?.id)
 
   const { data, error, isError, isSuccess, isLoading } = useTasksQuery({ userId });
+  const { data: customers } = useGetCustomersQuery();
 
   console.log(data, 'data___')
 
-  const handleSortChange = (sortType: 'year' | 'value', value: string) => {
-    setSortDetails({ sortType, value });
-  };
+  // const handleSortChange = (sortType: 'year' | 'value', value: string) => {
+  //   setSortDetails({ sortType, value });
+  // };
 
   const getFirstName = (fullName: string) => {
     return fullName.split(' ')[0];
@@ -48,67 +48,96 @@ const AdminHomePage = () => {
 
 
   const dataNNPC = [
-    { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
-    { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },
-    { month: 'Mar', 'Amount Sold': 150, Delivered: 120, Requests: 200, Revenue: 600 },
-    { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
-    { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
+    { month: 'Jan', 'Total Consumption': 120, },
+    { month: 'Feb', 'Total Consumption': 180, },
+    { month: 'Mar', 'Total Consumption': 150, },
+    { month: 'Apr', 'Total Consumption': 250, },
+    { month: 'May', 'Total Consumption': 300, },
+    { month: 'Jun', 'Total Consumption': 300, },
+    { month: 'Jul', 'Total Consumption': 320, },
+    { month: 'Aug', 'Total Consumption': 210, },
+    { month: 'Sep', 'Total Consumption': 300, },
+    { month: 'Oct', 'Total Consumption': 250, },
+    { month: 'Nov', 'Total Consumption': 340, },
+    { month: 'Dec', 'Total Consumption': 360, },
   ];
 
-  const chartColors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
+  const lineDataGraph = [
+    { month: 'Jan', 'Direct Consumption': 120, 'UJV Consumption': 110, 'Daily Volume Target': 130 },
+    { month: 'Feb', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
+    { month: 'Mar', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
+    { month: 'Apr', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
+    { month: 'May', 'Direct Consumption': 150, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
+    { month: 'Jun', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
+    { month: 'Jul', 'Direct Consumption': 120, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
+    { month: 'Aug', 'Direct Consumption': 110, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
+    { month: 'Sep', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
+    { month: 'Oct', 'Direct Consumption': 120, 'UJV Consumption': 150, 'Daily Volume Target': 130 },
+    { month: 'Nov', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
+    { month: 'Dec', 'Direct Consumption': 160, 'UJV Consumption': 170, 'Daily Volume Target': 130 },
+  ];
+
+  // const dataNNPC = [
+  //   { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
+  //   { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },
+  //   { month: 'Mar', 'Amount Sold': 150, Delivered: 120, Requests: 200, Revenue: 600 },
+  //   { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
+  //   { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
+  // ];
+  const chartColors = ['#8884d8', '#82ca9d', '#005828', '#ff7300'];
 
 
 
   const cardData = [
     {
-      title: 'Un-Verified Staff',
-      value: '2,305',
+      title: 'Staff',
+      value: '0',
       icon: <img src={images.contact} alt="staff icon" />,
 
     },
     {
       title: 'Pending Requests',
-      value: '32',
+      value: '0',
       icon: <img src={images.Requesticon} alt="request icon" />,
 
     },
     {
       title: 'Upcoming Site Visits',
-      value: '12',
+      value: '0',
       icon: <img src={images.zone} alt="zone icon" />,
     },
   ];
 
 
-  const dynamicCardData: DynamicCardDataItem[] = [
-    {
-      type: 'primary',
-      title: 'Total Supplied Volume ',
-      content: '12,129,243,990.00',
-      icon: <RestaurantMenuOutlined />,
-      yearOptions: [2020, 2021, 2022],
-      valueOptions: [
-        { label: 'Revenue', value: 'revenue' },
-        { label: 'Profit', value: 'profit' },
-      ],
-    },
-    {
-      type: 'secondary',
-      title: 'Total Consumption Volume ',
-      content: '4,039,213,455.00',
-      icon: <FileDownloadDoneOutlined />,
-      yearOptions: [2020, 2021, 2022],
-      valueOptions: [
-        { label: 'Profit', value: 'profit' },
-        { label: 'Revenue', value: 'revenue' },
-      ],
-    },
-  ];
+  // const dynamicCardData: DynamicCardDataItem[] = [
+  //   {
+  //     type: 'primary',
+  //     title: 'Total Supplied Volume ',
+  //     content: '12,129,243,990.00',
+  //     icon: <RestaurantMenuOutlined />,
+  //     yearOptions: [2020, 2021, 2022],
+  //     valueOptions: [
+  //       { label: 'Revenue', value: 'revenue' },
+  //       { label: 'Profit', value: 'profit' },
+  //     ],
+  //   },
+  //   {
+  //     type: 'secondary',
+  //     title: 'Total Consumption Volume ',
+  //     content: '4,039,213,455.00',
+  //     icon: <FileDownloadDoneOutlined />,
+  //     yearOptions: [2020, 2021, 2022],
+  //     valueOptions: [
+  //       { label: 'Profit', value: 'profit' },
+  //       { label: 'Revenue', value: 'revenue' },
+  //     ],
+  //   },
+  // ];
 
 
   const getIconStyles = (title: string) => {
     switch (title) {
-      case 'Un-Verified Staff':
+      case 'Staff':
         return { bgColor: 'bg-[#005828]', iconColor: 'text-white', };
       case 'Pending Requests':
         return { bgColor: 'bg-[#00AF50]', iconColor: 'text-white' };
@@ -122,17 +151,17 @@ const AdminHomePage = () => {
   const statisticCardData = [
     {
       label: 'Customers',
-      value: '554',
+      value: JSON.stringify(customers?.data.length) ?? '',
       primary: true,
     },
     {
       label: 'Suppliers',
-      value: '9',
+      value: '0',
       primary: false,
     },
     {
       label: 'Staff',
-      value: '8,307',
+      value: '0',
       primary: false,
     },
   ];
@@ -182,7 +211,7 @@ const AdminHomePage = () => {
               />
             ))}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[100%] mt-4">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[100%] mt-4">
             {dynamicCardData.map((card, index) => (
               <div key={index} className='mt-[15px]'>
                 <StatisticDynamicCard
@@ -196,12 +225,12 @@ const AdminHomePage = () => {
                 />
               </div>
             ))}
-          </div>
+          </div> */}
           <div >
             <Chart
               data={dataNNPC}
               chartType="bar"
-              yAxisLabel="NNPC"
+              yAxisLabel="Volume (mscf)"
               xAxisDataKey="month"
               colors={chartColors}
               title='Customer Consumption Chart'
@@ -215,7 +244,7 @@ const AdminHomePage = () => {
               <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
             </div>
           </div>
-          <div className='h-[1000px] overflow-y-auto'>
+          <div className='h-[400px] overflow-y-auto'>
             <div className='w-[100%] p-[10px] pt-[0px] '>
               {isLoading &&
                 <Loader className="text-nnpc-100 size-10 " />
@@ -240,9 +269,9 @@ const AdminHomePage = () => {
       <div>
         <div className='mt-[28px]'>
           <Chart
-            data={dataNNPC}
+            data={lineDataGraph}
             chartType="line"
-            yAxisLabel="NNPC"
+            yAxisLabel="Volume (mscf)"
             xAxisDataKey="month"
             colors={chartColors}
             title='Customer Consumption Chart'
