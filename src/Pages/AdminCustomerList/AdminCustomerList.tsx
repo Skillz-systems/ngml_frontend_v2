@@ -26,7 +26,7 @@ const AdminCustomerList: React.FC = () => {
 
     // const { data, isSuccess, isLoading } = useGetFormByIdQuery(1);
     // const { data, isSuccess, isLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
-    const { data, isSuccess, isLoading } = useGetFormByNameQuery('test/0/0');
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
     // const { data: dataFetch } = useGetDynamicFetchQuery('url')
     const { data: customers } = useGetCustomersQuery();
     const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation();
