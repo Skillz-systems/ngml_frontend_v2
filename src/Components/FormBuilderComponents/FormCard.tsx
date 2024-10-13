@@ -1,6 +1,5 @@
-import { FaEdit } from "react-icons/fa";
-import { Button } from "./ButtonComponent";
-import { useNavigate } from "react-router-dom";
+import { FaEdit } from 'react-icons/fa';
+import { Button } from './ButtonComponent';
 
 
 const FormCard = ({
@@ -8,7 +7,7 @@ const FormCard = ({
   formStatus,
   dateCreated,
   formDescription,
-  formId,
+  // formId,
 }: {
   formName: string;
   formStatus: string;
@@ -16,8 +15,8 @@ const FormCard = ({
   formDescription: string;
   formId?: number;
 }) => {
-  const navigate = useNavigate();
-  const openForm = () => navigate(`/admin/settings/formbuilder/${formId}`);
+  // const navigate = useNavigate();
+  // const openForm = () => navigate(`/admin/settings/formbuilder/${formId}`);
 
   return (
     <div className="w-[100%] md:w-[340px] bg-white px-3 py-4 md:px-6 border-[1.5px] border-dark-green/20 h-[200px] md:h-[190px] items-center justify-center flex flex-col border-dashed gap-4 rounded-lg">
@@ -27,9 +26,9 @@ const FormCard = ({
           <span className="text-sm text-gray-600">{dateCreated}</span>
         </div>
         <div
-          className={`flex items-center justify-center w-max px-2.5 py-0.5 text-xs text-white font-semibold rounded-md ${formStatus.toLowerCase() === "draft"
-              ? "bg-color-bright-red"
-              : "bg-light-green"
+          className={`flex items-center justify-center w-max px-2.5 py-0.5 text-xs text-white font-semibold rounded-md ${formStatus.toLowerCase() === '0'
+            ? 'bg-color-bright-red'
+            : 'bg-light-green'
             }`}
         >
           {formStatus}
@@ -40,7 +39,7 @@ const FormCard = ({
         <Button
           type="submit"
           className="w-full gap-2 font-semibold font-base"
-          onClick={openForm}
+        // onClick={openForm}
         >
           Edit form
           <FaEdit />

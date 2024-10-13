@@ -157,6 +157,15 @@ export const formBuilderApi = api.injectEndpoints({
       invalidatesTags: ['Forms'],
     
     }),
+    updateForm: builder.mutation<FormBuilderApiResponse, Partial<FormBuilderData>>({
+      query: (formData) => ({
+        url: '/formbuilder/api/forms/update/4',
+        method: 'PUT',
+        body: formData,
+      }),
+      invalidatesTags: ['Forms'],
+    
+    }),
 
     getForms: builder.query<FormBuilderApiResponse, void>({
       query: () => '/formbuilder/api/forms',
@@ -220,6 +229,7 @@ export const formBuilderApi = api.injectEndpoints({
 
 export const {
   useGetDynamicFetchQuery,
+  useUpdateFormMutation,
   useGetTagsQuery,
   useCreateFormMutation,
   useGetFormByEntityIdQuery,

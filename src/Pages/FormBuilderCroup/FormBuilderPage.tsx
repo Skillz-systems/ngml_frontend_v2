@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCreateFormMutation, useGetTagsQuery } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { Button } from '@/Components';
+import FormCard from '@/Components/FormBuilderComponents/FormCard';
+import Modal from '@/Components/Modal/Modal';
+import { useCreateFormMutation, useGetFormsQuery, useGetTagsQuery, useUpdateFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { useGetProcessFlowsQuery } from '@/Redux/Features/ProcessFlow/processFlowService';
 import { useGetLocationsQuery } from '@/Redux/Features/UserSettings/locationService';
 import { ArrowBack } from '@mui/icons-material';
@@ -8,7 +11,7 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { AiOutlineClear } from 'react-icons/ai';
 import { BsFillCalendarDateFill, BsTextareaResize } from 'react-icons/bs';
-import { FaFile, FaPencilAlt, FaSave, FaTimes, FaTrash } from 'react-icons/fa';
+import { FaFile, FaListUl, FaPencilAlt, FaSave, FaTimes, FaTrash } from 'react-icons/fa';
 import { FiEyeOff } from 'react-icons/fi';
 import { IoMdCheckbox } from 'react-icons/io';
 import {
@@ -38,6 +41,19 @@ interface FormInterface {
     tag_id?: string;
     json_form?: string;
     json_data: [];
+}
+
+interface FormData {
+    id?: number;
+    name: string;
+    description: string;
+    process_flow_id: string | number;
+    process_flow_step_id: string | number;
+    tag_id: string;
+    json_form: string;
+    json_data: any[];
+    status?: string;
+    created_at?: string;
 }
 
 interface FormElement {
@@ -150,6 +166,7 @@ const EditableFormElement = ({
     const [isEditing, setIsEditing] = useState(false);
     const [editedElement, setEditedElement] = useState<FormElement>(element);
     const { data: locations } = useGetLocationsQuery();
+
 
     const handleInputChange = (field: string, value: any) => {
         setEditedElement({
@@ -418,8 +435,41 @@ const EditableFormElement = ({
 };
 const FormBuilder = () => {
     const [formElements, setFormElements] = useState<FormElement[]>([]);
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { data: backendForms } = useGetFormsQuery();
+    // const [selectedForm, setSelectedForm] = useState(null);
+    const [selectedForm, setSelectedForm] = useState<FormData | null>(null);
     const [createForm, { isLoading }] = useCreateFormMutation();
+    const [updateForm] = useUpdateFormMutation();
+
+    // const handleFormSelection = (form: any) => {
+    //     setSelectedForm(form);
+    //     setForm({
+    //         name: form.name,
+    //         description: form.description,
+    //         process_flow_id: form.process_flow_id,
+    //         process_flow_step_id: form.process_flow_step_id,
+    //         tag_id: form.tag_id,
+    //         json_form: form.json_form,
+    //         json_data: form.json_data,
+    //     });
+    //     setFormElements(JSON.parse(form.json_form));
+    //     setIsModalOpen(false);
+    // };
+    const handleFormSelection = (form: FormData) => {
+        setSelectedForm(form);
+        setForm({
+            name: form.name,
+            description: form.description,
+            process_flow_id: form.process_flow_id,
+            process_flow_step_id: form.process_flow_step_id,
+            tag_id: form.tag_id,
+            json_form: form.json_form,
+            json_data: [],
+        });
+        setFormElements(JSON.parse(form.json_form));
+        setIsModalOpen(false);
+    };
     const [form, setForm] = useState<FormInterface>({
         name: '',
         description: '',
@@ -490,39 +540,72 @@ const FormBuilder = () => {
         setFormElements([]);
     };
 
+    //TODO old
+    // const handleSaveForm = async () => {
+    //     const newForm: FormInterface = {
+    //         name: form.name,
+    //         description: form.description,
+    //         process_flow_id: form.process_flow_id,
+    //         process_flow_step_id: form.process_flow_step_id,
+    //         tag_id: form.tag_id,
+    //         json_form: JSON.stringify(formElements),
+    //         // json_form: formElements,
+    //         json_data: [],
+    //     };
+    //     // console.log(formElements);
+
+    //     if (form?.name?.trim() === '' || form?.description?.trim() === '' || form?.process_flow_id === '' || form?.tag_id?.trim() === '' || form?.process_flow_step_id === '') {
+    //         toast.error('All field are required');
+
+    //         return;
+    //     }
+
+
+    //     try {
+    //         await createForm(newForm).unwrap();
+    //         // console.log(newForm)
+    //         toast.success('form created successfully!');
+    //     } catch (error) {
+    //         console.error('Error submitting the process flow:', error);
+    //         toast.error('Error creating form');
+    //     }
+
+    //     // alert('Form saved successfully!');
+    //     handleCreateNewForm();
+    // };
     const handleSaveForm = async () => {
-        const newForm: FormInterface = {
+        const formData = {
             name: form.name,
             description: form.description,
             process_flow_id: form.process_flow_id,
             process_flow_step_id: form.process_flow_step_id,
             tag_id: form.tag_id,
             json_form: JSON.stringify(formElements),
-            // json_form: formElements,
             json_data: [],
         };
-        // console.log(formElements);
 
         if (form?.name?.trim() === '' || form?.description?.trim() === '' || form?.process_flow_id === '' || form?.tag_id?.trim() === '' || form?.process_flow_step_id === '') {
-            toast.error('All field are required');
-
+            toast.error('All fields are required');
             return;
         }
 
-
         try {
-            await createForm(newForm).unwrap();
-            // console.log(newForm)
-            toast.success('form created successfully!');
+            if (selectedForm) {
+                // Update existing form
+                // await updateForm(selectedForm.id, formData).unwrap();
+                await updateForm(formData).unwrap();
+                toast.success('Form updated successfully!');
+            } else {
+                // Create new form
+                await createForm(formData).unwrap();
+                toast.success('Form created successfully!');
+            }
+            handleCreateNewForm();
         } catch (error) {
-            console.error('Error submitting the process flow:', error);
-            toast.error('Error creating form');
+            console.error('Error submitting the form:', error);
+            toast.error('Error saving form');
         }
-
-        // alert('Form saved successfully!');
-        handleCreateNewForm();
     };
-
     const [, drop] = useDrop(() => ({
         accept: ItemTypes.FORM_ELEMENT,
         drop: (item: { type: string; label: string }) => handleAddFormElement(item),
@@ -541,6 +624,14 @@ const FormBuilder = () => {
                     <h1 className="text-lg font-bold">Form Builder</h1>
                 </div> */}
                 <div className="flex space-x-2">
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="bg-nnpcmediumgreen-700 text-white px-2 py-1.5 rounded hover:bg-nnpcmediumgreen-950 flex items-center text-sm duration-200 ease-in transition-all"
+                    >
+                        <FaListUl className="mr-2" />
+                        <span className="">All Forms</span>
+                    </button>
+
                     <button
                         onClick={handleCreateNewForm}
                         className="bg-nnpc-800 text-white px-2 py-1.5 rounded hover:bg-red-800 flex items-center text-sm duration-200 ease-in transition-all"
@@ -696,6 +787,49 @@ const FormBuilder = () => {
                         />
                     ))}
                 </div>
+                <Modal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    size='large'
+                    title='List of Forms'
+                    subTitle=''
+                    buttons={[
+                        <div key="modal-buttons" className='flex gap-2 mb-[-10px]'>
+                            <div className='w-[120px]'>
+                                <Button
+                                    type="outline"
+                                    label="Cancel"
+                                    action={() => setIsModalOpen(false)}
+                                    color="#FFFFFF"
+                                    fontStyle="italic"
+                                    width="100%"
+                                    height="40px"
+                                    fontSize="16px"
+                                    radius="20px"
+                                />
+                            </div>
+
+                        </div>
+                    ]}
+                >
+                    <div className="grid grid-cols-2 gap-6">
+                        {Array.isArray(backendForms?.data) && backendForms?.data.map((form: FormData) => (
+                            <div
+                                key={form?.id}
+                                onClick={() => handleFormSelection(form)}
+                                className="cursor-pointer hover:bg-green-50 transition-colors duration-200"
+                            >
+                                <FormCard
+                                    formName={form?.name ?? ''}
+                                    formStatus={form?.status ?? ''}
+                                    dateCreated={form?.created_at ?? '15 days ago'}
+                                    formDescription={form?.id ?? ''}
+                                // formId={form?.id ?? ''}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </Modal>
             </div>
         </div>
     );
