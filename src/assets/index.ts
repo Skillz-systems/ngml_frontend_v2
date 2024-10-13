@@ -12,6 +12,8 @@ import emailicons from './images/emailIcons.png';
 import eyeicons from './images/eyeIcons.png';
 import greenicon from './images/greenIcon.png';
 import guy from './images/guy.jpeg';
+import ngmlPortrait from './images/loaders/ngml_portrait.gif';
+import ngmlSquare from './images/loaders/ngml_square.gif';
 import nnpc from './images/nnpc.png';
 import nnpclogo from './images/nnpclogo.png';
 import AltDownArrow from './images/png-icons/AltDownArrow.png';
@@ -61,6 +63,8 @@ import send from './images/png-icons/send.png';
 import uploadSvg from './images/svg-icons/Uploadngml.svg';
 import paper from './images/svg-icons/paper.svg';
 const images = {
+  ngmlPortrait,
+  ngmlSquare,
   Cancelicon,
   cancelIcon,
   Picture,

@@ -6,6 +6,7 @@ import { Button } from '@/Components';
 import { setCredentials } from '@/Redux/Features/Auth/authSlice';
 import { useAppDispatch } from '@/Redux/hooks';
 import { ToastContainer } from 'react-toastify';
+import images from '../../assets/index';
 
 
 interface User {
@@ -79,17 +80,47 @@ const SSOCallback = () => {
 
 
 
+    // if (isLoading) {
+    //     return (
+
+    //         <div className="min-h-screen flex items-center justify-center flex-col bg-white w-[100%]">
+    //             <ToastContainer />
+
+    //             <img src={images.ngmlSquare} className='w-full h-full' alt="loader" />
+
+    //             {/* <div className="animate-pulse text-white text-xl">
+
+    //                 Processing ....
+    //             </div> */}
+    //         </div>
+
+    //         // <div className="min-h-screen flex items-center justify-center flex-col logingradient-bg w-[100%]">
+    //         //     <ToastContainer />
+
+    //         //     <div className="animate-pulse text-white text-xl">
+
+    //         //         Processing ....
+    //         //     </div>
+    //         // </div>
+    //     )
+    // }
+
     if (isLoading) {
         return (
-            <div className="min-h-screen flex items-center justify-center flex-col logingradient-bg w-[100%]">
+            <div className="min-h-screen flex items-center justify-center bg-white w-full h-full">
                 <ToastContainer />
-
-                <div className="animate-pulse text-white text-xl">
-
-                    Processing ....
+                <div
+                    className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${images.ngmlSquare})` }}
+                >
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="animate-pulse text-white text-xl">
+                            Processing...
+                        </div>
+                    </div>
                 </div>
             </div>
-        )
+        );
     }
 
     if (error) {
