@@ -538,6 +538,14 @@ const FormBuilder = () => {
             process_flow_step_id: ''
         });
         setFormElements([]);
+        setSelectedForm(null);
+    };
+
+    const getButtonLabel = () => {
+        if (isLoading) {
+            return selectedForm ? 'Updating...' : 'Creating...';
+        }
+        return selectedForm ? 'Update Form' : 'Create Form';
     };
 
     //TODO old
@@ -592,8 +600,9 @@ const FormBuilder = () => {
         try {
             if (selectedForm) {
                 // Update existing form
-                // await updateForm(selectedForm.id, formData).unwrap();
-                await updateForm(formData).unwrap();
+                // await updateForm({selectedForm.id, ...formData}).unwrap();
+                await updateForm({ id: selectedForm.id, ...formData }).unwrap();
+                // await updateForm(formData).unwrap();
                 toast.success('Form updated successfully!');
             } else {
                 // Create new form
@@ -614,23 +623,25 @@ const FormBuilder = () => {
     return (
         <div className="flex flex-col h-full bg-transparent w-full rounded-xl">
             <div className="flex items-center justify-between p-1 mb-2 ">
+                {/* <Link to={'/admin/settings'}>
+                    <div className="flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]">
+                        <ArrowBack color="success" style={{ fontSize: 'medium' }} />
+                    </div>
+                </Link> */}
                 <Link to={'/admin/settings'}>
                     <div className="flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]">
                         <ArrowBack color="success" style={{ fontSize: 'medium' }} />
                     </div>
                 </Link>
+                <h1 className="text-lg font-bold">
+                    {selectedForm ? `Editing Form: ${selectedForm.name}` : 'Form Builder'}
+                </h1>
 
                 {/* <div>
                     <h1 className="text-lg font-bold">Form Builder</h1>
                 </div> */}
                 <div className="flex space-x-2">
-                    <button
-                        onClick={() => setIsModalOpen(true)}
-                        className="bg-nnpcmediumgreen-700 text-white px-2 py-1.5 rounded hover:bg-nnpcmediumgreen-950 flex items-center text-sm duration-200 ease-in transition-all"
-                    >
-                        <FaListUl className="mr-2" />
-                        <span className="">All Forms</span>
-                    </button>
+
 
                     <button
                         onClick={handleCreateNewForm}
@@ -639,13 +650,40 @@ const FormBuilder = () => {
                         <AiOutlineClear className="mr-2" />
                         <span className="">Reset Form</span>
                     </button>
-                    <button
+
+
+                    {!selectedForm ? (
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="bg-nnpcmediumgreen-700 text-white px-2 py-1.5 rounded hover:bg-nnpcmediumgreen-950 flex items-center text-sm duration-200 ease-in transition-all"
+                        >
+                            <FaListUl className="mr-2" />
+                            <span className="">All Forms</span>
+                        </button>
+                    ) : (
+                        <button
+                            onClick={handleCreateNewForm}
+                            className="w-fit px-2 py-1.5 duration-200 ease-in transition-all bg-gray-500 text-white rounded hover:bg-gray-600 flex items-center text-sm"
+                        >
+                            <FaTimes className="mr-2" /> Cancel Edit
+                        </button>
+                    )}
+                    {/* <button
                         onClick={handleSaveForm}
                         disabled={isLoading}
                         className="w-fit px-2 py-1.5 duration-200 ease-in transition-all bg-green-900 text-white rounded hover:bg-green-800 flex items-center text-sm disabled:cursor-not-allowed disabled:opacity-70"
                     >
                         <span className="sr-only">Create form</span>
+
                         <FaSave className="mr-2" /> {isLoading ? 'Creating...' : 'Create Form'}
+                    </button> */}
+                    <button
+                        onClick={handleSaveForm}
+                        disabled={isLoading}
+                        className="w-fit px-2 py-1.5 duration-200 ease-in transition-all bg-green-900 text-white rounded hover:bg-green-800 flex items-center text-sm disabled:cursor-not-allowed disabled:opacity-70"
+                    >
+                        <span className="sr-only">{getButtonLabel()}</span>
+                        <FaSave className="mr-2" /> {getButtonLabel()}
                     </button>
                 </div>
             </div>
@@ -812,19 +850,19 @@ const FormBuilder = () => {
                         </div>
                     ]}
                 >
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-3 gap-6">
                         {Array.isArray(backendForms?.data) && backendForms?.data.map((form: FormData) => (
                             <div
                                 key={form?.id}
                                 onClick={() => handleFormSelection(form)}
                                 className="cursor-pointer hover:bg-green-50 transition-colors duration-200"
                             >
+
+
                                 <FormCard
                                     formName={form?.name ?? ''}
-                                    formStatus={form?.status ?? ''}
-                                    dateCreated={form?.created_at ?? '15 days ago'}
-                                    formDescription={form?.id ?? ''}
-                                // formId={form?.id ?? ''}
+
+                                    formDescription={form?.description ?? ''}
                                 />
                             </div>
                         ))}
