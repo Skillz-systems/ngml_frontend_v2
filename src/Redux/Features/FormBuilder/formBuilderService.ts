@@ -7,8 +7,8 @@ import { api } from '../../api';
 
 
 interface Option {
-    label: string;
-    value: string;
+  label: string;
+  value: string;
 }
 
 export interface FormField {
@@ -20,7 +20,7 @@ export interface FormField {
   options?: Option[];
   required?: boolean;
   value?: string;
-  url?:string;
+  url?: string;
 }
 
 export interface FormBuilderData {
@@ -155,39 +155,60 @@ export const formBuilderApi = api.injectEndpoints({
         body: formData,
       }),
       invalidatesTags: ['Forms'],
-    
+
+    }),
+    // updateForm: builder.mutation<FormBuilderApiResponse, Partial<FormBuilderData>>({
+
+    //   query: (formData) => ({
+    //     url: `/formbuilder/api/forms/update/${formData.id}`,
+    //     method: 'PUT',
+    //     body: formData,
+    //   }),
+    //   invalidatesTags: ['Forms'],
+
+    // }),
+    updateForm: builder.mutation<FormBuilderApiResponse, Partial<FormBuilderData>>({
+      query: (formData) => {
+        const { id, ...bodyData } = formData;
+        return {
+          url: `/formbuilder/api/forms/update/${id}`,
+          method: 'PUT',
+          body: bodyData,
+        };
+      },
+      invalidatesTags: ['Forms'],
     }),
 
     getForms: builder.query<FormBuilderApiResponse, void>({
       query: () => '/formbuilder/api/forms',
       providesTags: ['Forms'],
-     
+
     }),
     getDynamicFetch: builder.query<any, any>({
       query: (url) => `/${url}`,
       providesTags: ['DynamicContent'],
-     
+
     }),
-     getTags: builder.query<any, void>({
+    getTags: builder.query<any, void>({
       query: () => '/formbuilder/api/tag',
       providesTags: ['Tags'],
-   
+
     }),
     getFormById: builder.query<FormBuilderApiResponse, number>({
       query: (id) => `/formbuilder/api/forms/${id}`,
       providesTags: ['Forms'],
-     
+
     }),
     getFormByEntityId: builder.query<ApiResponseTwo, string>({
       query: (url) => `/formbuilder/api/forms/view/${url}`,
       providesTags: ['Forms'],
-    
+
     }),
 
-     getFormByName: builder.query<FormBuilderApiResponse, string>({
+    getFormByName: builder.query<FormBuilderApiResponse, string>({
       query: (name) => `/formbuilder/api/forms/view/${name}`,
       providesTags: ['Forms'],
-    
+
     }),
 
     submitForm: builder.mutation<FormSubmission, FormSubmission>({
@@ -220,6 +241,7 @@ export const formBuilderApi = api.injectEndpoints({
 
 export const {
   useGetDynamicFetchQuery,
+  useUpdateFormMutation,
   useGetTagsQuery,
   useCreateFormMutation,
   useGetFormByEntityIdQuery,
