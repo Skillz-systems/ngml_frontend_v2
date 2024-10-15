@@ -1,7 +1,10 @@
 import { Button, Heading } from '@/Components';
+import { FormField, useGetFormByNameQuery } from '@/Redux/Features/FormBuilder/formBuilderService';
 import colors from '@/Utils/colors';
 import { ContentPasteOutlined } from '@mui/icons-material';
 import { Box } from '@mui/material';
+import { Fragment, useEffect, useState } from 'react';
+import FormInput from '../Custominput/FormInput';
 
 interface EoiRequestTemplateprops {
     dateTime?: string;
@@ -16,6 +19,11 @@ interface EoiRequestTemplateprops {
     disapprovalReason?: string;
 }
 
+type CustomerData = {
+    [key: string]: string | File | null;
+};
+
+
 const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
     dateTime,
     status,
@@ -28,6 +36,53 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
     approverName,
     disapprovalReason,
 }) => {
+
+    const [customerForm, setCustomerForm] = useState<FormField[]>([]);
+    const [customerData, setCustomerData] = useState<CustomerData>({});
+    const [formError,] = useState<string>('');
+
+
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery('EOIform');
+
+
+    useEffect(() => {
+        if (isSuccess && data) {
+            let parsedForm;
+            try {
+                parsedForm = JSON.parse(data.data.json_form);
+                setCustomerForm(parsedForm);
+
+                const initialData = parsedForm.reduce((acc: CustomerData, field: FormField) => {
+                    if (field.name) {
+                        acc[field.name] = '';
+                        if (field.type === 'file') {
+                            acc[`${field.name}`] = null;
+                        }
+                    }
+                    return acc;
+                }, {});
+
+                setCustomerData(initialData);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                setCustomerForm([]);
+            }
+        }
+    }, [data, isSuccess]);
+
+
+
+    const handleInputChange = (field: string, value: string | File | null) => {
+        if (value instanceof File) {
+            setCustomerData(prev => ({
+                ...prev,
+                [field]: value,
+            }));
+        } else {
+            setCustomerData(prev => ({ ...prev, [field]: value || '' }));
+        }
+    };
+
 
     const renderStatusContent = () => {
         switch (status) {
@@ -124,11 +179,39 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
             <div className='h-100% w-[100%] bg-[#FFFFFF] flex items-center justify-center p-[10px]'>
                 <div className='border border-[#E2E4EB] w-[100%] h-fit rounded-[12px] p-[20px] pt-[10px] flex flex-col gap-y-[10px]'>
                     <div className='text-[#828DA9] text-[16px] font-[700]'>REASON FOR REQUEST</div>
-                    <textarea className='text-[#050505] text-[16px] h-[340px] outline-none font-[500] rounded-md' placeholder='Enter your reason here...'></textarea>
-                </div>
+                    {formError && <p className="text-red-500 mb-4">{formError}</p>}
+                {isLoading ? (
+                    <p>Loading form fields...</p>
+                ) : customerForm.length > 0 ? (
+                    customerForm.map((form) => (
+                        <Fragment key={form.id}>
+                            <FormInput
+                                type={form?.type}
+                                label={form.label ?? form.name}
+                                value={
+                                    form.type === 'file'
+                                        ? (customerData[form.name as keyof typeof customerData] as string || '')
+                                        : (customerData[form.name as keyof typeof customerData] as string || '')
+                                }
+                                required={form?.required}
+                                onChange={(value: string | File | null) => handleInputChange(form?.name as string, value)}
+                                placeholder={form.placeholder}
+                                options={form.options?.map(opt =>
+                                    typeof opt === 'string'
+                                        ? { label: opt, value: opt }
+                                        : opt
+                                )}
+                                maxSizeMB={10}
+                            />
+                        </Fragment>
+                    ))
+                ) : (
+                    <p>No form fields available.</p>
+                )}                </div>
             </div>
             <div className='h-fit p-[20px] bg-[#FFF3D5] ' >
                 <div>{renderStatusContent()}</div>
+               
             </div>
 
         </div>

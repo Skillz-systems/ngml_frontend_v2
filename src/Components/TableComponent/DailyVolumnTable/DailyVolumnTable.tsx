@@ -122,29 +122,29 @@ const DailyVolumnTable = () => {
                 </div>
             ),
         },
-        // {
-        //     field: 'date',
-        //     headerName: 'DATE',
-        //     flex: 1,
-        //     renderCell: (params: GridRenderCellParams) => (
-        //         <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-        //             {params.row.datesent}
-        //         </div>
-        //     ),
-        // },
-        // {
-        //     field: 'volume',
-        //     headerName: 'VOLUME (MILLION CUBIC FEET)',
-        //     flex: 1,
-        //     renderCell: (params: GridRenderCellParams) => (
-        //         <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
-        //             {params.row.volume}
-        //         </div>
-        //     ),
-        // },
+        {
+            field: 'date',
+            headerName: 'DATE',
+            flex: 1,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
+                    {params.row.datesent}
+                </div>
+            ),
+        },
+        {
+            field: 'volume',
+            headerName: 'VOLUME (MILLION CUBIC FEET)',
+            flex: 1,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
+                    {params.row.volume}
+                </div>
+            ),
+        },
         {
             field: 'created_at',
-            headerName: 'CREATED AT',
+            headerName: 'DATE',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
@@ -154,7 +154,7 @@ const DailyVolumnTable = () => {
         },
         {
             field: 'updated_at',
-            headerName: 'UPDATED AT',
+            headerName: 'VALUE',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3'>

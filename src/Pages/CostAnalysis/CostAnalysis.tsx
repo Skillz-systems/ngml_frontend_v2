@@ -1,7 +1,13 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, DocumentCard, FileUploadInput, Modal } from '../../Components/index';
 import images from '../../assets/index';
+import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
+import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+import { convertFileToBase64 } from '@/Utils/base64Converter';
+import FormInput from '@/Components/Custominput/FormInput';
+import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 
 interface CardDataItem {
     type: 'withLink' | 'withoutLink' | 'withReport';
@@ -14,13 +20,60 @@ interface CardDataItem {
     height: number | string;
 }
 
+type CustomerData = {
+    [key: string]: string | File | null;
+};
+
 const CostAnalysis: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [customerForm, setCustomerForm] = useState<FormField[]>([]);
+    const [customerData, setCustomerData] = useState<CustomerData>({});
+    const [formError, setFormError] = useState<string>('');
+
     const navigate = useNavigate();
     const location = useLocation();
 
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery('customeranalysisform');
+    const [submitForm, { isSuccess: submitSuccess }] = useSubmitFormMutation();
+
+
+    useEffect(() => {
+        if (isSuccess && data) {
+            let parsedForm;
+            try {
+                parsedForm = JSON.parse(data.data.json_form);
+                setCustomerForm(parsedForm);
+
+                const initialData = parsedForm.reduce((acc: CustomerData, field: FormField) => {
+                    if (field.name) {
+                        acc[field.name] = '';
+                        if (field.type === 'file') {
+                            acc[`${field.name}`] = null;
+                        }
+                    }
+                    return acc;
+                }, {});
+
+                setCustomerData(initialData);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                setCustomerForm([]);
+            }
+        }
+    }, [data, isSuccess]);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            const allFilled = areRequiredFieldsFilled(customerForm, customerData);
+            if (!allFilled) return;
+
+        }
+    }, [customerData, isModalOpen, customerForm]);
+
+
     const toggleModal = (open: boolean) => {
         setIsModalOpen(open);
+        setFormError('');
         const searchParams = new URLSearchParams(location.search);
 
         if (open) {
@@ -32,8 +85,82 @@ const CostAnalysis: React.FC = () => {
         navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
     };
 
-    const handleCreateCustomer = () => {
-        // Handle create customer logic
+    const handleChange = (field: string, value: string | File | null) => {
+        if (value instanceof File) {
+            setCustomerData(prev => ({
+                ...prev,
+                [field]: value,
+            }));
+        } else {
+            setCustomerData(prev => ({ ...prev, [field]: value || '' }));
+        }
+    };
+
+    const handleUploadCapex = async () => {
+        if (!areRequiredFieldsFilled(customerForm, customerData)) {
+            setFormError('Please fill all required fields.');
+            return;
+        }
+
+        try {
+            setFormError('');
+
+            const formFieldAnswers = await Promise.all(
+                customerForm.map(async (field) => {
+                    const value = customerData[field.name as keyof typeof customerData];
+
+                    if (field.type === 'file' && value instanceof File) {
+                        try {
+                            console.log(`Attempting to convert file: ${field.name}`, value);
+                            const base64File = await convertFileToBase64(value);
+                            console.log(`Base64 for ${field.name} (first 100 chars):`, base64File.substring(0, 100));
+                            return {
+                                id: field.id,
+                                elementType: field.type,
+                                name: field.name || field.id.toString(),
+                                placeholder: field.placeholder || '',
+                                key: field.name || '',
+                                value: base64File
+                            };
+                        } catch (error) {
+                            console.error(`Error converting ${field.name} to Base64:`, error);
+                            return null;
+                        }
+                    } else {
+                        return {
+                            id: field.id,
+                            elementType: field.type,
+                            name: field.name || field.id.toString(),
+                            placeholder: field.placeholder || '',
+                            key: field.name || '',
+                            value: value || ''
+                        };
+                    }
+                })
+            );
+
+            const validFormFieldAnswers = formFieldAnswers.filter(answer => answer !== null);
+
+            console.log('Form Field Answers:', validFormFieldAnswers);
+
+            const payload = {
+                form_builder_id: data?.data?.id?.toString() || '',
+                name: data?.data?.name || '',
+                process_flow_id: data?.data?.process_flow_id?.toString() || '',
+                process_flow_step_id: data?.data?.process_flow_step_id?.toString() || '',
+                tag_id: data?.data?.tag_id || '',
+                form_field_answers: JSON.stringify(validFormFieldAnswers),
+            };
+
+            console.log('Payload:', payload);
+
+            await submitForm(payload).unwrap();
+
+            if (submitSuccess) toggleModal(false);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setFormError('An error occurred while submitting the form. Please try again.');
+        }
     };
 
     const costAnalysisCardDataTwo: CardDataItem[] = [
@@ -117,7 +244,7 @@ const CostAnalysis: React.FC = () => {
                             <Button
                                 type="secondary"
                                 label="Confirm"
-                                action={handleCreateCustomer}
+                                action={handleUploadCapex}
                                 color="#FFFFFF"
                                 fontStyle="italic"
                                 width="100%"
@@ -129,11 +256,36 @@ const CostAnalysis: React.FC = () => {
                     </div>
                 ]}
             >
-                <FileUploadInput
-                    title=''
-                    maxSizeMB={25}
-                    fileDescription="Only .xlxs file accepted"
-                />
+               {formError && <p className="text-red-500 mb-4">{formError}</p>}
+                {isLoading ? (
+                    <p>Loading form fields...</p>
+                ) : customerForm.length > 0 ? (
+                    customerForm.map((form) => (
+                        <Fragment key={form.id}>
+                            <FormInput
+                                type={form?.type}
+                                label={form.label ?? form.name}
+                                value={
+                                    form.type === 'file'
+                                        ? (customerData[form.name as keyof typeof customerData] as string || '')
+                                        : (customerData[form.name as keyof typeof customerData] as string || '')
+                                }
+                                required={form?.required}
+                                onChange={(value) => handleChange(form?.name as string, value)}
+                                placeholder={form.placeholder}
+                                options={form.options?.map(opt =>
+                                    typeof opt === 'string'
+                                        ? { label: opt, value: opt }
+                                        : opt
+                                )}
+                                maxSizeMB={10}
+                                allowedFileTypes={[FileType.PDF]}
+                            />
+                        </Fragment>
+                    ))
+                ) : (
+                    <p>No form fields available.</p>
+                )}
             </Modal>
         </div>
     );

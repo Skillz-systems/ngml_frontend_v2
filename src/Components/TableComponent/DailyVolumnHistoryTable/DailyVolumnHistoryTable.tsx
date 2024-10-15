@@ -100,16 +100,16 @@ const DailyVolumnHistoryTable = () => {
                 </div>
             )
         },
-        {
-            field: 'rate',
-            headerName: 'RATE (NGN)',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.rate}
-                </div>
-            )
-        },
+        // {
+        //     field: 'rate',
+        //     headerName: 'RATE (NGN)',
+        //     flex: 1,
+        //     renderCell: (params) => (
+        //         <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
+        //             {params.row.rate}
+        //         </div>
+        //     )
+        // },
         {
             field: 'value',
             headerName: 'VALUE (MILLION CUBIC FEET)',
@@ -121,16 +121,16 @@ const DailyVolumnHistoryTable = () => {
             )
         },
 
-        {
-            field: 'amount',
-            headerName: 'AMOUNT',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.amount}
-                </div>
-            )
-        },
+        // {
+        //     field: 'amount',
+        //     headerName: 'AMOUNT',
+        //     flex: 1,
+        //     renderCell: (params) => (
+        //         <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
+        //             {params.row.amount}
+        //         </div>
+        //     )
+        // },
 
     ]
 
