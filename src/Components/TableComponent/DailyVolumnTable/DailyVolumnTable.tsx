@@ -152,16 +152,16 @@ const DailyVolumnTable = () => {
         //         </div>
         //     ),
         // },
-        {
-            field: 'updated_at',
-            headerName: 'VALUE',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
-                    {params.row.updated_at}
-                </div>
-            ),
-        },
+        // {
+        //     field: 'updated_at',
+        //     headerName: 'VALUE',
+        //     flex: 1,
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
+        //             {params.row.updated_at}
+        //         </div>
+        //     ),
+        // },
         {
             field: 'status',
             headerName: 'STATUS',
