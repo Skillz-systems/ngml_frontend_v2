@@ -107,10 +107,10 @@ const SSOCallback = () => {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-white w-full h-full">
+            <div className="h-screen flex items-center justify-center bg-white w-screen">
                 <ToastContainer />
                 <div
-                    className="absolute inset-0 bg-contain bg-center bg-no-repeat w-full h-full"
+                    className="absolute inset-0 bg-contain bg-center bg-no-repeat w-fit h-fit"
                     style={{ backgroundImage: `url(${images.ngmlBlank})` }}
                 >
                     {/* <div className="absolute inset-0 flex items-center justify-center">
@@ -159,6 +159,16 @@ const SSOCallback = () => {
             <div className="animate-pulse text-white text-xl">
                 Completing authentication...
             </div>
+            <Button
+                type="primary"
+                label='Return to Login'
+                action={() => navigate('/sso')}
+                color="#FFFFFF"
+                width="100%"
+                height="48px"
+                fontSize="16px"
+                radius="32px"
+            />
         </div>
     </div>
 };
