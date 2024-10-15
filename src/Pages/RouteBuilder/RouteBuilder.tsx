@@ -2,6 +2,7 @@
 
 import { Button, Heading, Modal } from '@/Components';
 import { useCreateRouteMutation, useDeleteRouteMutation, useGetRoutesQuery } from '@/Redux/Features/RouteBuilder/routeService';
+import { convertToDynamicContentArray } from '@/Utils/convertToDynamicContentArray';
 // import { getRouteLists } from '@/Routes/Admin';
 import { ArrowBack } from '@mui/icons-material';
 
@@ -22,21 +23,14 @@ const RouteBuilder = () => {
     const [createRoute, { isLoading: creating }] = useCreateRouteMutation();
     const [deleteRoute] = useDeleteRouteMutation();
 
-    // const routeOptions = getRouteLists();
 
-    // Handles creation of a new route
-
-    // const handleDynamicContent =()=>{
-    //     const jsonContent = dynamicContent.split(',');
-    //     return jsonContent;
-    // }
     const handleCreateRoute = async () => {
         try {
             await createRoute({
                 name: routeName,
                 link: `https://ngml.skillzserver.com/${routeLink}`,
                 status: 1,
-                dynamic_content: dynamicContent
+                dynamic_content: convertToDynamicContentArray(dynamicContent)
             }).unwrap();
             setIsModalOpen(false);
             setRouteName('');

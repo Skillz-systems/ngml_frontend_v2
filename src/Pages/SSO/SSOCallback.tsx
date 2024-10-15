@@ -111,7 +111,7 @@ const SSOCallback = () => {
                 <ToastContainer />
                 <div
                     className="absolute inset-0 bg-contain bg-center bg-no-repeat w-full h-full"
-                    style={{ backgroundImage: `url(${images.ngmlSquare})` }}
+                    style={{ backgroundImage: `url(${images.ngmlBlank})` }}
                 >
                     {/* <div className="absolute inset-0 flex items-center justify-center">
                         <div className="animate-pulse text-white text-xl">
