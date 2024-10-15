@@ -12,6 +12,7 @@ import emailicons from './images/emailIcons.png';
 import eyeicons from './images/eyeIcons.png';
 import greenicon from './images/greenIcon.png';
 import guy from './images/guy.jpeg';
+import ngmlBlank from './images/loaders/ngml_blank.gif';
 import ngmlPortrait from './images/loaders/ngml_portrait.gif';
 import ngmlSquare from './images/loaders/ngml_square.gif';
 import nnpc from './images/nnpc.png';
@@ -137,7 +138,8 @@ const images = {
   newLogo,
   avatarLogo,
   uploadSvg,
-  paper
+  paper,
+  ngmlBlank
 };
 
 export default images;
