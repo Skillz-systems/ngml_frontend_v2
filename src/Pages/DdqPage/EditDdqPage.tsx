@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { FormField, useGetFormByNameQuery } from '@/Redux/Features/FormBuilder/formBuilderService';
 import FormInput from '@/Components/Custominput/FormInput';
-import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
+// import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
-import { convertFileToBase64 } from '@/Utils/base64Converter';
+// import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 
 
@@ -20,10 +20,10 @@ interface EditModalContentProps {
 const EditDdqPage: React.FC<EditModalContentProps> = () => {
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
-    const [formError, setFormError] = useState<string>('');
+    const [formError,] = useState<string>('');
 
     const { data, isSuccess, isLoading } = useGetFormByNameQuery('Editddqupload');
-    const [submitForm] = useSubmitFormMutation();
+    // const [submitForm] = useSubmitFormMutation();
     
 
 
@@ -83,74 +83,74 @@ const EditDdqPage: React.FC<EditModalContentProps> = () => {
 
 
 
-    const handleCreateCustomer = async () => {
+    // const handleCreateCustomer = async () => {
 
-        if (!areRequiredFieldsFilled(customerForm, customerData)) {
-            setFormError('Please fill all required fields.');
-            return;
-        }
+    //     if (!areRequiredFieldsFilled(customerForm, customerData)) {
+    //         setFormError('Please fill all required fields.');
+    //         return;
+    //     }
 
-        try {
-            setFormError('');
+    //     try {
+    //         setFormError('');
 
-            const formFieldAnswers = await Promise.all(
-                customerForm.map(async (field) => {
-                    const value = customerData[field.name as keyof typeof customerData];
+    //         const formFieldAnswers = await Promise.all(
+    //             customerForm.map(async (field) => {
+    //                 const value = customerData[field.name as keyof typeof customerData];
 
-                    if (field.type === 'file' && value instanceof File) {
-                        try {
-                            console.log(`Attempting to convert file: ${field.name}`, value);
-                            const base64File = await convertFileToBase64(value);
-                            console.log(`Base64 for ${field.name} (first 100 chars):`, base64File.substring(0, 100));
-                            return {
-                                id: field.id,
-                                elementType: field.type,
-                                name: field.name || field.id.toString(),
-                                placeholder: field.placeholder || '',
-                                key: field.name || '',
-                                value: base64File
-                            };
-                        } catch (error) {
-                            console.error(`Error converting ${field.name} to Base64:`, error);
-                            return null;
-                        }
-                    } else {
-                        return {
-                            id: field.id,
-                            elementType: field.type,
-                            name: field.name || field.id.toString(),
-                            placeholder: field.placeholder || '',
-                            key: field.name || '',
-                            value: value || ''
-                        };
-                    }
-                })
-            );
+    //                 if (field.type === 'file' && value instanceof File) {
+    //                     try {
+    //                         console.log(`Attempting to convert file: ${field.name}`, value);
+    //                         const base64File = await convertFileToBase64(value);
+    //                         console.log(`Base64 for ${field.name} (first 100 chars):`, base64File.substring(0, 100));
+    //                         return {
+    //                             id: field.id,
+    //                             elementType: field.type,
+    //                             name: field.name || field.id.toString(),
+    //                             placeholder: field.placeholder || '',
+    //                             key: field.name || '',
+    //                             value: base64File
+    //                         };
+    //                     } catch (error) {
+    //                         console.error(`Error converting ${field.name} to Base64:`, error);
+    //                         return null;
+    //                     }
+    //                 } else {
+    //                     return {
+    //                         id: field.id,
+    //                         elementType: field.type,
+    //                         name: field.name || field.id.toString(),
+    //                         placeholder: field.placeholder || '',
+    //                         key: field.name || '',
+    //                         value: value || ''
+    //                     };
+    //                 }
+    //             })
+    //         );
 
-            const validFormFieldAnswers = formFieldAnswers.filter(answer => answer !== null);
+    //         const validFormFieldAnswers = formFieldAnswers.filter(answer => answer !== null);
 
-            console.log('Form Field Answers:', validFormFieldAnswers);
+    //         console.log('Form Field Answers:', validFormFieldAnswers);
 
-            const payload = {
-                form_builder_id: data?.data?.id?.toString() || '',
-                name: data?.data?.name || '',
-                process_flow_id: data?.data?.process_flow_id?.toString() || '',
-                process_flow_step_id: data?.data?.process_flow_step_id?.toString() || '',
-                tag_id: data?.data?.tag_id || '',
-                form_field_answers: JSON.stringify(validFormFieldAnswers),
-            };
+    //         const payload = {
+    //             form_builder_id: data?.data?.id?.toString() || '',
+    //             name: data?.data?.name || '',
+    //             process_flow_id: data?.data?.process_flow_id?.toString() || '',
+    //             process_flow_step_id: data?.data?.process_flow_step_id?.toString() || '',
+    //             tag_id: data?.data?.tag_id || '',
+    //             form_field_answers: JSON.stringify(validFormFieldAnswers),
+    //         };
 
-            console.log('Payload:', payload);
+    //         console.log('Payload:', payload);
 
-            await submitForm(payload).unwrap();
+    //         await submitForm(payload).unwrap();
         
 
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            setFormError('An error occurred while submitting the form. Please try again.');
-        }
+    //     } catch (error) {
+    //         console.error('Error submitting form:', error);
+    //         setFormError('An error occurred while submitting the form. Please try again.');
+    //     }
 
-    };
+    // };
 
 
     return (
