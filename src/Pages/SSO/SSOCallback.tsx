@@ -107,10 +107,9 @@ const SSOCallback = () => {
 
     if (isLoading) {
         return (
-            <div className="h-screen flex items-center justify-center bg-white w-screen">
-                <ToastContainer />
+            <div className="h-screen flex items-center justify-center bg-white w-screen ">
                 <div
-                    className="absolute inset-0 bg-contain bg-center bg-no-repeat w-fit h-fit"
+                    className="absolute inset-0 bg-contain bg-center bg-no-repeat w-full h-full"
                     style={{ backgroundImage: `url(${images.ngmlBlank})` }}
                 >
                     {/* <div className="absolute inset-0 flex items-center justify-center">
@@ -138,7 +137,7 @@ const SSOCallback = () => {
                     <Button
                         type="primary"
                         label='Return to Login'
-                        action={() => navigate('/sso')}
+                        action={() => navigate('/')}
                         color="#FFFFFF"
                         width="100%"
                         height="48px"
@@ -162,12 +161,13 @@ const SSOCallback = () => {
             <Button
                 type="primary"
                 label='Return to Login'
-                action={() => navigate('/sso')}
+                action={() => navigate('/')}
                 color="#FFFFFF"
-                width="100%"
+                width="200px"
                 height="48px"
                 fontSize="16px"
                 radius="32px"
+                className='mt-8'
             />
         </div>
     </div>
