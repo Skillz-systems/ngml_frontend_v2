@@ -160,7 +160,6 @@ const ConnectProject: React.FC = () => {
 
                 {isTenderingVisible && (
                     <div className="w-full h-full p-5 space-y-6 border rounded-xl">
-                        {/* <div className="text-base font-bold font-['Mulish'] leading-none">SELECT MILESTONE OPTION</div> */}
                         <div className='flex flex-row gap-4 mt-4'>
                             <Button
                                 type="secondary"
@@ -228,10 +227,6 @@ const ConnectProject: React.FC = () => {
 
                     </div>
                 )}
-
-
-
-
             </div>
 
             <Modal
@@ -346,6 +341,10 @@ const ConnectProject: React.FC = () => {
 };
 
 export default ConnectProject;
+
+
+
+
 
 
 

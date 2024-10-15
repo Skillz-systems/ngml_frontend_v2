@@ -272,12 +272,18 @@ const FormInput: React.FC<FormInputProps> = ({
 
     return (
         <div className="mb-4 mx-2">
-            {label && (
+            {label && type !== 'hidden' && (
                 <label className="block mb-2 text-sm font-medium">
                     {label}
                     {required && <span className="text-red-500">*</span>}
                 </label>
             )}
+            {/* {label && (
+                <label className="block mb-2 text-sm font-medium">
+                    {label}
+                    {required && <span className="text-red-500">*</span>}
+                </label>
+            )} */}
             {renderInput()}
         </div>
     );

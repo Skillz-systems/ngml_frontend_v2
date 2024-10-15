@@ -264,7 +264,7 @@ import { FilterList, SearchOutlined } from '@mui/icons-material';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const CustomerListTable = () => {
     const [searchText, setSearchText] = useState<string>('');
@@ -324,28 +324,28 @@ const CustomerListTable = () => {
         setSearchText(value);
     };
 
-    const NavigateButton = ({ to }: { to: string }) => {
-        const navigate = useNavigate();
-        return (
-            <div
-                onClick={() => navigate(to)}
-                className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
-                View
-            </div>
-        );
-    };
+    // const NavigateButton = ({ to }: { to: string }) => {
+    //     const navigate = useNavigate();
+    //     return (
+    //         <div
+    //             onClick={() => navigate(to)}
+    //             className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
+    //             View
+    //         </div>
+    //     );
+    // };
 
     const columns: GridColDef[] = [
-        // {
-        //     field: 'id',
-        //     headerName: 'CUSTOMER ID',
-        //     flex: 1,
-        //     renderCell: (params: GridRenderCellParams) => (
-        //         <div className='text-[12px] font-[700] text-[#49526A] leading-3'>
-        //             {params.row.id}
-        //         </div>
-        //     ),
-        // },
+        {
+            field: 'id',
+            headerName: 'CUSTOMER ID',
+            flex: 1,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3'>
+                    {params.row.id}
+                </div>
+            ),
+        },
         {
             field: 'company_name',
             headerName: 'COMPANY NAME',
@@ -407,14 +407,14 @@ const CustomerListTable = () => {
                 );
             }
         },
-        {
-            field: 'action',
-            headerName: 'ACTION',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <NavigateButton to={`/admin/records/customer/${params.row.id}`} />
-            ),
-        },
+        // {
+        //     field: 'action',
+        //     headerName: 'ACTION',
+        //     flex: 1,
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <NavigateButton to={`/admin/records/customer/${params.row.id}`} />
+        //     ),
+        // },
     ];
 
     const startRow = paginationModel.page * paginationModel.pageSize + 1;

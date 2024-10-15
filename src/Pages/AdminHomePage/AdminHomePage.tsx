@@ -239,12 +239,12 @@ const AdminHomePage = () => {
         <div className='w-full h-full bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
           <div className='h-[48px] bg-[#F6F8FA] flex items-center p-[10px] justify-between'>
             <div className='text-[#828DA9] text-[20px] font-[400]'>Available Tasks</div>
-            <div className='border size-[32px] flex items-center justify-center rounded-full'>
+            <div className='border size-[32px] flex items-center justify-center rounded-full' >
               <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
             </div>
           </div>
           {/* <div className='h-[400px] overflow-y-auto'> */}
-          <div className='w-[100%] p-[10px] pt-[0px] '>
+          <div className='w-[100%] p-[10px] pt-[0px]  '>
             {isLoading &&
               // <div style={{ backgroundImage: images.ngmlPortrait }} className='w-full h-full flex justify-center items-center'></div>
               <img src={images.ngmlPortrait} className='w-full h-full' alt="loader" />
@@ -257,7 +257,8 @@ const AdminHomePage = () => {
 
             {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
               return (
-                <div className='h-[300px] overflow-y-auto' key={index}>
+                <div style={{border: '2px solid red'}}
+                className='h-[300px] overflow-y-auto ' key={index}>
 
                   <ActivityLogCard
                     // key={index}
@@ -270,7 +271,6 @@ const AdminHomePage = () => {
               );
             })}
           </div>
-          {/* </div> */}
         </div>
       </div>
 
