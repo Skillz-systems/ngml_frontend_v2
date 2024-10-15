@@ -134,7 +134,7 @@ const DailyVolumnTable = () => {
         },
         {
             field: 'volume',
-            headerName: 'VOLUME (MILLION CUBIC FEET)',
+            headerName: 'VOL (MSCF)',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
@@ -142,26 +142,26 @@ const DailyVolumnTable = () => {
                 </div>
             ),
         },
-        {
-            field: 'created_at',
-            headerName: 'DATE',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
-                    {params.row.created_at}
-                </div>
-            ),
-        },
-        {
-            field: 'updated_at',
-            headerName: 'VALUE',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
-                    {params.row.updated_at}
-                </div>
-            ),
-        },
+        // {
+        //     field: 'created_at',
+        //     headerName: 'DATE',
+        //     flex: 1,
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
+        //             {params.row.created_at}
+        //         </div>
+        //     ),
+        // },
+        // {
+        //     field: 'updated_at',
+        //     headerName: 'VALUE',
+        //     flex: 1,
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
+        //             {params.row.updated_at}
+        //         </div>
+        //     ),
+        // },
         {
             field: 'status',
             headerName: 'STATUS',
