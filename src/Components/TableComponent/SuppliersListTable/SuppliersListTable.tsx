@@ -69,7 +69,7 @@ const SuppliersListTable = () => {
 
     const uniqueStatuses = [...new Set(rows.map(row => row.status))];
 
-   
+
     /**
      * Handles changes to the search input field and updates the searchText state.
      * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered by changing the input field.
@@ -144,7 +144,7 @@ const SuppliersListTable = () => {
                 </div>
             ),
         },
-    
+
         {
             field: 'lastSupply',
             headerName: 'LAST SUPPLY DATE',
@@ -198,9 +198,13 @@ const SuppliersListTable = () => {
             field: 'action',
             headerName: 'ACTION',
             flex: 1,
-            renderCell: () => (  
-                 <NavigateButton to="/admin/records/supplier/id" />   
-            ),
+            renderCell: (params: GridRenderCellParams) => {
+                const supplierId = params.row.sn;
+                const projectId = params.row.sn;
+                return (
+                    <NavigateButton to={`/admin/records/supplier/${supplierId}/${projectId}/overview`} />
+                );
+            },
         },
     ]
 
@@ -293,7 +297,7 @@ const SuppliersListTable = () => {
                         width: '100%',
                         background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
-                            outline: 'solid #00AF50 1px',
+                            outline: 'none',
                         },
                         '& .MuiDataGrid-columnHeaders': {
                             backgroundColor: '#F6FDEC',
