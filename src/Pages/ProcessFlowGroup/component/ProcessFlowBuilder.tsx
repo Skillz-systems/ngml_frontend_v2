@@ -310,7 +310,7 @@ const EditableContent = ({
                     >
                         <option value="">Select a route</option>
                         {routes?.data && routes?.data?.map((route) => (
-                            <option key={route.id} value={route.link}>
+                            <option key={route.id} value={route.id}>
                                 {route.name}
                             </option>
                         ))}

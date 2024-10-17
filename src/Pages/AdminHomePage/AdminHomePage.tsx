@@ -30,9 +30,9 @@ import images from '../../assets/index';
 const AdminHomePage = () => {
   // const [, setSortDetails] = useState({ sortType: '', value: '' });
   const currentUser = useAppSelector(selectCurrentUser);
-  const userId = Number(currentUser?.id)
+  // const userId = Number(currentUser?.id)
 
-  const { data, error, isError, isSuccess, isLoading } = useTasksQuery({ userId });
+  const { data, error, isError, isSuccess, isLoading } = useTasksQuery();
   const { data: customers } = useGetCustomersQuery();
 
   console.log(data, 'data___')
