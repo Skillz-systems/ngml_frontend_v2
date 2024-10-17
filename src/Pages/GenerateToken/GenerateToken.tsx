@@ -49,6 +49,7 @@ const GenerateToken: React.FC = () => {
       try {
         await generateToken({ email: formData.email }).unwrap();
       } catch (err) {
+        console.log(err)
       }
     }
   };
