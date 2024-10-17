@@ -9,11 +9,12 @@ import SSOLogin from './Pages/SSO/SSOLogin';
 import SSOUpdateUser from './Pages/SSO/SSOUpdateUser';
 // import StaffLoginPage from './Pages/Stafflogin/StaffLoginPage';
 import FormBuilderPage from './Pages/FormBuilderCroup/FormBuilderPage';
+import GenerateToken from './Pages/GenerateToken/GenerateToken';
+import SuccessToken from './Pages/SuccessToken/SuccessToken';
 import { admin } from './Routes/Admin';
 import { customer } from './Routes/Customer';
 import Unauthorized from './Unauthorized';
-import GenerateToken from './Pages/GenerateToken/GenerateToken';
-import SuccessToken from './Pages/SuccessToken/SuccessToken';
+// import SuccessToken from './Pages/SuccessToken/SuccessToken';
 
 const RouterConfig = () => {
 
