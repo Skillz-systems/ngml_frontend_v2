@@ -1,9 +1,9 @@
+import { AuthContainer, Button, ContentContainer, CustomInput } from '@/Components';
+import { useGenerateTokenMutation } from '@/Redux/Features/Auth/authService';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AuthContainer, Button, ContentContainer, CustomInput } from '@/Components';
-import { useGenerateTokenMutation } from '@/Redux/Features/Auth/authService';
 import images from '../../assets/index';
 import '../../index.css';
 
@@ -18,7 +18,7 @@ const GenerateToken: React.FC = () => {
 
   useEffect(() => {
     if (isSuccess && data) {
-      navigate('/generateToken/success');  
+      navigate('/generateToken/success');
       toast.success('Token generated successfully');
     }
 
@@ -48,7 +48,7 @@ const GenerateToken: React.FC = () => {
     if (validateForm()) {
       try {
         await generateToken({ email: formData.email }).unwrap();
-    } catch (err) {
+      } catch (err) {
       }
     }
   };
@@ -60,7 +60,7 @@ const GenerateToken: React.FC = () => {
         <div className="w-[100%]">
           <AuthContainer>
             <h1 className="text-[12px] md:text-[18px] font-semibold text-white">
-            Generate Token
+              Generate Token
             </h1>
             <div className="w-[100%] mt-2">
               <div className="mx-auto space-y-5">
