@@ -184,7 +184,7 @@ const AdminHomePage = () => {
           </span>
         )}</div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4" >
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4">
         {cardData.map((card, index) => {
           const { bgColor, iconColor } = getIconStyles(card.title);
           return (
