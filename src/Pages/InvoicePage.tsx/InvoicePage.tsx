@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import images from '../../assets/index';
-import GasConsumptionCertificate from '../GasConsumptionCertificate/GasConsumptionCertificate';
+import GasConsumptionCertificate from '../../Components/GasConsumptionCertificate/GasConsumptionCertificate';
 
 /**
  * InvoicePage Component
