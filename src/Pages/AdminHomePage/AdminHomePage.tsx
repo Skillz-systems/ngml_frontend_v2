@@ -30,9 +30,9 @@ import images from '../../assets/index';
 const AdminHomePage = () => {
   // const [, setSortDetails] = useState({ sortType: '', value: '' });
   const currentUser = useAppSelector(selectCurrentUser);
-  const userId = Number(currentUser?.id)
+  // const userId = Number(currentUser?.id)
 
-  const { data, error, isError, isSuccess, isLoading } = useTasksQuery({ userId });
+  const { data, error, isError, isSuccess, isLoading } = useTasksQuery();
   const { data: customers } = useGetCustomersQuery();
 
   console.log(data, 'data___')
@@ -257,8 +257,8 @@ const AdminHomePage = () => {
 
             {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
               return (
-                <div style={{border: '2px solid red'}}
-                className='h-[300px] overflow-y-auto ' key={index}>
+                <div style={{ border: '2px solid red' }}
+                  className='h-[300px] overflow-y-auto ' key={index}>
 
                   <ActivityLogCard
                     // key={index}

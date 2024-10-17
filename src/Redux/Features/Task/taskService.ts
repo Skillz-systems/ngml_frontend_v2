@@ -1,4 +1,4 @@
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+// import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
 
 type Task = {
@@ -17,33 +17,33 @@ type TaskResponse = {
   data: Task[] | [];
 }
 
-type ErrorResponse = {
-  error: string;
-};
+// type ErrorResponse = {
+//   error: string;
+// };
 
-type TasksQueryParams = {
-  userId: number;
-};
+// type TasksQueryParams = {
+//   userId: number;
+// };
 
 export const notificationApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    tasks: builder.query<TaskResponse, TasksQueryParams>({
-      query: ({ userId }) => ({
-        url: `/notification/api/tasks/${userId}`,
+    tasks: builder.query<TaskResponse, void>({
+      query: () => ({
+        url: '/notification/api/tasks',
         method: 'GET',
       }),
        providesTags: ['Tasks'],
-      transformResponse: (response: TaskResponse | ErrorResponse) => {
-        if ('error' in response) {
-          throw new Error(response.error);
-        }
-        return response;
-      },
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse =
-          baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
+      // transformResponse: (response: TaskResponse | ErrorResponse) => {
+      //   if ('error' in response) {
+      //     throw new Error(response.error);
+      //   }
+      //   return response;
+      // },
+      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+      //   const errorResponse: ErrorResponse =
+      //     baseQueryReturnValue.data as ErrorResponse;
+      //   return errorResponse;
+      // },
      
     }),  
   }),
