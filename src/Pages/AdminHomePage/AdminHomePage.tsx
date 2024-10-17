@@ -257,17 +257,14 @@ const AdminHomePage = () => {
 
             {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
               return (
-                <div 
-                className='h-[300px] overflow-y-auto ' key={index}>
+                <ActivityLogCard
+                  key={index}
+                  route={activity.route}
+                  title={activity.title}
+                  text={activity.text}
+                  start_time={activity.start_time}
+                />
 
-                  <ActivityLogCard
-                    // key={index}
-                    route={activity.route}
-                    title={activity.title}
-                    text={activity.text}
-                    start_time={activity.start_time}
-                  />
-                </div>
               );
             })}
           </div>
