@@ -14,9 +14,12 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.ngml.skillzserver.com',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as any).auth.access_token;
+    // console.log(token)
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
+
+    //  headers.set('authorization', 'Bearer 19|ENEsiIwt9K9AmPM6xLtvfdZ2OLIHWO19RQmvPyAs3089de3b');
     return headers;
   },
 });
@@ -72,6 +75,6 @@ export const api = createApi({
   keepUnusedDataFor: 30,
   refetchOnFocus: true,
   endpoints: () => ({}),
-  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms','ProcessFlow','FormBuilder','Routes','Users','AssignTasks','HeadsOfUnit' , 'UsersSettings','Units', 'Designations', 'Departments','Locations', 'Staff','SSO_init', 'SSO_callback', 'Tags', 'DynamicContent' ],
+  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms','ProcessFlow','FormBuilder','Routes','Users','AssignTasks','HeadsOfUnit' , 'UsersSettings','Units', 'Designations', 'Departments','Locations', 'Staff','SSO_init', 'SSO_callback', 'Tags', 'DynamicContent', 'InvoiceAdvice' ],
 });
 
