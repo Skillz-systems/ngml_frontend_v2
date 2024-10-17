@@ -9,6 +9,7 @@ import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Button, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
 
 type CustomerData = {
@@ -27,7 +28,7 @@ const AdminCustomerList: React.FC = () => {
     // const { data, isSuccess, isLoading } = useGetFormByIdQuery(1);
     const { data, isSuccess, isLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
     const { data: customers } = useGetCustomersQuery();
-    const [submitForm, { isLoading: submitLoading, isSuccess: submitSuccess }] = useSubmitFormMutation();
+    const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
 
     useEffect(() => {
         if (isSuccess && data) {
@@ -94,7 +95,6 @@ const AdminCustomerList: React.FC = () => {
 
         try {
             setFormError('');
-
             const formFieldAnswers = await Promise.all(
                 customerForm.map(async (field) => {
                     const value = customerData[field.name as keyof typeof customerData];
@@ -131,8 +131,6 @@ const AdminCustomerList: React.FC = () => {
 
             const validFormFieldAnswers = formFieldAnswers.filter(answer => answer !== null);
 
-            console.log('Form Field Answers:', validFormFieldAnswers);
-
             const payload = {
                 form_builder_id: data?.data?.id?.toString() || '',
                 name: data?.data?.name || '',
@@ -142,17 +140,38 @@ const AdminCustomerList: React.FC = () => {
                 form_field_answers: JSON.stringify(validFormFieldAnswers),
             };
 
-            console.log('Payload:', payload);
-
             await submitForm(payload).unwrap();
 
-           
-            if (submitSuccess) toggleModal(false);
+            const result = await submitForm(payload).unwrap();
+
+            if (result) {
+                toast.success('Customer created successfully');
+                const initialData = customerForm.reduce((acc: CustomerData, field: FormField) => {
+                    if (field.name) {
+                        acc[field.name] = field.type === 'file' ? null : '';
+                    }
+                    return acc;
+                }, {});
+
+                setCustomerData(initialData);
+                setIsModalOpen(false);
+                const searchParams = new URLSearchParams(location.search);
+                searchParams.delete('createCustomer');
+                navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+            }
         } catch (error) {
             console.error('Error submitting form:', error);
             setFormError('An error occurred while submitting the form. Please try again.');
         }
     };
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const createCustomer = searchParams.get('createCustomer');
+
+        if (createCustomer === 'true') {
+            setIsModalOpen(true);
+        }
+    }, [location.search]);
 
     return (
         <div className="">
@@ -203,7 +222,13 @@ const AdminCustomerList: React.FC = () => {
 
             <Modal
                 isOpen={isModalOpen}
-                onClose={() => toggleModal(false)}
+                // onClose={() => toggleModal(false)}
+                onClose={() => {
+                    setIsModalOpen(false);
+                    const searchParams = new URLSearchParams(location.search);
+                    searchParams.delete('createCustomer');
+                    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+                }}
                 size='medium'
                 title='Create New Customer'
                 subTitle='Only Use this Method if the Customer is an already Existing Customer of the NGML'
