@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import images from '../../assets/index';
+import GasConsumptionCertificate from '../GasConsumptionCertificate/GasConsumptionCertificate';
 
 /**
  * InvoicePage Component
@@ -19,7 +20,7 @@ import images from '../../assets/index';
 const InvoicePage: React.FC = () => {
 
 
-     // Hooks and State
+    // Hooks and State
     const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,9 +36,9 @@ const InvoicePage: React.FC = () => {
         }
     };
 
-     /**
-     * Go to the previous page if it exists.
-     */
+    /**
+    * Go to the previous page if it exists.
+    */
     const handlePreviousPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
@@ -79,7 +80,7 @@ const InvoicePage: React.FC = () => {
                 </div>
 
                 <div className="w-full h-full flex flex-col sm:flex-row">
-                    <div className="w-full p-4 border-r space-y-4">
+                    <div className="w-80 p-4 border-r space-y-4">
                         <div className="w-full p-2 rounded-lg border justify-between items-center flex">
                             <div className="p-1 bg-[#EAEEF2] rounded-sm">
                                 <div className="text-center text-[#49526A] text-xs font-semibold">MONTH</div>
@@ -94,7 +95,19 @@ const InvoicePage: React.FC = () => {
                         </div>
                     </div>
                     <div className="w-full p-4 bg-[#FFFFFF] rounded-xl flex justify-center">
-                        <img className="w-full h-full relative rounded-xl border" src={`https://via.placeholder.com/706x1000?text=Page+${currentPage}`} />
+                        {/* <img className="w-full h-full relative rounded-xl border" src={`https://via.placeholder.com/706x1000?text=Page+${currentPage}`} /> */}
+                        <GasConsumptionCertificate
+                            refNumber="GCC12345"
+                            date="2024-10-17"
+                            certificateNumber="CERT2023"
+                            department="Gas Sales"
+                            buyerName="John Doe"
+                            period="October 2024"
+                            gasQuantity="1000 SCM"
+                            initialBuyerRepName="Buyer Rep"
+                            initialSellerRepName="Seller Rep"
+                        />
+
                     </div>
                     <div className="flex justify-center">
                         <div className="h-12 border-l">
