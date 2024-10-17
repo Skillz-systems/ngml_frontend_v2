@@ -12,6 +12,8 @@ import FormBuilderPage from './Pages/FormBuilderCroup/FormBuilderPage';
 import { admin } from './Routes/Admin';
 import { customer } from './Routes/Customer';
 import Unauthorized from './Unauthorized';
+import GenerateToken from './Pages/GenerateToken/GenerateToken';
+import SuccessToken from './Pages/SuccessToken/SuccessToken';
 
 const RouterConfig = () => {
 
@@ -57,6 +59,14 @@ const RouterConfig = () => {
         {
             path: '/forms',
             element: <FormBuilderPage />
+        },
+        {
+            path: '/generateToken',
+            element: <GenerateToken />
+        },
+        {
+            path: '/generateToken/success',
+            element: <SuccessToken />
         },
 
     ]);

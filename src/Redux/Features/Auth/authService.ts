@@ -5,7 +5,7 @@ import { api } from '../../api';
 type LoginRequest = {
   email: string;
   password: string;
-  scope:string;
+  scope: string;
 };
 
 type RegisterRequest = {
@@ -26,6 +26,15 @@ type AuthResponse = {
     role?: string;
   };
 };
+
+type TokenResponse = {
+  token: string;
+};
+
+type TokenRequest = {
+  email: string;
+};
+
 type ErrorResponse = {
   error: string;
 };
@@ -38,9 +47,7 @@ export const authApi = api.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
-
       transformResponse: (response: AuthResponse | ErrorResponse) => {
-        console.log(response);
         if ('error' in response) {
           throw new Error(response.error);
         }
@@ -63,15 +70,38 @@ export const authApi = api.injectEndpoints({
         user: AuthResponse['user'];
       }) => response,
     }),
+    generateToken: builder.mutation<TokenResponse, TokenRequest>({
+      query: (email: TokenRequest) => ({
+        url: '/users/api/generate-token',
+        method: 'POST',
+        body: email,
+      }),
+      transformResponse: (response: TokenResponse | ErrorResponse) => {
+        if ('error' in response) {
+          throw new Error(response.error);
+        }
+        return response;
+      },
+      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+        const errorResponse: ErrorResponse =
+          baseQueryReturnValue.data as ErrorResponse;
+        return errorResponse;
+      },
+    }),
     logout: builder.mutation<void, void>({
       query: () => ({
         url: '/users/api/logout',
         method: 'POST',
       }),
-        invalidatesTags: ['Forms', 'Customers', 'Tasks'],
+      invalidatesTags: ['Forms', 'Customers', 'Tasks'],
     }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useGenerateTokenMutation,
+  useLogoutMutation
+} = authApi;
+
