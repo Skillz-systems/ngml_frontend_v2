@@ -257,9 +257,8 @@ const AdminHomePage = () => {
 
             {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
               return (
-                <div 
-                className='h-[300px] overflow-y-auto ' key={index}>
-
+                <div
+                  className='h-[300px] overflow-y-auto ' key={index}>
                   <ActivityLogCard
                     // key={index}
                     route={activity.route}
