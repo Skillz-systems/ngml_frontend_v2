@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 interface ActivityLogCardProps {
   title?: string;
-  route?: string ;
+  route?: string;
   text?: string;
   start_time?: Date;
   button?: React.ReactNode;
@@ -22,7 +22,7 @@ interface ActivityLogCardProps {
 
 const ActivityLogCard: React.FC<ActivityLogCardProps> = ({
   title,
-  route ='https://ngml.skillzserver.com/admin/records/customer/',
+  route = 'https://ngml.skillzserver.com/admin/records/customer/',
   text,
   start_time,
   button
@@ -45,7 +45,7 @@ const ActivityLogCard: React.FC<ActivityLogCardProps> = ({
               <div className="bg-[#D2F69E] text-[#49526A] text-[12px] p-1 rounded-[5px] font-[700]">{truncateTitle(title)}</div>
             )}
             {formattedDateTime && (
-              <div className={button ? "text-[#828DA9] text-[13px] mt-[-40px] mr-[-40px]" : "text-[#828DA9] text-[10px] font-[500]"}>
+              <div className={button ? 'text-[#828DA9] text-[13px] mt-[-40px] mr-[-40px]' : 'text-[#828DA9] text-[10px] font-[500]'}>
                 {formattedDateTime}
               </div>
             )}

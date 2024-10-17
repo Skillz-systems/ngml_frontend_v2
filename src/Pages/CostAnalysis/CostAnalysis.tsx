@@ -1,13 +1,13 @@
+import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, DocumentCard, Modal } from '../../Components/index';
 import images from '../../assets/index';
-import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 // import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
-import { areRequiredFieldsFilled } from '@/Utils/formValidation';
-import { convertFileToBase64 } from '@/Utils/base64Converter';
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
+import { convertFileToBase64 } from '@/Utils/base64Converter';
+import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 
 interface CardDataItem {
     type: 'withLink' | 'withoutLink' | 'withReport';
@@ -33,7 +33,7 @@ const CostAnalysis: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { data, isSuccess, isLoading } = useGetFormByNameQuery('customeranalysisform');
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery('customeranalysisform/0/0');
     const [submitForm, { isSuccess: submitSuccess }] = useSubmitFormMutation();
 
 
@@ -256,7 +256,7 @@ const CostAnalysis: React.FC = () => {
                     </div>
                 ]}
             >
-               {formError && <p className="text-red-500 mb-4">{formError}</p>}
+                {formError && <p className="text-red-500 mb-4">{formError}</p>}
                 {isLoading ? (
                     <p>Loading form fields...</p>
                 ) : customerForm.length > 0 ? (

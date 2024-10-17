@@ -257,7 +257,7 @@ const AdminHomePage = () => {
 
             {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
               return (
-                <div style={{ border: '2px solid red' }}
+                <div
                   className='h-[300px] overflow-y-auto ' key={index}>
 
                   <ActivityLogCard

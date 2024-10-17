@@ -19,7 +19,7 @@ import images from '../../assets/index';
 const InvoicePage: React.FC = () => {
 
 
-     // Hooks and State
+    // Hooks and State
     const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,9 +35,9 @@ const InvoicePage: React.FC = () => {
         }
     };
 
-     /**
-     * Go to the previous page if it exists.
-     */
+    /**
+    * Go to the previous page if it exists.
+    */
     const handlePreviousPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
