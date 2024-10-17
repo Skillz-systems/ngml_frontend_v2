@@ -13,6 +13,7 @@ import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
 import FormBuilderPage from '@/Pages/FormBuilderCroup/FormBuilderPage';
 // import FormBuilderDashboard from '@/Pages/FormBuilderDashboard';
 import HeadofUnits from '@/Pages/HeadofUnits/HeadofUnits';
+import InvoiceLayoutPage from '@/Pages/InvoicePage.tsx/InvoiceLayoutPage';
 import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
 import OperationPage from '@/Pages/Manager/OperationPage/OperationPage';
 import ProcessFlowGenerator from '@/Pages/ProcessFlowGroup/ProcessFlowGenerator';
@@ -98,6 +99,11 @@ export const admin: RouteObject[] = [
     {
         path: '/admin/records/invoice',
         element: <InvoicePage />,
+
+    },
+    {
+        path: '/admin/records/invoice/:customerId/:locationId',
+        element: <InvoiceLayoutPage />,
 
     },
     {

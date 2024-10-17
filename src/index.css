@@ -196,7 +196,6 @@ body {
   z-index: 1000;
 }
 
-
 /* .responsive-button {
   width: 120px;
   font-size: 12px;
@@ -209,7 +208,20 @@ body {
   }
 } */
 
-
 .custom-radio input[type="radio"] {
-  accent-color: #28a745; 
+  accent-color: #28a745;
+}
+
+.tiny-scrollbar {
+  scrollbar-width: thin; /* For Firefox */
+}
+
+/* Chrome, Safari, Edge */
+.tiny-scrollbar::-webkit-scrollbar {
+  width: 6px;  /* Set width for vertical scrollbar */
+  height: 6px; /* Set height for horizontal scrollbar */
+}
+
+.test {
+  border: 2px solid red;
 }
