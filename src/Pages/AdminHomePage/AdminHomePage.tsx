@@ -276,7 +276,7 @@ const AdminHomePage = () => {
           <Chart
             data={lineDataGraph}
             chartType="line"
-            yAxisLabel="Volume (mscf)"
+            yAxisLabel="Vol (mscf)"
             xAxisDataKey="month"
             colors={chartColors}
             title='Customer Consumption Chart'
