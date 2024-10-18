@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import images from '@/assets';
 
 /**
  * Styled container for responsive design.
@@ -87,7 +88,7 @@ const AuthContainer: React.FC<AuthContainerProps> = ({ children, backgroundcolor
     return (
         <Container background-color={backgroundcolor} width={width} height={height}>
             <LogoContainer>
-                <LogoImage src="assets/nnpclogo.png" alt="NGML Logo" />
+                <LogoImage src={images.nnpclogo} alt="NGML Logo" />
             </LogoContainer>
             {children}
         </Container>

@@ -1,208 +1,209 @@
-import React from 'react';
-import { CustomInput } from '../../Components/index';
+import FormInput from '@/Components/Custominput/FormInput';
+import { FormField, useGetFormByNameQuery } from '@/Redux/Features/FormBuilder/formBuilderService';
+import React, { Fragment, useEffect, useState } from 'react';
+// import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
+import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+// import { convertFileToBase64 } from '@/Utils/base64Converter';
+import { FileType } from '@/Components/Fileuploadinput/FileTypes';
+import { useLocation } from 'react-router-dom';
 
-interface EditModalContentProps {
-    companyData: any;
-    setCompanyData: React.Dispatch<React.SetStateAction<any>>;
-}
 
-const EditDdqPage: React.FC<EditModalContentProps> = ({ companyData, setCompanyData }) => {
 
-    const handleInputChange = (value: string, key: string) => {
-        console.log(value)
-        setCompanyData({ ...companyData, [key]: value });
+type CustomerData = {
+    [key: string]: string | File | null;
+};
+
+
+const EditDdqPage: React.FC = () => {
+    const [customerForm, setCustomerForm] = useState<FormField[]>([]);
+    const [customerData, setCustomerData] = useState<CustomerData>({});
+    const [formError,] = useState<string>('');
+    const [customerId, setSetCustomerId] = useState<number | null>(null)
+
+
+    const location = useLocation()
+    //   const { data, isSuccess, isLoading } = useGetFormByNameQuery('Edditddqupload/customer/customerId');
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery(`Edditddqupload/customer/${customerId}`, {
+        skip: !customerId
+    });
+
+
+
+
+
+    // const [submitForm] = useSubmitFormMutation();
+
+    useEffect(() => {
+        const customer = location.pathname.split('/')
+        setSetCustomerId(Number(customer[4]))
+    }, [location])
+
+    // const { data, isSuccess, isLoading } = useGetFormByNameQuery('Editddqupload');
+    // const [submitForm] = useSubmitFormMutation();
+
+
+
+
+    useEffect(() => {
+        if (isSuccess && data) {
+            let parsedForm;
+            try {
+                parsedForm = JSON.parse(data.data.json_form);
+                setCustomerForm(parsedForm);
+
+                const initialData = parsedForm.reduce((acc: CustomerData, field: FormField) => {
+                    if (field.name) {
+                        acc[field.name] = '';
+                        if (field.type === 'file') {
+                            acc[`${field.name}`] = null;
+                        }
+                    }
+                    return acc;
+                }, {});
+
+                setCustomerData(initialData);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                setCustomerForm([]);
+            }
+        }
+    }, [data, isSuccess]);
+
+
+
+    const handleInputChange = (field: string, value: string | File | null) => {
+        if (value instanceof File) {
+            setCustomerData(prev => ({
+                ...prev,
+                [field]: value,
+            }));
+        } else {
+            setCustomerData(prev => ({ ...prev, [field]: value || '' }));
+        }
     };
 
-    const options = ['Mr', 'Mrs', 'Dr', 'Prof'];
+
+
+    const checkRequiredFields = (customerForm: FormField[], customerData: CustomerData) => {
+        const allFilled = areRequiredFieldsFilled(customerForm, customerData);
+        if (!allFilled) {
+            return false;
+        }
+        return true;
+    };
+
+    useEffect(() => {
+        checkRequiredFields(customerForm, customerData);
+    }, [customerData, customerForm]);
+
+
+
+
+    // const handleCreateCustomer = async () => {
+
+    //     if (!areRequiredFieldsFilled(customerForm, customerData)) {
+    //         setFormError('Please fill all required fields.');
+    //         return;
+    //     }
+
+    //     try {
+    //         setFormError('');
+
+    //         const formFieldAnswers = await Promise.all(
+    //             customerForm.map(async (field) => {
+    //                 const value = customerData[field.name as keyof typeof customerData];
+
+    //                 if (field.type === 'file' && value instanceof File) {
+    //                     try {
+    //                         console.log(`Attempting to convert file: ${field.name}`, value);
+    //                         const base64File = await convertFileToBase64(value);
+    //                         console.log(`Base64 for ${field.name} (first 100 chars):`, base64File.substring(0, 100));
+    //                         return {
+    //                             id: field.id,
+    //                             elementType: field.type,
+    //                             name: field.name || field.id.toString(),
+    //                             placeholder: field.placeholder || '',
+    //                             key: field.name || '',
+    //                             value: base64File
+    //                         };
+    //                     } catch (error) {
+    //                         console.error(`Error converting ${field.name} to Base64:`, error);
+    //                         return null;
+    //                     }
+    //                 } else {
+    //                     return {
+    //                         id: field.id,
+    //                         elementType: field.type,
+    //                         name: field.name || field.id.toString(),
+    //                         placeholder: field.placeholder || '',
+    //                         key: field.name || '',
+    //                         value: value || ''
+    //                     };
+    //                 }
+    //             })
+    //         );
+
+    //         const validFormFieldAnswers = formFieldAnswers.filter(answer => answer !== null);
+
+    //         console.log('Form Field Answers:', validFormFieldAnswers);
+
+    //         const payload = {
+    //             form_builder_id: data?.data?.id?.toString() || '',
+    //             name: data?.data?.name || '',
+    //             process_flow_id: data?.data?.process_flow_id?.toString() || '',
+    //             process_flow_step_id: data?.data?.process_flow_step_id?.toString() || '',
+    //             tag_id: data?.data?.tag_id || '',
+    //             form_field_answers: JSON.stringify(validFormFieldAnswers),
+    //         };
+
+    //         console.log('Payload:', payload);
+
+    //         await submitForm(payload).unwrap();
+
+
+    //     } catch (error) {
+    //         console.error('Error submitting form:', error);
+    //         setFormError('An error occurred while submitting the form. Please try again.');
+    //     }
+
+    // };
+
 
     return (
         <div>
             <div className='border-2 p-4 border-dashed border-dark-200 rounded-[10px] mt-2 space-y-4'>
-                <h3>COMPANY DETAILS</h3>
-                <CustomInput
-                    required
-                    type="text"
-                    label='Company Name'
-                    value={companyData.companyName}
-                    handleChangeEvent={(value) => handleInputChange(value, "companyName")}
-                    placeholder="Input Comapany Name here"
-                />
-                <CustomInput
-                    required
-                    type="text"
-                    label='RC Number'
-                    value={companyData.rcNumber}
-                    handleChangeEvent={(value) => handleInputChange(value, "rcNumber")}
-                    placeholder="Input Company RC Number"
-                />
-                <CustomInput
-                    required
-                    type="text"
-                    label='Nature of Business'
-                    value={companyData.natureOfBusiness}
-                    handleChangeEvent={(value) => handleInputChange(value, "natureOfBusiness")}
-                    placeholder="Input Your Nature of Business (e.g Cement Manufacturing)"
-                />
-                <div className='grid grid-cols-2 gap-2'>
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Company Telephone No:'
-                        value={companyData.companyTelephoneNumber}
-                        handleChangeEvent={(value) => handleInputChange(value, "companyTelephoneNumber")}
-                        placeholder="Input Company Telephone Number here"
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Company Mobile No:'
-                        value={companyData.companyMobileNumber}
-                        handleChangeEvent={(value) => handleInputChange(value, "companyMobileNumber")}
-                        placeholder="Input Company Mobile Number Here"
-                    />
-                </div>
-                <CustomInput
-                    required
-                    type="text"
-                    label='Email'
-                    value={companyData.email}
-                    handleChangeEvent={(value) => handleInputChange(value, "email")}
-                    placeholder="Input Company Email Here"
-                />
-                <CustomInput
-                    type="text"
-                    label='Website'
-                    value={companyData.website}
-                    handleChangeEvent={(value) => handleInputChange(value, "website")}
-                    placeholder="Input Company Website Here"
-                />
-                <CustomInput
-                    required
-                    type="text"
-                    label='Company Address'
-                    value={companyData.companyaddress}
-                    handleChangeEvent={(value) => handleInputChange(value, "companyaddress")}
-                    placeholder="Input Company Address Here"
-                />
-            </div>
-            <div className='border-2 p-4 border-dashed border-dark-200 rounded-[10px] mt-4 space-y-4'>
-                <h3>SENIOR MANAGEMENT OFFICERS</h3>
-                <div className='grid grid-cols-2 gap-2'>
-                    <CustomInput
-                        required
-                        type="select"
-                        label='Title'
-                        value={companyData.title}
-                        handleChangeEvent={(value) => handleInputChange(value, "title")}
-                        placeholder="Input Your Title here"
-                        options={options}
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='First Name'
-                        value={companyData.firstName}
-                        handleChangeEvent={(value) => handleInputChange(value, "firstName")}
-                        placeholder="Input First Name herer"
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Other Names'
-                        value={companyData.otherName}
-                        handleChangeEvent={(value) => handleInputChange(value, "otherName")}
-                        placeholder="Input other given name here"
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Last Name'
-                        value={companyData.lastName}
-                        handleChangeEvent={(value) => handleInputChange(value, "lastName")}
-                        placeholder="Input last name here"
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Phone Number'
-                        value={companyData.phoneNumber}
-                        handleChangeEvent={(value) => handleInputChange(value, "phoneNumber")}
-                        placeholder="Input Phone Number Here"
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Company Position'
-                        value={companyData.companyPosition}
-                        handleChangeEvent={(value) => handleInputChange(value, "companyPosition")}
-                        placeholder="Input company position here"
-                    />
-                </div>
-            </div>
-            <div className='border-2 p-4 border-dashed border-dark-200 rounded-[10px] mt-4 space-y-4'>
-                <h3>SENIOR MANAGEMENT OFFICERS</h3>
-                <div className='grid grid-cols-2 gap-2'>
-                    <CustomInput
-                        required
-                        type="select"
-                        label='Title'
-                        value={companyData.titlePlus}
-                        handleChangeEvent={(value) => handleInputChange(value, "titlePlus")}
-                        placeholder="Input Your Title here"
-                        options={options}
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='First Name'
-                        value={companyData.firstNamePlus}
-                        handleChangeEvent={(value) => handleInputChange(value, "firstNamePlus")}
-                        placeholder="Input First Name herer"
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Other Names'
-                        value={companyData.otherNamePlus}
-                        handleChangeEvent={(value) => handleInputChange(value, "otherNamePlus")}
-                        placeholder="Input other given name here"
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Last Name'
-                        value={companyData.lastNamePlus}
-                        handleChangeEvent={(value) => handleInputChange(value, "lastNamePlus")}
-                        placeholder="Input last name here"
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Phone Number'
-                        value={companyData.phoneNumberPlus}
-                        handleChangeEvent={(value) => handleInputChange(value, "phoneNumberPlus")}
-                        placeholder="Input Phone Number Here"
-                    />
-                    <CustomInput
-                        required
-                        type="text"
-                        label='Company Position'
-                        value={companyData.companyPositionPlus}
-                        handleChangeEvent={(value) => handleInputChange(value, "companyPositionPlus")}
-                        placeholder="Input company position here"
-                    />
-                </div>
-            </div>
-            <div className='border-2 p-4 border-dashed border-dark-200 rounded-[10px] mt-4'>
-                <h3>JOINT VENTURE</h3>
-                <div className='mt-2'>
-                    <CustomInput
-                        type="textarea"
-                        value={companyData.jointVenture}
-                        handleChangeEvent={(value) => handleInputChange(value, "jointVenture")}
-                        placeholder="Please give details of the existence or nature of any joint venture relationship in which the Company participates."
-                    />
-                </div>
+                {/* <h3>COMPANY DETAILS</h3> */}
+                {formError && <p className="text-red-500 mb-4">{formError}</p>}
+                {isLoading ? (
+                    <p>Loading form fields...</p>
+                ) : customerForm.length > 0 ? (
+                    customerForm.map((form) => (
+                        <Fragment key={form.id}>
+                            <FormInput
+                                type={form?.type}
+                                label={form.label ?? form.name}
+                                value={
+                                    form.type === 'file'
+                                        ? (customerData[form.name as keyof typeof customerData] as string || '')
+                                        : (customerData[form.name as keyof typeof customerData] as string || '')
+                                }
+                                required={form?.required}
+                                onChange={(value: string | File | null) => handleInputChange(form?.name as string, value)}
+                                placeholder={form.placeholder}
+                                options={form.options?.map(opt =>
+                                    typeof opt === 'string'
+                                        ? { label: opt, value: opt }
+                                        : opt
+                                )}
+                                maxSizeMB={10}
+                                allowedFileTypes={[FileType.PDF]}
+
+                            />
+                        </Fragment>
+                    ))
+                ) : (
+                    <p>No form fields available.</p>
+                )}
             </div>
         </div>
     );

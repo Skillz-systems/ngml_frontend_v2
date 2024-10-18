@@ -4,14 +4,14 @@ import { RootState } from '../../store';
 import authReducer, { logout, selectCurrentUser, setCredentials } from './authSlice';
 
 const initialState = {
-  token: null,
+  access_token: null,
   user: null,
 };
 
 describe('authSlice tests', () => {
   it('should handle initial state', () => {
     expect(authReducer(undefined, { type: 'unknown' })).toEqual({
-      token: null,
+      access_token: null,
       user: null,
     });
   });
@@ -20,13 +20,13 @@ describe('authSlice tests', () => {
     const actual = authReducer(
       initialState,
       setCredentials({
-        token: 'dummy-token',
-        user: { id: '1', email: 'user@example.com', name: 'John Doe' },
+        access_token: 'dummy-token',
+        user: { id: 1, email: 'user@example.com', name: 'John Doe' },
       })
     );
-    expect(actual.token).toEqual('dummy-token');
+    expect(actual.access_token).toEqual('dummy-token');
     expect(actual.user).toEqual({
-      id: '1',
+      id: 1,
       email: 'user@example.com',
       name: 'John Doe',
     });
@@ -35,12 +35,12 @@ describe('authSlice tests', () => {
   it('should handle logout', () => {
     const actual = authReducer(
       {
-        token: 'dummy-token',
-        user: { id: '1', email: 'user@example.com', name: 'John Doe' },
+        access_token: 'dummy-token',
+        user: { id: 1, email: 'user@example.com', name: 'John Doe' },
       },
       logout()
     );
-    expect(actual.token).toBeNull();
+    expect(actual.access_token).toBeNull();
     expect(actual.user).toBeNull();
   });
   const store = configureStore({
@@ -54,12 +54,12 @@ describe('authSlice tests', () => {
 
     store.dispatch(
       setCredentials({
-        token: 'dummy-token',
-        user: { id: '1', email: 'user@example.com', name: 'John Doe' },
+        access_token: 'dummy-token',
+        user: { id: 1, email: 'user@example.com', name: 'John Doe' },
       })
     );
     expect(selectCurrentUser(store.getState() as RootState)).toEqual({
-      id: '1',
+      id: 1,
       email: 'user@example.com',
       name: 'John Doe',
     });

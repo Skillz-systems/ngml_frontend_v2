@@ -22,44 +22,44 @@ const ActivityLogCardContainerWithButton: React.FC<ActivityLogCardContainerProps
         {
             title: 'EOI REQUEST',
             text: 'Alberta Corporation Limited just sent in an EOI Request',
-            dateTime: new Date(),
+            start_time: new Date(),
         },
         {
             title: 'EOI REQUEST',
             text: 'Ayolla Obasanjo just approved the Aberta Corporation EOI Request',
-            dateTime: new Date(),
+            start_time: new Date(),
         },
         {
             title: 'SITE VISIT',
             text: 'Johnson Alaba has updated the site survey findings.',
-            dateTime: new Date(),
+            start_time: new Date(),
         },
         {
             title: 'SITE VISIT',
             text: 'GET Technologies has picked a survey date.',
-            dateTime: new Date(),
+            start_time: new Date(),
         },
         {
             title: 'DCQ',
             text: 'Some description for activity 2',
-            dateTime: new Date(),
+            start_time: new Date(),
         },
     ];
 
     return (
-        <div style={{ width: size }}  className="flex flex-col border-1 rounded-[10px] overflow-hidden">
+        <div style={{ width: size }} className="flex flex-col border-1 rounded-[10px] overflow-hidden">
             <div className={`flex items-center justify-between mb-4 ${headingBgColor} p-2`}>
                 <h2 className="text-xl font-[400] text-gray-400">{heading}</h2>
                 {icon && <img src={icon} alt="icon" className="w-6 h-6 text-gray-600" />}
             </div>
-    
+
             <div className="flex flex-col gap-2 px-2 pb-20">
                 {activityData.map((activity, index) => (
                     <ActivityLogCard
                         key={index}
                         title={activity.title}
                         text={activity.text}
-                        dateTime={activity.dateTime}
+                        start_time={activity.start_time}
                         button={<button className="bg-green-600 hover:bg-gray-100 text-white font-bold py-1 px-8 rounded-[30px]">View Request</button>}
                     />
                 ))}

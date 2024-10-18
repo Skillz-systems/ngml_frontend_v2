@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import GasConsumptionCertificate from '../../Components/GasConsumptionCertificate/GasConsumptionCertificate';
 import images from '../../assets/index';
 
 /**
@@ -19,7 +20,7 @@ import images from '../../assets/index';
 const InvoicePage: React.FC = () => {
 
 
-     // Hooks and State
+    // Hooks and State
     const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,9 +36,9 @@ const InvoicePage: React.FC = () => {
         }
     };
 
-     /**
-     * Go to the previous page if it exists.
-     */
+    /**
+    * Go to the previous page if it exists.
+    */
     const handlePreviousPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
@@ -79,7 +80,7 @@ const InvoicePage: React.FC = () => {
                 </div>
 
                 <div className="w-full h-full flex flex-col sm:flex-row">
-                    <div className="w-full p-4 border-r space-y-4">
+                    <div className="w-80 p-4 border-r space-y-4">
                         <div className="w-full p-2 rounded-lg border justify-between items-center flex">
                             <div className="p-1 bg-[#EAEEF2] rounded-sm">
                                 <div className="text-center text-[#49526A] text-xs font-semibold">MONTH</div>
@@ -94,7 +95,23 @@ const InvoicePage: React.FC = () => {
                         </div>
                     </div>
                     <div className="w-full p-4 bg-[#FFFFFF] rounded-xl flex justify-center">
-                        <img className="w-full h-full relative rounded-xl border" src={`https://via.placeholder.com/706x1000?text=Page+${currentPage}`} />
+                        {/* <img className="w-full h-full relative rounded-xl border" src={`https://via.placeholder.com/706x1000?text=Page+${currentPage}`} /> */}
+                        <GasConsumptionCertificate
+                            refNumber="NGML/MD.01/Vol.01"
+                            date="1st June 2024"
+                            certificateNumber="Ying Zhe-0523"
+                            department="Gas Distribution Delta"
+                            buyerName="Ying Zhe Energy Ltd, Utesi"
+                            period="1st to 31st May 2023"
+                            gasQuantity="239,133,559,34SCF"
+                            buyerRepName="KAYADE OLADEJO"
+                            buyerRepSignature=""
+                            buyerRepDate="02-06-2023"
+                            sellerRepName="YAKUBU F."
+                            sellerRepSignature=""
+                            sellerRepDate="01/06/2023"
+                        />
+
                     </div>
                     <div className="flex justify-center">
                         <div className="h-12 border-l">

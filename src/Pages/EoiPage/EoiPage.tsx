@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Button, EoiRequestTemplate } from '@/Components';
 import images from '@/assets';
+import { useState } from 'react';
 
 const EoiPage = () => {
   const [status] = useState('Default Status');
@@ -12,21 +12,21 @@ const EoiPage = () => {
     approverName: 'Okoro Florish'
   });
 
-  const handleClose = () => {};
+  const handleClose = () => { };
 
   return (
     <div>
       <div className='flex items-end justify-end mb-3'>
-      <Button
-        type="outline"
-        label="Upload"
-        radius="20px"
-        width="96px"
-        height="32px"
-        icon={<div><img src={images.upload} alt="send Icon" /></div>}
-        columnGap="10px"
-        action={() => {}}
-      />
+        <Button
+          type="primary"
+          label="Upload"
+          radius="20px"
+          width="120px"
+          height="32px"
+          icon={<div><img src={images.uploadSvg} alt="send Icon" className='text-white' /></div>}
+          columnGap="5px"
+          action={() => { }}
+        />
       </div>
       <EoiRequestTemplate
         handleClose={handleClose}
