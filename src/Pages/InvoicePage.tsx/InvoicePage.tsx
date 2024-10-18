@@ -56,17 +56,17 @@ const InvoicePage: React.FC = () => {
     return (
         <div className="w-full h-full">
             <div className="w-full h-fit pt-8 bg-[#FFFFFF] bg-opacity-50 rounded-lg">
-                <div className="flex flex-col items-center justify-between px-8 mb-6 sm:flex-row">
+                <div className="px-8 justify-between items-center flex mb-6 flex-col sm:flex-row">
                     <div className="text-center text-3xl text-[#49526A] font-semibold">October Invoice Advice</div>
-                    <div className="flex items-center gap-2">
-                        <div className="px-2 py-1 border rounded-3xl">
+                    <div className="items-center gap-2 flex">
+                        <div className="px-2 py-1 rounded-3xl border">
                             <div className="text-[#49526A] text-base font-normal">Reject Invoice Advice</div>
                         </div>
-                        <div className="px-2 py-1 border rounded-3xl">
+                        <div className="px-2 py-1 rounded-3xl border">
                             <div className="text-[#49526A] text-base font-normal">Link Invoice</div>
                         </div>
-                        <div className="flex items-center justify-center gap-1 p-2 border cursor-pointer rounded-3xl" onClick={handleClose}>
-                            <div className="flex items-center justify-center w-4 h-4">
+                        <div className="p-2 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
+                            <div className="w-4 h-4 justify-center items-center flex">
                                 <img src={images.cancel} alt="close icon" width={'10px'} />
                             </div>
                             <div className="text-center text-[#808080] text-xs font-normal">Close</div>
@@ -74,32 +74,48 @@ const InvoicePage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between w-full px-5 py-2 bg-nnpc-50">
+                <div className="w-full justify-between items-center flex bg-nnpc-50 px-5 py-2">
                     <div className="text-[#49526A] text-sm font-semibold">DETAILS</div>
                     <div className="text-[#49526A] text-sm font-semibold">DOCUMENT PREVIEW</div>
                 </div>
 
-                <div className="flex flex-col w-full h-full sm:flex-row">
-                    <div className="w-full p-4 space-y-4 border-r">
-                        <div className="flex items-center justify-between w-full p-2 border rounded-lg">
+                <div className="w-full h-full flex flex-col sm:flex-row">
+                    <div className="w-80 p-4 border-r space-y-4">
+                        <div className="w-full p-2 rounded-lg border justify-between items-center flex">
                             <div className="p-1 bg-[#EAEEF2] rounded-sm">
                                 <div className="text-center text-[#49526A] text-xs font-semibold">MONTH</div>
                             </div>
                             <div className="text-center text-[#49526A] text-xs font-normal">October</div>
                         </div>
-                        <div className="flex items-center justify-between w-full p-2 border rounded-lg">
+                        <div className="w-full p-2 rounded-lg border justify-between items-center flex">
                             <div className="p-1 bg-[#EAEEF2] rounded-sm">
-                                <div className="text-xs font-semibold text-center">Generated on</div>
+                                <div className="text-center text-xs font-semibold">Generated on</div>
                             </div>
-                            <div className="text-xs font-semibold text-center">03/Nov/2023</div>
+                            <div className="text-center text-xs font-semibold">03/Nov/2023</div>
                         </div>
                     </div>
                     <div className="w-full p-4 bg-[#FFFFFF] rounded-xl flex justify-center">
-                        <img className="relative w-full h-full border rounded-xl" src={`https://via.placeholder.com/706x1000?text=Page+${currentPage}`} />
+                        {/* <img className="w-full h-full relative rounded-xl border" src={`https://via.placeholder.com/706x1000?text=Page+${currentPage}`} /> */}
+                        <GasConsumptionCertificate
+                            refNumber="NGML/MD.01/Vol.01"
+                            date="1st June 2024"
+                            certificateNumber="Ying Zhe-0523"
+                            department="Gas Distribution Delta"
+                            buyerName="Ying Zhe Energy Ltd, Utesi"
+                            period="1st to 31st May 2023"
+                            gasQuantity="239,133,559,34SCF"
+                            buyerRepName="KAYADE OLADEJO"
+                            buyerRepSignature=""
+                            buyerRepDate="02-06-2023"
+                            sellerRepName="YAKUBU F."
+                            sellerRepSignature=""
+                            sellerRepDate="01/06/2023"
+                        />
+
                     </div>
                     <div className="flex justify-center">
                         <div className="h-12 border-l">
-                            <div className="flex items-center justify-between p-2 border-b">
+                            <div className="p-2 border-b justify-between items-center flex">
                                 <div className="text-[#49526A] text-xs font-semibold">Page {currentPage} of {totalPages} showing</div>
                                 <div className="flex items-center gap-2">
                                     <button
@@ -122,8 +138,8 @@ const InvoicePage: React.FC = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="flex-col w-full border-l md:w-60">
-                                <div className="flex flex-row h-full p-4 space-y-3 sm:flex-col">
+                            <div className="w-full md:w-60 border-l flex-col">
+                                <div className="h-full p-4 space-y-3 flex flex-row sm:flex-col">
                                     {[1, 2, 3, 4, 5].map(page => (
                                         <div key={page} className="h-full">
                                             <div className="text-[#808080] text-xs font-normal">Page {page}</div>
