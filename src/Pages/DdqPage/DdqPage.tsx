@@ -520,6 +520,7 @@ const DdqPage: React.FC = () => {
                                             ? { label: opt, value: opt }
                                             : opt
                                     )}
+                                    url={form?.url}
                                     maxSizeMB={10}
                                     allowedFileTypes={[FileType.PDF]}
                                 />
