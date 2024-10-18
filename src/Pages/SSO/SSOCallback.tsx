@@ -49,7 +49,7 @@ const SSOCallback = () => {
             const response = await sendCode({ code }).unwrap() as RegistrationResponse;
             if (isSuccess) {
                 console.log('response', response)
-                alert('Successs')
+                // alert('Successs')
             }
             dispatch(setCredentials(response));
             if (response.user.status == 0) {

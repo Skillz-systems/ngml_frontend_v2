@@ -1,4 +1,5 @@
 
+import { ActivityLogCard, Chart, StatisticDynamicCard } from '@/Components';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
   ArrowOutwardOutlined,
@@ -6,9 +7,6 @@ import {
   RestaurantMenuOutlined
 } from '@mui/icons-material';
 import React from 'react';
-import { selectCurrentUser } from '../../../Redux/Features/Auth/authSlice';
-import { useAppSelector } from '../../../Redux/hooks';
-import { ActivityLogCard, Chart, StatisticDynamicCard } from '@/Components';
 // import { aC } from 'vitest/dist/reporters-1evA5lom';
 
 
@@ -29,12 +27,12 @@ interface DynamicCardDataItem {
 
 const CustomerHomePage = () => {
 
-  const currentUser = useAppSelector(selectCurrentUser);
-  const userId = Number(currentUser?.id)
+  // const currentUser = useAppSelector(selectCurrentUser);
+  // const userId = Number(currentUser?.id)
 
-  const { data, error, isError, isSuccess } = useTasksQuery({ userId });
+  const { data, error, isError, isSuccess } = useTasksQuery();
 
-  console.log(data, "data___")
+  console.log(data, 'data___')
 
 
 
@@ -56,7 +54,7 @@ const CustomerHomePage = () => {
       title: 'All Time',
       content: '0',
       icon: <RestaurantMenuOutlined />,
-      
+
     },
     {
       type: 'secondary',
@@ -83,7 +81,7 @@ const CustomerHomePage = () => {
   return (
     <div className="h-fit w-full" >
       <div>
-      <div className='text-[30px] text-[#49526A] font-[700]'>Home</div>
+        <div className='text-[30px] text-[#49526A] font-[700]'>Home</div>
         {/* <div className='text-[30px] text-[#49526A] font-[700]'>Welcome {currentUser && (
           <span className="text-[30px] text-[#49526A] font-[700] capitalize">
             {getFirstName(currentUser.name)}

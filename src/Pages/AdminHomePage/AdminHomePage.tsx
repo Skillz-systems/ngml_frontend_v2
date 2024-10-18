@@ -30,9 +30,9 @@ import images from '../../assets/index';
 const AdminHomePage = () => {
   // const [, setSortDetails] = useState({ sortType: '', value: '' });
   const currentUser = useAppSelector(selectCurrentUser);
-  const userId = Number(currentUser?.id)
+  // const userId = Number(currentUser?.id)
 
-  const { data, error, isError, isSuccess, isLoading } = useTasksQuery({ userId });
+  const { data, error, isError, isSuccess, isLoading } = useTasksQuery();
   const { data: customers } = useGetCustomersQuery();
 
   console.log(data, 'data___')
@@ -184,7 +184,7 @@ const AdminHomePage = () => {
           </span>
         )}</div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4" >
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4">
         {cardData.map((card, index) => {
           const { bgColor, iconColor } = getIconStyles(card.title);
           return (
@@ -257,17 +257,14 @@ const AdminHomePage = () => {
 
             {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
               return (
-                <div style={{border: '2px solid red'}}
-                className='h-[300px] overflow-y-auto ' key={index}>
+                <ActivityLogCard
+                  key={index}
+                  route={activity.route}
+                  title={activity.title}
+                  text={activity.text}
+                  start_time={activity.start_time}
+                />
 
-                  <ActivityLogCard
-                    // key={index}
-                    route={activity.route}
-                    title={activity.title}
-                    text={activity.text}
-                    start_time={activity.start_time}
-                  />
-                </div>
               );
             })}
           </div>
@@ -279,7 +276,7 @@ const AdminHomePage = () => {
           <Chart
             data={lineDataGraph}
             chartType="line"
-            yAxisLabel="Volume (mscf)"
+            yAxisLabel="Vol (mscf)"
             xAxisDataKey="month"
             colors={chartColors}
             title='Customer Consumption Chart'
