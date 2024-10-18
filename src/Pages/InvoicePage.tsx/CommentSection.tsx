@@ -39,7 +39,7 @@ export default function CommentSection({
             </div>
           ))}
         </div>
-        <form onSubmit={handleSubmit} className="px-4 mt-4">
+        <form onSubmit={handleSubmit} className="px-4 mt-4 gap-3 flex flex-col items-start">
           <textarea
             className="w-full px-3 py-2 text-sm text-gray-700 border rounded-lg focus:outline-none"
             rows={4}
