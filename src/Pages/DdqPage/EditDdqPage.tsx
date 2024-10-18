@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { FormField, useGetFormByNameQuery } from '@/Redux/Features/FormBuilder/formBuilderService';
 import FormInput from '@/Components/Custominput/FormInput';
+import { FormField, useGetFormByNameQuery } from '@/Redux/Features/FormBuilder/formBuilderService';
+import React, { Fragment, useEffect, useState } from 'react';
 // import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 // import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -12,19 +13,34 @@ type CustomerData = {
     [key: string]: string | File | null;
 };
 
-interface EditModalContentProps {
-    companyData: any;
-    setCompanyData: React.Dispatch<React.SetStateAction<any>>;
-}
 
-const EditDdqPage: React.FC<EditModalContentProps> = () => {
+const EditDdqPage: React.FC = () => {
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError,] = useState<string>('');
+    const [customerId, setSetCustomerId] = useState<number | null>(null)
 
-    const { data, isSuccess, isLoading } = useGetFormByNameQuery('Editddqupload');
+
+    const location = useLocation()
+    //   const { data, isSuccess, isLoading } = useGetFormByNameQuery('Edditddqupload/customer/customerId');
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery(`Edditddqupload/customer/${customerId}`, {
+        skip: !customerId
+    });
+
+
+
+
+
     // const [submitForm] = useSubmitFormMutation();
-    
+
+    useEffect(() => {
+        const customer = location.pathname.split('/')
+        setSetCustomerId(Number(customer[4]))
+    }, [location])
+
+    // const { data, isSuccess, isLoading } = useGetFormByNameQuery('Editddqupload');
+    // const [submitForm] = useSubmitFormMutation();
+
 
 
 
@@ -143,7 +159,7 @@ const EditDdqPage: React.FC<EditModalContentProps> = () => {
     //         console.log('Payload:', payload);
 
     //         await submitForm(payload).unwrap();
-        
+
 
     //     } catch (error) {
     //         console.error('Error submitting form:', error);
@@ -156,7 +172,7 @@ const EditDdqPage: React.FC<EditModalContentProps> = () => {
     return (
         <div>
             <div className='border-2 p-4 border-dashed border-dark-200 rounded-[10px] mt-2 space-y-4'>
-                <h3>COMPANY DETAILS</h3>
+                {/* <h3>COMPANY DETAILS</h3> */}
                 {formError && <p className="text-red-500 mb-4">{formError}</p>}
                 {isLoading ? (
                     <p>Loading form fields...</p>
