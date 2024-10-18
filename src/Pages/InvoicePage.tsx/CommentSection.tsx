@@ -1,3 +1,4 @@
+import { Button } from '@/Components';
 import React, { useState } from 'react';
 
 interface Comment {
@@ -24,9 +25,8 @@ export default function CommentSection({
       setNewComment('');
     }
   };
-
   return (
-    <div className="w-full lg:w-[30%] max-w-md pb-4 mx-auto mt-4 overflow-y-auto overflow-hidden bg-white rounded-lg shadow-md md:max-w-2xl max-h-[700px] tiny-scrollbar">
+    <div className="w-full lg:w-[30%] max-w-md pb-4 mx-auto mt-4 overflow-y-auto overflow-hidden bg-white rounded-lg shadow md:max-w-2xl max-h-[700px] tiny-scrollbar">
       <>
         <p className="p-4 text-lg font-semibold text-left bg-gray-100 rounded-t-lg">
           Comments
@@ -47,12 +47,18 @@ export default function CommentSection({
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           ></textarea>
-          <button
-            type="submit"
-            className="px-4 py-2 mt-2 text-white transition-colors bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-          >
-            Send
-          </button>
+
+          <Button
+            type="primary"
+            label="Send"
+            action={() => { }}
+            color="#FFFFFF"
+            // fontStyle="italic"
+            width="100px"
+            height="35px"
+            fontSize="16px"
+            radius="20px"
+          />
         </form>
       </>
     </div>
