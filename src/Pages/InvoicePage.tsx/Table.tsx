@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { InvoiceAdviceDataType } from './data';
-import CommentSection from './CommentSection';
-import { FaDeleteLeft } from 'react-icons/fa6';
-import { RiEdit2Fill, RiFileAddFill, RiSaveFill } from 'react-icons/ri';
-import { MdCancel } from 'react-icons/md';
+import { Button } from '@/Components';
 import useScrollToId from '@/Utils/useScrollToId';
+import { useState } from 'react';
+import { FaDeleteLeft } from 'react-icons/fa6';
+import { MdCancel } from 'react-icons/md';
+import { RiEdit2Fill, RiFileAddFill, RiSaveFill } from 'react-icons/ri';
+import CommentSection from './CommentSection';
+import { InvoiceAdviceDataType } from './data';
 
 interface BacklogType {
   sn: number;
@@ -73,7 +74,7 @@ export default function InventoryTable({
     <div className="flex flex-col items-start w-full gap-2 lg:flex-row">
       <CommentSection commentsData={invoiceAdviceData.comments} />
       <div className="container py-4 md:p-4 mx-auto space-y-8 w-full lg:w-[70%]">
-        <div id="line-items" className="overflow-x-auto rounded-lg shadow-md tiny-scrollbar">
+        <div id="line-items" className="overflow-x-auto rounded-lg shadow tiny-scrollbar">
           <table className="min-w-full bg-white">
             <caption className="p-4 text-lg font-semibold text-left bg-gray-100">
               Line Items
@@ -190,7 +191,7 @@ export default function InventoryTable({
         </div>
 
         {backlog.length > 0 ? (
-          <div id="backlog" className="overflow-x-auto rounded-lg shadow-md">
+          <div id="backlog" className="overflow-x-auto rounded-lg shadow">
             <table className="min-w-full bg-white">
               <caption className="p-4 text-lg font-semibold text-left bg-gray-100">
                 Line Items Backlog
@@ -248,7 +249,22 @@ export default function InventoryTable({
           </div>
         ) : null}
 
-        <button
+        <Button
+          type="primary"
+          label="Create Invoice Advice"
+          action={async () => {
+            await onCreateInvoiceAdviceClick();
+            scrollToId('proceed');
+          }}
+          color="#FFFFFF"
+          // fontStyle="italic"
+          width="100%"
+          height="35px"
+          fontSize="16px"
+          radius="20px"
+        />
+
+        {/* <button
           className="w-full px-4 py-2 text-white transition-colors bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           onClick={async () => {
             await onCreateInvoiceAdviceClick();
@@ -256,7 +272,7 @@ export default function InventoryTable({
           }}
         >
           Create Invoice Advice
-        </button>
+        </button> */}
       </div>
     </div>
   );
