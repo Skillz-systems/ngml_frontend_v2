@@ -109,7 +109,7 @@ export const admin: RouteObject[] = [
 
     },
     {
-        path: '/admin/records/invoice/customer/:customerId/:locationId',
+        path: '/admin/records/customerinvoice/:customerId/:locationId',
         element: <CustomerInvoiceAdviceLayout />,
 
     },
