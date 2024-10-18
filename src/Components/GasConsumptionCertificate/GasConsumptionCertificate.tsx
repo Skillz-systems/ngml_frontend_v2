@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import images from '../../assets/index';
 
 interface GasConsumptionCertificateProps {
@@ -9,8 +9,12 @@ interface GasConsumptionCertificateProps {
     buyerName: string;
     period: string;
     gasQuantity: string;
-    initialBuyerRepName: string;
-    initialSellerRepName: string;
+    buyerRepName: string;
+    buyerRepSignature: string;
+    buyerRepDate: string;
+    sellerRepName: string;
+    sellerRepSignature: string;
+    sellerRepDate: string;
 }
 
 const GasConsumptionCertificate: React.FC<GasConsumptionCertificateProps> = ({
@@ -21,17 +25,13 @@ const GasConsumptionCertificate: React.FC<GasConsumptionCertificateProps> = ({
     buyerName,
     period,
     gasQuantity,
-    initialBuyerRepName,
-    initialSellerRepName,
+    buyerRepName,
+    buyerRepSignature,
+    buyerRepDate,
+    sellerRepName,
+    sellerRepSignature,
+    sellerRepDate
 }) => {
-    const [buyerRepName, setBuyerRepName] = useState(initialBuyerRepName);
-    const [buyerSignature, setBuyerSignature] = useState('');
-    const [buyerDate, setBuyerDate] = useState('');
-
-    const [sellerRepName, setSellerRepName] = useState(initialSellerRepName);
-    const [sellerSignature, setSellerSignature] = useState('');
-    const [sellerDate, setSellerDate] = useState('');
-
     return (
         <div className="max-w-4xl mx-auto p-8 border border-gray-400">
             {/* Header */}
@@ -84,32 +84,17 @@ const GasConsumptionCertificate: React.FC<GasConsumptionCertificateProps> = ({
                 <div className="space-y-4 mt-4">
                     <div className="flex">
                         <span className="w-1/3 font-bold">NAME:</span>
-                        <input
-                            type="text"
-                            value={buyerRepName}
-                            onChange={(e) => setBuyerRepName(e.target.value)}
-                            className="w-2/3 border-b border-black"
-                        />
+                        <span className="w-2/3 border-b border-black">{buyerRepName}</span>
                     </div>
 
                     <div className="flex">
                         <span className="w-1/3 font-bold">SIGNATURE:</span>
-                        <input
-                            type="text"
-                            value={buyerSignature}
-                            onChange={(e) => setBuyerSignature(e.target.value)}
-                            className="w-2/3 border-b border-black"
-                        />
+                        <span className="w-2/3 border-b border-black">{buyerRepSignature}</span>
                     </div>
 
                     <div className="flex">
                         <span className="w-1/3 font-bold">DATE:</span>
-                        <input
-                            type="date"
-                            value={buyerDate}
-                            onChange={(e) => setBuyerDate(e.target.value)}
-                            className="w-2/3 border-b border-black"
-                        />
+                        <span className="w-2/3 border-b border-black">{buyerRepDate}</span>
                     </div>
                 </div>
             </div>
@@ -120,32 +105,17 @@ const GasConsumptionCertificate: React.FC<GasConsumptionCertificateProps> = ({
                 <div className="space-y-4 mt-4">
                     <div className="flex">
                         <span className="w-1/3 font-bold">NAME:</span>
-                        <input
-                            type="text"
-                            value={sellerRepName}
-                            onChange={(e) => setSellerRepName(e.target.value)}
-                            className="w-2/3 border-b border-black"
-                        />
+                        <span className="w-2/3 border-b border-black">{sellerRepName}</span>
                     </div>
 
                     <div className="flex">
                         <span className="w-1/3 font-bold">SIGNATURE:</span>
-                        <input
-                            type="text"
-                            value={sellerSignature}
-                            onChange={(e) => setSellerSignature(e.target.value)}
-                            className="w-2/3 border-b border-black"
-                        />
+                        <span className="w-2/3 border-b border-black">{sellerRepSignature}</span>
                     </div>
 
                     <div className="flex">
                         <span className="w-1/3 font-bold">DATE:</span>
-                        <input
-                            type="date"
-                            value={sellerDate}
-                            onChange={(e) => setSellerDate(e.target.value)}
-                            className="w-2/3 border-b border-black"
-                        />
+                        <span className="w-2/3 border-b border-black">{sellerRepDate}</span>
                     </div>
                 </div>
             </div>

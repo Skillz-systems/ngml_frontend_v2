@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import images from '../../assets/index';
 import GasConsumptionCertificate from '../../Components/GasConsumptionCertificate/GasConsumptionCertificate';
+import images from '../../assets/index';
 
 /**
  * InvoicePage Component
@@ -97,15 +97,19 @@ const InvoicePage: React.FC = () => {
                     <div className="w-full p-4 bg-[#FFFFFF] rounded-xl flex justify-center">
                         {/* <img className="w-full h-full relative rounded-xl border" src={`https://via.placeholder.com/706x1000?text=Page+${currentPage}`} /> */}
                         <GasConsumptionCertificate
-                            refNumber="GCC12345"
-                            date="2024-10-17"
-                            certificateNumber="CERT2023"
-                            department="Gas Sales"
-                            buyerName="John Doe"
-                            period="October 2024"
-                            gasQuantity="1000 SCM"
-                            initialBuyerRepName="Buyer Rep"
-                            initialSellerRepName="Seller Rep"
+                            refNumber="NGML/MD.01/Vol.01"
+                            date="1st June 2024"
+                            certificateNumber="Ying Zhe-0523"
+                            department="Gas Distribution Delta"
+                            buyerName="Ying Zhe Energy Ltd, Utesi"
+                            period="1st to 31st May 2023"
+                            gasQuantity="239,133,559,34SCF"
+                            buyerRepName="KAYADE OLADEJO"
+                            buyerRepSignature=""
+                            buyerRepDate="02-06-2023"
+                            sellerRepName="YAKUBU F."
+                            sellerRepSignature=""
+                            sellerRepDate="01/06/2023"
                         />
 
                     </div>
