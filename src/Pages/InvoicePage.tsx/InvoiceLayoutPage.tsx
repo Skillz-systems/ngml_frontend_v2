@@ -169,9 +169,8 @@ const InvoiceLayoutPage: React.FC = () => {
                         </div>
                         <img
                           className="h-full p-2.5 rounded-lg border"
-                          src={`https://via.placeholder.com/202x280?text=Page+${
-                            index + 1
-                          }`}
+                          src={`https://via.placeholder.com/202x280?text=Page+${index + 1
+                            }`}
                         />
                       </div>
                     )
