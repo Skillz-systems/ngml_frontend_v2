@@ -6,7 +6,6 @@ import AccountsInvoiceOne from "./invoices/accountsInvoiceOne";
 
 const GCCComponent = () => <div>GCC Component Content</div>;
 const InvoiceComponent = () => <div>Invoice Component Content</div>;
-const AccountsComponent = () => <div>Accounts Component Content</div>;
 
 const InvoiceLayoutPage: React.FC = () => {
   // const [activeTab, setActiveTab] = useState('Items');
