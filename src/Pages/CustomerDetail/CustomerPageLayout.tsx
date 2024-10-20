@@ -9,6 +9,7 @@ import ConnectProject from '../ConnectProject/ConnectProject';
 import CostAnalysis from '../CostAnalysis/CostAnalysis';
 import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
 import CustomerManager from '../CustomerManager/CustomerManager';
+import CustomerDailyVolumns from '../Dailyvolumns/CustomerDailyVolumns';
 import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
@@ -23,15 +24,16 @@ const AdminCustomerPageLayout: React.FC = () => {
   if (error) return <div>Error loading customer data.</div>;
 
   const tablist = [
-    { name: 'overview', ref: 'overview' },
-    { name: 'customer details', ref: 'customerdetails' },
+    { name: 'Overview', ref: 'overview' },
+    { name: 'Customer details', ref: 'customerdetails' },
     { name: 'Eoi request', ref: 'eoirequest' },
     { name: 'DDQ', ref: 'ddq' },
-    { name: 'site visit', ref: 'sitevisit' },
-    { name: 'cost analysis', ref: 'costanalysis' },
-    { name: 'agreement', ref: 'agreement' },
-    { name: 'connect project', ref: 'connectproject' },
-    { name: 'customer manager', ref: 'customermanager' }
+    { name: 'Daily consumption', ref: 'dailyconsumptions' },
+    { name: 'Site visit', ref: 'sitevisit' },
+    { name: 'Cost analysis', ref: 'costanalysis' },
+    { name: 'Agreement', ref: 'agreement' },
+    { name: 'Connect project', ref: 'connectproject' },
+    { name: 'Customer manager', ref: 'customermanager' }
   ];
 
   const tabContent = {
@@ -40,6 +42,7 @@ const AdminCustomerPageLayout: React.FC = () => {
     eoirequest: <EoiPage />,
     ddq: <DdqPage />,
     sitevisit: <SiteVisitationPage />,
+    dailyconsumptions: <CustomerDailyVolumns />,
     costanalysis: <CostAnalysis />,
     agreement: <Agreement />,
     connectproject: <ConnectProject />,
