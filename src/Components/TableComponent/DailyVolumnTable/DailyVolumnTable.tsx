@@ -1,8 +1,8 @@
 
+import { useGetAllCustomersDailyVolumeQuery } from '@/Redux/Features/Customer/customerVolume';
 import { Modal } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import { useGetAllCustomersDailyVolumeQuery } from '@/Redux/Features/Customer/customerVolume';
 
 /**
  * Interface representing the properties of a daily volume entry.
@@ -45,13 +45,13 @@ const DailyVolumnTable = () => {
 
     const [queryParams] = useState<Record<string, string>>({
         page: '1',
-        per_page: "50",
+        per_page: '50',
         created_at_from: dayBeforeToday(),
         created_at_to: dayBeforeToday(),
         updated_at_from: dayBeforeToday(),
         updated_at_to: dayBeforeToday(),
-        status: "active",
-        customer_id: "1"
+        status: 'active',
+        customer_id: '1'
     });
 
 
@@ -80,7 +80,7 @@ const DailyVolumnTable = () => {
         if (!data?.data) return [
 
         ];
-        console.log(data, 'ppppppppppprick');
+        // console.log(data, 'ppppppppppprick');
 
 
         const lowercasedSearch = searchText.toLowerCase();
@@ -94,7 +94,7 @@ const DailyVolumnTable = () => {
     };
 
 
- 
+
 
     const columns: GridColDef[] = [
         {
@@ -167,27 +167,27 @@ const DailyVolumnTable = () => {
             headerName: 'STATUS',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => {
-              let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
-          
-              switch (params.row.abnormal_status) {
-                case 'low':
-                  classNames += 'bg-orange-200';
-                  break;
-                case 'high':
-                  classNames += 'bg-green-200'; 
-                  break;
-                default:
-                  classNames += 'bg-gray-200';
-                  break;
-              }
-          
-              return (
-                <div className={classNames}>
-                  {params.value}
-                </div>
-              );
+                let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
+
+                switch (params.row.abnormal_status) {
+                    case 'low':
+                        classNames += 'bg-orange-200';
+                        break;
+                    case 'high':
+                        classNames += 'bg-green-200';
+                        break;
+                    default:
+                        classNames += 'bg-gray-200';
+                        break;
+                }
+
+                return (
+                    <div className={classNames}>
+                        {params.value}
+                    </div>
+                );
             }
-          },
+        },
     ];
 
     useEffect(() => {
