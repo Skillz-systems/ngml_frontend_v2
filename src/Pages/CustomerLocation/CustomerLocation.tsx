@@ -311,6 +311,7 @@ const CustomerLocation: React.FC = () => {
   const [customerData, setCustomerData] = useState<CustomerData>({});
   const [formError, setFormError] = useState<string>('');
 
+
   const navigate = useNavigate();
   const location = useLocation();
 

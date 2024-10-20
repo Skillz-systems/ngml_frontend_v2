@@ -1,12 +1,8 @@
 
 
+import GasConsumptionCertificate from '@/Components/GasConsumptionCertificate/GasConsumptionCertificate';
 import React, { useEffect, useState } from 'react';
 import ListItems from './ListItems';
-
-
-const GCCComponent = () => <div>GCC Component Content</div>;
-
-
 
 const CustomerInvoiceAdviceLayout: React.FC = () => {
     const [activeTab, setActiveTab] = useState(() => {
@@ -22,7 +18,25 @@ const CustomerInvoiceAdviceLayout: React.FC = () => {
                 <ListItems />
             )
         },
-        { name: 'GCC', component: GCCComponent },
+        {
+            name: 'GCC', component: () => (
+                <GasConsumptionCertificate
+                    refNumber="NGML/MD.01/Vol.01"
+                    date="1st June 2024"
+                    certificateNumber="Ying Zhe-0523"
+                    department="Gas Distribution Delta"
+                    buyerName="Ying Zhe Energy Ltd, Utesi"
+                    period="1st to 31st May 2023"
+                    gasQuantity="239,133,559,34SCF"
+                    buyerRepName="KAYADE OLADEJO"
+                    buyerRepSignature=""
+                    buyerRepDate="02-06-2023"
+                    sellerRepName="YAKUBU F."
+                    sellerRepSignature=""
+                    sellerRepDate="01/06/2023"
+                />
+            )
+        },
     ];
 
     useEffect(() => {

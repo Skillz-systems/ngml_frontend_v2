@@ -1,10 +1,10 @@
-import { Button } from "@/Components";
-import React, { useEffect, useState } from "react";
-import { invoiceAdviceData } from "./data";
-import InventoryTable from "./Table";
-import AccountsInvoiceOne from "./invoices/accountsInvoiceOne";
+import { Button } from '@/Components';
+import GasConsumptionCertificate from '@/Components/GasConsumptionCertificate/GasConsumptionCertificate';
+import React, { useEffect, useState } from 'react';
+import { invoiceAdviceData } from './data';
+import AccountsInvoiceOne from './invoices/accountsInvoiceOne';
+import InventoryTable from './Table';
 
-const GCCComponent = () => <div>GCC Component Content</div>;
 const InvoiceComponent = () => <div>Invoice Component Content</div>;
 
 const InvoiceLayoutPage: React.FC = () => {
@@ -35,18 +35,18 @@ const InvoiceLayoutPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState(() => {
     // Initialize activeTab from URL if present
     const params = new URLSearchParams(window.location.search);
-    return params.get("tab") || "Items";
+    return params.get('tab') || 'Items';
   });
   const [showProceed, setShowProceed] = useState<boolean>(false);
 
   const onCreateInvoiceAdviceClick = async () => {
-    console.log("clicked");
+    console.log('clicked');
     setShowProceed(true);
   };
 
   const tabs = [
     {
-      name: "Items",
+      name: 'Items',
       component: () => (
         <InventoryTable
           invoiceAdviceData={invoiceAdviceData}
@@ -54,11 +54,29 @@ const InvoiceLayoutPage: React.FC = () => {
         />
       ),
     },
-    { name: "GCC", component: GCCComponent },
-    { name: "Invoice", component: InvoiceComponent },
+    {
+      name: 'GCC', component: () => (
+        <GasConsumptionCertificate
+          refNumber="NGML/MD.01/Vol.01"
+          date="1st June 2024"
+          certificateNumber="Ying Zhe-0523"
+          department="Gas Distribution Delta"
+          buyerName="Ying Zhe Energy Ltd, Utesi"
+          period="1st to 31st May 2023"
+          gasQuantity="239,133,559,34SCF"
+          buyerRepName="KAYADE OLADEJO"
+          buyerRepSignature=""
+          buyerRepDate="02-06-2023"
+          sellerRepName="YAKUBU F."
+          sellerRepSignature=""
+          sellerRepDate="01/06/2023"
+        />
+      )
+    },
+    { name: 'Invoice', component: InvoiceComponent },
     // { name: 'Accounts', component: AccountsComponent },
     {
-      name: "Accounts",
+      name: 'Accounts',
       component: () => (
         <AccountsInvoiceOne
           invoiceAdviceData={invoiceAdviceData}
@@ -70,21 +88,21 @@ const InvoiceLayoutPage: React.FC = () => {
 
   useEffect(() => {
     const url = new URL(window.location.href);
-    url.searchParams.set("tab", activeTab);
-    window.history.pushState({}, "", url);
+    url.searchParams.set('tab', activeTab);
+    window.history.pushState({}, '', url);
   }, [activeTab]);
 
   useEffect(() => {
     const handlePopState = () => {
       const params = new URLSearchParams(window.location.search);
-      const tab = params.get("tab");
+      const tab = params.get('tab');
       if (tab && tabs.some((t) => t.name === tab)) {
         setActiveTab(tab);
       }
     };
 
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const ActiveComponent =
@@ -100,11 +118,11 @@ const InvoiceLayoutPage: React.FC = () => {
           <div id="proceed" className="flex items-center gap-2">
             {showProceed ? (
               <div className="flex items-center gap-3">
-                {" "}
+                {' '}
                 <Button
                   type="primary"
                   label="Proceed"
-                  action={() => {}}
+                  action={() => { }}
                   color="#FFFFFF"
                   // fontStyle="italic"
                   width="100px"
@@ -186,9 +204,8 @@ const InvoiceLayoutPage: React.FC = () => {
               {tabs.map((tab) => (
                 <div
                   key={tab.name}
-                  className={`p-2 rounded cursor-pointer ${
-                    activeTab === tab.name ? "bg-gray-200" : ""
-                  }`}
+                  className={`p-2 rounded cursor-pointer ${activeTab === tab.name ? 'bg-gray-200' : ''
+                    }`}
                   onClick={() => setActiveTab(tab.name)}
                 >
                   <div className="text-[#808080] text-xs font-normal">
