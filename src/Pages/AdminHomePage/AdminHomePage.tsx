@@ -35,8 +35,6 @@ const AdminHomePage = () => {
   const { data, error, isError, isSuccess, isLoading } = useTasksQuery();
   const { data: customers } = useGetCustomersQuery();
 
-  console.log(data, 'data___')
-
   // const handleSortChange = (sortType: 'year' | 'value', value: string) => {
   //   setSortDetails({ sortType, value });
   // };
@@ -246,7 +244,7 @@ const AdminHomePage = () => {
           {/* <div className='h-[400px] overflow-y-auto'> */}
           <div className='w-[100%] p-[10px] pt-[0px]  '>
             {isLoading &&
-              // <div style={{ backgroundImage: images.ngmlPortrait }} className='w-full h-full flex justify-center items-center'></div>
+
               <img src={images.ngmlPortrait} className='w-full h-full' alt="loader" />
               // <Loader className="text-nnpc-100 size-10 " />
               // <div
