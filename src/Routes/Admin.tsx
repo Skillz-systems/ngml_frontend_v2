@@ -6,7 +6,6 @@ import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
 import Complaints from '@/Pages/Complaints/Complaints';
 import ConnectProjectPage from '@/Pages/ConnectProjectPage/ConnectProjectPage';
 import { default as AdminCustomerPageLayout, default as CustomerPageLayout } from '@/Pages/CustomerDetail/CustomerPageLayout';
-import CustomerInvoiceAdviceLayout from '@/Pages/CustomerInvoiceAdvice/CustomerInvoiceAdviceLayout';
 // import CustomerInvoiceAdviceLayout from '@/Pages/CustomerInvoiceAdvice/CustomerInvoiceAdviceLayout';
 import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
@@ -106,11 +105,6 @@ export const admin: RouteObject[] = [
     {
         path: '/admin/records/invoice/:customerId/:locationId',
         element: <InvoiceLayoutPage />,
-
-    },
-    {
-        path: '/admin/records/customerinvoice/:customerId/:locationId',
-        element: <CustomerInvoiceAdviceLayout />,
 
     },
     {

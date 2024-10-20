@@ -321,13 +321,14 @@ const DdqPage: React.FC = () => {
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
     const [customerId, setCustomerId] = useState<number | null>(null);
+    const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
 
 
-    const { data, isSuccess, isLoading } = useGetFormByNameQuery(`Edditddqupload/0/${customerId}`, {
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery(`Edditddqupload/customer/${customerId}/${customerSiteId}`, {
         skip: !customerId
     });
 
@@ -336,6 +337,7 @@ const DdqPage: React.FC = () => {
     useEffect(() => {
         const customer = location.pathname.split('/');
         setCustomerId(Number(customer[4]));
+        setCustomerSiteId(Number(customer[5]))
     }, [location]);
 
     const toggleModal = useCallback((open: boolean) => {
@@ -426,6 +428,7 @@ const DdqPage: React.FC = () => {
             );
 
             const validFormFieldAnswers = formFieldAnswers.filter(Boolean);
+            console.log('customerSiteId', customerSiteId)
 
             const payload = {
                 form_builder_id: data?.data?.id?.toString() || '',

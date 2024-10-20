@@ -6,6 +6,7 @@ import CustomerOtpPage from '@/Pages/Customer/CustomerOtpPage/CustomerOtpPage';
 import CustomerRegistrationPage from '@/Pages/Customer/CustomerRegistrationPage/CustomerRegistrationPage';
 import ForgotPassword from '@/Pages/Customer/ForgotPassword/ForgotPassword';
 import ResetPassword from '@/Pages/Customer/ResetPassword/ResetPassword';
+import CustomerInvoiceAdviceLayout from '@/Pages/CustomerInvoiceAdvice/CustomerInvoiceAdviceLayout';
 import Secondary from '@/Pages/Secondary';
 
 
@@ -28,6 +29,10 @@ export const customer = [
 
                 path: '/customer/businessmanager',
                 element: <CustomerBusinessManagerPageLayout />
+            },
+            {
+                path: '/customer/invoice/:customerId/:locationId',
+                element: <CustomerInvoiceAdviceLayout />,
             },
 
         ]
