@@ -1,37 +1,10 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, DocumentCard, Modal } from '../../Components/index';
 import AddNewInvoice from './AddNewInvoice';
 
-import images from '../../assets/index';
 import { ArrowBack } from '@mui/icons-material';
-
-
-/**
- * Data structure for billing history information.
- * 
- * @typedef {Object} BillingHistoryData
- * @property {'withLink' | 'withoutLink' | 'withReport'} type - The type of document card.
- * @property {string} title - The title of the document card.
- * @property {string} subtitle - The subtitle of the document card.
- * @property {React.ReactNode} icon - The icon displayed on the document card.
- * @property {string} linkText - The text for the document link.
- * @property {string} linkText2 - Additional link text.
- * @property {number|string} width - Width of the document card.
- * @property {number|string} height - Height of the document card.
- * @property {string} backgroundColor - Background color of the document card.
- */
-
-/**
- * BillingHistory Component that displays a list of invoice advice for each month.
- * 
- * @component
- * 
- * @example
- * // To use the component, import and include it within a parent component or route
- * <BillingHistory />
- */
-
+import images from '../../assets/index';
 
 interface BillingHistoryData {
     type: 'withLink' | 'withoutLink' | 'withReport';
@@ -46,15 +19,21 @@ interface BillingHistoryData {
 }
 
 const BillingHistory: React.FC = () => {
-
     const navigate = useNavigate();
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+
     const [selectedYear, setSelectedYear] = useState('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(searchParams.get('modal') === 'newInvoice');
     const [newInvoiceData, setNewInvoiceData] = useState({
         year: '',
         month: '',
         rate: '',
     });
+
+    useEffect(() => {
+        setIsModalOpen(searchParams.get('modal') === 'newInvoice');
+    }, [location.search]);
 
     const billingHistoryDataTwo: BillingHistoryData[] = [
         {
@@ -66,7 +45,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -77,7 +56,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -88,7 +67,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -99,7 +78,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -110,7 +89,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -121,7 +100,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -132,7 +111,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
         {
             type: 'withLink',
@@ -143,7 +122,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
         {
             type: 'withoutLink',
@@ -154,7 +133,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
         {
             type: 'withoutLink',
@@ -165,7 +144,7 @@ const BillingHistory: React.FC = () => {
             icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
             width: '250px',
             height: '100%',
-            backgroundColor:'bg-[#EAEEF2]'
+            backgroundColor: 'bg-[#EAEEF2]'
         },
     ]
 
@@ -177,15 +156,15 @@ const BillingHistory: React.FC = () => {
     const years = [2023, 2022, 2021, 2020, 2019];
 
     const handleClose = () => {
-        navigate(-1)
+        navigate(-1);
     };
 
     const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
+        navigate(isModalOpen ? location.pathname : `${location.pathname}?modal=newInvoice`);
     };
 
     const handleAddNewInvoice = () => {
-        setIsModalOpen(!isModalOpen);
+        navigate(`${location.pathname}?modal=newInvoice`);
     };
 
     const handleGenerateInvoice = () => {
@@ -193,10 +172,9 @@ const BillingHistory: React.FC = () => {
         toggleModal();
     };
 
-
     return (
         <div className="">
-             <Link to={'/admin/records/customer/id'}>
+            <Link to={'/admin/records/customer/:tabId'}>
                 <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
                     <ArrowBack color="success" style={{ fontSize: 'medium' }} />
                 </div>
@@ -221,7 +199,6 @@ const BillingHistory: React.FC = () => {
                         <div className="text-[#49526A] text-xl font-bold font-['Mulish'] leading-tight">INVOICE ADVICE</div>
                         <div className="items-center gap-4 flex">
                             <div className="px-6 py-1 rounded-3xl border justify-start items-center gap-2 flex">
-
                                 <div className="w-6 h-6 justify-center items-center flex">
                                     <select
                                         className="bg-[#f1f7ea] border-0 text-base font-normal outline-none"
@@ -256,7 +233,6 @@ const BillingHistory: React.FC = () => {
                                 />
                             </div>
                         ))}
-
                     </div>
                 </div>
             </div>
@@ -265,7 +241,7 @@ const BillingHistory: React.FC = () => {
                 onClose={handleAddNewInvoice}
                 title="Generate New Invoice Advice"
                 buttons={[
-                    <div className='flex gap-2 mb-[-10px]'>
+                    <div className='flex gap-2 mb-[-10px]' key="buttons">
                         <div className='w-[120px]'>
                             <Button
                                 type="outline"
@@ -293,8 +269,7 @@ const BillingHistory: React.FC = () => {
                     </div>
                 ]}
             >
-                <AddNewInvoice newInvoiceData={newInvoiceData}
-                    setNewInvoiceData={setNewInvoiceData} />
+                <AddNewInvoice newInvoiceData={newInvoiceData} setNewInvoiceData={setNewInvoiceData} />
             </Modal>
         </div>
     );

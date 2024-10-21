@@ -1,83 +1,100 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { DailyFrequencyData } from '@/Data';
+
+import { useGetAllCustomersDailyVolumeQuery } from '@/Redux/Features/Customer/customerVolume';
 import { Modal } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
-
 
 /**
  * Interface representing the properties of a daily volume entry.
- * @typeof {Object} DailyVolumnProps
- * @property {number} id - Unique identifier for the daily volume entry.
- * @property {string} companyname - Name of the company associated with the entry.
- * @property {string} companyType - Type of the company (e.g., LLC, Corporation).
- * @property {string[]} [selectedDates] - Optional. Dates selected for the entry.
- * @property {string} [status] - Optional. Current status of the entry.
- * @property {string} action - Action to be taken on the entry (e.g., View, Edit).
- * @property {string} [deadline] - Optional. Deadline for the entry submission.
- * @property {string} [companyEmail] - Optional. Email address of the company.
- * @property {string} [companyNumber] - Optional. Contact number of the company.
- * @property {string} [companyAddress] - Optional. Physical address of the company.
- * @property {string} [datesent] - Optional. Date when the entry was sent.
  */
-interface DailyVolumnProps {
-    id: number;
-    companyname: string;
-    companyType: string;
-    selectedDates?: string[];
-    status?: string;
-    action: string;
-    deadline?: string;
-    companyEmail?: string;
-    companyNumber?: string;
-    companyAddress?: string;
-    datesent?: string;
-}
+// interface DailyVolumnProps {
+//     id: number;
+//     companyname: string;
+//     companyType: string;
+//     selectedDates?: string[];
+//     status?: string;
+//     action: string;
+//     deadline?: string;
+//     companyEmail?: string;
+//     companyNumber?: string;
+//     companyAddress?: string;
+//     datesent?: string;
 
-const rows = DailyFrequencyData
+// }
+
+
+// interface QueryParams {
+//     page: string;
+//     per_page: string;
+//     created_at_from: string;
+//     created_at_to: string;
+//     updated_at_from: string;
+//     updated_at_to: string;
+//     status: string;
+//     customer_id: string;
+// }
+
 
 
 const DailyVolumnTable = () => {
     const [searchText] = useState<string>('');
-    const [filteredRows, setFilteredRows] = useState<DailyVolumnProps[]>(rows);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState<DailyVolumnProps | null>(null);
     const [selectedMonth, setSelectedMonth] = useState<string>('');
     const [selectedYear, setSelectedYear] = useState<string>('');
 
-    useEffect(() => {
-        filterData();
-    }, [searchText, selectedMonth, selectedYear]);
+
+    const [queryParams] = useState<Record<string, string>>({
+        page: '1',
+        per_page: '50',
+        created_at_from: dayBeforeToday(),
+        created_at_to: dayBeforeToday(),
+        updated_at_from: dayBeforeToday(),
+        updated_at_to: dayBeforeToday(),
+        status: 'active',
+        customer_id: '1'
+    });
 
 
-    /**
-     * Opens a modal to display detailed information for the selected row.
-     * @param {DailyVolumnProps} row - The row data to be displayed in the modal.
-     */
-    const handleOpen = (row: DailyVolumnProps) => {
-        setSelectedRow(row);
-        setOpen(true);
-    };
+    function dayBeforeToday() {
+        const today = new Date();
+        today.setDate(today.getDate() - 1);
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+
+        return `${year}-${month}-${day}`;
+    }
+
+
+    const { data, error, isLoading } = useGetAllCustomersDailyVolumeQuery(queryParams);
+
+
+    // const handleOpen = (row: DailyVolumnProps) => {
+    //     setSelectedRow(row);
+    //     setOpen(true);
+    // };
 
     const handleClose = () => setOpen(false);
 
-
     const filterData = () => {
+        if (!data?.data) return [
+
+        ];
+        // console.log(data, 'ppppppppppprick');
+
+
         const lowercasedSearch = searchText.toLowerCase();
-        const filtered = DailyFrequencyData.filter(row => {
-            const dateParts = row.datesent.split('/');
-            const rowMonth = dateParts[1];
-            const rowYear = dateParts[2];
+
+        return data?.data?.filter((customer) => {
             return (
-                (row.companyname.toLowerCase().includes(lowercasedSearch) || row.companyType.toLowerCase().includes(lowercasedSearch)) &&
-                (selectedMonth ? rowMonth === selectedMonth : true) &&
-                (selectedYear ? rowYear === selectedYear : true)
+                customer.customerId?.toLowerCase().includes(lowercasedSearch) ||
+                customer.dailyVolumes?.some((vol) => vol.date.includes(selectedMonth) && vol.date.includes(selectedYear))
             );
         });
-
-        setFilteredRows(filtered);
     };
+
+
+
 
     const columns: GridColDef[] = [
         {
@@ -86,10 +103,9 @@ const DailyVolumnTable = () => {
             width: 60,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
-                    {params.row.sn}
+                    {params.row.customer_id}
                 </div>
             ),
-
         },
         {
             field: 'name',
@@ -100,21 +116,9 @@ const DailyVolumnTable = () => {
                     <div className='text-[14px] font-[600] text-[#49526A] leading-3'>
                         {params.row.companyname}
                     </div>
-                    <div
-                        className='text-[10px] font-[400] text-[#828DA9] leading-3'>
+                    <div className='text-[10px] font-[400] text-[#828DA9] leading-3'>
                         {params.row.companyType}
                     </div>
-                </div>
-            ),
-        },
-        {
-            field: 'frequency',
-            headerName: 'FREQUENCY',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div
-                    className='text-[12px] font-[600] text-[#49526A] leading-3'>
-                    {params.row.frequency}
                 </div>
             ),
         },
@@ -122,66 +126,82 @@ const DailyVolumnTable = () => {
             field: 'date',
             headerName: 'DATE',
             flex: 1,
-            renderCell: (params) => (
+            renderCell: (params: GridRenderCellParams) => (
                 <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
                     {params.row.datesent}
                 </div>
-            )
+            ),
         },
         {
-            field: 'value',
-            headerName: 'VALUE (MILLION CUBIC FEET)',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.value}
-                </div>
-            )
-        },
-        {
-            field: 'rate',
-            headerName: 'RATE (NGN)',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.rate}
-                </div>
-            )
-        },
-        {
-            field: 'amount',
-            headerName: 'AMOUNT',
-            flex: 1,
-            renderCell: (params) => (
-                <div className='text-[12px] font-[400] text-[#49526A] leading-3 '>
-                    {params.row.amount}
-                </div>
-            )
-        },
-        {
-            field: 'action',
-            headerName: 'ACTION',
+            field: 'volume',
+            headerName: 'VOL (MSCF)',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div
-                    onClick={() => handleOpen(params.row)}
-                    className='text-[12px] text-[#FFFFFF] rounded-[32px] bg-[#828DA9] h-[24px] w-[53px] flex items-center justify-center cursor-pointer'>
-                    View
+                <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
+                    {params.row.volume}
                 </div>
             ),
         },
-    ]
+        // {
+        //     field: 'created_at',
+        //     headerName: 'DATE',
+        //     flex: 1,
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
+        //             {params.row.created_at}
+        //         </div>
+        //     ),
+        // },
+        // {
+        //     field: 'updated_at',
+        //     headerName: 'VALUE',
+        //     flex: 1,
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <div className='text-[12px] font-[400] text-[#49526A] leading-3'>
+        //             {params.row.updated_at}
+        //         </div>
+        //     ),
+        // },
+        {
+            field: 'status',
+            headerName: 'STATUS',
+            flex: 1,
+            renderCell: (params: GridRenderCellParams) => {
+                let classNames = 'text-[12px] font-[500] h-[24px] rounded-full flex justify-center items-center px-2.5 ';
+
+                switch (params.row.abnormal_status) {
+                    case 'low':
+                        classNames += 'bg-orange-200';
+                        break;
+                    case 'high':
+                        classNames += 'bg-green-200';
+                        break;
+                    default:
+                        classNames += 'bg-gray-200';
+                        break;
+                }
+
+                return (
+                    <div className={classNames}>
+                        {params.value}
+                    </div>
+                );
+            }
+        },
+    ];
+
+    useEffect(() => {
+        filterData();
+    }, [data, selectedMonth, selectedYear]);
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading data</div>;
 
     return (
-        <div className='mt-[20px] w-[100%] '>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
-            >
-                <div >
-                    {selectedRow && (
+        <div className='mt-[20px] w-[100%]'>
+            <Modal open={open} onClose={handleClose}>
+                <div>
+                    {/* {selectedRow && (
                         <SelectedDateModal
                             handleClose={handleClose}
                             dateTime={'09th, Nov, 2023; 09:23:44Am'}
@@ -193,14 +213,15 @@ const DailyVolumnTable = () => {
                             companyAddress={selectedRow.companyAddress || 'Provide an Address'}
                             statusHeading={''}
                         />
-                    )}
+                    )} */}
                 </div>
             </Modal>
-            <div className='flex flex-col md:flex-row justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 pl-[18px] pr-[18px]  w-[100%] '>
+
+            <div className='flex flex-col md:flex-row justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 pl-[18px] pr-[18px] w-[100%]'>
                 <div className='flex items-center italic text-[12px] text-[#828DA9] w-[100%]'>
-                    Showing {filteredRows.length} of {rows.length} site visits
+                    Showing {filterData().length} of {data?.data?.length} site visits
                 </div>
-                <div className='flex items-center justify-between h-[60px] ' >
+                <div className='flex items-center justify-between h-[60px]'>
                     <div className='flex gap-[10px]'>
                         <select
                             value={selectedMonth}
@@ -225,7 +246,7 @@ const DailyVolumnTable = () => {
                         <select
                             value={selectedYear}
                             onChange={e => setSelectedYear(e.target.value)}
-                            className='border border-[#CCD0DC] outline-none text-gray-400 pl-1 rounded-[32px] hover:border-[#00AF50] text-[12px] font-[600]  h-[32px]  w-[77px]'
+                            className='border border-[#CCD0DC] outline-none text-gray-400 pl-1 rounded-[32px] hover:border-[#00AF50] text-[12px] font-[600] h-[32px] w-[77px]'
                         >
                             <option value="">Year</option>
                             <option value="2022">2022</option>
@@ -240,30 +261,28 @@ const DailyVolumnTable = () => {
             <div className='w-[100%]'>
                 <DataGrid
                     className="pointer-cursor-datagrid"
-                    rows={filteredRows}
+                    rows={filterData()}
                     columns={columns}
                     rowHeight={48}
+                    // getRowClassName={getRowClassName}
                     autoHeight
                     initialState={{
                         pagination: {
                             paginationModel: { page: 0, pageSize: 13 },
                         },
                     }}
-
                     sx={{
                         width: '100%',
                         background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
-                            outline: 'solid #00AF50 1px',
+                            outline: 'none',
                         },
                         '& .MuiDataGrid-columnHeaders': {
                             backgroundColor: '#F6FDEC',
-
                             '& .MuiDataGrid-columnHeaderTitle': {
                                 color: '#050505',
                                 fontWeight: '700',
                                 fontSize: '12px',
-
                             },
                         },
                     }}
@@ -271,8 +290,9 @@ const DailyVolumnTable = () => {
             </div>
         </div>
     );
-}
+};
 
-export default DailyVolumnTable
+export default DailyVolumnTable;
+
 
 

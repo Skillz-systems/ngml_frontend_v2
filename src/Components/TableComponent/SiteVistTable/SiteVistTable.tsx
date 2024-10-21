@@ -91,7 +91,6 @@ const SiteVistTable = () => {
         {
             field: 'sn',
             headerName: 'SN',
-            flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.sn}
@@ -102,7 +101,7 @@ const SiteVistTable = () => {
         {
             field: 'name',
             headerName: 'COMPANY NAME',
-            flex: 1,
+            flex: 1.5,
             renderCell: (params: GridRenderCellParams) => (
                 <div className='text-xs font-[600] text-[#49526A] leading-3'>
                     {params.row.companyname}
@@ -123,7 +122,7 @@ const SiteVistTable = () => {
         {
             field: 'selectedDates',
             headerName: 'SELECTED DATES',
-            flex: 1,
+            flex: 2,
             renderCell: (params) => (
                 <div className='text-[12px] font-[500] text-[#49526A] leading-3 flex gap-[10px]'>
                     {params.row.selectedDates ? params.row.selectedDates.map((date: string, index: number) => (
@@ -278,7 +277,7 @@ const SiteVistTable = () => {
                         width: '100%',
                         background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
-                            outline: 'solid #00AF50 1px',
+                            outline: 'none',
                         },
                         '& .MuiDataGrid-columnHeaders': {
                             backgroundColor: '#F6FDEC',

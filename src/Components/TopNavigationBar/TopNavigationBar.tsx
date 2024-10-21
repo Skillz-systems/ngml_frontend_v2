@@ -1,6 +1,10 @@
-import { GppMaybeOutlined, NotificationImportantOutlined, PowerSettingsNewOutlined } from '@mui/icons-material';
+import { PowerSettingsNewOutlined } from '@mui/icons-material';
 import images from '../../assets/index';
-import { Notification, SearchInput  } from '../../Components/index';
+import { Notification, SearchInput } from '../../Components/index';
+
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../../Redux/Features/Auth/authSlice';
 
 /**
  * Represents the top navigation bar of the application.
@@ -11,18 +15,26 @@ import { Notification, SearchInput  } from '../../Components/index';
  */
 const TopNavigationBar = () => {
 
-    const messageNotifications = [
-        { title: 'New Message', date: '2024-03-29', content: 'Message content 1' },
-        { title: 'New Message', date: '2024-03-29', content: 'Message content 1' },
-        { title: 'New Message', date: '2024-03-29', content: 'Message content 1' },
-    ];
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const alertNotifications = [
-        { title: 'System Alert', date: '2024-03-30', content: 'Alert content 1' },
-        { title: 'System Alert', date: '2024-03-30', content: 'Alert content 1' },
-        { title: 'System Alert', date: '2024-03-30', content: 'Alert content 1' },
+    const handleLogout = () => {
+        navigate('/');
+        dispatch(logout());
+    };
 
-    ];
+    // const messageNotifications = [
+    //     { title: 'New Message', date: '2024-03-29', content: 'Message content 1' },
+    //     { title: 'New Message', date: '2024-03-29', content: 'Message content 1' },
+    //     { title: 'New Message', date: '2024-03-29', content: 'Message content 1' },
+    // ];
+
+    // const alertNotifications = [
+    //     { title: 'System Alert', date: '2024-03-30', content: 'Alert content 1' },
+    //     { title: 'System Alert', date: '2024-03-30', content: 'Alert content 1' },
+    //     { title: 'System Alert', date: '2024-03-30', content: 'Alert content 1' },
+
+    // ];
 
     // const reminderNotifications = [
     //     { title: 'Meeting Reminder', date: '2024-03-31', content: 'Reminder content 1' },
@@ -50,24 +62,27 @@ const TopNavigationBar = () => {
                     className="w-28 sm:w-36 md:w-48 lg:w-56 xl:w-1/3"
                 />
                 <div className='flex gap-4'>
-                    <Notification
+                    {/* <Notification
                         count={messageNotifications.length}
                         headerTitle="Messages"
                         notifications={messageNotifications}
                         renderIcon={() => <div><GppMaybeOutlined style={{ fontSize: 'medium' }} /></div>}
-                    />
-                    <Notification
+                    /> */}
+                    {/* <Notification
                         count={alertNotifications.length}
                         headerTitle="Alerts"
                         notifications={alertNotifications}
                         renderIcon={() => <div><NotificationImportantOutlined style={{ fontSize: 'medium' }} /></div>}
-                    />
-                    <Notification
-                        // count={reminderNotifications.length}
-                        // headerTitle="Reminders"
-                        // notifications={reminderNotifications}
-                        renderIcon={() => <div><PowerSettingsNewOutlined style={{ fontSize: 'medium' }} /></div>}
-                    />
+                    /> */}
+                    <button type='button' onClick={handleLogout}>
+                        <span className='sr-only'>logout</span>
+                        <Notification
+                            // count={reminderNotifications.length}
+                            // headerTitle="Reminders"
+                            // notifications={reminderNotifications}
+                            renderIcon={() => <div><PowerSettingsNewOutlined style={{ fontSize: 'medium' }} /></div>}
+                        />
+                    </button>
                 </div>
             </div>
         </div>

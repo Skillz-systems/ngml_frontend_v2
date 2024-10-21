@@ -22,10 +22,10 @@ const SupplierDashboardTable = () => {
     const [selectedYear, setSelectedYear] = useState<string>('');
 
 
-    
+
     useEffect(() => {
         filterData();
-    }, [ selectedMonth, selectedYear]);
+    }, [selectedMonth, selectedYear]);
 
 
 
@@ -80,7 +80,7 @@ const SupplierDashboardTable = () => {
                 </div>
             ),
         },
-      
+
         {
             field: 'rate',
             headerName: 'INTERRUPTIBLE (Scf)',
@@ -99,11 +99,11 @@ const SupplierDashboardTable = () => {
                 <div
                     onClick={() => (params.row)}
                     className='text-[12px] ml-6 text-[#828DA9] flex items-center justify-end cursor-pointer'>
-                    <MoreHorizOutlined/>
+                    <MoreHorizOutlined />
                 </div>
             ),
         },
-       
+
     ]
 
     return (
@@ -167,7 +167,7 @@ const SupplierDashboardTable = () => {
                         width: '100%',
                         background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
-                            outline: 'solid #00AF50 1px',
+                            outline: 'none',
                         },
                         '& .MuiDataGrid-columnHeaders': {
                             backgroundColor: '#F6FDEC',
