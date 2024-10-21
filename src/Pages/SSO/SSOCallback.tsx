@@ -55,21 +55,21 @@ const SSOCallback = () => {
             if (response.user.status == 0) {
                 // alert('0')
 
-                console.log(0);
-                // navigate('/sso/redirect');
-                return
+                // console.log(0);
+                navigate('/sso/redirect');
+                // return
                 // navigate('/sso/redirect');
             }
 
             if (response.user.status == 1) {
 
                 // alert('1')
-                console.log(1)
+                // console.log(1)
                 navigate('/admin');
             }
             if (response.user.status == 2) {
                 // alert('2')
-                console.log(2)
+                // console.log(2)
                 navigate('/sso/redirect');
             }
         } catch (err) {
@@ -78,32 +78,6 @@ const SSOCallback = () => {
         }
     };
 
-
-
-    // if (isLoading) {
-    //     return (
-
-    //         <div className="min-h-screen flex items-center justify-center flex-col bg-white w-[100%]">
-    //             <ToastContainer />
-
-    //             <img src={images.ngmlSquare} className='w-full h-full' alt="loader" />
-
-    //             {/* <div className="animate-pulse text-white text-xl">
-
-    //                 Processing ....
-    //             </div> */}
-    //         </div>
-
-    //         // <div className="min-h-screen flex items-center justify-center flex-col logingradient-bg w-[100%]">
-    //         //     <ToastContainer />
-
-    //         //     <div className="animate-pulse text-white text-xl">
-
-    //         //         Processing ....
-    //         //     </div>
-    //         // </div>
-    //     )
-    // }
 
     if (isLoading) {
         return (
