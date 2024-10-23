@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../ButtonComponent/Button';
 import images from '../../assets/index';
+import Button from '../ButtonComponent/Button';
 
 /**
  * Props interface for the NotificationContents component

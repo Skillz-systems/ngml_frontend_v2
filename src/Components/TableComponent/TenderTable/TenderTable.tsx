@@ -23,6 +23,8 @@ import SelectedDateModal from '../SiteVistTable/SiteVistTableModal';
  * @property {string} [companyAddress] - Physical address of the company.
  */
 
+
+
 interface TenderTypeProps {
     id: number;
     companyname: string;
@@ -155,7 +157,7 @@ const TenderTable = () => {
         {
             field: 'titleDescription',
             headerName: 'TITLE AND DESCRIPTION',
-            flex: 1,
+            flex: 3,
             renderCell: (params) => (
                 <div className='flex flex-col gap-[16px]'>
                     <div className='text-[14px] font-[700] text-[#49526A] leading-3 '>
@@ -169,7 +171,7 @@ const TenderTable = () => {
         {
             field: 'category',
             headerName: 'CATEGORY',
-            flex: 1,
+            flex: 1.5,
             renderCell: (params: GridRenderCellParams) => (
                 <div className=' bg-[#EAEEF2] h-[24px] p-[8px] rounded-[24px] flex items-center justify-center'>
                     <div className='text-[#050505] font-[700] text-[12px]'>{params.row.category}</div>
@@ -219,7 +221,7 @@ const TenderTable = () => {
                     )}
                 </div>
             </Modal>
-            <div className='flex flex-col md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%] '>
+            <div className='flex flex-col rounded-t-lg md:flex-row items-center justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 p-[18px] w-[100%] '>
                 <div className='italic text-[12px] text-[#828DA9] w-[100%]'>
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
@@ -312,7 +314,8 @@ const TenderTable = () => {
                         width: '100%',
                         background: '#FFFFFF',
                         '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-columnHeader:focus-within': {
-                            outline: 'solid #00AF50 1px',
+                            outline: 'none',
+
                         },
                         '& .MuiDataGrid-columnHeaders': {
                             backgroundColor: '#F6FDEC',

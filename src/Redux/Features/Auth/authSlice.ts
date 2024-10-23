@@ -1,18 +1,40 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../store';
 
-interface AuthState {
-  token: string | null;
-  user: {
-    id: string;
+
+interface User {
     email: string;
-    name: string;
-  } | null;
+    name?: string;
+    status?: number | string;
+    updated_at?: string;
+    created_at?: string;
+    id: number;
+  
 }
 
-const initialState: AuthState = {
-  token: null,
+export interface RegistrationResponse {
+    message?: string|null;
+    user: User|null;
+    access_token: string|null;
+}
+
+
+// interface AuthState {
+//   jwt: string | null;
+//   user: {
+//     id: string;
+//     email: string;
+//     name: string;
+//     email_verified_at?: string | null;
+//     created_at?: string;
+//     updated_at?: string | null;
+//   } | null;
+// }
+
+const initialState: RegistrationResponse = {
+  access_token: null,
   user: null,
+
 };
 
 const authSlice = createSlice({
@@ -21,13 +43,13 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (
       state,
-      action: PayloadAction<{ token: string; user: AuthState['user'] }>
+      action: PayloadAction<{ access_token: string; user: RegistrationResponse['user'] }>
     ) => {
-      state.token = action.payload.token;
+      state.access_token = action.payload.access_token;
       state.user = action.payload.user;
     },
     logout: (state) => {
-      state.token = null;
+      state.access_token = null;
       state.user = null;
     },
   },
@@ -35,7 +57,7 @@ const authSlice = createSlice({
 
 export const { setCredentials, logout } = authSlice.actions;
 
-export const selectCurrentUser = (state: RootState) => state.auth.user;
-export const selectToken = (state: RootState) => state.auth.token;
+export const selectCurrentUser = (state: any) => state.auth.user;
+export const selectToken = (state: any) => state.auth.access_token;
 
 export default authSlice.reducer;

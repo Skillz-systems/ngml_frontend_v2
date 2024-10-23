@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { DocumentCard, DocumentCardTwo, Button, FileUploadInput, Modal } from '../../Components/index';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button, DocumentCard, DocumentCardTwo, FileUploadInput, Modal } from '../../Components/index';
 import images from '../../assets/index';
 
 interface CardDataItem {
@@ -13,48 +14,12 @@ interface CardDataItem {
     height: number | string;
 }
 
-
 const documentCardData = [
-    {
-        title: 'GSPA',
-        subtitle: 'Agreement',
-        icon: <img src={images.files} alt='icon' />,
-        buttonText: 'Use template',
-        height: '140px'
-
-    },
-    {
-        title: 'Supplement',
-        subtitle: 'Agreement',
-        icon: <img src={images.files} alt='icon' />,
-        buttonText: 'Use template',
-        height: '140px'
-
-    },
-    {
-        title: 'Addendum',
-        subtitle: 'Agreement',
-        icon: <img src={images.files} alt='icon' />,
-        buttonText: 'Use template',
-        height: '140px'
-
-    },
-    {
-        title: 'Side',
-        subtitle: 'Letter',
-        icon: <img src={images.files} alt='icon' />,
-        buttonText: 'Use template',
-        height: '140px'
-
-    },
-    {
-        title: 'Approval',
-        subtitle: 'Letter',
-        icon: <img src={images.files} alt='icon' />,
-        buttonText: 'Use template',
-        height: '140px'
-
-    },
+    { title: 'GSPA', subtitle: 'Agreement', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
+    { title: 'Supplement', subtitle: 'Agreement', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
+    { title: 'Addendum', subtitle: 'Agreement', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
+    { title: 'Side', subtitle: 'Letter', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
+    { title: 'Approval', subtitle: 'Letter', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
 ];
 
 const documentCardDataTwo: CardDataItem[] = [
@@ -67,18 +32,38 @@ const documentCardDataTwo: CardDataItem[] = [
         icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
         width: "200px",
         height: "100%",
-    }]
+    }
+];
 
 const Agreement: React.FC = () => {
-
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const modalParam = params.get('modal');
+        if (modalParam === 'open') {
+            setIsModalOpen(true);
+        }
+    }, [location.search]);
 
     const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
+        setIsModalOpen(prevState => {
+            const newState = !prevState;
+            const params = new URLSearchParams(location.search);
+            if (newState) {
+                params.set('modal', 'open');
+            } else {
+                params.delete('modal');
+            }
+            navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+            return newState;
+        });
     };
 
     const handleCreateCustomer = () => {
-
+        // Your logic for handling the create customer action
     };
 
     return (
@@ -87,9 +72,9 @@ const Agreement: React.FC = () => {
                 <div className="w-full px-3 py-2.5 bg-white border-b rounded-t-[10px] flex justify-between items-center">
                     <div className="text-xl font-bold font-['Mulish']">AGREEMENT TEMPLATES</div>
                     <div className="flex items-center border px-3 py-2 rounded-3xl hover:bg-gray-100" onClick={toggleModal}>
-                            <img src={images.upload} alt="Upload" className="w-4 h-4 md:w-5 md:h-5" />
-                            <span className="text-sm md:text-base ml-2 cursor-pointer">Upload Agreement</span>
-                        </div>
+                        <img src={images.upload} alt="Upload" className="w-4 h-4 md:w-5 md:h-5" />
+                        <span className="text-sm md:text-base ml-2 cursor-pointer">Upload Agreement</span>
+                    </div>
                 </div>
                 <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] items-center gap-3">
                     {documentCardData.map((card, index) => (
@@ -120,7 +105,6 @@ const Agreement: React.FC = () => {
                                 linkText={cards.linkText}
                                 linkText2={cards.linkText2}
                                 icon={cards.icon}
-                                // width={cards.width}
                                 height={cards.height}
                             />
                         </div>

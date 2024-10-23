@@ -29,13 +29,13 @@ import React, { useState } from 'react';
 
 
 interface ButtonProps {
-    type: 'primary' | 'secondary' | 'tertiary' | 'icon' | 'outline' | 'transparent';
+    type: 'primary' | 'secondary' | 'tertiary' | 'icon' | 'outline' | 'transparent' | 'newest';
     label?: string;
-    color?: string; 
+    color?: string;
     fontStyle?: string;
     action: () => void;
     disabled?: boolean;
-    icon?: React.ReactNode | string; 
+    icon?: React.ReactNode | string;
     iconPosition?: 'left' | 'right';
     iconWidth?: string;
     iconHeight?: string;
@@ -51,7 +51,7 @@ interface ButtonProps {
     textDecoration?: string;
     backgroundColor?: string
     borderColor?: string
-    className?: string; 
+    className?: string;
 }
 
 
@@ -76,7 +76,7 @@ const Button: React.FC<ButtonProps> = ({
     iconColor,
     width,
     height,
-    fontSize ,
+    fontSize,
     radius,
     fontWeight,
     underline,
@@ -90,36 +90,38 @@ const Button: React.FC<ButtonProps> = ({
 
     const [isHovered, setIsHovered] = useState(false);
 
-     /**
-     * Get the styles for the button based on its type.
-     *
-     * @returns {React.CSSProperties} - The CSS properties for the button.
-     */
+    /**
+    * Get the styles for the button based on its type.
+    *
+    * @returns {React.CSSProperties} - The CSS properties for the button.
+    */
     const getButtonStyles = (): React.CSSProperties => {
         switch (type) {
+            case 'newest':
+                return { backgroundColor: isHovered ? '#FFFFFF' : '#00AF50', color: isHovered ? '#414242' : '#E3EADA', width, height, fontSize, borderRadius: radius, fontWeight, lineHeight, };
             case 'primary':
-                return { backgroundColor: isHovered ? '#00903e' : '#00AF50', color: '#FFFFFF', width, height, fontSize, borderRadius: radius, fontWeight, lineHeight,  };
+                return { backgroundColor: isHovered ? '#00903e' : '#00AF50', color: '#FFFFFF', width, height, fontSize, borderRadius: radius, fontWeight, lineHeight, };
             case 'secondary':
-                return { backgroundColor: isHovered ? '#00903e' : '#00AF50', color: '#FFFFFF', width, height, fontSize, borderRadius: radius, fontWeight, lineHeight , columnGap};
+                return { backgroundColor: isHovered ? '#00903e' : '#00AF50', color: '#FFFFFF', width, height, fontSize, borderRadius: radius, fontWeight, lineHeight, columnGap };
             case 'tertiary':
                 return { border: '1px solid #DCDFE4', color: '#49526A', width, height, fontSize: isHovered ? '15.5px' : '15px', borderRadius: radius, fontWeight };
             case 'icon':
-                return {  backgroundColor: isHovered ? '#00903e' : '#F9FAFB', color, width, height, borderRadius: radius,   };
+                return { backgroundColor: isHovered ? '#00903e' : '#F9FAFB', color, width, height, borderRadius: radius, };
             case 'outline':
-                return { border: '1px solid #DCDFE4', color: '#49526A', width, height, fontSize: isHovered ? '13px' : '12px', borderRadius: radius, fontWeight };
+                return { border: '1px solid #DCDFE4', color: '#49526A', width, height, fontSize: isHovered ? '13px' : '12.5px', borderRadius: radius, fontWeight };
             case 'transparent':
-                return { fontSize: isHovered ? '12.5px' : '12px', fontWeight, lineHeight};
+                return { fontSize: isHovered ? '12.5px' : '12px', fontWeight, lineHeight };
             default:
-                return {backgroundColor: isHovered ? 'darkgreen' : 'green', color: 'white' };
+                return { backgroundColor: isHovered ? 'darkgreen' : 'green', color: 'white' };
         }
     };
 
-     /**
-     * Render the icon element based on its type.
-     *
-     * @returns {React.ReactElement} - The rendered icon element.
-     */
-    
+    /**
+    * Render the icon element based on its type.
+    *
+    * @returns {React.ReactElement} - The rendered icon element.
+    */
+
     const renderIcon = (): React.ReactElement => {
         if (typeof icon === 'string') {
             return <img src={icon} alt="icon" style={{ width: isHovered ? '30px' : '24px', height: isHovered ? '30px' : '24px', color: iconColor }} />;
@@ -146,13 +148,13 @@ const Button: React.FC<ButtonProps> = ({
                 columnGap,
                 backgroundColor,
                 fontSize,
-                color,       
-                border: borderColor,       
+                color,
+                border: borderColor,
                 ...getButtonStyles(),
             }}
         >
             {icon && iconPosition === 'left' && renderIcon()}
-            <span style={{color, fontStyle, textDecoration}}>{label}</span>
+            <span style={{ color, fontStyle, textDecoration }}>{label}</span>
             {icon && iconPosition === 'right' && renderIcon()}
         </button>
     );

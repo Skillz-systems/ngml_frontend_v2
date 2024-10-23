@@ -20,7 +20,7 @@ interface ModalProps {
   title: string;
   subTitle?: string;
   buttons?: ReactNode[];
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const Modal: FC<ModalProps> = ({

@@ -63,8 +63,8 @@ const EoiModal: React.FC<EoiModalprops> = ({
                             fontWeight='400'
                             radius='32px'
                             color='#828DA9'
-                            
-                        
+
+
                         />
                         <div >Reason: {disapprovalReason}</div>
                         <div >Disapproved on: {dateTime}</div>
@@ -82,7 +82,7 @@ const EoiModal: React.FC<EoiModalprops> = ({
 
     return (
         <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 h-[700px] -translate-y-1/2 w-[750px] bg-white shadow-2xl rounded-md h-fit">
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[750px] bg-white shadow-2xl rounded-md h-fit">
             <Box>
                 <div className='flex justify-between items-center h-[100%] p-[10px]'>
                     <div className='text-[20px] text-[#49526A] font-[700]'>EOI REQUEST</div>
