@@ -1,11 +1,12 @@
 import { Button, EoiRequestTemplate, Modal } from '@/Components';
 import FormInput from '@/Components/Custominput/FormInput';
+import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 import images from '@/assets';
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
@@ -25,17 +26,48 @@ const EoiPage = () => {
 
   const navigate = useNavigate();
 
+  // Assuming customer ID is passed via params
+  const { customerId } = useParams<{ customerId: string }>();
 
-  const [status] = useState('Default Status');
-  const [selectedRow] = useState({
-    companyName: 'Provide Company Name',
-    companyEmail: 'Provide an email address',
-    companyNumber: 'Provide a number',
-    status: 'Approved',
-    approverName: 'Okoro Florish'
-  });
+  // Fetch customer details using customerId
+  const { data: customerDetails, isSuccess: isCustomerSuccess } = useGetCustomerByIdQuery(Number(customerId));
+
+  // const [status] = useState('Default Status');
+  // const [selectedRow] = useState({
+  //   companyName: 'Provide Company Name',
+  //   companyEmail: 'Provide an email address',
+  //   companyNumber: 'Provide a number',
+  //   status: 'Approved',
+  //   approverName: 'Okoro Florish'
+  // });
 
 
+  // useEffect(() => {
+  //   if (isSuccess && data) {
+  //     let parsedForm;
+  //     try {
+  //       parsedForm = JSON.parse(data.data.json_form);
+  //       setCustomerForm(parsedForm);
+
+  //       const initialData = parsedForm.reduce((acc: CustomerData, field: FormField) => {
+  //         if (field.name) {
+  //           acc[field.name] = '';
+  //           if (field.type === 'file') {
+  //             acc[`${field.name}`] = null;
+  //           }
+  //         }
+  //         return acc;
+  //       }, {});
+
+  //       setCustomerData(initialData);
+  //     } catch (error) {
+  //       console.error('Error parsing JSON:', error);
+  //       setCustomerForm([]);
+  //     }
+  //   }
+  // }, [data, isSuccess]);
+
+  // Update form fields with fetched customer data
   useEffect(() => {
     if (isSuccess && data) {
       let parsedForm;
@@ -47,7 +79,7 @@ const EoiPage = () => {
           if (field.name) {
             acc[field.name] = '';
             if (field.type === 'file') {
-              acc[`${field.name}`] = null;
+              acc[field.name] = null;
             }
           }
           return acc;
@@ -96,70 +128,70 @@ const EoiPage = () => {
 
   const uploadEoiRequest = useCallback(async () => {
     if (!areRequiredFieldsFilled(customerForm, customerData)) {
-        setFormError('Please fill all required fields.');
-        return;
+      setFormError('Please fill all required fields.');
+      return;
     }
 
     try {
-        setFormError('');
-        const formFieldAnswers = await Promise.all(
-            customerForm.map(async (field) => {
-                const value = customerData[field.name as keyof typeof customerData];
+      setFormError('');
+      const formFieldAnswers = await Promise.all(
+        customerForm.map(async (field) => {
+          const value = customerData[field.name as keyof typeof customerData];
 
-                if (field.type === 'file' && value instanceof File) {
-                    try {
-                        const base64File = await convertFileToBase64(value);
-                        return {
-                            id: field.id,
-                            elementType: field.type,
-                            name: field.name || field.id.toString(),
-                            placeholder: field.placeholder || '',
-                            key: field.name || '',
-                            value: base64File
-                        };
-                    } catch (error) {
-                        console.error(`Error converting ${field.name} to Base64:`, error);
-                        return null;
-                    }
-                } else {
-                    return {
-                        id: field.id,
-                        elementType: field.type,
-                        name: field.name || field.id.toString(),
-                        placeholder: field.placeholder || '',
-                        key: field.name || '',
-                        value: value || ''
-                    };
-                }
-            })
-        );
+          if (field.type === 'file' && value instanceof File) {
+            try {
+              const base64File = await convertFileToBase64(value);
+              return {
+                id: field.id,
+                elementType: field.type,
+                name: field.name || field.id.toString(),
+                placeholder: field.placeholder || '',
+                key: field.name || '',
+                value: base64File
+              };
+            } catch (error) {
+              console.error(`Error converting ${field.name} to Base64:`, error);
+              return null;
+            }
+          } else {
+            return {
+              id: field.id,
+              elementType: field.type,
+              name: field.name || field.id.toString(),
+              placeholder: field.placeholder || '',
+              key: field.name || '',
+              value: value || ''
+            };
+          }
+        })
+      );
 
-        const validFormFieldAnswers = formFieldAnswers.filter(Boolean);
+      const validFormFieldAnswers = formFieldAnswers.filter(Boolean);
 
-        const payload = {
-            form_builder_id: data?.data?.id?.toString() || '',
-            name: data?.data?.name || '',
-            process_flow_id: data?.data?.process_flow_id?.toString() || '',
-            process_flow_step_id: data?.data?.process_flow_step_id?.toString() || '',
-            tag_id: data?.data?.tag_id || '',
-            form_field_answers: JSON.stringify(validFormFieldAnswers),
-        };
+      const payload = {
+        form_builder_id: data?.data?.id?.toString() || '',
+        name: data?.data?.name || '',
+        process_flow_id: data?.data?.process_flow_id?.toString() || '',
+        process_flow_step_id: data?.data?.process_flow_step_id?.toString() || '',
+        tag_id: data?.data?.tag_id || '',
+        form_field_answers: JSON.stringify(validFormFieldAnswers),
+      };
 
-        const result = await submitForm(payload).unwrap();
+      const result = await submitForm(payload).unwrap();
 
-        if (result) {
-            toast.success('DDQ created successfully');
-            setCustomerData({});
-            toggleModal(false);
-            const searchParams = new URLSearchParams(location.search);
-            searchParams.delete('createCustomer');
-            navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-        }
+      if (result) {
+        toast.success('DDQ created successfully');
+        setCustomerData({});
+        toggleModal(false);
+        const searchParams = new URLSearchParams(location.search);
+        searchParams.delete('createCustomer');
+        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+      }
     } catch (error) {
-        console.error('Error submitting form:', error);
-        setFormError('An error occurred while submitting the form. Please try again.');
+      console.error('Error submitting form:', error);
+      setFormError('An error occurred while submitting the form. Please try again.');
     }
-}, [customerForm, customerData, data, submitForm, toggleModal, location, navigate]);
+  }, [customerForm, customerData, data, submitForm, toggleModal, location, navigate]);
 
   return (
     <div>
@@ -172,7 +204,7 @@ const EoiPage = () => {
           height="32px"
           columnGap="5px"
           action={() => toggleModal(true)}
-          />
+        />
         <Button
           type="primary"
           label="Upload"
@@ -192,35 +224,35 @@ const EoiPage = () => {
         subTitle='Only Use this Method if the Customer is an already Existing Customer of the NGML'
         buttons={[
           <div key="modal-buttons" className='flex gap-2 mb-[-10px]'>
-              <div className='w-[120px]'>
-                  <Button
-                      type="outline"
-                      label="Cancel"
-                      action={() => toggleModal(false)}
-                      color="#FFFFFF"
-                      fontStyle="italic"
-                      width="100%"
-                      height="40px"
-                      fontSize="16px"
-                      radius="20px"
-                  />
-              </div>
-              <div className='w-[260px]'>
-                  <Button
-                      type="secondary"
-                      label={submitLoading ? 'Submitting...' : 'Submit EOI Request'}
-                      action={uploadEoiRequest}
-                      color="#FFFFFF"
-                      fontStyle="italic"
-                      width="100%"
-                      height="40px"
-                      fontSize="16px"
-                      radius="20px"
-                      disabled={submitLoading || !areRequiredFieldsFilled(customerForm, customerData)}
-                  />
-              </div>
+            <div className='w-[120px]'>
+              <Button
+                type="outline"
+                label="Cancel"
+                action={() => toggleModal(false)}
+                color="#FFFFFF"
+                fontStyle="italic"
+                width="100%"
+                height="40px"
+                fontSize="16px"
+                radius="20px"
+              />
+            </div>
+            <div className='w-[260px]'>
+              <Button
+                type="secondary"
+                label={submitLoading ? 'Submitting...' : 'Submit EOI Request'}
+                action={uploadEoiRequest}
+                color="#FFFFFF"
+                fontStyle="italic"
+                width="100%"
+                height="40px"
+                fontSize="16px"
+                radius="20px"
+                disabled={submitLoading || !areRequiredFieldsFilled(customerForm, customerData)}
+              />
+            </div>
           </div>
-      ]}
+        ]}
 
 
       >
@@ -255,14 +287,14 @@ const EoiPage = () => {
         )}
       </Modal>
       <EoiRequestTemplate
-        handleClose={handleClose}
+        handleClose={() => { }}
         dateTime={'09th, Nov, 2023; 09:23:44 AM'}
-        status={status}
-        companyName={selectedRow.companyName}
-        companyEmail={selectedRow.companyEmail}
-        companyNumber={selectedRow.companyNumber}
-        statusHeading={selectedRow.status}
-        approverName={selectedRow.approverName}
+        status={customerDetails?.data?.status ? 'Approved' : 'Pending'}
+        companyName={customerDetails?.data?.company_name || 'N/A'}
+        companyEmail={customerDetails?.data?.email || 'N/A'}
+        companyNumber={customerDetails?.data?.phone_number || 'N/A'}
+        statusHeading={customerDetails?.data?.status ? 'Approved' : 'Pending'}
+        approverName={'Okoro Florish'}
       />
     </div>
   );
