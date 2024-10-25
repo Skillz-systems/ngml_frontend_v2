@@ -685,7 +685,7 @@ const FormBuilder = () => {
                             </select>
                         </div>
 
-                        <label className='text-sm flex items-center space-x-2'>
+                        <label className='text-sm flex items-center space-x-2 cursor-pointer'>
                             <input
                                 type="checkbox"
                                 // checked={showProcessFlow}
@@ -702,7 +702,11 @@ const FormBuilder = () => {
                                         }));
                                     }
                                 }}
-                                className="checked:text-green-900 mr-3 text-green-900"
+                                className='peer relative appearance-none shrink-0 w-4 h-4 border border-nnpc-200 rounded-md bg-white
+        focus:outline-none 
+        checked:bg-nnpc-200 checked:border-0
+        disabled:border-steel-400 disabled:bg-steel-400'
+                            // className="checked:text-green-900 mr-3 text-green-900"
                             />
                             <span> Has ProcessFlow</span>
                         </label>
