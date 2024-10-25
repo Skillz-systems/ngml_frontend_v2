@@ -1,7 +1,12 @@
 
 import { useGetAllCustomersDailyVolumeQuery } from '@/Redux/Features/Customer/customerVolume';
 import { Modal } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { 
+    DataGrid, 
+    GridColDef, 
+    GridRenderCellParams, 
+    GridValueGetterParams 
+} from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 
 /**
@@ -41,6 +46,8 @@ const DailyVolumnTable = () => {
     const [open, setOpen] = useState(false);
     const [selectedMonth, setSelectedMonth] = useState<string>('');
     const [selectedYear, setSelectedYear] = useState<string>('');
+    const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 13 });
+    const [filteredRows] = useState<any[]>([]);
 
 
     const [queryParams] = useState<Record<string, string>>({
@@ -80,9 +87,6 @@ const DailyVolumnTable = () => {
         if (!data?.data) return [
 
         ];
-        // console.log(data, 'ppppppppppprick');
-
-
         const lowercasedSearch = searchText.toLowerCase();
 
         return data?.data?.filter((customer) => {
@@ -97,13 +101,32 @@ const DailyVolumnTable = () => {
 
 
     const columns: GridColDef[] = [
+        // {
+        //     field: 'sn',
+        //     headerName: 'SN',
+        //     width: 60,
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <div className='text-xs font-[600] text-[#49526A] leading-3'>
+        //             {params.row.customer_id}
+        //         </div>
+        //     ),
+        // },
+
         {
-            field: 'sn',
-            headerName: 'SN',
-            width: 60,
+            field: 'serialNumber',
+            headerName: 'S.NO',
+            width: 100,
+            valueGetter: (params: GridValueGetterParams) => {
+                const currentPageRows = filteredRows.slice(
+                    paginationModel.page * paginationModel.pageSize,
+                    (paginationModel.page + 1) * paginationModel.pageSize
+                );
+                const index = currentPageRows.findIndex(row => row.id === params.row.id);
+                return (paginationModel.page * paginationModel.pageSize) + index + 1;
+            },
             renderCell: (params: GridRenderCellParams) => (
-                <div className='text-xs font-[600] text-[#49526A] leading-3'>
-                    {params.row.customer_id}
+                <div className='text-[12px] font-[700] text-[#49526A] leading-3'>
+                    {params.value}
                 </div>
             ),
         },
@@ -266,9 +289,12 @@ const DailyVolumnTable = () => {
                     rowHeight={48}
                     // getRowClassName={getRowClassName}
                     autoHeight
+                    paginationModel={paginationModel}
+                    onPaginationModelChange={(newModel) => setPaginationModel(newModel)}
+                    pagination
                     initialState={{
                         pagination: {
-                            paginationModel: { page: 0, pageSize: 13 },
+                            paginationModel: paginationModel,
                         },
                     }}
                     sx={{
