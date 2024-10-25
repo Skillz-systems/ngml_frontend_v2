@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, DailyVolumnHistoryTable, Modal } from '../../Components/index';
 
+
 type CustomerData = Record<string, string | File | null>;
 
 const CustomerDailyVolumns: React.FC = () => {

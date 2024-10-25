@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import CustomDatePicker from '@/Components/DatePickers/CustomDatePicker';
 import { DailyVolumnHistoryData } from '@/Data';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import { Print, SystemUpdateAlt } from '@mui/icons-material';
+import { DateObject } from 'react-multi-date-picker';
 
 
 /**
@@ -38,8 +39,13 @@ const rows = DailyVolumnHistoryData
 
 const DailyVolumnHistoryTable = () => {
     const [filteredRows, setFilteredRows] = useState<DailyVolumnProps[]>(rows);
-    const [selectedMonth, setSelectedMonth] = useState<string>('');
-    const [selectedYear, setSelectedYear] = useState<string>('');
+    const [selectedMonth] = useState<string>('');
+    const [selectedYear] = useState<string>('');
+    const [dateRange, setDateRange] = useState<DateObject[] | null>(null);
+    const handleDateRangeChange = (dates: DateObject | DateObject[] | null) => {
+        setDateRange(dates as DateObject[]);
+        console.log('Selected date range:', dates);
+    };
 
 
 
@@ -141,47 +147,28 @@ const DailyVolumnHistoryTable = () => {
                     Showing {filteredRows.length} of {rows.length} site visits
                 </div>
                 <div className='flex items-center justify-between h-[60px] gap-5 ' >
-                    <div className='flex gap-5'>
+                    {/* <div className='flex gap-5'>
                         <div className='w-[32px] h-[32px] border border-[#CCD0DC] flex items-center justify-center rounded-[20px]'>
                             <SystemUpdateAlt style={{ color: '#49526A', fontSize: '16px' }} />
                         </div>
                         <div className='w-[32px] h-[32px] border border-[#CCD0DC] flex items-center justify-center rounded-[20px]'>
                             <Print style={{ color: '#49526A', fontSize: '16px' }} />
                         </div>
-                    </div>
-                    <div className='flex gap-[10px]'>
-                        <select
-                            value={selectedMonth}
-                            onChange={e => setSelectedMonth(e.target.value)}
-                            className='border p-1 border-[#CCD0DC] outline-none text-[12px] font-[600] hover:border-[#00AF50] rounded-[32px] h-[32px] w-[100px]'
-                        >
-                            <option value="">Month</option>
-                            <option value="Jan">January</option>
-                            <option value="Feb">February</option>
-                            <option value="Mar">March</option>
-                            <option value="Apr">April</option>
-                            <option value="May">May</option>
-                            <option value="Jun">June</option>
-                            <option value="Jul">July</option>
-                            <option value="Aug">August</option>
-                            <option value="Sep">September</option>
-                            <option value="Oct">October</option>
-                            <option value="Nov">November</option>
-                            <option value="Dec">December</option>
-                        </select>
+                    </div> */}
 
-                        <select
-                            value={selectedYear}
-                            onChange={e => setSelectedYear(e.target.value)}
-                            className='border border-[#CCD0DC] p-1 outline-none rounded-[32px] hover:border-[#00AF50] text-[12px] font-[600]  h-[32px]  w-[77px]'
-                        >
-                            <option value="">Year</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                        </select>
-                    </div>
+                    <CustomDatePicker
+                        range
+                        value={dateRange}
+                        onChange={handleDateRangeChange}
+                        placeholder="Select date range"
+                        format="YYYY-MM-DD"
+                    />
+                    {/* {dateRange && (
+                        <p className="mt-2 text-sm text-gray-600">
+                            Selected range: {dateRange[0]?.format('DD-MM-YYYY')} to{' '}
+                            {dateRange[1]?.format('DD-MM-YYYY')}
+                        </p>
+                    )} */}
 
                 </div>
             </div>

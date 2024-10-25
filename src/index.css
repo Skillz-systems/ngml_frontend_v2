@@ -218,10 +218,29 @@ body {
 
 /* Chrome, Safari, Edge */
 .tiny-scrollbar::-webkit-scrollbar {
-  width: 6px;  /* Set width for vertical scrollbar */
+  width: 6px; /* Set width for vertical scrollbar */
   height: 6px; /* Set height for horizontal scrollbar */
 }
 
 .test {
   border: 2px solid red;
+}
+
+/* Date picker */
+
+.rmdp-input {
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  height: inherit !important;
+}
+
+.rmdp-panel-body li .b-deselect {
+  background-color: inherit !important;
+}
+
+.green .b-deselect {
+  background-color: inherit !important;
+  color: white !important;
 }

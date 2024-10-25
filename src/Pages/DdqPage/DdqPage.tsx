@@ -317,6 +317,8 @@ type CustomerData = Record<string, string | File | null>;
 const DdqPage: React.FC = () => {
 
 
+
+
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
