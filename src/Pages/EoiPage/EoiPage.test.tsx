@@ -40,7 +40,5 @@ describe('EoiPage Component', () => {
             expect(screen.getByText(/Submitting.../i)).toBeInTheDocument();
         });
 
-        // Expect some success message or result after submission
-
     });
 });

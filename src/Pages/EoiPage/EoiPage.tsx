@@ -30,7 +30,7 @@ const EoiPage = () => {
   const { customerId } = useParams<{ customerId: string }>();
 
   // Fetch customer details using customerId
-  const { data: customerDetails, isSuccess: isCustomerSuccess } = useGetCustomerByIdQuery(Number(customerId));
+  const { data: customerDetails } = useGetCustomerByIdQuery(Number(customerId));
 
   // const [status] = useState('Default Status');
   // const [selectedRow] = useState({
@@ -112,7 +112,7 @@ const EoiPage = () => {
     }
   };
 
-  const handleClose = () => { };
+  // const handleClose = () => { };
 
 
   const handleInputChange = (field: string, value: string | File | null) => {

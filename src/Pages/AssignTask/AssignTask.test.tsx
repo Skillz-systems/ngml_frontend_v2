@@ -1,8 +1,8 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from '@/Redux/store'; // Adjust the import path to your Redux store
-import AssignTask from './AssignTask'; // Adjust the import path to your component
-import { MemoryRouter } from 'react-router-dom'; // Import MemoryRouter
+import { store } from '@/Redux/store';
+import AssignTask from './AssignTask';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('AssignTask Component', () => {
     beforeEach(() => {
