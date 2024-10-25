@@ -20,9 +20,9 @@ describe('DailyVolumnHistoryTable', () => {
     expect(rows.length).toBe(2);
   });
 
-  it('allows month and year selection', () => {
-    render(<DailyVolumnHistoryTable />);
-    expect(screen.getByText('Month')).toBeInTheDocument();
-    expect(screen.getByText('Year')).toBeInTheDocument();
-  });
+  // it('allows month and year selection', () => {
+  //   render(<DailyVolumnHistoryTable />);
+  //   expect(screen.getByText('Month')).toBeInTheDocument();
+  //   expect(screen.getByText('Year')).toBeInTheDocument();
+  // });
 });

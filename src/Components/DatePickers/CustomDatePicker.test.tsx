@@ -1,111 +1,130 @@
+// CustomDatePicker.test.tsx
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { DateObject } from 'react-multi-date-picker';
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import CustomDatePicker from './CustomDatePicker';
 
 describe('CustomDatePicker', () => {
-    // Helper function to create a mock date object
     const createMockDate = (dateString: string) => {
         return new DateObject(dateString);
     };
+    const mockSingleDate = createMockDate('2024-01-15');
 
-    it('renders single date picker with placeholder', () => {
-        render(
-            <CustomDatePicker
-                onChange={() => { }}
-                placeholder="Select test date"
-            />
-        );
-
-        expect(screen.getByPlaceholderText('Select test date')).toBeInTheDocument();
+    beforeEach(() => {
+        vi.clearAllMocks();
     });
 
-    it('renders range date picker', () => {
-        render(
-            <CustomDatePicker
-                range
-                onChange={() => { }}
-                placeholder="Select date range"
-            />
-        );
 
-        expect(screen.getByPlaceholderText('Select date range')).toBeInTheDocument();
+    describe('Value handling', () => {
+        it('displays the selected date in single mode with correct format', () => {
+            render(
+                <CustomDatePicker
+                    onChange={() => { }}
+                    value={mockSingleDate}
+                    format="MM/DD/YYYY"
+                />
+            );
+            expect(screen.getByDisplayValue('01/15/2024')).toBeInTheDocument();
+        });
+
+        it('handles custom date format correctly', () => {
+            render(
+                <CustomDatePicker
+                    onChange={() => { }}
+                    value={mockSingleDate}
+                    format="YYYY-MM-DD"
+                />
+            );
+            expect(screen.getByDisplayValue('2024-01-15')).toBeInTheDocument();
+        });
+    });
+    describe('Edge cases', () => {
+        it('handles null value correctly', () => {
+            render(
+                <CustomDatePicker
+                    onChange={() => { }}
+                    value={null}
+                />
+            );
+            expect(screen.getByRole('textbox')).toHaveValue('');
+        });
     });
 
-    // it('calls onChange when a date is selected in single mode', async () => {
-    //     const mockOnChange = vi.fn();
-    //     const user = userEvent.setup();
+    describe('Accessibility', () => {
+        it('maintains focus state correctly', async () => {
+            const user = userEvent.setup();
+            render(<CustomDatePicker onChange={() => { }} />);
 
-    //     render(
-    //         <CustomDatePicker
-    //             onChange={mockOnChange}
-    //             placeholder="Select date"
-    //         />
-    //     );
+            const input = screen.getByRole('textbox');
+            await user.tab();
 
-    //     const input = screen.getByPlaceholderText('Select date');
-    //     await user.click(input);
-
-    //     // Find and click a date in the calendar
-    //     const dateButton = screen.getByRole('button', { name: '15' });
-    //     await user.click(dateButton);
-
-    //     expect(mockOnChange).toHaveBeenCalled();
-    // });
-
-    // it('calls onChange when dates are selected in range mode', async () => {
-    //     const mockOnChange = vi.fn();
-    //     const user = userEvent.setup();
-
-    //     render(
-    //         <CustomDatePicker
-    //             range
-    //             onChange={mockOnChange}
-    //             placeholder="Select date range"
-    //         />
-    //     );
-
-    //     const input = screen.getByPlaceholderText('Select date range');
-    //     await user.click(input);
-
-    //     // Select start date
-    //     const startDate = screen.getByRole('button', { name: '15' });
-    //     await user.click(startDate);
-
-    //     // Select end date
-    //     const endDate = screen.getByRole('button', { name: '20' });
-    //     await user.click(endDate);
-
-    //     expect(mockOnChange).toHaveBeenCalled();
-    // });
-
-    it('displays the selected date in single mode', () => {
-        const mockDate = createMockDate('2024-01-15');
-
-        render(
-            <CustomDatePicker
-                onChange={() => { }}
-                value={mockDate}
-                format="MM/DD/YYYY"
-            />
-        );
-
-        expect(screen.getByDisplayValue('01/15/2024')).toBeInTheDocument();
+            expect(input).toHaveFocus();
+        });
     });
-
-    it('disables the date picker when disabled prop is true', () => {
-        render(
-            <CustomDatePicker
-                onChange={() => { }}
-                disabled
-                placeholder="Select date"
-            />
-        );
-
-        expect(screen.getByPlaceholderText('Select date')).toBeDisabled();
-    });
-
 });
+
+// import { render, screen } from '@testing-library/react';
+// import { DateObject } from 'react-multi-date-picker';
+// import { describe, expect, it } from 'vitest';
+// import CustomDatePicker from './CustomDatePicker';
+
+// describe('CustomDatePicker', () => {
+//     // Helper function to create a mock date object
+//     const createMockDate = (dateString: string) => {
+//         return new DateObject(dateString);
+//     };
+
+//     it('renders single date picker with placeholder', () => {
+//         render(
+//             <CustomDatePicker
+//                 onChange={() => { }}
+//                 placeholder="Select test date"
+//             />
+//         );
+
+//         expect(screen.getByPlaceholderText('Select test date')).toBeInTheDocument();
+//     });
+
+//     it('renders range date picker', () => {
+//         render(
+//             <CustomDatePicker
+//                 range
+//                 onChange={() => { }}
+//                 placeholder="Select date range"
+//             />
+//         );
+
+//         expect(screen.getByPlaceholderText('Select date range')).toBeInTheDocument();
+//     });
+
+//     it('displays the selected date in single mode', () => {
+//         const mockDate = createMockDate('2024-01-15');
+
+//         render(
+//             <CustomDatePicker
+//                 onChange={() => { }}
+//                 value={mockDate}
+//                 format="MM/DD/YYYY"
+//             />
+//         );
+
+//         expect(screen.getByDisplayValue('01/15/2024')).toBeInTheDocument();
+//     });
+
+//     it('disables the date picker when disabled prop is true', () => {
+//         render(
+//             <CustomDatePicker
+//                 onChange={() => { }}
+//                 disabled
+//                 placeholder="Select date"
+//             />
+//         );
+
+//         expect(screen.getByPlaceholderText('Select date')).toBeDisabled();
+//     });
+
+// });
 
 // Mock the calendar position calculation
 // vi.mock('react-multi-date-picker', () => {

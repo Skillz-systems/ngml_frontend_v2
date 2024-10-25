@@ -27,36 +27,36 @@ const DailyVolumnUpload: React.FC<DailyVolumnUploadProps> = ({ DailyVolumnUpload
         }
     };
 
-    
+
 
     return (
 
-            <div className='p-4 rounded-[10px] space-y-4'>
-                 <CustomInput
-                    required
-                    type="select"
-                    label='Data Type'
-                    value={DailyVolumnUploadData.datatype}
-                    handleChangeEvent={(value) => handleInputChange(value, 'datatype')}
-                    placeholder="Choose Data type"
-                    options={datatype}
+        <div className='p-4 rounded-[10px] space-y-4'>
+            <CustomInput
+                required
+                type="select"
+                label='Data Type'
+                value={DailyVolumnUploadData.datatype}
+                handleChangeEvent={(value) => handleInputChange(value, 'datatype')}
+                placeholder="Choose Data type"
+                options={datatype}
+            />
+            <CustomInput
+                required
+                type="select"
+                label='Year'
+                value={DailyVolumnUploadData.year}
+                handleChangeEvent={(value) => handleInputChange(value, 'year')}
+                placeholder="Choose Year"
+                options={yearOptions}
+            />
+            <div className='mt-[30px]'>
+                <FileUploadInput
+                    fileDescription='Only .xlxs file accepted'
+                    maxSizeMB={25}
                 />
-                <CustomInput
-                    required
-                    type="select"
-                    label='Year'
-                    value={DailyVolumnUploadData.year}
-                    handleChangeEvent={(value) => handleInputChange(value, 'year')}
-                    placeholder="Choose Year"
-                    options={yearOptions}
-                />   
-                 <div className='mt-[30px]'>
-                        <FileUploadInput
-                            fileDescription='Only .xlxs file accepted'
-                            maxSizeMB={25}
-                        />
-                    </div>    
-                    {displayContent()}         
+            </div>
+            {displayContent()}
         </div>
 
     );
