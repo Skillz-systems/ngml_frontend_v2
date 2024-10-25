@@ -80,7 +80,7 @@ const CustomerListTable = () => {
     const columns: GridColDef[] = [
         {
             field: 'serialNumber',
-            headerName: 'S.NO',
+            headerName: 'S/N',
             width: 100,
             valueGetter: (params: GridValueGetterParams<CustomerData>) => {
                 const currentPageRows = filteredRows.slice(

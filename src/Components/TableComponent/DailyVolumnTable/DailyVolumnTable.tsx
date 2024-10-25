@@ -114,7 +114,7 @@ const DailyVolumnTable = () => {
 
         {
             field: 'serialNumber',
-            headerName: 'S.NO',
+            headerName: 'S/N',
             width: 100,
             valueGetter: (params: GridValueGetterParams) => {
                 const currentPageRows = filteredRows.slice(
