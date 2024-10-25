@@ -9,6 +9,8 @@ import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { Button, Modal } from '@/Components';
 import { toast } from 'react-toastify';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
+import { useParams } from 'react-router-dom';
+import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
 
 
 type CustomerData = {
@@ -20,6 +22,10 @@ const CustomerDetail: React.FC = () => {
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
+
+    const { customerId } = useParams<{ customerId: string }>();
+
+    const { data: customerDetails } = useGetCustomerByIdQuery(Number(customerId));
 
 
     const { data, isSuccess, isLoading } = useGetFormByNameQuery('CustomerDetailsform');
@@ -134,21 +140,30 @@ const CustomerDetail: React.FC = () => {
             </div>
             <div className="p-[20px] rounded-[20px]" style={{ background: colors.dark[50] }}>
                 <div className='border border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
-                    <div className='flex-col space-y-5'>
+                    <div>
+                        <div className='flex justify-between items-center'>
                         <h3 className='text-[#49526A] font-[700]'>PERSONAL DETAILS</h3>
-                        <div className='border-2 rounded-[10px] p-4'>
-                            <div className='flex items-center justify-between'>
-                                <div><img src={images.avatarLogo} alt="logo" />
-                                </div>
-                                <div><h2>COMPANY LOGO</h2>
+                        <img src={images.avatarLogo} alt="logo" />
+                        </div>
+                       
+                        <div>
+                            <div className='mt-4'>
+                                <div className='flex gap-4'>
+                                    <div className='font-[700]'>
+                                        <div>Name:</div>
+                                        <div>Email:</div>
+                                        <div>Phone Number:</div>
+                                        <div>Created At:</div>
+                                    </div>
+                                    <div className='font-[500]'>
+                                        <div>{customerDetails?.data?.company_name || 'N/A'}</div>
+                                        <div>{customerDetails?.data?.email || 'N/A'}</div>
+                                        <div>{customerDetails?.data?.phone_number || 'N/A'}</div>
+                                        <div>{customerDetails?.data?.created_at || 'N/A'}</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='mt-2'>
-                                <div>Company Name: {typeof customerData.companyName === 'string' ? customerData.companyName : 'N/A'}</div>
-                                <div>Company Email: {typeof customerData.companyEmail === 'string' ? customerData.companyEmail : 'N/A'}</div>
-                                <div>Company Phone Number: {typeof customerData.companyPhone === 'string' ? customerData.companyPhone : 'N/A'}</div>
-                                <div>Company Address: {typeof customerData.companyAddress === 'string' ? customerData.companyAddress : 'N/A'}</div>
-                            </div>
+
                         </div>
                         <Modal
                             isOpen={isModalOpen}
@@ -225,7 +240,7 @@ const CustomerDetail: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
 
     );
 };
