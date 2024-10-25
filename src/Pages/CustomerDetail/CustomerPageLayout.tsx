@@ -68,6 +68,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         tablist={tablist}
         tabContent={tabContent}
         showButtons={false}
+        
       />
     </div>
   );
