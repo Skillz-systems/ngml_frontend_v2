@@ -365,23 +365,6 @@ const EditableFormElement = ({
                             </div>
                         </div>
                     )}
-
-                    {/* {(editedElement.type === 'text' || editedElement.type === 'textarea') && (
-                        <div>
-                            <label className="block text-sm font-medium mb-1">
-                                Placeholder
-                            </label>
-                            <input
-                                type="text"
-                                value={editedElement.placeholder || ''}
-                                onChange={(e) =>
-                                    handleInputChange('placeholder', e.target.value)
-                                }
-                                className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green disabled:cursor-not-allowed disabled:opacity-50"
-                            />
-                        </div>
-                    )} */}
-
                     {(editedElement.type === 'dynamic') && (
                         <div>
                             <label className="block text-sm font-medium mb-1">
@@ -436,26 +419,16 @@ const EditableFormElement = ({
 const FormBuilder = () => {
     const [formElements, setFormElements] = useState<FormElement[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { data: backendForms } = useGetFormsQuery();
-    // const [selectedForm, setSelectedForm] = useState(null);
     const [selectedForm, setSelectedForm] = useState<FormData | null>(null);
     const [createForm, { isLoading }] = useCreateFormMutation();
     const [updateForm] = useUpdateFormMutation();
+    const [showProcessFlow, setShowProcessFlow] = useState<boolean>(false);
 
-    // const handleFormSelection = (form: any) => {
-    //     setSelectedForm(form);
-    //     setForm({
-    //         name: form.name,
-    //         description: form.description,
-    //         process_flow_id: form.process_flow_id,
-    //         process_flow_step_id: form.process_flow_step_id,
-    //         tag_id: form.tag_id,
-    //         json_form: form.json_form,
-    //         json_data: form.json_data,
-    //     });
-    //     setFormElements(JSON.parse(form.json_form));
-    //     setIsModalOpen(false);
-    // };
+    const { data: backendForms } = useGetFormsQuery();
+    const { data: backendProcessflows } = useGetProcessFlowsQuery();
+    const { data: tags } = useGetTagsQuery();
+
+
     const handleFormSelection = (form: FormData) => {
         setSelectedForm(form);
         setForm({
@@ -467,6 +440,12 @@ const FormBuilder = () => {
             json_form: form.json_form,
             json_data: [],
         });
+        setShowProcessFlow(
+            form.process_flow_id !== '0' &&
+            form.process_flow_id !== 0 &&
+            form.process_flow_id !== '' &&
+            form.process_flow_id !== undefined
+        );
         setFormElements(JSON.parse(form.json_form));
         setIsModalOpen(false);
     };
@@ -479,8 +458,6 @@ const FormBuilder = () => {
         process_flow_step_id: '',
         json_data: [],
     });
-    const { data: backendProcessflows } = useGetProcessFlowsQuery();
-    const { data: tags } = useGetTagsQuery();
 
     const handleFormChange =
         (key: string) =>
@@ -539,6 +516,7 @@ const FormBuilder = () => {
         });
         setFormElements([]);
         setSelectedForm(null);
+        setShowProcessFlow(false);
     };
 
     const getButtonLabel = () => {
@@ -547,46 +525,14 @@ const FormBuilder = () => {
         }
         return selectedForm ? 'Update Form' : 'Create Form';
     };
-
-    //TODO old
-    // const handleSaveForm = async () => {
-    //     const newForm: FormInterface = {
-    //         name: form.name,
-    //         description: form.description,
-    //         process_flow_id: form.process_flow_id,
-    //         process_flow_step_id: form.process_flow_step_id,
-    //         tag_id: form.tag_id,
-    //         json_form: JSON.stringify(formElements),
-    //         // json_form: formElements,
-    //         json_data: [],
-    //     };
-    //     // console.log(formElements);
-
-    //     if (form?.name?.trim() === '' || form?.description?.trim() === '' || form?.process_flow_id === '' || form?.tag_id?.trim() === '' || form?.process_flow_step_id === '') {
-    //         toast.error('All field are required');
-
-    //         return;
-    //     }
-
-
-    //     try {
-    //         await createForm(newForm).unwrap();
-    //         // console.log(newForm)
-    //         toast.success('form created successfully!');
-    //     } catch (error) {
-    //         console.error('Error submitting the process flow:', error);
-    //         toast.error('Error creating form');
-    //     }
-
-    //     // alert('Form saved successfully!');
-    //     handleCreateNewForm();
-    // };
     const handleSaveForm = async () => {
         const formData = {
             name: form.name,
             description: form.description,
-            process_flow_id: form.process_flow_id,
-            process_flow_step_id: form.process_flow_step_id,
+            // process_flow_id: form.process_flow_id,
+            // process_flow_step_id: form.process_flow_step_id,
+            process_flow_id: showProcessFlow ? form.process_flow_id : '0',
+            process_flow_step_id: showProcessFlow ? form.process_flow_step_id : '0',
             tag_id: form.tag_id,
             json_form: JSON.stringify(formElements),
             json_data: [],
@@ -599,13 +545,10 @@ const FormBuilder = () => {
 
         try {
             if (selectedForm) {
-                // Update existing form
-                // await updateForm({selectedForm.id, ...formData}).unwrap();
+
                 await updateForm({ id: selectedForm.id, ...formData }).unwrap();
-                // await updateForm(formData).unwrap();
                 toast.success('Form updated successfully!');
             } else {
-                // Create new form
                 await createForm(formData).unwrap();
                 toast.success('Form created successfully!');
             }
@@ -623,11 +566,6 @@ const FormBuilder = () => {
     return (
         <div className="flex flex-col h-full bg-transparent w-full rounded-xl">
             <div className="flex items-center justify-between p-1 mb-2 ">
-                {/* <Link to={'/admin/settings'}>
-                    <div className="flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]">
-                        <ArrowBack color="success" style={{ fontSize: 'medium' }} />
-                    </div>
-                </Link> */}
                 <Link to={'/admin/settings'}>
                     <div className="flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]">
                         <ArrowBack color="success" style={{ fontSize: 'medium' }} />
@@ -636,10 +574,6 @@ const FormBuilder = () => {
                 <h1 className="text-lg font-bold">
                     {selectedForm ? `Editing Form: ${selectedForm.name}` : 'Form Builder'}
                 </h1>
-
-                {/* <div>
-                    <h1 className="text-lg font-bold">Form Builder</h1>
-                </div> */}
                 <div className="flex space-x-2">
 
 
@@ -668,15 +602,6 @@ const FormBuilder = () => {
                             <FaTimes className="mr-2" /> Cancel Edit
                         </button>
                     )}
-                    {/* <button
-                        onClick={handleSaveForm}
-                        disabled={isLoading}
-                        className="w-fit px-2 py-1.5 duration-200 ease-in transition-all bg-green-900 text-white rounded hover:bg-green-800 flex items-center text-sm disabled:cursor-not-allowed disabled:opacity-70"
-                    >
-                        <span className="sr-only">Create form</span>
-
-                        <FaSave className="mr-2" /> {isLoading ? 'Creating...' : 'Create Form'}
-                    </button> */}
                     <button
                         onClick={handleSaveForm}
                         disabled={isLoading}
@@ -735,59 +660,6 @@ const FormBuilder = () => {
                         />
 
                         <div>
-                            <label htmlFor="process_flow_id" className="sr-only">
-                                ProcessFlow
-                            </label>
-                            <select
-                                id="process_flow_id"
-                                name="process_flow_id"
-                                value={form.process_flow_id}
-                                onChange={handleFormChange('process_flow_id')}
-                                className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
-        ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
-        placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-        disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
-                            >
-                                <option className="text-gray-500">Select a processflow</option>
-                                {backendProcessflows?.data && Array.isArray(backendProcessflows.data) &&
-                                    backendProcessflows.data.map((flow) => (
-                                        <option key={flow.id} value={Number(flow.id)}>
-                                            {flow.name.replace(/_/g, ' ')}
-                                        </option>
-                                    ))}
-                            </select>
-                        </div>
-                        <div>
-                            <label htmlFor="process_flow_step_id" className="sr-only">
-                                ProcessFlow Step
-                            </label>
-                            <select
-                                id="process_flow_step_id"
-                                name="process_flow_step_id"
-                                value={form.process_flow_step_id}
-                                onChange={handleFormChange('process_flow_step_id')}
-                                className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
-        ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
-        placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-        disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
-                                disabled={!form.process_flow_id}
-                            >
-                                <option className="text-gray-500">Select a processflow step</option>
-                                {backendProcessflows?.data && Array.isArray(backendProcessflows.data) && form.process_flow_id && (
-                                    (() => {
-                                        const selectedFlow = backendProcessflows.data.find(
-                                            flow => Number(flow.id) === Number(form.process_flow_id)
-                                        );
-                                        return selectedFlow?.steps?.map((step) => (
-                                            <option key={step.id} value={Number(step.id)}>
-                                                {step.name.replace(/_/g, ' ')}
-                                            </option>
-                                        ));
-                                    })()
-                                )}
-                            </select>
-                        </div>
-                        <div>
                             <label htmlFor="tag_id" className="sr-only">
                                 Tag
                             </label>
@@ -812,6 +684,93 @@ const FormBuilder = () => {
                                     )}
                             </select>
                         </div>
+
+                        <label className='text-sm flex items-center space-x-2 cursor-pointer'>
+                            <input
+                                type="checkbox"
+                                // checked={showProcessFlow}
+                                // onChange={() => setShowProcessFlow(!showProcessFlow)}
+                                checked={showProcessFlow}
+                                onChange={(e) => {
+                                    setShowProcessFlow(e.target.checked);
+                                    if (!e.target.checked) {
+                                        // Reset process flow related values when unchecked
+                                        setForm(prev => ({
+                                            ...prev,
+                                            process_flow_id: '0',
+                                            process_flow_step_id: '0'
+                                        }));
+                                    }
+                                }}
+                                className='peer relative appearance-none shrink-0 w-4 h-4 border border-nnpc-200 rounded-md bg-white
+        focus:outline-none 
+        checked:bg-nnpc-200 checked:border-0
+        disabled:border-steel-400 disabled:bg-steel-400'
+                            // className="checked:text-green-900 mr-3 text-green-900"
+                            />
+                            <span> Has ProcessFlow</span>
+                        </label>
+
+                        {showProcessFlow && (
+                            <>
+
+
+                                <div>
+                                    <label htmlFor="process_flow_id" className="sr-only">
+                                        ProcessFlow
+                                    </label>
+                                    <select
+                                        id="process_flow_id"
+                                        name="process_flow_id"
+                                        value={form.process_flow_id}
+                                        onChange={handleFormChange('process_flow_id')}
+                                        className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
+        ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
+        placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
+        disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
+                                    >
+                                        <option className="text-gray-500">Select a processflow</option>
+                                        {backendProcessflows?.data && Array.isArray(backendProcessflows.data) &&
+                                            backendProcessflows.data.map((flow) => (
+                                                <option key={flow.id} value={Number(flow.id)}>
+                                                    {flow.name.replace(/_/g, ' ')}
+                                                </option>
+                                            ))}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="process_flow_step_id" className="sr-only">
+                                        ProcessFlow Step
+                                    </label>
+                                    <select
+                                        id="process_flow_step_id"
+                                        name="process_flow_step_id"
+                                        value={form.process_flow_step_id}
+                                        onChange={handleFormChange('process_flow_step_id')}
+                                        className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
+        ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
+        placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
+        disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
+                                        disabled={!form.process_flow_id}
+                                    >
+                                        <option className="text-gray-500">Select a processflow step</option>
+                                        {backendProcessflows?.data && Array.isArray(backendProcessflows.data) && form.process_flow_id && (
+                                            (() => {
+                                                const selectedFlow = backendProcessflows.data.find(
+                                                    flow => Number(flow.id) === Number(form.process_flow_id)
+                                                );
+                                                return selectedFlow?.steps?.map((step) => (
+                                                    <option key={step.id} value={Number(step.id)}>
+                                                        {step.name.replace(/_/g, ' ')}
+                                                    </option>
+                                                ));
+                                            })()
+                                        )}
+                                    </select>
+                                </div>
+                            </>
+                        )}
+
                     </div>
 
                     <h2 className="text-base font-bold mb-4">Form Elements</h2>
