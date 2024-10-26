@@ -34,13 +34,6 @@ export interface FormBuilderData {
   description?: string;
 }
 
-// export interface FormSubmission {
-//   form_builder_id?: string |undefined;
-//   form_field_answers: string;
-//   data_id?: number;
-//   files?: File[]; // Add this line to support file uploads
-// }
-
 export interface FormSubmission {
   form_builder_id?: string | undefined;
   form_field_answers: string;
@@ -50,29 +43,6 @@ export interface FormSubmission {
   tag_id?: string;
 }
 
-
-
-
-// export interface FormField {
-//   id: number;
-//   name?: string;
-//   label?: string;
-//   type: 'number' | 'text' | 'password' | 'date' | 'select' | 'textarea' | 'checkbox' | 'radio'|'location'|'email'|'tel'|'hidden'|'file';
-//   placeholder?: string;
-//   options?:[];
-//   required?:boolean;
-// }
-
-// export interface FormBuilderData {
-//   id?: number;
-//   name?: string;
-//   json_form: string;
-//   process_flow_id: string | number | undefined;
-//   process_flow_step_id: string | number | undefined;
-//   tag_id?: string;
-//   form_data: string[]|[];
-//   description?: string;
-// }
 
 export interface FormBuilderApiResponse {
   data: FormBuilderData;
@@ -85,13 +55,6 @@ export interface FormFieldAnswer {
   field_id: number;
   answer: string;
 }
-
-// export interface FormSubmission {
-//   form_builder_id?: number;
-//   form_field_answers: string;
-//   data_id?: number;
-// }
-
 
 
 export interface FormFieldAnswerTwo {
