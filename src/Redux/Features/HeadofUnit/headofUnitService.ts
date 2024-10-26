@@ -1,4 +1,3 @@
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
 
 export interface HeadOfUnit {
@@ -23,20 +22,14 @@ export interface HeadOfUnitCreateInterface{
   unit_id:string;
   status:string;
 }
-type ErrorResponse = {
-  success: boolean;
-  message: string;
-};
+
 
 export const headOfUnitApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getHeadsOfUnit: builder.query<HeadsOfUnitData, void>({
       query: () => '/users/api/v1/headofunit',
       providesTags: ['HeadsOfUnit'],
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
+     
     }),
 
     createHeadOfUnit: builder.mutation<HeadOfUnitSingleData, HeadOfUnitCreateInterface>({
@@ -47,16 +40,6 @@ export const headOfUnitApi = api.injectEndpoints({
         body: headOfUnit,
       }),
       invalidatesTags: ['HeadsOfUnit'],
-      transformResponse: (response: HeadOfUnitSingleData | ErrorResponse) => {
-        if ('message' in response) {
-          throw new Error(response.message);
-        }
-        return response;
-      },
-      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-        const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-        return errorResponse;
-      },
     }),
 
   }),

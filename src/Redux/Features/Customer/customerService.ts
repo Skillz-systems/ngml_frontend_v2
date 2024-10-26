@@ -227,21 +227,11 @@ export const customersApi = api.injectEndpoints({
     getCustomers: builder.query<CustomerResponse, void>({
       query: () => '/customer/api/customers',
       providesTags: ['Customers'],
-      // transformResponse: (response: CustomerResponse) => {
-      //   console.log('customersApi',response)
-      //   return response;
-      // },
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+     
     }),
     getCustomerById: builder.query<CustomerWithSite, number>({
       query: (id) => `/customer/api/customers/${id}`,
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+    
       providesTags: ['Customers'],
     }),
     addCustomer: builder.mutation<CustomerResponse, Omit<CustomerData, 'id' | 'created_at' | 'updated_at'>>({
@@ -252,16 +242,7 @@ export const customersApi = api.injectEndpoints({
         body: customer,
       }),
       invalidatesTags: ['Forms', 'Customers', 'Tasks'],
-      // transformResponse: (response: CustomerResponse | ErrorResponse) => {
-      //   if ('error' in response) {
-      //     throw new Error(response.error);
-      //   }
-      //   return response;
-      // },
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+     
     }),
     updateCustomer: builder.mutation<CustomerResponse, Partial<CustomerData> & { id: number }>({
       query: ({ id, ...updates }) => ({
@@ -270,16 +251,7 @@ export const customersApi = api.injectEndpoints({
         headers: { 'Content-Type': 'application/json' },
         body: updates,
       }),
-      // transformResponse: (response: CustomerResponse | ErrorResponse) => {
-      //   if ('error' in response) {
-      //     throw new Error(response.error);
-      //   }
-      //   return response;
-      // },
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+     
     }),
     deleteCustomer: builder.mutation<{ success: boolean; id: number }, number>({
       query: (id) => ({
@@ -288,20 +260,7 @@ export const customersApi = api.injectEndpoints({
         headers: { 'Content-Type': 'application/json' },
       }),
       invalidatesTags: ['Forms', 'Customers', 'Tasks'],
-      // transformResponse: (response: { success: boolean; id: number } | ErrorResponse) => {
-      //   if ('error' in response) {
-      //     throw new Error(response.error);
-      //   }
-
-      //   if ('success' in response && 'id' in response) {
-      //     return response;
-      //   }
-      //   throw new Error('Invalid response format');
-      // },
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+     
     }),
   }),
   overrideExisting: false,
