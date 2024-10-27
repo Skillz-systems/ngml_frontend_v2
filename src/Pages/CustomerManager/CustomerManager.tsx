@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { DocumentCard } from '../../Components/index';
 import images from '../../assets/index';
-import { useNavigate } from 'react-router-dom';
 
 /**
  * DocumentCardProps describes the props for the DocumentCard component.
@@ -28,7 +29,17 @@ import { useNavigate } from 'react-router-dom';
 
 const CustomerManager: React.FC = () => {
 
-    const navigate = useNavigate();
+  const [customerId, setCustomerId] = useState<number | null>(null);
+  const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const customer = location.pathname.split('/');
+    setCustomerId(Number(customer[4]));
+    setCustomerSiteId(Number(customer[5]))
+  }, [location]);
 
   return (
     <div className="bg-white flex-row md:flex gap-4 items-center p-4 rounded-lg">
@@ -38,8 +49,8 @@ const CustomerManager: React.FC = () => {
         title='Daily Volumes'
         subtitle='Last Updated'
         height='330px'
-        reports='12/nov/2023'
-        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' onClick={() => navigate('/admin/records/dailyvolumns')} />}
+        reports='12/Nov/2023'
+        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' onClick={() => navigate(`/admin/records/dailyvolumns/${customerId}/${customerSiteId}`)} />}
         backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard
@@ -48,7 +59,7 @@ const CustomerManager: React.FC = () => {
         title='Billing'
         subtitle='Last Updated'
         height='330px'
-        reports='12/nov/2023'
+        reports='12/Nov/2023'
         reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4' onClick={() => navigate('/admin/records/billinghistory')} />}
         backgroundColor='bg-[#EAEEF2]'
       />

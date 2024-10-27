@@ -9,7 +9,7 @@ import { default as AdminCustomerPageLayout, default as CustomerPageLayout } fro
 // import CustomerInvoiceAdviceLayout from '@/Pages/CustomerInvoiceAdvice/CustomerInvoiceAdviceLayout';
 import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
-import Dailyvolumns from '@/Pages/Dailyvolumns/Dailyvolumns';
+import CustomerDailyVolumns from '@/Pages/Dailyvolumns/CustomerDailyVolumns';
 // import FormBuilder from '@/Pages/FormBuilder';
 import FormBuilderPage from '@/Pages/FormBuilderCroup/FormBuilderPage';
 // import FormBuilderDashboard from '@/Pages/FormBuilderDashboard';
@@ -93,8 +93,9 @@ export const admin: RouteObject[] = [
 
     },
     {
-        path: '/admin/records/dailyvolumns',
-        element: <Dailyvolumns />,
+        path: '/admin/records/dailyvolumns/:customerId/:siteId',
+        // element: <Dailyvolumns />,
+        element: <CustomerDailyVolumns />
 
     },
     {

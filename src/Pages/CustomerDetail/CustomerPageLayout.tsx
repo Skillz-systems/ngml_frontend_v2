@@ -9,7 +9,6 @@ import ConnectProject from '../ConnectProject/ConnectProject';
 import CostAnalysis from '../CostAnalysis/CostAnalysis';
 import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
 import CustomerManager from '../CustomerManager/CustomerManager';
-import CustomerDailyVolumns from '../Dailyvolumns/CustomerDailyVolumns';
 import DdqPage from '../DdqPage/DdqPage';
 import EoiPage from '../EoiPage/EoiPage';
 import SiteVisitationPage from '../SiteVisitationPage/SiteVisitationPage';
@@ -28,7 +27,7 @@ const AdminCustomerPageLayout: React.FC = () => {
     { name: 'Customer details', ref: 'customerdetails' },
     { name: 'Eoi request', ref: 'eoirequest' },
     { name: 'DDQ', ref: 'ddq' },
-    { name: 'Daily consumption', ref: 'dailyconsumptions' },
+    // { name: 'Daily consumption', ref: 'dailyconsumptions' },
     { name: 'Site visit', ref: 'sitevisit' },
     { name: 'Cost analysis', ref: 'costanalysis' },
     { name: 'Agreement', ref: 'agreement' },
@@ -42,7 +41,7 @@ const AdminCustomerPageLayout: React.FC = () => {
     eoirequest: <EoiPage />,
     ddq: <DdqPage />,
     sitevisit: <SiteVisitationPage />,
-    dailyconsumptions: <CustomerDailyVolumns />,
+    // dailyconsumptions: <CustomerDailyVolumns />,
     costanalysis: <CostAnalysis />,
     agreement: <Agreement />,
     connectproject: <ConnectProject />,
@@ -68,7 +67,7 @@ const AdminCustomerPageLayout: React.FC = () => {
         tablist={tablist}
         tabContent={tabContent}
         showButtons={false}
-        
+
       />
     </div>
   );
