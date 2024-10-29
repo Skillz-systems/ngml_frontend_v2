@@ -290,12 +290,12 @@ const EoiPage = () => {
       </Modal>
       <EoiRequestTemplate
         handleClose={() => { }}
-        dateTime={'09th, Nov, 2023; 09:23:44 AM'}
+        // dateTime={'09th, Nov, 2023; 09:23:44 AM'}
         status={customerDetails?.data?.status ? 'Approved' : 'Pending'}
         companyName={customerDetails?.data?.company_name || 'N/A'}
         companyEmail={customerDetails?.data?.email || 'N/A'}
         companyNumber={customerDetails?.data?.phone_number || 'N/A'}
-        statusHeading={customerDetails?.data?.status ? 'Approved' : 'Pending'}
+        // statusHeading={customerDetails?.data?.status ? 'Approved' : 'Pending'}
         approverName={'Okoro Florish'}
       />
     </div>
