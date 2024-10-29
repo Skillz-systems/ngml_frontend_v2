@@ -200,14 +200,14 @@ const EoiPage = () => {
       <div className='flex items-end justify-end gap-2 mb-3'>
         <Button
           type="primary"
-          label="REASON FOR REQUEST"
+          label="REASON FOR EOI UPLOAD"
           radius="20px"
-          width="25%"
+          width="28%"
           height="32px"
           columnGap="5px"
           action={() => toggleModal(true)}
         />
-        <Button
+        {/* <Button
           type="primary"
           label="Upload"
           radius="20px"
@@ -216,7 +216,7 @@ const EoiPage = () => {
           icon={<div><img src={images.uploadSvg} alt="send Icon" className='text-white' /></div>}
           columnGap="5px"
           action={() => { }}
-        />
+        /> */}
       </div>
       <Modal
         isOpen={isModalOpen}

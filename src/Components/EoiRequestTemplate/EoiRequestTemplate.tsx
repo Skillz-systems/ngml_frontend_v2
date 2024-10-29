@@ -256,9 +256,9 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
     companyName,
     companyEmail,
     companyNumber,
-    statusHeading,
+    // statusHeading,
     handleClose,
-    statusStyle,
+    // statusStyle,
     approverName,
     disapprovalReason,
 }) => {
@@ -316,13 +316,13 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
     return (
         <div className="  h-[100%] w-[100%] rounded-[6px]" style={{ background: colors.dark[50] }}>
             <Box>
-                <div className='items-center h-[100%] p-[10px]'>
+                <div className='items-center h-[100%] p-4'>
                     <Heading as="h6" size="h6" color='primaryColor' className="font-[2px] text-dark-400">EOI REQUEST</Heading>
 
                     {/* <div className='text-[20px] text-[#49526A] font-[700]'>EOI REQUEST</div> */}
                 </div>
             </Box>
-            <div className='h-fit bg-[#F6FDEC] p-[10px]'>
+            {/* <div className='h-fit bg-[#F6FDEC] p-[10px]'>
                 <div className='flex justify-between '>
                     <div className='flex gap-[8px] items-center'>
                         <div className='text-[#828DA9] text-[12px] font-[700]'>Dates Picked On</div>
@@ -333,8 +333,8 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
                         {statusHeading}
                     </div>
                 </div>
-            </div>
-            <div className='h-fit bg-[#F6F8FA] p-[10px]'>
+            </div> */}
+            <div className='h-fit bg-[#F6F8FA] p-4'>
                 <div className='flex justify-between w-[100%]'>
                     <div className='text-[#828DA9] text-[14px] font-[500] w-[50%] flex justify-between'>
                         <div>
@@ -361,9 +361,9 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
                     <textarea className='text-[#050505] text-[16px] h-[340px] outline-none font-[500] rounded-md' placeholder='Enter your reason here...'></textarea>
                 </div> */}
             </div>
-            <div className='h-fit p-[20px] bg-[#FFF3D5] ' >
+            {/* <div className='h-fit p-[20px] bg-[#FFF3D5] ' >
                 <div>{renderStatusContent()}</div>
-            </div>
+            </div> */}
 
         </div>
     );
