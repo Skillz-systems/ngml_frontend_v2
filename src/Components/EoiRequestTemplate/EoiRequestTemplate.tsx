@@ -232,7 +232,7 @@
 
 
 
-import { Button, Heading } from '@/Components';
+import { Heading } from '@/Components';
 import colors from '@/Utils/colors';
 import { ContentPasteOutlined } from '@mui/icons-material';
 import { Box } from '@mui/material';
@@ -251,66 +251,66 @@ interface EoiRequestTemplateprops {
 }
 
 const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
-    dateTime,
-    status,
+    // dateTime,
+    // status,
     companyName,
     companyEmail,
     companyNumber,
     // statusHeading,
-    handleClose,
+    // handleClose,
     // statusStyle,
-    approverName,
-    disapprovalReason,
+    // approverName,
+    // disapprovalReason,
 }) => {
 
-    const renderStatusContent = () => {
-        switch (status) {
-            case 'New':
-                return (
-                    <Button
-                        type='primary'
-                        label='Request Approval'
-                        action={handleClose}
-                        width='164px'
-                        height='26px'
-                        fontSize='12px'
-                        fontWeight='400'
-                        radius='32px'
-                    />
-                );
-            case 'Approved':
-                return (
-                    <div className='flex justify-between text-[#828DA9] text-[14px] font-[400] '>
-                        <div >Approved by: {approverName}</div>
-                        <div >Date & Time: {dateTime}</div>
-                    </div>
-                );
-            case 'Disapproved':
-                return (
-                    <div className='flex justify-end gap-[8px] text-[#828DA9]'>
-                        <Button
-                            type='outline'
-                            label='View Reason'
-                            action={handleClose}
-                            width='105px'
-                            height='26px'
-                            fontSize='10px'
-                            fontWeight='400'
-                            radius='32px'
-                            color='#828DA9'
+    // const renderStatusContent = () => {
+    //     switch (status) {
+    //         case 'New':
+    //             return (
+    //                 <Button
+    //                     type='primary'
+    //                     label='Request Approval'
+    //                     action={handleClose}
+    //                     width='164px'
+    //                     height='26px'
+    //                     fontSize='12px'
+    //                     fontWeight='400'
+    //                     radius='32px'
+    //                 />
+    //             );
+    //         case 'Approved':
+    //             return (
+    //                 <div className='flex justify-between text-[#828DA9] text-[14px] font-[400] '>
+    //                     <div >Approved by: {approverName}</div>
+    //                     <div >Date & Time: {dateTime}</div>
+    //                 </div>
+    //             );
+    //         case 'Disapproved':
+    //             return (
+    //                 <div className='flex justify-end gap-[8px] text-[#828DA9]'>
+    //                     <Button
+    //                         type='outline'
+    //                         label='View Reason'
+    //                         action={handleClose}
+    //                         width='105px'
+    //                         height='26px'
+    //                         fontSize='10px'
+    //                         fontWeight='400'
+    //                         radius='32px'
+    //                         color='#828DA9'
 
 
-                        />
-                        <div >Reason: {disapprovalReason}</div>
-                        <div >Disapproved on: {dateTime}</div>
-                    </div>
-                );
-            case 'Pending':
-                return <div className='text-[#828DA9] text-[14px] font-[700]'>Awaiting Approval...</div>;
-            default:
-                return null;
-        }
-    }
+    //                     />
+    //                     <div >Reason: {disapprovalReason}</div>
+    //                     <div >Disapproved on: {dateTime}</div>
+    //                 </div>
+    //             );
+    //         case 'Pending':
+    //             return <div className='text-[#828DA9] text-[14px] font-[700]'>Awaiting Approval...</div>;
+    //         default:
+    //             return null;
+    //     }
+    // }
 
 
     return (
