@@ -19,43 +19,53 @@ const ConnectProject: React.FC = () => {
     });
     const [firstGasDate, setFirstGasDate] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isNewModalOpen, setIsNewModalOpen] = useState(false);
-    const [isTenderingVisible, setIsTenderingVisible] = useState(false);
+    // const [isNewModalOpen, setIsNewModalOpen] = useState(false);
+    // const [isTenderingVisible, setIsTenderingVisible] = useState(false);
     const [selectedDate, setSelectedDate] = useState('');
-    const [isTenderingComplete, setIsTenderingComplete] = useState(false);
-    const [isStrategyVisible, setIsStrategyVisible] = useState(false);
-    const [selectedStrategy, setSelectedStrategy] = useState('');
+    // const [isTenderingComplete, setIsTenderingComplete] = useState(false);
+    // const [isStrategyVisible, setIsStrategyVisible] = useState(false);
+    // const [selectedStrategy, setSelectedStrategy] = useState('');
+    const [areDatesConfirmed, setAreDatesConfirmed] = useState(false); 
 
 
+
+    const handleConfirmDates = () => {
+        setAreDatesConfirmed(true); 
+    };
+
+    const handleSend = () => {
+        console.log('Sending dates:', projectDate);
+        alert(`Dates sent: Start Date - ${projectDate.startdate}, End Date - ${projectDate.enddate}`);
+    };
 
     const handleInputChange = (value: string, key: string) => {
         setProjectDate({ ...projectDate, [key]: value });
     };
 
-    const handleCreateCustomer = () => {
-        setIsNewModalOpen(true);
-    };
+    // const handleCreateCustomer = () => {
+    //     setIsNewModalOpen(true);
+    // };
 
     const handleClose = () => {
         setIsModalOpen(false);
     };
 
-    const handleCloseNewModal = () => {
-        setIsNewModalOpen(false);
-    };
+    // const handleCloseNewModal = () => {
+    //     setIsNewModalOpen(false);
+    // };
 
-    const handleTenderingProcessComplete = () => {
-        setIsTenderingComplete(true);
-        setIsNewModalOpen(true);
-    };
+    // const handleTenderingProcessComplete = () => {
+    //     setIsTenderingComplete(true);
+    //     setIsNewModalOpen(true);
+    // };
 
-    const toggleStrategyVisibility = () => {
-        setIsStrategyVisible(!isStrategyVisible);
-    };
+    // const toggleStrategyVisibility = () => {
+    //     setIsStrategyVisible(!isStrategyVisible);
+    // };
 
-    const handleStrategyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedStrategy(event.target.value);
-    };
+    // const handleStrategyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     setSelectedStrategy(event.target.value);
+    // };
 
 
     const areDatesSelected = projectDate.startdate && projectDate.enddate;
@@ -67,13 +77,13 @@ const ConnectProject: React.FC = () => {
                     <div className="items-center gap-4 flex">
                         <div
                             onClick={() => setIsModalOpen(true)}
-                            className="p-3 rounded-3xl border justify-center flex cursor-pointer"
+                            className="p-2 rounded-3xl border justify-center flex cursor-pointer"
                         >
-                            <div className="text-[14px] leading-none">
+                            <div className="text-[12px] leading-none">
                                 {firstGasDate ? 'Adjust First Gas Date' : 'Set First Gas Date'}
                             </div>
                         </div>
-                        <div className="p-2 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
+                        <div className="p-1 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
                             <div className="w-4 h-4 justify-center items-center flex">
                                 <img src={images.cancel} alt="close icon" width={'10px'} />
                             </div>
@@ -81,13 +91,79 @@ const ConnectProject: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex p-2 py-4 items-center justify-between w-full border rounded-xl">
+                <div className="flex p-2 py-3 items-center justify-between w-full border rounded-xl">
                     <div className="text-[#808080] text-base font-600 font-['Mulish'] ml-4">First Gas Date</div>
                     <div className="mr-2 bg-[#D2F69E] px-2 py-1 rounded-[20px]">
                         <div className='text-[#266425] text-[12px] font-[700]'>{firstGasDate || 'Add a date'}</div>
                     </div>
                 </div>
-                <div className="w-full h-full p-5 space-y-6 border rounded-xl">
+                {!areDatesConfirmed && (
+                    <div className="w-full h-full p-5 space-y-6 border rounded-xl">
+                        <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT DATES</div>
+                        <div>
+                            <CustomInput
+                                type="date"
+                                label='Proposed Project Start Date'
+                                value={projectDate.startdate}
+                                handleChangeEvent={(value) => handleInputChange(value, 'startdate')}
+                                placeholder="Select start date"
+                            />
+                        </div>
+                        <div>
+                            <CustomInput
+                                type="date"
+                                label='Proposed Project End Date'
+                                value={projectDate.enddate}
+                                handleChangeEvent={(value) => handleInputChange(value, 'enddate')}
+                                placeholder="Select end date"
+                            />
+                        </div>
+                        <div className='flex items-end justify-end'> 
+                            <div className="w-[30%]">
+                            {areDatesSelected && (
+                                <Button
+                                    type="secondary"
+                                    label="Confirm Selection"
+                                    action={handleConfirmDates}
+                                    color="#FFFFFF"
+                                    width="100%"
+                                    height="40px"
+                                    fontSize="16px"
+                                    radius="20px"
+                                />
+                            )}
+                        </div></div>
+                       
+                    </div>
+                )}
+
+                {areDatesConfirmed && (
+                    <div className="w-full h-full p-5 space-y-6 border rounded-xl">
+                        <div className="text-base font-bold font-['Mulish'] leading-none">SELECTED PROJECT DATES</div>
+                        <div className="text-[#266425] text-[16px]">
+                            <p className='mb-2'><strong>Start Date:</strong> {projectDate.startdate}</p>
+                            <p><strong>End Date:</strong> {projectDate.enddate}</p>
+                        </div>
+                        <div className='flex items-end justify-end'>
+                        <div className=" w-[20%] ">
+                            <Button
+                                type="secondary"
+                                label="Send"
+                                action={handleSend}
+                                color="#FFFFFF"
+                                width="100%"
+                                height="40px"
+                                fontSize="16px"
+                                radius="20px"
+                                className=''
+                            />
+                        </div>
+                        </div>
+                    </div>
+                )}
+
+
+                {/* <div className="w-full h-full p-5 space-y-6 border rounded-xl">
                     <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT DATES</div>
                     <div className="">
                         <CustomInput
@@ -128,9 +204,8 @@ const ConnectProject: React.FC = () => {
                             </div>
                         )}
                     </div>
-
-                </div>
-                {areDatesSelected && (
+                </div> */}
+                {/* {areDatesSelected && (
                     <div className="w-full h-full p-6 space-y-6 border rounded-xl">
                         <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT MILESTONE</div>
                         <div className='flex flex-col justify-start gap-4 md:flex-row'>
@@ -226,7 +301,7 @@ const ConnectProject: React.FC = () => {
                         )}
 
                     </div>
-                )}
+                )} */}
             </div>
 
             <Modal
@@ -269,7 +344,7 @@ const ConnectProject: React.FC = () => {
                 />
             </Modal>
 
-            <Modal
+            {/* <Modal
                 isOpen={isNewModalOpen}
                 onClose={handleCloseNewModal}
                 title="Milestone 1"
@@ -335,7 +410,7 @@ const ConnectProject: React.FC = () => {
                         ></textarea>
                     </div>
                 </div>
-            </Modal>
+            </Modal> */}
         </div>
     );
 };
