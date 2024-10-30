@@ -6,7 +6,7 @@ import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 // import images from '@/assets';
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
@@ -19,18 +19,44 @@ const EoiPage = () => {
   const [customerForm, setCustomerForm] = useState<FormField[]>([]);
   const [customerData, setCustomerData] = useState<CustomerData>({});
   const [formError, setFormError] = useState<string>('');
+  const [customerId, setCustomerId] = useState<number | null>(null);
+  const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
+  const location = useLocation();
 
 
-  const { data, isSuccess, isLoading } = useGetFormByNameQuery('EOIform');
+  // const { data, isSuccess, isLoading } = useGetFormByNameQuery('EOIform');
+  const { data, isSuccess, isLoading } = useGetFormByNameQuery(`EOIform/customer/${customerId}/${customerSiteId}`, {
+    skip: !customerId
+  });
   const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
 
   const navigate = useNavigate();
 
   // Assuming customer ID is passed via params
-  const { customerId } = useParams<{ customerId: string }>();
+  // const { customerId } = useParams<{ customerId: string }>();
 
   // Fetch customer details using customerId
   const { data: customerDetails } = useGetCustomerByIdQuery(Number(customerId));
+
+
+  useEffect(() => {
+    const customer = location.pathname.split('/');
+    setCustomerId(Number(customer[4]));
+    setCustomerSiteId(Number(customer[5]))
+  }, [location]);
+
+  const toggleModal = useCallback((open: boolean) => {
+    setIsModalOpen(open);
+    const searchParams = new URLSearchParams(location.search);
+
+    if (open) {
+      searchParams.set('Eoirquest', 'true');
+    } else {
+      searchParams.delete('eoirquest');
+    }
+
+    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+  }, [location, navigate]);
 
   // const [status] = useState('Default Status');
   // const [selectedRow] = useState({
@@ -69,7 +95,7 @@ const EoiPage = () => {
 
   // Update form fields with fetched customer data
 
-  
+
   useEffect(() => {
     if (isSuccess && data) {
       let parsedForm;
@@ -102,17 +128,17 @@ const EoiPage = () => {
 
     }
   }, [customerData, isModalOpen, customerForm]);
+  //now
+  // const toggleModal = (open: boolean) => {
+  //   setIsModalOpen(open);
+  //   const searchParams = new URLSearchParams(location.search);
 
-  const toggleModal = (open: boolean) => {
-    setIsModalOpen(open);
-    const searchParams = new URLSearchParams(location.search);
-
-    if (open) {
-      searchParams.set('reasonForRequest', 'true');
-    } else {
-      searchParams.delete('eoirquest');
-    }
-  };
+  //   if (open) {
+  //     searchParams.set('reasonForRequest', 'true');
+  //   } else {
+  //     searchParams.delete('eoirquest');
+  //   }
+  // };
 
   // const handleClose = () => { };
 
@@ -200,9 +226,9 @@ const EoiPage = () => {
       <div className='flex items-end justify-end gap-2 mb-3'>
         <Button
           type="primary"
-          label="REASON FOR EOI UPLOAD"
+          label="EOI UPLOAD"
           radius="20px"
-          width="28%"
+          width="150px"
           height="32px"
           columnGap="5px"
           action={() => toggleModal(true)}
