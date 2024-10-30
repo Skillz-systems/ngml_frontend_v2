@@ -1,13 +1,13 @@
-import { Fragment, useEffect, useState } from 'react';
+import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, DocumentCard, Modal } from '../../Components/index';
 import images from '../../assets/index';
-import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 // import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
-import { areRequiredFieldsFilled } from '@/Utils/formValidation';
-import { convertFileToBase64 } from '@/Utils/base64Converter';
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
+import { convertFileToBase64 } from '@/Utils/base64Converter';
+import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 
 interface CardDataItem {
     type: 'withLink' | 'withoutLink' | 'withReport';
@@ -30,10 +30,21 @@ const CostAnalysis: React.FC = () => {
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
 
-    const navigate = useNavigate();
+    const [customerId, setCustomerId] = useState<number | null>(null);
+    const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
     const location = useLocation();
 
-    const { data, isSuccess, isLoading } = useGetFormByNameQuery('customeranalysisform');
+
+    // const { data, isSuccess, isLoading } = useGetFormByNameQuery('EOIform');
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery(`customeranalysisform/customer/${customerId}/${customerSiteId}`, {
+        skip: !customerId
+    });
+
+
+    const navigate = useNavigate();
+    // const location = useLocation();
+
+    // const { data, isSuccess, isLoading } = useGetFormByNameQuery('customeranalysisform');
     const [submitForm, { isSuccess: submitSuccess }] = useSubmitFormMutation();
 
 
@@ -71,9 +82,28 @@ const CostAnalysis: React.FC = () => {
     }, [customerData, isModalOpen, customerForm]);
 
 
-    const toggleModal = (open: boolean) => {
+    // const toggleModal = (open: boolean) => {
+    //     setIsModalOpen(open);
+    //     setFormError('');
+    //     const searchParams = new URLSearchParams(location.search);
+
+    //     if (open) {
+    //         searchParams.set('uploadCapex', 'true');
+    //     } else {
+    //         searchParams.delete('uploadCapex');
+    //     }
+
+    //     navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+    // };
+
+    useEffect(() => {
+        const customer = location.pathname.split('/');
+        setCustomerId(Number(customer[4]));
+        setCustomerSiteId(Number(customer[5]))
+    }, [location]);
+
+    const toggleModal = useCallback((open: boolean) => {
         setIsModalOpen(open);
-        setFormError('');
         const searchParams = new URLSearchParams(location.search);
 
         if (open) {
@@ -83,7 +113,7 @@ const CostAnalysis: React.FC = () => {
         }
 
         navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-    };
+    }, [location, navigate]);
 
     const handleChange = (field: string, value: string | File | null) => {
         if (value instanceof File) {
@@ -176,14 +206,14 @@ const CostAnalysis: React.FC = () => {
         },
     ];
 
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const uploadCapex = searchParams.get('uploadCapex');
+    // useEffect(() => {
+    //     const searchParams = new URLSearchParams(location.search);
+    //     const uploadCapex = searchParams.get('uploadCapex');
 
-        if (uploadCapex === 'true') {
-            setIsModalOpen(true);
-        }
-    }, [location.search]);
+    //     if (uploadCapex === 'true') {
+    //         setIsModalOpen(true);
+    //     }
+    // }, [location.search]);
 
     return (
         <div className="w-full h-full p-4 bg-white rounded-xl flex flex-col gap-4 md:gap-6">
@@ -256,7 +286,7 @@ const CostAnalysis: React.FC = () => {
                     </div>
                 ]}
             >
-               {formError && <p className="text-red-500 mb-4">{formError}</p>}
+                {formError && <p className="text-red-500 mb-4">{formError}</p>}
                 {isLoading ? (
                     <p>Loading form fields...</p>
                 ) : customerForm.length > 0 ? (
