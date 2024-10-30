@@ -537,18 +537,18 @@ const FormBuilder = () => {
             json_form: JSON.stringify(formElements),
             json_data: [],
         };
-
-        if (form?.name?.trim() === '' || form?.description?.trim() === '' || form?.process_flow_id === '' || form?.tag_id?.trim() === '' || form?.process_flow_step_id === '') {
+        if (form?.name?.trim() === '' || form?.description?.trim() === '' || formElements.length < 1) {
             toast.error('All fields are required');
             return;
         }
 
         try {
             if (selectedForm) {
-
+                console.log('site visit')
                 await updateForm({ id: selectedForm.id, ...formData }).unwrap();
                 toast.success('Form updated successfully!');
             } else {
+                console.log('site visit 2')
                 await createForm(formData).unwrap();
                 toast.success('Form created successfully!');
             }
