@@ -1,7 +1,7 @@
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button, DocumentCard, Modal } from '../../Components/index';
+import { Button, Modal } from '../../Components/index';
 import images from '../../assets/index';
 // import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import FormInput from '@/Components/Custominput/FormInput';
@@ -9,16 +9,16 @@ import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 
-interface CardDataItem {
-    type: 'withLink' | 'withoutLink' | 'withReport';
-    title: string;
-    subtitle: string;
-    icon: React.ReactNode;
-    linkText: string;
-    linkText2: string;
-    width: number | string;
-    height: number | string;
-}
+// interface CardDataItem {
+//     type: 'withLink' | 'withoutLink' | 'withReport';
+//     title: string;
+//     subtitle: string;
+//     icon: React.ReactNode;
+//     linkText: string;
+//     linkText2: string;
+//     width: number | string;
+//     height: number | string;
+// }
 
 type CustomerData = {
     [key: string]: string | File | null;
@@ -193,18 +193,18 @@ const CostAnalysis: React.FC = () => {
         }
     };
 
-    const costAnalysisCardDataTwo: CardDataItem[] = [
-        {
-            type: 'withLink',
-            title: 'Dangote Cement',
-            subtitle: 'Site Survey Report',
-            linkText: 'Last Updated',
-            linkText2: '12/13/2023',
-            icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
-            width: '200px',
-            height: '100%',
-        },
-    ];
+    // const costAnalysisCardDataTwo: CardDataItem[] = [
+    //     {
+    //         type: 'withLink',
+    //         title: 'Dangote Cement',
+    //         subtitle: 'Site Survey Report',
+    //         linkText: 'Last Updated',
+    //         linkText2: '12/13/2023',
+    //         icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
+    //         width: '200px',
+    //         height: '100%',
+    //     },
+    // ];
 
     // useEffect(() => {
     //     const searchParams = new URLSearchParams(location.search);
@@ -232,7 +232,7 @@ const CostAnalysis: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className=" flex-wrap w-full p-3 bg-[#FFFFFF] border-b items-center gap-3 flex">
+                {/* <div className=" flex-wrap w-full p-3 bg-[#FFFFFF] border-b items-center gap-3 flex">
                     {costAnalysisCardDataTwo.map((cards, index) => (
                         <div key={index} className="flex flex-1 min-w-[150px] max-w-[200px]">
                             <DocumentCard
@@ -247,7 +247,7 @@ const CostAnalysis: React.FC = () => {
                             />
                         </div>
                     ))}
-                </div>
+                </div> */}
             </div>
             <Modal
                 isOpen={isModalOpen}

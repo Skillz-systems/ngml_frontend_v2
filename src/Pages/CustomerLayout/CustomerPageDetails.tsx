@@ -4,12 +4,27 @@ import images from '../../assets/index';
 
 const CustomerPageDetails = () => {
 
-    const dataNNPC = [
-        { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
-        { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },
-        { month: 'Mar', 'Amount Sold': 150, Delivered: 120, Requests: 200, Revenue: 600 },
-        { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
-        { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
+    // const dataNNPC = [
+    //     { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
+    //     { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },
+    //     { month: 'Mar', 'Amount Sold': 150, Delivered: 120, Requests: 200, Revenue: 600 },
+    //     { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
+    //     { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
+    // ];
+
+    const lineDataGraph = [
+        { month: 'Jan', 'Daily Volume': 120, 'Consumed Volume': 110, },
+        { month: 'Feb', 'Daily Volume': 140, 'Consumed Volume': 130, },
+        { month: 'Mar', 'Daily Volume': 150, 'Consumed Volume': 140, },
+        { month: 'Apr', 'Daily Volume': 150, 'Consumed Volume': 140, },
+        { month: 'May', 'Daily Volume': 150, 'Consumed Volume': 130, },
+        { month: 'Jun', 'Daily Volume': 100, 'Consumed Volume': 120, },
+        { month: 'Jul', 'Daily Volume': 120, 'Consumed Volume': 120, },
+        { month: 'Aug', 'Daily Volume': 110, 'Consumed Volume': 140, },
+        { month: 'Sep', 'Daily Volume': 100, 'Consumed Volume': 120, },
+        { month: 'Oct', 'Daily Volume': 120, 'Consumed Volume': 150, },
+        { month: 'Nov', 'Daily Volume': 140, 'Consumed Volume': 130, },
+        { month: 'Dec', 'Daily Volume': 160, 'Consumed Volume': 170, },
     ];
 
     const chartColors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
@@ -44,7 +59,7 @@ const CustomerPageDetails = () => {
             <div className="mt-6 md:mt-0">
                 <div className='mt-[28px]'>
                     <Chart
-                        data={dataNNPC}
+                        data={lineDataGraph}
                         chartType="line"
                         yAxisLabel="NNPC"
                         xAxisDataKey="month"

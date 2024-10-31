@@ -27,7 +27,7 @@ import images from '../../assets/index';
  * @returns {JSX.Element} The JSX element that represents the CustomerManager component.
  */
 
-const CustomerManager: React.FC = () => {
+const CustomerManager: React.FC = (): JSX.Element => {
 
   const [customerId, setCustomerId] = useState<number | null>(null);
   const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
@@ -50,7 +50,8 @@ const CustomerManager: React.FC = () => {
         subtitle='Last Updated'
         height='330px'
         reports='12/Nov/2023'
-        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' onClick={() => navigate(`/admin/records/dailyvolumns/${customerId}/${customerSiteId}`)} />}
+        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' 
+        onClick={() => navigate(`/admin/records/dailyvolumns/${customerId}/${customerSiteId}`)} />}
         backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard
@@ -60,7 +61,8 @@ const CustomerManager: React.FC = () => {
         subtitle='Last Updated'
         height='330px'
         reports='12/Nov/2023'
-        reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4' onClick={() => navigate('/admin/records/billinghistory')} />}
+        reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4'
+         onClick={() => navigate(`/admin/records/invoice/${customerId}/${customerSiteId}`)} />}
         backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard

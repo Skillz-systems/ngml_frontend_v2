@@ -13,6 +13,8 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.ngml.skillzserver.com',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as any).auth.access_token;
+    // console.log(token);
+    
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
