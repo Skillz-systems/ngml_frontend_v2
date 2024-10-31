@@ -14,17 +14,17 @@ const CustomerPageDetails = () => {
 
     const lineDataGraph = [
         { month: 'Jan', 'Daily Volume': 120, 'Consumed Volume': 110, },
-        { month: 'Feb', 'Daily Volume': 140, 'Consumed Volume': 130, },
-        { month: 'Mar', 'Daily Volume': 150, 'Consumed Volume': 140, },
-        { month: 'Apr', 'Daily Volume': 150, 'Consumed Volume': 140, },
-        { month: 'May', 'Daily Volume': 150, 'Consumed Volume': 130, },
-        { month: 'Jun', 'Daily Volume': 100, 'Consumed Volume': 120, },
+        { month: 'Feb', 'Daily Volume': 120, 'Consumed Volume': 130, },
+        { month: 'Mar', 'Daily Volume': 120, 'Consumed Volume': 140, },
+        { month: 'Apr', 'Daily Volume': 120, 'Consumed Volume': 140, },
+        { month: 'May', 'Daily Volume': 120, 'Consumed Volume': 130, },
+        { month: 'Jun', 'Daily Volume': 120, 'Consumed Volume': 120, },
         { month: 'Jul', 'Daily Volume': 120, 'Consumed Volume': 120, },
-        { month: 'Aug', 'Daily Volume': 110, 'Consumed Volume': 140, },
-        { month: 'Sep', 'Daily Volume': 100, 'Consumed Volume': 120, },
+        { month: 'Aug', 'Daily Volume': 120, 'Consumed Volume': 140, },
+        { month: 'Sep', 'Daily Volume': 120, 'Consumed Volume': 120, },
         { month: 'Oct', 'Daily Volume': 120, 'Consumed Volume': 150, },
-        { month: 'Nov', 'Daily Volume': 140, 'Consumed Volume': 130, },
-        { month: 'Dec', 'Daily Volume': 160, 'Consumed Volume': 170, },
+        { month: 'Nov', 'Daily Volume': 120, 'Consumed Volume': 130, },
+        { month: 'Dec', 'Daily Volume': 120, 'Consumed Volume': 170, },
     ];
 
     const chartColors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
@@ -37,8 +37,8 @@ const CustomerPageDetails = () => {
                     icon={<img src={images.firewood} alt="firewood icon" width='30px' />}
                     value={0}
                     yearOptions={[2021, 2022, 2023]}
-                    content="Consumed Volume"
-                    subcontent="(Scf)"
+                    content="Total Consumed Volume"
+                    subcontent="(MMscf)"
                     className="w-full md:w-[50%]"
                     iconColor="#ffff"
                 />
@@ -46,8 +46,8 @@ const CustomerPageDetails = () => {
                     type='secondary'
                     icon={<img src={images.firewood2} alt="firewood2 icon" width='30px' />}
                     value={0}
-                    content="Yesterday's Consumed Volume"
-                    subcontent="(Scf)"
+                    content="⁠Yesterday's Consumed Volume"
+                    subcontent="(MMscf)"
                     className="w-full md:w-[50%]"
                     iconColor="text-black"
                     contentColor='text-nnpc-100 text-[2xl]'
@@ -61,7 +61,7 @@ const CustomerPageDetails = () => {
                     <Chart
                         data={lineDataGraph}
                         chartType="line"
-                        yAxisLabel="NNPC"
+                        yAxisLabel="⁠Volume (MMscf)"
                         xAxisDataKey="month"
                         colors={chartColors}
                         title='Customer Consumption Chart'

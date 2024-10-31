@@ -2902,7 +2902,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 1,
         sn: '01',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '25/Feb/2022',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -2912,7 +2912,7 @@ export const DailyVolumnHistoryData = [
     {
         sn: '02',
         id: 2,
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '19/Oct/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -2922,7 +2922,7 @@ export const DailyVolumnHistoryData = [
     {
         sn: '03',
         id: 3,
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '05/Jun/2022',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -2932,7 +2932,7 @@ export const DailyVolumnHistoryData = [
     {
         sn: '04',
         id: 4,
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '11/May/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -2942,7 +2942,7 @@ export const DailyVolumnHistoryData = [
     {
         sn: '05',
         id: 5,
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '08/Dec/2024',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -2952,7 +2952,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 6,
         sn: '06',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '14/Sept/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -2962,7 +2962,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 7,
         sn: '07',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '18/May/2025',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -2972,7 +2972,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 8,
         sn: '08',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '04/April/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -2982,7 +2982,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 9,
         sn: '09',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '17/Oct/2024',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -2992,7 +2992,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 10,
         sn: '10',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '11/Nov/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3002,7 +3002,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 11,
         sn: '11',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '07/Mar/2025',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3012,7 +3012,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 12,
         sn: '12',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '20/May/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3022,7 +3022,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 13,
         sn: '13',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '15/Sept/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3032,7 +3032,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 14,
         sn: '14',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '14/Feb/2022',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3042,7 +3042,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 15,
         sn: '15',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '19/July/2024',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3052,7 +3052,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 16,
         sn: '16',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '01/Dec/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3062,7 +3062,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 17,
         sn: '17',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '24/May/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3072,7 +3072,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 18,
         sn: '18',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '10/Jan/2022',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3082,7 +3082,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 19,
         sn: '19',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '11/Feb/2023',
         value: '662,008,000.00',
         rate: '1200/Scf',
@@ -3092,7 +3092,7 @@ export const DailyVolumnHistoryData = [
     {
         id: 20,
         sn: '20',
-        seriesname: 'Daily Gas Delivery',
+        seriesname: 'Daily Gas Consumption',
         datesent: '18/May/2024',
         value: '662,008,000.00',
         rate: '1200/Scf',
