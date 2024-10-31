@@ -37,7 +37,7 @@ const CustomerPageDetails = () => {
                     icon={<img src={images.firewood} alt="firewood icon" width='30px' />}
                     value={0}
                     yearOptions={[2021, 2022, 2023]}
-                    content="Total Consumed Volume(MMscf)"
+                    content="Total Consumed Volume"
                     subcontent="(MMscf)"
                     className="w-full md:w-[50%]"
                     iconColor="#ffff"
