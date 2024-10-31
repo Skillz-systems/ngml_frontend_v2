@@ -62,7 +62,7 @@ const CustomerManager: React.FC = (): JSX.Element => {
         height='330px'
         reports='12/Nov/2023'
         reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4'
-         onClick={() => navigate(`/admin/records/invoice/${customerId}/${customerSiteId}`)} />}
+         onClick={() => navigate(`/admin/records/billinghistory/${customerId}/${customerSiteId}`)} />}
         backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard

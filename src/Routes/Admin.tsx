@@ -83,7 +83,7 @@ export const admin: RouteObject[] = [
 
     },
     {
-        path: '/admin/records/billinghistory',
+        path: '/admin/records/billinghistory/:customerId/:siteId',
         element: <BillingHistory />,
 
     },

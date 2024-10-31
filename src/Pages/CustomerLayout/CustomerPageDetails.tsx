@@ -14,17 +14,17 @@ const CustomerPageDetails = () => {
 
     const lineDataGraph = [
         { month: 'Jan', 'Daily Volume': 120, 'Consumed Volume': 110, },
-        { month: 'Feb', 'Daily Volume': 140, 'Consumed Volume': 130, },
-        { month: 'Mar', 'Daily Volume': 150, 'Consumed Volume': 140, },
-        { month: 'Apr', 'Daily Volume': 150, 'Consumed Volume': 140, },
-        { month: 'May', 'Daily Volume': 150, 'Consumed Volume': 130, },
-        { month: 'Jun', 'Daily Volume': 100, 'Consumed Volume': 120, },
+        { month: 'Feb', 'Daily Volume': 120, 'Consumed Volume': 130, },
+        { month: 'Mar', 'Daily Volume': 120, 'Consumed Volume': 140, },
+        { month: 'Apr', 'Daily Volume': 120, 'Consumed Volume': 140, },
+        { month: 'May', 'Daily Volume': 120, 'Consumed Volume': 130, },
+        { month: 'Jun', 'Daily Volume': 120, 'Consumed Volume': 120, },
         { month: 'Jul', 'Daily Volume': 120, 'Consumed Volume': 120, },
-        { month: 'Aug', 'Daily Volume': 110, 'Consumed Volume': 140, },
-        { month: 'Sep', 'Daily Volume': 100, 'Consumed Volume': 120, },
+        { month: 'Aug', 'Daily Volume': 120, 'Consumed Volume': 140, },
+        { month: 'Sep', 'Daily Volume': 120, 'Consumed Volume': 120, },
         { month: 'Oct', 'Daily Volume': 120, 'Consumed Volume': 150, },
-        { month: 'Nov', 'Daily Volume': 140, 'Consumed Volume': 130, },
-        { month: 'Dec', 'Daily Volume': 160, 'Consumed Volume': 170, },
+        { month: 'Nov', 'Daily Volume': 120, 'Consumed Volume': 130, },
+        { month: 'Dec', 'Daily Volume': 120, 'Consumed Volume': 170, },
     ];
 
     const chartColors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300'];

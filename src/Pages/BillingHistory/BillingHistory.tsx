@@ -30,6 +30,15 @@ const BillingHistory: React.FC = () => {
         month: '',
         rate: '',
     });
+    const [customerId, setCustomerId] = useState<number | null>(null);
+    const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
+  
+  
+    useEffect(() => {
+      const customer = location.pathname.split('/');
+      setCustomerId(Number(customer[4]));
+      setCustomerSiteId(Number(customer[5]))
+    }, [location]);
 
     useEffect(() => {
         setIsModalOpen(searchParams.get('modal') === 'newInvoice');
@@ -220,7 +229,7 @@ const BillingHistory: React.FC = () => {
                     </div>
                     <div className="flex-wrap w-full p-3 bg-[#FFFFFF] rounded-b-[10px] items-center gap-3 flex">
                         {billingHistoryDataTwo.map((cards, index) => (
-                            <div key={index} className="flex flex-1 min-w-[150px] md:min-w-[200px] max-w-[200px] cursor-pointer" onClick={() => navigate('/admin/records/invoice')}>
+                            <div key={index} className="flex flex-1 min-w-[150px] md:min-w-[200px] max-w-[200px] cursor-pointer" onClick={() => navigate(`/admin/records/invoice/${customerId}/${customerSiteId}`)}>
                                 <DocumentCard
                                     type={cards.type}
                                     title={cards.title}
