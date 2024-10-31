@@ -37,8 +37,8 @@ const CustomerPageDetails = () => {
                     icon={<img src={images.firewood} alt="firewood icon" width='30px' />}
                     value={0}
                     yearOptions={[2021, 2022, 2023]}
-                    content="Consumed Volume"
-                    subcontent="(Scf)"
+                    content="Total Consumed Volume(MMscf)"
+                    subcontent="(MMscf)"
                     className="w-full md:w-[50%]"
                     iconColor="#ffff"
                 />
@@ -46,8 +46,8 @@ const CustomerPageDetails = () => {
                     type='secondary'
                     icon={<img src={images.firewood2} alt="firewood2 icon" width='30px' />}
                     value={0}
-                    content="Yesterday's Consumed Volume"
-                    subcontent="(Scf)"
+                    content="⁠Yesterday's Consumed Volume"
+                    subcontent="(MMscf)"
                     className="w-full md:w-[50%]"
                     iconColor="text-black"
                     contentColor='text-nnpc-100 text-[2xl]'
@@ -61,7 +61,7 @@ const CustomerPageDetails = () => {
                     <Chart
                         data={lineDataGraph}
                         chartType="line"
-                        yAxisLabel="NNPC"
+                        yAxisLabel="⁠Volume (MMscf)"
                         xAxisDataKey="month"
                         colors={chartColors}
                         title='Customer Consumption Chart'
