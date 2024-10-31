@@ -28,10 +28,23 @@ interface ErrorResponse {
 
 export const customersApi = api.injectEndpoints({
     endpoints: (builder) => ({
-        getAllCustomersDailyVolume: builder.query<GetAllCustomersVolumeResponse, Record<string, string>>({
-            query: (params: Record<string, string >) => `/gas/api/daily-volumes?${new URLSearchParams(params).toString()}`,
-            providesTags: ['Customers'],
+        // getAllCustomersDailyVolume: builder.query<GetAllCustomersVolumeResponse, Record<string, string>>({
+        //     query: (params: Record<string, string >) => `/gas/api/daily-volumes?${new URLSearchParams(params).toString()}`,
+        //     providesTags: ['Customers'],
 
+        //     transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
+        //         const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
+        //         return errorResponse;
+        //     },
+        // }),
+
+        getAllCustomersDailyVolume: builder.query<GetAllCustomersVolumeResponse, Record<string, string>>({
+            query: (params: Record<string, string>) => ({
+                url: `/gas/api/daily-volumes`,
+                method: 'POST',
+                body: params,
+            }),
+            providesTags: ['Customers'],
             transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
                 const errorResponse: ErrorResponse = baseQueryReturnValue.data as ErrorResponse;
                 return errorResponse;
