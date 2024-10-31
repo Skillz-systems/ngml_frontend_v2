@@ -33,11 +33,6 @@ const ConnectProject: React.FC = () => {
         setAreDatesConfirmed(true); 
     };
 
-    const handleSend = () => {
-        console.log('Sending dates:', projectDate);
-        alert(`Dates sent: Start Date - ${projectDate.startdate}, End Date - ${projectDate.enddate}`);
-    };
-
     const handleInputChange = (value: string, key: string) => {
         setProjectDate({ ...projectDate, [key]: value });
     };
@@ -143,21 +138,6 @@ const ConnectProject: React.FC = () => {
                         <div className="text-[#266425] text-[16px]">
                             <p className='mb-2'><strong>Start Date:</strong> {projectDate.startdate}</p>
                             <p><strong>End Date:</strong> {projectDate.enddate}</p>
-                        </div>
-                        <div className='flex items-end justify-end'>
-                        <div className=" w-[20%] ">
-                            <Button
-                                type="secondary"
-                                label="Send"
-                                action={handleSend}
-                                color="#FFFFFF"
-                                width="100%"
-                                height="40px"
-                                fontSize="16px"
-                                radius="20px"
-                                className=''
-                            />
-                        </div>
                         </div>
                     </div>
                 )}

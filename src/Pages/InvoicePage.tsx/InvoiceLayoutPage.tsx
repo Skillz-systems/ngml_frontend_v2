@@ -4,8 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { invoiceAdviceData } from './data';
 import AccountsInvoiceOne from './invoices/accountsInvoiceOne';
 import InventoryTable from './Table';
+import InvoiceAdvice from '@/Components/InvoiceAdvice/InvoiceAdvice';
 
-const InvoiceComponent = () => <div>Invoice Component Content</div>;
+const InvoiceComponent = () => 
+<div>
+  <InvoiceAdvice/>
+</div>;
 
 const InvoiceLayoutPage: React.FC = () => {
   // const [activeTab, setActiveTab] = useState('Items');
