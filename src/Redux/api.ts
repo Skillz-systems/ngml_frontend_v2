@@ -9,21 +9,19 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { toast } from 'react-toastify';
 
-
-
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.ngml.skillzserver.com',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as any).auth.access_token;
-    // if (token) {
-    //   headers.set('authorization', `Bearer ${token}`);
-    // }
+    // console.log(token);
     
-    console.log(token)
-    headers.set('authorization', 'Bearer 19|ENEsiIwt9K9AmPM6xLtvfdZ2OLIHWO19RQmvPyAs3089de3b');
+    if (token) {
+      headers.set('authorization', `Bearer ${token}`);
+    }
+
+    // headers.set('authorization', 'Bearer 19|ENEsiIwt9K9AmPM6xLtvfdZ2OLIHWO19RQmvPyAs3089de3b');
     return headers;
   },
-
 });
 
 const baseQueryWithReauth = async (
@@ -33,11 +31,11 @@ const baseQueryWithReauth = async (
 ) => {
   try {
     const result = await baseQuery(args, api, extraOptions);
-
+    
     if (result.error) {
       const error = result.error as FetchBaseQueryError;
       console.log('API Error:', error); // Add this line for debugging
-
+      
       switch (error.status) {
         case 401:
           toast.error('Unauthorized: Please login again.');

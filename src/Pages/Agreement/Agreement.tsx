@@ -15,11 +15,36 @@ interface CardDataItem {
 }
 
 const documentCardData = [
-    { title: 'GSPA', subtitle: 'Agreement', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
-    { title: 'Supplement', subtitle: 'Agreement', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
-    { title: 'Addendum', subtitle: 'Agreement', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
-    { title: 'Side', subtitle: 'Letter', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
-    { title: 'Approval', subtitle: 'Letter', icon: <img src={images.files} alt='icon' />, buttonText: 'Use template', height: '140px' },
+    { title: 'GSPA', 
+    subtitle: 'Agreement', 
+    // icon: <img src={images.files} alt='icon' />, 
+    buttonText: 'Use template', 
+    height: '140px' 
+},
+    { title: 'Supplement', 
+    subtitle: 'Agreement', 
+    // icon: <img src={images.files} alt='icon' />, 
+    buttonText: 'Use template', 
+    height: '140px' 
+},
+    { title: 'Addendum', 
+    subtitle: 'Agreement', 
+    // icon: <img src={images.files} alt='icon' />, 
+    buttonText: 'Use template', 
+    height: '140px' 
+},
+    { title: 'Side', 
+    subtitle: 'Letter', 
+    // icon: <img src={images.files} alt='icon' />, 
+    buttonText: 'Use template', 
+    height: '140px' 
+},
+    { title: 'Approval', 
+    subtitle: 'Letter', 
+    // icon: <img src={images.files} alt='icon' />, 
+    buttonText: 'Use template', 
+    height: '140px' 
+},
 ];
 
 const documentCardDataTwo: CardDataItem[] = [
@@ -83,7 +108,7 @@ const Agreement: React.FC = () => {
                                 title={card.title}
                                 subtitle={card.subtitle}
                                 buttonText={card.buttonText}
-                                icon={card.icon}
+                                icon={''}
                                 height={card.height}
                             />
                         </div>
@@ -104,7 +129,7 @@ const Agreement: React.FC = () => {
                                 subtitle={cards.subtitle}
                                 linkText={cards.linkText}
                                 linkText2={cards.linkText2}
-                                icon={cards.icon}
+                                icon={''}
                                 height={cards.height}
                             />
                         </div>
