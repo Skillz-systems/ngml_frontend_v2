@@ -99,9 +99,9 @@ const InvoicePage: React.FC = () => {
                         <GasConsumptionCertificate
                             refNumber="NGML/MD.01/Vol.01"
                             date="1st June 2024"
-                            certificateNumber="Ying Zhe-0523"
+                            certificateNumber="Dangote Sugar-0523"
                             department="Gas Distribution Delta"
-                            buyerName="Ying Zhe Energy Ltd, Utesi"
+                            buyerName="Dangote Sugar"
                             period="1st to 31st May 2023"
                             gasQuantity="239,133,559,34SCF"
                             buyerRepName="KAYADE OLADEJO"
