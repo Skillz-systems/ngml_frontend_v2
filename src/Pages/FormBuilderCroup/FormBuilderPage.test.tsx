@@ -122,10 +122,10 @@ describe('FormBuilderPage', () => {
         expect(descriptionInput).toHaveValue('Test Description')
     })
 
-    it('shows process flow fields when "Has ProcessFlow" is checked', () => {
+    it('shows process flow fields when "Remove ProcessFlow" is checked', () => {
         renderWithProviders(<FormBuilderPage />)
 
-        const checkbox = screen.getByLabelText('Has ProcessFlow')
+        const checkbox = screen.getByLabelText('Remove ProcessFlow')
         fireEvent.click(checkbox)
 
         expect(screen.getByText('Select a processflow')).toBeInTheDocument()

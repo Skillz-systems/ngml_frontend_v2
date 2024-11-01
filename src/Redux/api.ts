@@ -19,7 +19,7 @@ const baseQuery = fetchBaseQuery({
       headers.set('authorization', `Bearer ${token}`);
     }
 
-    // headers.set('authorization', 'Bearer 19|ENEsiIwt9K9AmPM6xLtvfdZ2OLIHWO19RQmvPyAs3089de3b');
+    // headers.set('authorization', 'Bearer 7|2xM4ffMZdwqjGYR5qjk0m7bltSIjmJQpQWiWrzTx599207b3');
     return headers;
   },
 });
