@@ -422,7 +422,7 @@ const FormBuilder = () => {
     const [selectedForm, setSelectedForm] = useState<FormData | null>(null);
     const [createForm, { isLoading }] = useCreateFormMutation();
     const [updateForm] = useUpdateFormMutation();
-    const [showProcessFlow, setShowProcessFlow] = useState<boolean>(false);
+    const [removeProcessFlow, setRemoveProcessFlow] = useState<boolean>(false);
 
     const { data: backendForms } = useGetFormsQuery();
     const { data: backendProcessflows } = useGetProcessFlowsQuery();
@@ -440,12 +440,14 @@ const FormBuilder = () => {
             json_form: form.json_form,
             json_data: [],
         });
-        setShowProcessFlow(
-            form.process_flow_id !== '0' &&
-            form.process_flow_id !== 0 &&
-            form.process_flow_id !== '' &&
-            form.process_flow_id !== undefined
-        );
+        // setRemoveProcessFlow(
+        //     form.process_flow_id !== '0' &&
+        //     form.process_flow_id !== 0 &&
+        //     form.process_flow_id !== '' &&
+        //     form.process_flow_id !== undefined
+        // );
+        setRemoveProcessFlow(form.process_flow_id === null);
+        // console.log('removeProcessFlow 450', removeProcessFlow)
         setFormElements(JSON.parse(form.json_form));
         setIsModalOpen(false);
     };
@@ -458,7 +460,6 @@ const FormBuilder = () => {
         process_flow_step_id: '',
         json_data: [],
     });
-
     const handleFormChange =
         (key: string) =>
             (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -516,7 +517,7 @@ const FormBuilder = () => {
         });
         setFormElements([]);
         setSelectedForm(null);
-        setShowProcessFlow(false);
+        setRemoveProcessFlow(false);
     };
 
     const getButtonLabel = () => {
@@ -531,8 +532,11 @@ const FormBuilder = () => {
             description: form.description,
             // process_flow_id: form.process_flow_id,
             // process_flow_step_id: form.process_flow_step_id,
-            process_flow_id: showProcessFlow ? form.process_flow_id : '0',
-            process_flow_step_id: showProcessFlow ? form.process_flow_step_id : '0',
+            // process_flow_id: showProcessFlow ? form.process_flow_id : '0',
+            // process_flow_step_id: showProcessFlow ? form.process_flow_step_id : '0',
+
+            process_flow_id: removeProcessFlow ? null : form.process_flow_id,
+            process_flow_step_id: form.process_flow_step_id,
             tag_id: form.tag_id,
             json_form: JSON.stringify(formElements),
             json_data: [],
@@ -544,15 +548,15 @@ const FormBuilder = () => {
 
         try {
             if (selectedForm) {
-                console.log('site visit')
                 await updateForm({ id: selectedForm.id, ...formData }).unwrap();
                 toast.success('Form updated successfully!');
+
             } else {
-                console.log('site visit 2')
                 await createForm(formData).unwrap();
                 toast.success('Form created successfully!');
             }
             handleCreateNewForm();
+
         } catch (error) {
             console.error('Error submitting the form:', error);
             toast.error('Error saving form');
@@ -688,88 +692,76 @@ const FormBuilder = () => {
                         <label className='text-sm flex items-center space-x-2 cursor-pointer'>
                             <input
                                 type="checkbox"
-                                // checked={showProcessFlow}
-                                // onChange={() => setShowProcessFlow(!showProcessFlow)}
-                                checked={showProcessFlow}
-                                onChange={(e) => {
-                                    setShowProcessFlow(e.target.checked);
-                                    if (!e.target.checked) {
-                                        // Reset process flow related values when unchecked
-                                        setForm(prev => ({
-                                            ...prev,
-                                            process_flow_id: '0',
-                                            process_flow_step_id: '0'
-                                        }));
-                                    }
-                                }}
+                                checked={removeProcessFlow}
+                                onChange={() => setRemoveProcessFlow(!removeProcessFlow)}
                                 className='peer relative appearance-none shrink-0 w-4 h-4 border border-nnpc-200 rounded-md bg-white
         focus:outline-none 
         checked:bg-nnpc-200 checked:border-0
         disabled:border-steel-400 disabled:bg-steel-400'
                             // className="checked:text-green-900 mr-3 text-green-900"
                             />
-                            <span> Has ProcessFlow</span>
+                            <span>Remove ProcessFlow</span>
                         </label>
 
-                        {showProcessFlow && (
-                            <>
+                        {/* {showProcessFlow && ( */}
+                        <>
 
 
-                                <div>
-                                    <label htmlFor="process_flow_id" className="sr-only">
-                                        ProcessFlow
-                                    </label>
-                                    <select
-                                        id="process_flow_id"
-                                        name="process_flow_id"
-                                        value={form.process_flow_id}
-                                        onChange={handleFormChange('process_flow_id')}
-                                        className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
+                            <div>
+                                <label htmlFor="process_flow_id" className="sr-only">
+                                    ProcessFlow
+                                </label>
+                                <select
+                                    id="process_flow_id"
+                                    name="process_flow_id"
+                                    value={form.process_flow_id}
+                                    onChange={handleFormChange('process_flow_id')}
+                                    className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
         ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
         placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
         disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
-                                    >
-                                        <option className="text-gray-500">Select a processflow</option>
-                                        {backendProcessflows?.data && Array.isArray(backendProcessflows.data) &&
-                                            backendProcessflows.data.map((flow) => (
-                                                <option key={flow.id} value={Number(flow.id)}>
-                                                    {flow.name.replace(/_/g, ' ')}
+                                >
+                                    <option className="text-gray-500">Select a processflow</option>
+                                    {backendProcessflows?.data && Array.isArray(backendProcessflows.data) &&
+                                        backendProcessflows.data.map((flow) => (
+                                            <option key={flow.id} value={Number(flow.id)}>
+                                                {flow.name.replace(/_/g, ' ')}
+                                            </option>
+                                        ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor="process_flow_step_id" className="sr-only">
+                                    ProcessFlow Step
+                                </label>
+                                <select
+                                    id="process_flow_step_id"
+                                    name="process_flow_step_id"
+                                    value={form.process_flow_step_id}
+                                    onChange={handleFormChange('process_flow_step_id')}
+                                    className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
+        ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
+        placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
+        disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
+                                    disabled={!form.process_flow_id}
+                                >
+                                    <option className="text-gray-500">Select a processflow step</option>
+                                    {backendProcessflows?.data && Array.isArray(backendProcessflows.data) && form.process_flow_id && (
+                                        (() => {
+                                            const selectedFlow = backendProcessflows.data.find(
+                                                flow => Number(flow.id) === Number(form.process_flow_id)
+                                            );
+                                            return selectedFlow?.steps?.map((step) => (
+                                                <option key={step.id} value={Number(step.id)}>
+                                                    {step.name.replace(/_/g, ' ')}
                                                 </option>
-                                            ))}
-                                    </select>
-                                </div>
-                                <div>
-                                    <label htmlFor="process_flow_step_id" className="sr-only">
-                                        ProcessFlow Step
-                                    </label>
-                                    <select
-                                        id="process_flow_step_id"
-                                        name="process_flow_step_id"
-                                        value={form.process_flow_step_id}
-                                        onChange={handleFormChange('process_flow_step_id')}
-                                        className="flex h-10 w-full rounded-md border-[1.5px] border-input bg-white px-3 py-2 text-sm 
-        ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium 
-        placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-light-green 
-        disabled:cursor-not-allowed disabled:opacity-50 placeholder-shown:text-gray-400"
-                                        disabled={!form.process_flow_id}
-                                    >
-                                        <option className="text-gray-500">Select a processflow step</option>
-                                        {backendProcessflows?.data && Array.isArray(backendProcessflows.data) && form.process_flow_id && (
-                                            (() => {
-                                                const selectedFlow = backendProcessflows.data.find(
-                                                    flow => Number(flow.id) === Number(form.process_flow_id)
-                                                );
-                                                return selectedFlow?.steps?.map((step) => (
-                                                    <option key={step.id} value={Number(step.id)}>
-                                                        {step.name.replace(/_/g, ' ')}
-                                                    </option>
-                                                ));
-                                            })()
-                                        )}
-                                    </select>
-                                </div>
-                            </>
-                        )}
+                                            ));
+                                        })()
+                                    )}
+                                </select>
+                            </div>
+                        </>
+                        {/* )} */}
 
                     </div>
 
