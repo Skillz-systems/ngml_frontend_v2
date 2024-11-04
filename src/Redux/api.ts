@@ -13,13 +13,17 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.ngml.skillzserver.com',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as any).auth.access_token;
-    // console.log(token);
+    console.log(token);
     
-    if (token) {
-      headers.set('authorization', `Bearer ${token}`);
-    }
+    // if (token) {
+    //   headers.set('authorization', `Bearer ${token}`);
+    // }
+    
 
-    // headers.set('authorization', 'Bearer 7|2xM4ffMZdwqjGYR5qjk0m7bltSIjmJQpQWiWrzTx599207b3');
+
+        headers.set('authorization', 'Bearer 30|C9beNUgkUZGM3ju0WG4tkHNhs5BKA4A1haB96zji490a3fcd');
+
+    // headers.set('authorization', 'Bearer 17|siL4R4qrvHV0MR5rq8sYpct2A2hbXcO3LFdpo62Z66e4733a');
     return headers;
   },
 });

@@ -23,6 +23,37 @@ export interface FormField {
   url?: string;
 }
 
+
+interface Task {
+  id: number;
+  form_builder_id: string;
+  form_field_answers: string | null;
+  automator_task_id: string;
+  process_flow_history_id: string | null;
+  entity: string;
+  entity_id: string;
+  entity_site_id: string | null;
+  user_id: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
+// type Task = {
+//   id: number;
+//   form_builder_id: number;
+//   form_field_answers: string | null;
+//   automator_task_id: number;
+//   process_flow_history_id: number | null;
+//   entity: string;
+//   entity_id: number;
+//   entity_site_id: number;
+//   user_id: number;
+//   status: number;
+//   created_at: string; 
+//   updated_at: string; 
+// };
+
 export interface FormBuilderData {
   id?: number;
   name?: string;
@@ -32,7 +63,10 @@ export interface FormBuilderData {
   tag_id?: string;
   form_data: string[] | [];
   description?: string;
+  
 }
+
+
 
 export interface FormSubmission {
   form_builder_id?: string | undefined;
@@ -47,6 +81,8 @@ export interface FormSubmission {
 export interface FormBuilderApiResponse {
   data: FormBuilderData;
   status?: string;
+  // task?: Task;
+
 }
 
 
@@ -82,20 +118,6 @@ export interface FormBuilderDataTwo {
   form_data: FormFieldAnswerTwo[];
 }
 
-interface Task {
-  id: number;
-  form_builder_id: string;
-  form_field_answers: string | null;
-  automator_task_id: string;
-  process_flow_history_id: string | null;
-  entity: string;
-  entity_id: string;
-  entity_site_id: string | null;
-  user_id: string;
-  status: string;
-  created_at: string;
-  updated_at: string;
-}
 
 export interface ApiResponseTwo {
   data: FormBuilderDataTwo;
@@ -168,7 +190,7 @@ export const formBuilderApi = api.injectEndpoints({
 
     }),
 
-    getFormByName: builder.query<FormBuilderApiResponse, string>({
+    getFormByName: builder.query<ApiResponseTwo, string>({
       query: (name) => `/formbuilder/api/forms/view/${name}`,
       providesTags: ['Forms'],
 
