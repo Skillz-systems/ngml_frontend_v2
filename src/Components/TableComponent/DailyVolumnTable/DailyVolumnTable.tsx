@@ -1,53 +1,35 @@
 
-import { useGetAllCustomersDailyVolumeQuery } from '@/Redux/Features/Customer/customerVolume';
+import { useGetAllCustomersDailyVolumeQuery, useGetCustomersDailyVolumeByIdQuery } from '@/Redux/Features/Customer/customerVolume';
 import { Modal } from '@mui/material';
-import { 
-    DataGrid, 
-    GridColDef, 
-    GridRenderCellParams, 
-    GridValueGetterParams 
+import {
+    DataGrid,
+    GridColDef,
+    GridRenderCellParams,
+    GridValueGetterParams
 } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-/**
- * Interface representing the properties of a daily volume entry.
- */
-// interface DailyVolumnProps {
-//     id: number;
-//     companyname: string;
-//     companyType: string;
-//     selectedDates?: string[];
-//     status?: string;
-//     action: string;
-//     deadline?: string;
-//     companyEmail?: string;
-//     companyNumber?: string;
-//     companyAddress?: string;
-//     datesent?: string;
-
-// }
-
-
-// interface QueryParams {
-//     page: string;
-//     per_page: string;
-//     created_at_from: string;
-//     created_at_to: string;
-//     updated_at_from: string;
-//     updated_at_to: string;
-//     status: string;
-//     customer_id: string;
-// }
 
 
 
 const DailyVolumnTable = () => {
+
+    const location = useLocation();
+
+
     const [searchText] = useState<string>('');
     const [open, setOpen] = useState(false);
     const [selectedMonth, setSelectedMonth] = useState<string>('');
     const [selectedYear, setSelectedYear] = useState<string>('');
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 13 });
     const [filteredRows] = useState<any[]>([]);
+    const [customerId, setCustomerId] = useState<number | null>(null);
+
+    useEffect(() => {
+        const customer = location.pathname.split('/');
+        setCustomerId(Number(customer[4]));
+    }, [location]);
 
 
     const [queryParams] = useState<Record<string, string>>({
@@ -74,6 +56,19 @@ const DailyVolumnTable = () => {
 
 
     const { data, error, isLoading } = useGetAllCustomersDailyVolumeQuery(queryParams);
+
+    const { data: dataQuery, isSuccess, isError, error: queryError } = useGetCustomersDailyVolumeByIdQuery(customerId as number);
+
+    useEffect(() => {
+        console.log(dataQuery, 'hhhhhhhhhhhdataQuery');
+        if (isSuccess) console.log(dataQuery, 'dataQuery');
+        if (isError) console.log(queryError, 'error');
+
+
+    }, [])
+
+
+
 
 
     // const handleOpen = (row: DailyVolumnProps) => {
