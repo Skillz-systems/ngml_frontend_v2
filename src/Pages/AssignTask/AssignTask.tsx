@@ -48,7 +48,7 @@ const AssignTask: React.FC = () => {
                         tasks?.data.map((task) => (
                             <div key={task.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
                                 <h3 className="text-lg font-semibold mb-2">Task Type: {task.entity}</h3>
-                                <p className="text-gray-600 mb-4">Status: {task.task_status === "0" ? "Pending" : "Completed"}</p>
+                                <p className="text-gray-600 mb-4">Status: {task.task_status === '0' ? 'Pending' : 'Completed'}</p>
                                 <Button
                                     type="secondary"
                                     label="Assign Task"
@@ -91,15 +91,41 @@ const AssignTask: React.FC = () => {
                         </div>
                     ]}
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {usersLoading ? (
                             <p className="col-span-full text-center">Loading users...</p>
                         ) : (
                             users?.data.map((user: User) => (
                                 <div key={user.id} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
                                     <div>
-                                        <p className="font-medium">{user.name}</p>
-                                        <p className="text-sm text-gray-500">{user.email}</p>
+
+                                        <p className="font-medium truncate max-w-[200px]">{user.name}</p>
+                                        <p className="text-sm text-gray-500 truncate max-w-[200px]">{user.email}</p>
+                                    </div>
+                                    <Button
+                                        type="outline"
+                                        label="Assign"
+                                        action={() => handleAssignTask(user.id)}
+                                        color="#4CAF50"
+                                        width="80px"
+                                        height="32px"
+                                        fontSize="14px"
+                                        radius="16px"
+                                        disabled={assigningTask}
+                                    />
+                                </div>
+                            ))
+                        )}
+                    </div> */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {usersLoading ? (
+                            <p className="col-span-full text-center">Loading users...</p>
+                        ) : (
+                            users?.data.map((user: User) => (
+                                <div key={user.id} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+                                    <div className="min-w-0 flex-1"> {/* add min-w-0 to handle truncation properly */}
+                                        <p className="font-medium truncate w-[90%]">{user.name}</p>
+                                        <p className="text-sm text-gray-500 truncate w-[90%]">{user.email}</p>
                                     </div>
                                     <Button
                                         type="outline"
