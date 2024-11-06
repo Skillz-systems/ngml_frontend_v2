@@ -153,10 +153,10 @@
 //     return (
 //         <div className="w-full h-full">
 //             <div className="w-100% h-full p-8 bg-[#FFFFFF] bg-opacity-50 rounded-lg flex-col justify-start items-start gap-8 flex">
-//                 <div className="w-full justify-between items-center flex">
-//                     <div className="text-center text-3xl font-semibold">Daily Volumes History</div>
-//                     <div className="items-center gap-4 flex">
-//                         <div className="w-36 p-3 rounded-3xl border justify-center flex cursor-pointer" onClick={() => toggleModal(true)}>
+//                 <div className="flex items-center justify-between w-full">
+//                     <div className="text-3xl font-semibold text-center">Daily Volumes History</div>
+//                     <div className="flex items-center gap-4">
+//                         <div className="flex justify-center p-3 border cursor-pointer w-36 rounded-3xl" onClick={() => toggleModal(true)}>
 //                             <div className="text-[14px] leading-none">Add New Volume</div>
 //                         </div>
 //                     </div>
@@ -205,7 +205,7 @@
 //                         DailyVolumnUploadData={newDailyVolumnData}
 //                         setDailyVolumnUploadData={setDailyVolumnData}
 //                     /> */}
-//                     {formError && <p className="text-red-500 mb-4">{formError}</p>}
+//                     {formError && <p className="mb-4 text-red-500">{formError}</p>}
 //                     {isLoading ? (
 //                         <p>Loading form fields...</p>
 //                     ) : customerForm.length > 0 ? (
@@ -383,6 +383,47 @@ const CustomerDailyVolumns: React.FC = () => {
 
             const validFormFieldAnswers = formFieldAnswers.filter(Boolean);
 
+            // const customerAndSite = [
+            //     {
+            //         id: data?.task?.entity_id.toString(),
+            //         elementType: 'hidden',
+            //         name: 'customer_id',
+            //         value: data?.task?.entity_id,
+            //         placeholder: 'customer_site_id',
+            //         key: 'customer_id',
+            //     },
+            //     {
+            //         id: data?.task?.entity_site_id || 'customer_site_id',
+            //         name: 'customer_site_id',
+            //         elementType: 'hidden',
+            //         value: data?.task?.entity_site_id,
+            //         placeholder: 'customer_site_id',
+            //         key: 'customer_site_id',
+
+            //     }
+            // ]
+
+            validFormFieldAnswers.push({
+                id: Number(data?.task?.entity_id),
+                elementType: 'hidden',
+                name: 'customer_id',
+                value: data?.task?.entity_id || '',
+                placeholder: 'customer_site_id',
+                key: 'customer_id',
+            })
+            validFormFieldAnswers.push(
+                {
+                    id: Number(data?.task?.entity_site_id),
+                    name: 'customer_site_id',
+                    elementType: 'hidden',
+                    value: data?.task?.entity_site_id || '',
+                    placeholder: 'customer_site_id',
+                    key: 'customer_site_id',
+
+                }
+            )
+
+
             const payload = {
                 form_builder_id: data?.data?.id?.toString() || '',
                 name: data?.data?.name || '',
@@ -391,8 +432,8 @@ const CustomerDailyVolumns: React.FC = () => {
                 tag_id: data?.data?.tag_id || '',
                 form_field_answers: JSON.stringify(validFormFieldAnswers),
                 data_id: data?.task?.id,
-                customer_id: data?.task?.entity_id,
-                customer_site_id: data?.task?.entity_site_id
+                // customer_id: data?.task?.entity_id,
+                // customer_site_id: data?.task?.entity_site_id
             };
 
             const result = await submitForm(payload).unwrap();
@@ -414,10 +455,10 @@ const CustomerDailyVolumns: React.FC = () => {
     return (
         <div className="w-full h-full">
             <div className="w-100% h-full p-8 bg-[#FFFFFF] bg-opacity-50 rounded-lg flex-col justify-start items-start gap-8 flex">
-                <div className="w-full justify-between items-center flex">
-                    <div className="text-center text-3xl font-semibold">Daily Volumes History</div>
-                    <div className="items-center gap-4 flex">
-                        <div className="w-36 p-3 rounded-3xl border justify-center flex cursor-pointer" onClick={() => toggleModal(true)}>
+                <div className="flex items-center justify-between w-full">
+                    <div className="text-3xl font-semibold text-center">Daily Volumes History</div>
+                    <div className="flex items-center gap-4">
+                        <div className="flex justify-center p-3 border cursor-pointer w-36 rounded-3xl" onClick={() => toggleModal(true)}>
                             <div className="text-[14px] leading-none">Add New Volume</div>
                         </div>
                     </div>
@@ -462,7 +503,7 @@ const CustomerDailyVolumns: React.FC = () => {
                         </div>
                     ]}
                 >
-                    {formError && <p className="text-red-500 mb-4">{formError}</p>}
+                    {formError && <p className="mb-4 text-red-500">{formError}</p>}
                     {isLoading ? (
                         <p>Loading form fields...</p>
                     ) : customerForm.length > 0 ? (
