@@ -284,7 +284,7 @@ const CustomerDailyVolumns: React.FC = () => {
     });
 
     console.log(data?.task, 'kkkkkkkkkkk');
-    
+
 
     const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
 
@@ -391,6 +391,8 @@ const CustomerDailyVolumns: React.FC = () => {
                 tag_id: data?.data?.tag_id || '',
                 form_field_answers: JSON.stringify(validFormFieldAnswers),
                 data_id: data?.task?.id,
+                customer_id: data?.task?.entity_id,
+                customer_site_id: data?.task?.entity_site_id
             };
 
             const result = await submitForm(payload).unwrap();
