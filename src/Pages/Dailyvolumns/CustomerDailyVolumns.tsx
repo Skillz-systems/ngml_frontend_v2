@@ -282,8 +282,16 @@ const CustomerDailyVolumns: React.FC = () => {
     const { data, isSuccess, isLoading } = useGetFormByNameQuery(`DailyVolumnConsumption/customer/${customerId}/${customerSiteId}`, {
         skip: !customerId || !customerSiteId
     });
+    console.log(data?.task, 'useGetFormByNameQuery task');
 
-    console.log(data?.task, 'kkkkkkkkkkk');
+    // const { data: dailyvolumes, isSuccess: dailyvolumesSuccess } = useGetCustomersDailyVolumeByIdQuery(Number(customerId), {
+    //     skip: !customerId
+    // });
+
+
+    // if (dailyvolumesSuccess) {
+    //     console.log('dailyvolumes', dailyvolumes)
+    // }
 
 
     const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();

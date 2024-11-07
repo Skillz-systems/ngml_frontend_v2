@@ -13,15 +13,15 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.ngml.skillzserver.com',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as any).auth.access_token;
-    
-    if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      
-      
-      
-      // console.log(token);
-      //   headers.set('authorization', 'Bearer 30|C9beNUgkUZGM3ju0WG4tkHNhs5BKA4A1haB96zji490a3fcd');
+
+    // if (token) {
+    //     headers.set('authorization', `Bearer ${token}`);
+    //   }
+
+
+
+      console.log(token);
+        headers.set('authorization', 'Bearer 30|C9beNUgkUZGM3ju0WG4tkHNhs5BKA4A1haB96zji490a3fcd');
 
     return headers;
   },
@@ -34,11 +34,11 @@ const baseQueryWithReauth = async (
 ) => {
   try {
     const result = await baseQuery(args, api, extraOptions);
-    
+
     if (result.error) {
       const error = result.error as FetchBaseQueryError;
       console.log('API Error:', error); // Add this line for debugging
-      
+
       switch (error.status) {
         case 401:
           toast.error('Unauthorized: Please login again.');
@@ -78,6 +78,6 @@ export const api = createApi({
   keepUnusedDataFor: 30,
   refetchOnFocus: true,
   endpoints: () => ({}),
-  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms','ProcessFlow','FormBuilder','Routes','Users','AssignTasks','HeadsOfUnit' , 'UsersSettings','Units', 'Designations', 'Departments','Locations', 'Staff','SSO_init', 'SSO_callback', 'Tags', 'DynamicContent', 'InvoiceAdvice' ],
+  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms','ProcessFlow','FormBuilder','Routes','Users','AssignTasks','HeadsOfUnit' , 'UsersSettings','Units', 'Designations', 'Departments','Locations', 'Staff','SSO_init', 'SSO_callback', 'Tags', 'DynamicContent', 'InvoiceAdvice', 'DailyVolumes' ],
 });
 
