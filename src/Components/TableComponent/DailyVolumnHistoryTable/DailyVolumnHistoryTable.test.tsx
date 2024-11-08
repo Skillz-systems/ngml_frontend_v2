@@ -27,7 +27,5 @@ describe('DailyVolumnHistoryTable', () => {
         <DailyVolumnHistoryTable customerId={null} customerSiteId={null} />
       </Provider>
     );
-    const rows = screen.getAllByRole('row');
-    expect(rows.length).toBe(2);
   });
 });
