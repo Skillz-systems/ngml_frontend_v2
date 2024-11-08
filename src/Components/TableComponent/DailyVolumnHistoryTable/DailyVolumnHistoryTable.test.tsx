@@ -10,12 +10,12 @@ vi.mock('@/Data', () => ({
 
 describe('DailyVolumnHistoryTable', () => {
   it('renders without crashing', () => {
-    render(<DailyVolumnHistoryTable />);
+    render(<DailyVolumnHistoryTable customerId={null} customerSiteId={null} />);
     expect(screen.getByText('SERIES NAME')).toBeInTheDocument();
   });
 
   it('displays the correct number of entries', () => {
-    render(<DailyVolumnHistoryTable />);
+    render(<DailyVolumnHistoryTable customerId={null} customerSiteId={null} />);
     const rows = screen.getAllByRole('row');
     expect(rows.length).toBe(2);
   });

@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const DefaultView: Story = {
     render: () => (
         <MemoryRouter>
-            <DailyVolumnHistoryTable />
+            <DailyVolumnHistoryTable customerId={null} customerSiteId={null} />
         </MemoryRouter>
     ),
 };

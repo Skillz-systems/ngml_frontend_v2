@@ -1,5 +1,5 @@
 
-import { useGetAllCustomersDailyVolumeQuery, useGetCustomersDailyVolumeByIdQuery } from '@/Redux/Features/Customer/customerVolume';
+import { Filters, useGetAllCustomersDailyVolumeQuery, useGetCustomersDailyVolumeByIdQuery } from '@/Redux/Features/Customer/customerVolume';
 import { Modal } from '@mui/material';
 import {
     DataGrid,
@@ -32,15 +32,16 @@ const DailyVolumnTable = () => {
     }, [location]);
 
 
-    const [queryParams] = useState<Record<string, string>>({
-        page: '1',
+    const [queryParams] = useState<Filters>({
+        page: '1',  
         per_page: '50',
         created_at_from: dayBeforeToday(),
         created_at_to: dayBeforeToday(),
         updated_at_from: dayBeforeToday(),
         updated_at_to: dayBeforeToday(),
         status: 'active',
-        customer_id: '1'
+        customer_id: '1',
+        customer_site_id: null
     });
 
 
@@ -55,7 +56,7 @@ const DailyVolumnTable = () => {
     }
 
 
-    const { data, error, isLoading } = useGetAllCustomersDailyVolumeQuery(queryParams);
+    const { data, error, isLoading } = useGetAllCustomersDailyVolumeQuery(queryParams as Filters);
 
     const { data: dataQuery, isSuccess, isError, error: queryError } = useGetCustomersDailyVolumeByIdQuery(customerId as number);
 

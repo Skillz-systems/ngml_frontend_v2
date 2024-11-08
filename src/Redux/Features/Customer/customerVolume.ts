@@ -43,6 +43,8 @@ export interface Filters {
     created_at_from: string | null;
     created_at_to: string | null;
     status: string | null;
+    updated_at_from?: string | null;
+    updated_at_to?: string | null;
 }
 
 

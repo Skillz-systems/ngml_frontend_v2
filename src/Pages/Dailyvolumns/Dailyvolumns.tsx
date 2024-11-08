@@ -72,7 +72,7 @@ const Dailyvolumns: React.FC = () => {
                     </div>
                 </div>
                 <div className='w-full'>
-                    <DailyVolumnHistoryTable />
+                    <DailyVolumnHistoryTable customerId={null} customerSiteId={null} />
                 </div>
             </div>
             <div>
