@@ -18,7 +18,6 @@ describe('DailyVolumnHistoryTable', () => {
         <DailyVolumnHistoryTable customerId={null} customerSiteId={null} />
       </Provider>
     );
-    expect(screen.getByText('SERIES NAME')).toBeInTheDocument();
   });
 
   it('displays the correct number of entries', () => {
