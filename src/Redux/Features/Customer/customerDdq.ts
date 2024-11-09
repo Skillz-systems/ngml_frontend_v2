@@ -25,31 +25,26 @@ export interface CustomerResponse {
 
 // Replace or add the endpoints with DDQ-related queries and mutations
 export const customersApi = api.injectEndpoints({
-  endpoints: (builder) => ({
-    // Replace getCustomers with getCustomersDDQ
-    getCustomersDDQ: builder.query<CustomerResponse, void>({
-      query: () => '/customer/api/customer-ddq-existings',
-      providesTags: ['DDQ'],
-    }),
-    
-    // Replace getCustomerById with getACustomerDDQById
-    getACustomerDDQById: builder.query<CustomerData, number>({
-      query: (id) => `/customer/api/customer-ddq-existings/${id}`,
-      providesTags: ['DDQ'],
-    }),
-
-    // Replace deleteCustomer with deleteCustomerDDQ
-    deleteCustomerDDQ: builder.mutation<{ success: boolean; id: number }, number>({
-      query: (id) => ({
-        url: `/customer/api/customer-ddq-existings/${id}`,
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+    endpoints: (builder) => ({
+      getCustomersDDQ: builder.query<CustomerResponse, void>({
+        query: () => '/customer/api/customer-ddq-existings',
+        providesTags: ['DDQ'],
       }),
-      invalidatesTags: ['DDQ'],
+      getACustomerDDQById: builder.query<CustomerData, number>({
+        query: (id) => `/customer/api/customer-ddq-existings/${id}`,
+        providesTags: ['DDQ'],
+      }),
+      deleteCustomerDDQ: builder.mutation<{ success: boolean; id: number }, number>({
+        query: (id) => ({
+          url: `/customer/api/customer-ddq-existings/${id}`,
+          method: 'DELETE',
+        }),
+        invalidatesTags: ['DDQ'],
+      }),
     }),
-  }),
-  overrideExisting: false,
-});
+    overrideExisting: false,
+  })
+  
 
 export const {
   useGetCustomersDDQQuery,
