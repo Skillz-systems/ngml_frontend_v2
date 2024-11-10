@@ -21,7 +21,7 @@ const baseQuery = fetchBaseQuery({
       
       
       // console.log(token);
-      //   headers.set('authorization', 'Bearer 30|C9beNUgkUZGM3ju0WG4tkHNhs5BKA4A1haB96zji490a3fcd');
+      // headers.set('authorization', 'Bearer 30|C9beNUgkUZGM3ju0WG4tkHNhs5BKA4A1haB96zji490a3fcd');
 
     return headers;
   },
@@ -78,6 +78,6 @@ export const api = createApi({
   keepUnusedDataFor: 30,
   refetchOnFocus: true,
   endpoints: () => ({}),
-  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms','ProcessFlow','FormBuilder','Routes','Users','AssignTasks','HeadsOfUnit' , 'UsersSettings','Units', 'Designations', 'Departments','Locations', 'Staff','SSO_init', 'SSO_callback', 'Tags', 'DynamicContent', 'InvoiceAdvice' ],
+  tagTypes: ['Customers', 'Suppliers', 'EOI', 'Tasks', 'Forms','ProcessFlow','FormBuilder','Routes','Users','AssignTasks','HeadsOfUnit' , 'UsersSettings','Units', 'Designations', 'Departments','Locations', 'Staff','SSO_init', 'SSO_callback', 'Tags', 'DynamicContent', 'InvoiceAdvice','DailyVolumes' ],
 });
 

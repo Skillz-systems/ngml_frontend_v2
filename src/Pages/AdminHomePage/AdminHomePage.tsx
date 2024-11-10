@@ -5,7 +5,8 @@ import {
   ArrowOutwardOutlined,
 } from '@mui/icons-material';
 import React from 'react';
-import { ActivityLogCard, Chart, DailyVolumnTable, StatisticCard, StatisticRectangleCard } from '../../Components/index';
+import { ActivityLogCard, Chart, DailyVolumnHistoryTable, StatisticCard, StatisticRectangleCard } from '../../Components/index';
+
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
@@ -282,7 +283,9 @@ const AdminHomePage = () => {
         </div>
       </div>
       <div className='w-[100%] mt-[28px]'>
-        <DailyVolumnTable />
+        {/* <DailyVolumnTable /> */}
+        {/* <CustomerDailyVolumns /> */}
+        <DailyVolumnHistoryTable />
       </div>
     </div>
   );
