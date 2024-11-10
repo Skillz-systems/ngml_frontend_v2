@@ -273,6 +273,7 @@ const CustomerDailyVolumns: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false);
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
@@ -283,7 +284,7 @@ const CustomerDailyVolumns: React.FC = () => {
         skip: !customerId || !customerSiteId
     });
 
-    console.log(data?.task, 'kkkkkkkkkkk');
+    // console.log(data?.task, 'DailyVolumnConsumption');
 
 
     const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
@@ -306,6 +307,20 @@ const CustomerDailyVolumns: React.FC = () => {
 
         navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
     }, [location, navigate]);
+
+
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const verify = searchParams.get('verifyVolume');
+        if (verify) {
+            setIsVerifyModalOpen(true)
+        }
+
+        // if (isVerifyModalOpen === false) {
+        //     searchParams.delete('verifyVolumn');
+        // }
+    }, [location.search])
 
 
     useEffect(() => {
@@ -531,6 +546,45 @@ const CustomerDailyVolumns: React.FC = () => {
                         <p>No form fields available.</p>
                     )}
                 </Modal>
+
+                {/* verify */}
+                <Modal
+                    isOpen={isVerifyModalOpen}
+                    onClose={() => setIsVerifyModalOpen(false)}
+                    size='medium'
+                    title="Verify current volume"
+                    buttons={[
+                        <div className='flex gap-2 mb-[-10px] ' key="modal-buttons">
+                            <div className='w-[120px]'>
+                                <Button
+                                    type="outline"
+                                    label="Cancel"
+                                    action={() => setIsVerifyModalOpen(false)}
+                                    color="#FFFFFF"
+                                    width="100%"
+                                    height="40px"
+                                    fontSize="16px"
+                                    radius="20px"
+                                />
+                            </div>
+                            <div className='w-[260px]'>
+                                <Button
+                                    type="secondary"
+                                    label="Verify"
+                                    action={() => setIsVerifyModalOpen(false)}
+                                    color="#FFFFFF"
+                                    width="100%"
+                                    height="40px"
+                                    fontSize="16px"
+                                    radius="20px"
+                                />
+                            </div>
+                        </div>
+                    ]}
+                >
+                    Verify
+                </Modal>
+                {/* end verify */}
             </div>
         </div>
     );

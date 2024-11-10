@@ -225,10 +225,7 @@ const CostAnalysis: React.FC = () => {
                     <div className="flex items-center gap-2 md:gap-4">
                         <div className="flex items-center border px-3 py-2 rounded-3xl hover:bg-gray-100" onClick={() => toggleModal(true)}>
                             <img src={images.upload} alt="Upload" className="w-4 h-4 md:w-5 md:h-5" />
-                            <span className="text-sm md:text-base ml-2 cursor-pointer">Upload CAPEX</span>
-                        </div>
-                        <div className="border px-3 py-2 rounded-3xl hover:bg-gray-100">
-                            <span className="text-sm md:text-base cursor-pointer">Create CAPEX</span>
+                            <span className="text-sm md:text-base ml-2 cursor-pointer">Upload Document</span>
                         </div>
                     </div>
                 </div>
@@ -253,7 +250,7 @@ const CostAnalysis: React.FC = () => {
                 isOpen={isModalOpen}
                 onClose={() => toggleModal(false)}
                 size='medium'
-                title='CAPEX Sheet Upload'
+                title='Upload Document'
                 subTitle=''
                 buttons={[
                     <div className='flex gap-2 mb-[-10px]'>
