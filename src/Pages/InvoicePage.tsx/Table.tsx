@@ -1,11 +1,11 @@
-import { Button } from "@/Components";
-import useScrollToId from "@/Utils/useScrollToId";
-import { useState } from "react";
-import { FaDeleteLeft } from "react-icons/fa6";
-import { MdCancel } from "react-icons/md";
-import { RiEdit2Fill, RiFileAddFill, RiSaveFill } from "react-icons/ri";
-import CommentSection from "./CommentSection";
-import { InvoiceAdviceDataType } from "./data";
+import { Button } from '@/Components';
+import useScrollToId from '@/Utils/useScrollToId';
+import { useState } from 'react';
+import { FaDeleteLeft } from 'react-icons/fa6';
+import { MdCancel } from 'react-icons/md';
+import { RiEdit2Fill, RiFileAddFill, RiSaveFill } from 'react-icons/ri';
+import CommentSection from './CommentSection';
+import { InvoiceAdviceDataType } from './data';
 
 interface BacklogType {
   sn: number;
@@ -111,7 +111,7 @@ export default function InventoryTable({
                     {editingRow === index ? (
                       <input
                         type="number"
-                        value={tempEditValues.volume || ""}
+                        value={tempEditValues.volume || ''}
                         onChange={(e) =>
                           setTempEditValues({
                             ...tempEditValues,
@@ -131,7 +131,7 @@ export default function InventoryTable({
                     {editingRow === index ? (
                       <input
                         type="text"
-                        value={tempEditValues.other || ""}
+                        value={tempEditValues.other || ''}
                         onChange={(e) =>
                           setTempEditValues({
                             ...tempEditValues,
@@ -168,7 +168,7 @@ export default function InventoryTable({
                       onClick={async () => {
                         if (editingRow !== index) {
                           await moveToBacklog(row);
-                          scrollToId("backlog");
+                          scrollToId('backlog');
                         } else {
                           setEditingRow(null);
                           setTempEditValues({});
@@ -176,8 +176,8 @@ export default function InventoryTable({
                       }}
                       title={
                         editingRow !== index
-                          ? "Move to Backlog"
-                          : "Cancel changes"
+                          ? 'Move to Backlog'
+                          : 'Cancel changes'
                       }
                     >
                       {editingRow === index ? (
@@ -257,7 +257,7 @@ export default function InventoryTable({
           label="Create Invoice Advice"
           action={async () => {
             await onCreateInvoiceAdviceClick();
-            scrollToId("proceed");
+            scrollToId('proceed');
           }}
           color="#FFFFFF"
           // fontStyle="italic"

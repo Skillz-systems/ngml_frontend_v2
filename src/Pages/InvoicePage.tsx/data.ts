@@ -15,21 +15,21 @@ export const invoiceAdviceData = {
       comment:
         'We had a bit of confusion with the delivery date, but the support team sorted it out in no time. The fuel consumption was higher than expected this month, but the pricing and service quality were unmatched. Kudos to the logistics team for their efficiency.',
     },
-    {
-      author: 'Emeka Obi',
-      comment:
-        'Received the order in excellent condition, and the entire process was smooth from start to finish. The quantity was exactly as requested, and the fuel quality was consistently high throughout the month. Very satisfied with the service overall.',
-    },
-    {
-      author: 'Funmi Alade',
-      comment:
-        'Everything went well with this order, although there was a minor delay due to route issues. The fuel was of good quality, and the volume ordered was perfect for our operations. Happy to recommend this service to others.',
-    },
-    {
-      author: 'Sani Abdullahi',
-      comment:
-        'We were a bit skeptical at first due to some previous experiences with other suppliers, but this order exceeded expectations. The team ensured timely delivery, and the volume matched our consumption needs exactly. Looking forward to a long-term partnership.',
-    },
+    // {
+    //   author: 'Emeka Obi',
+    //   comment:
+    //     'Received the order in excellent condition, and the entire process was smooth from start to finish. The quantity was exactly as requested, and the fuel quality was consistently high throughout the month. Very satisfied with the service overall.',
+    // },
+    // {
+    //   author: 'Funmi Alade',
+    //   comment:
+    //     'Everything went well with this order, although there was a minor delay due to route issues. The fuel was of good quality, and the volume ordered was perfect for our operations. Happy to recommend this service to others.',
+    // },
+    // {
+    //   author: 'Sani Abdullahi',
+    //   comment:
+    //     'We were a bit skeptical at first due to some previous experiences with other suppliers, but this order exceeded expectations. The team ensured timely delivery, and the volume matched our consumption needs exactly. Looking forward to a long-term partnership.',
+    // },
   ],
   lineItems: [
     { sn: 1, volume: 641, date: '01/01/24', other: 'RX-8920-AZ' },

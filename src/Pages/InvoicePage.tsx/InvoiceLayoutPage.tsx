@@ -1,15 +1,15 @@
 import { Button } from '@/Components';
 import GasConsumptionCertificate from '@/Components/GasConsumptionCertificate/GasConsumptionCertificate';
+import InvoiceAdvice from '@/Components/InvoiceAdvice/InvoiceAdvice';
 import React, { useEffect, useState } from 'react';
 import { invoiceAdviceData } from './data';
 import AccountsInvoiceOne from './invoices/accountsInvoiceOne';
 import InventoryTable from './Table';
-import InvoiceAdvice from '@/Components/InvoiceAdvice/InvoiceAdvice';
 
-const InvoiceComponent = () => 
-<div>
-  <InvoiceAdvice/>
-</div>;
+const InvoiceComponent = () =>
+  <div>
+    <InvoiceAdvice />
+  </div>;
 
 const InvoiceLayoutPage: React.FC = () => {
   // const [activeTab, setActiveTab] = useState('Items');
@@ -148,21 +148,14 @@ const InvoiceLayoutPage: React.FC = () => {
                 />
               </div>
             ) : (
-              // <button className="px-4 py-2 text-xs font-normal text-white transition-colors bg-blue-500 rounded w-max hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-              //   Proceed
-              // </button>
-              <>
-                {/* <div className="px-2 py-1 border rounded-3xl">
-                          <div className="text-[#49526A] text-base font-normal">
-                            Reject Invoice Advice
-                          </div>
-                        </div> */}
-                <div className="px-2 py-1 border rounded-3xl">
-                  <div className="text-[#49526A] text-base font-normal">
-                    Link Invoice
-                  </div>
-                </div>
-              </>
+              null
+
+              //   <div className="px-2 py-1 border rounded-3xl">
+              //     <div className="text-[#49526A] text-base font-normal">
+              //       Link Invoice
+              //     </div>
+              //   </div>
+              // </>
             )}
           </div>
         </div>
