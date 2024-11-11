@@ -280,7 +280,7 @@ const AdminHomePage = () => {
             /> */}
             <Chart
               data={chartData}
-              chartType="area"
+              chartType="bar"
               xAxisDataKey="date"
               yAxisLabel="Amount"
               colors={['#4F46E5', '#10B981', '#F59E0B']}
