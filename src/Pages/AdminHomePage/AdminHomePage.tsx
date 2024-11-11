@@ -4,7 +4,7 @@ import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
   ArrowOutwardOutlined,
 } from '@mui/icons-material';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityLogCard, Chart, DailyVolumnHistoryTable, StatisticCard, StatisticRectangleCard } from '../../Components/index';
 
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
@@ -13,29 +13,12 @@ import images from '../../assets/index';
 
 import { FilterParams } from '@/Hooks/useChartFilter';
 import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
+import DollarConversionRateModal from '@/Components/DollarConversionRate/DollarConversionRate';
+import { Edit } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { UserState } from '@/Redux/types';
 
 
-// import { aC } from 'vitest/dist/reporters-1evA5lom';
-
-
-// interface SelectOption {
-//   label: string;
-//   value: string;
-// }
-
-// interface DynamicCardDataItem {
-//   type: 'primary' | 'secondary';
-//   title: string;
-//   content: React.ReactNode;
-//   icon: React.ReactNode;
-//   yearOptions: Array<number>;
-//   valueOptions: Array<SelectOption>;
-// }
-
-// interface DataKeyConfig {
-//   key: string;
-//   type: DataKeyType;
-// }
 
 
 const AdminHomePage = () => {
@@ -52,11 +35,27 @@ const AdminHomePage = () => {
 
   const [chartData, setChartData] = useState(generateLineGraphData());
   const [chartDataOne, setChartDataOne] = useState(generateNNPCData());
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [rate, setRate] = useState<string | null>(null);
+  const [currentMonth, setCurrentMonth] = useState("")
+
+  const userRole = useSelector((state: { user: UserState }) => state.user.role)
 
 
-  // const sampleNNPCData = generateNNPCData();
-  // const sampleLineData = generateLineGraphData();
-  // const sampleBusinessData = generateBusinessData();
+  useEffect(() => {
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ]
+    const now = new Date()
+    setCurrentMonth(months[now.getMonth()])
+  }, [])
+
+
+  const handleRateSave = (newRate: string) => {
+    setRate(newRate);
+  };
+
 
   const handleFilterChange = useCallback((params: FilterParams) => {
     // Handle filter changes
@@ -78,55 +77,6 @@ const AdminHomePage = () => {
     setChartDataOne(newData);
   }, []);
 
-
-  // const dataMixed = [
-  //   { month: 'Jan', revenue: 1000, orders: 500 },
-  //   { month: 'Feb', revenue: 1500, orders: 500 },
-  //   { month: 'Mar', revenue: 1200, orders: 500 }
-  // ];
-
-  // const dataKeyConfig: DataKeyConfig[] = [
-  //   { key: 'revenue', type: 'bar' as const },
-  //   { key: 'orders', type: 'line' as const }
-  // ];
-
-  // const dataNNPC = [
-  //   { month: 'Jan', 'Total Consumption': 120, },
-  //   { month: 'Feb', 'Total Consumption': 180, },
-  //   { month: 'Mar', 'Total Consumption': 150, },
-  //   { month: 'Apr', 'Total Consumption': 250, },
-  //   { month: 'May', 'Total Consumption': 300, },
-  //   { month: 'Jun', 'Total Consumption': 300, },
-  //   { month: 'Jul', 'Total Consumption': 320, },
-  //   { month: 'Aug', 'Total Consumption': 210, },
-  //   { month: 'Sep', 'Total Consumption': 300, },
-  //   { month: 'Oct', 'Total Consumption': 250, },
-  //   { month: 'Nov', 'Total Consumption': 340, },
-  //   { month: 'Dec', 'Total Consumption': 360, },
-  // ];
-
-  // const lineDataGraph = [
-  //   { month: 'Jan', 'Direct Consumption': 120, 'UJV Consumption': 110, 'Daily Volume Target': 130 },
-  //   { month: 'Feb', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
-  //   { month: 'Mar', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
-  //   { month: 'Apr', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
-  //   { month: 'May', 'Direct Consumption': 150, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
-  //   { month: 'Jun', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
-  //   { month: 'Jul', 'Direct Consumption': 120, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
-  //   { month: 'Aug', 'Direct Consumption': 110, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
-  //   { month: 'Sep', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
-  //   { month: 'Oct', 'Direct Consumption': 120, 'UJV Consumption': 150, 'Daily Volume Target': 130 },
-  //   { month: 'Nov', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
-  //   { month: 'Dec', 'Direct Consumption': 160, 'UJV Consumption': 170, 'Daily Volume Target': 130 },
-  // ];
-
-  // const dataNNPC = [
-  //   { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
-  //   { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },
-  //   { month: 'Mar', 'Amount Sold': 150, Delivered: 120, Requests: 200, Revenue: 600 },
-  //   { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
-  //   { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
-  // ];
   const chartColors = ['#8884d8', '#82ca9d', '#413ea0', '#ff7300'];
 
 
@@ -150,32 +100,6 @@ const AdminHomePage = () => {
       icon: <img src={images.zone} alt="zone icon" />,
     },
   ];
-
-
-  // const dynamicCardData: DynamicCardDataItem[] = [
-  //   {
-  //     type: 'primary',
-  //     title: 'Total Supplied Volume ',
-  //     content: '12,129,243,990.00',
-  //     icon: <RestaurantMenuOutlined />,
-  //     yearOptions: [2020, 2021, 2022],
-  //     valueOptions: [
-  //       { label: 'Revenue', value: 'revenue' },
-  //       { label: 'Profit', value: 'profit' },
-  //     ],
-  //   },
-  //   {
-  //     type: 'secondary',
-  //     title: 'Total Consumption Volume ',
-  //     content: '4,039,213,455.00',
-  //     icon: <FileDownloadDoneOutlined />,
-  //     yearOptions: [2020, 2021, 2022],
-  //     valueOptions: [
-  //       { label: 'Profit', value: 'profit' },
-  //       { label: 'Revenue', value: 'revenue' },
-  //     ],
-  //   },
-  // ];
 
 
   const getIconStyles = (title: string) => {
@@ -221,12 +145,53 @@ const AdminHomePage = () => {
 
   return (
     <div className="h-fit w-full" >
-      <div>
-        <div className='text-[30px] text-[#49526A] font-[700]'>Welcome {currentUser && (
-          <span className="text-[30px] text-[#49526A] font-[700] capitalize">
-            {getFirstName(currentUser.name)}
-          </span>
-        )}</div>
+      <div className='flex justify-between items-center'>
+        <div>
+          <div className='text-[30px] text-[#49526A] font-[700]'>Welcome {currentUser && (
+            <span className="text-[30px] text-[#49526A] font-[700] capitalize">
+              {getFirstName(currentUser.name)}
+            </span>
+          )}</div>
+        </div>
+        <div className='mb-2'>
+          {!rate && (
+            <button
+              className="bg-green-600 text-white px-4 py-2 rounded-md mt-4"
+              onClick={() => setIsModalOpen(true)}
+            >
+              Set Monthly Dollar Conversion Rate
+            </button>
+          )}
+          <DollarConversionRateModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onRateSave={handleRateSave}
+          />
+        </div>
+        {rate && (
+          <div>
+            <div className="p-3 bg-white border border-[#E2E4EB] rounded-[6px] shadow-sm">
+              <div className="flex justify-between  mb-2 gap-24">
+                <div>
+                  <h3 className="text-sm font-semibold text-green-800">Monthly USD Rate</h3>
+                  <p className="text-xs text-green-600">{currentMonth}</p>
+                </div>
+                <div>
+                  <p className="text-lg font-bold text-green-700">₦{rate}</p>
+                </div>
+              </div>
+              {userRole === 'admin' && (
+                <button
+                  className="w-full px-3 py-1.5 text-sm bg-green-50 text-green-700 border border-green-600 rounded hover:bg-green-600 hover:text-white transition-colors duration-200 flex items-center justify-center group"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <Edit className="w-4 h-4 mr-1 group-hover:text-white" />
+                  Edit Rate
+                </button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4">
         {cardData.map((card, index) => {
@@ -254,30 +219,7 @@ const AdminHomePage = () => {
               />
             ))}
           </div>
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[100%] mt-4">
-            {dynamicCardData.map((card, index) => (
-              <div key={index} className='mt-[15px]'>
-                <StatisticDynamicCard
-                  type={card.type}
-                  title={card.title}
-                  content={card.content}
-                  icon={card.icon}
-                  onSortChange={handleSortChange}
-                  yearOptions={card.yearOptions}
-                  valueOptions={card.valueOptions}
-                />
-              </div>
-            ))}
-          </div> */}
           <div >
-            {/* <Chart
-              data={dataNNPC}
-              chartType="bar"
-              yAxisLabel="Volume (mscf)"
-              xAxisDataKey="month"
-              colors={chartColors}
-              title='Customer Consumption Chart'
-            /> */}
             <Chart
               data={chartData}
               chartType="bar"
@@ -335,16 +277,7 @@ const AdminHomePage = () => {
             title='Customer Consumption Chart'
             onFilterChange={handleFilterChangeOne}
           />
-          {/* <Chart
-            data={dataMixed}
-            chartType="mixed"
-            xAxisDataKey="month"
-            yAxisLabel="Values"
-            colors={['#4F46E5', '#10B981']}
-            title="Revenue and Orders"
-            dataKeyConfig={dataKeyConfig}
-            onFilterChange={handleFilterChange}
-          /> */}
+
         </div>
       </div>
       <div className='w-[100%] mt-[28px]'>
