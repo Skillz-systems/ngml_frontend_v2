@@ -32,11 +32,10 @@ import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
 //   valueOptions: Array<SelectOption>;
 // }
 
-// interface DataKeyConfig {
-//   key: string;
-//   type: DataKeyType;
-// }
-
+interface DataKeyConfig {
+  key: string;
+  type: 'bar' | 'line';
+}
 
 const AdminHomePage = () => {
   // const [, setSortDetails] = useState({ sortType: '', value: '' });
@@ -85,10 +84,11 @@ const AdminHomePage = () => {
   //   { month: 'Mar', revenue: 1200, orders: 500 }
   // ];
 
-  // const dataKeyConfig: DataKeyConfig[] = [
-  //   { key: 'revenue', type: 'bar' as const },
-  //   { key: 'orders', type: 'line' as const }
-  // ];
+  const dataKeyConfig: DataKeyConfig[] = [
+    { key: 'Direct Consumption', type: 'bar' as const },
+    { key: 'UJV/BOT Consumption', type: 'bar' as const },
+    { key: 'Volume Target', type: 'line' as const }
+  ];
 
   // const dataNNPC = [
   //   { month: 'Jan', 'Total Consumption': 120, },
@@ -127,7 +127,7 @@ const AdminHomePage = () => {
   //   { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
   //   { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
   // ];
-  const chartColors = ['#8884d8', '#82ca9d', '#413ea0', '#ff7300'];
+  // const chartColors = ['#8884d8', '#82ca9d', '#413ea0', '#ff7300'];
 
 
 
@@ -279,17 +279,24 @@ const AdminHomePage = () => {
               title='Customer Consumption Chart'
             /> */}
             <Chart
+
+              // data={dataMixed}
+              chartType="mixed"
+
+              dataKeyConfig={dataKeyConfig}
               data={chartData}
-              chartType="bar"
+              // chartType="bar"
               xAxisDataKey="date"
-              yAxisLabel="Amount"
-              colors={['#4F46E5', '#10B981', '#F59E0B']}
+              yAxisLabel="Volume (mscf)"
+              colors={['#012209', '#005828',
+                '#00af50'
+              ]}
               title="Customer Consumption Chart"
               onFilterChange={handleFilterChange}
             />
           </div>
         </div>
-        <div className='w-full h-full bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
+        <div className='w-full max-h-[60rem] bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
           <div className='h-[48px] bg-[#F6F8FA] flex items-center p-[10px] justify-between'>
             <div className='text-[#828DA9] text-[20px] font-[400]'>Available Tasks</div>
             <div className='border size-[32px] flex items-center justify-center rounded-full' >
@@ -297,7 +304,7 @@ const AdminHomePage = () => {
             </div>
           </div>
           {/* <div className='h-[400px] overflow-y-auto'> */}
-          <div className='w-[100%] p-[10px] pt-[0px]  '>
+          <div className='w-[100%] p-[10px] pt-[0px]'>
             {isLoading &&
 
               <img src={images.ngmlPortrait} className='w-full h-full' alt="loader" />
@@ -327,11 +334,12 @@ const AdminHomePage = () => {
       <div>
         <div className='mt-[28px]'>
           <Chart
+
             data={chartDataOne}
-            chartType="bar"
+            chartType="line"
             yAxisLabel="Volume (mscf)"
             xAxisDataKey="date"
-            colors={chartColors}
+            colors={['#0c6f22']}
             title='Customer Consumption Chart'
             onFilterChange={handleFilterChangeOne}
           />

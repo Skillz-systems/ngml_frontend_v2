@@ -42,13 +42,14 @@ export const FilterRadioGroup = ({ filterType, onChange }: FilterRadioGroupProps
             <button
                 key={type}
                 onClick={() => onChange(type)}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200
+                className={`px-4 capitalize py-2 text-sm font-medium rounded-md transition-all duration-200
           ${filterType === type
                         ? 'bg-white text-primary-600 shadow-sm'
                         : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
                     }`}
             >
-                {type.charAt(0).toUpperCase() + type.slice(1)}
+                {type === 'year' ? 'month' : 'daily'}
+                {/* {type.charAt(0).toUpperCase() + type.slice(1)} */}
             </button>
         ))}
     </div>

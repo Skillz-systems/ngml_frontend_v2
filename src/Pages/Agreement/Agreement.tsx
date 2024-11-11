@@ -15,48 +15,53 @@ interface CardDataItem {
 }
 
 const documentCardData = [
-    { title: 'GSPA', 
-    subtitle: 'Agreement', 
-    // icon: <img src={images.files} alt='icon' />, 
-    buttonText: 'Use template', 
-    height: '140px' 
-},
-    { title: 'Supplement', 
-    subtitle: 'Agreement', 
-    // icon: <img src={images.files} alt='icon' />, 
-    buttonText: 'Use template', 
-    height: '140px' 
-},
-    { title: 'Addendum', 
-    subtitle: 'Agreement', 
-    // icon: <img src={images.files} alt='icon' />, 
-    buttonText: 'Use template', 
-    height: '140px' 
-},
-    { title: 'Side', 
-    subtitle: 'Letter', 
-    // icon: <img src={images.files} alt='icon' />, 
-    buttonText: 'Use template', 
-    height: '140px' 
-},
-    { title: 'Approval', 
-    subtitle: 'Letter', 
-    // icon: <img src={images.files} alt='icon' />, 
-    buttonText: 'Use template', 
-    height: '140px' 
-},
+    {
+        title: 'GSPA',
+        subtitle: 'Agreement',
+        // icon: <img src={images.files} alt='icon' />, 
+        buttonText: 'Use template',
+        height: '140px'
+    },
+    {
+        title: 'Supplement',
+        subtitle: 'Agreement',
+        // icon: <img src={images.files} alt='icon' />, 
+        buttonText: 'Use template',
+        height: '140px'
+    },
+    {
+        title: 'Addendum',
+        subtitle: 'Agreement',
+        // icon: <img src={images.files} alt='icon' />, 
+        buttonText: 'Use template',
+        height: '140px'
+    },
+    {
+        title: 'Side',
+        subtitle: 'Letter',
+        // icon: <img src={images.files} alt='icon' />, 
+        buttonText: 'Use template',
+        height: '140px'
+    },
+    {
+        title: 'Approval',
+        subtitle: 'Letter',
+        // icon: <img src={images.files} alt='icon' />, 
+        buttonText: 'Use template',
+        height: '140px'
+    },
 ];
 
 const documentCardDataTwo: CardDataItem[] = [
     {
-        type: "withLink",
-        title: "Dangote Cement",
-        subtitle: "Site Survey Report",
-        linkText: "Last Updated",
-        linkText2: "12/13/2023",
+        type: 'withLink',
+        title: 'Dangote Cement',
+        subtitle: 'Site Survey Report',
+        linkText: 'Last Updated',
+        linkText2: '12/13/2023',
         icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
-        width: "200px",
-        height: "100%",
+        width: '200px',
+        height: '100%',
     }
 ];
 
@@ -140,7 +145,7 @@ const Agreement: React.FC = () => {
                 isOpen={isModalOpen}
                 onClose={toggleModal}
                 size='medium'
-                title='CAPEX Sheet Upload'
+                title='Upload Document'
                 subTitle=''
                 buttons={[
                     <div className='flex gap-2 mb-[-10px]'>
