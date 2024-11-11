@@ -1,8 +1,16 @@
+import { FilterParams } from '@/Hooks/useChartFilter';
+import { useCallback } from 'react';
 import { Chart, StatisticCard, StatisticDynamicCardTwo, SupplierDashboardTable } from '../../Components/index';
 import images from '../../assets/index';
 
 
 const SupplierOverviewPage = () => {
+
+    const handleFilterChange = useCallback((params: FilterParams) => {
+        // Handle filter changes
+        console.log('Filter params:', params);
+
+    }, []);
 
     const dataNNPC = [
         { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
@@ -71,6 +79,7 @@ const SupplierOverviewPage = () => {
             <div className="mt-6 md:mt-0">
                 <div className='mt-[28px]'>
                     <Chart
+                        onFilterChange={handleFilterChange}
                         data={dataNNPC}
                         chartType="bar"
                         yAxisLabel="NNPC"
