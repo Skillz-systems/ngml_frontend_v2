@@ -532,13 +532,20 @@ import {
 } from 'recharts';
 import { FilterRadioGroup, SelectDropdown } from './ChartFilters';
 
-type ChartType = 'bar' | 'line' | 'area' | 'pie';
+type ChartType = 'bar' | 'line' | 'area' | 'pie' | 'mixed';
 
 interface FilterParams {
     filterType: 'month' | 'year';
     month?: string;
     year: number;
 }
+
+interface DataKeyConfig {
+    key: string;
+    type: 'bar' | 'line';
+}
+
+
 
 interface ComposedChartProps<T extends Record<string, unknown>> {
     data: any;
@@ -548,6 +555,7 @@ interface ComposedChartProps<T extends Record<string, unknown>> {
     colors: string[];
     title: string;
     onFilterChange: (params: FilterParams) => void;
+    dataKeyConfig?: DataKeyConfig[];
 }
 
 const Chart = <T extends Record<string, unknown>>({
@@ -557,7 +565,8 @@ const Chart = <T extends Record<string, unknown>>({
     yAxisLabel,
     colors,
     title,
-    onFilterChange
+    onFilterChange,
+    dataKeyConfig = []
 }: ComposedChartProps<T>) => {
     const {
         filterParams,
@@ -579,6 +588,40 @@ const Chart = <T extends Record<string, unknown>>({
     }, [filterParams, handleFilterChange]);
 
     const renderChartComponent = (dataKey: string, color: string, index: number) => {
+
+        if (chartType === 'mixed') {
+            const config = dataKeyConfig.find(conf => conf.key === dataKey);
+            // if (!config) return null;
+
+            switch (config?.type) {
+                case 'bar':
+                    return (
+                        <Bar
+                            key={index}
+                            dataKey={dataKey}
+                            fill={color}
+                            type="monotone"
+                            stroke={color}
+                            radius={[5, 5, 5, 5]}
+                        />
+                    );
+                case 'line':
+                    return (
+                        <Line
+                            key={index}
+                            type="monotone"
+                            dataKey={dataKey}
+                            stroke={color}
+                            fill={color}
+                            strokeWidth={2}
+                            dot={{ fill: color, strokeWidth: 2 }}
+                        />
+                    );
+                default:
+                    return null;
+            }
+        }
+
         switch (chartType) {
             case 'bar':
                 return (
