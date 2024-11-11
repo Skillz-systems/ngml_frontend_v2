@@ -1,4 +1,5 @@
 
+
 export { default as ActivityLogCard } from './Activitylogcard/ActivityLogCard';
 export { default as AgreementTemplate } from './AgreementTemplateComponent/AgreementTemplate';
 export { default as AuthContainer } from './Authcontainer/AuthContainer';
@@ -35,6 +36,8 @@ export { default as DateCardDetails } from './DateCardDetails/DateCardDetails';
 export { default as LocationCard } from './LocationCard/LocationCard';
 
 export { default as PDFViewer } from './Viewer/PDFViewer';
+
+// export { default as Charts } from './ChartComponent/Charts';
 
 
 // export { default as SuppliersPage } from './SuppliersPage/SuppliersPage'

@@ -1,12 +1,13 @@
 
 import { ActivityLogCard, Chart, StatisticDynamicCard } from '@/Components';
+import { FilterParams } from '@/Hooks/useChartFilter';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
   ArrowOutwardOutlined,
   FileDownloadDoneOutlined,
   RestaurantMenuOutlined
 } from '@mui/icons-material';
-import React from 'react';
+import React, { useCallback } from 'react';
 // import { aC } from 'vitest/dist/reporters-1evA5lom';
 
 
@@ -26,7 +27,11 @@ interface DynamicCardDataItem {
 
 
 const CustomerHomePage = () => {
+  const handleFilterChange = useCallback((params: FilterParams) => {
+    // Handle filter changes
+    console.log('Filter params:', params);
 
+  }, []);
   // const currentUser = useAppSelector(selectCurrentUser);
   // const userId = Number(currentUser?.id)
 
@@ -104,6 +109,7 @@ const CustomerHomePage = () => {
           </div>
           <div >
             <Chart
+              onFilterChange={handleFilterChange}
               data={dataNNPC}
               chartType="bar"
               yAxisLabel="NNPC"

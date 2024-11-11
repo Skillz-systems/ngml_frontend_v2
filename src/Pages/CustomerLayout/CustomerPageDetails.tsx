@@ -1,8 +1,17 @@
+import { FilterParams } from '@/Hooks/useChartFilter';
 import { Chart, StatisticDynamicCardTwo } from '../../Components/index';
 import images from '../../assets/index';
 
+import { useCallback } from 'react';
+
 
 const CustomerPageDetails = () => {
+
+    const handleFilterChange = useCallback((params: FilterParams) => {
+        // Handle filter changes
+        console.log('Filter params:', params);
+
+    }, []);
 
     // const dataNNPC = [
     //     { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
@@ -65,6 +74,7 @@ const CustomerPageDetails = () => {
                         xAxisDataKey="month"
                         colors={chartColors}
                         title='Customer Consumption Chart'
+                        onFilterChange={handleFilterChange}
                     />
                 </div>
             </div>
