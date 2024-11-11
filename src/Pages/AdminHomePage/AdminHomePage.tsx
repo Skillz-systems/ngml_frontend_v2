@@ -4,12 +4,17 @@ import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
   ArrowOutwardOutlined,
 } from '@mui/icons-material';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { ActivityLogCard, Chart, DailyVolumnHistoryTable, StatisticCard, StatisticRectangleCard } from '../../Components/index';
 
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
+
+import { FilterParams } from '@/Hooks/useChartFilter';
+import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
+
+
 // import { aC } from 'vitest/dist/reporters-1evA5lom';
 
 
@@ -36,44 +41,66 @@ const AdminHomePage = () => {
   const { data, error, isError, isSuccess, isLoading } = useTasksQuery();
   const { data: customers } = useGetCustomersQuery();
 
-  // const handleSortChange = (sortType: 'year' | 'value', value: string) => {
-  //   setSortDetails({ sortType, value });
-  // };
-
   const getFirstName = (fullName: string) => {
     return fullName.split(' ')[0];
   };
 
+  const [chartData, setChartData] = useState(generateLineGraphData());
+  const [chartDataOne, setChartDataOne] = useState(generateNNPCData());
 
-  const dataNNPC = [
-    { month: 'Jan', 'Total Consumption': 120, },
-    { month: 'Feb', 'Total Consumption': 180, },
-    { month: 'Mar', 'Total Consumption': 150, },
-    { month: 'Apr', 'Total Consumption': 250, },
-    { month: 'May', 'Total Consumption': 300, },
-    { month: 'Jun', 'Total Consumption': 300, },
-    { month: 'Jul', 'Total Consumption': 320, },
-    { month: 'Aug', 'Total Consumption': 210, },
-    { month: 'Sep', 'Total Consumption': 300, },
-    { month: 'Oct', 'Total Consumption': 250, },
-    { month: 'Nov', 'Total Consumption': 340, },
-    { month: 'Dec', 'Total Consumption': 360, },
-  ];
 
-  const lineDataGraph = [
-    { month: 'Jan', 'Direct Consumption': 120, 'UJV Consumption': 110, 'Daily Volume Target': 130 },
-    { month: 'Feb', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
-    { month: 'Mar', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
-    { month: 'Apr', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
-    { month: 'May', 'Direct Consumption': 150, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
-    { month: 'Jun', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
-    { month: 'Jul', 'Direct Consumption': 120, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
-    { month: 'Aug', 'Direct Consumption': 110, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
-    { month: 'Sep', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
-    { month: 'Oct', 'Direct Consumption': 120, 'UJV Consumption': 150, 'Daily Volume Target': 130 },
-    { month: 'Nov', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
-    { month: 'Dec', 'Direct Consumption': 160, 'UJV Consumption': 170, 'Daily Volume Target': 130 },
-  ];
+  // const sampleNNPCData = generateNNPCData();
+  // const sampleLineData = generateLineGraphData();
+  // const sampleBusinessData = generateBusinessData();
+
+  const handleFilterChange = useCallback((params: FilterParams) => {
+    // Handle filter changes
+    console.log('Filter params:', params);
+
+    const newData = generateLineGraphData(
+      params.filterType === 'month' ? 1 : 12
+    );
+    setChartData(newData);
+  }, []);
+  const handleFilterChangeOne = useCallback((params: FilterParams) => {
+    // Handle filter changes
+    console.log('Filter params:', params);
+
+    const newData = generateNNPCData(
+      params.filterType === 'month' ? 1 : 12
+    );
+    setChartDataOne(newData);
+  }, []);
+
+  // const dataNNPC = [
+  //   { month: 'Jan', 'Total Consumption': 120, },
+  //   { month: 'Feb', 'Total Consumption': 180, },
+  //   { month: 'Mar', 'Total Consumption': 150, },
+  //   { month: 'Apr', 'Total Consumption': 250, },
+  //   { month: 'May', 'Total Consumption': 300, },
+  //   { month: 'Jun', 'Total Consumption': 300, },
+  //   { month: 'Jul', 'Total Consumption': 320, },
+  //   { month: 'Aug', 'Total Consumption': 210, },
+  //   { month: 'Sep', 'Total Consumption': 300, },
+  //   { month: 'Oct', 'Total Consumption': 250, },
+  //   { month: 'Nov', 'Total Consumption': 340, },
+  //   { month: 'Dec', 'Total Consumption': 360, },
+  // ];
+
+  // const lineDataGraph = [
+  //   { month: 'Jan', 'Direct Consumption': 120, 'UJV Consumption': 110, 'Daily Volume Target': 130 },
+  //   { month: 'Feb', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
+  //   { month: 'Mar', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
+  //   { month: 'Apr', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
+  //   { month: 'May', 'Direct Consumption': 150, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
+  //   { month: 'Jun', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
+  //   { month: 'Jul', 'Direct Consumption': 120, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
+  //   { month: 'Aug', 'Direct Consumption': 110, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
+  //   { month: 'Sep', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
+  //   { month: 'Oct', 'Direct Consumption': 120, 'UJV Consumption': 150, 'Daily Volume Target': 130 },
+  //   { month: 'Nov', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
+  //   { month: 'Dec', 'Direct Consumption': 160, 'UJV Consumption': 170, 'Daily Volume Target': 130 },
+  // ];
 
   // const dataNNPC = [
   //   { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
@@ -82,7 +109,7 @@ const AdminHomePage = () => {
   //   { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
   //   { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
   // ];
-  const chartColors = ['#8884d8', '#82ca9d', '#005828', '#ff7300'];
+  const chartColors = ['#8884d8', '#82ca9d', '#413ea0', '#ff7300'];
 
 
 
@@ -225,13 +252,22 @@ const AdminHomePage = () => {
             ))}
           </div> */}
           <div >
-            <Chart
+            {/* <Chart
               data={dataNNPC}
               chartType="bar"
               yAxisLabel="Volume (mscf)"
               xAxisDataKey="month"
               colors={chartColors}
               title='Customer Consumption Chart'
+            /> */}
+            <Chart
+              data={chartData}
+              chartType="bar"
+              xAxisDataKey="month"
+              yAxisLabel="Amount"
+              colors={['#4F46E5', '#10B981', '#F59E0B']}
+              title="Customer Consumption Chart"
+              onFilterChange={handleFilterChange}
             />
           </div>
         </div>
@@ -273,12 +309,13 @@ const AdminHomePage = () => {
       <div>
         <div className='mt-[28px]'>
           <Chart
-            data={lineDataGraph}
-            chartType="line"
+            data={chartDataOne}
+            chartType="bar"
             yAxisLabel="Volume (mscf)"
             xAxisDataKey="month"
             colors={chartColors}
             title='Customer Consumption Chart'
+            onFilterChange={handleFilterChangeOne}
           />
         </div>
       </div>
