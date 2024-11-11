@@ -32,6 +32,11 @@ import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
 //   valueOptions: Array<SelectOption>;
 // }
 
+// interface DataKeyConfig {
+//   key: string;
+//   type: DataKeyType;
+// }
+
 
 const AdminHomePage = () => {
   // const [, setSortDetails] = useState({ sortType: '', value: '' });
@@ -58,7 +63,7 @@ const AdminHomePage = () => {
     console.log('Filter params:', params);
 
     const newData = generateLineGraphData(
-      params.filterType === 'month' ? 1 : 12
+      params.filterType === 'month' ? 'daily' : 'monthly'
     );
     setChartData(newData);
   }, []);
@@ -67,10 +72,23 @@ const AdminHomePage = () => {
     console.log('Filter params:', params);
 
     const newData = generateNNPCData(
-      params.filterType === 'month' ? 1 : 12
+      // params.filterType === 'month' ? 1 : 12
+      params.filterType === 'month' ? 'daily' : 'monthly'
     );
     setChartDataOne(newData);
   }, []);
+
+
+  // const dataMixed = [
+  //   { month: 'Jan', revenue: 1000, orders: 500 },
+  //   { month: 'Feb', revenue: 1500, orders: 500 },
+  //   { month: 'Mar', revenue: 1200, orders: 500 }
+  // ];
+
+  // const dataKeyConfig: DataKeyConfig[] = [
+  //   { key: 'revenue', type: 'bar' as const },
+  //   { key: 'orders', type: 'line' as const }
+  // ];
 
   // const dataNNPC = [
   //   { month: 'Jan', 'Total Consumption': 120, },
@@ -251,7 +269,7 @@ const AdminHomePage = () => {
               </div>
             ))}
           </div> */}
-          <div >
+          <div >for daily generate only the days in that particular month
             {/* <Chart
               data={dataNNPC}
               chartType="bar"
@@ -262,8 +280,8 @@ const AdminHomePage = () => {
             /> */}
             <Chart
               data={chartData}
-              chartType="bar"
-              xAxisDataKey="month"
+              chartType="area"
+              xAxisDataKey="date"
               yAxisLabel="Amount"
               colors={['#4F46E5', '#10B981', '#F59E0B']}
               title="Customer Consumption Chart"
@@ -312,11 +330,21 @@ const AdminHomePage = () => {
             data={chartDataOne}
             chartType="bar"
             yAxisLabel="Volume (mscf)"
-            xAxisDataKey="month"
+            xAxisDataKey="date"
             colors={chartColors}
             title='Customer Consumption Chart'
             onFilterChange={handleFilterChangeOne}
           />
+          {/* <Chart
+            data={dataMixed}
+            chartType="mixed"
+            xAxisDataKey="month"
+            yAxisLabel="Values"
+            colors={['#4F46E5', '#10B981']}
+            title="Revenue and Orders"
+            dataKeyConfig={dataKeyConfig}
+            onFilterChange={handleFilterChange}
+          /> */}
         </div>
       </div>
       <div className='w-[100%] mt-[28px]'>
