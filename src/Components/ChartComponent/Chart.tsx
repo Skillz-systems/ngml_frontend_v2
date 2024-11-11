@@ -632,7 +632,7 @@ const Chart = <T extends Record<string, unknown>>({
                         type="monotone"
                         stroke={color}
                         stackId="a"
-                        radius={[5, 5, 5, 5]}
+                        radius={[0, 0, 0, 0]}
                     />
                 );
             case 'line':

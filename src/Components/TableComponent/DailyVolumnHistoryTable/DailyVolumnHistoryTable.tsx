@@ -79,7 +79,15 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Status',
             flex: 1,
             renderCell: (params) => (
-                <div className="text-[12px] font-[400] text-[#49526A] leading-3 ">
+                <div className="text-[12px] font-[400] text-white leading-3 p-2 rounded-md" style={{
+                    backgroundColor: params.row.abnormal_status === 'normal'
+                        ? 'rebeccapurple'
+                        : params.row.abnormal_status === 'abnormal'
+                            ? '#DC2626'
+                            : params.row.abnormal_status === 'regular'
+                                ? '#2563EB'
+                                : '#6B7280'
+                }}>
                     {params.row.abnormal_status}
                 </div>
             ),

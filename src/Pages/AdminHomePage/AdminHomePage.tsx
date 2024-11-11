@@ -282,7 +282,7 @@ const AdminHomePage = () => {
               data={chartData}
               chartType="bar"
               xAxisDataKey="date"
-              yAxisLabel="Amount"
+              yAxisLabel="Volume (mscf)"
               colors={['#4F46E5', '#10B981', '#F59E0B']}
               title="Customer Consumption Chart"
               onFilterChange={handleFilterChange}
@@ -328,7 +328,7 @@ const AdminHomePage = () => {
         <div className='mt-[28px]'>
           <Chart
             data={chartDataOne}
-            chartType="bar"
+            chartType="line"
             yAxisLabel="Volume (mscf)"
             xAxisDataKey="date"
             colors={chartColors}
