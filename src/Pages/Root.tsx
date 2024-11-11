@@ -40,7 +40,7 @@ export default Root;
 // import MainLayout from '@/Layout/MainLayout';
 // import { Outlet } from 'react-router-dom';
 
-// const Root = () => {
+// const Rogot = () => {
 
 //     return (
 //         <MainLayout>
