@@ -288,8 +288,12 @@ const AdminHomePage = () => {
               // chartType="bar"
               xAxisDataKey="date"
               yAxisLabel="Volume (mscf)"
-              colors={['#012209', '#005828',
-                '#00af50'
+              // colors={['#f6ff0d', '#005828',
+              //   '#00af50'
+              // ]}
+
+              colors={['#f6ff0d',
+                '#005828'
               ]}
               title="Customer Consumption Chart"
               onFilterChange={handleFilterChange}
