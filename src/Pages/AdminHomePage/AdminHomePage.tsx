@@ -34,9 +34,8 @@ import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
 
 interface DataKeyConfig {
   key: string;
-  type: DataKeyType;
+  type: 'bar' | 'line';
 }
-
 
 const AdminHomePage = () => {
   // const [, setSortDetails] = useState({ sortType: '', value: '' });
