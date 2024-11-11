@@ -269,7 +269,7 @@ const AdminHomePage = () => {
               </div>
             ))}
           </div> */}
-          <div >for daily generate only the days in that particular month
+          <div >
             {/* <Chart
               data={dataNNPC}
               chartType="bar"
