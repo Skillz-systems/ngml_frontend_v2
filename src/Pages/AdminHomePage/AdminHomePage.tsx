@@ -292,7 +292,7 @@ const AdminHomePage = () => {
               //   '#00af50'
               // ]}
 
-              colors={['#f6ff0d',
+              colors={['#D3D3D3',
                 '#005828'
               ]}
               title="Customer Consumption Chart"
