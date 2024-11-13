@@ -1,64 +1,213 @@
 
-import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
+import { DollarRate, useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import {
   ArrowOutwardOutlined,
 } from '@mui/icons-material';
-import React, { useCallback, useState } from 'react';
-import { ActivityLogCard, Chart, DailyVolumnHistoryTable, StatisticCard, StatisticRectangleCard } from '../../Components/index';
-
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, StatisticCard, StatisticRectangleCard } from '../../Components/index';
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
-
 import { FilterParams } from '@/Hooks/useChartFilter';
 import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
+import FormInput from '@/Components/Custominput/FormInput';
+import { useNavigate } from 'react-router-dom';
+import { FileType } from '@/Components/Fileuploadinput/FileTypes';
+import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { convertFileToBase64 } from '@/Utils/base64Converter';
+import { toast } from 'react-toastify';
+import DollarRateDisplay from '@/Components/DollarRateDisplay/DollarRateDisplay';
 
-
-// import { aC } from 'vitest/dist/reporters-1evA5lom';
-
-
-// interface SelectOption {
-//   label: string;
-//   value: string;
-// }
-
-// interface DynamicCardDataItem {
-//   type: 'primary' | 'secondary';
-//   title: string;
-//   content: React.ReactNode;
-//   icon: React.ReactNode;
-//   yearOptions: Array<number>;
-//   valueOptions: Array<SelectOption>;
-// }
-
+type DollarData = {
+  [key: string]: string | File | null;
+};
 interface DataKeyConfig {
   key: string;
   type: 'bar' | 'line';
 }
 
-const AdminHomePage = () => {
-  // const [, setSortDetails] = useState({ sortType: '', value: '' });
-  const currentUser = useAppSelector(selectCurrentUser);
-  // const userId = Number(currentUser?.id)
 
+const AdminHomePage = () => {
+  const [chartData, setChartData] = useState(generateLineGraphData());
+  const [chartDataOne, setChartDataOne] = useState(generateNNPCData());
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formError, setFormError] = useState<string>('');
+  const [dollarData, setDollarData] = useState<DollarData>({});
+  const [dollarForm, setDollarForm] = useState<FormField[]>([]);
+  const [latestRate] = useState<DollarRate | null>(null);
+
+
+
+  const navigate = useNavigate();
+
+
+
+  const currentUser = useAppSelector(selectCurrentUser);
   const { data, error, isError, isSuccess, isLoading } = useTasksQuery();
   const { data: customers } = useGetCustomersQuery();
+
+
+  const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
+  const { data: rateData, isSuccess: rateSuccess, isLoading: rateIsLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
 
   const getFirstName = (fullName: string) => {
     return fullName.split(' ')[0];
   };
 
-  const [chartData, setChartData] = useState(generateLineGraphData());
-  const [chartDataOne, setChartDataOne] = useState(generateNNPCData());
+
+  useEffect(() => {
+    if (rateSuccess && rateData) {
+      try {
+        const parsedForm = JSON.parse(rateData.data.json_form);
+        setDollarForm(parsedForm);
 
 
-  // const sampleNNPCData = generateNNPCData();
-  // const sampleLineData = generateLineGraphData();
-  // const sampleBusinessData = generateBusinessData();
+        const initialData = parsedForm.reduce((acc: DollarData, field: FormField) => {
+          if (field.name) {
+            acc[field.name] = field.type === 'file' ? null : '';
+          }
+          return acc;
+        }, {});
+
+        setDollarData(initialData);
+
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+        setDollarForm([]);
+        setDollarData({});
+      }
+    }
+  }, [rateData, rateSuccess]);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      const allFilled = areRequiredFieldsFilled(dollarForm, dollarData);
+      if (!allFilled) return;
+
+    }
+  }, [dollarData, isModalOpen, dollarForm]);
+
+
+  const toggleModal = (open: boolean) => {
+    setIsModalOpen(open);
+    setFormError('');
+    const searchParams = new URLSearchParams(location.search);
+
+    if (open) {
+      searchParams.set('addRate', 'true');
+    } else {
+      searchParams.delete('addRate');
+    }
+    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+  };
+
+
+  const handleChange = (field: string, value: string | File | null) => {
+    if (value instanceof File) {
+      setDollarData(prev => ({
+        ...prev,
+        [field]: value,
+      }));
+    } else {
+      setDollarData(prev => ({ ...prev, [field]: value || '' }));
+    }
+  };
+
+
+  const handleAddRate = async () => {
+    if (!areRequiredFieldsFilled(dollarForm, dollarData)) {
+      setFormError('Please fill all required fields.');
+      return;
+    }
+
+    try {
+      setFormError('');
+      const formFieldAnswers = await Promise.all(
+        dollarForm.map(async (field) => {
+          const value = dollarData[field.name as keyof typeof dollarData];
+
+          if (field.type === 'file' && value instanceof File) {
+            try {
+              console.log(`Attempting to convert file: ${field.name}`, value);
+              const base64File = await convertFileToBase64(value);
+              console.log(`Base64 for ${field.name} (first 100 chars):`, base64File.substring(0, 100));
+              return {
+                id: field.id,
+                elementType: field.type,
+                name: field.name || field.id.toString(),
+                placeholder: field.placeholder || '',
+                key: field.name || '',
+                value: base64File
+              };
+            } catch (error) {
+              console.error(`Error converting ${field.name} to Base64:`, error);
+              return null;
+            }
+          } else {
+            return {
+              id: field.id,
+              elementType: field.type,
+              name: field.name || field.id.toString(),
+              placeholder: field.placeholder || '',
+              key: field.name || '',
+              value: value || ''
+            };
+          }
+        })
+      );
+
+      const validFormFieldAnswers = formFieldAnswers.filter(answer => answer !== null);
+
+      const payload = {
+        form_builder_id: rateData?.data?.id?.toString() || '',
+        name: rateData?.data?.name || '',
+        process_flow_id: rateData?.data?.process_flow_id?.toString() || '',
+        process_flow_step_id: rateData?.data?.process_flow_step_id?.toString() || '',
+        tag_id: rateData?.data?.tag_id || '',
+        form_field_answers: JSON.stringify(validFormFieldAnswers),
+      };
+
+      await submitForm(payload).unwrap();
+
+      const result = await submitForm(payload).unwrap();
+
+      if (result) {
+        toast.success('Dollar rate updated successfully');
+
+        const initialData = dollarForm.reduce((acc: DollarData, field: FormField) => {
+          if (field.name) {
+            acc[field.name] = field.type === 'file' ? null : '';
+          }
+          return acc;
+        }, {});
+
+        setDollarData(initialData);
+        setIsModalOpen(false);
+        
+        const searchParams = new URLSearchParams(location.search);
+        searchParams.delete('addRate');
+        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormError('An error occurred while submitting the form. Please try again.');
+    }
+  };
+
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const addRate = searchParams.get('addRate');
+
+    if (addRate === 'true') {
+      setIsModalOpen(true);
+    }
+  }, [location.search]);
+
 
   const handleFilterChange = useCallback((params: FilterParams) => {
-    // Handle filter changes
     console.log('Filter params:', params);
 
     const newData = generateLineGraphData(
@@ -76,6 +225,7 @@ const AdminHomePage = () => {
     );
     setChartDataOne(newData);
   }, []);
+
 
 
   // const dataMixed = [
@@ -152,32 +302,6 @@ const AdminHomePage = () => {
   ];
 
 
-  // const dynamicCardData: DynamicCardDataItem[] = [
-  //   {
-  //     type: 'primary',
-  //     title: 'Total Supplied Volume ',
-  //     content: '12,129,243,990.00',
-  //     icon: <RestaurantMenuOutlined />,
-  //     yearOptions: [2020, 2021, 2022],
-  //     valueOptions: [
-  //       { label: 'Revenue', value: 'revenue' },
-  //       { label: 'Profit', value: 'profit' },
-  //     ],
-  //   },
-  //   {
-  //     type: 'secondary',
-  //     title: 'Total Consumption Volume ',
-  //     content: '4,039,213,455.00',
-  //     icon: <FileDownloadDoneOutlined />,
-  //     yearOptions: [2020, 2021, 2022],
-  //     valueOptions: [
-  //       { label: 'Profit', value: 'profit' },
-  //       { label: 'Revenue', value: 'revenue' },
-  //     ],
-  //   },
-  // ];
-
-
   const getIconStyles = (title: string) => {
     switch (title) {
       case 'Staff':
@@ -221,12 +345,18 @@ const AdminHomePage = () => {
 
   return (
     <div className="h-fit w-full" >
-      <div>
-        <div className='text-[30px] text-[#49526A] font-[700]'>Welcome {currentUser && (
-          <span className="text-[30px] text-[#49526A] font-[700] capitalize">
-            {getFirstName(currentUser.name)}
-          </span>
-        )}</div>
+      <div className='flex justify-between items-center'>
+        <div>
+          <div className='text-[30px] text-[#49526A] font-[700]'>Welcome {currentUser && (
+            <span className="text-[30px] text-[#49526A] font-[700] capitalize">
+              {getFirstName(currentUser.name)}
+            </span>
+          )}
+          </div>
+        </div>
+        <div>
+          <DollarRateDisplay latestRate={latestRate} />
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4">
         {cardData.map((card, index) => {
@@ -254,30 +384,7 @@ const AdminHomePage = () => {
               />
             ))}
           </div>
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[100%] mt-4">
-            {dynamicCardData.map((card, index) => (
-              <div key={index} className='mt-[15px]'>
-                <StatisticDynamicCard
-                  type={card.type}
-                  title={card.title}
-                  content={card.content}
-                  icon={card.icon}
-                  onSortChange={handleSortChange}
-                  yearOptions={card.yearOptions}
-                  valueOptions={card.valueOptions}
-                />
-              </div>
-            ))}
-          </div> */}
           <div >
-            {/* <Chart
-              data={dataNNPC}
-              chartType="bar"
-              yAxisLabel="Volume (mscf)"
-              xAxisDataKey="month"
-              colors={chartColors}
-              title='Customer Consumption Chart'
-            /> */}
             <Chart
 
               // data={dataMixed}
@@ -307,16 +414,11 @@ const AdminHomePage = () => {
               <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
             </div>
           </div>
+
           {/* <div className='h-[400px] overflow-y-auto'> */}
           <div className='w-[100%] p-[10px] pt-[0px]'>
             {isLoading &&
-
               <img src={images.ngmlPortrait} className='w-full h-full' alt="loader" />
-              // <Loader className="text-nnpc-100 size-10 " />
-              // <div
-              //   className=" bg-cover bg-center bg-no-repeat"
-              //   style={{ backgroundImage: `url(${images.ngmlPortrait})` }}
-              // ></div>
             }
 
             {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
@@ -347,21 +449,85 @@ const AdminHomePage = () => {
             title='Customer Consumption Chart'
             onFilterChange={handleFilterChangeOne}
           />
-          {/* <Chart
-            data={dataMixed}
-            chartType="mixed"
-            xAxisDataKey="month"
-            yAxisLabel="Values"
-            colors={['#4F46E5', '#10B981']}
-            title="Revenue and Orders"
-            dataKeyConfig={dataKeyConfig}
-            onFilterChange={handleFilterChange}
-          /> */}
         </div>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          const searchParams = new URLSearchParams(location.search);
+          searchParams.delete('createCustomer');
+          navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+        }}
+        size='medium'
+        title='Monthly Dollar Conversion Rate'
+        subTitle='Enter the average monthly dollar rate'
+        buttons={[
+          <div key="modal-buttons" className='flex gap-2 mb-[-10px]'>
+            <div className='w-[120px]'>
+              <Button
+                type="outline"
+                label="Cancel"
+                action={() => toggleModal(false)}
+                color="#FFFFFF"
+                fontStyle="italic"
+                width="100%"
+                height="40px"
+                fontSize="16px"
+                radius="20px"
+              />
+            </div>
+            <div className='w-[260px]'>
+              <Button
+                type="secondary"
+                label={submitLoading ? 'Updating...' : 'Edit Rate'}
+                action={handleAddRate}
+                color="#FFFFFF"
+                fontStyle="italic"
+                width="100%"
+                height="40px"
+                fontSize="16px"
+                radius="20px"
+                disabled={submitLoading || !areRequiredFieldsFilled(dollarForm, dollarData)}
+              />
+            </div>
+          </div>
+        ]}
+      >
+        {formError && <p className="text-red-500 mb-4">{formError}</p>}
+        {rateIsLoading ? (
+          <p>Loading form fields...</p>
+        ) : dollarForm.length > 0 ? (
+          dollarForm.map((form) => (
+            <Fragment key={form.id}>
+              <FormInput
+                type={form?.type}
+                label={form.label ?? form.name}
+                value={
+                  form.type === 'file'
+                    ? (dollarData[form.name as keyof typeof dollarData] as string || '')
+                    : (dollarData[form.name as keyof typeof dollarData] as string || '')
+                }
+                required={form?.required}
+                onChange={(value) => handleChange(form?.name as string, value)}
+                placeholder={form.placeholder}
+                options={form.options?.map(opt =>
+                  typeof opt === 'string'
+                    ? { label: opt, value: opt }
+                    : opt
+                )}
+                url={form?.url}
+                maxSizeMB={10}
+                allowedFileTypes={[FileType.PDF]}
+              />
+            </Fragment>
+          ))
+        ) : (
+          <p>No form fields available.</p>
+        )}
+      </Modal>
       <div className='w-[100%] mt-[28px]'>
-        {/* <DailyVolumnTable /> */}
-        {/* <CustomerDailyVolumns /> */}
         <DailyVolumnHistoryTable />
       </div>
     </div>
