@@ -126,8 +126,8 @@ interface NNPCData {
 interface LineGraphData {
     date: string;
     'Direct Consumption': number;
-    'UJV Consumption': number;
-    'Daily Volume Target': number;
+    'UJV/BOT Consumption': number;
+    // 'Daily Volume Target'?: number;
 }
 
 /**
@@ -192,7 +192,7 @@ export const generateNNPCData = (
  */
 export const generateLineGraphData = (
     timeframe: 'daily' | 'monthly' = 'monthly',
-    targetVolume: number = 130,
+    // targetVolume: number = 130,
     baseConsumption: number = 130,
     variance: number = 40,
     startDate: Date = new Date()
@@ -208,10 +208,10 @@ export const generateLineGraphData = (
             'Direct Consumption': Math.floor(
                 baseConsumption + (Math.random() * 2 - 1) * variance
             ),
-            'UJV Consumption': Math.floor(
+            'UJV/BOT Consumption': Math.floor(
                 baseConsumption + (Math.random() * 2 - 1) * variance
             ),
-            'Daily Volume Target': targetVolume
+            // 'Volume Target': targetVolume
         }));
     } else {
         // Generate daily data for current month only
@@ -225,10 +225,10 @@ export const generateLineGraphData = (
             'Direct Consumption': Math.floor(
                 baseConsumption + (Math.random() * 2 - 1) * variance
             ),
-            'UJV Consumption': Math.floor(
+            'UJV/BOT Consumption': Math.floor(
                 baseConsumption + (Math.random() * 2 - 1) * variance
             ),
-            'Daily Volume Target': targetVolume
+            // 'Volume Target': targetVolume
         }));
     }
 };
