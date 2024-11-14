@@ -14,7 +14,7 @@ const DollarRateDisplay: React.FC<DollarRateDisplayProps> = ({ latestRate }) => 
     };
 
     return (
-        <div className="bg-white rounded-lg border px-8 py-3 shadow-2xl">
+        <div className="bg-white rounded-lg border px-8 py-3 shadow-sm">
             <div className="flex flex-col">
                 <span className="text-[#56B45B] font-semibold text-[16px] mb-1 ">Monthly USD Rate</span>
                 <span className="text-[16px] font-semibold text-gray-800">
