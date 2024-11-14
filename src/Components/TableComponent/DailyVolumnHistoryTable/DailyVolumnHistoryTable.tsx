@@ -98,7 +98,7 @@ const DailyVolumnHistoryTable = () => {
         <div className="mt-[20px] w-[100%] ">
             <div className="flex flex-col md:flex-row justify-between border bg-[#FFFFFF] border-[#CCD0DC] border-b-0 pl-[18px] pr-[18px] w-[100%] ">
                 <div className="flex items-center italic text-[12px] text-[#828DA9] w-[100%]">
-                    Showing {data?.data.length} of {rows.length} site visits
+                    Showing {data?.data.length} of {rows.length} Daily Volume
                 </div>
                 <div className="flex items-center justify-between h-[60px] gap-5">
                     <div className="flex items-center gap-5">

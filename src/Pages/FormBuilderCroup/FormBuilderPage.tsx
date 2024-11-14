@@ -118,7 +118,7 @@ const DraggableFormElement = ({
             ref={drag}
             className={`p-2 text-sm bg-white duration-300 transition-all flex flex-col items-center space-y-1 rounded-md justify-between border border-dotted cursor-move 
                 ${isDragging ? 'opacity-60' : ''
-                } hover:bg-green-100 border-solid `}
+                } hover:bg-[#F5F7F9] border-solid `}
         >
             {label === 'Date' && (
                 <BsFillCalendarDateFill className="text-green-800 size-5" />
@@ -569,15 +569,16 @@ const FormBuilder = () => {
 
     return (
         <div className="flex flex-col h-full bg-transparent w-full rounded-xl">
-            <div className="flex items-center justify-between p-1 mb-2 ">
+              <h1 className="text-[24px] font-bold mb-5">
+                    {selectedForm ? `Editing Form: ${selectedForm.name}` : 'Form Builder'}
+                </h1>
+            <div className="flex items-center justify-between p-1 mb-3 ">
                 <Link to={'/admin/settings'}>
                     <div className="flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]">
                         <ArrowBack color="success" style={{ fontSize: 'medium' }} />
                     </div>
                 </Link>
-                <h1 className="text-lg font-bold">
-                    {selectedForm ? `Editing Form: ${selectedForm.name}` : 'Form Builder'}
-                </h1>
+              
                 <div className="flex space-x-2">
 
 
@@ -634,7 +635,7 @@ const FormBuilder = () => {
 
                 <div
                     ref={drop}
-                    className="col-span-3 p-4 overflow-y-auto rounded-xl bg-green-100  m-2 h-[28rem] scroll-smooth"
+                    className="col-span-3 p-4 overflow-y-auto rounded-[4px] bg-white  m-2 h-[28.5rem] scroll-smooth"
                 >
                     <h2 className="text-xl font-bold mb-4">Form Preview</h2>
 
