@@ -769,8 +769,9 @@ const Chart = <T extends Record<string, unknown>>({
                                 height={36}
                                 wrapperStyle={{
                                     paddingBottom: '20px',
-                                    fontSize: '14px'
+                                    fontSize: '14px',
                                 }}
+                                iconType="rect"
                             />
                             {Object.keys(data[0]).map((dataKey, index) => {
                                 if (dataKey !== xAxisDataKey) {

@@ -192,7 +192,7 @@ export const generateNNPCData = (
  */
 export const generateLineGraphData = (
     timeframe: 'daily' | 'monthly' = 'monthly',
-    // targetVolume: number = 130,
+    targetVolume: number = 310,
     baseConsumption: number = 130,
     variance: number = 40,
     startDate: Date = new Date()
@@ -211,7 +211,7 @@ export const generateLineGraphData = (
             'UJV/BOT Consumption': Math.floor(
                 baseConsumption + (Math.random() * 2 - 1) * variance
             ),
-            // 'Volume Target': targetVolume
+            'Volume Target': targetVolume
         }));
     } else {
         // Generate daily data for current month only
@@ -228,7 +228,7 @@ export const generateLineGraphData = (
             'UJV/BOT Consumption': Math.floor(
                 baseConsumption + (Math.random() * 2 - 1) * variance
             ),
-            // 'Volume Target': targetVolume
+            'Volume Target': targetVolume
         }));
     }
 };

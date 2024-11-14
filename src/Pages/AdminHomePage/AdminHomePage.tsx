@@ -1,24 +1,24 @@
 
+import FormInput from '@/Components/Custominput/FormInput';
+import DollarRateDisplay from '@/Components/DollarRateDisplay/DollarRateDisplay';
+import { FileType } from '@/Components/Fileuploadinput/FileTypes';
+import { FilterParams } from '@/Hooks/useChartFilter';
 import { DollarRate, useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
+import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
+import { convertFileToBase64 } from '@/Utils/base64Converter';
+import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
 import {
   ArrowOutwardOutlined,
 } from '@mui/icons-material';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, StatisticCard, StatisticRectangleCard } from '../../Components/index';
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
-import { FilterParams } from '@/Hooks/useChartFilter';
-import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
-import FormInput from '@/Components/Custominput/FormInput';
-import { useNavigate } from 'react-router-dom';
-import { FileType } from '@/Components/Fileuploadinput/FileTypes';
-import { areRequiredFieldsFilled } from '@/Utils/formValidation';
-import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
-import { convertFileToBase64 } from '@/Utils/base64Converter';
-import { toast } from 'react-toastify';
-import DollarRateDisplay from '@/Components/DollarRateDisplay/DollarRateDisplay';
 
 type DollarData = {
   [key: string]: string | File | null;
@@ -185,7 +185,7 @@ const AdminHomePage = () => {
 
         setDollarData(initialData);
         setIsModalOpen(false);
-        
+
         const searchParams = new URLSearchParams(location.search);
         searchParams.delete('addRate');
         navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
@@ -395,12 +395,12 @@ const AdminHomePage = () => {
               // chartType="bar"
               xAxisDataKey="date"
               yAxisLabel="Volume (mscf)"
-              // colors={['#f6ff0d', '#005828',
+              // colors={['#D3D3D3', '#005828',
               //   '#00af50'
               // ]}
 
-              colors={['#D3D3D3',
-                '#005828'
+              colors={['#ec0000',
+                '#005828', '#888a88'
               ]}
               title="Customer Consumption Chart"
               onFilterChange={handleFilterChange}

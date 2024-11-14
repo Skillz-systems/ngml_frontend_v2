@@ -375,7 +375,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   const userInfo = currentUser
     ? {
       name: currentUser.name,
-      designation: 'D. Manager',
+      designation: '',
       avatar: images.avatarLogo,
     }
     : {
