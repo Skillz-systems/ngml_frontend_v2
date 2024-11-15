@@ -76,7 +76,7 @@ const DraggableItem = ({ type, name }: { type: string; name: string }) => {
     return (
         <div
             ref={drag}
-            className={`p-2 mb-2 bg-white rounded cursor-move ${isDragging ? 'opacity-50' : ''}`}
+            className={`p-2 mb-2 text-[14px] bg-white rounded-[6px] cursor-move ${isDragging ? 'opacity-50' : ''}`}
         >
             {name}
         </div>
@@ -604,9 +604,9 @@ const ProcessFlowBuilder = () => {
 
     return (
         <div className="flex flex-col h-full w-[100%]">
-            <div className="w-full flex-shrink-0 p-4 flex justify-between items-center rounded-xl mb-4" >
+            <div className="w-full flex-shrink-0 p-4 flex justify-between items-center rounded-[6px] mb-4" >
                 {/* <img src={images.newLogo} alt='nnpc logo' className='cursor-pointer' onClick={() => navigate('/admin')} /> */}
-                <Heading size="h6" className='text-nnpcmediumgreen-950 text-center'>Process Flow Builder</Heading>
+                <Heading size="h5" className='text-nnpcmediumgreen-950 text-center'>Process Flow Builder</Heading>
                 <div className='gap-3 flex'>
                     <button
                         type='button'
@@ -637,38 +637,35 @@ const ProcessFlowBuilder = () => {
 
             <div className="flex flex-1 overflow-hidden">
                 <div className="w-1/4 bg-[#F5F7F9] p-4 overflow-y-auto rounded-xl mr-4 h-fit">
-                    <h2 className="text-xl font-bold mb-2">FLow Items</h2>
+                    <h2 className="text-[16px] font-bold mb-1 text-[#2D6844]">Flow Items</h2>
                     {!selectedFlow && <DraggableItem type={ItemTypes.PROCESS_FLOW} name="Process Flow" />}
                     <DraggableItem type={ItemTypes.PROCESS_FLOW_STEP} name="Process Flow Step" />
 
                     {/* Scrollable list of saved process flows */}
-                    <h3 className="text-[16px] font-semibold mt-4">Saved Process Flows</h3>
+                    <h3 className="text-[16px] font-bold mt-6 text-[#2D6844] ">Saved Process Flows</h3>
                     <div className="overflow-y-auto max-h-40">
                         {processFlows.map(flow => (
                             <div
                                 key={flow.id}
-                                className="cursor-pointer p-2 mt-2 bg-sky-200 rounded"
+                                className="cursor-pointer p-2 mt-1 text-[14px] bg-white rounded-[6px]"
                                 onClick={() => handleSelectFlow(flow)}
                             >
                                 {flow.name}
                             </div>
                         ))}
                     </div>
-
-                    <h3 className="text-[16px] font-semibold mt-4">Created Process flow</h3>
-                    <div className="overflow-y-auto max-h-40">
+                    <h3 className="text-[16px] font-bold mt-6 text-[#2D6844]">Created Process flow</h3>
+                    <div className="overflow-y-auto max-h-40 mt-1">
                         {backendProcessflows?.data && backendProcessflows?.data?.map((flow: any) => (
                             <div
                                 key={flow.id}
-                                className="cursor-pointer p-2 mt-2 bg-sky-200 rounded"
+                                className="cursor-pointer p-2 mt-2 text-[14px] bg-white rounded-[6px]"
                                 onClick={() => handleSelectFlow(flow)}
                             >
                                 {flow.name}
                             </div>
                         ))}
                     </div>
-
-
                 </div>
 
                 <div ref={drop} className="w-3/4 bg-[#F5F7F9] p-4 overflow-y-scroll rounded-xl h-[30rem]">

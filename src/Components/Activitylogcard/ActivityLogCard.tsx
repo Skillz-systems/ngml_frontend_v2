@@ -42,7 +42,7 @@ const ActivityLogCard: React.FC<ActivityLogCardProps> = ({
             {button ? (
               <div className="bg-customGreen text-gray-800 font-[300] mt-[-35px] ml-[-30px] rounded px-2 py-1">{truncateTitle(title)}</div>
             ) : (
-              <div className="bg-[#D2F69E] text-[#49526A] text-[12px] p-1 rounded-[5px] font-[700]">{truncateTitle(title)}</div>
+              <div className="bg-[#53B052] text-white text-[12px] p-1 rounded-[5px] font-[700]">{truncateTitle(title)}</div>
             )}
             {formattedDateTime && (
               <div className={button ? 'text-[#828DA9] text-[13px] mt-[-40px] mr-[-40px]' : 'text-[#828DA9] text-[10px] font-[500]'}>

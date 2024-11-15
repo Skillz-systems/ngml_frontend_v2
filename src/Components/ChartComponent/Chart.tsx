@@ -680,7 +680,7 @@ const Chart = <T extends Record<string, unknown>>({
     const FilterControls = () => {
         if (filterParams.filterType === 'month') {
             return (
-                <div className="flex items-end gap-3">
+                <div className="flex items-end gap-3 ">
                     <SelectDropdown
                         options={months}
                         value={filterParams.month!}
