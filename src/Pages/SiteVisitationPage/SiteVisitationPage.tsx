@@ -73,7 +73,7 @@ const SiteVisitationPage = () => {
             console.error('Error saving site visit:', error);
             setFormError('An error occurred while saving the site visit. Please try again.');
         }
-    }, [customerForm, customerData]);
+    }, [customerForm, customerData, submitForm]);
 
     return (
         <div>
