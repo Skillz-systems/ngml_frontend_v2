@@ -23,7 +23,7 @@ const SiteVisitationPage = () => {
 
 
 
-    const { data, isSuccess, isLoading } = useGetFormByNameQuery('Sitevisiteform');
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery('SiteVisitForm');
     const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
 
     const navigate = useNavigate();
