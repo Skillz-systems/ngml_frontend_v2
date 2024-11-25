@@ -178,6 +178,7 @@ const AdminCustomerList: React.FC = () => {
                     <StatisticRectangleCard
                         title='Active Customers'
                         icon={<img src={images.customers} alt="staff icon" />}
+                        // value={JSON.stringify(customers?.data.length) ?? ''}
                         value={'0'}
                         valueColor='text-black'
                         iconBgColor='bg-nnpc-50 rounded-[10px]'
@@ -185,6 +186,7 @@ const AdminCustomerList: React.FC = () => {
                     <StatisticRectangleCard
                         title='Processing Customers'
                         icon={<img src={images.warning} alt="staff icon" />}
+                        // value='112'
                         value={JSON.stringify(customers?.data.length) ?? ''}
                         valueColor='text-green-800'
                         backgroundColor='bg-nnpc-600'
