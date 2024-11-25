@@ -1,4 +1,5 @@
 import { Button, Heading, Modal } from '@/Components';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 import { Task, User, useAssignTaskMutation, useGetTasksQuery, useGetUsersQuery } from '@/Redux/Features/AssignTask/assignTaskService';
 import { ArrowBack } from '@mui/icons-material';
 import React, { useState } from 'react';
@@ -7,9 +8,10 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const AssignTask: React.FC = () => {
+    
+    const { isModalOpen, toggleModal } = useModalManagement('assignTaskModal');
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
+    
     const { data: tasks, isLoading: tasksLoading } = useGetTasksQuery();
     const { data: users, isLoading: usersLoading } = useGetUsersQuery(Number(selectedTask?.id),
         {
@@ -22,7 +24,7 @@ const AssignTask: React.FC = () => {
             try {
                 await assignTask({ taskId: selectedTask.id, userId }).unwrap();
                 toast.success('Task assigned successfully');
-                setIsModalOpen(false);
+                toggleModal(false);
             } catch (error) {
                 console.log(error);
                 toast.error('Failed to assign task');
@@ -54,7 +56,7 @@ const AssignTask: React.FC = () => {
                                     label="Assign Task"
                                     action={() => {
                                         setSelectedTask(task);
-                                        setIsModalOpen(true);
+                                        toggleModal(true);
                                     }}
                                     icon={<FaUserPlus className="mr-2" />}
                                     color="#FFFFFF"
@@ -70,7 +72,7 @@ const AssignTask: React.FC = () => {
 
                 <Modal
                     isOpen={isModalOpen}
-                    onClose={() => setIsModalOpen(false)}
+                    onClose={() => toggleModal(false)}
                     size="large"
                     title="Assign Task"
                     subTitle={`Assign "${selectedTask?.entity}" to a user`}
@@ -80,7 +82,7 @@ const AssignTask: React.FC = () => {
                                 <Button
                                     type="outline"
                                     label="Cancel"
-                                    action={() => setIsModalOpen(false)}
+                                    action={() => toggleModal(false)}
                                     color="#FFFFFF"
                                     width="100%"
                                     height="40px"

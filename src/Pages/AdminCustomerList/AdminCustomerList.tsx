@@ -7,24 +7,20 @@ import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 import React, { Fragment, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, CustomerListTable, Heading, Modal, StatisticRectangleCard } from '../../Components/index';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 
 type CustomerData = {
     [key: string]: string | File | null;
 };
 
 const AdminCustomerList: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isModalOpen, toggleModal } = useModalManagement('createCustomer');  
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
 
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    // const { data, isSuccess, isLoading } = useGetFormByIdQuery(1);
     const { data, isSuccess, isLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
     const { data: customers } = useGetCustomersQuery();
     const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
@@ -62,18 +58,6 @@ const AdminCustomerList: React.FC = () => {
         }
     }, [customerData, isModalOpen, customerForm]);
 
-    const toggleModal = (open: boolean) => {
-        setIsModalOpen(open);
-        setFormError('');
-        const searchParams = new URLSearchParams(location.search);
-
-        if (open) {
-            searchParams.set('createCustomer', 'true');
-        } else {
-            searchParams.delete('createCustomer');
-        }
-        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-    };
 
     const handleChange = (field: string, value: string | File | null) => {
         if (value instanceof File) {
@@ -153,24 +137,16 @@ const AdminCustomerList: React.FC = () => {
                 }, {});
 
                 setCustomerData(initialData);
-                setIsModalOpen(false);
+                toggleModal(false);
                 const searchParams = new URLSearchParams(location.search);
                 searchParams.delete('createCustomer');
-                navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
             }
         } catch (error) {
             console.error('Error submitting form:', error);
             setFormError('An error occurred while submitting the form. Please try again.');
         }
     };
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const createCustomer = searchParams.get('createCustomer');
-
-        if (createCustomer === 'true') {
-            setIsModalOpen(true);
-        }
-    }, [location.search]);
+    
 
     return (
         <div className="">
@@ -221,13 +197,7 @@ const AdminCustomerList: React.FC = () => {
 
             <Modal
                 isOpen={isModalOpen}
-                // onClose={() => toggleModal(false)}
-                onClose={() => {
-                    setIsModalOpen(false);
-                    const searchParams = new URLSearchParams(location.search);
-                    searchParams.delete('createCustomer');
-                    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-                }}
+                onClose={() => toggleModal(false)}
                 size='medium'
                 title='Create New Customer'
                 subTitle='Only Use this Method if the Customer is an already Existing Customer of the NGML'

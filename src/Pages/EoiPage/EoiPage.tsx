@@ -1,5 +1,6 @@
 import { Button, EoiRequestTemplate, Modal } from '@/Components';
 import FormInput from '@/Components/Custominput/FormInput';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
@@ -15,7 +16,7 @@ type CustomerData = {
 };
 
 const EoiPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, toggleModal } = useModalManagement('Eoirquest');
   const [customerForm, setCustomerForm] = useState<FormField[]>([]);
   const [customerData, setCustomerData] = useState<CustomerData>({});
   const [formError, setFormError] = useState<string>('');
@@ -45,18 +46,18 @@ const EoiPage = () => {
     setCustomerSiteId(Number(customer[5]))
   }, [location]);
 
-  const toggleModal = useCallback((open: boolean) => {
-    setIsModalOpen(open);
-    const searchParams = new URLSearchParams(location.search);
+  // const toggleModal = useCallback((open: boolean) => {
+  //   setIsModalOpen(open);
+  //   const searchParams = new URLSearchParams(location.search);
 
-    if (open) {
-      searchParams.set('Eoirquest', 'true');
-    } else {
-      searchParams.delete('eoirquest');
-    }
+  //   if (open) {
+  //     searchParams.set('Eoirquest', 'true');
+  //   } else {
+  //     searchParams.delete('eoirquest');
+  //   }
 
-    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-  }, [location, navigate]);
+  //   navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+  // }, [location, navigate]);
 
   // const [status] = useState('Default Status');
   // const [selectedRow] = useState({

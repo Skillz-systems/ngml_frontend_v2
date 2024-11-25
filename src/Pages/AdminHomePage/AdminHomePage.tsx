@@ -19,10 +19,12 @@ import { ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, Statist
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 
 type DollarData = {
   [key: string]: string | File | null;
 };
+
 interface DataKeyConfig {
   key: string;
   type: 'bar' | 'line';
@@ -30,25 +32,20 @@ interface DataKeyConfig {
 
 
 const AdminHomePage = () => {
+  const { isModalOpen, toggleModal } = useModalManagement('addRate');
   const [chartData, setChartData] = useState(generateLineGraphData());
   const [chartDataOne, setChartDataOne] = useState(generateNNPCData());
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formError, setFormError] = useState<string>('');
   const [dollarData, setDollarData] = useState<DollarData>({});
   const [dollarForm, setDollarForm] = useState<FormField[]>([]);
   const [latestRate] = useState<DollarRate | null>(null);
 
 
-
   const navigate = useNavigate();
-
-
 
   const currentUser = useAppSelector(selectCurrentUser);
   const { data, error, isError, isSuccess, isLoading } = useTasksQuery();
   const { data: customers } = useGetCustomersQuery();
-
-
   const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
   const { data: rateData, isSuccess: rateSuccess, isLoading: rateIsLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
 
@@ -88,20 +85,6 @@ const AdminHomePage = () => {
 
     }
   }, [dollarData, isModalOpen, dollarForm]);
-
-
-  const toggleModal = (open: boolean) => {
-    setIsModalOpen(open);
-    setFormError('');
-    const searchParams = new URLSearchParams(location.search);
-
-    if (open) {
-      searchParams.set('addRate', 'true');
-    } else {
-      searchParams.delete('addRate');
-    }
-    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-  };
 
 
   const handleChange = (field: string, value: string | File | null) => {
@@ -184,7 +167,7 @@ const AdminHomePage = () => {
         }, {});
 
         setDollarData(initialData);
-        setIsModalOpen(false);
+        toggleModal(false);
 
         const searchParams = new URLSearchParams(location.search);
         searchParams.delete('addRate');
@@ -195,16 +178,6 @@ const AdminHomePage = () => {
       setFormError('An error occurred while submitting the form. Please try again.');
     }
   };
-
-
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const addRate = searchParams.get('addRate');
-
-    if (addRate === 'true') {
-      setIsModalOpen(true);
-    }
-  }, [location.search]);
 
 
   const handleFilterChange = useCallback((params: FilterParams) => {
@@ -228,58 +201,11 @@ const AdminHomePage = () => {
 
 
 
-  // const dataMixed = [
-  //   { month: 'Jan', revenue: 1000, orders: 500 },
-  //   { month: 'Feb', revenue: 1500, orders: 500 },
-  //   { month: 'Mar', revenue: 1200, orders: 500 }
-  // ];
-
   const dataKeyConfig: DataKeyConfig[] = [
     { key: 'Direct Consumption', type: 'bar' as const },
     { key: 'UJV/BOT Consumption', type: 'bar' as const },
     { key: 'Volume Target', type: 'line' as const }
   ];
-
-  // const dataNNPC = [
-  //   { month: 'Jan', 'Total Consumption': 120, },
-  //   { month: 'Feb', 'Total Consumption': 180, },
-  //   { month: 'Mar', 'Total Consumption': 150, },
-  //   { month: 'Apr', 'Total Consumption': 250, },
-  //   { month: 'May', 'Total Consumption': 300, },
-  //   { month: 'Jun', 'Total Consumption': 300, },
-  //   { month: 'Jul', 'Total Consumption': 320, },
-  //   { month: 'Aug', 'Total Consumption': 210, },
-  //   { month: 'Sep', 'Total Consumption': 300, },
-  //   { month: 'Oct', 'Total Consumption': 250, },
-  //   { month: 'Nov', 'Total Consumption': 340, },
-  //   { month: 'Dec', 'Total Consumption': 360, },
-  // ];
-
-  // const lineDataGraph = [
-  //   { month: 'Jan', 'Direct Consumption': 120, 'UJV Consumption': 110, 'Daily Volume Target': 130 },
-  //   { month: 'Feb', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
-  //   { month: 'Mar', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
-  //   { month: 'Apr', 'Direct Consumption': 150, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
-  //   { month: 'May', 'Direct Consumption': 150, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
-  //   { month: 'Jun', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
-  //   { month: 'Jul', 'Direct Consumption': 120, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
-  //   { month: 'Aug', 'Direct Consumption': 110, 'UJV Consumption': 140, 'Daily Volume Target': 130 },
-  //   { month: 'Sep', 'Direct Consumption': 100, 'UJV Consumption': 120, 'Daily Volume Target': 130 },
-  //   { month: 'Oct', 'Direct Consumption': 120, 'UJV Consumption': 150, 'Daily Volume Target': 130 },
-  //   { month: 'Nov', 'Direct Consumption': 140, 'UJV Consumption': 130, 'Daily Volume Target': 130 },
-  //   { month: 'Dec', 'Direct Consumption': 160, 'UJV Consumption': 170, 'Daily Volume Target': 130 },
-  // ];
-
-  // const dataNNPC = [
-  //   { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
-  //   { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },
-  //   { month: 'Mar', 'Amount Sold': 150, Delivered: 120, Requests: 200, Revenue: 600 },
-  //   { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
-  //   { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
-  // ];
-  // const chartColors = ['#8884d8', '#82ca9d', '#413ea0', '#ff7300'];
-
-
 
   const cardData = [
     {
@@ -454,12 +380,7 @@ const AdminHomePage = () => {
 
       <Modal
         isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-          const searchParams = new URLSearchParams(location.search);
-          searchParams.delete('createCustomer');
-          navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-        }}
+        onClose={() => toggleModal(false)}
         size='medium'
         title='Monthly Dollar Conversion Rate'
         subTitle='Enter the average monthly dollar rate'
