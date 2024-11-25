@@ -159,7 +159,7 @@ const DdqPage: React.FC = () => {
                 <Modal
                     isOpen={isModalOpen}
                     onClose={() => toggleModal(false)}
-                    title="Upload DDQ"
+                    title="Create DDQ"
                     buttons={[
                         <div key="buttons" className='flex gap-2 mb-[-10px]'>
                             <div className='w-[120px]'>
