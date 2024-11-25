@@ -288,9 +288,14 @@
 
 // export default CustomerLocation;
 
+
+
+
+
 import { Button, Heading, LocationCard, Modal } from '@/Components';
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
@@ -305,7 +310,7 @@ type CustomerData = {
 };
 
 const CustomerLocation: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, toggleModal } = useModalManagement('createLocationCustomer');
   const { customerId } = useParams<{ customerId: string }>();
   const [customerForm, setCustomerForm] = useState<FormField[]>([]);
   const [customerData, setCustomerData] = useState<CustomerData>({});
@@ -345,18 +350,6 @@ const CustomerLocation: React.FC = () => {
     }
   }, [formData, formSuccess]);
 
-  const toggleModal = (open: boolean) => {
-    setIsModalOpen(open);
-    setFormError('');
-    const searchParams = new URLSearchParams(location.search);
-
-    if (open) {
-      searchParams.set('createLocationCustomer', 'true');
-    } else {
-      searchParams.delete('createLocationCustomer');
-    }
-    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-  };
 
   const handleChange = (field: string, value: string | File | null) => {
     if (value instanceof File) {
@@ -434,7 +427,7 @@ const CustomerLocation: React.FC = () => {
         }, {});
 
         setCustomerData(initialData);
-        setIsModalOpen(false);
+        toggleModal(false);
         const searchParams = new URLSearchParams(location.search);
         searchParams.delete('createLocationCustomer');
         navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
@@ -451,7 +444,7 @@ const CustomerLocation: React.FC = () => {
     const createLocationCustomer = searchParams.get('createLocationCustomer');
 
     if (createLocationCustomer === 'true') {
-      setIsModalOpen(true);
+      toggleModal(true);
     }
   }, [location.search]);
 
@@ -505,10 +498,8 @@ const CustomerLocation: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => {
-          setIsModalOpen(false);
-          const searchParams = new URLSearchParams(location.search);
-          searchParams.delete('createLocationCustomer');
-          navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+          toggleModal(false);
+
         }}
         size='large'
         title='Add New Location Address'

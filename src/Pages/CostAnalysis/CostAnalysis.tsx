@@ -1,31 +1,21 @@
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
-import { Fragment, useCallback, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Button, Modal } from '../../Components/index';
 import images from '../../assets/index';
-// import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 
-// interface CardDataItem {
-//     type: 'withLink' | 'withoutLink' | 'withReport';
-//     title: string;
-//     subtitle: string;
-//     icon: React.ReactNode;
-//     linkText: string;
-//     linkText2: string;
-//     width: number | string;
-//     height: number | string;
-// }
 
 type CustomerData = {
     [key: string]: string | File | null;
 };
 
 const CostAnalysis: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isModalOpen, toggleModal } = useModalManagement('uploadCapex');
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
@@ -34,17 +24,10 @@ const CostAnalysis: React.FC = () => {
     const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
     const location = useLocation();
 
-
-    // const { data, isSuccess, isLoading } = useGetFormByNameQuery('EOIform');
     const { data, isSuccess, isLoading } = useGetFormByNameQuery(`customeranalysisform/customer/${customerId}/${customerSiteId}`, {
         skip: !customerId
     });
 
-
-    const navigate = useNavigate();
-    // const location = useLocation();
-
-    // const { data, isSuccess, isLoading } = useGetFormByNameQuery('customeranalysisform');
     const [submitForm, { isSuccess: submitSuccess }] = useSubmitFormMutation();
 
 
@@ -81,39 +64,11 @@ const CostAnalysis: React.FC = () => {
         }
     }, [customerData, isModalOpen, customerForm]);
 
-
-    // const toggleModal = (open: boolean) => {
-    //     setIsModalOpen(open);
-    //     setFormError('');
-    //     const searchParams = new URLSearchParams(location.search);
-
-    //     if (open) {
-    //         searchParams.set('uploadCapex', 'true');
-    //     } else {
-    //         searchParams.delete('uploadCapex');
-    //     }
-
-    //     navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-    // };
-
     useEffect(() => {
         const customer = location.pathname.split('/');
         setCustomerId(Number(customer[4]));
         setCustomerSiteId(Number(customer[5]))
     }, [location]);
-
-    const toggleModal = useCallback((open: boolean) => {
-        setIsModalOpen(open);
-        const searchParams = new URLSearchParams(location.search);
-
-        if (open) {
-            searchParams.set('uploadCapex', 'true');
-        } else {
-            searchParams.delete('uploadCapex');
-        }
-
-        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-    }, [location, navigate]);
 
     const handleChange = (field: string, value: string | File | null) => {
         if (value instanceof File) {
@@ -192,29 +147,6 @@ const CostAnalysis: React.FC = () => {
             setFormError('An error occurred while submitting the form. Please try again.');
         }
     };
-
-    // const costAnalysisCardDataTwo: CardDataItem[] = [
-    //     {
-    //         type: 'withLink',
-    //         title: 'Dangote Cement',
-    //         subtitle: 'Site Survey Report',
-    //         linkText: 'Last Updated',
-    //         linkText2: '12/13/2023',
-    //         icon: <img src={images.files} alt="Copy Icon" className="w-5 h-5" />,
-    //         width: '200px',
-    //         height: '100%',
-    //     },
-    // ];
-
-    // useEffect(() => {
-    //     const searchParams = new URLSearchParams(location.search);
-    //     const uploadCapex = searchParams.get('uploadCapex');
-
-    //     if (uploadCapex === 'true') {
-    //         setIsModalOpen(true);
-    //     }
-    // }, [location.search]);
-
     return (
         <div className="w-full h-full p-4 bg-white rounded-xl flex flex-col gap-4 md:gap-6">
             <div className="w-full h-full bg-white rounded-xl border flex flex-col justify-start items-start gap-4">
@@ -229,22 +161,6 @@ const CostAnalysis: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {/* <div className=" flex-wrap w-full p-3 bg-[#FFFFFF] border-b items-center gap-3 flex">
-                    {costAnalysisCardDataTwo.map((cards, index) => (
-                        <div key={index} className="flex flex-1 min-w-[150px] max-w-[200px]">
-                            <DocumentCard
-                                type={cards.type}
-                                title={cards.title}
-                                subtitle={cards.subtitle}
-                                linkText={cards.linkText}
-                                linkText2={cards.linkText2}
-                                icon={cards.icon}
-                                // width={cards.width}
-                                height={cards.height}
-                            />
-                        </div>
-                    ))}
-                </div> */}
             </div>
             <Modal
                 isOpen={isModalOpen}

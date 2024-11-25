@@ -3,6 +3,7 @@
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { Button, Modal } from '@/Components/index';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
@@ -20,7 +21,7 @@ const DdqPage: React.FC = () => {
     const [formError, setFormError] = useState<string>('');
     const [customerId, setCustomerId] = useState<number | null>(null);
     const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isModalOpen, toggleModal } = useModalManagement('createLocationCustomer');
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -38,18 +39,6 @@ const DdqPage: React.FC = () => {
         setCustomerSiteId(Number(customer[5]))
     }, [location]);
 
-    const toggleModal = useCallback((open: boolean) => {
-        setIsModalOpen(open);
-        const searchParams = new URLSearchParams(location.search);
-
-        if (open) {
-            searchParams.set('uploadDdq', 'true');
-        } else {
-            searchParams.delete('uploadDdq');
-        }
-
-        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-    }, [location, navigate]);
 
     useEffect(() => {
         if (isSuccess && data) {
@@ -77,7 +66,7 @@ const DdqPage: React.FC = () => {
         const uploadDdq = searchParams.get('uploadDdq');
 
         if (uploadDdq === 'true') {
-            setIsModalOpen(true);
+            toggleModal(true);
         }
     }, [location.search]);
 

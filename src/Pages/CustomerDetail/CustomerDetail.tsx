@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { useParams } from 'react-router-dom';
 import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 
 
 type CustomerData = {
@@ -18,7 +19,7 @@ type CustomerData = {
 };
 
 const CustomerDetail: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isModalOpen, toggleModal } = useModalManagement('EditCustomer'); 
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
@@ -66,18 +67,6 @@ const CustomerDetail: React.FC = () => {
         }
     }, [customerData, isModalOpen, customerForm]);
 
-    const toggleModal = (open: boolean) => {
-        setIsModalOpen(open);
-        setFormError('');
-        const searchParams = new URLSearchParams(location.search);
-
-        if (open) {
-            searchParams.set('EditCustomer', 'true');
-        } else {
-            searchParams.delete('createCustomer');
-        }
-    };
-
 
     const handleChange = (field: string, value: string | File | null) => {
         if (value instanceof File) {
@@ -119,6 +108,7 @@ const CustomerDetail: React.FC = () => {
 
             await submitForm(payload).unwrap();
             toast.success('Customer updated successfully!');
+            toggleModal(false);
         } catch (error) {
             setFormError('Error updating customer. Please try again.');
         }
@@ -168,7 +158,7 @@ const CustomerDetail: React.FC = () => {
                         <Modal
                             isOpen={isModalOpen}
                             onClose={() => {
-                                setIsModalOpen(false);
+                                toggleModal(false);
 
                             }}
                             size='medium'

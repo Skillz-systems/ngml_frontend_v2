@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Heading, Modal } from '@/Components'
 import FormInput from '@/Components/Custominput/FormInput';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import colors from '@/Utils/colors'
@@ -19,7 +20,7 @@ const SiteVisitationPage = () => {
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isModalOpen, toggleModal } = useModalManagement('addsitevisit');
 
 
 
@@ -54,17 +55,17 @@ const SiteVisitationPage = () => {
         }
     }, [data, isSuccess]);
 
-    const toggleModal = (open: boolean) => {
-        setIsModalOpen(open);
-        setFormError('');
-        const searchParams = new URLSearchParams(location.search);
+    // const toggleModal = (open: boolean) => {
+    //     setIsModalOpen(open);
+    //     setFormError('');
+    //     const searchParams = new URLSearchParams(location.search);
 
-        if (open) {
-            searchParams.set('createCustomer', 'true');
-        } else {
-            searchParams.delete('createCustomer');
-        }
-    };
+    //     if (open) {
+    //         searchParams.set('createCustomer', 'true');
+    //     } else {
+    //         searchParams.delete('createCustomer');
+    //     }
+    // };
 
 
 
