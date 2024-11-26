@@ -2,20 +2,29 @@
 import FormInput from '@/Components/Custominput/FormInput';
 import DollarRateDisplay from '@/Components/DollarRateDisplay/DollarRateDisplay';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
-import { FilterParams } from '@/Hooks/useChartFilter';
+// import { FilterParams } from '@/Hooks/useChartFilter';
 import { DollarRate, useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
-import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
+// import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
 import {
   ArrowOutwardOutlined,
 } from '@mui/icons-material';
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, { Fragment,
+  //  useCallback, 
+   useEffect, 
+   useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, StatisticCard, StatisticRectangleCard } from '../../Components/index';
+import { ActivityLogCard,
+   Button,
+    // Chart,
+  DailyVolumnHistoryTable, 
+  Modal, 
+  StatisticCard, 
+  StatisticRectangleCard } from '../../Components/index';
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
@@ -25,16 +34,16 @@ type DollarData = {
   [key: string]: string | File | null;
 };
 
-interface DataKeyConfig {
-  key: string;
-  type: 'bar' | 'line';
-}
+// interface DataKeyConfig {
+//   key: string;
+//   type: 'bar' | 'line';
+// }
 
 
 const AdminHomePage = () => {
   const { isModalOpen, toggleModal } = useModalManagement('addRate');
-  const [chartData, setChartData] = useState(generateLineGraphData());
-  const [chartDataOne, setChartDataOne] = useState(generateNNPCData());
+  // const [chartData, setChartData] = useState(generateLineGraphData());
+  // const [chartDataOne, setChartDataOne] = useState(generateNNPCData());
   const [formError, setFormError] = useState<string>('');
   const [dollarData, setDollarData] = useState<DollarData>({});
   const [dollarForm, setDollarForm] = useState<FormField[]>([]);
@@ -180,32 +189,32 @@ const AdminHomePage = () => {
   };
 
 
-  const handleFilterChange = useCallback((params: FilterParams) => {
-    console.log('Filter params:', params);
+  // const handleFilterChange = useCallback((params: FilterParams) => {
+  //   console.log('Filter params:', params);
 
-    const newData = generateLineGraphData(
-      params.filterType === 'month' ? 'daily' : 'monthly'
-    );
-    setChartData(newData);
-  }, []);
-  const handleFilterChangeOne = useCallback((params: FilterParams) => {
-    // Handle filter changes
-    console.log('Filter params:', params);
+  //   const newData = generateLineGraphData(
+  //     params.filterType === 'month' ? 'daily' : 'monthly'
+  //   );
+  //   setChartData(newData);
+  // }, []);
+  // const handleFilterChangeOne = useCallback((params: FilterParams) => {
+  //   // Handle filter changes
+  //   console.log('Filter params:', params);
 
-    const newData = generateNNPCData(
-      // params.filterType === 'month' ? 1 : 12
-      params.filterType === 'month' ? 'daily' : 'monthly'
-    );
-    setChartDataOne(newData);
-  }, []);
+  //   const newData = generateNNPCData(
+  //     // params.filterType === 'month' ? 1 : 12
+  //     params.filterType === 'month' ? 'daily' : 'monthly'
+  //   );
+  //   setChartDataOne(newData);
+  // }, []);
 
 
 
-  const dataKeyConfig: DataKeyConfig[] = [
-    { key: 'Direct Consumption', type: 'bar' as const },
-    { key: 'UJV/BOT Consumption', type: 'bar' as const },
-    { key: 'Volume Target', type: 'line' as const }
-  ];
+  // const dataKeyConfig: DataKeyConfig[] = [
+  //   { key: 'Direct Consumption', type: 'bar' as const },
+  //   { key: 'UJV/BOT Consumption', type: 'bar' as const },
+  //   { key: 'Volume Target', type: 'line' as const }
+  // ];
 
   const cardData = [
     {
@@ -310,7 +319,7 @@ const AdminHomePage = () => {
               />
             ))}
           </div>
-          <div >
+          {/* <div >
             <Chart
 
               // data={dataMixed}
@@ -331,7 +340,7 @@ const AdminHomePage = () => {
               title="Customer Consumption Chart"
               onFilterChange={handleFilterChange}
             />
-          </div>
+          </div> */}
         </div>
         <div className='w-full max-h-[60rem] bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
           <div className='h-[48px] bg-[#F6F8FA] flex items-center p-[10px] justify-between'>
@@ -364,7 +373,7 @@ const AdminHomePage = () => {
       </div>
 
       <div>
-        <div className='mt-[28px]'>
+        {/* <div className='mt-[28px]'>
           <Chart
 
             data={chartDataOne}
@@ -375,7 +384,7 @@ const AdminHomePage = () => {
             title='Customer Consumption Chart'
             onFilterChange={handleFilterChangeOne}
           />
-        </div>
+        </div> */}
       </div>
 
       <Modal

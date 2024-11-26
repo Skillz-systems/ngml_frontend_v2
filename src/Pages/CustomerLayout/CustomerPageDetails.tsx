@@ -1,5 +1,7 @@
 import { FilterParams } from '@/Hooks/useChartFilter';
-import { Chart, StatisticDynamicCardTwo } from '../../Components/index';
+import { 
+    // Chart, 
+    StatisticDynamicCardTwo } from '../../Components/index';
 import images from '../../assets/index';
 
 import { useCallback } from 'react';
@@ -7,11 +9,11 @@ import { useCallback } from 'react';
 
 const CustomerPageDetails = () => {
 
-    const handleFilterChange = useCallback((params: FilterParams) => {
-        // Handle filter changes
-        console.log('Filter params:', params);
+    // const handleFilterChange = useCallback((params: FilterParams) => {
+    //     // Handle filter changes
+    //     console.log('Filter params:', params);
 
-    }, []);
+    // }, []);
 
     // const dataNNPC = [
     //     { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
@@ -21,22 +23,22 @@ const CustomerPageDetails = () => {
     //     { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
     // ];
 
-    const lineDataGraph = [
-        { month: 'Jan', 'Daily Volume': 120, 'Consumed Volume': 110, },
-        { month: 'Feb', 'Daily Volume': 120, 'Consumed Volume': 130, },
-        { month: 'Mar', 'Daily Volume': 120, 'Consumed Volume': 140, },
-        { month: 'Apr', 'Daily Volume': 120, 'Consumed Volume': 140, },
-        { month: 'May', 'Daily Volume': 120, 'Consumed Volume': 130, },
-        { month: 'Jun', 'Daily Volume': 120, 'Consumed Volume': 120, },
-        { month: 'Jul', 'Daily Volume': 120, 'Consumed Volume': 120, },
-        { month: 'Aug', 'Daily Volume': 120, 'Consumed Volume': 140, },
-        { month: 'Sep', 'Daily Volume': 120, 'Consumed Volume': 120, },
-        { month: 'Oct', 'Daily Volume': 120, 'Consumed Volume': 150, },
-        { month: 'Nov', 'Daily Volume': 120, 'Consumed Volume': 130, },
-        { month: 'Dec', 'Daily Volume': 120, 'Consumed Volume': 170, },
-    ];
+    // const lineDataGraph = [
+    //     { month: 'Jan', 'Daily Volume': 120, 'Consumed Volume': 110, },
+    //     { month: 'Feb', 'Daily Volume': 120, 'Consumed Volume': 130, },
+    //     { month: 'Mar', 'Daily Volume': 120, 'Consumed Volume': 140, },
+    //     { month: 'Apr', 'Daily Volume': 120, 'Consumed Volume': 140, },
+    //     { month: 'May', 'Daily Volume': 120, 'Consumed Volume': 130, },
+    //     { month: 'Jun', 'Daily Volume': 120, 'Consumed Volume': 120, },
+    //     { month: 'Jul', 'Daily Volume': 120, 'Consumed Volume': 120, },
+    //     { month: 'Aug', 'Daily Volume': 120, 'Consumed Volume': 140, },
+    //     { month: 'Sep', 'Daily Volume': 120, 'Consumed Volume': 120, },
+    //     { month: 'Oct', 'Daily Volume': 120, 'Consumed Volume': 150, },
+    //     { month: 'Nov', 'Daily Volume': 120, 'Consumed Volume': 130, },
+    //     { month: 'Dec', 'Daily Volume': 120, 'Consumed Volume': 170, },
+    // ];
 
-    const chartColors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
+    // const chartColors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
 
     return (
         <div className="grid grid-cols-1" >
@@ -66,7 +68,7 @@ const CustomerPageDetails = () => {
             </div>
 
             <div className="mt-6 md:mt-0">
-                <div className='mt-[28px]'>
+                {/* <div className='mt-[28px]'>
                     <Chart
                         data={lineDataGraph}
                         chartType="line"
@@ -76,7 +78,7 @@ const CustomerPageDetails = () => {
                         title='Customer Consumption Chart'
                         onFilterChange={handleFilterChange}
                     />
-                </div>
+                </div> */}
             </div>
         </div>
     );

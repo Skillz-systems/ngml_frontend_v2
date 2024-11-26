@@ -93,9 +93,9 @@ export default function InventoryTable({
                 <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Date
                 </th>
-                <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                {/* <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Other
-                </th>
+                </th> */}
                 <th className="p-4 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
                   Action
                 </th>
@@ -127,7 +127,7 @@ export default function InventoryTable({
                   <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
                     {row.date}
                   </td>
-                  <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
+                  {/* <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
                     {editingRow === index ? (
                       <input
                         type="text"
@@ -143,7 +143,7 @@ export default function InventoryTable({
                     ) : (
                       row.other
                     )}
-                  </td>
+                  </td> */}
                   <td className="flex items-center justify-end gap-0.5 p-4 text-sm text-right text-gray-500 whitespace-nowrap">
                     {editingRow === index ? (
                       <span
