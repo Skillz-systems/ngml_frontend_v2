@@ -1,10 +1,10 @@
-import { FilterParams } from '@/Hooks/useChartFilter';
+// import { FilterParams } from '@/Hooks/useChartFilter';
 import { 
     // Chart, 
     StatisticDynamicCardTwo } from '../../Components/index';
 import images from '../../assets/index';
 
-import { useCallback } from 'react';
+// import { useCallback } from 'react';
 
 
 const CustomerPageDetails = () => {
