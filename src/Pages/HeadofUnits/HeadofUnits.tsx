@@ -41,11 +41,6 @@ const HeadofUnits: React.FC = () => {
         return staff.data.data.filter(user => !assignedUserIds.includes(user.id?.toString() || ''));
     }, [staff, heads]);
 
-    // const availableUnits = useMemo(() => {
-    //     if (!Array.isArray(units?.data) || !Array.isArray(heads?.data)) return [];
-    //     const assignedUnitIds = heads.data.map(head => head.unit_id);
-    //     return units.data.filter(unit => !assignedUnitIds.includes(unit.id?.toString() || ''));
-    // }, [units, heads]);
 
     const handleCreate = async () => {
         try {
@@ -183,43 +178,6 @@ const HeadofUnits: React.FC = () => {
                     ]}
                 >
                     <div className="space-y-2">
-                        {/* <div>
-                            <label htmlFor="user_id" className="block text-sm font-medium text-gray-700 capitalize">Users</label>
-                            <select
-                                id="user_id"
-                                name="user_id"
-                                value={formData.user_id}
-                                onChange={handleChange('user_id')}
-                                className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
-                            >
-                                <option>Select user</option>
-                                {Array.isArray(staff?.data?.data) && staff.data.data?.map((aStaff) => (
-                                    <option key={aStaff.id} value={aStaff.id}>
-                                        {aStaff.name.replace(/_/g, ' ')}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div>
-                            <label htmlFor="unit_id" className="block text-sm font-medium text-gray-700 capitalize">Unit</label>
-                            <select
-                                id="unit_id"
-                                name="unit_id"
-                                value={formData.unit_id}
-                                onChange={handleChange('unit_id')}
-                                className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
-                            >
-                                <option>Select unit</option>
-                                {Array.isArray(units?.data) && units.data.map((unit) => (
-                                    <option key={unit.id} value={unit.id}>
-                                        {unit.name.replace(/_/g, ' ')}
-                                    </option>
-                                ))}
-                            </select>
-                        </div> */}
-
-
                         <div>
                             <label htmlFor="user_id" className="block text-sm font-medium text-gray-700 capitalize">Users</label>
                             <select

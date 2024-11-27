@@ -22,7 +22,7 @@ const DocumentCardThree: React.FC<DocumentCardProps> = ({
 }) => {
 
   return (
-    <div style={{ width, height }} className="w-full h-full p-4 bg-[#FFEDD5] rounded-xl border border space-y-8">
+    <div style={{ width, height }} className="w-full h-full p-4 bg-[#FFEDD5] rounded-xl  border space-y-8">
       <div className="w-8 h-8 p-2.5 bg-[#FB7185] rounded-full flex-col justify-center items-center flex">
         <div className="w-4 h-4 justify-center items-center flex">
           {icon &&
@@ -30,7 +30,7 @@ const DocumentCardThree: React.FC<DocumentCardProps> = ({
           }
         </div>
       </div>
-      <div className="w-full px-6 rounded-xl border-2 border-dashed border justify-center items-center gap-2.5 flex">
+      <div className="w-full px-6 rounded-xl border-dashed border justify-center items-center gap-2.5 flex">
         <div className="py-1 rounded-lg justify-center items-center gap-2.5 flex">
           <img src={images.Upload} className="w-6 h-6" alt="Upload Icon" />
         </div>

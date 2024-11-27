@@ -173,22 +173,6 @@ const RouteBuilder = () => {
                             onChange={(e) => setDynamicContent(e.target.value)}
                             className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
                         />
-
-                        {/* <label htmlFor="link" className="block text-sm font-medium text-gray-700 capitalize">Route</label>
-                        <select
-                            id="link"
-                            name="link"
-                            value={routeLink}
-                            onChange={(e) => setRouteLink(e.target.value)}
-                            className="mt-1 block w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
-                        >
-                            <option value="">Select a route</option>
-                            {Object.entries(routeOptions).map(([label, path]) => (
-                                <option key={path} value={path}>
-                                    {label.replace(/_/g, ' ')}
-                                </option>
-                            ))}
-                        </select> */}
                     </div>
                 </Modal>
             </div>

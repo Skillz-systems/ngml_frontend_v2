@@ -17,13 +17,6 @@ type TaskResponse = {
   data: Task[] | [];
 }
 
-// type ErrorResponse = {
-//   error: string;
-// };
-
-// type TasksQueryParams = {
-//   userId: number;
-// };
 
 export const notificationApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -33,21 +26,10 @@ export const notificationApi = api.injectEndpoints({
         method: 'GET',
       }),
        providesTags: ['Tasks'],
-      // transformResponse: (response: TaskResponse | ErrorResponse) => {
-      //   if ('error' in response) {
-      //     throw new Error(response.error);
-      //   }
-      //   return response;
-      // },
-      // transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
-      //   const errorResponse: ErrorResponse =
-      //     baseQueryReturnValue.data as ErrorResponse;
-      //   return errorResponse;
-      // },
+
      
     }),  
   }),
-//   overrideExisting:false
 });
 
 export const { useTasksQuery } = notificationApi;

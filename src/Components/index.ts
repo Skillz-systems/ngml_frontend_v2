@@ -25,31 +25,16 @@ export { default as Notification } from './NotificationComponent/Notification';
 export { default as SearchResultComponent } from './SearchBarModalComponent/SearchResultComponent';
 export { default as SearchInput } from './Searchinput/SearchInput';
 export { default as StatisticDynamicCard } from './StatisticCardComponent/StatisticDynamicCard';
-// export { default as StatisticDynamicCardTwo } from './StatisticDynamicCardTwo/StatisticDynamicCardTwo';
 export { default as StatisticCard } from './Statisticccard/StatisticCard';
 export { default as StatisticRectangleCard } from './Statisticrectanclecard/StatisticRectangleCard';
-// export { default as TabLayout } from './CustomerTabs/TabLayout';
-// export { default as TabCustomer } from './CustomerTabs/TabCustomer';
 export { default as StatisticDynamicCardTwo } from './StatisticDynamicCardTwo/StatisticDynamicCardTwo';
-// export { default as EoiRequestTemplate } from './EoiRequestTemplate/EoiRequestTemplate';
 export { default as DateCardDetails } from './DateCardDetails/DateCardDetails';
 export { default as LocationCard } from './LocationCard/LocationCard';
-
 export { default as PDFViewer } from './Viewer/PDFViewer';
 
-// export { default as Charts } from './ChartComponent/Charts';
-
-
-// export { default as SuppliersPage } from './SuppliersPage/SuppliersPage'
 
 
 export { default as TopNavigationBar } from './TopNavigationBar/TopNavigationBar';
-// export { default as SupplierRegistrationLayout } from './SupplierRegistrationLayout/SupplierRegistration';
-// export { default as SupplierInformation } from './SupplierInformation/SupplierRegistration';
-// export { default as SupplierRegistrationUpload } from './SupplierRegistrationUpload/SupplierRegistrationUpload'
-// export { default as SupplierPaymentHistory } from './SupplierPaymentHistory/SupplierPaymentHistory'
-
-
 
 
 // TABLES  

@@ -1,6 +1,4 @@
 
-
-
 'use client'
 
 import { useLoginMutation } from '@/Redux/Features/Auth/authService';
@@ -8,15 +6,12 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { useAppDispatch } from '@/Redux/hooks';
-// import { setCredentials } from '@/Redux/Features/Auth/authSlice';
-import images from '@/assets'; // Ensure this path is correct and the image exists
+import images from '@/assets'; 
 import { AuthContainer, Button, ContentContainer, CustomInput } from '@/Components';
 import '../../../index.css';
 
 const CustomerOtpPage: React.FC = () => {
     const [login, { isLoading, data, isSuccess }] = useLoginMutation();
-    // const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -32,7 +27,6 @@ const CustomerOtpPage: React.FC = () => {
 
     useEffect(() => {
         if (isSuccess && data) {
-            // dispatch(setCredentials(data));
             navigate('/optPage');
             toast.success('OTP Sent');
         }

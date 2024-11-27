@@ -13,8 +13,6 @@ export interface UnitData {
 }
 
 
-
-
 export const unitApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getUnits: builder.query<UnitData, void>({

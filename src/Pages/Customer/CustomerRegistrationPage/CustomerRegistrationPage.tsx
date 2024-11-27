@@ -28,7 +28,7 @@ const CustomerRegistrationPage: React.FC = () => {
 
   useEffect(() => {
     if (isSuccess && data) {
-      navigate('/otp-verification');  // Navigate to the OTP verification page
+      navigate('/otp-verification');  
       toast.success('Registration successful. OTP has been sent to your email.');
       console.log('Registration successful. OTP sent.');
     }
@@ -65,7 +65,6 @@ const CustomerRegistrationPage: React.FC = () => {
       try {
         await register(formData).unwrap();
       } catch (err) {
-        // Error is handled in the useEffect
       }
     }
   };

@@ -5,7 +5,6 @@ import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerServi
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
-// import images from '@/assets';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -25,7 +24,6 @@ const EoiPage = () => {
   const location = useLocation();
 
 
-  // const { data, isSuccess, isLoading } = useGetFormByNameQuery('EOIform');
   const { data, isSuccess, isLoading } = useGetFormByNameQuery(`EOIform/customer/${customerId}/${customerSiteId}`, {
     skip: !customerId
   });
@@ -33,10 +31,7 @@ const EoiPage = () => {
 
   const navigate = useNavigate();
 
-  // Assuming customer ID is passed via params
-  // const { customerId } = useParams<{ customerId: string }>();
 
-  // Fetch customer details using customerId
   const { data: customerDetails } = useGetCustomerByIdQuery(Number(customerId));
 
 
@@ -45,56 +40,6 @@ const EoiPage = () => {
     setCustomerId(Number(customer[4]));
     setCustomerSiteId(Number(customer[5]))
   }, [location]);
-
-  // const toggleModal = useCallback((open: boolean) => {
-  //   setIsModalOpen(open);
-  //   const searchParams = new URLSearchParams(location.search);
-
-  //   if (open) {
-  //     searchParams.set('Eoirquest', 'true');
-  //   } else {
-  //     searchParams.delete('eoirquest');
-  //   }
-
-  //   navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-  // }, [location, navigate]);
-
-  // const [status] = useState('Default Status');
-  // const [selectedRow] = useState({
-  //   companyName: 'Provide Company Name',
-  //   companyEmail: 'Provide an email address',
-  //   companyNumber: 'Provide a number',
-  //   status: 'Approved',
-  //   approverName: 'Okoro Florish'
-  // });
-
-
-  // useEffect(() => {
-  //   if (isSuccess && data) {
-  //     let parsedForm;
-  //     try {
-  //       parsedForm = JSON.parse(data.data.json_form);
-  //       setCustomerForm(parsedForm);
-
-  //       const initialData = parsedForm.reduce((acc: CustomerData, field: FormField) => {
-  //         if (field.name) {
-  //           acc[field.name] = '';
-  //           if (field.type === 'file') {
-  //             acc[`${field.name}`] = null;
-  //           }
-  //         }
-  //         return acc;
-  //       }, {});
-
-  //       setCustomerData(initialData);
-  //     } catch (error) {
-  //       console.error('Error parsing JSON:', error);
-  //       setCustomerForm([]);
-  //     }
-  //   }
-  // }, [data, isSuccess]);
-
-  // Update form fields with fetched customer data
 
 
   useEffect(() => {
@@ -129,20 +74,6 @@ const EoiPage = () => {
 
     }
   }, [customerData, isModalOpen, customerForm]);
-  //now
-  // const toggleModal = (open: boolean) => {
-  //   setIsModalOpen(open);
-  //   const searchParams = new URLSearchParams(location.search);
-
-  //   if (open) {
-  //     searchParams.set('reasonForRequest', 'true');
-  //   } else {
-  //     searchParams.delete('eoirquest');
-  //   }
-  // };
-
-  // const handleClose = () => { };
-
 
   const handleInputChange = (field: string, value: string | File | null) => {
     if (value instanceof File) {
@@ -234,16 +165,7 @@ const EoiPage = () => {
           columnGap="5px"
           action={() => toggleModal(true)}
         />
-        {/* <Button
-          type="primary"
-          label="Upload"
-          radius="20px"
-          width="120px"
-          height="32px"
-          icon={<div><img src={images.uploadSvg} alt="send Icon" className='text-white' /></div>}
-          columnGap="5px"
-          action={() => { }}
-        /> */}
+
       </div>
       <Modal
         isOpen={isModalOpen}
@@ -317,12 +239,10 @@ const EoiPage = () => {
       </Modal>
       <EoiRequestTemplate
         handleClose={() => { }}
-        // dateTime={'09th, Nov, 2023; 09:23:44 AM'}
         status={customerDetails?.data?.status ? 'Approved' : 'Pending'}
         companyName={customerDetails?.data?.company_name || 'N/A'}
         companyEmail={customerDetails?.data?.email || 'N/A'}
         companyNumber={customerDetails?.data?.phone_number || 'N/A'}
-        // statusHeading={customerDetails?.data?.status ? 'Approved' : 'Pending'}
         approverName={'Okoro Florish'}
       />
     </div>

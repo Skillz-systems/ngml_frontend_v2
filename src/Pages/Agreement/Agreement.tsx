@@ -18,35 +18,30 @@ const documentCardData = [
     {
         title: 'GSPA',
         subtitle: 'Agreement',
-        // icon: <img src={images.files} alt='icon' />, 
         buttonText: 'Use template',
         height: '140px'
     },
     {
         title: 'Supplement',
         subtitle: 'Agreement',
-        // icon: <img src={images.files} alt='icon' />, 
         buttonText: 'Use template',
         height: '140px'
     },
     {
         title: 'Addendum',
         subtitle: 'Agreement',
-        // icon: <img src={images.files} alt='icon' />, 
         buttonText: 'Use template',
         height: '140px'
     },
     {
         title: 'Side',
         subtitle: 'Letter',
-        // icon: <img src={images.files} alt='icon' />, 
         buttonText: 'Use template',
         height: '140px'
     },
     {
         title: 'Approval',
         subtitle: 'Letter',
-        // icon: <img src={images.files} alt='icon' />, 
         buttonText: 'Use template',
         height: '140px'
     },

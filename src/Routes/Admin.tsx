@@ -6,13 +6,10 @@ import BillingHistory from '@/Pages/BillingHistory/BillingHistory';
 import Complaints from '@/Pages/Complaints/Complaints';
 import ConnectProjectPage from '@/Pages/ConnectProjectPage/ConnectProjectPage';
 import { default as AdminCustomerPageLayout, default as CustomerPageLayout } from '@/Pages/CustomerDetail/CustomerPageLayout';
-// import CustomerInvoiceAdviceLayout from '@/Pages/CustomerInvoiceAdvice/CustomerInvoiceAdviceLayout';
 import CustomerLocation from '@/Pages/CustomerLocation/CustomerLocation';
 import CustomerNewRegistration from '@/Pages/CustomerNewRegistration/CustomerNewRegistration';
 import CustomerDailyVolumns from '@/Pages/Dailyvolumns/CustomerDailyVolumns';
-// import FormBuilder from '@/Pages/FormBuilder';
 import FormBuilderPage from '@/Pages/FormBuilderCroup/FormBuilderPage';
-// import FormBuilderDashboard from '@/Pages/FormBuilderDashboard';
 import HeadofUnits from '@/Pages/HeadofUnits/HeadofUnits';
 import InvoiceLayoutPage from '@/Pages/InvoicePage.tsx/InvoiceLayoutPage';
 import InvoicePage from '@/Pages/InvoicePage.tsx/InvoicePage';
@@ -27,7 +24,6 @@ import SupplierRegistrationLayout from '@/Pages/SupplierRegistration/SupplierReg
 import SuppliersPage from '@/Pages/SuppliersPage/SuppliersPage';
 import TenderPage from '@/Pages/TenderPage/TenderPage';
 import UserSettings from '@/Pages/UserSettingsGroup/UserSettings';
-// import { QuestionProvider } from '@/context/QuestionContext';
 
 import { RouteObject } from 'react-router-dom';
 
@@ -154,24 +150,6 @@ export const admin: RouteObject[] = [
         element: <FormBuilderPage />,
 
     },
-
-
-    // {
-    //     path: '/admin/settings/formbuilder',
-    //     element: (
-    //         <QuestionProvider>
-    //             <FormBuilderDashboard />
-    //         </QuestionProvider>
-    //     ),
-    // },
-    // {
-    //     path: '/admin/settings/formbuilder/:formId',
-    //     element: (
-    //         <QuestionProvider>
-    //             <FormBuilder />
-    //         </QuestionProvider>
-    //     ),
-    // },
 
     {
         path: '/admin/settings/processflow',

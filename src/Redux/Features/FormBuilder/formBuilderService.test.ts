@@ -64,53 +64,6 @@ vi.mock('./formBuilderService', () => ({
 import { formBuilderApi } from './formBuilderService'
 
 describe('Form Builder API', () => {
-  // describe('createForm', () => {
-  //   it('creates a new form successfully', async () => {
-  //     const result = await formBuilderApi.endpoints.createForm.initiate(mockForm)
-  //     expect(result.data).toEqual(mockFormResponse)
-  //   })
-  // })
-
-  // describe('getFormById', () => {
-  //   it('fetches form by ID successfully', async () => {
-  //     const result = await formBuilderApi.endpoints.getFormById.initiate(1)
-  //     expect(result.data).toEqual(mockFormResponse)
-  //   })
-  // })
-
-  // describe('updateForm', () => {
-  //   it('updates existing form successfully', async () => {
-  //     const updatedForm = {
-  //       ...mockForm,
-  //       name: 'Updated Form'
-  //     }
-  //     const result = await formBuilderApi.endpoints.updateForm.initiate(updatedForm)
-  //     expect(result.data).toEqual(mockFormResponse)
-  //   })
-  // })
-
-  // describe('submitForm', () => {
-  //   it('submits form data successfully', async () => {
-  //     const result = await formBuilderApi.endpoints.submitForm.initiate(mockSubmission)
-  //     expect(result.data).toEqual(mockSubmission)
-  //   })
-  // })
-
-  // describe('getDynamicFetch', () => {
-  //   it('fetches dynamic content successfully', async () => {
-  //     const result = await formBuilderApi.endpoints.getDynamicFetch.initiate('test-url')
-  //     expect(result.data.content).toBe('dynamic data')
-  //   })
-  // })
-
-  // describe('getForms', () => {
-  //   it('fetches all forms successfully', async () => {
-  //     const result = await formBuilderApi.endpoints.getForms.initiate()
-  //     expect(Array.isArray(result.data)).toBe(true)
-  //     expect(result.data).toHaveLength(1)
-  //     expect(result.data[0]).toEqual(mockFormResponse)
-  //   })
-  // })
 
   describe('error handling', () => {
     it('handles creation errors properly', async () => {

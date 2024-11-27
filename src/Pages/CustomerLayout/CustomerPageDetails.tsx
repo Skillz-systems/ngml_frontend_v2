@@ -8,18 +8,9 @@ import { useCallback } from 'react';
 const CustomerPageDetails = () => {
 
     const handleFilterChange = useCallback((params: FilterParams) => {
-        // Handle filter changes
         console.log('Filter params:', params);
 
     }, []);
-
-    // const dataNNPC = [
-    //     { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
-    //     { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },
-    //     { month: 'Mar', 'Amount Sold': 150, Delivered: 120, Requests: 200, Revenue: 600 },
-    //     { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
-    //     { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
-    // ];
 
     const lineDataGraph = [
         { month: 'Jan', 'Daily Volume': 120, 'Consumed Volume': 110, },

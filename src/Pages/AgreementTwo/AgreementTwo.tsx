@@ -83,7 +83,6 @@ const AgreementTwo: React.FC = () => {
                                 linkText={cards.linkText}
                                 linkText2={cards.linkText2}
                                 icon={cards.icon}
-                                // width={card
                                 height={cards.height}
                             />
                         </div>

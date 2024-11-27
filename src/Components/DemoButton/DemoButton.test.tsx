@@ -16,13 +16,6 @@ describe('Button', () => {
         expect(button).toHaveClass('border-2');
     });
 
-    // it("calls onClick handler when clicked", () => {
-    //     const onClick = jest.fn();
-    //     const { getByText } = render(<Button onClick={onClick}>Click me</Button>);
-    //     const button = getByText("Click me");
-    //     fireEvent.click(button);
-    //     expect(onClick).toHaveBeenCalledTimes(1);
-    // });
 
     it('disables the button when disabled prop is true', () => {
         const { getByText } = render(<Button disabled>Click me</Button>);

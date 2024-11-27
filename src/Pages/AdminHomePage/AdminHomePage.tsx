@@ -189,11 +189,9 @@ const AdminHomePage = () => {
     setChartData(newData);
   }, []);
   const handleFilterChangeOne = useCallback((params: FilterParams) => {
-    // Handle filter changes
     console.log('Filter params:', params);
 
     const newData = generateNNPCData(
-      // params.filterType === 'month' ? 1 : 12
       params.filterType === 'month' ? 'daily' : 'monthly'
     );
     setChartDataOne(newData);
@@ -312,19 +310,11 @@ const AdminHomePage = () => {
           </div>
           <div >
             <Chart
-
-              // data={dataMixed}
               chartType="mixed"
-
               dataKeyConfig={dataKeyConfig}
               data={chartData}
-              // chartType="bar"
               xAxisDataKey="date"
               yAxisLabel="Volume (mscf)"
-              // colors={['#D3D3D3', '#005828',
-              //   '#00af50'
-              // ]}
-
               colors={['#ec0000',
                 '#005828', '#888a88'
               ]}
@@ -340,8 +330,6 @@ const AdminHomePage = () => {
               <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
             </div>
           </div>
-
-          {/* <div className='h-[400px] overflow-y-auto'> */}
           <div className='w-[100%] p-[10px] pt-[0px]'>
             {isLoading &&
               <img src={images.ngmlPortrait} className='w-full h-full' alt="loader" />
@@ -366,7 +354,6 @@ const AdminHomePage = () => {
       <div>
         <div className='mt-[28px]'>
           <Chart
-
             data={chartDataOne}
             chartType="line"
             yAxisLabel="Volume (mscf)"

@@ -9,14 +9,12 @@ import {
   CustomInput,
 } from '../../Components/index';
 import { useLoginMutation } from '../../Redux/Features/Auth/authService';
-// import { useAppDispatch } from '../../Redux/hooks';
 import images from '../../assets/index';
 import '../../index.css';
 
 const StaffLoginPage: React.FC = () => {
   const [login, { isLoading, error, data, isError, isSuccess }] =
     useLoginMutation();
-  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -32,7 +30,6 @@ const StaffLoginPage: React.FC = () => {
 
   useEffect(() => {
     if (isSuccess && data) {
-      // dispatch(setCredentials(data));
       navigate('/admin');
       toast.success('Login successful');
 
@@ -69,7 +66,6 @@ const StaffLoginPage: React.FC = () => {
       try {
         await login(formData).unwrap();
       } catch (err) {
-        // Error is handled in the useEffect
       }
     }
   };

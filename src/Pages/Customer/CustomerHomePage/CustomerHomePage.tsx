@@ -8,7 +8,6 @@ import {
   RestaurantMenuOutlined
 } from '@mui/icons-material';
 import React, { useCallback } from 'react';
-// import { aC } from 'vitest/dist/reporters-1evA5lom';
 
 
 interface SelectOption {
@@ -28,12 +27,10 @@ interface DynamicCardDataItem {
 
 const CustomerHomePage = () => {
   const handleFilterChange = useCallback((params: FilterParams) => {
-    // Handle filter changes
     console.log('Filter params:', params);
 
   }, []);
-  // const currentUser = useAppSelector(selectCurrentUser);
-  // const userId = Number(currentUser?.id)
+
 
   const { data, error, isError, isSuccess } = useTasksQuery();
 
@@ -81,17 +78,10 @@ const CustomerHomePage = () => {
   }
 
 
-
-
   return (
     <div className="h-fit w-full" >
       <div>
         <div className='text-[30px] text-[#49526A] font-[700]'>Home</div>
-        {/* <div className='text-[30px] text-[#49526A] font-[700]'>Welcome {currentUser && (
-          <span className="text-[30px] text-[#49526A] font-[700] capitalize">
-            {getFirstName(currentUser.name)}
-          </span>
-        )}</div> */}
       </div>
       <div className='mt-8 h-fit grid grid-cols-1 xl:grid-cols-7 gap-6 ' id="stat-card-chart-parent">
         <div className="xl:col-span-5 col-span-1  order-last lg:order-first xl:order-last" id="cards">

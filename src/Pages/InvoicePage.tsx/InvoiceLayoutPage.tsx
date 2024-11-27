@@ -12,32 +12,10 @@ const InvoiceComponent = () =>
   </div>;
 
 const InvoiceLayoutPage: React.FC = () => {
-  // const [activeTab, setActiveTab] = useState('Items');
-  // const [showProceed, setShowProceed] = useState<boolean>(false);
 
-  // const onCreateInvoiceAdviceClick = async () => {
-  //   console.log('clicked');
-  //   setShowProceed(true);
-  // };
 
-  // const tabs = [
-  //   {
-  //     name: 'Items',
-  //     component: () => (
-  //       <InventoryTable
-  //         invoiceAdviceData={invoiceAdviceData}
-  //         onCreateInvoiceAdviceClick={onCreateInvoiceAdviceClick}
-  //       />
-  //     )
-  //   },
-  //   { name: 'GCC', component: GCCComponent },
-  //   { name: 'Invoice', component: InvoiceComponent },
-  //   { name: 'Accounts', component: AccountsComponent },
-  // ];
-
-  // const ActiveComponent = tabs.find(tab => tab.name === activeTab)?.component || tabs[0].component;
   const [activeTab, setActiveTab] = useState(() => {
-    // Initialize activeTab from URL if present
+
     const params = new URLSearchParams(window.location.search);
     return params.get('tab') || 'Items';
   });
@@ -78,7 +56,6 @@ const InvoiceLayoutPage: React.FC = () => {
       )
     },
     { name: 'Invoice', component: InvoiceComponent },
-    // { name: 'Accounts', component: AccountsComponent },
     {
       name: 'Accounts',
       component: () => (
@@ -149,13 +126,6 @@ const InvoiceLayoutPage: React.FC = () => {
               </div>
             ) : (
               null
-
-              //   <div className="px-2 py-1 border rounded-3xl">
-              //     <div className="text-[#49526A] text-base font-normal">
-              //       Link Invoice
-              //     </div>
-              //   </div>
-              // </>
             )}
           </div>
         </div>

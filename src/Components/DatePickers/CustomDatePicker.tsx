@@ -2,7 +2,6 @@ import { cn } from '@/Utils/cn';
 import { useState } from 'react';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import 'react-multi-date-picker/styles/colors/green.css';
-// import 'react-multi-date-picker/styles/layouts/mobile.css';
 import InputIcon from 'react-multi-date-picker/components/input_icon';
 import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 import 'react-multi-date-picker/styles/layouts/mobile.css';

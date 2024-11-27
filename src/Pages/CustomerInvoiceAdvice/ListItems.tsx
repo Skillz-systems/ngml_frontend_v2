@@ -1,6 +1,5 @@
 import { invoiceAdviceData } from '../InvoicePage.tsx/data'
 
-// import { invoiceAdviceData } from './data';
 import Table from './Table'
 const ListItems = () => {
     return (

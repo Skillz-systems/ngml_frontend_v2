@@ -1,95 +1,3 @@
-// import { Button } from '@/Components';
-// import { useState } from 'react';
-// import { InvoiceAdviceDataType } from '../InvoicePage.tsx/data';
-// import CommentSection from './CommentSection';
-
-// interface BacklogType {
-//     sn: number;
-//     volume: number;
-//     date: string;
-//     other: string;
-// }
-
-// export default function Table({
-//     invoiceAdviceData,
-
-// }: {
-//     invoiceAdviceData: InvoiceAdviceDataType;
-
-// }) {
-
-//     const [lineItems,] = useState<BacklogType[]>(
-//         invoiceAdviceData.lineItems
-//     );
-
-//     return (
-//         <div className="flex flex-col items-start w-full gap-2 lg:flex-row">
-//             <CommentSection commentsData={invoiceAdviceData.comments} />
-//             <div className="container py-4 md:p-4 mx-auto space-y-8 w-full lg:w-[70%]">
-//                 <div id="line-items" className="overflow-x-auto rounded-lg shadow tiny-scrollbar">
-//                     <table className="min-w-full bg-white">
-//                         <caption className="p-4 text-lg font-semibold text-left bg-gray-100">
-//                             Line Items
-//                         </caption>
-//                         <thead className="bg-gray-50">
-//                             <tr>
-//                                 <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-//                                     SN
-//                                 </th>
-//                                 <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-//                                     Volume
-//                                 </th>
-//                                 <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-//                                     Date
-//                                 </th>
-//                                 <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-//                                     Other
-//                                 </th>
-//                                 <th className="p-4 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
-//                                     Action
-//                                 </th>
-//                             </tr>
-//                         </thead>
-//                         <tbody className="divide-y divide-gray-200">
-//                             {lineItems.map((row, index) => (
-//                                 <tr id={`line-item${row.sn}`} key={index}>
-//                                     <td className="p-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-//                                         {row.sn}
-//                                     </td>
-//                                     <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-//                                         {row.volume}
-//                                     </td>
-//                                     <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-//                                         {row.date}
-//                                     </td>
-//                                     <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-//                                         {row.other}
-//                                     </td>
-
-//                                     <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-//                                         Key
-//                                     </td>
-
-//                                 </tr>
-//                             ))}
-//                         </tbody>
-//                     </table>
-//                 </div>
-//                 <Button
-//                     type="primary"
-//                     label="Create Invoice Advice"
-//                     action={() => { }}
-//                     color="#FFFFFF"
-//                     // fontStyle="italic"
-//                     width="100%"
-//                     height="35px"
-//                     fontSize="16px"
-//                     radius="20px"
-//                 />
-//             </div>
-//         </div>
-//     );
-// }
 
 import { Button } from '@/Components';
 import { useState } from 'react';
@@ -110,7 +18,7 @@ export default function Table({
 }) {
     const [lineItems,] = useState<BacklogType[]>(invoiceAdviceData.lineItems);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8; // Adjust this value to change items per page
+    const itemsPerPage = 8; 
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
