@@ -6,7 +6,7 @@ import images from '../../assets/index';
 /**
  * DocumentCardProps describes the props for the DocumentCard component.
  *
- * @typedef {Object} DocumentCardProps
+ * @typedof {Object} DocumentCardProps
  * @property {'withLink' | 'withoutLink' | 'withReport'} type - The type of document card.
  * @property {React.ReactNode} icon - The icon to be displayed on the card.
  * @property {string} title - The title text displayed on the card.

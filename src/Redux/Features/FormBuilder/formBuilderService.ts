@@ -39,20 +39,6 @@ interface Task {
   updated_at: string;
 }
 
-// type Task = {
-//   id: number;
-//   form_builder_id: number;
-//   form_field_answers: string | null;
-//   automator_task_id: number;
-//   process_flow_history_id: number | null;
-//   entity: string;
-//   entity_id: number;
-//   entity_site_id: number;
-//   user_id: number;
-//   status: number;
-//   created_at: string; 
-//   updated_at: string; 
-// };
 
 export interface FormBuilderData {
   id?: number;
@@ -142,16 +128,6 @@ export const formBuilderApi = api.injectEndpoints({
       invalidatesTags: ['Forms'],
 
     }),
-    // updateForm: builder.mutation<FormBuilderApiResponse, Partial<FormBuilderData>>({
-
-    //   query: (formData) => ({
-    //     url: `/formbuilder/api/forms/update/${formData.id}`,
-    //     method: 'PUT',
-    //     body: formData,
-    //   }),
-    //   invalidatesTags: ['Forms'],
-
-    // }),
     updateForm: builder.mutation<FormBuilderApiResponse, Partial<FormBuilderData>>({
       query: (formData) => {
         const { id, ...bodyData } = formData;

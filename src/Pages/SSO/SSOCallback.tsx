@@ -63,17 +63,13 @@ const SSOCallback = () => {
 
             if (response.user.status == 1) {
 
-                // alert('1')
-                // console.log(1)
                 navigate('/admin');
             }
             if (response.user.status == 2) {
-                // alert('2')
-                // console.log(2)
+
                 navigate('/sso/redirect');
             }
         } catch (err) {
-            // alert('err')
             console.error('SSO Callback error:', err);
         }
     };
@@ -86,11 +82,6 @@ const SSOCallback = () => {
                     className="absolute inset-0 bg-contain bg-center bg-no-repeat w-full h-full"
                     style={{ backgroundImage: `url(${images.ngmlBlank})` }}
                 >
-                    {/* <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="animate-pulse text-white text-xl">
-                            Processing...
-                        </div>
-                    </div> */}
                 </div>
             </div>
         );

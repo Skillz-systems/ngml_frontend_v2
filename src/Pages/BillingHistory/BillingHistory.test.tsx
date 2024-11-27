@@ -39,10 +39,8 @@ describe('BillingHistory Component', () => {
 
         const yearDropdown = screen.getByRole('combobox') as HTMLSelectElement;
 
-        // Change the value with the correct event structure
         fireEvent.change(yearDropdown, { target: { value: '2022' } });
 
-        // Validate the change
         expect(yearDropdown.value).toBe('2022');
     });
 });

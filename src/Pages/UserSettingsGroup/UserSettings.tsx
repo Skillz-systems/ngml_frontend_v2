@@ -53,13 +53,6 @@ const UserSettings = () => {
                     <ArrowBack color="success" style={{ fontSize: 'medium' }} />
                 </div>
             </Link>
-
-            {/* <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                <Unit />
-                <LocationGroup />
-                <Designation />
-                <DepartmentGroup />
-            </div> */}
              <div className='flex justify-end gap-[6px]'>
       <TabLayout
         title=""

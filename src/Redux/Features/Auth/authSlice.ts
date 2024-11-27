@@ -19,18 +19,6 @@ export interface RegistrationResponse {
 }
 
 
-// interface AuthState {
-//   jwt: string | null;
-//   user: {
-//     id: string;
-//     email: string;
-//     name: string;
-//     email_verified_at?: string | null;
-//     created_at?: string;
-//     updated_at?: string | null;
-//   } | null;
-// }
-
 const initialState: RegistrationResponse = {
   access_token: null,
   user: null,

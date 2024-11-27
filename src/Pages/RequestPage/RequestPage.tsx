@@ -2,7 +2,6 @@
 import React from 'react';
 import { EoiRequestTable, Heading, StatisticRectangleCard } from '../../Components/index';
 import images from '../../assets/index';
-// import { useNavigate } from 'react-router-dom';
 
 const RequestPage: React.FC = () => {
 

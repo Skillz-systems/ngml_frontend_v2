@@ -33,9 +33,7 @@ const booleanOptions = [true, false];
 
 const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'None'];
 const weekOptions = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'none'];
-// const designationOptions = ['Manager', 'Officer', 'ED', 'none'];
-// const unitOptions = ['EOI', 'Legal', 'none'];
-// const departmentOptions = ['COBD', 'Sales', 'none', 'EOI', 'legal'];
+
 
 const getOptionsForField = (fieldName: string) => {
     switch (fieldName) {
@@ -53,12 +51,7 @@ const getOptionsForField = (fieldName: string) => {
             return dayOptions;
         case 'week':
             return weekOptions;
-        // case 'next_user_designation':
-        //     return designationOptions;
-        // case 'next_user_unit':
-        //     return unitOptions;
-        // case 'next_user_department':
-        //     return departmentOptions;
+
         default:
             return null;
     }
@@ -82,7 +75,6 @@ const DraggableItem = ({ type, name }: { type: string; name: string }) => {
         </div>
     );
 };
-// added
 const DraggableStep = ({ step, index, moveStep, updateStep, deleteStep }: { step: ProcessFlowStep, index: number, moveStep: (dragIndex: number, hoverIndex: number) => void, updateStep: (updatedItem: ProcessFlow | ProcessFlowStep) => void, deleteStep: (id: number) => void }) => {
     const ref = React.useRef<HTMLDivElement>(null);
     const [{ handlerId }, drop] = useDrop<unknown, void, { handlerId: string | symbol | null }>(() => ({
@@ -154,18 +146,12 @@ const EditableContent = ({
 }) => {
     const [editedItem, setEditedItem] = useState(item);
     const [isEditing, setIsEditing] = useState(false);
-    // const [generatedRoutes, setGeneratedRoutes] = useState([])
-
-    // const routeOptions = getRouteLists();
+;
     const { data: routes } = useGetRoutesQuery();
     const { data: departments } = useGetDepartmentsQuery();
     const { data: locations } = useGetLocationsQuery();
     const { data: units } = useGetUnitsQuery();
     const { data: designations } = useGetDesignationsQuery();
-
-    // if (generatedSuccess) {
-    //     setGeneratedRoutes(routes?.data)
-    // }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -410,9 +396,6 @@ const ProcessFlowBuilder = () => {
     const [submit, { isLoading: submitLoading }] =
         useCreateProcessFlowMutation();
 
-
-    // const navigate = useNavigate();
-    // const [submitProcessFlow, { isLoading, isSuccess }] = useSubmitProcessFlowMutation();
     useEffect(() => {
         const savedFlows = localStorage.getItem('processFlows');
         if (savedFlows) {
@@ -496,14 +479,11 @@ const ProcessFlowBuilder = () => {
         },
     }));
 
-    //end added
     const handleUpdateProcessFlow = (updatedFlow: ProcessFlow | ProcessFlowStep) => {
         setSelectedFlow(updatedFlow as ProcessFlow);
     };
 
-    // const handleUpdateStep = (updatedStep: ProcessFlowStep) => {
-    //     setSteps(steps.map((step) => (step.id === updatedStep.id ? updatedStep : step)));
-    // };
+
 
     const handleUpdateStep = (updatedItem: ProcessFlow | ProcessFlowStep) => {
         if ('step_route' in updatedItem) {
@@ -605,7 +585,6 @@ const ProcessFlowBuilder = () => {
     return (
         <div className="flex flex-col h-full w-[100%]">
             <div className="w-full flex-shrink-0 p-4 flex justify-between items-center rounded-[6px] mb-4" >
-                {/* <img src={images.newLogo} alt='nnpc logo' className='cursor-pointer' onClick={() => navigate('/admin')} /> */}
                 <Heading size="h5" className='text-nnpcmediumgreen-950 text-center'>Process Flow Builder</Heading>
                 <div className='gap-3 flex'>
                     <button

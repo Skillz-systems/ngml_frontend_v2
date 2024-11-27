@@ -93,39 +93,13 @@ const AssignTask: React.FC = () => {
                         </div>
                     ]}
                 >
-                    {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {usersLoading ? (
-                            <p className="col-span-full text-center">Loading users...</p>
-                        ) : (
-                            users?.data.map((user: User) => (
-                                <div key={user.id} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
-                                    <div>
-
-                                        <p className="font-medium truncate max-w-[200px]">{user.name}</p>
-                                        <p className="text-sm text-gray-500 truncate max-w-[200px]">{user.email}</p>
-                                    </div>
-                                    <Button
-                                        type="outline"
-                                        label="Assign"
-                                        action={() => handleAssignTask(user.id)}
-                                        color="#4CAF50"
-                                        width="80px"
-                                        height="32px"
-                                        fontSize="14px"
-                                        radius="16px"
-                                        disabled={assigningTask}
-                                    />
-                                </div>
-                            ))
-                        )}
-                    </div> */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {usersLoading ? (
                             <p className="col-span-full text-center">Loading users...</p>
                         ) : (
                             users?.data.map((user: User) => (
                                 <div key={user.id} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
-                                    <div className="min-w-0 flex-1"> {/* add min-w-0 to handle truncation properly */}
+                                    <div className="min-w-0 flex-1"> 
                                         <p className="font-medium truncate w-[90%]">{user.name}</p>
                                         <p className="text-sm text-gray-500 truncate w-[90%]">{user.email}</p>
                                     </div>
