@@ -5,7 +5,6 @@ import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridPaginationModel, GridRenderCellParams, GridValueGetterParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
 
 
 const CustomerListTable = () => {

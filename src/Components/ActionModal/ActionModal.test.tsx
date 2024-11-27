@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ActionModal from './ActionModal'; // Adjust the import path as needed
+import ActionModal from './ActionModal'; 
 import logo from '@/assets/images/png-icons/Done.png';
 
 describe('ActionModal', () => {

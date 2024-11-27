@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom'; // Import MemoryRouter
+import { MemoryRouter } from 'react-router-dom'; 
 import TabCustomer, { TabListInterface } from './TabCustomer';
 
 const tablist: TabListInterface[] = [

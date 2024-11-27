@@ -2,13 +2,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Chart from './Chart';
 
-// interface DataItem {
-//     month: string;
-//     'Amount Sold': number;
-//     Delivered: number;
-//     Requests: number;
-//     Revenue: number;
-// }
 
 const data: Record<string, unknown>[] = [
     { month: 'Jan', 'Amount Sold': 300, Delivered: 300, Requests: 400, Revenue: 500 },
@@ -24,7 +17,7 @@ const meta: Meta<typeof Chart> = {
     title: 'Components/Chart',
     component: Chart,
     parameters: {
-        layout: 'fullscreen', // Change layout to fullscreen
+        layout: 'fullscreen', 
     },
     tags: ['autodocs'],
     argTypes: {

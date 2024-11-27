@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import DateCard from './DateCard';
-// import uploadIcon from '../../../public/assets/png-icons/UploadIcon.png'
 import { LocationCity, ManageAccounts } from '@mui/icons-material';
-
-
 
 
 const meta = {
