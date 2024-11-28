@@ -3,6 +3,7 @@ import FormInput from '@/Components/Custominput/FormInput';
 import DollarRateDisplay from '@/Components/DollarRateDisplay/DollarRateDisplay';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { FilterParams } from '@/Hooks/useChartFilter';
+import { useModalManagement } from '@/Hooks/useModalManagement';
 import { DollarRate, useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
@@ -19,7 +20,6 @@ import { ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, Statist
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
-import { useModalManagement } from '@/Hooks/useModalManagement';
 
 type DollarData = {
   [key: string]: string | File | null;
@@ -326,15 +326,16 @@ const AdminHomePage = () => {
         <div className='w-full max-h-[60rem] bg-[#FFFFFF] border rounded-t-lg border-[#E2E4EB] rounded-b-lg hidden xl:order-last lg:order-last order-first md:block xl:col-span-2 col-span-1'>
           <div className='h-[48px] bg-[#F6F8FA] flex items-center p-[10px] justify-between'>
             <div className='text-[#828DA9] text-[20px] font-[400]'>Available Tasks</div>
-            <div className='border size-[32px] flex items-center justify-center rounded-full' >
+            <div className='border size-[32px] flex items-center justify-center rounded-full'>
               <ArrowOutwardOutlined color="disabled" style={{ fontSize: 'medium' }} />
             </div>
           </div>
-          <div className='w-[100%] p-[10px] pt-[0px]'>
-            {isLoading &&
+          {/* Make this div scrollable */}
+          <div
+            className='w-[100%] p-[10px] pt-[0px] max-h-[45rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100'>
+            {isLoading && (
               <img src={images.ngmlPortrait} className='w-full h-full' alt="loader" />
-            }
-
+            )}
             {isSuccess && Array.isArray(data?.data) && data.data.map((activity: any, index: number) => {
               return (
                 <ActivityLogCard
@@ -344,11 +345,12 @@ const AdminHomePage = () => {
                   text={activity.text}
                   start_time={activity.start_time}
                 />
-
               );
             })}
           </div>
         </div>
+
+
       </div>
 
       <div>
