@@ -11,7 +11,109 @@ import { DateObject } from 'react-multi-date-picker';
 import { useLocation } from 'react-router-dom';
 
 
+// const sampleDailyVolumeData = [
+//     {
+//         id: 1,
+//         customer: 'Acme Water Solutions',
+//         volume: '1,250 m³',
+//         inlet: '45 PSI',
+//         outlet: '38 PSI',
+//         status: 'approve',
+//         abnormal_status: 'normal',
+//         timestamp: '2024-03-15 09:45:22',
+//         additionalNotes: 'Steady flow, no significant variations',
+//         temperature: '30C'
+//     },
+//     {
+//         id: 2,
+//         customer: 'Green Energy Utilities',
+//         volume: '875 m³',
+//         inlet: '52 PSI',
+//         outlet: '30 PSI',
+//         status: 'pending',
+//         abnormal_status: 'low',
+//         temperature: '35C',
+//         timestamp: '2024-03-15 10:15:33',
+//         additionalNotes: 'Pressure drop detected, investigate potential leak'
+//     },
+//     {
+//         id: 3,
+//         customer: 'Metropolitan Water District',
+//         volume: '2,300 m³',
+//         inlet: '60 PSI',
+//         temperature: '40C',
+//         outlet: '55 PSI',
+//         status: 'approve',
+//         abnormal_status: 'high',
+//         timestamp: '2024-03-15 11:22:11',
+//         additionalNotes: 'High volume during peak hours, system performing well'
+//     },
+//     {
+//         id: 4,
+//         customer: 'Industrial Liquid Systems',
+//         volume: '650 m³',
+//         inlet: '40 PSI',
+//         outlet: '35 PSI',
+//         status: 'pending',
+//         abnormal_status: 'normal',
+//         temperature: '30C',
+//         timestamp: '2024-03-15 12:05:44',
+//         additionalNotes: 'Consistent flow, minor pressure variations'
+//     },
+//     {
+//         id: 5,
+//         customer: 'Rural Water Cooperative',
+//         volume: '425 m³',
+//         inlet: '35 PSI',
+//         outlet: '28 PSI',
+//         status: 'approve',
+//         abnormal_status: 'low',
+//         temperature: '30C',
+//         timestamp: '2024-03-15 13:30:55',
+//         additionalNotes: 'Low pressure, recommend system inspection'
+//     },
+//     {
+//         id: 6,
+//         customer: 'Tech Valley Water Systems',
+//         volume: '1,850 m³',
+//         inlet: '58 PSI',
+//         outlet: '52 PSI',
+//         status: 'approve',
+//         abnormal_status: 'high',
+//         temperature: '30C',
+//         timestamp: '2024-03-15 14:45:01',
+//         additionalNotes: 'High-performance system, exceeding expected volumes'
+//     },
+//     {
+//         id: 7,
+//         customer: 'Coastal Resource Management',
+//         volume: '550 m³',
+//         inlet: '42 PSI',
+//         outlet: '36 PSI',
+//         status: 'pending',
+//         temperature: '30C',
+//         abnormal_status: 'normal',
+//         timestamp: '2024-03-15 15:20:33',
+//         additionalNotes: 'Standard operational parameters'
+//     },
+//     {
+//         id: 8,
+//         customer: 'Urban Infrastructure Services',
+//         volume: '1,100 m³',
+//         inlet: '48 PSI',
+//         outlet: '41 PSI',
+//         status: 'approve',
+//         temperature: '30C',
+//         abnormal_status: 'normal',
+//         timestamp: '2024-03-15 16:10:22',
+//         additionalNotes: 'Stable system performance'
+//     }
+// ];
+
+
 const DailyVolumnHistoryTable = () => {
+
+
     const [dateRange, setDateRange] = useState<DateObject[] | null>(null);
     const [rows, setRows] = useState([]);
 
@@ -63,7 +165,7 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Customer Name',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[12px] font-[400] text-[#49526A] leading-3">
+                <div className="text-[14px] font-[400] text-[#49526A] leading-3">
                     {params.row.customer}
                 </div>
             ),
@@ -73,17 +175,27 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Volume',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[12px] font-[400] text-[#49526A] leading-3">
+                <div className="text-[14px] font-[400] text-[#49526A] leading-3">
                     {params.row.volume}
                 </div>
             ),
         },
         {
-            field: 'pressure',
-            headerName: 'Pressure',
+            field: 'temperature',
+            headerName: 'Temperature',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[12px] font-[400] text-[#49526A] leading-3 space-x-3 flex items-center justify-center">
+                <div className="text-[14px] font-[400] text-[#49526A] leading-3">
+                    {params.row.temperature}
+                </div>
+            ),
+        },
+        {
+            field: 'pressure',
+            headerName: 'Pressure (Inlet & Outlet)',
+            flex: 1,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className="text-[14px] font-[400] text-[#49526A] leading-3 space-x-3 flex items-center justify-center">
                     <span>
                         {params.row.inlet}
                     </span>
@@ -93,22 +205,13 @@ const DailyVolumnHistoryTable = () => {
                 </div>
             ),
         },
-        // {
-        //     field: 'created_at',
-        //     headerName: 'DATE',
-        //     flex: 1,
-        //     renderCell: (params) => (
-        //         <div className="text-[12px] font-[400] text-[#49526A] leading-3 ">
-        //             {params.row.created_at}
-        //         </div>
-        //     ),
-        // },
+
         {
             field: 'abnormal_status',
             headerName: 'Status',
             flex: 1,
             renderCell: (params) => (
-                <div className="text-[12px] font-[400] leading-3 p-2 rounded-md flex space-x-4"
+                <div className="text-[14px] font-[400] leading-3 p-2 rounded-md flex space-x-4 capitalize"
                 >
                     <span style={{ color: params.row.status === 'approve' ? '#22c55e' : '#f59e0b' }}>
                         {params.row.status}
@@ -129,29 +232,11 @@ const DailyVolumnHistoryTable = () => {
                         <IoIosTrendingUp className='text-green-500 size-4' />
                     )
                     }
+
                 </div>
             ),
         },
-        // {
-        //     field: 'abnormal_status',
-        //     headerName: 'Status',
-        //     flex: 1,
-        //     renderCell: (params) => (
-        //         <div className="text-[12px] font-[400] leading-3 p-2 rounded-md"
-        //         // style={{
-        //         //     backgroundColor: params.row.abnormal_status === 'normal'
-        //         //         ? '#005828'
-        //         //         : params.row.abnormal_status === 'abnormal'
-        //         //             ? '#DC2626'
-        //         //             : params.row.abnormal_status === 'regular'
-        //         //                 ? '#2563EB'
-        //         //                 : '#6B7280'
-        //         // }}
-        //         >
-        //             {params.row.abnormal_status}
-        //         </div>
-        //     ),
-        // },
+
     ];
 
     return (
@@ -191,6 +276,7 @@ const DailyVolumnHistoryTable = () => {
                     rows={rows}
                     columns={columns}
                     rowHeight={48}
+
                     autoHeight
                     initialState={{
                         pagination: {
