@@ -5,8 +5,11 @@ import CustomDatePicker from '@/Components/DatePickers/CustomDatePicker';
 import { Filters, useGetAllCustomersDailyVolumeQuery } from '@/Redux/Features/Customer/customerVolume';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
+import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';
+import { MdTrendingFlat } from 'react-icons/md';
 import { DateObject } from 'react-multi-date-picker';
 import { useLocation } from 'react-router-dom';
+
 
 const DailyVolumnHistoryTable = () => {
     const [dateRange, setDateRange] = useState<DateObject[] | null>(null);
@@ -54,6 +57,17 @@ const DailyVolumnHistoryTable = () => {
     }, [isSuccess, data]);
 
     const columns: GridColDef[] = [
+
+        {
+            field: 'customer',
+            headerName: 'Customer Name',
+            flex: 1,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className="text-[12px] font-[400] text-[#49526A] leading-3">
+                    {params.row.customer}
+                </div>
+            ),
+        },
         {
             field: 'volume',
             headerName: 'Volume',
@@ -65,33 +79,79 @@ const DailyVolumnHistoryTable = () => {
             ),
         },
         {
-            field: 'created_at',
-            headerName: 'DATE',
+            field: 'pressure',
+            headerName: 'Pressure',
             flex: 1,
-            renderCell: (params) => (
-                <div className="text-[12px] font-[400] text-[#49526A] leading-3 ">
-                    {params.row.created_at}
+            renderCell: (params: GridRenderCellParams) => (
+                <div className="text-[12px] font-[400] text-[#49526A] leading-3 space-x-3 flex items-center justify-center">
+                    <span>
+                        {params.row.inlet}
+                    </span>
+                    <span>
+                        {params.row.outlet}
+                    </span>
                 </div>
             ),
         },
+        // {
+        //     field: 'created_at',
+        //     headerName: 'DATE',
+        //     flex: 1,
+        //     renderCell: (params) => (
+        //         <div className="text-[12px] font-[400] text-[#49526A] leading-3 ">
+        //             {params.row.created_at}
+        //         </div>
+        //     ),
+        // },
         {
             field: 'abnormal_status',
             headerName: 'Status',
             flex: 1,
             renderCell: (params) => (
-                <div className="text-[12px] font-[400] text-white leading-3 p-2 rounded-md" style={{
-                    backgroundColor: params.row.abnormal_status === 'normal'
-                        ? '#005828'
-                        : params.row.abnormal_status === 'abnormal'
-                            ? '#DC2626'
-                            : params.row.abnormal_status === 'regular'
-                                ? '#2563EB'
-                                : '#6B7280'
-                }}>
-                    {params.row.abnormal_status}
+                <div className="text-[12px] font-[400] leading-3 p-2 rounded-md flex space-x-4"
+                >
+                    <span style={{ color: params.row.status === 'approve' ? '#22c55e' : '#f59e0b' }}>
+                        {params.row.status}
+                    </span>
+                    {params.row.abnormal_status === 'normal' && (
+                        <MdTrendingFlat className='text-amber-500 size-4' />
+
+                    )
+                    }
+
+                    {params.row.abnormal_status === 'low' && (
+                        <IoIosTrendingDown className='text-red-500 size-4' />
+
+                    )
+                    }
+                    {params.row.abnormal_status === 'high' && (
+
+                        <IoIosTrendingUp className='text-green-500 size-4' />
+                    )
+                    }
                 </div>
             ),
         },
+        // {
+        //     field: 'abnormal_status',
+        //     headerName: 'Status',
+        //     flex: 1,
+        //     renderCell: (params) => (
+        //         <div className="text-[12px] font-[400] leading-3 p-2 rounded-md"
+        //         // style={{
+        //         //     backgroundColor: params.row.abnormal_status === 'normal'
+        //         //         ? '#005828'
+        //         //         : params.row.abnormal_status === 'abnormal'
+        //         //             ? '#DC2626'
+        //         //             : params.row.abnormal_status === 'regular'
+        //         //                 ? '#2563EB'
+        //         //                 : '#6B7280'
+        //         // }}
+        //         >
+        //             {params.row.abnormal_status}
+        //         </div>
+        //     ),
+        // },
     ];
 
     return (
