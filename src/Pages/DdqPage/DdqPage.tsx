@@ -20,7 +20,7 @@ const DdqPage: React.FC = () => {
     const [formError, setFormError] = useState<string>('');
     const [customerId, setCustomerId] = useState<number | null>(null);
     const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
-    const { isModalOpen, toggleModal } = useModalManagement('createLocationCustomer');
+    const { isModalOpen, toggleModal } = useModalManagement('uploadDdq');
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -132,7 +132,7 @@ const DdqPage: React.FC = () => {
                 setCustomerData({});
                 toggleModal(false);
                 const searchParams = new URLSearchParams(location.search);
-                searchParams.delete('createCustomer');
+                searchParams.delete('uploadDdq');
                 navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
             }
         } catch (error) {
