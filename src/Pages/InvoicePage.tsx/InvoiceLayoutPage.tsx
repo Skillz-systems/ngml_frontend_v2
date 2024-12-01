@@ -55,9 +55,9 @@ const InvoiceLayoutPage: React.FC = () => {
         />
       )
     },
-    { name: 'Invoice', component: InvoiceComponent },
+    { name: 'Invoice Advice', component: InvoiceComponent },
     {
-      name: 'Accounts',
+      name: 'Invoice',
       component: () => (
         <AccountsInvoiceOne
           invoiceAdviceData={invoiceAdviceData}

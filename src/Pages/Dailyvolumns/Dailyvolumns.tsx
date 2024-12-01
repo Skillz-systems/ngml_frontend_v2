@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, DailyVolumnHistoryTable, Modal } from '../../Components/index';
 import images from '../../assets/index';
 import DailyVolumnUpload from './DailyVolumnUpload';
@@ -52,6 +52,7 @@ const Dailyvolumns: React.FC = () => {
         <div className="w-full h-full">
             <div className="w-100% h-full p-8 bg-[#FFFFFF] bg-opacity-50 rounded-lg flex-col justify-start items-start gap-8 flex">
                 <div className="w-full justify-between items-center flex">
+
                     <div className="text-center text-3xl font-semibold">Daily Volumes History</div>
                     <div className="items-center gap-4 flex">
                         <div className="w-36 p-3 rounded-3xl border justify-center flex cursor-pointer" onClick={handleUploadNewInvoice}>

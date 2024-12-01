@@ -4,8 +4,9 @@ import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+import { ArrowBack } from '@mui/icons-material';
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, DailyVolumnHistoryTable, Modal } from '../../Components/index';
 
@@ -189,7 +190,15 @@ const CustomerDailyVolumns: React.FC = () => {
         <div className="w-full h-full">
             <div className="w-100% h-full p-8 bg-[#FFFFFF] bg-opacity-50 rounded-lg flex-col justify-start items-start gap-8 flex">
                 <div className="flex items-center justify-between w-full">
-                    <div className="text-3xl font-semibold text-center">Daily Volumes History</div>
+                    <div className="flex items-center justify-center">
+                        <Link to={`/admin/records/customer/${customerId}/${customerSiteId}/customermanager`}>
+                            <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
+                                <ArrowBack color="success" style={{ fontSize: 'medium' }} />
+                            </div>
+                        </Link>
+
+                        <div className="ml-3 text-3xl font-semibold text-center">Daily Volumes History</div>
+                    </div>
                     <div className="flex items-center gap-4">
                         <div className="flex justify-center p-3 border cursor-pointer w-36 rounded-3xl" onClick={() => toggleModal(true)}>
                             <div className="text-[14px] leading-none">Add New Volume</div>
