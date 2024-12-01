@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DocumentCard } from '../../Components/index';
@@ -49,9 +50,9 @@ const CustomerManager: React.FC = (): JSX.Element => {
         title='Daily Volumes'
         subtitle='Last Updated'
         height='330px'
-        reports='12/Nov/2023'
-        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4' 
-        onClick={() => navigate(`/admin/records/dailyvolumns/${customerId}/${customerSiteId}`)} />}
+        reports={format(new Date(), 'dd/MMM/yyyy')}
+        reportIcon={<img src={images.callmade} alt="callmade Icon" className='w-4 h-4'
+          onClick={() => navigate(`/admin/records/dailyvolumns/${customerId}/${customerSiteId}`)} />}
         backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard
@@ -60,9 +61,9 @@ const CustomerManager: React.FC = (): JSX.Element => {
         title='Billing'
         subtitle='Last Updated'
         height='330px'
-        reports='12/Nov/2023'
+        reports={format(new Date(), 'dd/MMM/yyyy')}
         reportIcon={<img src={images.callmade} alt="callmade Icon2" className='w-4 h-4'
-         onClick={() => navigate(`/admin/records/billinghistory/${customerId}/${customerSiteId}`)} />}
+          onClick={() => navigate(`/admin/records/billinghistory/${customerId}/${customerSiteId}`)} />}
         backgroundColor='bg-[#EAEEF2]'
       />
       <DocumentCard

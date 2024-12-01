@@ -10,6 +10,8 @@ import { MdTrendingFlat } from 'react-icons/md';
 import { DateObject } from 'react-multi-date-picker';
 import { useLocation } from 'react-router-dom';
 
+import { format } from 'date-fns';
+
 
 
 
@@ -62,6 +64,8 @@ const DailyVolumnHistoryTable = () => {
 
     const columns: GridColDef[] = [
 
+
+
         // {
         //     field: 'id',
         //     headerName: 'SN',
@@ -79,10 +83,12 @@ const DailyVolumnHistoryTable = () => {
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#49526A] leading-3">
-                    {params.api.getRowId(params)}
+                    {Number(params.api.getRowIndexRelativeToVisibleRows(params.id)) + 1}
                 </div>
             ),
         },
+
+
 
         {
             field: 'customer',
@@ -187,6 +193,24 @@ const DailyVolumnHistoryTable = () => {
                     )
                     }
 
+                </div>
+
+            ),
+        },
+        {
+            field: 'created_at',
+            headerName: 'Date',
+            flex: 1,
+            renderCell: (params: GridRenderCellParams) => (
+                <div className="text-[14px] font-[400] text-[#49526A] leading-3 ">
+                    <span>
+
+                        {
+                            // format(subDays(new Date(), 4), params.row.created_at)
+
+                            format(new Date(params.row.created_at), 'dd/MMM/yyyy')
+                        }
+                    </span>
                 </div>
             ),
         },

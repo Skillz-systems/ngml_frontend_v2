@@ -95,6 +95,18 @@ const CustomerListTable = () => {
                 </div>
             ),
         },
+        // {
+        //     field: 'sn',
+        //     headerName: 'SN',
+        //     filterable: false,
+        //     flex: 1,
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <div className="text-[14px] font-[400] text-[#49526A] leading-3">
+        //             {Number(params.api.getRowIndexRelativeToVisibleRows(params.id)) + 1}
+        //             {/* {params.api.getRowId(params)} */}
+        //         </div>
+        //     ),
+        // },
         {
             field: 'company_name',
             headerName: 'COMPANY NAME',
