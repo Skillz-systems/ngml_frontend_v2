@@ -314,7 +314,7 @@ const AdminHomePage = () => {
               dataKeyConfig={dataKeyConfig}
               data={chartData}
               xAxisDataKey="date"
-              yAxisLabel="Volume (mscf)"
+              yAxisLabel="Volume (Mmscf)"
               colors={['#ec0000',
                 '#005828', '#888a88'
               ]}
@@ -358,7 +358,7 @@ const AdminHomePage = () => {
           <Chart
             data={chartDataOne}
             chartType="line"
-            yAxisLabel="Volume (mscf)"
+            yAxisLabel="Volume (Mmscf)"
             xAxisDataKey="date"
             colors={['#0c6f22']}
             title='Customer Consumption Chart'
