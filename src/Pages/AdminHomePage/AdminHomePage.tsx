@@ -1,4 +1,3 @@
-
 import FormInput from '@/Components/Custominput/FormInput';
 import DollarRateDisplay from '@/Components/DollarRateDisplay/DollarRateDisplay';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
@@ -230,18 +229,18 @@ const AdminHomePage = () => {
   // ];
 
 
-  const getIconStyles = (title: string) => {
-    switch (title) {
-      case 'Staff':
-        return { bgColor: 'bg-[#005828]', iconColor: 'text-white', };
-      case 'Pending Requests':
-        return { bgColor: 'bg-[#00AF50]', iconColor: 'text-white' };
-      case 'Upcoming Site Visits':
-        return { bgColor: 'bg-[#FFD181]', iconColor: 'text-black' };
-      default:
-        return { bgColor: 'bg-gray-500', iconColor: 'text-white' };
-    }
-  };
+  // const getIconStyles = (title: string) => {
+  //   switch (title) {
+  //     case 'Staff':
+  //       return { bgColor: 'bg-[#005828]', iconColor: 'text-white', };
+  //     case 'Pending Requests':
+  //       return { bgColor: 'bg-[#00AF50]', iconColor: 'text-white' };
+  //     case 'Upcoming Site Visits':
+  //       return { bgColor: 'bg-[#FFD181]', iconColor: 'text-black' };
+  //     default:
+  //       return { bgColor: 'bg-gray-500', iconColor: 'text-white' };
+  //   }
+  // };
 
   const statisticCardData = [
     {
