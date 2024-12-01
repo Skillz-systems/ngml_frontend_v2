@@ -182,14 +182,14 @@ const AdminCustomerList: React.FC = () => {
                         valueColor='text-black'
                         iconBgColor='bg-nnpc-50 rounded-[10px]'
                     />
-                    <StatisticRectangleCard
+                    {/* <StatisticRectangleCard
                         title='Processing Customers'
                         icon={<img src={images.warning} alt="staff icon" />}
                         value={JSON.stringify(customers?.data.length) ?? ''}
                         valueColor='text-green-800'
                         backgroundColor='bg-nnpc-600'
                         iconBgColor='rounded-full bg-nnpc-700'
-                    />
+                    /> */}
                 </div>
             </div>
 

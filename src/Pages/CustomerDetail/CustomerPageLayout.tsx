@@ -25,7 +25,7 @@ const AdminCustomerPageLayout: React.FC = () => {
   const tablist = [
     { name: 'Overview', ref: 'overview' },
     { name: 'Customer details', ref: 'customerdetails' },
-    { name: 'Eoi request', ref: 'eoirequest' },
+    { name: 'EOI', ref: 'eoirequest' },
     { name: 'DDQ', ref: 'ddq' },
     { name: 'Site visit', ref: 'sitevisit' },
     { name: 'Cost analysis', ref: 'costanalysis' },
