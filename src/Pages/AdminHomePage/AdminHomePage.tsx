@@ -13,10 +13,14 @@ import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
 import {
   ArrowOutwardOutlined,
 } from '@mui/icons-material';
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import 
+// React, 
+{ Fragment, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, StatisticCard, StatisticRectangleCard } from '../../Components/index';
+import { ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, StatisticCard, 
+  // StatisticRectangleCard 
+} from '../../Components/index';
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
@@ -205,25 +209,25 @@ const AdminHomePage = () => {
     { key: 'Volume Target', type: 'line' as const }
   ];
 
-  const cardData = [
-    {
-      title: 'Staff',
-      value: '0',
-      icon: <img src={images.contact} alt="staff icon" />,
+  // const cardData = [
+  //   {
+  //     title: 'Staff',
+  //     value: '0',
+  //     icon: <img src={images.contact} alt="staff icon" />,
 
-    },
-    {
-      title: 'Pending Requests',
-      value: '0',
-      icon: <img src={images.Requesticon} alt="request icon" />,
+  //   },
+  //   {
+  //     title: 'Pending Requests',
+  //     value: '0',
+  //     icon: <img src={images.Requesticon} alt="request icon" />,
 
-    },
-    {
-      title: 'Upcoming Site Visits',
-      value: '0',
-      icon: <img src={images.zone} alt="zone icon" />,
-    },
-  ];
+  //   },
+  //   {
+  //     title: 'Upcoming Site Visits',
+  //     value: '0',
+  //     icon: <img src={images.zone} alt="zone icon" />,
+  //   },
+  // ];
 
 
   const getIconStyles = (title: string) => {
@@ -245,11 +249,11 @@ const AdminHomePage = () => {
       value: JSON.stringify(customers?.data.length) ?? '',
       primary: true,
     },
-    {
-      label: 'Suppliers',
-      value: '0',
-      primary: false,
-    },
+    // {
+    //   label: 'Suppliers',
+    //   value: '0',
+    //   primary: false,
+    // },
     {
       label: 'Staff',
       value: '0',
@@ -282,7 +286,7 @@ const AdminHomePage = () => {
           <DollarRateDisplay latestRate={latestRate} />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-6 gap-4">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 mt-6 gap-4">
         {cardData.map((card, index) => {
           const { bgColor, iconColor } = getIconStyles(card.title);
           return (
@@ -295,10 +299,10 @@ const AdminHomePage = () => {
             />
           );
         })}
-      </div>
+      </div> */}
       <div className='mt-8 h-fit grid grid-cols-1 xl:grid-cols-7 gap-6 ' id="stat-card-chart-parent">
         <div className="xl:col-span-5 col-span-1  order-last lg:order-first xl:order-last" id="cards">
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 lg:gap-4">
             {statisticCardData.map((card, index) => (
               <StatisticCard
                 key={index}

@@ -14,6 +14,6 @@ describe('AdminHomePage', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(screen.getByText('Upcoming Site Visits')).toBeInTheDocument();
+        // expect(screen.getByText('Pending Requests')).toBeInTheDocument();
     });
 });

@@ -28,7 +28,7 @@ const EoiRequestTemplate: React.FC<EoiRequestTemplateprops> = ({
         <div className="  h-[100%] w-[100%] rounded-[6px]" style={{ background: colors.dark[50] }}>
             <Box>
                 <div className='items-center h-[100%] p-4'>
-                    <Heading as="h6" size="h6" color='primaryColor' className="font-[2px] text-dark-400">EOI REQUEST</Heading>
+                    <Heading as="h6" size="h6" color='primaryColor' className="font-[2px] text-dark-400">EOI</Heading>
                 </div>
             </Box>
 
