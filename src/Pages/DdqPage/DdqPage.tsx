@@ -142,85 +142,95 @@ const DdqPage: React.FC = () => {
     }, [customerForm, customerData, data, submitForm, toggleModal, location, navigate]);
 
     return (
-        <div className='bg-[#FFFFFF] p-4 rounded-xl'>
-            <div className="rounded-xl border flex-col justify-start items-start bg-[#FFFFFF]">
-                <div className="w-full h-[60px] px-3 py-2.5 bg-dark-50 border-b justify-between items-center flex">
-                    <div className="text text-xl font-bold font-['Mulish'] leading-tight">Due Diligence Questionnaire</div>
-                    <div className="px-4 py-2 rounded-[32px] border justify-center items-center gap-2.5 flex">
-                        <div className="text-base font-normal font-['Mulish'] leading-none tracking-tight cursor-pointer" onClick={() => toggleModal(true)}>Upload DDQ</div>
-                    </div>
-                </div>
-                <div className="bg-dark-50 justify-between">
+        <>
+            <div className='flex items-end justify-end gap-2 mb-3'>
+                <Button
+                    type="primary"
+                    label="UPLOAD DDQ"
+                    radius="20px"
+                    width="150px"
+                    height="32px"
+                    columnGap="5px"
+                    action={() => toggleModal(true)}
+                />
 
-                    {/* <PDFViewer url='https://s28.q4cdn.com/392171258/files/doc_downloads/test.pdf' /> */}
-
-                </div>
-                <Modal
-                    isOpen={isModalOpen}
-                    onClose={() => toggleModal(false)}
-                    title="Create DDQ"
-                    buttons={[
-                        <div key="buttons" className='flex gap-2 mb-[-10px]'>
-                            <div className='w-[120px]'>
-                                <Button
-                                    type="outline"
-                                    label="Save and Close"
-                                    action={() => toggleModal(false)}
-                                    color="#FFFFFF"
-                                    fontStyle="italic"
-                                    width="100%"
-                                    height="40px"
-                                    fontSize="16px"
-                                    radius="20px"
-                                />
-                            </div>
-                            <div className='w-[260px]'>
-                                <Button
-                                    type="secondary"
-                                    label="Save and Continue"
-                                    action={uploadCustomerDdq}
-                                    color="#FFFFFF"
-                                    fontStyle="italic"
-                                    width="100%"
-                                    height="40px"
-                                    fontSize="16px"
-                                    radius="20px"
-                                    disabled={submitLoading || !areRequiredFieldsFilled(customerForm, customerData)}
-                                />
-                            </div>
-                        </div>
-                    ]}
-                >
-                    {formError && <p className="text-red-500 mb-4">{formError}</p>}
-                    {isLoading ? (
-                        <p>Loading form fields...</p>
-                    ) : customerForm.length > 0 ? (
-                        customerForm.map((form) => (
-                            <Fragment key={form.id}>
-                                <FormInput
-                                    type={form?.type}
-                                    label={form.label ?? form.name}
-                                    value={customerData[form.name as keyof typeof customerData] as string || ''}
-                                    required={form?.required}
-                                    onChange={(value: string | File | null) => handleInputChange(form?.name as string, value)}
-                                    placeholder={form.placeholder}
-                                    options={form.options?.map(opt =>
-                                        typeof opt === 'string'
-                                            ? { label: opt, value: opt }
-                                            : opt
-                                    )}
-                                    url={form?.url}
-                                    maxSizeMB={10}
-                                    allowedFileTypes={[FileType.PDF]}
-                                />
-                            </Fragment>
-                        ))
-                    ) : (
-                        <p>No form fields available.</p>
-                    )}
-                </Modal>
             </div>
-        </div>
+            <div className='bg-[#FFFFFF] p-4 rounded-xl'>
+
+                <div className="rounded-xl border flex-col justify-start mt-2 items-start bg-[#FFFFFF]">
+                    <div className="w-full h-[60px] px-3 py-2.5 bg-dark-50 border-b items-center flex">
+                        <div className="text text-xl font-bold font-['Mulish'] leading-tight">Due Diligence Questionnaire</div>
+                    </div>
+                    <div className="bg-dark-50 justify-between">
+                        {/* <PDFViewer url='https://s28.q4cdn.com/392171258/files/doc_downloads/test.pdf' /> */}
+                    </div>
+                    <Modal
+                        isOpen={isModalOpen}
+                        onClose={() => toggleModal(false)}
+                        title="Create DDQ"
+                        buttons={[
+                            <div key="buttons" className='flex gap-2 mb-[-10px]'>
+                                <div className='w-[120px]'>
+                                    <Button
+                                        type="outline"
+                                        label="Save and Close"
+                                        action={() => toggleModal(false)}
+                                        color="#FFFFFF"
+                                        fontStyle="italic"
+                                        width="100%"
+                                        height="40px"
+                                        fontSize="16px"
+                                        radius="20px"
+                                    />
+                                </div>
+                                <div className='w-[260px]'>
+                                    <Button
+                                        type="secondary"
+                                        label="Save and Continue"
+                                        action={uploadCustomerDdq}
+                                        color="#FFFFFF"
+                                        fontStyle="italic"
+                                        width="100%"
+                                        height="40px"
+                                        fontSize="16px"
+                                        radius="20px"
+                                        disabled={submitLoading || !areRequiredFieldsFilled(customerForm, customerData)}
+                                    />
+                                </div>
+                            </div>
+                        ]}
+                    >
+                        {formError && <p className="text-red-500 mb-4">{formError}</p>}
+                        {isLoading ? (
+                            <p>Loading form fields...</p>
+                        ) : customerForm.length > 0 ? (
+                            customerForm.map((form) => (
+                                <Fragment key={form.id}>
+                                    <FormInput
+                                        type={form?.type}
+                                        label={form.label ?? form.name}
+                                        value={customerData[form.name as keyof typeof customerData] as string || ''}
+                                        required={form?.required}
+                                        onChange={(value: string | File | null) => handleInputChange(form?.name as string, value)}
+                                        placeholder={form.placeholder}
+                                        options={form.options?.map(opt =>
+                                            typeof opt === 'string'
+                                                ? { label: opt, value: opt }
+                                                : opt
+                                        )}
+                                        url={form?.url}
+                                        maxSizeMB={10}
+                                        allowedFileTypes={[FileType.PDF]}
+                                    />
+                                </Fragment>
+                            ))
+                        ) : (
+                            <p>No form fields available.</p>
+                        )}
+                    </Modal>
+                </div>
+            </div></>
+
     );
 };
 

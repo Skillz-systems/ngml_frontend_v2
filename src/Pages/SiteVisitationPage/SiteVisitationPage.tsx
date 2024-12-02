@@ -118,14 +118,14 @@ const SiteVisitationPage = () => {
                     <Modal
                         isOpen={isModalOpen}
                         onClose={() => toggleModal(false)}
-                        title="Save Site Visit"
+                        title="Save Site Visit Form"
                         buttons={[
                             <div key="buttons" className="flex gap-2 mb-[-10px]">
                                 <div className="w-[120px]">
                                     <Button
                                         key="saveClose"
                                         type="outline"
-                                        label="Save and Close"
+                                        label="Close"
                                         action={() => toggleModal(false)}
                                         color="#FFFFFF"
                                         fontStyle="italic"
@@ -139,7 +139,7 @@ const SiteVisitationPage = () => {
                                     <Button
                                         key="saveContinue"
                                         type="secondary"
-                                        label="Save and Continue"
+                                        label="Continue"
                                         action={updateSiteVisit}
                                         color="#FFFFFF"
                                         fontStyle="italic"

@@ -5,7 +5,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { TabLayout } from '../../Components/index';
 import Agreement from '../Agreement/Agreement';
-import ConnectProject from '../ConnectProject/ConnectProject';
+// import ConnectProject from '../ConnectProject/ConnectProject';
 import CostAnalysis from '../CostAnalysis/CostAnalysis';
 import CustomerPageDetails from '../CustomerLayout/CustomerPageDetails';
 import CustomerManager from '../CustomerManager/CustomerManager';
@@ -30,7 +30,7 @@ const AdminCustomerPageLayout: React.FC = () => {
     { name: 'Site visit', ref: 'sitevisit' },
     { name: 'Cost analysis', ref: 'costanalysis' },
     { name: 'Agreement', ref: 'agreement' },
-    { name: 'Connect project', ref: 'connectproject' },
+    // { name: 'Connect project', ref: 'connectproject' },
     { name: 'Customer manager', ref: 'customermanager' }
   ];
 
@@ -42,7 +42,7 @@ const AdminCustomerPageLayout: React.FC = () => {
     sitevisit: <SiteVisitationPage />,
     costanalysis: <CostAnalysis />,
     agreement: <Agreement />,
-    connectproject: <ConnectProject />,
+    // connectproject: <ConnectProject />,
     customermanager: <CustomerManager />
   };
 
