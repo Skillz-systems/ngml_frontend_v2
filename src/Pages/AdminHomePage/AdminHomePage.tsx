@@ -1,5 +1,5 @@
 import FormInput from '@/Components/Custominput/FormInput';
-import DollarRateDisplay from '@/Components/DollarRateDisplay/DollarRateDisplay';
+// import DollarRateDisplay from '@/Components/DollarRateDisplay/DollarRateDisplay';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { FilterParams } from '@/Hooks/useChartFilter';
 import { useModalManagement } from '@/Hooks/useModalManagement';
@@ -23,6 +23,7 @@ import { ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, Statist
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import images from '../../assets/index';
+import DollarDisplay from '@/Components/DollarRateDisplay/DollarDisplay';
 
 type DollarData = {
   [key: string]: string | File | null;
@@ -281,8 +282,11 @@ const AdminHomePage = () => {
           )}
           </div>
         </div>
-        <div>
+        {/* <div>
           <DollarRateDisplay latestRate={latestRate} />
+        </div> */}
+         <div>
+          <DollarDisplay />
         </div>
       </div>
       {/* <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 mt-6 gap-4">
