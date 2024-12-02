@@ -6,19 +6,20 @@ import { useModalManagement } from '@/Hooks/useModalManagement';
 import { DollarRate, useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
+import { useGetAllStaffQuery } from '@/Redux/Features/UserSettings/staffService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 import { generateLineGraphData, generateNNPCData } from '@/Utils/sampleData';
 import {
   ArrowOutwardOutlined,
 } from '@mui/icons-material';
-import 
+import
 // React, 
 { Fragment, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, StatisticCard, 
-  // StatisticRectangleCard 
+import {
+  ActivityLogCard, Button, Chart, DailyVolumnHistoryTable, Modal, StatisticCard,
 } from '../../Components/index';
 import { selectCurrentUser } from '../../Redux/Features/Auth/authSlice';
 import { useAppSelector } from '../../Redux/hooks';
@@ -50,6 +51,8 @@ const AdminHomePage = () => {
   const currentUser = useAppSelector(selectCurrentUser);
   const { data, error, isError, isSuccess, isLoading } = useTasksQuery();
   const { data: customers } = useGetCustomersQuery();
+
+  const { data: staff } = useGetAllStaffQuery()
   const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
   const { data: rateData, isSuccess: rateSuccess, isLoading: rateIsLoading } = useGetFormByNameQuery('CreateNewCustomer/0/0');
 
@@ -256,7 +259,7 @@ const AdminHomePage = () => {
     // },
     {
       label: 'Staff',
-      value: '0',
+      value: JSON.stringify(staff?.data.data.length) ?? '',
       primary: false,
     },
   ];
