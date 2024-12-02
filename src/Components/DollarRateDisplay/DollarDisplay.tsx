@@ -141,7 +141,7 @@ export default function Component() {
                             currentRate={rate}
                         />
                     </>
-                )}
+                 )} 
             </div>
         </div>
     )

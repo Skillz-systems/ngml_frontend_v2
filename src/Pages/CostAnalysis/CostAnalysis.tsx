@@ -2,7 +2,7 @@ import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux
 import { Fragment, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button, Modal } from '../../Components/index';
-import images from '../../assets/index';
+// import images from '../../assets/index';
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
@@ -148,89 +148,104 @@ const CostAnalysis: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full p-4 bg-white rounded-xl flex flex-col gap-4 md:gap-6">
-            <div className="w-full h-full bg-white rounded-xl border flex flex-col justify-start items-start gap-4">
-                <div className="w-full flex flex-col md:flex-row justify-between items-center p-4 bg-white border rounded-xl">
-                    <div className="text-lg md:text-xl font-bold font-['Mulish']">
-                        Documents
-                    </div>
-                    <div className="flex items-center gap-2 md:gap-4">
+        <>
+            <div className='flex items-end justify-end gap-2 mb-3'>
+                <Button
+                    type="primary"
+                    label="UPLOAD DOCUMENT"
+                    radius="20px"
+                    width="185px"
+                    height="32px"
+                    columnGap="5px"
+                    action={() => toggleModal(true)}
+                />
+
+            </div>
+            <div className="w-full h-full p-4 bg-white rounded-xl flex flex-col gap-4 md:gap-6">
+                <div className="w-full h-full bg-white rounded-xl border flex flex-col justify-start items-start gap-4">
+                    <div className="w-full flex flex-col md:flex-row justify-between items-center p-4 bg-white border rounded-xl">
+                        <div className="text-lg md:text-xl font-bold font-['Mulish']">
+                            Documents
+                        </div>
+                        {/* <div className="flex items-center gap-2 md:gap-4">
                         <div className="flex items-center border px-3 py-2 rounded-3xl hover:bg-gray-100" onClick={() => toggleModal(true)}>
                             <img src={images.upload} alt="Upload" className="w-4 h-4 md:w-5 md:h-5" />
                             <span className="text-sm md:text-base ml-2 cursor-pointer">Upload Document</span>
                         </div>
+                    </div> */}
                     </div>
                 </div>
+                <Modal
+                    isOpen={isModalOpen}
+                    onClose={() => toggleModal(false)}
+                    size='medium'
+                    title='Upload Document'
+                    subTitle=''
+                    buttons={[
+                        <div className='flex gap-2 mb-[-10px]'>
+                            <div className='w-[120px]'>
+                                <Button
+                                    type="outline"
+                                    label="Cancel"
+                                    action={() => toggleModal(false)}
+                                    color="#FFFFFF"
+                                    fontStyle="italic"
+                                    width="100%"
+                                    height="40px"
+                                    fontSize="16px"
+                                    radius="20px"
+                                />
+                            </div>
+                            <div className='w-[260px]'>
+                                <Button
+                                    type="secondary"
+                                    label="Confirm"
+                                    action={handleUploadCapex}
+                                    color="#FFFFFF"
+                                    fontStyle="italic"
+                                    width="100%"
+                                    height="40px"
+                                    fontSize="16px"
+                                    radius="20px"
+                                />
+                            </div>
+                        </div>
+                    ]}
+                >
+                    {formError && <p className="text-red-500 mb-4">{formError}</p>}
+                    {isLoading ? (
+                        <p>Loading form fields...</p>
+                    ) : customerForm.length > 0 ? (
+                        customerForm.map((form) => (
+                            <Fragment key={form.id}>
+                                <FormInput
+                                    type={form?.type}
+                                    label={form.label ?? form.name}
+                                    value={
+                                        form.type === 'file'
+                                            ? (customerData[form.name as keyof typeof customerData] as string || '')
+                                            : (customerData[form.name as keyof typeof customerData] as string || '')
+                                    }
+                                    required={form?.required}
+                                    onChange={(value) => handleChange(form?.name as string, value)}
+                                    placeholder={form.placeholder}
+                                    options={form.options?.map(opt =>
+                                        typeof opt === 'string'
+                                            ? { label: opt, value: opt }
+                                            : opt
+                                    )}
+                                    maxSizeMB={10}
+                                    allowedFileTypes={[FileType.PDF]}
+                                />
+                            </Fragment>
+                        ))
+                    ) : (
+                        <p>No form fields available.</p>
+                    )}
+                </Modal>
             </div>
-            <Modal
-                isOpen={isModalOpen}
-                onClose={() => toggleModal(false)}
-                size='medium'
-                title='Upload Document'
-                subTitle=''
-                buttons={[
-                    <div className='flex gap-2 mb-[-10px]'>
-                        <div className='w-[120px]'>
-                            <Button
-                                type="outline"
-                                label="Cancel"
-                                action={() => toggleModal(false)}
-                                color="#FFFFFF"
-                                fontStyle="italic"
-                                width="100%"
-                                height="40px"
-                                fontSize="16px"
-                                radius="20px"
-                            />
-                        </div>
-                        <div className='w-[260px]'>
-                            <Button
-                                type="secondary"
-                                label="Confirm"
-                                action={handleUploadCapex}
-                                color="#FFFFFF"
-                                fontStyle="italic"
-                                width="100%"
-                                height="40px"
-                                fontSize="16px"
-                                radius="20px"
-                            />
-                        </div>
-                    </div>
-                ]}
-            >
-                {formError && <p className="text-red-500 mb-4">{formError}</p>}
-                {isLoading ? (
-                    <p>Loading form fields...</p>
-                ) : customerForm.length > 0 ? (
-                    customerForm.map((form) => (
-                        <Fragment key={form.id}>
-                            <FormInput
-                                type={form?.type}
-                                label={form.label ?? form.name}
-                                value={
-                                    form.type === 'file'
-                                        ? (customerData[form.name as keyof typeof customerData] as string || '')
-                                        : (customerData[form.name as keyof typeof customerData] as string || '')
-                                }
-                                required={form?.required}
-                                onChange={(value) => handleChange(form?.name as string, value)}
-                                placeholder={form.placeholder}
-                                options={form.options?.map(opt =>
-                                    typeof opt === 'string'
-                                        ? { label: opt, value: opt }
-                                        : opt
-                                )}
-                                maxSizeMB={10}
-                                allowedFileTypes={[FileType.PDF]}
-                            />
-                        </Fragment>
-                    ))
-                ) : (
-                    <p>No form fields available.</p>
-                )}
-            </Modal>
-        </div>
+        </>
+
     );
 };
 

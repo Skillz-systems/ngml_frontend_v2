@@ -3,7 +3,7 @@ import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { FilterParams } from '@/Hooks/useChartFilter';
 import { useModalManagement } from '@/Hooks/useModalManagement';
-import { DollarRate, useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
+import { useGetCustomersQuery } from '@/Redux/Features/Customer/customerService';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { useTasksQuery } from '@/Redux/Features/Task/taskService';
 import { useGetAllStaffQuery } from '@/Redux/Features/UserSettings/staffService';
@@ -43,7 +43,7 @@ const AdminHomePage = () => {
   const [formError, setFormError] = useState<string>('');
   const [dollarData, setDollarData] = useState<DollarData>({});
   const [dollarForm, setDollarForm] = useState<FormField[]>([]);
-  const [latestRate] = useState<DollarRate | null>(null);
+  // const [latestRate] = useState<DollarRate | null>(null);
 
 
   const navigate = useNavigate();
