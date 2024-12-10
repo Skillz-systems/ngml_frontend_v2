@@ -21,7 +21,7 @@ const baseQuery = fetchBaseQuery({
       
       
       // console.log(token);
-      // headers.set('authorization', 'Bearer 65|0hVlXJFTjNFZWAqGsL6cM4JHrtIJoNX87ryJofFB0cd1a4c6');
+      headers.set('authorization', 'Bearer 23|J6W5uae64X6oj314QEflI8Hs4wk0LGPZmll5Azrpc32e4a5b');
 
     return headers;
   },
