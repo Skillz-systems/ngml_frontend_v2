@@ -33,7 +33,7 @@ interface ButtonProps {
     label?: string;
     color?: string;
     fontStyle?: string;
-    action: () => void;
+     action: () => void;
     disabled?: boolean;
     icon?: React.ReactNode | string;
     iconPosition?: 'left' | 'right';

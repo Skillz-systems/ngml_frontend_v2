@@ -50,3 +50,4 @@ export const invoiceAdviceData = {
     { sn: 30, volume: 680, date: '30/01/24', other: 'QL-7528-EN' },
   ],
 };
+

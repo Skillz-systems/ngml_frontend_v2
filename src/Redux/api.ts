@@ -15,13 +15,13 @@ const baseQuery = fetchBaseQuery({
     const token = (getState() as any).auth.access_token;
     
     if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        // headers.set('authorization', `Bearer ${token}`);
       }
       
       
       
-      // console.log(token);
-      // headers.set('authorization', 'Bearer 65|0hVlXJFTjNFZWAqGsL6cM4JHrtIJoNX87ryJofFB0cd1a4c6');
+      console.log(token);
+      headers.set('authorization', 'Bearer 65|0hVlXJFTjNFZWAqGsL6cM4JHrtIJoNX87ryJofFB0cd1a4c6');
 
     return headers;
   },

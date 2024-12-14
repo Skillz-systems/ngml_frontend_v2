@@ -141,7 +141,7 @@ const DailyVolumnHistoryTable = () => {
             ),
         },
         {
-            field: 'pressure',
+            field: 'inlet-pressure',
             headerName: 'Inlet Pressure',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
@@ -154,7 +154,7 @@ const DailyVolumnHistoryTable = () => {
             ),
         },
         {
-            field: 'pressure',
+            field: 'outlet-pressure',
             headerName: 'Outlet Pressure',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
