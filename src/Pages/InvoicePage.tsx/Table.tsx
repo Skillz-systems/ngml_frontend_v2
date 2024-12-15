@@ -1,205 +1,120 @@
-
-
-import { Button } from '@/Components';
+import { useState, useEffect } from 'react';
+import { ApiResponse, LineItemType, useInitGCCMutation } from '@/Redux/Features/Gcc/Gcc';
 import useScrollToId from '@/Utils/useScrollToId';
-import { useState } from 'react';
 import { FaDeleteLeft } from 'react-icons/fa6';
 import { MdCancel } from 'react-icons/md';
 import { RiEdit2Fill, RiFileAddFill, RiSaveFill } from 'react-icons/ri';
-import CommentSection from './CommentSection';
-import { InvoiceAdviceDataType } from './data';
-
-interface BacklogType {
-  sn: number;
-  volume: number;
-  date: string;
-  other: string;
-}
+import { format } from 'date-fns';
 
 export default function InventoryTable({
-  invoiceAdviceData,
-  onCreateInvoiceAdviceClick,
+  onGccCreate,
 }: {
-  invoiceAdviceData: InvoiceAdviceDataType;
   onCreateInvoiceAdviceClick: () => void;
+  onGccCreate: (data: LineItemType[]) => void;
 }) {
   const scrollToId = useScrollToId();
-
-  const [lineItems, setLineItems] = useState<BacklogType[]>(
-    invoiceAdviceData.lineItems
-  );
-  const [backlog, setBacklog] = useState<BacklogType[]>([]);
+  const [lineItems, setLineItems] = useState<LineItemType[]>();
+  const [backlog, setBacklog] = useState<LineItemType[]>([]);
   const [editingRow, setEditingRow] = useState<number | null>(null);
-  const [tempEditValues, setTempEditValues] = useState<Partial<BacklogType>>(
-    {}
-  );
+  const [tempEditValues, setTempEditValues] = useState<Partial<LineItemType>>({});
 
-  const sortBySn = (arr: BacklogType[]) => {
-    return arr.sort((a, b) => a.sn - b.sn);
+  const [initGCC] = useInitGCCMutation();
+
+  const fetchLineItems = async () => {
+    try {
+      const response: ApiResponse = await initGCC({
+        customer_id: 31,
+        customer_site_id: 11,
+      });
+
+      if (response.data?.status === 'success') {
+        const fetchedListItems = response.data?.data?.list_item || [];
+        setLineItems(fetchedListItems);
+      } else {
+        setLineItems([]);
+      }
+    } catch (error) {
+      console.error('Error fetching line items:', error);
+      setLineItems([]);
+    }
   };
 
-  const moveToBacklog = async (row: BacklogType) => {
-    setBacklog((prevBacklog) => sortBySn([...prevBacklog, row]));
-    setLineItems((prevLineItems) =>
-      sortBySn(prevLineItems.filter((item) => item.sn !== row.sn))
-    );
+  useEffect(() => {
+    fetchLineItems();
+  }, [initGCC]);
+
+  const sortBySn = (arr: LineItemType[]) => arr.sort((a, b) => a.sn - b.sn);
+
+  const moveToBacklog = async (id: number) => {
+    const itemToMove = lineItems?.find(item => item.id === id);
+    if (itemToMove) {
+      setBacklog((prevBacklog) => sortBySn([...prevBacklog, itemToMove]));
+      setLineItems((prevLineItems) =>
+        sortBySn((prevLineItems || []).filter((item) => item.id !== id))
+      );
+    }
   };
 
   const moveToLineItems = async (index: number) => {
     const rowToMove = backlog[index];
-    setLineItems((prevLineItems) => sortBySn([...prevLineItems, rowToMove]));
+    setLineItems((prevLineItems) => sortBySn([...((prevLineItems || []) as LineItemType[]), rowToMove]));
     setBacklog((prevBacklog) =>
       sortBySn(prevBacklog.filter((_, idx) => idx !== index))
     );
   };
 
-  const handleEditClick = (index: number, row: BacklogType) => {
+
+  const handleCreateGCC = () => {
+
+    console.log('lineItems:', lineItems);
+    console.log('backlog:', backlog);
+
+    const allItems = [...(lineItems ?? []), ...(backlog ?? [])];
+
+    console.log('allItems (combined):', allItems);
+    
+    onGccCreate(allItems);
+  };
+
+
+
+  const handleEditClick = (index: number, row: LineItemType) => {
     setEditingRow(index);
     setTempEditValues({ volume: row.volume, other: row.other });
   };
 
-  const handleSaveClick = async (index: number, row: BacklogType) => {
+  const handleSaveClick = async (index: number, row: LineItemType) => {
     const updatedRow = { ...row, ...tempEditValues };
-
-    // Assuming API call is made here to save the updated row
-    // await apiCallToUpdateRow(updatedRow);
 
     setLineItems((prevLineItems) =>
       sortBySn(
-        prevLineItems.map((item, idx) => (idx === index ? updatedRow : item))
+        (prevLineItems || []).map((item, idx) => (idx === index ? updatedRow : item))
       )
     );
     setEditingRow(null);
   };
 
+
+
   return (
-    <div className="flex flex-col items-start w-full gap-2 lg:flex-row">
-      <CommentSection commentsData={invoiceAdviceData.comments} />
-      <div className="container py-4 md:p-4 mx-auto space-y-8 w-full lg:w-[70%]">
-        <div
-          id="line-items"
-          className="overflow-x-auto rounded-lg shadow tiny-scrollbar"
+    <div className='w-[100%]'>
+      <div className="flex justify-end mb-6 mr-4">
+        <button
+          className="px-3 py-2 bg-[#53B052] text-white rounded"
+          onClick={handleCreateGCC}
         >
-          <table className="min-w-full bg-white">
-            <caption className="p-4 text-lg font-semibold text-left bg-gray-100">
-              Line Items
-            </caption>
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  SN
-                </th>
-                <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  Volume
-                </th>
-                <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  Date
-                </th>
-                <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  Other
-                </th>
-                <th className="p-4 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {lineItems.map((row, index) => (
-                <tr id={`line-item${row.sn}`} key={index}>
-                  <td className="p-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    {row.sn}
-                  </td>
-                  <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-                    {editingRow === index ? (
-                      <input
-                        type="number"
-                        value={tempEditValues.volume || ''}
-                        onChange={(e) =>
-                          setTempEditValues({
-                            ...tempEditValues,
-                            volume: Number(e.target.value),
-                          })
-                        }
-                        className="px-2 py-1 border rounded max-w-[100px]"
-                      />
-                    ) : (
-                      row.volume
-                    )}
-                  </td>
-                  <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-                    {row.date}
-                  </td>
-                  <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-                    {editingRow === index ? (
-                      <input
-                        type="text"
-                        value={tempEditValues.other || ''}
-                        onChange={(e) =>
-                          setTempEditValues({
-                            ...tempEditValues,
-                            other: e.target.value,
-                          })
-                        }
-                        className="px-2 py-1 border rounded max-w-[150px]"
-                      />
-                    ) : (
-                      row.other
-                    )}
-                  </td>
-                  <td className="flex items-center justify-end gap-0.5 p-4 text-sm text-right text-gray-500 whitespace-nowrap">
-                    {editingRow === index ? (
-                      <span
-                        className="flex items-center justify-center p-1 transition-all cursor-pointer hover:scale-110 animate-bounce"
-                        onClick={() => handleSaveClick(index, row)}
-                        title="Save Changes"
-                      >
-                        <RiSaveFill className="w-5 h-5 text-[#00AF50]" />
-                      </span>
-                    ) : (
-                      <span
-                        className="flex items-center justify-center p-1 transition-all cursor-pointer hover:scale-110"
-                        title="Edit Line Item"
-                        onClick={() => handleEditClick(index, row)}
-                      >
-                        <RiEdit2Fill className="w-5 h-5 text-[#FFA02E]" />
-                      </span>
-                    )}
-
-                    <span
-                      className="flex items-center justify-center p-1 transition-all cursor-pointer hover:scale-110"
-                      onClick={async () => {
-                        if (editingRow !== index) {
-                          await moveToBacklog(row);
-                          scrollToId('backlog');
-                        } else {
-                          setEditingRow(null);
-                          setTempEditValues({});
-                        }
-                      }}
-                      title={
-                        editingRow !== index
-                          ? 'Move to Backlog'
-                          : 'Cancel changes'
-                      }
-                    >
-                      {editingRow === index ? (
-                        <MdCancel className="w-5 h-5 text-[#ED0027]" />
-                      ) : (
-                        <FaDeleteLeft className="w-5 h-5 text-[#ED0027]" />
-                      )}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {backlog.length > 0 ? (
-          <div id="backlog" className="overflow-x-auto rounded-lg shadow">
+          Create GCC
+        </button>
+      </div>
+      <div className="flex flex-col items-start w-full gap-2 lg:flex-row">
+        <div className="container py-4 md:p-4 mx-auto space-y-8 w-full lg:w-[100%]">
+          <div
+            id="line-items"
+            className="overflow-x-auto rounded-lg shadow tiny-scrollbar"
+          >
             <table className="min-w-full bg-white">
               <caption className="p-4 text-lg font-semibold text-left bg-gray-100">
-                Line Items Backlog
+                Line Items
               </caption>
               <thead className="bg-gray-50">
                 <tr>
@@ -210,10 +125,13 @@ export default function InventoryTable({
                     Volume
                   </th>
                   <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                    Date
+                    Inlet
                   </th>
                   <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                    Other
+                    Outlet
+                  </th>
+                  <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                    Date
                   </th>
                   <th className="p-4 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
                     Action
@@ -221,30 +139,80 @@ export default function InventoryTable({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {backlog.map((row, index) => (
+                {lineItems?.map((row, index) => (
                   <tr key={index}>
-                    <td className="p-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                      {row.sn}
+                    <td className="p-4 text-sm font-medium text-gray-900 whitespace-nowrap">{index + 1}</td>
+                    <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
+                      {editingRow === index ? (
+                        <input
+                          type="number"
+                          value={tempEditValues.volume || ''}
+                          onChange={(e) =>
+                            setTempEditValues({
+                              ...tempEditValues,
+                              volume: Number(e.target.value),
+                            })
+                          }
+                          className="px-2 py-1 border rounded max-w-[100px]"
+                        />
+                      ) : (
+                        row.volume
+                      )}
                     </td>
                     <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-                      {row.volume}
+                      {row.inlet_pressure ? row.inlet_pressure : row.inlet}
                     </td>
                     <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-                      {row.date}
+                      {row.outlet_pressure ? row.outlet_pressure : row.outlet}
                     </td>
                     <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-                      {row.other}
+                      {row.original_date
+                        ? format(new Date(row.original_date), 'MM-dd-yyyy')
+                        : row.created_at
+                          ? format(new Date(row.created_at), 'MM-dd-yyyy')
+                          : ''}
                     </td>
                     <td className="flex items-center justify-end gap-0.5 p-4 text-sm text-right text-gray-500 whitespace-nowrap">
+                      {editingRow === index ? (
+                        <span
+                          className="flex items-center justify-center p-1 transition-all cursor-pointer hover:scale-110 animate-bounce"
+                          onClick={() => handleSaveClick(index, row)}
+                          title="Save Changes"
+                        >
+                          <RiSaveFill className="w-5 h-5 text-[#00AF50]" />
+                        </span>
+                      ) : (
+                        <span
+                          className="flex items-center justify-center p-1 transition-all cursor-pointer hover:scale-110"
+                          title="Edit Line Item"
+                          onClick={() => handleEditClick(index, row)}
+                        >
+                          <RiEdit2Fill className="w-5 h-5 text-[#FFA02E]" />
+                        </span>
+                      )}
+
                       <span
                         className="flex items-center justify-center p-1 transition-all cursor-pointer hover:scale-110"
                         onClick={async () => {
-                          await moveToLineItems(index);
-                          scrollToId(`line-item${row.sn}`);
+                          if (editingRow !== index) {
+                            await moveToBacklog(row.id);
+                            scrollToId('backlog');
+                          } else {
+                            setEditingRow(null);
+                            setTempEditValues({});
+                          }
                         }}
-                        title="Move to Line Items"
+                        title={
+                          editingRow !== index
+                            ? 'Move to Backlog'
+                            : 'Cancel changes'
+                        }
                       >
-                        <RiFileAddFill className="w-5 h-5 text-[#00AF50]" />
+                        {editingRow === index ? (
+                          <MdCancel className="w-5 h-5 text-[#ED0027]" />
+                        ) : (
+                          <FaDeleteLeft className="w-5 h-5 text-[#ED0027]" />
+                        )}
                       </span>
                     </td>
                   </tr>
@@ -252,35 +220,78 @@ export default function InventoryTable({
               </tbody>
             </table>
           </div>
-        ) : null}
-
-        <Button
-          type="primary"
-          label="Create Invoice Advice"
-          action={async () => {
-            await onCreateInvoiceAdviceClick();
-            scrollToId('proceed');
-          }}
-          color="#FFFFFF"
-          // fontStyle="italic"
-          width="100%"
-          height="35px"
-          fontSize="16px"
-          radius="20px"
-        />
-
-        {/* <button
-          className="w-full px-4 py-2 text-white transition-colors bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-          onClick={async () => {
-            await onCreateInvoiceAdviceClick();
-            scrollToId('proceed');
-          }}
-        >
-          Create Invoice Advice
-        </button> */}
+          {backlog.length > 0 && (
+            <div id="backlog" className="overflow-x-auto rounded-lg shadow">
+              <table className="min-w-full bg-white">
+                <caption className="p-4 text-lg font-semibold text-left bg-gray-100">
+                  Line Items Backlog
+                </caption>
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      SN
+                    </th>
+                    <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      Volume
+                    </th>
+                    <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      Inlet
+                    </th>
+                    <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      Outlet
+                    </th>
+                    <th className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      Date
+                    </th>
+                    <th className="p-4 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {backlog.map((row, index) => (
+                    <tr key={index}>
+                      <td className="p-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                        {index + 1}
+                      </td>
+                      <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
+                        {row.volume}
+                      </td>
+                      <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
+                        {row.inlet_pressure}
+                      </td>
+                      <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
+                        {row.outlet_pressure ? row.outlet_pressure : row.outlet}
+                      </td>
+                      <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
+                        {row.original_date
+                          ? format(new Date(row.original_date), 'MM-dd-yyyy')
+                          : row.created_at
+                            ? format(new Date(row.created_at), 'MM-dd-yyyy')
+                            : ''}
+                      </td>
+                      <td className="flex items-center justify-end gap-0.5 p-4 text-sm text-right text-gray-500 whitespace-nowrap">
+                        <span
+                          className="flex items-center justify-center p-1 transition-all cursor-pointer hover:scale-110"
+                          onClick={async () => {
+                            await moveToLineItems(index);
+                            scrollToId(`line-item${row.sn}`);
+                          }}
+                          title="Move to Line Items"
+                        >
+                          <RiFileAddFill className="w-5 h-5 text-[#00AF50]" />
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       </div>
     </div>
+
   );
 }
-
 

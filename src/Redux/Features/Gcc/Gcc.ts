@@ -1,4 +1,37 @@
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { api } from '../../api';
+import { SerializedError } from '@reduxjs/toolkit';
+
+export interface LineItemType {
+  sn: number;
+  id: number;
+  customer_id: number;
+  customer_site_id: number;
+  volume: number;
+  inlet_pressure: number;
+  outlet_pressure: number;
+  status: number;
+  created_at: string;
+  original_date: number;
+  other: string;
+  outlet: number;
+  inlet: number;
+}
+
+
+export interface ApiResponse {
+  status: string;
+  data: {
+    data: any;
+    list_item: LineItemType[];
+    gcc: any | null;
+    invoice_advice: any | null;
+    invoice: any | null;
+    status?: string;
+  } | null;
+  error?: FetchBaseQueryError | { status: string; error: string } | SerializedError;
+}
+
 
 type GCCCreate = {
   customer_id: number;
@@ -21,7 +54,7 @@ export const gccApi = api.injectEndpoints({
         body: gccData,
       }),
     }),
-    initGCC: builder.mutation<{ success: boolean }, GCCInit>({
+    initGCC: builder.mutation<ApiResponse, GCCInit>({
       query: (gccData) => ({
         url: 'billing/api/gcc-init',
         method: 'POST',
