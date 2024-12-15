@@ -1,3 +1,5 @@
+
+
 import { Button } from '@/Components';
 import useScrollToId from '@/Utils/useScrollToId';
 import { useState } from 'react';
@@ -280,3 +282,5 @@ export default function InventoryTable({
     </div>
   );
 }
+
+
