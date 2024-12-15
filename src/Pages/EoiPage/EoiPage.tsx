@@ -24,9 +24,12 @@ const EoiPage = () => {
   const location = useLocation();
 
 
-  const { data, isSuccess, isLoading } = useGetFormByNameQuery(`EOIform/customer/${customerId}/${customerSiteId}`, {
-    skip: !customerId
-  });
+  const { data, isSuccess, isLoading } = useGetFormByNameQuery(
+  //   `EOIform/customer/${customerId}/${customerSiteId}`, {
+  //   skip: !customerId
+  // }
+  'EoiUpload/0/0'
+);
   const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
 
   const navigate = useNavigate();
@@ -65,7 +68,7 @@ const EoiPage = () => {
         setCustomerForm([]);
       }
     }
-  }, [data, isSuccess]);
+  }, [data, isSuccess, customerSiteId]);
 
   useEffect(() => {
     if (isModalOpen) {
