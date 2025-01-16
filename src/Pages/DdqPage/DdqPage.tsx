@@ -1,4 +1,6 @@
-
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { Button, Modal } from '@/Components/index';
@@ -6,17 +8,13 @@ import { useModalManagement } from '@/Hooks/useModalManagement';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 type CustomerData = Record<string, string | File | null>;
 
 const DdqPage: React.FC = () => {
-
-
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
+    const [uploadedFiles, setUploadedFiles] = useState<Array<{ name: string; url: string }>>([]);
     const [formError, setFormError] = useState<string>('');
     const [customerId, setCustomerId] = useState<number | null>(null);
     const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
@@ -25,19 +23,14 @@ const DdqPage: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-
-    const { data, isSuccess, isLoading } = useGetFormByNameQuery(`Edditddqupload/customer/${customerId}/${customerSiteId}`, {
-        skip: !customerId
-    });
-
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery('DdqUpload/0/0');
     const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
 
     useEffect(() => {
         const customer = location.pathname.split('/');
         setCustomerId(Number(customer[4]));
-        setCustomerSiteId(Number(customer[5]))
+        setCustomerSiteId(Number(customer[5]));
     }, [location]);
-
 
     useEffect(() => {
         if (isSuccess && data) {
@@ -58,16 +51,7 @@ const DdqPage: React.FC = () => {
                 setCustomerForm([]);
             }
         }
-    }, [data, isSuccess]);
-
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const uploadDdq = searchParams.get('uploadDdq');
-
-        if (uploadDdq === 'true') {
-            toggleModal(true);
-        }
-    }, [location.search]);
+    }, [data, isSuccess, submitForm, customerId, customerSiteId, navigate]);
 
     const handleInputChange = useCallback((field: string, value: string | File | null) => {
         setCustomerData(prev => ({ ...prev, [field]: value }));
@@ -81,69 +65,26 @@ const DdqPage: React.FC = () => {
 
         try {
             setFormError('');
-            const formFieldAnswers = await Promise.all(
-                customerForm.map(async (field) => {
-                    const value = customerData[field.name as keyof typeof customerData];
+            const fileField = customerForm.find(field => field.type === 'file');
+            const file = fileField && customerData[fileField.name as keyof typeof customerData];
 
-                    if (field.type === 'file' && value instanceof File) {
-                        try {
-                            const base64File = await convertFileToBase64(value);
-                            return {
-                                id: field.id,
-                                elementType: field.type,
-                                name: field.name || field.id.toString(),
-                                placeholder: field.placeholder || '',
-                                key: field.name || '',
-                                value: base64File
-                            };
-                        } catch (error) {
-                            console.error(`Error converting ${field.name} to Base64:`, error);
-                            return null;
-                        }
-                    } else {
-                        return {
-                            id: field.id,
-                            elementType: field.type,
-                            name: field.name || field.id.toString(),
-                            placeholder: field.placeholder || '',
-                            key: field.name || '',
-                            value: value || ''
-                        };
-                    }
-                })
-            );
-
-            const validFormFieldAnswers = formFieldAnswers.filter(Boolean);
-            console.log('customerSiteId', customerSiteId)
-
-            const payload = {
-                form_builder_id: data?.data?.id?.toString() || '',
-                name: data?.data?.name || '',
-                process_flow_id: data?.data?.process_flow_id?.toString() || '',
-                process_flow_step_id: data?.data?.process_flow_step_id?.toString() || '',
-                tag_id: data?.data?.tag_id || '',
-                form_field_answers: JSON.stringify(validFormFieldAnswers),
-            };
-
-            const result = await submitForm(payload).unwrap();
-
-            if (result) {
-                toast.success('DDQ created successfully');
-                setCustomerData({});
+            if (file instanceof File) {
+                const base64File = await convertFileToBase64(file);
+                setUploadedFiles(prev => [...prev, { name: file.name, url: base64File }]);
+                toast.success('File uploaded successfully');
                 toggleModal(false);
-                const searchParams = new URLSearchParams(location.search);
-                searchParams.delete('uploadDdq');
-                navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+            } else {
+                throw new Error('No file uploaded');
             }
         } catch (error) {
-            console.error('Error submitting form:', error);
-            setFormError('An error occurred while submitting the form. Please try again.');
+            console.error('Error uploading file:', error);
+            setFormError('An error occurred while uploading the file. Please try again.');
         }
-    }, [customerForm, customerData, data, submitForm, toggleModal, location, navigate]);
+    }, [customerForm, customerData, toggleModal]);
 
     return (
         <>
-            <div className='flex items-end justify-end gap-2 mb-3'>
+            <div className="flex items-end justify-end gap-2 mb-3">
                 <Button
                     type="primary"
                     label="UPLOAD DDQ"
@@ -153,27 +94,42 @@ const DdqPage: React.FC = () => {
                     columnGap="5px"
                     action={() => toggleModal(true)}
                 />
-
             </div>
-            <div className='bg-[#FFFFFF] p-4 rounded-xl'>
-
+            <div className="bg-[#FFFFFF] p-4 rounded-xl">
                 <div className="rounded-xl border flex-col justify-start mt-2 items-start bg-[#FFFFFF]">
                     <div className="w-full h-[60px] px-3 py-2.5 bg-dark-50 border-b items-center flex">
                         <div className="text text-xl font-bold font-['Mulish'] leading-tight">Due Diligence Questionnaire</div>
                     </div>
-                    <div className="bg-dark-50 justify-between">
-                        {/* <PDFViewer url='https://s28.q4cdn.com/392171258/files/doc_downloads/test.pdf' /> */}
+                    <div className="bg-dark-50 justify-between p-4">
+                        {uploadedFiles.length > 0 ? (
+                            uploadedFiles.map((file, index) => (
+                                <div key={index} className="mb-2">
+                                    <a
+                                        href={URL.createObjectURL(
+                                            new Blob([file.url], { type: 'application/pdf' })
+                                        )}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-500 underline"
+                                    >
+                                        {file.name}
+                                    </a>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No files uploaded yet.</p>
+                        )}
                     </div>
                     <Modal
                         isOpen={isModalOpen}
                         onClose={() => toggleModal(false)}
-                        title="Create DDQ"
+                        title="Upload DDQ"
                         buttons={[
-                            <div key="buttons" className='flex gap-2 mb-[-10px]'>
-                                <div className='w-[120px]'>
+                            <div key="buttons" className="flex gap-2 mb-[-10px]">
+                                <div className="w-[120px]">
                                     <Button
                                         type="outline"
-                                        label="Save and Close"
+                                        label="Close"
                                         action={() => toggleModal(false)}
                                         color="#FFFFFF"
                                         fontStyle="italic"
@@ -183,7 +139,7 @@ const DdqPage: React.FC = () => {
                                         radius="20px"
                                     />
                                 </div>
-                                <div className='w-[260px]'>
+                                <div className="w-[260px]">
                                     <Button
                                         type="secondary"
                                         label="Save and Continue"
@@ -197,28 +153,27 @@ const DdqPage: React.FC = () => {
                                         disabled={submitLoading || !areRequiredFieldsFilled(customerForm, customerData)}
                                     />
                                 </div>
-                            </div>
+                            </div>,
                         ]}
                     >
                         {formError && <p className="text-red-500 mb-4">{formError}</p>}
                         {isLoading ? (
                             <p>Loading form fields...</p>
                         ) : customerForm.length > 0 ? (
-                            customerForm.map((form) => (
+                            customerForm.map(form => (
                                 <Fragment key={form.id}>
                                     <FormInput
                                         type={form?.type}
                                         label={form.label ?? form.name}
-                                        value={customerData[form.name as keyof typeof customerData] as string || ''}
+                                        value={(customerData[form.name as keyof typeof customerData] as string) || ''}
                                         required={form?.required}
-                                        onChange={(value: string | File | null) => handleInputChange(form?.name as string, value)}
+                                        onChange={(value: string | File | null) =>
+                                            handleInputChange(form?.name as string, value)
+                                        }
                                         placeholder={form.placeholder}
                                         options={form.options?.map(opt =>
-                                            typeof opt === 'string'
-                                                ? { label: opt, value: opt }
-                                                : opt
+                                            typeof opt === 'string' ? { label: opt, value: opt } : opt
                                         )}
-                                        url={form?.url}
                                         maxSizeMB={10}
                                         allowedFileTypes={[FileType.PDF]}
                                     />
@@ -229,19 +184,9 @@ const DdqPage: React.FC = () => {
                         )}
                     </Modal>
                 </div>
-            </div></>
-
+            </div>
+        </>
     );
 };
 
 export default DdqPage;
-
-
-
-
-
-
-
-
-
-
