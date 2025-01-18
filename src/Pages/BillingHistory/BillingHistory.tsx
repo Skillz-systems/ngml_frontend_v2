@@ -203,7 +203,7 @@ const BillingHistory: React.FC = () => {
                     <div className="text-center  text-[#49526A] text-3xl font-semibold font-['Mulish']">Billing</div>
                     <div className="items-center gap-4 flex">
                         <div className="w-44 p-3 rounded-3xl border justify-center flex cursor-pointer" onClick={handleAddNewInvoice}>
-                            <div className="text-base font-normal font-['Mulish'] leading-none">New Billings</div>
+                            <div className="text-base font-normal font-['Mulish'] leading-none">New Billing</div>
                         </div>
                         {/* <div className="w-16 p-2.5 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
                             <div className="w-4 h-4 justify-center items-center flex">
