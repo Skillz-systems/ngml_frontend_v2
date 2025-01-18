@@ -32,12 +32,22 @@ const BillingHistory: React.FC = () => {
     });
     const [customerId, setCustomerId] = useState<number | null>(null);
     const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
-  
-  
+    // const [years, setYears] = useState<number[]>([]);
+
+    // useEffect(() => {
+    //     const currentYear = new Date().getFullYear();
+    //     const generatedYears = Array.from({ length: 10 }, (_, index) => currentYear - index);
+    //     setYears(generatedYears);
+    // }, []);
+
+    const currentYear = new Date().getFullYear();
+    const years = Array.from({ length: currentYear - 1899 }, (_, i) => 1900 + i);
+
+
     useEffect(() => {
-      const customer = location.pathname.split('/');
-      setCustomerId(Number(customer[4]));
-      setCustomerSiteId(Number(customer[5]))
+        const customer = location.pathname.split('/');
+        setCustomerId(Number(customer[4]));
+        setCustomerSiteId(Number(customer[5]))
     }, [location]);
 
     useEffect(() => {
@@ -162,11 +172,11 @@ const BillingHistory: React.FC = () => {
         setSelectedYear(newYear);
     };
 
-    const years = [2023, 2022, 2021, 2020, 2019];
+    // const years = [2023, 2022, 2021, 2020, 2019];
 
-    const handleClose = () => {
-        navigate(-1);
-    };
+    // const handleClose = () => {
+    //     navigate(-1);
+    // };
 
     const toggleModal = () => {
         navigate(isModalOpen ? location.pathname : `${location.pathname}?modal=newInvoice`);
@@ -183,8 +193,8 @@ const BillingHistory: React.FC = () => {
 
     return (
         <div className="">
-            <Link to={'/admin/records/customer/:tabId'}>
-                <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
+            <Link to={`/admin/records/customer/${customerId}/${customerSiteId}/customermanager`}>
+                <div className="flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]">
                     <ArrowBack color="success" style={{ fontSize: 'medium' }} />
                 </div>
             </Link>
@@ -193,22 +203,33 @@ const BillingHistory: React.FC = () => {
                     <div className="text-center  text-[#49526A] text-3xl font-semibold font-['Mulish']">Billing</div>
                     <div className="items-center gap-4 flex">
                         <div className="w-44 p-3 rounded-3xl border justify-center flex cursor-pointer" onClick={handleAddNewInvoice}>
-                            <div className="text-base font-normal font-['Mulish'] leading-none">New Invoice Advice</div>
+                            <div className="text-base font-normal font-['Mulish'] leading-none">New Billings</div>
                         </div>
-                        <div className="w-16 p-2.5 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
+                        {/* <div className="w-16 p-2.5 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
                             <div className="w-4 h-4 justify-center items-center flex">
                                 <img src={images.cancel} alt="close icon" width={'10px'} />
                             </div>
                             <div className="Close text-center text-[#808080] text-xs font-normal font-['Mulish']">Close</div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="w-full h-full bg-[#FFFFFF] rounded-xl border">
                     <div className="w-full px-3 py-4 bg-[#f1f7ea] border-b justify-between items-center rounded-t-[10px] flex">
-                        <div className="text-[#49526A] text-xl font-bold font-['Mulish'] leading-tight">INVOICE ADVICE</div>
+                        <div className="text-[#49526A] text-xl font-bold font-['Mulish'] leading-tight">BILLINGS</div>
                         <div className="items-center gap-4 flex">
                             <div className="px-6 py-1 rounded-3xl border justify-start items-center gap-2 flex">
                                 <div className="w-6 h-6 justify-center items-center flex">
+                                    {/* <select
+                                        className="bg-[#f1f7ea] border-0 text-base font-normal outline-none"
+                                        onChange={handleYearChange}
+                                        value={selectedYear}
+                                    >
+                                        {years.map((year) => (
+                                            <option key={year} value={year}>
+                                                {year}
+                                            </option>
+                                        ))}
+                                    </select> */}
                                     <select
                                         className="bg-[#f1f7ea] border-0 text-base font-normal outline-none"
                                         onChange={handleYearChange}
