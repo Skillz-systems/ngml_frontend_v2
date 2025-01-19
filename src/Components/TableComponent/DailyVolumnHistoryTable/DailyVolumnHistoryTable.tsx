@@ -96,7 +96,7 @@ const DailyVolumnHistoryTable = () => {
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#49526A] leading-3">
-                    {params.row.customer}
+                    {params.row.name}
                 </div>
             ),
         },
