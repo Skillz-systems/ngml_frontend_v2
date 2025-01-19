@@ -16,11 +16,17 @@ import CustomerDetail from './CustomerDetail';
 
 const AdminCustomerPageLayout: React.FC = () => {
   const { customerId } = useParams<{ customerId: string }>();
+  const { data: customer, error: customerError, isLoading: isCustomerLoading } = useGetCustomerByIdQuery(Number(customerId));
+  const { data: customerLocation, error: locationError, isLoading: isLocationLoading } = useGetCustomerByIdQuery(Number(customerId));
 
-  const { data: customer, error, isLoading } = useGetCustomerByIdQuery(Number(customerId));
+  if (isCustomerLoading || isLocationLoading) return <div>Loading...</div>;
+  if (customerError || locationError) return <div>Error loading customer data.</div>;
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading customer data.</div>;
+  // Dynamically determine title
+  const firstSiteName = customerLocation?.data?.sites?.[0]?.site_name;
+  const title = firstSiteName
+    ? firstSiteName.toUpperCase()
+    : customer?.data?.company_name.toUpperCase() || 'Customer Details';
 
   const tablist = [
     { name: 'Overview', ref: 'overview' },
@@ -30,8 +36,7 @@ const AdminCustomerPageLayout: React.FC = () => {
     { name: 'Site visit', ref: 'sitevisit' },
     { name: 'Cost analysis', ref: 'costanalysis' },
     { name: 'Agreement', ref: 'agreement' },
-    // { name: 'Connect project', ref: 'connectproject' },
-    { name: 'Customer manager', ref: 'customermanager' }
+    { name: 'Customer manager', ref: 'customermanager' },
   ];
 
   const tabContent = {
@@ -42,19 +47,18 @@ const AdminCustomerPageLayout: React.FC = () => {
     sitevisit: <SiteVisitationPage />,
     costanalysis: <CostAnalysis />,
     agreement: <Agreement />,
-    // connectproject: <ConnectProject />,
-    customermanager: <CustomerManager />
+    customermanager: <CustomerManager />,
   };
 
   return (
-    <div className='flex justify-end gap-[6px]'>
+    <div className="flex justify-end gap-[6px]">
       <Link to={`/admin/records/customer/${customerId}`}>
-        <div className='flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]'>
+        <div className="flex justify-center items-center border-2 h-[32px] w-[32px] rounded-[50%]">
           <ArrowBack color="success" style={{ fontSize: 'medium' }} />
         </div>
       </Link>
       <TabLayout
-        title={customer?.data?.company_name.toUpperCase() || 'Customer Details'}
+        title={title} // Dynamically set title
         width=""
         height=""
         backgroundColor="#F5F7F9"
@@ -65,10 +69,10 @@ const AdminCustomerPageLayout: React.FC = () => {
         tablist={tablist}
         tabContent={tabContent}
         showButtons={false}
-
       />
     </div>
   );
 };
 
 export default AdminCustomerPageLayout;
+
