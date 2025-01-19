@@ -14,15 +14,14 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as any).auth.access_token;
     
-    if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      
-      
-      
-      // console.log(token);
-      // headers.set('authorization', 'Bearer 65|0hVlXJFTjNFZWAqGsL6cM4JHrtIJoNX87ryJofFB0cd1a4c6');
+    const authToken = import.meta.env.VITE_ENV === 'development'
+      ? import.meta.env.VITE_API_TOKEN
+      : token;
 
+    if (authToken && typeof authToken === 'string') {
+      headers.set('authorization', `Bearer ${authToken}`);
+    }
+    
     return headers;
   },
 });
