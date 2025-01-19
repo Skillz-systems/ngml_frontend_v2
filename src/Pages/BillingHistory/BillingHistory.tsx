@@ -41,7 +41,7 @@ const BillingHistory: React.FC = () => {
     // }, []);
 
     const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: currentYear - 1899 }, (_, i) => 1900 + i);
+    const years = Array.from({ length: currentYear - 1995 }, (_, i) => 2020 + i);
 
 
     useEffect(() => {
@@ -243,9 +243,9 @@ const BillingHistory: React.FC = () => {
                                     </select>
                                 </div>
                             </div>
-                            <div className="p-2 bg-nnpc-50 rounded-3xl flex-col justify-center items-center gap-2.5 inline-flex">
+                            {/* <div className="p-2 bg-nnpc-50 rounded-3xl flex-col justify-center items-center gap-2.5 inline-flex">
                                 <div className="text-center text-[#49526A] text-xs font-medium font-['Mulish'] leading-3 tracking-tight">10</div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="flex-wrap w-full p-3 bg-[#FFFFFF] rounded-b-[10px] items-center gap-3 flex">

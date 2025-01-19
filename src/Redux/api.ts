@@ -20,8 +20,8 @@ const baseQuery = fetchBaseQuery({
       
       
       
-      console.log(token);
-      headers.set('authorization', 'Bearer 64|ZRFfNVKwQrUi2x0lFmRFK8S2RtkS0RrYxkXKHQdJce10c214');
+      // console.log(token);
+      // headers.set('authorization', 'Bearer 64|ZRFfNVKwQrUi2x0lFmRFK8S2RtkS0RrYxkXKHQdJce10c214');
 
     return headers;
   },
