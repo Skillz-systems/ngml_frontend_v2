@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+// /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Heading } from '@/Components';
-import { useCreateProcessFlowMutation, useDeleteProcessFlowMutation, useGetProcessFlowsQuery, useUpdateProcessFlowMutation } from '@/Redux/Features/ProcessFlow/processFlowService';
+import { useCreateProcessFlowMutation, useGetProcessFlowsQuery } from '@/Redux/Features/ProcessFlow/processFlowService';
 import { useGetRoutesQuery } from '@/Redux/Features/RouteBuilder/routeService';
 import { useGetDepartmentsQuery } from '@/Redux/Features/UserSettings/departmentService';
 import { useGetDesignationsQuery } from '@/Redux/Features/UserSettings/designationService';
@@ -391,14 +391,10 @@ const EditableContent = ({
 const ProcessFlowBuilder = () => {
     const [processFlows, setProcessFlows] = useState<ProcessFlow[]>([]);
     const [selectedFlow, setSelectedFlow] = useState<ProcessFlow | null>(null);
-    const [isExisting, setIsExisting] = useState<boolean>(false);
     const [steps, setSteps] = useState<ProcessFlowStep[]>([]);
 
     const [submit, { isLoading: submitLoading }] =
         useCreateProcessFlowMutation();
-
-    const [updateFlow, { isLoading: updateLoading }] = useUpdateProcessFlowMutation();
-    const [deleteFlow, { isLoading: deleteLoading }] = useDeleteProcessFlowMutation();
 
     useEffect(() => {
         const savedFlows = localStorage.getItem('processFlows');
@@ -538,17 +534,13 @@ const ProcessFlowBuilder = () => {
         }
     };
 
-
-
     const handleSelectFlow = (flow: ProcessFlow) => {
         setSelectedFlow(flow);
-        setIsExisting(true);
         setSteps(flow.steps || []);
     };
 
     const handleCreateNewFlow = () => {
         setSelectedFlow(null);
-        setIsExisting(false);
         setSteps([]);
     };
 
@@ -582,54 +574,10 @@ const ProcessFlowBuilder = () => {
                 console.log('Submission Response:', response);
             } catch (error) {
                 console.error('Error submitting the process flow:', error);
-                toast.error('Error creating the process flow');
+                // toast.error('Error creating the process flow');
             }
         } else {
             toast.info('No Process Flow selected for submission');
-        }
-    };
-    const handleUpdateToBackend = async () => {
-        if (selectedFlow && selectedFlow.id && isExisting === true) {
-            // Clone the selectedFlow and include steps
-
-            const { id, ...updateData } = {
-                ...selectedFlow,
-                steps: steps.map(step => ({
-                    ...step,
-                }))
-            };
-
-            try {
-                const response = await updateFlow({
-                    id: selectedFlow.id,
-                    ...updateData
-                }).unwrap();
-                toast.success('Process flow updated successfully!');
-                handleCreateNewFlow();
-                console.log('Update Response:', response);
-            } catch (error) {
-                console.error('Error updating the process flow:', error);
-                toast.error('Error updating the process flow');
-            }
-        } else {
-            toast.info('No Process Flow selected for update');
-        }
-    };
-    const handleDeleteFromBackend = async () => {
-        if (selectedFlow && selectedFlow.id) {
-            const confirmDelete = window.confirm('Are you sure you want to delete this process flow?');
-            if (confirmDelete) {
-                try {
-                    await deleteFlow(selectedFlow.id).unwrap();
-                    toast.success('Process flow deleted successfully!');
-                    handleCreateNewFlow(); // Clear the form
-                } catch (error) {
-                    console.error('Error deleting the process flow:', error);
-                    toast.error('Error deleting the process flow');
-                }
-            }
-        } else {
-            toast.info('No Process Flow selected for deletion');
         }
     };
 
@@ -638,7 +586,7 @@ const ProcessFlowBuilder = () => {
         <div className="flex flex-col h-full w-[100%]">
             <div className="w-full flex-shrink-0 p-4 flex justify-between items-center rounded-[6px] mb-4" >
                 <Heading size="h5" className='text-nnpcmediumgreen-950 text-center'>Process Flow Builder</Heading>
-                {/* <div className='gap-3 flex'>
+                <div className='gap-3 flex'>
                     <button
                         type='button'
                         onClick={handleCreateNewFlow}
@@ -663,53 +611,6 @@ const ProcessFlowBuilder = () => {
                         <VscSend />
                         {submitLoading ? 'Creating' : 'Create'}
                     </button>
-                </div> */}
-                <div className='gap-3 flex'>
-                    <button
-                        type='button'
-                        onClick={handleCreateNewFlow}
-                        className="px-4 py-2 text-[14px] rounded-md border flex items-center justify-center gap-1 bg-white font-[500] border-nnpc-200 text-nnpc-300 hover:text-white  hover:bg-nnpc-300 duration-300 ease-out transition-all"
-                    >
-                        <MdOutlineLibraryAdd />
-                        Reset
-                    </button>
-                    <button
-                        type='button'
-                        onClick={handleSaveProcessFlow}
-                        className="px-4 py-2 text-[14px] border flex items-center justify-center gap-1 bg-white font-[500] border-nnpc-200 text-nnpc-300 hover:text-white rounded-md hover:bg-nnpc-300 duration-300 ease-out transition-all"
-                    >
-                        <CiSaveDown2 />
-                        Save
-                    </button>
-                    {isExisting === true ? (
-
-                        <>
-                            <button
-                                type='button'
-                                onClick={handleUpdateToBackend}
-                                className="px-4 py-2 text-[14px] border flex items-center justify-center gap-1 bg-nnpc-200 font-[500] text-[white] hover:text-white rounded-md hover:bg-nnpc-300 duration-300 ease-out transition-all"
-                            >
-                                <VscSend />
-                                {updateLoading ? 'Updating' : 'Update'}
-                            </button>
-                            <button
-                                type='button'
-                                onClick={handleDeleteFromBackend}
-                                className="px-4 py-2 text-[14px] border flex items-center justify-center gap-1 bg-red-500 font-[500] text-[white] hover:text-white rounded-md hover:bg-red-600 duration-300 ease-out transition-all"
-                            >
-                                {deleteLoading ? 'Deleting...' : 'Delete'}
-                            </button>
-                        </>
-                    ) : (
-                        <button
-                            type='button'
-                            onClick={handleSubmitToBackend}
-                            className="px-4 py-2 text-[14px] border flex items-center justify-center gap-1 bg-nnpc-200 font-[500] text-[white] hover:text-white rounded-md hover:bg-nnpc-300 duration-300 ease-out transition-all"
-                        >
-                            <VscSend />
-                            {submitLoading ? 'Creating' : 'Create'}
-                        </button>
-                    )}
                 </div>
             </div>
 

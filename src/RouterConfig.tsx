@@ -2,12 +2,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import NotFound from './NotFound';
+import Development from './Pages/Development';
+import FormBuilderPage from './Pages/FormBuilderCroup/FormBuilderPage';
+import GenerateToken from './Pages/GenerateToken/GenerateToken';
 import Root from './Pages/Root';
 import SSOCallback from './Pages/SSO/SSOCallback';
 import SSOLogin from './Pages/SSO/SSOLogin';
 import SSOUpdateUser from './Pages/SSO/SSOUpdateUser';
-import FormBuilderPage from './Pages/FormBuilderCroup/FormBuilderPage';
-import GenerateToken from './Pages/GenerateToken/GenerateToken';
 import SuccessToken from './Pages/SuccessToken/SuccessToken';
 import { admin } from './Routes/Admin';
 import { customer } from './Routes/Customer';
@@ -20,7 +21,7 @@ const RouterConfig = () => {
 
         {
             path: '/admin',
-            element: <Root />,
+            element: import.meta.env.VITE_ENV === 'development' ? <Development /> : <Root />,
             children: admin
         },
         {

@@ -74,7 +74,7 @@ export const processFlowApi = api.injectEndpoints({
 
     deleteProcessFlow: builder.mutation<{ success: boolean; id: number }, number>({
       query: (id) => ({
-        url: `//processflow/api/processflows/${id}`,
+        url: `/processflow/api/processflows/${id}`,
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
       }),
