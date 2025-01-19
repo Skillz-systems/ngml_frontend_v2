@@ -38,10 +38,10 @@ const BillingHistory: React.FC = () => {
     //     const currentYear = new Date().getFullYear();
     //     const generatedYears = Array.from({ length: 10 }, (_, index) => currentYear - index);
     //     setYears(generatedYears);
-    // }, []);
+    // }, []); 
 
     const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: currentYear - 1995 }, (_, i) => 2020 + i);
+    const years = Array.from({ length: currentYear }, (_, i) => 2020 + i);
 
 
     useEffect(() => {
