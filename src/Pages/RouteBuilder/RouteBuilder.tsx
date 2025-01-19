@@ -1,8 +1,8 @@
 
 
 import { Button, Heading, Modal } from '@/Components';
-import { useCreateRouteMutation, useDeleteRouteMutation, useGetRoutesQuery, useUpdateRouteMutation } from '@/Redux/Features/RouteBuilder/routeService';
-import { convertToDynamicContentArray } from '@/Utils/convertToDynamicContentArray';
+import { Route, useCreateRouteMutation, useDeleteRouteMutation, useGetRoutesQuery, useUpdateRouteMutation } from '@/Redux/Features/RouteBuilder/routeService';
+import { convertToDynamicContentArray, reverseDynamicContentArray } from '@/Utils/convertToDynamicContentArray';
 import { ArrowBack } from '@mui/icons-material';
 
 import { useState } from 'react';
@@ -104,7 +104,7 @@ const RouteBuilder = () => {
                         label="Create Route"
                         action={() => setIsModalOpen(true)}
                         icon={<VscSend className="mr-2" />}
-                        className="px-4 py-2 text-sm"
+                        className="px-4 py-2 text-sm rounded-lg"
                     />
                 </div>
 
@@ -115,20 +115,6 @@ const RouteBuilder = () => {
                     {routes?.data && (
                         <div className="space-y-2">
                             {routes.data.map((route) => (
-                                // <div key={route.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
-                                //     <span className="capitalize font-medium text-gray-800">{route.name}</span>
-                                //     <span className="text-gray-600 truncate max-w-md">{route.link}</span>
-                                //     <Button
-                                //         type="tertiary"
-                                //         label={deletingRouteId === route.id ? 'Deleting...' : 'Delete'}
-                                //         // action={() => handleDeleteRoute(route?.id)}
-                                //         action={() => route?.id !== undefined ? handleDeleteRoute(route.id) : undefined}
-                                //         icon={<FaTrashCan />}
-                                //         className="px-3 py-1 text-sm rounded-lg space-x-2"
-                                //         disabled={deletingRouteId === route.id}
-                                //     />
-                                // </div>
-
                                 <div key={route.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
                                     <span className="capitalize font-medium text-gray-800">{route.name}</span>
                                     <span className="text-gray-600 truncate max-w-md">{route.link}</span>
@@ -144,7 +130,7 @@ const RouteBuilder = () => {
                                             className="px-3 py-1 text-sm rounded-lg space-x-2"
                                         />
                                         <Button
-                                            type="tertiary"
+                                            type="outline"
                                             label={deletingRouteId === route.id ? 'Deleting...' : 'Delete'}
                                             action={() => route?.id !== undefined ? handleDeleteRoute(route.id) : undefined}
                                             icon={<FaTrashCan />}
@@ -298,8 +284,16 @@ const RouteBuilder = () => {
                             id="update-dynamic-content"
                             type="text"
                             name="dynamic_content"
-                            value={selectedRoute?.dynamic_content || ''}
-                            onChange={(e) => setSelectedRoute(prev => prev ? { ...prev, dynamic_content: e.target.value } : null)}
+                            // value={selectedRoute?.dynamic_content ?
+                            //     (typeof selectedRoute.dynamic_content === 'string' ?
+                            //         reverseDynamicContentArray(selectedRoute.dynamic_content) :
+                            //         selectedRoute.dynamic_content
+                            //     ) : ''}
+                            value={reverseDynamicContentArray(selectedRoute?.dynamic_content) || ''}
+                            onChange={(e) => setSelectedRoute(prev => prev ?
+                                { ...prev, dynamic_content: e.target.value } :
+                                null
+                            )}
                             className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
                         />
                     </div>
