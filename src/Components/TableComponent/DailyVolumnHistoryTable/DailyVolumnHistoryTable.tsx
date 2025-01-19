@@ -80,9 +80,9 @@ const DailyVolumnHistoryTable = () => {
             field: 'sn',
             headerName: 'SN',
             filterable: false,
-            flex: 1,
+            // flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#49526A] leading-3">
+                <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
                     {Number(params.api.getRowIndexRelativeToVisibleRows(params.id)) + 1}
                 </div>
             ),
@@ -92,11 +92,11 @@ const DailyVolumnHistoryTable = () => {
 
         {
             field: 'customer',
-            headerName: 'Customer',
+            headerName: 'Site Name',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#49526A] leading-3">
-                    {params.row.name}
+                <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
+                    {params.row.customer_site}
                 </div>
             ),
         },
@@ -105,7 +105,7 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Allocation',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#49526A] leading-3">
+                <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
                     {params.row.allocation}
                 </div>
             ),
@@ -115,7 +115,7 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Nomination',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#49526A] leading-3">
+                <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
                     {params.row.nomination}
                 </div>
             ),
@@ -125,7 +125,7 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Volume',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#49526A] leading-3">
+                <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
                     {params.row.volume}
                 </div>
             ),
@@ -135,7 +135,7 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Temperature',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#49526A] leading-3">
+                <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
                     {params.row.temperature}
                 </div>
             ),
@@ -145,7 +145,7 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Inlet Pressure',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#49526A] leading-3 ">
+                <div className="text-[14px] font-[400] text-[#9297A1] leading-3 ">
                     <span>
                         {params.row.inlet}
                     </span>
@@ -158,7 +158,7 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Outlet Pressure',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#49526A] leading-3 ">
+                <div className="text-[14px] font-[400] text-[#9297A1] leading-3 ">
                     <span>
                         {params.row.outlet}
                     </span>
@@ -171,7 +171,7 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Status',
             flex: 1,
             renderCell: (params) => (
-                <div className="text-[14px] font-[400] leading-3 p-2 rounded-md flex space-x-4 capitalize"
+                <div className="text-[13px] font-[500] leading-3 p-2 rounded-md flex space-x-4 capitalize"
                 >
                     <span style={{ color: params.row.status === 'approve' ? '#22c55e' : '#f59e0b' }}>
                         {params.row.status}
@@ -202,7 +202,7 @@ const DailyVolumnHistoryTable = () => {
             headerName: 'Date',
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#49526A] leading-3 ">
+                <div className="text-[13px] font-[400] text-[#9297A1] leading-3 ">
                     <span>
 
                         {
