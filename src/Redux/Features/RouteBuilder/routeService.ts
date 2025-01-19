@@ -37,6 +37,15 @@ export const routeApi = api.injectEndpoints({
       invalidatesTags: ['Routes'],
      
     }),
+     updateRoute: builder.mutation<RouteSingleData, { id: number; data: Partial<Route> }>({
+      query: ({ id, data }) => ({
+        url: `/processflow/api/route/update/${id}`,
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: data,
+      }),
+      invalidatesTags: ['Routes'],
+    }),
 
     deleteRoute: builder.mutation<{ success: boolean; id: number }, number>({
       query: (id) => ({
@@ -56,4 +65,5 @@ export const {
   useCreateRouteMutation, 
   useGetRoutesQuery, 
   useDeleteRouteMutation,
+  useUpdateRouteMutation
 } = routeApi;

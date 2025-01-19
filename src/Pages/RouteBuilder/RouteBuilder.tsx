@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 
 import { Button, Heading, Modal } from '@/Components';
-import { useCreateRouteMutation, useDeleteRouteMutation, useGetRoutesQuery } from '@/Redux/Features/RouteBuilder/routeService';
+import { useCreateRouteMutation, useDeleteRouteMutation, useGetRoutesQuery, useUpdateRouteMutation } from '@/Redux/Features/RouteBuilder/routeService';
 import { convertToDynamicContentArray } from '@/Utils/convertToDynamicContentArray';
-// import { getRouteLists } from '@/Routes/Admin';
 import { ArrowBack } from '@mui/icons-material';
 
 import { useState } from 'react';
+import { FaEdit } from 'react-icons/fa';
 import { FaTrashCan } from 'react-icons/fa6';
 import { VscSend } from 'react-icons/vsc';
 import { Link } from 'react-router-dom';
@@ -18,10 +18,13 @@ const RouteBuilder = () => {
     const [routeLink, setRouteLink] = useState('');
     const [dynamicContent, setDynamicContent] = useState('');
     const [deletingRouteId, setDeletingRouteId] = useState<number | null>(null);
+    const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+    const [selectedRoute, setSelectedRoute] = useState<Route | null>(null);
 
     const { data: routes, isLoading, isError } = useGetRoutesQuery();
     const [createRoute, { isLoading: creating }] = useCreateRouteMutation();
     const [deleteRoute] = useDeleteRouteMutation();
+    const [updateRoute, { isLoading: updating }] = useUpdateRouteMutation();
 
 
     const handleCreateRoute = async () => {
@@ -41,6 +44,31 @@ const RouteBuilder = () => {
         } catch (error) {
             console.error('Failed to create route:', error);
             toast.error('Failed to create route');
+        }
+    };
+
+
+
+    const handleUpdateRoute = async () => {
+        if (!selectedRoute?.id) return;
+
+        try {
+            await updateRoute({
+                id: selectedRoute.id,
+                data: {
+                    name: selectedRoute.name,
+                    link: selectedRoute.link,
+                    dynamic_content: convertToDynamicContentArray(selectedRoute.dynamic_content || ''),
+                    status: selectedRoute.status
+                }
+            }).unwrap();
+
+            setIsUpdateModalOpen(false);
+            setSelectedRoute(null);
+            toast.success('Route updated successfully');
+        } catch (error) {
+            console.error('Failed to update route:', error);
+            toast.error('Failed to update route');
         }
     };
 
@@ -87,18 +115,43 @@ const RouteBuilder = () => {
                     {routes?.data && (
                         <div className="space-y-2">
                             {routes.data.map((route) => (
+                                // <div key={route.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
+                                //     <span className="capitalize font-medium text-gray-800">{route.name}</span>
+                                //     <span className="text-gray-600 truncate max-w-md">{route.link}</span>
+                                //     <Button
+                                //         type="tertiary"
+                                //         label={deletingRouteId === route.id ? 'Deleting...' : 'Delete'}
+                                //         // action={() => handleDeleteRoute(route?.id)}
+                                //         action={() => route?.id !== undefined ? handleDeleteRoute(route.id) : undefined}
+                                //         icon={<FaTrashCan />}
+                                //         className="px-3 py-1 text-sm rounded-lg space-x-2"
+                                //         disabled={deletingRouteId === route.id}
+                                //     />
+                                // </div>
+
                                 <div key={route.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
                                     <span className="capitalize font-medium text-gray-800">{route.name}</span>
                                     <span className="text-gray-600 truncate max-w-md">{route.link}</span>
-                                    <Button
-                                        type="tertiary"
-                                        label={deletingRouteId === route.id ? 'Deleting...' : 'Delete'}
-                                        // action={() => handleDeleteRoute(route?.id)}
-                                        action={() => route?.id !== undefined ? handleDeleteRoute(route.id) : undefined}
-                                        icon={<FaTrashCan />}
-                                        className="px-3 py-1 text-sm rounded-lg space-x-2"
-                                        disabled={deletingRouteId === route.id}
-                                    />
+                                    <div className="flex gap-2">
+                                        <Button
+                                            type="secondary"
+                                            label="Edit"
+                                            action={() => {
+                                                setSelectedRoute(route);
+                                                setIsUpdateModalOpen(true);
+                                            }}
+                                            icon={<FaEdit />}
+                                            className="px-3 py-1 text-sm rounded-lg space-x-2"
+                                        />
+                                        <Button
+                                            type="tertiary"
+                                            label={deletingRouteId === route.id ? 'Deleting...' : 'Delete'}
+                                            action={() => route?.id !== undefined ? handleDeleteRoute(route.id) : undefined}
+                                            icon={<FaTrashCan />}
+                                            className="px-3 py-1 text-sm rounded-lg space-x-2"
+                                            disabled={deletingRouteId === route.id}
+                                        />
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -171,6 +224,82 @@ const RouteBuilder = () => {
                             name="dynamic_content"
                             value={dynamicContent}
                             onChange={(e) => setDynamicContent(e.target.value)}
+                            className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
+                        />
+                    </div>
+                </Modal>
+
+                {/* EDit */}
+                <Modal
+                    isOpen={isUpdateModalOpen}
+                    onClose={() => {
+                        setIsUpdateModalOpen(false);
+                        setSelectedRoute(null);
+                    }}
+                    size='medium'
+                    title='Update Route'
+                    subTitle='Update route details'
+                    buttons={[
+                        <div key="modal-buttons" className='flex gap-2 mb-[-10px]'>
+                            <div className='w-[120px]'>
+                                <Button
+                                    type="outline"
+                                    label="Cancel"
+                                    action={() => {
+                                        setIsUpdateModalOpen(false);
+                                        setSelectedRoute(null);
+                                    }}
+                                    color="#FFFFFF"
+                                    width="100%"
+                                    height="40px"
+                                    fontSize="16px"
+                                    radius="20px"
+                                />
+                            </div>
+                            <div className='w-[260px]'>
+                                <Button
+                                    type="secondary"
+                                    label={updating ? 'Updating...' : 'Update Route'}
+                                    action={handleUpdateRoute}
+                                    color="#FFFFFF"
+                                    width="100%"
+                                    height="40px"
+                                    fontSize="16px"
+                                    radius="20px"
+                                    disabled={updating}
+                                />
+                            </div>
+                        </div>
+                    ]}
+                >
+                    <div>
+                        <label htmlFor="update-name" className="block text-sm font-medium text-gray-700 capitalize">Route Name</label>
+                        <input
+                            id="update-name"
+                            type="text"
+                            name="name"
+                            value={selectedRoute?.name || ''}
+                            onChange={(e) => setSelectedRoute(prev => prev ? { ...prev, name: e.target.value } : null)}
+                            className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
+                        />
+
+                        <label htmlFor="update-link" className="block text-sm font-medium text-gray-700 capitalize">Route </label>
+                        <input
+                            id="update-link"
+                            type="text"
+                            name="link"
+                            value={selectedRoute?.link || ''}
+                            onChange={(e) => setSelectedRoute(prev => prev ? { ...prev, link: e.target.value } : null)}
+                            className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
+                        />
+
+                        <label htmlFor="update-dynamic-content" className="block text-sm font-medium text-gray-700 capitalize">Dynamic Content </label>
+                        <input
+                            id="update-dynamic-content"
+                            type="text"
+                            name="dynamic_content"
+                            value={selectedRoute?.dynamic_content || ''}
+                            onChange={(e) => setSelectedRoute(prev => prev ? { ...prev, dynamic_content: e.target.value } : null)}
                             className="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-nnpc-200 focus:border-nnpc-200 p-2.5"
                         />
                     </div>
