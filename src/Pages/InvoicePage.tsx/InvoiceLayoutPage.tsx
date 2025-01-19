@@ -43,15 +43,15 @@ const InvoiceLayoutPage: React.FC = () => {
   }, [initGCC]);
 
 
-
   const handleCreateGCC = async (data: LineItemType[]) => {
-    if (!gccData) {
+    
+    if (!gccData.gcc) {
       const response = await createGCC({
         customer_id: 31,
         customer_site_id: 11,
         list_item: JSON.stringify(data),
       });
-
+       
       if (response.data?.success) {
         setShowDateInfo(true);
         setGccData({} as ApiResponse['data']);

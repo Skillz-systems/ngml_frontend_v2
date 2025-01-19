@@ -68,7 +68,6 @@ export default function InventoryTable({
 
     console.log('lineItems:', lineItems);
     console.log('backlog:', backlog);
-
     const allItems = [...(lineItems ?? []), ...(backlog ?? [])];
 
     console.log('allItems (combined):', allItems);
