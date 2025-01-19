@@ -41,7 +41,7 @@ const BillingHistory: React.FC = () => {
     // }, []); 
 
     const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: currentYear }, (_, i) => 2020 + i);
+    const years = Array.from({ length: 6 }, (_, i) => currentYear - i).reverse();
 
 
     useEffect(() => {
