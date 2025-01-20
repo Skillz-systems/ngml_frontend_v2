@@ -15,7 +15,7 @@ import { format, subDays } from 'date-fns';
 const DailyVolumnHistoryTable = () => {
 
     const defaultDate = subDays(new Date(), 1);
-    const defaultDateFormatted = format(defaultDate, 'YYYY-MM-DD');
+    const defaultDateFormatted = format(defaultDate, 'yyyy-MM-dd');
     const [date, setDate] = useState<DateObject | null>(new DateObject(defaultDate));
     const [rows, setRows] = useState([]);
 
@@ -31,8 +31,8 @@ const DailyVolumnHistoryTable = () => {
         setDate(newDate as DateObject);
         setFilters((prevFilters) => ({
             ...prevFilters,
-            created_at_from: newDate?.format('YYYY-MM-DD'),
-            created_at_to: newDate?.format('YYYY-MM-DD'),
+            created_at_from: newDate?.format('yyyy-MM-dd'),
+            created_at_to: newDate?.format('yyyy-MM-dd'),
         }));
         console.log('Selected date :', newDate);
     };
