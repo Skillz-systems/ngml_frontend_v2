@@ -83,7 +83,8 @@ const DailyVolumnHistoryTable = () => {
             // flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
-                    {Number(params.api.getRowIndexRelativeToVisibleRows(params.id)) + 1}
+                    {/* {Number(params.api.getRowIndexRelativeToVisibleRows(params.id)) + 1} */}
+                    {Number(params.id)}
                 </div>
             ),
         },
