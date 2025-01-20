@@ -9,21 +9,22 @@ import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';
 import { MdTrendingFlat } from 'react-icons/md';
 import { DateObject } from 'react-multi-date-picker';
 import { useLocation } from 'react-router-dom';
-
 import { format, subDays } from 'date-fns';
-
-
 
 
 const DailyVolumnHistoryTable = () => {
 
     const defaultDate = subDays(new Date(), 1);
+    const defaultDateFormatted = format(defaultDate, 'YYYY-MM-DD');
     const [date, setDate] = useState<DateObject | null>(new DateObject(defaultDate));
     const [rows, setRows] = useState([]);
+
 
     const [filters, setFilters] = useState<Filters>({
         page: '1',
         per_page: '20',
+        created_at_from: defaultDateFormatted,
+        created_at_to: defaultDateFormatted,
     });
 
     const handleDateRangeChange = (newDate: any | null) => {
@@ -31,7 +32,7 @@ const DailyVolumnHistoryTable = () => {
         setFilters((prevFilters) => ({
             ...prevFilters,
             created_at_from: newDate?.format('YYYY-MM-DD'),
-            created_at_to: newDate?.[1]?.format('YYYY-MM-DD'),
+            created_at_to: newDate?.format('YYYY-MM-DD'),
         }));
         console.log('Selected date :', newDate);
     };
@@ -87,8 +88,6 @@ const DailyVolumnHistoryTable = () => {
                 </div>
             ),
         },
-
-
 
         {
             field: 'customer',
@@ -178,20 +177,16 @@ const DailyVolumnHistoryTable = () => {
                     </span>
                     {params.row.abnormal_status === 'normal' && (
                         <MdTrendingFlat className='text-amber-500 size-4' />
-
-                    )
-                    }
+                    )}
 
                     {params.row.abnormal_status === 'low' && (
                         <IoIosTrendingDown className='text-red-500 size-4' />
 
-                    )
-                    }
+                    )}
                     {params.row.abnormal_status === 'high' && (
 
                         <IoIosTrendingUp className='text-green-500 size-4' />
-                    )
-                    }
+                    )}
 
                 </div>
 
