@@ -21,7 +21,7 @@ const RouterConfig = () => {
 
         {
             path: '/admin',
-            element: import.meta.env.VITE_ENV === 'development' ? <Development /> : <Root />,
+            element: import.meta.env.VITE_NGML_DEV === 'development' ? <Development /> : <Root />,
             children: admin
         },
         {

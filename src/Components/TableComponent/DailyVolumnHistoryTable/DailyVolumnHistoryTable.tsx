@@ -10,15 +10,15 @@ import { MdTrendingFlat } from 'react-icons/md';
 import { DateObject } from 'react-multi-date-picker';
 import { useLocation } from 'react-router-dom';
 
-import { format } from 'date-fns';
+import { format, subDays } from 'date-fns';
 
 
 
 
 const DailyVolumnHistoryTable = () => {
 
-
-    const [dateRange, setDateRange] = useState<DateObject[] | null>(null);
+    const defaultDate = subDays(new Date(), 1);
+    const [date, setDate] = useState<DateObject | null>(new DateObject(defaultDate));
     const [rows, setRows] = useState([]);
 
     const [filters, setFilters] = useState<Filters>({
@@ -26,14 +26,14 @@ const DailyVolumnHistoryTable = () => {
         per_page: '20',
     });
 
-    const handleDateRangeChange = (dates: any | null) => {
-        setDateRange(dates as DateObject[]);
+    const handleDateRangeChange = (newDate: any | null) => {
+        setDate(newDate as DateObject);
         setFilters((prevFilters) => ({
             ...prevFilters,
-            created_at_from: dates?.[0]?.format('YYYY-MM-DD'),
-            created_at_to: dates?.[1]?.format('YYYY-MM-DD'),
+            created_at_from: newDate?.format('YYYY-MM-DD'),
+            created_at_to: newDate?.[1]?.format('YYYY-MM-DD'),
         }));
-        console.log('Selected date range:', dates);
+        console.log('Selected date :', newDate);
     };
 
     const location = useLocation();
@@ -238,16 +238,14 @@ const DailyVolumnHistoryTable = () => {
                             }
                         />
                         <CustomDatePicker
-                            range
-                            value={dateRange}
+                            value={date}
                             onChange={handleDateRangeChange}
-                            placeholder="Select date range"
+                            placeholder="Select date"
                             format="YYYY-MM-DD"
                         />
                     </div>
                 </div>
             </div>
-
             <div className="w-[100%]">
                 <DataGrid
                     className="pointer-cursor-datagrid"
