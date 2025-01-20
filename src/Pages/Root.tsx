@@ -37,3 +37,19 @@ export default Root;
 
 
 
+
+
+
+// import MainLayout from '@/Layout/MainLayout';
+// import { Outlet } from 'react-router-dom';
+
+// const Root = () => {
+
+//     return (
+//         <MainLayout>
+//             <Outlet />
+//         </MainLayout>
+//     );
+// };
+
+// export default Root;

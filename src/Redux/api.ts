@@ -20,6 +20,9 @@ const baseQuery = fetchBaseQuery({
 
     if (authToken && typeof authToken === 'string') {
       headers.set('authorization', `Bearer ${authToken}`);
+
+      // headers.set('authorization', 'Bearer 80|eIIsgyICNpZyw2Q39hii5pqSSdC5aNtpachwD8910bd9bfbc');
+
     }
     
     return headers;
