@@ -12,12 +12,28 @@ import { useLocation } from 'react-router-dom';
 import { format, subDays } from 'date-fns';
 
 
+
+type RowType = {
+    sn: string;
+    customer_site: string;
+    allocation: string;
+    nomination: string;
+    volume: string;
+    temperature: string;
+    inlet: string;
+    outlet: string;
+    abnormal_status: string;
+    created_at: string;
+};
+
+
+
 const DailyVolumnHistoryTable = () => {
 
     const defaultDate = subDays(new Date(), 1);
     const defaultDateFormatted = format(defaultDate, 'yyyy-MM-dd');
     const [date, setDate] = useState<DateObject | null>(new DateObject(defaultDate));
-    const [rows, setRows] = useState([]);
+    const [rows, setRows] = useState<RowType[]>([]);
 
 
     const [filters, setFilters] = useState<Filters>({
@@ -64,35 +80,29 @@ const DailyVolumnHistoryTable = () => {
     }, [isSuccess, data]);
 
     const columns: GridColDef[] = [
-
-
-
-        // {
-        //     field: 'id',
-        //     headerName: 'SN',
-        //     flex: 1,
-        //     renderCell: (params: GridRenderCellParams) => (
-        //         <div className="text-[14px] font-[400] text-[#49526A] leading-3">
-        //             {params.row.id}
-        //         </div>
-        //     ),
-        // },
         {
             field: 'sn',
             headerName: 'SN',
             filterable: false,
-            // flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
-                    {Number(params.api.getRowIndexRelativeToVisibleRows(params.id)) + 1}
-                </div>
-            ),
+            sortable: false,
+            renderCell: (params: GridRenderCellParams) => {
+                const pageIndex = Number(filters.page) - 1;
+                const rowsPerPage = Number(filters.per_page);
+                const rowIndex = rows.indexOf(params.row);
+                const rowNumber = rowIndex + 1 + pageIndex * rowsPerPage;
+                return (
+                    <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
+                        {rowNumber}
+                    </div>
+                );
+            },
         },
 
         {
             field: 'customer',
             headerName: 'Site Name',
             flex: 1,
+            sortable: false,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
                     {params.row.customer_site}
@@ -102,6 +112,7 @@ const DailyVolumnHistoryTable = () => {
         {
             field: 'allocation',
             headerName: 'Allocation',
+            sortable: false,
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
@@ -112,6 +123,7 @@ const DailyVolumnHistoryTable = () => {
         {
             field: 'nomination',
             headerName: 'Nomination',
+            sortable: false,
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
@@ -122,6 +134,7 @@ const DailyVolumnHistoryTable = () => {
         {
             field: 'volume',
             headerName: 'Volume',
+            sortable: false,
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
@@ -132,6 +145,7 @@ const DailyVolumnHistoryTable = () => {
         {
             field: 'temperature',
             headerName: 'Temperature',
+            sortable: false,
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#9297A1] leading-3">
@@ -142,6 +156,7 @@ const DailyVolumnHistoryTable = () => {
         {
             field: 'inlet-pressure',
             headerName: 'Inlet Pressure',
+            sortable: false,
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#9297A1] leading-3 ">
@@ -155,6 +170,7 @@ const DailyVolumnHistoryTable = () => {
         {
             field: 'outlet-pressure',
             headerName: 'Outlet Pressure',
+            sortable: false,
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[14px] font-[400] text-[#9297A1] leading-3 ">
@@ -168,6 +184,7 @@ const DailyVolumnHistoryTable = () => {
         {
             field: 'abnormal_status',
             headerName: 'Status',
+            sortable: false,
             flex: 1,
             renderCell: (params) => (
                 <div className="text-[13px] font-[500] leading-3 p-2 rounded-md flex space-x-4 capitalize"
@@ -195,6 +212,7 @@ const DailyVolumnHistoryTable = () => {
         {
             field: 'created_at',
             headerName: 'Date',
+            sortable: false,
             flex: 1,
             renderCell: (params: GridRenderCellParams) => (
                 <div className="text-[13px] font-[400] text-[#9297A1] leading-3 ">
