@@ -7,6 +7,10 @@ import { useCallback } from 'react';
 
 const CustomerPageDetails = () => {
 
+    const currentYear = new Date().getFullYear();
+    const yearRange = Array.from({ length: 6 }, (_, i) => currentYear - i).reverse();
+    // const yearRange = Array.from({ length: currentYear - 2019 + 1 }, (_, i) => 2020 + i);
+
     const handleFilterChange = useCallback((params: FilterParams) => {
         console.log('Filter params:', params);
 
@@ -36,7 +40,7 @@ const CustomerPageDetails = () => {
                     type='primary'
                     icon={<img src={images.firewood} alt="firewood icon" width='30px' />}
                     value={0}
-                    yearOptions={[2021, 2022, 2023]}
+                    yearOptions={yearRange}
                     content="Total Consumed Volume"
                     subcontent="(MMscf)"
                     className="w-full md:w-[50%]"
