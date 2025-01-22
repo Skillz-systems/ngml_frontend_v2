@@ -19,7 +19,7 @@ type CustomerData = {
 };
 
 const CustomerDetail: React.FC = () => {
-    const { isModalOpen, toggleModal } = useModalManagement('EditCustomer'); 
+    const { isModalOpen, toggleModal } = useModalManagement('EditCustomer');
     const [customerForm, setCustomerForm] = useState<FormField[]>([]);
     const [customerData, setCustomerData] = useState<CustomerData>({});
     const [formError, setFormError] = useState<string>('');
@@ -132,28 +132,38 @@ const CustomerDetail: React.FC = () => {
                 <div className='border border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
                     <div>
                         <div className='flex justify-between items-center'>
-                        <h3 className='text-[#49526A] font-[700]'>PERSONAL DETAILS</h3>
-                        <img src={images.avatarLogo} alt="logo" />
+                            <h3 className='text-[#49526A] text-xl font-[700]'>PERSONAL DETAILS</h3>
+                            <img src={images.avatarLogo} alt="logo" />
                         </div>
-                       
                         <div>
                             <div className='mt-4'>
                                 <div className='flex gap-4'>
-                                    <div className='font-[700]'>
-                                        <div>Name:</div>
-                                        <div>Email:</div>
+                                    <div className='font-semibold'>
+                                        <div>Company Name :</div>
                                         <div>Phone Number:</div>
+                                        <div>Site Name:</div>
+                                        <div>Site Address:</div>                     
                                         <div>Created At:</div>
+                                        <div>Email:</div>
+                                        <div>Zone:</div>
                                     </div>
-                                    <div className='font-[500]'>
+                                    <div className='font-[400]'>
                                         <div>{customerDetails?.data?.company_name || 'N/A'}</div>
-                                        <div>{customerDetails?.data?.email || 'N/A'}</div>
                                         <div>{customerDetails?.data?.phone_number || 'N/A'}</div>
-                                        <div>{customerDetails?.data?.created_at || 'N/A'}</div>
+                                        <div>{customerDetails?.data?.sites[0]?.site_name || 'N/A'}</div>
+                                        <div>{customerDetails?.data?.sites[0]?.site_address || 'N/A'}</div>                                      
+                                        <div>
+                                            {
+                                                customerDetails?.data?.created_at
+                                                    ? new Date(customerDetails?.data?.created_at).toLocaleDateString('en-GB')
+                                                    : 'N/A'
+                                            }
+                                        </div>
+                                        <div>{customerDetails?.data?.email || 'N/A'}</div>
+                                        <div>{customerDetails?.data?.sites[0]?.ngml_zone_id || 'N/A'}</div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <Modal
                             isOpen={isModalOpen}
