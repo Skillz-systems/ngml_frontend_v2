@@ -1,6 +1,3 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
 import { Button, Modal } from '@/Components/index';
@@ -8,6 +5,9 @@ import { useModalManagement } from '@/Hooks/useModalManagement';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 type CustomerData = Record<string, string | File | null>;
 
@@ -105,9 +105,7 @@ const DdqPage: React.FC = () => {
                             uploadedFiles.map((file, index) => (
                                 <div key={index} className="mb-2">
                                     <a
-                                        href={URL.createObjectURL(
-                                            new Blob([file.url], { type: 'application/pdf' })
-                                        )}
+                                        href={`data:application/pdf;base64,${file.url}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-blue-500 underline"
@@ -119,6 +117,7 @@ const DdqPage: React.FC = () => {
                         ) : (
                             <p>No files uploaded yet.</p>
                         )}
+
                     </div>
                     <Modal
                         isOpen={isModalOpen}
