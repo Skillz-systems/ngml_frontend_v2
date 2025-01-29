@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import colors from '@/Utils/colors';
-import React, { Fragment, useEffect, useState } from 'react';
-import images from '../../assets/index';
-import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { Button, Modal, Heading } from '@/Components';
 import FormInput from '@/Components/Custominput/FormInput';
-import { areRequiredFieldsFilled } from '@/Utils/formValidation';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
-import { Button, Modal } from '@/Components';
-import { toast } from 'react-toastify';
-import { convertFileToBase64 } from '@/Utils/base64Converter';
-import { useParams } from 'react-router-dom';
-import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
 import { useModalManagement } from '@/Hooks/useModalManagement';
+import { useGetCustomerByIdQuery } from '@/Redux/Features/Customer/customerService';
+import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { convertFileToBase64 } from '@/Utils/base64Converter';
+import colors from '@/Utils/colors';
+import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import images from '../../assets/index';
 
 
 type CustomerData = {
@@ -132,7 +132,10 @@ const CustomerDetail: React.FC = () => {
                 <div className='border border-nnpcdarkgreen-500 rounded-[20px] p-[20px] bg-dark-50'>
                     <div>
                         <div className='flex justify-between items-center'>
-                            <h3 className='text-[#49526A] text-xl font-[700]'>PERSONAL DETAILS</h3>
+                            {/* <h3 className='text-[#49526A] text-xl font-[700]'>PERSONAL DETAILS</h3> */}
+                            <Heading as="h4" size="h6" color="primaryColor" className="font-[2px] text-dark-100">
+                                PERSONAL DETAILS
+                            </Heading>
                             <img src={images.avatarLogo} alt="logo" />
                         </div>
                         <div>
@@ -142,7 +145,7 @@ const CustomerDetail: React.FC = () => {
                                         <div>Company Name :</div>
                                         <div>Phone Number:</div>
                                         <div>Site Name:</div>
-                                        <div>Site Address:</div>                     
+                                        <div>Site Address:</div>
                                         <div>Created At:</div>
                                         <div>Email:</div>
                                         <div>Zone:</div>
@@ -151,7 +154,7 @@ const CustomerDetail: React.FC = () => {
                                         <div>{customerDetails?.data?.company_name || 'N/A'}</div>
                                         <div>{customerDetails?.data?.phone_number || 'N/A'}</div>
                                         <div>{customerDetails?.data?.sites[0]?.site_name || 'N/A'}</div>
-                                        <div>{customerDetails?.data?.sites[0]?.site_address || 'N/A'}</div>                                      
+                                        <div>{customerDetails?.data?.sites[0]?.site_address || 'N/A'}</div>
                                         <div>
                                             {
                                                 customerDetails?.data?.created_at

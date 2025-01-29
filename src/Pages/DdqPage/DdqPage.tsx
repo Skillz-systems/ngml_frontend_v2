@@ -1,13 +1,13 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import FormInput from '@/Components/Custominput/FormInput';
 import { FileType } from '@/Components/Fileuploadinput/FileTypes';
-import { Button, Modal } from '@/Components/index';
+import { Button, Heading, Modal } from '@/Components/index';
 import { useModalManagement } from '@/Hooks/useModalManagement';
 import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
 import { convertFileToBase64 } from '@/Utils/base64Converter';
 import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 type CustomerData = Record<string, string | File | null>;
 
@@ -98,7 +98,10 @@ const DdqPage: React.FC = () => {
             <div className="bg-[#FFFFFF] p-4 rounded-xl">
                 <div className="rounded-xl border flex-col justify-start mt-2 items-start bg-[#FFFFFF]">
                     <div className="w-full h-[60px] px-3 py-2.5 bg-dark-50 border-b items-center flex">
-                        <div className="text text-xl font-bold font-['Mulish'] leading-tight">Due Diligence Questionnaire</div>
+                        {/* <div className="text text-xl font-bold font-['Mulish'] leading-tight">Due Diligence Questionnaire</div> */}
+                        <Heading as="h4" size="h6" color="primaryColor" className="font-[2px] text-dark-100">
+                            Due Diligence Questionaire
+                        </Heading>
                     </div>
                     <div className="bg-dark-50 justify-between p-4">
                         {uploadedFiles.length > 0 ? (

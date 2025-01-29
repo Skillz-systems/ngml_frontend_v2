@@ -143,7 +143,7 @@ const EoiPage = () => {
       const result = await submitForm(payload).unwrap();
 
       if (result) {
-        toast.success('DDQ created successfully');
+        toast.success('EOI created successfully');
         setCustomerData({});
         toggleModal(false);
         const searchParams = new URLSearchParams(location.search);
