@@ -379,8 +379,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
       avatar: images.avatarLogo,
     }
     : {
-      name: 'Guest',
-      designation: 'Guest User',
+      name: 'Unknown',
+      designation: 'Unknown User',
       avatar: images.avatarLogo,
     };
 
