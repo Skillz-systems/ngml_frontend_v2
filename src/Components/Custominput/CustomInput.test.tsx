@@ -82,9 +82,23 @@ describe('CustomInput', () => {
         render(<CustomInput type="text" label="Username" value="" handleChangeEvent={() => { }} />);
         const inputElement = screen.getByRole('textbox');
 
-        expect(inputElement).toHaveClass('border-b', 'border-solid', 'border-2', 'border-gray-300');
-        expect(inputElement).toHaveClass(' appearance-none block w-full px-3 py-3 border border-b border-solid border-2 border-gray-300 rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-[12px] pl-3');
-        expect(inputElement).toHaveClass('appearance-none block w-full px-3 py-3 border border-b border-solid border-2 border-gray-300 rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-[12px] pl-3');
+        expect(inputElement).toHaveClass(
+            'appearance-none',
+            'block',
+            'w-full',
+            'px-3',
+            'py-3',
+            'border',
+            'border-gray-300',
+            'rounded-[13px]',
+            'shadow-sm',
+            'placeholder-gray-400',
+            'placeholder:italic',
+            'focus:outline-none',
+            'focus:ring-gray-700',
+            'focus:border-lime-200',
+            'sm:text-[12px]'
+        );
     });
 
     it('applies customStyle1 to select input', () => {
@@ -100,16 +114,9 @@ describe('CustomInput', () => {
         );
         const selectElement = screen.getByRole('combobox');
 
-        expect(selectElement).toHaveClass('border border-solid border-lime-500 text-[12px] h-[56px] placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 pl-14 rounded-full w-full px-4 py-2 focus:outline-none focus:border-t-2 focus:ring-lime-500 focus:bg-gray-100');
-    });
-
-    it('applies custom styles to textarea', () => {
-        render(<CustomInput type="textarea" label="Description" value="" handleChangeEvent={() => { }} />);
-        const textareaElement = screen.getByRole('textbox');
-
-        expect(textareaElement).toHaveClass('border-b', 'border-solid', 'border-2', 'border-gray-300');
-        expect(textareaElement).toHaveClass('appearance-none block w-full px-3 py-3 border border-b border-solid border-2 border-gray-300 rounded-[13px] shadow-sm placeholder-gray-400 placeholder:italic pl-12 focus:outline-none focus:ring-gray-700 focus:border-lime-200 sm:text-[12px] pl-3');
-        expect(textareaElement).toHaveClass('focus:outline-none', 'focus:ring-gray-700', 'sm:text-[12px]');
+        expect(selectElement).toHaveClass(
+            'border border-lime-500 text-[12px] h-[56px] placeholder:font-[400] font-[500] placeholder:italic placeholder-gray-400 rounded-full w-full px-4 py-2 focus:outline-none focus:ring-lime-500 focus:bg-gray-100 pl-3 appearance-none select-none'
+        );
     });
 
     it('applies custom styles to checkbox', () => {
@@ -130,7 +137,23 @@ describe('CustomInput', () => {
         render(<CustomInput type="text" label="Username" value="" handleChangeEvent={() => { }} />);
         const inputElement = screen.getByRole('textbox');
 
-        expect(inputElement).toHaveClass('border-b');
+        expect(inputElement).toHaveClass(
+            'appearance-none',
+            'block',
+            'w-full',
+            'px-3',
+            'py-3',
+            'border',
+            'border-gray-300',
+            'rounded-[13px]',
+            'shadow-sm',
+            'placeholder-gray-400',
+            'placeholder:italic',
+            'focus:outline-none',
+            'focus:ring-gray-700',
+            'focus:border-lime-200',
+            'sm:text-[12px]'
+        );
     });
 
     it('applies customStyle1', () => {

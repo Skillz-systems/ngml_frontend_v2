@@ -51,7 +51,7 @@ const AgreementTemplate: React.FC<AgreementTemplateProps> = ({ icon, heading, ti
             <Divider />
             <div className='h-[114px] p-[10px] flex flex-wrap gap-[12px]'>
                 {templates.map((_template, index) => (
-                    <div key={index} className="border rounded-[12px] border-[#E2E4EB] bg-[#FBFDFF] rounded-md h-[120px] w-[100px] flex flex-col justify-center items-center ">
+                    <div key={index} className="border border-[#E2E4EB] bg-[#FBFDFF] rounded-md h-[120px] w-[100px] flex flex-col justify-center items-center ">
                         <div className="text-[#CCD0DC] rounded-[40px] p-[10px] cursor-pointer h-[32px] w-[32px] border border-[#CCD0DC] flex justify-center items-center" onClick={openModal}>
                             {icon}
                         </div>

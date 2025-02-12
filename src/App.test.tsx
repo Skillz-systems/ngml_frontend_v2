@@ -1,38 +1,36 @@
 import { render } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { RouterProvider } from 'react-router-dom';
+import { describe, expect, it, vi } from 'vitest';
 import App from './App';
 
+// Mock the RouterConfig
+vi.mock('./RouterConfig', () => ({
+  default: () => ({
+    // Mock minimal router object
+    routes: [],
+  }),
+}));
 
-type ChildrenProps = {
-    children?: React.ReactNode;
-  };
-  
-
+// Mock react-router-dom
 vi.mock('react-router-dom', () => ({
-  BrowserRouter: ({ children }: ChildrenProps) => <div>{children}</div>, 
-  Route: ({ children }: ChildrenProps) => <div>{children}</div>, 
-  Routes: ({ children }: ChildrenProps) => <div>{children}</div>, 
-}));
-
-vi.mock('./Components/Routes/Index', () => ({
-    PrivateAdminRoute: ({ children }: ChildrenProps) => <div>{children}</div>,
-  routes: {
-    AuthRoutes: [],
-    AdminRoutes: [],
-    ClientRoutes: [],
-    StaffRoutes: [],
-    SupplierRoutes: [],
-  }, 
-}));
-
-vi.mock('react-toastify', () => ({
-  ToastContainer: () => <div></div>, 
+  RouterProvider: vi.fn(() => <div data-testid="mock-router-provider" />),
 }));
 
 describe('App Component', () => {
-  it('renders without crashing', () => {
-    const { container } = render(<App />);
-    
-    expect(container).toBeInTheDocument();
+  it('renders RouterProvider with RouterConfig', () => {
+    const { getByTestId } = render(<App />);
+
+    // Check if RouterProvider is rendered
+    expect(getByTestId('mock-router-provider')).toBeDefined();
+
+    // Check if RouterProvider was called with the result of RouterConfig
+    expect(RouterProvider).toHaveBeenCalledWith(
+      expect.objectContaining({
+        router: expect.objectContaining({
+          routes: expect.any(Array),
+        }),
+      }),
+      expect.anything()
+    );
   });
 });

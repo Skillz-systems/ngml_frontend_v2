@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-// import Cancelicon from '../../../public/assets/Cancelicon.png';
 import Button from './Button';
 import sendIcon from '../../../public/assets/png-icons/SendIcon.png'
 import uploadIcon from '../../../public/assets/png-icons/UploadIcon.png'
@@ -68,7 +67,6 @@ export const Secondary: Story = {
         lineHeight: '24px',
         icon: <div><img src={sendIcon} alt="send Icon" /></div>,
         columnGap: '10px',
-        // iconPosition: 'right',
         action: () => console.log('Email Sent'),
     },
 };

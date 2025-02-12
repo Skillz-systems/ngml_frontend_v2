@@ -1,15 +1,34 @@
+import { FilterParams } from '@/Hooks/useChartFilter';
 import { Chart, StatisticDynamicCardTwo } from '../../Components/index';
 import images from '../../assets/index';
+
+import { useCallback } from 'react';
 
 
 const CustomerPageDetails = () => {
 
-    const dataNNPC = [
-        { month: 'Jan', 'Amount Sold': 100, Delivered: 80, Requests: 120, Revenue: 500 },
-        { month: 'Feb', 'Amount Sold': 200, Delivered: 150, Requests: 180, Revenue: 800 },
-        { month: 'Mar', 'Amount Sold': 150, Delivered: 120, Requests: 200, Revenue: 600 },
-        { month: 'Apr', 'Amount Sold': 300, Delivered: 250, Requests: 280, Revenue: 1200 },
-        { month: 'May', 'Amount Sold': 250, Delivered: 200, Requests: 320, Revenue: 1000 },
+    const currentYear = new Date().getFullYear();
+    const yearRange = Array.from({ length: 6 }, (_, i) => currentYear - i).reverse();
+    // const yearRange = Array.from({ length: currentYear - 2019 + 1 }, (_, i) => 2020 + i);
+
+    const handleFilterChange = useCallback((params: FilterParams) => {
+        console.log('Filter params:', params);
+
+    }, []);
+
+    const lineDataGraph = [
+        { month: 'Jan', 'Daily Volume': 120, 'Consumed Volume': 110, },
+        { month: 'Feb', 'Daily Volume': 120, 'Consumed Volume': 130, },
+        { month: 'Mar', 'Daily Volume': 120, 'Consumed Volume': 140, },
+        { month: 'Apr', 'Daily Volume': 120, 'Consumed Volume': 140, },
+        { month: 'May', 'Daily Volume': 120, 'Consumed Volume': 130, },
+        { month: 'Jun', 'Daily Volume': 120, 'Consumed Volume': 120, },
+        { month: 'Jul', 'Daily Volume': 120, 'Consumed Volume': 120, },
+        { month: 'Aug', 'Daily Volume': 120, 'Consumed Volume': 140, },
+        { month: 'Sep', 'Daily Volume': 120, 'Consumed Volume': 120, },
+        { month: 'Oct', 'Daily Volume': 120, 'Consumed Volume': 150, },
+        { month: 'Nov', 'Daily Volume': 120, 'Consumed Volume': 130, },
+        { month: 'Dec', 'Daily Volume': 120, 'Consumed Volume': 170, },
     ];
 
     const chartColors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
@@ -21,9 +40,9 @@ const CustomerPageDetails = () => {
                     type='primary'
                     icon={<img src={images.firewood} alt="firewood icon" width='30px' />}
                     value={0}
-                    yearOptions={[2021, 2022, 2023]}
-                    content="Consumed Volume"
-                    subcontent="(Scf)"
+                    yearOptions={yearRange}
+                    content="Total Consumed Volume"
+                    subcontent="(MMscf)"
                     className="w-full md:w-[50%]"
                     iconColor="#ffff"
                 />
@@ -31,8 +50,8 @@ const CustomerPageDetails = () => {
                     type='secondary'
                     icon={<img src={images.firewood2} alt="firewood2 icon" width='30px' />}
                     value={0}
-                    content="Yesterday's Consumed Volume"
-                    subcontent="(Scf)"
+                    content="⁠Yesterday's Consumed Volume"
+                    subcontent="(MMscf)"
                     className="w-full md:w-[50%]"
                     iconColor="text-black"
                     contentColor='text-nnpc-100 text-[2xl]'
@@ -44,12 +63,13 @@ const CustomerPageDetails = () => {
             <div className="mt-6 md:mt-0">
                 <div className='mt-[28px]'>
                     <Chart
-                        data={dataNNPC}
+                        data={lineDataGraph}
                         chartType="line"
-                        yAxisLabel="NNPC"
+                        yAxisLabel="⁠Volume (MMscf)"
                         xAxisDataKey="month"
                         colors={chartColors}
                         title='Customer Consumption Chart'
+                        onFilterChange={handleFilterChange}
                     />
                 </div>
             </div>

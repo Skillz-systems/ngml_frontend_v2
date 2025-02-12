@@ -83,7 +83,7 @@ const CostAnalysisTwo: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-wrap w-full p-3 bg-[#FFFFFF] border-b items-center gap-3 flex">
+                <div className="flex-wrap w-full p-3 bg-[#FFFFFF] border-b items-center gap-3 flex">
                     {costAnalysisCardDataTwo.map((cards, index) => (
                         <div key={index} className="flex flex-1 min-w-[150px] max-w-[200px]">
                             <DocumentCardThree

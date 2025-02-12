@@ -17,8 +17,8 @@ const NnpcDocument: React.FC = () => {
         <img src={images.nnpclogo} alt="NNPC Logo" className="w-5 h-5" />
       </div>
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-sm">Formal Letter</h1>
-        <p>Date: April 12, 2024</p>
+        <h1 className="text-2xl font-bold ">Formal Letter</h1>
+        <p className='text-sm'>Date: April 12, 2024</p>
       </div>
       <div className="mb-8 text-small">
         <p>

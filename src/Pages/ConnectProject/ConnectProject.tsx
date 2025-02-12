@@ -1,151 +1,187 @@
+
 import { useState } from 'react';
-import { CustomInput } from '../../Components/index';
+import { Button, CustomInput, Modal } from '../../Components/index';
+import images from '@/assets';
 
 /**
  * ConnectProject component for handling project date selection and other project-related operations.
- * 
+ *
  * @component
  * @example
  * <ConnectProject />
- * 
+ *
  * @returns {React.FC} The ConnectProject component.
  */
-
 const ConnectProject: React.FC = () => {
-
-    /**
-    * State for storing the project start and end dates.
-    * 
-    * @type {Object}
-    * @property {string} startdate - The proposed project start date.
-    * @property {string} enddate - The proposed project end date.
-    */
-
     const [projectDate, setProjectDate] = useState({
         startdate: '',
         enddate: '',
     });
-
-    /**
-    * State for storing the first gas date.
-    * 
-    * @type {string}
-    */
     const [firstGasDate, setFirstGasDate] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [isNewModalOpen, setIsNewModalOpen] = useState(false);
+    // const [isTenderingVisible, setIsTenderingVisible] = useState(false);
+    const [selectedDate, setSelectedDate] = useState('');
+    // const [isTenderingComplete, setIsTenderingComplete] = useState(false);
+    // const [isStrategyVisible, setIsStrategyVisible] = useState(false);
+    // const [selectedStrategy, setSelectedStrategy] = useState('');
+    const [areDatesConfirmed, setAreDatesConfirmed] = useState(false); 
 
-    /**
-    * Handles input changes for the date fields.
-    * 
-    * @param {any} value - The value to set for the specified key.
-    * @param {any} key - The key (state property name) to update.
-    */
+
+
+    const handleConfirmDates = () => {
+        setAreDatesConfirmed(true); 
+    };
 
     const handleInputChange = (value: string, key: string) => {
-        console.log(value)
         setProjectDate({ ...projectDate, [key]: value });
     };
 
-    /**
-    * Handles input change for the first gas date.
-    * 
-    * @param {string} value - The value to set for the first gas date.
-    */
-    const handleFirstGasDateChange = (value: string) => {
-        console.log(value)
-        setFirstGasDate(value);
+
+    const handleClose = () => {
+        setIsModalOpen(false);
     };
 
-    /**
-     * Placeholder function to create a customer. 
-     * (Functionality to be implemented.)
-     */
 
-    // const handleCreateCustomer = () => {
-
-    // };
-
-    /**
-     * Checks if both project start and end dates are selected.
-     * 
-     * @type {boolean}
-     */
-
-    // const areDatesSelected = projectDate.startdate && projectDate.enddate;
+    const areDatesSelected = projectDate.startdate && projectDate.enddate;
 
     return (
-        <div className="w-full h-full flex-col justify-start items-start gap-2 inline-flex">
-            <div className="w-full h-full p-4 bg-white rounded-xl flex-col justify-start items-start gap-6 flex">
-                <div className="w-full p-2 rounded-xl border justify-between items-center flex">
-                    <div className="text-[#808080] text-base font-bold font-['Mulish'] ml-4">First Gas Date</div>
-                    <div className="p-1 rounded-3xl w-40 mr-4">
-                        <CustomInput
-                            type="date"
-                            label=''
-                            value={firstGasDate}
-                            handleChangeEvent={handleFirstGasDateChange}
-                            placeholder="Select First Gas Date"
-                            styleVariant='customStyle3'
-                        />
+        <div className="inline-flex flex-col items-start justify-start w-full h-full gap-2">
+            <div className="flex flex-col items-start justify-start w-full h-full gap-6 p-4 bg-white rounded-xl">
+                <div className="w-full justify-end items-center flex">
+                    <div className="items-center gap-4 flex">
+                        <div
+                            onClick={() => setIsModalOpen(true)}
+                            className="p-2 rounded-3xl border justify-center flex cursor-pointer"
+                        >
+                            <div className="text-[12px] leading-none">
+                                {firstGasDate ? 'Adjust First Gas Date' : 'Set First Gas Date'}
+                            </div>
+                        </div>
+                        <div className="p-1 rounded-3xl border justify-center items-center gap-1 flex cursor-pointer" onClick={handleClose}>
+                            <div className="w-4 h-4 justify-center items-center flex">
+                                <img src={images.cancel} alt="close icon" width={'10px'} />
+                            </div>
+                            <div className="Close text-center text-[#808080] text-[12px] font-normal">Close</div>
+                        </div>
                     </div>
                 </div>
-                <div className="h-full w-full p-6 rounded-xl border space-y-6">
-                    <div className="text-base font-bold font-['Mulish'] leading-none">PROJECT DATES</div>
-                    <div className="">
-                        <CustomInput
-                            type="date"
-                            label='Proposed project start date'
-                            value={projectDate.startdate}
-                            handleChangeEvent={(value) => handleInputChange(value, 'startdate')}
-                            placeholder="Select start date"
-                        />
+                <div className="flex p-2 py-3 items-center justify-between w-full border rounded-xl">
+                    <div className="text-[#808080] text-base font-600 font-['Mulish'] ml-4">First Gas Date</div>
+                    <div className="mr-2 bg-[#D2F69E] px-2 py-1 rounded-[20px]">
+                        <div className='text-[#266425] text-[12px] font-[700]'>{firstGasDate || 'Add a date'}</div>
                     </div>
-                    <div className="">
-                        <CustomInput
-                            type="date"
-                            label='Proposed project end date'
-                            value={projectDate.enddate}
-                            handleChangeEvent={(value) => handleInputChange(value, 'enddate')}
-                            placeholder="Select end date"
-                        />
-                    </div>
-                    {/* <div className={`flex ${!areDatesSelected ? 'justify-start' : 'justify-end'} items-center transition-transform duration-5000 ease-in-out`}>
-                        {!areDatesSelected && (
-                            <div className="w-full md:w-60 h-12 px-8 py-3 rounded-3xl border justify-center items-center gap-2.5 inline-flex">
-                                <div className="text-base font-normal font-['Mulish'] leading-none">Setup Project Milestones</div>
-                            </div>
-                        )}
-                        {areDatesSelected && (
-                            <div className='w-full md:w-[200px] transition-transform duration-5000 ease-in-out transform translate-y'>
+                </div>
+                {!areDatesConfirmed && (
+                    <div className="w-full h-full p-5 space-y-6 border rounded-xl">
+                        <div className="text-base font-bold font-['Mulish'] leading-none">SET PROJECT DATES</div>
+                        <div>
+                            <CustomInput
+                                type="date"
+                                label='Proposed Project Start Date'
+                                value={projectDate.startdate}
+                                handleChangeEvent={(value) => handleInputChange(value, 'startdate')}
+                                placeholder="Select start date"
+                            />
+                        </div>
+                        <div>
+                            <CustomInput
+                                type="date"
+                                label='Proposed Project End Date'
+                                value={projectDate.enddate}
+                                handleChangeEvent={(value) => handleInputChange(value, 'enddate')}
+                                placeholder="Select end date"
+                            />
+                        </div>
+                        <div className='flex items-end justify-end'> 
+                            <div className="w-[30%]">
+                            {areDatesSelected && (
                                 <Button
                                     type="secondary"
                                     label="Confirm Selection"
-                                    action={handleCreateCustomer}
+                                    action={handleConfirmDates}
                                     color="#FFFFFF"
                                     width="100%"
                                     height="40px"
                                     fontSize="16px"
                                     radius="20px"
                                 />
-                            </div>
-                        )}
-                    </div> */}
-                </div>
-                {/* {areDatesSelected && (
-                    <div className="w-full h-full p-6 rounded-xl border space-y-6">
-                        <div className="text-base font-bold font-['Mulish'] leading-none">PROJECT DATES</div>
-                        <div className='flex md:flex-row flex-col justify-start gap-4'>
-                            <div className="w-full md:w-[250px] px-8 py-3 rounded-3xl border hover:bg-nnpcmediumgreen-850 cursor-pointer">
-                                <div className="text-base font-normal font-['Mulish'] text-center">Select Project Strategy</div>
-                            </div>
-                            <div className="w-full md:w-[250px] px-8 py-3 rounded-3xl border hover:bg-nnpcmediumgreen-850 justify-center cursor-pointer">
-                                <div className="text-base font-normal font-['Mulish'] text-center">Setup Project Milestones</div>
-                            </div>
+                            )}
+                        </div></div>
+                       
+                    </div>
+                )}
+
+                {areDatesConfirmed && (
+                    <div className="w-full h-full p-5 space-y-6 border rounded-xl">
+                        <div className="text-base font-bold font-['Mulish'] leading-none">SELECTED PROJECT DATES</div>
+                        <div className="text-[#266425] text-[16px]">
+                            <p className='mb-2'><strong>Start Date:</strong> {projectDate.startdate}</p>
+                            <p><strong>End Date:</strong> {projectDate.enddate}</p>
                         </div>
                     </div>
-                )} */}
+                )}
             </div>
+
+            <Modal
+                isOpen={isModalOpen}
+                onClose={handleClose}
+                title="Select First Gas Date"
+                buttons={[
+                    <Button
+                        key="cancel"
+                        type="outline"
+                        label="Cancel"
+                        action={handleClose}
+                        color="#FFFFFF"
+                        width="100px"
+                        height="40px"
+                        fontSize="16px"
+                        radius="20px"
+                    />,
+                    <Button
+                        key="confirm"
+                        type="secondary"
+                        label="Confirm"
+                        action={() => {
+                            setFirstGasDate(selectedDate);
+                            setIsModalOpen(false);
+                        }}
+                        color="#FFFFFF"
+                        width="100px"
+                        height="40px"
+                        fontSize="16px"
+                        radius="20px"
+                    />,
+                ]}
+            >
+                <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="border border-gray-300 rounded p-2 w-full"
+                />
+            </Modal>
         </div>
     );
 };
 
 export default ConnectProject;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

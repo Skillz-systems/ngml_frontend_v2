@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import SearchResultsModal from './SearchResultsModal'; // Adjust the import path as necessary
+import SearchResultsModal from './SearchResultsModal';
 
 const meta: Meta<typeof SearchResultsModal> = {
     title: 'Components/SearchResultsModal',

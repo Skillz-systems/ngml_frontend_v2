@@ -1,185 +1,194 @@
-import React, { useState } from 'react';
-import { Button, DocumentCard, Modal } from '../../Components/index';
-import images from '../../assets/index';
-import EditDdqPage from './EditDdqPage';
+import FormInput from '@/Components/Custominput/FormInput';
+import { FileType } from '@/Components/Fileuploadinput/FileTypes';
+import { Button, Heading, Modal } from '@/Components/index';
+import { useModalManagement } from '@/Hooks/useModalManagement';
+import { FormField, useGetFormByNameQuery, useSubmitFormMutation } from '@/Redux/Features/FormBuilder/formBuilderService';
+import { convertFileToBase64 } from '@/Utils/base64Converter';
+import { areRequiredFieldsFilled } from '@/Utils/formValidation';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+type CustomerData = Record<string, string | File | null>;
 
 const DdqPage: React.FC = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [companyData, setCompanyData] = useState({
-        companyName: '',
-        rcNumber: '',
-        natureOfBusiness: '',
-        companyphone: '',
-        companyTelephoneNumber: '',
-        companyMobileNumber: '',
-        email: '',
-        website: '',
-        companyaddress: '',
-        title: '',
-        firstName: '',
-        otherName: '',
-        lastName: '',
-        phoneNumber: '',
-        companyPosition: '',
-        titlePlus: '',
-        firstNamePlus: '',
-        otherNamePlus: '',
-        lastNamePlus: '',
-        phoneNumberPlus: '',
-        companyPositionPlus: '',
-        jointVenture: ''
-    });
+    const [customerForm, setCustomerForm] = useState<FormField[]>([]);
+    const [customerData, setCustomerData] = useState<CustomerData>({});
+    const [uploadedFiles, setUploadedFiles] = useState<Array<{ name: string; url: string }>>([]);
+    const [formError, setFormError] = useState<string>('');
+    const [customerId, setCustomerId] = useState<number | null>(null);
+    const [customerSiteId, setCustomerSiteId] = useState<number | null>(null);
+    const { isModalOpen, toggleModal } = useModalManagement('uploadDdq');
 
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    const totalPages = 5;
+    const { data, isSuccess, isLoading } = useGetFormByNameQuery('DdqUpload/0/0');
+    const [submitForm, { isLoading: submitLoading }] = useSubmitFormMutation();
 
-    const goToPage = (page: number) => {
-        if (page >= 1 && page <= totalPages) {
-            setCurrentPage(page);
+    useEffect(() => {
+        const customer = location.pathname.split('/');
+        setCustomerId(Number(customer[4]));
+        setCustomerSiteId(Number(customer[5]));
+    }, [location]);
+
+    useEffect(() => {
+        if (isSuccess && data) {
+            try {
+                const parsedForm = JSON.parse(data.data.json_form);
+                setCustomerForm(parsedForm);
+
+                const initialData = parsedForm.reduce((acc: CustomerData, field: FormField) => {
+                    if (field.name) {
+                        acc[field.name] = field.type === 'file' ? null : '';
+                    }
+                    return acc;
+                }, {});
+
+                setCustomerData(initialData);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                setCustomerForm([]);
+            }
         }
-    };
+    }, [data, isSuccess, submitForm, customerId, customerSiteId, navigate]);
 
-    const goToPreviousPage = () => {
-        goToPage(currentPage - 1);
-    };
+    const handleInputChange = useCallback((field: string, value: string | File | null) => {
+        setCustomerData(prev => ({ ...prev, [field]: value }));
+    }, []);
 
-    const goToNextPage = () => {
-        goToPage(currentPage + 1);
-    };
+    const uploadCustomerDdq = useCallback(async () => {
+        if (!areRequiredFieldsFilled(customerForm, customerData)) {
+            setFormError('Please fill all required fields.');
+            return;
+        }
 
-    const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
-    };
+        try {
+            setFormError('');
+            const fileField = customerForm.find(field => field.type === 'file');
+            const file = fileField && customerData[fileField.name as keyof typeof customerData];
 
-    const handleEditButtonClick = () => {
-        setIsModalOpen(!isModalOpen);
-    };
-
-    const handlesaveAndContinue = () => {
-        console.log('Creating company data:', companyData);
-        toggleModal();
-    };
+            if (file instanceof File) {
+                const base64File = await convertFileToBase64(file);
+                setUploadedFiles(prev => [...prev, { name: file.name, url: base64File }]);
+                toast.success('File uploaded successfully');
+                toggleModal(false);
+            } else {
+                throw new Error('No file uploaded');
+            }
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            setFormError('An error occurred while uploading the file. Please try again.');
+        }
+    }, [customerForm, customerData, toggleModal]);
 
     return (
-        <div className='bg-[#FFFFFF] p-4 rounded-xl'>
-            <div className="rounded-xl border flex-col justify-start items-start bg-[#FFFFFF]">
-                <div className="w-full h-[60px] px-3 py-2.5 bg-dark-50 border-b justify-between items-center flex">
-                    <div className="text text-xl font-bold font-['Mulish'] leading-tight">Due Diligence Questionnaire</div>
-                    <div className="px-4 py-2 rounded-[32px] border justify-center items-center gap-2.5 flex">
-                        <div className="w-4 h-4 justify-center items-center flex">
-                            <div className="w-4 h-4 p-[0.83px] justify-center items-center inline-flex cursor-pointer"><img src={images.edit} alt='icon' /></div>
-                        </div>
-                        <div className="text-base font-normal font-['Mulish'] leading-none tracking-tight cursor-pointer" onClick={handleEditButtonClick}>Edit DDQ</div>
-                    </div>
-                </div>
-                <div className="bg-dark-50 justify-between items-start flex flex-col sm:flex-row">
-                    <div className="w-full p-4 bg-dark-50 flex-col justify-start items-center border-r">
-                        <DocumentCard
-                            type="withoutLink"
-                            title="Dangote Cement LTD"
-                            subtitle="DDQ"
-                            linkText="Last Updated"
-                            linkText2="12/13/2023"
-                            icon={<img src={images.files} alt="Copy Icon" className="w-5 h-5" />}
-                            width="200px"
-                            height="100%"
-                        />
-                        <div className="w-full p-2 mt-4 rounded-xl border justify-between items-center inline-flex">
-                            <div className="text-slate-400 text-xs font-normal font-['Mulish'] leading-3">Page {currentPage} of {totalPages} showing</div>
-                            <div className="justify-end items-center gap-2 flex">
-                                <button
-                                    onClick={goToPreviousPage}
-                                    disabled={currentPage === 1}
-                                    className={`w-8 h-8 p-2.5 rounded-[40px] border border-dark-100 flex-col justify-center items-center gap-2.5 inline-flex ${currentPage === 1 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
-                                        }`}
-                                >
-                                    <img src={images.leftarrow} alt='icon1' />
-                                </button>
-                                <button
-                                    onClick={goToNextPage}
-                                    disabled={currentPage === totalPages}
-                                    className={`w-8 h-8 p-2.5 rounded-[40px] border flex-col justify-center items-center gap-2.5 inline-flex ${currentPage === totalPages ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
-                                        }`}
-                                >
-                                    <img src={images.rightarrow} alt='icon2' />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <div className="p-4 mt-6 w-full space-y-6 flex-col items-center gap-4">
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Filling status</div>
-                            </div>
-                            <div className="text-center text-xs font-normal font-['Mulish'] leading-3">72%</div>
-                        </div>
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">uploads</div>
-                            </div>
-                            <div className="text-center text-xs font-semibold font-['Mulish'] leading-3">6/12 Uploads</div>
-                        </div>
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Fields</div>
-                            </div>
-                            <div className="text-center text-xs font-normal font-['Mulish'] leading-3">22/41 Fields</div>
-                        </div>
-                        <div className="p-2 rounded-lg border justify-between items-center flex">
-                            <div className="p-1 bg-nnpcdark-100 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">Date Started</div>
-                            </div>
-                            <div className="text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">12/Nov/2023</div>
-                        </div>
-                        <div className="p-2 bg-nnpc-600 rounded-lg border border-dark-100 justify-between items-center flex">
-                            <div className="p-1 bg-nnpcred-300 rounded-sm justify-center items-start gap-2.5 flex">
-                                <div className="text-center text-white text-[10px] font-semibold font-['Mulish'] uppercase leading-[10px]">days left</div>
-                            </div>
-                            <div className="text-center text-zinc-950 text-xs font-semibold font-['Mulish'] leading-3">13 Days</div>
-                        </div>
-                    </div> */}
-                </div>
-                <Modal
-                    isOpen={isModalOpen}
-                    onClose={handleEditButtonClick}
-                    title="OWNERSHIP AND MANAGEMENT"
-                    buttons={[
-                        <div className='flex gap-2 mb-[-10px]'>
-                            <div className='w-[120px]'>
-                                <Button
-                                    type="outline"
-                                    label="Save and Close"
-                                    action={toggleModal}
-                                    color="#FFFFFF"
-                                    fontStyle="italic"
-                                    width="100%"
-                                    height="40px"
-                                    fontSize="16px"
-                                    radius="20px"
-                                />
-                            </div>
-                            <div className='w-[260px]'>
-                                <Button
-                                    type="secondary"
-                                    label="Save and Continue"
-                                    action={handlesaveAndContinue}
-                                    color="#FFFFFF"
-                                    fontStyle="italic"
-                                    width="100%"
-                                    height="40px"
-                                    fontSize="16px"
-                                    radius="20px"
-                                />
-                            </div>
-                        </div>
-                    ]}
-                >
-                    <EditDdqPage companyData={companyData}
-                        setCompanyData={setCompanyData} />
-                </Modal>
+        <>
+            <div className="flex items-end justify-end gap-2 mb-3">
+                <Button
+                    type="primary"
+                    label="UPLOAD DDQ"
+                    radius="20px"
+                    width="150px"
+                    height="32px"
+                    columnGap="5px"
+                    action={() => toggleModal(true)}
+                />
             </div>
-        </div>
+            <div className="bg-[#FFFFFF] p-4 rounded-xl">
+                <div className="rounded-xl border flex-col justify-start mt-2 items-start bg-[#FFFFFF]">
+                    <div className="w-full h-[60px] px-3 py-2.5 bg-dark-50 border-b items-center flex">
+                        {/* <div className="text text-xl font-bold font-['Mulish'] leading-tight">Due Diligence Questionnaire</div> */}
+                        <Heading as="h4" size="h6" color="primaryColor" className="font-[2px] text-dark-100">
+                            Due Diligence Questionaire
+                        </Heading>
+                    </div>
+                    <div className="bg-dark-50 justify-between p-4">
+                        {uploadedFiles.length > 0 ? (
+                            uploadedFiles.map((file, index) => (
+                                <div key={index} className="mb-2">
+                                    <a
+                                        href={URL.createObjectURL(
+                                            new Blob([file.url], { type: 'application/pdf' })
+                                        )}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-500 underline"
+                                    >
+                                        {file.name}
+                                    </a>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No files uploaded yet.</p>
+                        )}
+                    </div>
+                    <Modal
+                        isOpen={isModalOpen}
+                        onClose={() => toggleModal(false)}
+                        title="Upload DDQ"
+                        buttons={[
+                            <div key="buttons" className="flex gap-2 mb-[-10px]">
+                                <div className="w-[120px]">
+                                    <Button
+                                        type="outline"
+                                        label="Close"
+                                        action={() => toggleModal(false)}
+                                        color="#FFFFFF"
+                                        fontStyle="italic"
+                                        width="100%"
+                                        height="40px"
+                                        fontSize="16px"
+                                        radius="20px"
+                                    />
+                                </div>
+                                <div className="w-[260px]">
+                                    <Button
+                                        type="secondary"
+                                        label="Save and Continue"
+                                        action={uploadCustomerDdq}
+                                        color="#FFFFFF"
+                                        fontStyle="italic"
+                                        width="100%"
+                                        height="40px"
+                                        fontSize="16px"
+                                        radius="20px"
+                                        disabled={submitLoading || !areRequiredFieldsFilled(customerForm, customerData)}
+                                    />
+                                </div>
+                            </div>,
+                        ]}
+                    >
+                        {formError && <p className="text-red-500 mb-4">{formError}</p>}
+                        {isLoading ? (
+                            <p>Loading form fields...</p>
+                        ) : customerForm.length > 0 ? (
+                            customerForm.map(form => (
+                                <Fragment key={form.id}>
+                                    <FormInput
+                                        type={form?.type}
+                                        label={form.label ?? form.name}
+                                        value={(customerData[form.name as keyof typeof customerData] as string) || ''}
+                                        required={form?.required}
+                                        onChange={(value: string | File | null) =>
+                                            handleInputChange(form?.name as string, value)
+                                        }
+                                        placeholder={form.placeholder}
+                                        options={form.options?.map(opt =>
+                                            typeof opt === 'string' ? { label: opt, value: opt } : opt
+                                        )}
+                                        maxSizeMB={10}
+                                        allowedFileTypes={[FileType.PDF]}
+                                    />
+                                </Fragment>
+                            ))
+                        ) : (
+                            <p>No form fields available.</p>
+                        )}
+                    </Modal>
+                </div>
+            </div>
+        </>
     );
 };
 
