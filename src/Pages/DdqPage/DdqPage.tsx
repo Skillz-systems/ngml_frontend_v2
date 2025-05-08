@@ -108,9 +108,7 @@ const DdqPage: React.FC = () => {
                             uploadedFiles.map((file, index) => (
                                 <div key={index} className="mb-2">
                                     <a
-                                        href={URL.createObjectURL(
-                                            new Blob([file.url], { type: 'application/pdf' })
-                                        )}
+                                        href={`data:application/pdf;base64,${file.url}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-blue-500 underline"
@@ -122,6 +120,7 @@ const DdqPage: React.FC = () => {
                         ) : (
                             <p>No files uploaded yet.</p>
                         )}
+
                     </div>
                     <Modal
                         isOpen={isModalOpen}
